@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bhawna Mangla — Senior Product Manager</title>
-<meta name="description" content="Bhawna Mangla is a Senior Product Manager building fintech platforms, B2B products, and AI tools. Built PCMS 0→1 at Bajaj Finance, cut partner TAT from 7 days to 1.">
+<title>Bhawna Mangla — Product Manager</title>
+<meta name="description" content="Bhawna Mangla is a Product Manager building fintech platforms and B2B products, and running PMgirlz — a public practice of 10 structured PM journals. Built PCMS 0→1 at Bajaj Finance, cut partner TAT from 7 days to 1.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -12,6 +12,7 @@
   :root{
     --ink:#0A0A0B;
     --ink-2:#141416;
+    --ink-3:#1B1B1F;
     --pink:#FF2E88;
     --lime:#C6FF00;
     --paper:#F5F3EE;
@@ -31,31 +32,40 @@
   }
   ::selection{background:var(--pink);color:var(--ink)}
   a{color:inherit}
-  a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:2px}
+  a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:2px}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
   .bebas{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.01em}
   .mono{font-family:'Space Mono',monospace}
 
+  /* ---------- TODO marker ---------- */
+  .todo{
+    display:inline-block;
+    font-family:'Space Mono',monospace;font-size:12.5px;font-style:italic;
+    color:var(--pink);border:1px dashed var(--pink);
+    padding:2px 8px;border-radius:3px;background:rgba(255,46,136,.06);
+  }
+  .todo::before{content:"TODO — ";font-weight:700;font-style:normal}
+
   /* ---------- Nav ---------- */
   nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(10,10,11,.88);
+    background:rgba(10,10,11,.9);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
   .logo{font-family:'Bebas Neue',sans-serif;font-size:26px;text-decoration:none;letter-spacing:.04em}
   .logo em{font-style:normal;color:var(--pink)}
-  .nav-links{display:flex;gap:26px;list-style:none}
+  .nav-links{display:flex;gap:22px;list-style:none;flex-wrap:wrap}
   .nav-links a{
-    text-decoration:none;font-size:13px;font-weight:600;
-    text-transform:uppercase;letter-spacing:.12em;color:var(--grey);
+    text-decoration:none;font-size:12.5px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.1em;color:var(--grey);
     transition:color .18s;
   }
   .nav-links a:hover{color:var(--lime)}
 
   /* ---------- Hero ---------- */
-  header.hero{padding:96px 0 72px;position:relative;overflow:hidden}
+  header.hero{padding:96px 0 60px;position:relative;overflow:hidden}
   .eyebrow{
     display:inline-flex;align-items:center;gap:10px;
     font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;
@@ -64,149 +74,214 @@
   .eyebrow::before{content:"";width:34px;height:2px;background:var(--lime)}
   h1{
     font-family:'Bebas Neue',sans-serif;
-    font-size:clamp(72px,13vw,168px);
-    line-height:.9;letter-spacing:.005em;
+    font-size:clamp(56px,10vw,132px);
+    line-height:.92;letter-spacing:.005em;
     text-transform:uppercase;
   }
   h1 .row2{color:var(--pink)}
   .hero-sub{
-    margin-top:34px;max-width:640px;
+    margin-top:30px;max-width:660px;
     font-size:clamp(17px,2vw,21px);font-weight:500;color:#CFCDC6;
   }
   .hero-sub strong{color:var(--paper)}
-  .hero-cta{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap}
+  .hero-metric{
+    margin-top:26px;display:inline-block;
+    border-left:3px solid var(--lime);padding:4px 0 4px 16px;
+    font-family:'Space Mono',monospace;font-size:14px;color:var(--paper);
+  }
+  .hero-cta{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap}
   .btn{
-    display:inline-block;text-decoration:none;
+    display:inline-block;text-decoration:none;cursor:pointer;
     font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;
     padding:13px 30px 11px;border:2px solid var(--paper);
+    background:none;color:var(--paper);
     transition:all .18s;
   }
   .btn.primary{background:var(--pink);border-color:var(--pink);color:var(--ink)}
   .btn.primary:hover{background:var(--lime);border-color:var(--lime)}
   .btn.ghost:hover{border-color:var(--lime);color:var(--lime)}
 
-  /* ---------- Ticker (signature) ---------- */
+  /* ---------- Ticker ---------- */
   .ticker{
     background:var(--pink);color:var(--ink);
     overflow:hidden;white-space:nowrap;
     border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
   }
-  .ticker-track{
-    display:inline-flex;gap:0;
-    animation:scroll 30s linear infinite;
-    will-change:transform;
-  }
-  .ticker span{
-    font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;
-    padding:12px 0 9px;
-  }
+  .ticker-track{display:inline-flex;gap:0;animation:scroll 32s linear infinite;will-change:transform}
+  .ticker span{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;padding:11px 0 8px}
   .ticker b{color:var(--paper);font-weight:400}
-  .ticker .dot{padding:12px 22px 9px;color:var(--lime)}
+  .ticker .dot{padding:11px 20px 8px;color:var(--lime)}
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @media (prefers-reduced-motion: reduce){
     .ticker-track{animation:none}
     html{scroll-behavior:auto}
-    .card,.log-item{transition:none}
+    .card,.log-item,.jcard{transition:none}
   }
 
   /* ---------- Sections ---------- */
-  section{padding:88px 0}
-  .sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:52px;flex-wrap:wrap}
+  section{padding:80px 0}
+  .sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:40px;flex-wrap:wrap}
   h2{
     font-family:'Bebas Neue',sans-serif;
-    font-size:clamp(44px,6vw,68px);line-height:1;text-transform:uppercase;
+    font-size:clamp(40px,5.5vw,62px);line-height:1;text-transform:uppercase;
   }
+  h3{font-family:'Bebas Neue',sans-serif;text-transform:uppercase}
   .sec-tag{
     font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;
     text-transform:uppercase;color:var(--grey);
   }
+  .sec-intro{max-width:760px;color:#C9C7C0;font-size:15.5px;margin:-16px 0 40px}
 
-  /* ---------- Work cards ---------- */
+  /* ---------- About ---------- */
+  #about{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  .about-block{margin-bottom:20px}
+  .about-block .k{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:8px}
+  .about-block p{color:#C9C7C0;font-size:15.5px}
+
+  /* ---------- generic cards ---------- */
   .work-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .card{
-    background:var(--ink-2);border:1px solid var(--line);
-    padding:36px 32px;position:relative;
-    transition:transform .2s, border-color .2s;
-  }
+  .card{background:var(--ink-2);border:1px solid var(--line);padding:34px 30px;position:relative;transition:transform .2s, border-color .2s}
   .card:hover{transform:translateY(-4px);border-color:var(--pink)}
-  .card.flagship{grid-column:1 / -1;border-left:4px solid var(--lime)}
-  .card-label{
-    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--lime);margin-bottom:16px;
-  }
-  .card h3{
-    font-family:'Bebas Neue',sans-serif;font-size:34px;line-height:1;
-    text-transform:uppercase;margin-bottom:14px;
-  }
-  .card p{color:#C9C7C0;font-size:15.5px;margin-bottom:18px}
-  .metric-row{display:flex;gap:28px;flex-wrap:wrap;margin-top:6px}
+  .card-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+  .card h3{font-size:30px;line-height:1;margin-bottom:12px}
+  .card p{color:#C9C7C0;font-size:15px;margin-bottom:14px}
+  .metric-row{display:flex;gap:26px;flex-wrap:wrap;margin-top:6px}
   .metric{border-top:2px solid var(--pink);padding-top:10px;min-width:120px}
-  .metric .num{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;color:var(--paper)}
-  .metric .lbl{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-top:5px}
+  .metric .num{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;color:var(--paper)}
+  .metric .lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-top:5px}
+
+  /* ---------- Journal cards ---------- */
+  .jcard{background:var(--ink-2);border:1px solid var(--line);padding:0;margin-bottom:18px;overflow:hidden}
+  .jcard.featured{border-color:var(--lime);border-left-width:4px}
+  .jhead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;cursor:pointer;list-style:none}
+  .jhead::-webkit-details-marker{display:none}
+  .jhead-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .jnum{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--pink);line-height:1}
+  .jtitle{font-family:'Bebas Neue',sans-serif;font-size:26px;text-transform:uppercase;line-height:1}
+  .jmeta{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin-top:4px}
+  .jbadge{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--lime);color:var(--ink);padding:4px 10px;border-radius:2px;white-space:nowrap}
+  .jtoggle{font-family:'Space Mono',monospace;font-size:12px;color:var(--grey);white-space:nowrap}
+  .jbody{padding:0 28px 28px}
+  .jcard.featured .jbody{padding:0 28px 32px}
+  .fields{display:grid;grid-template-columns:220px 1fr;gap:10px 20px;margin-top:8px}
+  .fields dt{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);padding-top:2px}
+  .fields dd{color:#D8D6CF;font-size:14.5px}
+  .jlinks{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;gap:24px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:12px}
+  .jlinks .k{color:var(--grey);text-transform:uppercase;letter-spacing:.08em;margin-right:6px}
+
+  .practice-note{
+    background:var(--ink-3);border:1px solid var(--line);border-left:3px solid var(--pink);
+    padding:18px 22px;margin-bottom:36px;font-size:14.5px;color:#C9C7C0;
+  }
+
+  /* ---------- Public practice table ---------- */
+  .ptable-wrap{overflow-x:auto;border:1px solid var(--line)}
+  table.ptable{width:100%;border-collapse:collapse;min-width:680px}
+  table.ptable th,table.ptable td{padding:14px 16px;text-align:left;font-size:14px;border-bottom:1px solid var(--line)}
+  table.ptable th{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);background:var(--ink-2)}
+  table.ptable td{color:#D8D6CF}
+  table.ptable tr:last-child td{border-bottom:none}
+  table.ptable td:first-child{font-family:'Space Mono',monospace;color:var(--pink)}
+
+  /* ---------- AI section ---------- */
+  .ai-sub{margin-bottom:56px}
+  .ai-sub:last-child{margin-bottom:0}
+  .ai-sub-head{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+  .ai-sub-head h3{font-size:26px;line-height:1}
+  .ai-letter{font-family:'Space Mono',monospace;font-size:13px;color:var(--pink);border:1px solid var(--pink);padding:2px 9px;border-radius:2px}
+  .ai-sub p.desc{color:#C9C7C0;font-size:14.5px;margin-bottom:16px;max-width:760px}
+  ul.plain{list-style:none}
+  ul.plain li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:#D8D6CF}
+  ul.plain li:last-child{border-bottom:none}
+  ul.plain li .k{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);display:block;margin-bottom:5px}
+
+  .pipeline{
+    display:flex;flex-direction:column;gap:0;
+    border:1px solid var(--line);background:var(--ink-2);padding:28px;margin-bottom:24px;
+  }
+  .pipe-step{display:flex;align-items:center;gap:16px;padding:10px 0}
+  .pipe-num{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--ink);background:var(--lime);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .pipe-label{font-family:'Space Mono',monospace;font-size:14px;color:var(--paper)}
+  .pipe-arrow{font-family:'Space Mono',monospace;color:var(--pink);padding-left:17px;font-size:14px}
+
+  .ptable2-wrap{overflow-x:auto;border:1px solid var(--line);margin-bottom:20px}
+  table.ptable2{width:100%;border-collapse:collapse;min-width:820px}
+  table.ptable2 th,table.ptable2 td{padding:12px 14px;text-align:left;font-size:13.5px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.ptable2 th{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);background:var(--ink-2)}
+  table.ptable2 td{color:#D8D6CF}
+  table.ptable2 tr:last-child td{border-bottom:none}
+
+  .caveat{background:var(--ink-3);border:1px solid var(--line);border-left:3px solid var(--lime);padding:18px 22px;font-size:14.5px;color:#C9C7C0}
 
   /* ---------- Experience log ---------- */
   #experience{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .log{list-style:none}
-  .log-item{
-    display:grid;grid-template-columns:150px 1fr;gap:28px;
-    padding:30px 0;border-bottom:1px solid var(--line);
-    transition:padding-left .18s;
-  }
+  .log-item{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:28px 0;border-bottom:1px solid var(--line);transition:padding-left .18s}
   .log-item:hover{padding-left:10px}
   .log-item:last-child{border-bottom:none}
   .log-when{font-family:'Space Mono',monospace;font-size:13px;color:var(--pink);padding-top:6px}
-  .log-role{font-family:'Bebas Neue',sans-serif;font-size:28px;text-transform:uppercase;line-height:1.05}
-  .log-org{font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.08em;color:var(--lime);text-transform:uppercase;margin:6px 0 10px}
-  .log-desc{color:#C9C7C0;font-size:15px;max-width:640px}
+  .log-role{font-family:'Bebas Neue',sans-serif;font-size:26px;text-transform:uppercase;line-height:1.05}
+  .log-org{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--lime);text-transform:uppercase;margin:6px 0 10px}
+  .log-desc{color:#C9C7C0;font-size:14.5px;max-width:640px}
 
-  /* ---------- Community ---------- */
+  /* ---------- Community / toolkit ---------- */
   .split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .panel{
-    border:1px solid var(--line);padding:38px 34px;
-    background:linear-gradient(180deg,var(--ink-2) 0%,var(--ink) 100%);
-  }
-  .panel h3{font-family:'Bebas Neue',sans-serif;font-size:36px;text-transform:uppercase;line-height:1;margin-bottom:6px}
+  .panel{border:1px solid var(--line);padding:36px 32px;background:linear-gradient(180deg,var(--ink-2) 0%,var(--ink) 100%)}
+  .panel h3{font-size:32px;line-height:1;margin-bottom:6px}
   .panel h3 span{color:var(--pink)}
-  .panel .role{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:16px}
-  .panel p{color:#C9C7C0;font-size:15.5px}
+  .panel .role{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:16px}
+  .panel p{color:#C9C7C0;font-size:15px}
 
-  /* ---------- Toolkit ---------- */
-  .chips{display:flex;flex-wrap:wrap;gap:12px}
-  .chip{
-    font-family:'Space Mono',monospace;font-size:13px;
-    border:1px solid var(--line);padding:9px 18px;color:#D8D6CF;
-    transition:all .18s;cursor:default;
-  }
+  .toolkit-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .toolkit-cat{border:1px solid var(--line);padding:26px 28px}
+  .toolkit-cat h4{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{font-family:'Space Mono',monospace;font-size:12.5px;border:1px solid var(--line);padding:8px 14px;color:#D8D6CF;transition:all .18s;cursor:default}
   .chip:hover{border-color:var(--lime);color:var(--lime)}
 
+  /* ---------- Impact dashboard ---------- */
+  .impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+  .impact-card{border:1px solid var(--line);padding:28px 24px;background:var(--ink-2)}
+  .impact-card .num{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;color:var(--pink)}
+  .impact-card .lbl{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin-top:10px}
+  .impact-card .flag{display:block;margin-top:10px;font-family:'Space Mono',monospace;font-size:10.5px;color:var(--lime);text-transform:uppercase;letter-spacing:.06em}
+
+  /* ---------- Leadership vignettes ---------- */
+  .vignette{border:1px solid var(--line);border-left:3px solid var(--pink);padding:24px 26px;margin-bottom:16px;background:var(--ink-2)}
+  .vignette h4{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:10px}
+
+  /* ---------- Resume ---------- */
+  .resume-panel{border:1px solid var(--line);padding:36px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;background:var(--ink-2)}
+  .resume-meta{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--grey)}
+
+  /* ---------- Recommendations ---------- */
+  .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .rec-card{border:1px dashed var(--line);padding:26px 28px;background:var(--ink-2)}
+  .rec-card blockquote{font-size:15px;color:#C9C7C0;font-style:italic;margin-bottom:14px}
+  .rec-card .who{font-family:'Space Mono',monospace;font-size:12px;color:var(--grey)}
+
   /* ---------- Contact ---------- */
-  footer{padding:96px 0 60px;border-top:1px solid var(--line)}
-  .foot-big{
-    font-family:'Bebas Neue',sans-serif;
-    font-size:clamp(52px,9vw,110px);line-height:.95;text-transform:uppercase;
-    margin-bottom:36px;
-  }
+  footer{padding:88px 0 56px;border-top:1px solid var(--line)}
+  .foot-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(46px,8vw,96px);line-height:.95;text-transform:uppercase;margin-bottom:32px}
   .foot-big a{color:var(--lime);text-decoration:none;position:relative}
   .foot-big a:hover{color:var(--pink)}
-  .foot-links{display:flex;gap:30px;flex-wrap:wrap;margin-bottom:56px}
-  .foot-links a{
-    font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.06em;
-    color:var(--paper);text-decoration:none;border-bottom:2px solid var(--pink);
-    padding-bottom:3px;transition:color .18s,border-color .18s;
-  }
+  .foot-links{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:50px}
+  .foot-links a{font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.06em;color:var(--paper);text-decoration:none;border-bottom:2px solid var(--pink);padding-bottom:3px;transition:color .18s,border-color .18s}
   .foot-links a:hover{color:var(--lime);border-color:var(--lime)}
-  .colophon{
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
-    font-family:'Space Mono',monospace;font-size:12px;color:var(--grey);
-  }
+  .colophon{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'Space Mono',monospace;font-size:12px;color:var(--grey)}
 
   /* ---------- Responsive ---------- */
   @media (max-width:820px){
-    .work-grid,.split{grid-template-columns:1fr}
+    .work-grid,.split,.about-grid,.toolkit-grid,.rec-grid{grid-template-columns:1fr}
     .log-item{grid-template-columns:1fr;gap:6px}
+    .fields{grid-template-columns:1fr}
+    .fields dt{margin-top:6px}
     .nav-links{display:none}
-    section{padding:64px 0}
-    header.hero{padding:64px 0 52px}
+    section{padding:56px 0}
+    header.hero{padding:56px 0 44px}
+    .jhead{padding:18px 20px}
+    .jbody{padding:0 20px 22px}
   }
 </style>
 </head>
@@ -216,9 +291,11 @@
   <div class="wrap nav-in">
     <a class="logo" href="#top">Bhawna<em> Mangla</em></a>
     <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#community">Community</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#practice">Practice</a></li>
+      <li><a href="#ai-skills">AI Skills</a></li>
+      <li><a href="#toolkit">Toolkit</a></li>
+      <li><a href="#impact">Impact</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -226,19 +303,24 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <p class="eyebrow">Senior Product Manager · Gurugram, India</p>
+    <p class="eyebrow">Product Manager · Gurugram, India</p>
     <h1>
       <span class="row1">Builds what</span><br>
       <span class="row2">she learns.</span>
     </h1>
     <p class="hero-sub">
-      Product manager with <strong>5+ years across fintech and B2B platforms</strong> —
-      from a 0→1 partner commission system at Bajaj Finance to an AI workflow
-      extension shipped nights and weekends. I turn regulatory complexity and
-      operational mess into products that move real numbers.
+      I turn regulatory complexity and operational mess into products that move
+      real numbers — from a 0→1 partner commission platform at Bajaj Finance to
+      <strong>PMgirlz</strong>, a public, self-directed practice of 10 structured
+      PM journals with 82 published analyses in 6 months.
+    </p>
+    <p class="hero-metric mono">
+      Cut partner onboarding TAT from 7 days → 1 day (86% faster) and drove an
+      80% TAT reduction through a data-first process at Bajaj Finance — while
+      owning PCMS 0→1 for a ₹50,000 Cr+ deposit book.
     </p>
     <div class="hero-cta">
-      <a class="btn primary" href="#work">See the work</a>
+      <a class="btn primary" href="#practice">See the practice</a>
       <a class="btn ghost" href="#contact">Get in touch</a>
     </div>
   </div>
@@ -249,94 +331,627 @@
     <span>₹50,000 Cr+ deposit book supported</span><span class="dot">◆</span>
     <span>Partner TAT: <b>7 days → 1 day</b></span><span class="dot">◆</span>
     <span>PCMS built 0 → 1</span><span class="dot">◆</span>
-    <span>eKYC · Account Aggregator · RBI DLG</span><span class="dot">◆</span>
+    <span>82 journal analyses in 6 months</span><span class="dot">◆</span>
     <span>₹50,000 Cr+ deposit book supported</span><span class="dot">◆</span>
     <span>Partner TAT: <b>7 days → 1 day</b></span><span class="dot">◆</span>
     <span>PCMS built 0 → 1</span><span class="dot">◆</span>
-    <span>eKYC · Account Aggregator · RBI DLG</span><span class="dot">◆</span>
+    <span>82 journal analyses in 6 months</span><span class="dot">◆</span>
   </div>
 </div>
 
-<section id="work">
+<section id="about">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Selected Work</h2>
-      <span class="sec-tag">// what shipped, what moved</span>
+      <h2>About</h2>
+      <span class="sec-tag">// the throughline</span>
     </div>
-    <div class="work-grid">
-
-      <article class="card flagship">
-        <p class="card-label">Flagship case study · In progress</p>
-        <h3>Partner Distribution OS</h3>
-        <p>
-          A ground-up product thesis for how financial institutions should run
-          partner-led distribution — commission engines, onboarding, compliance
-          rails, and partner-facing analytics as one operating system. Full PRD
-          and artifact suite built as a portfolio deep-dive for fintech product teams.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><div class="num">1</div><div class="lbl">Full PRD + artifacts</div></div>
-          <div class="metric"><div class="num">E2E</div><div class="lbl">Distribution lifecycle</div></div>
+    <div class="about-grid">
+      <div>
+        <div class="about-block">
+          <div class="k">Where I started</div>
+          <p>Engineering at Ericsson on the Vietnam Mobile Operator programme, before moving into product — learning early that systems serving millions fail in ways spreadsheets never predict.</p>
         </div>
-      </article>
-
-      <article class="card">
-        <p class="card-label">Bajaj Finance · Fintech platform</p>
-        <h3>PCMS — Partner Commission Management</h3>
-        <p>
-          Owned the 0→1 build of the partner commission management system for one
-          of India's largest NBFCs — commission logic, payout workflows, and
-          reconciliation for a partner network supporting a ₹50,000 Cr+ deposit book.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><div class="num">0→1</div><div class="lbl">Platform build</div></div>
-          <div class="metric"><div class="num">₹50K Cr+</div><div class="lbl">Deposit book</div></div>
+        <div class="about-block">
+          <div class="k">The thread</div>
+          <p><span class="todo">One sentence connecting Ericsson → Bajaj Finance → PMgirlz — a problem type, skill, or industry lens that runs through all three, not just a chronological list</span></p>
         </div>
-      </article>
-
-      <article class="card">
-        <p class="card-label">Bajaj Finance · B2B portal</p>
-        <h3>Partner Portal Revamp</h3>
-        <p>
-          Re-architected the partner onboarding and servicing journey — killed the
-          manual back-and-forth, digitised document flows, and rebuilt the
-          experience around what partners actually needed to transact.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><div class="num">7d → 1d</div><div class="lbl">Onboarding TAT</div></div>
-          <div class="metric"><div class="num">86%</div><div class="lbl">Faster turnaround</div></div>
+      </div>
+      <div>
+        <div class="about-block">
+          <div class="k">What I gravitate toward</div>
+          <p><span class="todo">The kind of problem you seek out — e.g. regulatory complexity, 0-to-1 ambiguity, operational mess at scale</span></p>
         </div>
-      </article>
-
-      <article class="card">
-        <p class="card-label">Personal build · Chrome MV3 extension</p>
-        <h3>Weft — AI Workflow Intelligence</h3>
-        <p>
-          A Chrome extension that reconstructs how you actually work with AI tools —
-          session capture with strict client-side PII redaction, workflow pattern
-          detection, and insight into where AI genuinely saves you time. Designed,
-          specced, and built solo.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><div class="num">MV3</div><div class="lbl">Manifest V3 build</div></div>
-          <div class="metric"><div class="num">100%</div><div class="lbl">Client-side redaction</div></div>
+        <div class="about-block">
+          <div class="k">My point of view</div>
+          <p><span class="todo">One sentence stating a belief about product work, in your own voice</span></p>
         </div>
-      </article>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <article class="card">
-        <p class="card-label">Writing · Newsletter</p>
-        <h3>90 Days to AI PM</h3>
-        <p>
-          A working-in-public newsletter documenting the sprint from platform PM to
-          AI product manager — evals, prompt systems, agent workflows, and what the
-          job actually demands, tested on real builds like Weft.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><div class="num">90</div><div class="lbl">Day curriculum</div></div>
-          <div class="metric"><div class="num">1</div><div class="lbl">Real product testbed</div></div>
+<section id="practice">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Public Practice — PMgirlz Journals</h2>
+      <span class="sec-tag">// judgment, documented in public</span>
+    </div>
+    <p class="sec-intro">
+      A self-directed practice discipline: 10 structured journals, 82 published analyses in 6 months,
+      covering product sense, feature thinking, metrics, strategy, and PM craft. No manager assigned
+      these and no company required them — they're evidence of judgment exercised under no supervision.
+    </p>
+
+    <div class="practice-note">
+      Each entry below runs one representative project per journal, documented using that journal's own
+      field list. Three are featured in full below (Swiggy, Zepto, Career Lessons) — the rest are
+      collapsed; click a row to expand. Fields marked <span class="todo" style="padding:1px 6px">fill in</span>
+      are still open from the source content and are not yet populated.
+    </div>
+
+    <!-- FEATURED: J4 Swiggy -->
+    <article class="jcard featured">
+      <div class="jhead" style="cursor:default">
+        <div class="jhead-left">
+          <span class="jnum">J4</span>
+          <div>
+            <div class="jtitle">Metrics &amp; Analytics — Swiggy's Real North Star Metric</div>
+            <div class="jmeta">Analytical Thinking · Featured</div>
+          </div>
         </div>
-      </article>
+        <span class="jbadge">Featured</span>
+      </div>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Product</dt><dd>Swiggy</dd>
+          <dt>Feature analyzed</dt><dd>Order/delivery experience</dd>
+          <dt>North Star metric (proposed)</dt><dd>Orders delivered on time, per active user</dd>
+          <dt>Acquisition metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Activation metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Retention metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Revenue metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Referral metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Metric tree</dt><dd>Orders placed (acquisition, inflatable with discounts) → on-time delivery (what users actually value) → normalized per active user (removes growth-inflation noise)</dd>
+          <dt>Leading indicators</dt><dd>Delivery partner availability</dd>
+          <dt>Lagging indicators</dt><dd>NPS, repeat order rate</dd>
+          <dt>Guardrail metrics</dt><dd>Restaurant cancellation rate</dd>
+          <dt>Hypotheses</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Experiment ideas</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Expected impact</dt><dd><span class="todo">fill in</span></dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </article>
 
+    <!-- FEATURED: J5 Zepto -->
+    <article class="jcard featured">
+      <div class="jhead" style="cursor:default">
+        <div class="jhead-left">
+          <span class="jnum">J5</span>
+          <div>
+            <div class="jtitle">Product Strategy — Why Zepto Won</div>
+            <div class="jmeta">Business Acumen · Featured</div>
+          </div>
+        </div>
+        <span class="jbadge">Featured</span>
+      </div>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Company overview</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Industry</dt><dd>Quick commerce / India</dd>
+          <dt>TAM/SAM/SOM</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Business model</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Pricing strategy</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Growth strategy</dt><dd>Category expansion beyond core delivery</dd>
+          <dt>Competitors</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Competitive advantage</dt><dd>Precision over scale — dark store density concentrated in top-10 pin codes rather than broad coverage</dd>
+          <dt>Network effects</dt><dd>Orders → better placement/inventory decisions → faster delivery → more orders (flywheel)</dd>
+          <dt>Moats</dt><dd>Dark store density in high-density pin codes</dd>
+          <dt>Risks</dt><dd>Thin margins</dd>
+          <dt>SWOT</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Future predictions (1/3/5 yr)</dt><dd>5-year — profitability path runs through premium SKUs, not core delivery margin</dd>
+          <dt>Strategic recommendations</dt><dd><span class="todo">fill in</span></dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- FEATURED: J7 Career Lessons -->
+    <article class="jcard featured">
+      <div class="jhead" style="cursor:default">
+        <div class="jhead-left">
+          <span class="jnum">J7</span>
+          <div>
+            <div class="jtitle">Career Lessons — Bajaj Finance → Ericsson → Startup</div>
+            <div class="jmeta">Leadership &amp; Pattern Recognition · Featured</div>
+          </div>
+        </div>
+        <span class="jbadge">Featured</span>
+      </div>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Company overview</dt><dd>BFSI (Bajaj Finance) → Telecom/enterprise (Ericsson) → Startup</dd>
+          <dt>Role</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Responsibilities</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Leadership lessons</dt><dd>At Ericsson — enterprise PMs operate with global stakeholders and slow decision cycles; the PM has to "be the constant"</dd>
+          <dt>Product lessons</dt><dd>At the startup — speed is the product; ship, learn, adapt; PM scope is roughly 10× wider than in a large org</dd>
+          <dt>Execution lessons</dt><dd>At Bajaj Finance — a data-first culture drove an <strong>80% reduction in TAT</strong> (turnaround time) — real, quantified outcome, also in the Impact Dashboard below</dd>
+          <dt>Team dynamics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Stakeholder conflicts</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Customer complaints</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Why projects succeeded/failed</dt><dd><span class="todo">fill in</span></dd>
+          <dt>People dynamics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Personal mistakes</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Key learnings</dt><dd>Each environment shaped a different kind of PM — the combination of BFSI rigor, enterprise stakeholder management, and startup speed is the actual differentiator</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- J1 -->
+    <details class="jcard">
+      <summary class="jhead">
+        <div class="jhead-left">
+          <span class="jnum">J1</span>
+          <div>
+            <div class="jtitle">Product Teardown — MakeMyTrip</div>
+            <div class="jmeta">Product Sense</div>
+          </div>
+        </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Product overview</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Target users</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Personas</dt><dd><span class="todo">fill in</span></dd>
+          <dt>JTBD</dt><dd><span class="todo">fill in</span></dd>
+          <dt>User journey</dt><dd>Mapped both not-logged-in and logged-in states across the full browsing → booking flow (3 hrs of mapping)</dd>
+          <dt>Onboarding</dt><dd>Deliberately invisible — no explicit onboarding flow; users are guided through urgency nudges instead</dd>
+          <dt>Retention</dt><dd>"My Trips" tab functions as a lifecycle retention engine, not just a utility tab</dd>
+          <dt>Value proposition</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Revenue model</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Pricing</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Competitors</dt><dd><span class="todo">fill in</span></dd>
+          <dt>North Star metric</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Growth channels</dt><dd><span class="todo">fill in</span></dd>
+          <dt>SWOT</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Improvement ideas</dt><dd><span class="todo">fill in</span></dd>
+          <dt>PM recommendations</dt><dd><span class="todo">fill in</span></dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </details>
+
+    <!-- J2 -->
+    <details class="jcard">
+      <summary class="jhead">
+        <div class="jhead-left">
+          <span class="jnum">J2</span>
+          <div>
+            <div class="jtitle">Feature Reverse Engineering — Duolingo's Streak</div>
+            <div class="jmeta">Feature Thinking</div>
+          </div>
+        </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Feature name</dt><dd>Streak</dd>
+          <dt>Product</dt><dd>Duolingo</dd>
+          <dt>User problem</dt><dd>Learners forget → feel guilty → quit</dd>
+          <dt>Business problem</dt><dd>D30 retention collapses without an intervention loop</dd>
+          <dt>Why it exists</dt><dd>Loss aversion outperforms achievement motivation as a retention lever</dd>
+          <dt>User flow</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Workflow</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Assumptions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Edge cases</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Failure scenarios</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Abuse cases</dt><dd>"Streak freeze" normalizes breaks while still keeping users inside the ecosystem</dd>
+          <dt>Launch strategy</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Adoption metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Retention impact</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Revenue impact</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Trade-offs</dt><dd>Creates user anxiety alongside motivation — not a free win</dd>
+          <dt>Redesign ideas</dt><dd>Surface a visible "grace period" upfront to reduce anxiety while preserving the retention hook</dd>
+          <dt>Future roadmap</dt><dd><span class="todo">fill in</span></dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </details>
+
+    <!-- J3 -->
+    <details class="jcard">
+      <summary class="jhead">
+        <div class="jhead-left">
+          <span class="jnum">J3</span>
+          <div>
+            <div class="jtitle">User Psychology — First-Open Observation (Fintech App)</div>
+            <div class="jmeta">User Empathy</div>
+          </div>
+        </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Product observed</dt><dd>Fintech app (KYC onboarding flow)</dd>
+          <dt>User action</dt><dd>First open, attempting to complete KYC with no instructions</dd>
+          <dt>Emotional trigger</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Friction point</dt><dd>7-step KYC flow; users abandoned at step 4 of 7</dd>
+          <dt>Motivation</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Habit loop</dt><dd>Broken — daily check-ins expected by the product, but zero streak/return mechanism exists</dd>
+          <dt>Cognitive bias</dt><dd>Anchoring — complexity on the first screen set user expectations for the whole flow</dd>
+          <dt>User quotes</dt><dd>User said "finally" on reaching the dashboard — read as relief, not delight</dd>
+          <dt>Behavioral patterns</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Product implications</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Business implications</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Lessons</dt><dd>User empathy is the most analytical thing a PM can do — it isn't a "soft" skill</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </details>
+
+    <!-- J6 -->
+    <details class="jcard">
+      <summary class="jhead">
+        <div class="jhead-left">
+          <span class="jnum">J6</span>
+          <div>
+            <div class="jtitle">PM Writing — The PRD Template</div>
+            <div class="jmeta">Communication · Reusable framework</div>
+          </div>
+        </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Problem statements</dt><dd>Field 1 of the PRD template</dd>
+          <dt>User stories</dt><dd>Field 2 of the PRD template</dd>
+          <dt>Business goals</dt><dd>Field 3 of the PRD template</dd>
+          <dt>Requirements</dt><dd>Field 4 of the PRD template</dd>
+          <dt>Acceptance criteria</dt><dd>Field 5 of the PRD template</dd>
+          <dt>Success metrics</dt><dd>Field 6 of the PRD template</dd>
+          <dt>Launch plans</dt><dd>Field 7 of the PRD template</dd>
+          <dt>Executive updates</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Stakeholder memos</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Product vision docs</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Roadmap summaries</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Release notes</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Decision proposals</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Positioning line</dt><dd>"A PRD isn't a spec doc. It's a decision memo in disguise."</dd>
+          <dt>Proof point</dt><dd><span class="todo">fill in — confirm real PRD count</span></dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </details>
+
+    <!-- J8 -->
+    <details class="jcard">
+      <summary class="jhead">
+        <div class="jhead-left">
+          <span class="jnum">J8</span>
+          <div>
+            <div class="jtitle">Decision Journal — Reversible vs. Irreversible Decisions (Bezos Model)</div>
+            <div class="jmeta">Judgment &amp; Decision Making</div>
+          </div>
+        </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
+      <div class="jbody">
+        <p style="font-size:14px;color:var(--grey);margin-bottom:14px">This entry pairs the mental model with one specific real decision — the fields below need a real case from your career to complete.</p>
+        <dl class="fields">
+          <dt>Context</dt><dd><span class="todo">fill in — a specific decision you made, and what was happening at the time</span></dd>
+          <dt>Goal</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Constraints</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Assumptions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Available data</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Options considered</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Pros/cons</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Final decision</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Expected outcome</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Risks</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Actual outcome</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Lessons learned</dt><dd>Most PM decisions are "two-way doors" (reversible) — decide fast, ship, learn, iterate. Most PMs mistakenly treat them like "one-way doors," which is why products move slowly.</dd>
+          <dt>What would be done differently</dt><dd><span class="todo">fill in</span></dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </details>
+
+    <!-- J9 -->
+    <details class="jcard">
+      <summary class="jhead">
+        <div class="jhead-left">
+          <span class="jnum">J9</span>
+          <div>
+            <div class="jtitle">PM Interview — "Influenced Without Authority"</div>
+            <div class="jmeta">Interview Readiness</div>
+          </div>
+        </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Product design questions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Execution questions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Estimation questions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Strategy questions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Leadership questions</dt><dd>"Tell me about a time you influenced without authority"</dd>
+          <dt>Frameworks used</dt><dd>STAR — Situation → Task → Action (data, relationships, shared goals) → Result</dd>
+          <dt>Assumptions made</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Final answer</dt><dd><span class="todo">fill in — your own real example; this is the story an interviewer will actually probe, worth writing in full</span></dd>
+          <dt>Feedback</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Improvements</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Common mistakes</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Reusable insights</dt><dd>This question tests whether you can lead without a title, read stakeholder dynamics, and drive alignment without forcing it</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </details>
+
+    <!-- J10 -->
+    <details class="jcard">
+      <summary class="jhead">
+        <div class="jhead-left">
+          <span class="jnum">J10</span>
+          <div>
+            <div class="jtitle">Personal Growth — 6-Month Journal Challenge Wrap</div>
+            <div class="jmeta">Self-Awareness &amp; Growth</div>
+          </div>
+        </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Weekly wins</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Failures</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Feedback</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Skills improved</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Skills lacking</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Books read</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Articles read</dt><dd><span class="todo">fill in</span></dd>
+          <dt>PM concepts learned</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Networking efforts</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Interview prep status</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Monthly goals</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Quarterly goals</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Career vision</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Next actions</dt><dd>Launching the "PMgirlz" community — "no PM should figure this out alone"</dd>
+          <dt>6-month final tallies</dt><dd>50 product teardowns · 120 feature reverse-engineerings · 90 user psychology observations · 65 metric cases · 35 company strategies · 50 PRDs + 30 memos · 200 decisions documented · 250 PM interview cases · 52 weekly reviews <span class="todo" style="margin-left:6px;padding:1px 6px">confirm accuracy before publishing</span></dd>
+          <dt>Biggest insight</dt><dd>"Journals build judgment, not just knowledge. Judgment is the compound interest of a PM career."</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+    </details>
+
+    <div class="ptable-wrap" style="margin-top:36px">
+      <table class="ptable">
+        <thead>
+          <tr><th>#</th><th>Journal</th><th>Annual goal</th><th>PM skill developed</th><th>Entries logged</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>J1</td><td>Product Teardown</td><td>100 Products</td><td>Product Sense</td><td>9</td></tr>
+          <tr><td>J2</td><td>Feature Reverse Engineering</td><td>200 Features</td><td>Feature Thinking</td><td>7</td></tr>
+          <tr><td>J3</td><td>User Psychology</td><td>150 Observations</td><td>User Empathy</td><td>8</td></tr>
+          <tr><td>J4</td><td>Metrics &amp; Analytics</td><td>100 Cases</td><td>Analytical Thinking</td><td>9</td></tr>
+          <tr><td>J5</td><td>Product Strategy</td><td>50 Companies</td><td>Business Acumen</td><td>10</td></tr>
+          <tr><td>J6</td><td>PM Writing</td><td>50 PRDs + 50 Memos</td><td>Communication</td><td>9</td></tr>
+          <tr><td>J7</td><td>Career Lessons</td><td>Every Company + Major Project</td><td>Leadership &amp; Pattern Recognition</td><td>8</td></tr>
+          <tr><td>J8</td><td>Decision Journal</td><td>200 Decisions</td><td>Judgment &amp; Decision Making</td><td>7</td></tr>
+          <tr><td>J9</td><td>Google PM Interview</td><td>250 Cases</td><td>Interview Readiness</td><td>8</td></tr>
+          <tr><td>J10</td><td>Personal Growth</td><td>52 Weekly + 12 Monthly Reviews</td><td>Self-Awareness &amp; Growth</td><td>7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:16px;font-size:14px;color:var(--grey)">
+      Cadence proof point: <span class="todo">fill in — confirmed publishing schedule and date range</span> ·
+      Full archive: <a href="https://www.linkedin.com/in/bhawnamangla/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">browse on LinkedIn</a>
+    </p>
+  </div>
+</section>
+
+<section id="ai-skills" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>AI Skills</h2>
+      <span class="sec-tag">// product management in the AI era</span>
+    </div>
+    <p class="sec-intro">Three sections carry the strongest signal: the orchestrated Claude → tools pipeline (C), an applied AI product teardown (D), and evidence of AI use in daily workflow (A). The rest are structured as a working checklist.</p>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">A</span><h3>AI in my own PM workflow</h3></div>
+      <ul class="plain">
+        <li><span class="k">AI-directed content generation</span>Specified on 60 of 82 published journal pieces (73%, carousels and quote cards) vs. "NA" on the rest.</li>
+        <li><span class="k">Tools used</span><span class="todo">fill in — e.g. Midjourney / Canva AI / DALL·E / ChatGPT image gen</span></li>
+        <li><span class="k">AI for synthesis &amp; drafting</span><span class="todo">fill in</span></li>
+        <li><span class="k">AI for research acceleration</span><span class="todo">fill in</span></li>
+        <li><span class="k">AI as a thinking partner in decision-making</span><span class="todo">fill in (optional)</span></li>
+      </ul>
+    </div>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">B</span><h3>AI product management competencies</h3></div>
+      <p class="desc">Study checklist ahead of AI-PM interview loops — fill in with real examples as you have them.</p>
+      <ul class="plain">
+        <li><span class="k">AI feature evaluation</span><span class="todo">fill in — your framework for accuracy vs. latency vs. cost trade-offs</span></li>
+        <li><span class="k">Prompt/product design for LLM features</span><span class="todo">fill in</span></li>
+        <li><span class="k">Build vs. buy vs. fine-tune</span><span class="todo">fill in</span></li>
+        <li><span class="k">Responsible AI / guardrails</span><span class="todo">fill in</span></li>
+        <li><span class="k">Model evaluation &amp; metrics</span><span class="todo">fill in</span></li>
+      </ul>
+    </div>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">C</span><h3>End-to-End AI-Orchestrated PM Workflow</h3></div>
+      <p class="desc"><strong style="color:var(--paper)">One prompt → a researched, documented, ticketed, architected, and shipped increment — orchestrated end-to-end.</strong></p>
+      <div class="pipeline mono">
+        <div class="pipe-step"><span class="pipe-num">1</span><span class="pipe-label">Ask Claude</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">2</span><span class="pipe-label">Research company</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">3</span><span class="pipe-label">Generate PRD</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">4</span><span class="pipe-label">Publish to Notion</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">5</span><span class="pipe-label">Create Jira stories</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">6</span><span class="pipe-label">Create Linear issues</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">7</span><span class="pipe-label">Generate architecture</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">8</span><span class="pipe-label">Create Miro diagram</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">9</span><span class="pipe-label">Commit code</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">10</span><span class="pipe-label">Push GitHub</span></div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-step"><span class="pipe-num">11</span><span class="pipe-label">Notify Slack</span></div>
+      </div>
+
+      <div class="ptable2-wrap">
+        <table class="ptable2">
+          <thead>
+            <tr><th>Step</th><th>What happens</th><th>Tool/system</th><th>What it demonstrates</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1. Ask Claude</td><td>Kick off with a single prompt describing the product goal</td><td class="todo">fill in</td><td>Prompt design, scoping an ambiguous ask into a workable brief</td></tr>
+            <tr><td>2. Research company</td><td>Pull market, competitor, and user context automatically</td><td class="todo">fill in</td><td>Product sense, market research at AI speed</td></tr>
+            <tr><td>3. Generate PRD</td><td>Turn research into a structured PRD (problem, goals, requirements, success metrics)</td><td>Claude</td><td>PM Writing — same rigor as J6, AI-accelerated</td></tr>
+            <tr><td>4. Publish to Notion</td><td>Push the PRD into the team's actual workspace, not a local doc</td><td>Notion MCP/API</td><td>Closing the loop from draft to shared source of truth</td></tr>
+            <tr><td>5. Create Jira stories</td><td>Break the PRD into tracked engineering stories</td><td>Jira MCP/API</td><td>Execution — translating strategy into backlog</td></tr>
+            <tr><td>6. Create Linear issues</td><td>Mirror or route issues into Linear for teams that use it</td><td>Linear MCP/API</td><td>Tool fluency across PM stacks, not locked to one system</td></tr>
+            <tr><td>7. Generate architecture</td><td>Produce a first-pass technical architecture from the PRD</td><td>Claude</td><td>Technical fluency — enough system-design literacy to brief engineering</td></tr>
+            <tr><td>8. Create Miro diagram</td><td>Visualize the architecture for stakeholder review</td><td>Miro MCP/API</td><td>Communication — translating technical decisions into a shared visual</td></tr>
+            <tr><td>9. Commit code</td><td>Land a first implementation pass (scaffold, config, or prototype)</td><td>Claude Code / IDE</td><td>Enough technical fluency to prototype, not just spec</td></tr>
+            <tr><td>10. Push GitHub</td><td>Ship the commit to the actual repo</td><td>GitHub MCP/API</td><td>Real deployment, not a sandbox exercise</td></tr>
+            <tr><td>11. Notify Slack</td><td>Close the loop — tell the team what shipped</td><td>Slack MCP/API</td><td>Stakeholder communication, keeping humans in the loop despite automation</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13.5px;color:var(--grey);margin-bottom:20px">Demo proof: <span class="todo">fill in — link to a screen recording of this pipeline running end-to-end</span></p>
+      <div class="caveat">
+        An 11-tool automated chain reads impressively but can also read as "did the AI do my job for me."
+        Framed explicitly: <em>I orchestrate and review each step — Claude accelerates execution, I own the
+        judgment calls (what to research, what trade-offs go in the PRD, which stories actually matter).</em>
+      </div>
+    </div>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">D</span><h3>AI Product Teardown — ChatGPT Memory</h3></div>
+      <div class="jcard" style="margin-bottom:0">
+        <div class="jbody" style="padding-top:24px">
+          <dl class="fields">
+            <dt>Feature name</dt><dd>Memory (persistent cross-conversation memory)</dd>
+            <dt>Product</dt><dd>ChatGPT</dd>
+            <dt>User problem</dt><dd>Users repeat context in every new conversation; the assistant "forgets" preferences, ongoing projects, and prior corrections</dd>
+            <dt>Business problem</dt><dd>Session-to-session experience feels disposable without persistence — a real retention and differentiation lever against competitors without it</dd>
+            <dt>Why it exists</dt><dd>Personalization compounds engagement — the more the assistant "knows" a user, the higher the switching cost to a competitor</dd>
+            <dt>What to remember vs. forget</dt><dd>Explicit user statements vs. inferred preferences</dd>
+            <dt>Guardrails</dt><dd>User-visible memory management (view/edit/delete), opt-out control, no silent retention of sensitive data</dd>
+            <dt>Evaluation challenge</dt><dd>No ground-truth "correct" memory — success has to be measured by correction rate and re-engagement, not accuracy</dd>
+            <dt>Trade-offs</dt><dd>Personalization vs. privacy; more useful over time vs. "creepiness" risk if memory surfaces unprompted</dd>
+            <dt>Failure/abuse case</dt><dd>Stale memory — the model over-indexes on outdated info (e.g. remembering a job the user has since left), requiring a decay/update strategy, not just accumulation</dd>
+            <dt>Redesign idea</dt><dd>Confidence-weighted memory with visible "last updated" timestamps, so users can trust and correct what's remembered in-line</dd>
+            <dt>Reusable insight</dt><dd>The general pattern for any AI feature with implicit state — the PM's real job is designing the correction and visibility mechanism, not the memory mechanism itself</dd>
+          </dl>
+          <div class="jlinks">
+            <span><span class="k">Link</span><span class="todo">fill in</span></span>
+            <span><span class="k">Image</span><span class="todo">fill in</span></span>
+            <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">E</span><h3>AI Tools I Actually Use</h3></div>
+      <p class="desc">Breadth across the PM workflow, not just visual generation.</p>
+      <div class="ptable2-wrap">
+        <table class="ptable2">
+          <thead><tr><th>Workflow stage</th><th>Tool(s) used</th><th>What it's used for</th></tr></thead>
+          <tbody>
+            <tr><td>Research &amp; synthesis</td><td class="todo">fill in</td><td class="todo">fill in</td></tr>
+            <tr><td>Writing (PRDs, memos, specs)</td><td class="todo">fill in</td><td class="todo">fill in</td></tr>
+            <tr><td>Prototyping / coding</td><td class="todo">fill in</td><td class="todo">fill in</td></tr>
+            <tr><td>Visual/design generation</td><td class="todo">fill in</td><td class="todo">fill in</td></tr>
+            <tr><td>Meeting notes &amp; transcription</td><td class="todo">fill in</td><td class="todo">fill in</td></tr>
+            <tr><td>Data analysis</td><td class="todo">fill in</td><td class="todo">fill in</td></tr>
+            <tr><td>Project/task orchestration</td><td class="todo">fill in</td><td class="todo">fill in</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">F</span><h3>Judgment Signal — A Time I Said No to AI</h3></div>
+      <ul class="plain">
+        <li><span class="k">Context</span><span class="todo">fill in — a feature or request where AI was proposed/expected</span></li>
+        <li><span class="k">Why I pushed back</span><span class="todo">fill in</span></li>
+        <li><span class="k">What I recommended instead</span><span class="todo">fill in</span></li>
+        <li><span class="k">Outcome</span><span class="todo">fill in</span></li>
+      </ul>
+    </div>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">G</span><h3>Efficiency Impact of AI in My Workflow</h3></div>
+      <ul class="plain">
+        <li><span class="todo">fill in — e.g. a quantified before/after such as PRD-to-ticket turnaround time</span></li>
+        <li><span class="todo">fill in — e.g. change in content output per week after introducing AI-assisted drafting</span></li>
+      </ul>
+      <p class="desc" style="margin-top:20px">Proficiency self-rating:</p>
+      <div class="ptable2-wrap">
+        <table class="ptable2">
+          <thead><tr><th>Area</th><th>Level</th></tr></thead>
+          <tbody>
+            <tr><td>Prompt engineering</td><td class="todo">fill in</td></tr>
+            <tr><td>LLM evaluation &amp; benchmarking</td><td class="todo">fill in</td></tr>
+            <tr><td>RAG / retrieval architecture (product-level)</td><td class="todo">fill in</td></tr>
+            <tr><td>AI agents / tool-use design</td><td class="todo">fill in</td></tr>
+            <tr><td>Responsible AI / governance</td><td class="todo">fill in</td></tr>
+            <tr><td>AI cost &amp; latency trade-offs</td><td class="todo">fill in</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </section>
@@ -351,7 +966,7 @@
       <li class="log-item">
         <div class="log-when">Recent</div>
         <div>
-          <div class="log-role">Senior Product Manager — Platforms</div>
+          <div class="log-role">Product Manager — Platforms</div>
           <div class="log-org">Bajaj Finance</div>
           <p class="log-desc">
             Owned PCMS (0→1) and the Partner Portal revamp for the fixed-deposit
@@ -368,8 +983,7 @@
           <div class="log-org">Ericsson</div>
           <p class="log-desc">
             Telecom-scale delivery on the Vietnam Mobile Operator programme —
-            where I learned that systems serving millions fail in ways
-            spreadsheets never predict.
+            where systems serving millions fail in ways spreadsheets never predict.
           </p>
         </div>
       </li>
@@ -399,36 +1013,138 @@
   </div>
 </section>
 
-<section id="community">
+<section id="toolkit">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Community</h2>
-      <span class="sec-tag">// building beyond the job</span>
+      <h2>Skills &amp; Toolkit</h2>
+      <span class="sec-tag">// what I bring on day one</span>
     </div>
-    <div class="split">
-      <div class="panel">
-        <h3>PM<span>girlz</span></h3>
-        <p class="role">Founder</p>
-        <p>
-          A community for women in product management — peer learning, honest
-          career talk, and a room where the question "am I the only one?" gets
-          answered with "no." Built because the industry needed it, run because
-          it works.
-        </p>
+    <div class="toolkit-grid">
+      <div class="toolkit-cat">
+        <h4>Strategy &amp; Prioritization</h4>
+        <div class="chips"><span class="chip todo" style="padding:8px 14px">fill in — e.g. RICE, OKRs, Kano, JTBD, opportunity sizing</span></div>
       </div>
-      <div class="panel">
-        <h3>Domain <span>Toolkit</span></h3>
-        <p class="role">What I bring to a fintech team on day one</p>
+      <div class="toolkit-cat">
+        <h4>Execution</h4>
+        <div class="chips">
+          <span class="chip">Azure DevOps</span>
+          <span class="chip">Partner Onboarding</span>
+          <span class="chip">Commission Engines</span>
+          <span class="chip todo" style="padding:8px 14px">fill in — Agile/Scrum, sprint planning tools</span>
+        </div>
+      </div>
+      <div class="toolkit-cat">
+        <h4>Data &amp; Experimentation</h4>
+        <div class="chips"><span class="chip todo" style="padding:8px 14px">fill in — e.g. SQL, A/B testing platform, Amplitude/Mixpanel/GA</span></div>
+      </div>
+      <div class="toolkit-cat">
+        <h4>Technical Fluency</h4>
         <div class="chips">
           <span class="chip">eKYC</span>
           <span class="chip">Account Aggregator</span>
           <span class="chip">RBI Digital Lending Guidelines</span>
           <span class="chip">Finacle</span>
-          <span class="chip">Azure DevOps</span>
-          <span class="chip">Commission Engines</span>
-          <span class="chip">Partner Onboarding</span>
-          <span class="chip">AI Product Workflows</span>
+          <span class="chip todo" style="padding:8px 14px">fill in — REST APIs, system design</span>
         </div>
+      </div>
+      <div class="toolkit-cat" style="grid-column:1/-1">
+        <h4>Communication</h4>
+        <div class="chips">
+          <span class="chip">PRD Writing</span>
+          <span class="chip todo" style="padding:8px 14px">fill in — exec status docs, design reviews, customer-facing demos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="impact" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Impact Dashboard</h2>
+      <span class="sec-tag">// true, memorable, career-spanning</span>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="num">7d → 1d</div>
+        <div class="lbl">Partner onboarding TAT</div>
+      </div>
+      <div class="impact-card">
+        <div class="num">80%</div>
+        <div class="lbl">TAT reduction (Bajaj Finance)</div>
+        <span class="flag">confirm before using as headline</span>
+      </div>
+      <div class="impact-card">
+        <div class="num">₹50K Cr+</div>
+        <div class="lbl">Deposit book supported</div>
+      </div>
+      <div class="impact-card">
+        <div class="num">82</div>
+        <div class="lbl">Product analyses published, 10 journals, 6 months</div>
+      </div>
+      <div class="impact-card">
+        <div class="num todo" style="font-size:20px;padding:6px 10px">fill in</div>
+        <div class="lbl">Users impacted</div>
+      </div>
+      <div class="impact-card">
+        <div class="num todo" style="font-size:20px;padding:6px 10px">fill in</div>
+        <div class="lbl">Revenue influenced</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="leadership">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Leadership &amp; Cross-Functional Influence</h2>
+      <span class="sec-tag">// real vignettes, not filled yet</span>
+    </div>
+    <div class="vignette">
+      <h4>Conflict resolution</h4>
+      <p class="todo" style="display:block;width:fit-content">fill in — a specific disagreement with eng or design, how you resolved it, and the outcome</p>
+    </div>
+    <div class="vignette">
+      <h4>Influencing without authority</h4>
+      <p class="todo" style="display:block;width:fit-content">fill in — a time you got an exec or peer team to change direction without having power over them</p>
+    </div>
+    <div class="vignette">
+      <h4>Mentoring / growing others</h4>
+      <p class="todo" style="display:block;width:fit-content">fill in — someone you helped grow, and the specific thing you did</p>
+    </div>
+  </div>
+</section>
+
+<section id="resume" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Resume</h2>
+      <span class="sec-tag">// download</span>
+    </div>
+    <div class="resume-panel">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;text-transform:uppercase">Resume PDF not yet attached</div>
+        <div class="resume-meta">No file was provided for this build — add the PDF and link it here, then set "last updated" to match.</div>
+      </div>
+      <a class="btn ghost" href="mailto:bhawna202019@gmail.com?subject=Resume%20request">Request via email</a>
+    </div>
+  </div>
+</section>
+
+<section id="recommendations">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Recommendations</h2>
+      <span class="sec-tag">// optional, 2–3</span>
+    </div>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <blockquote><span class="todo" style="display:block;width:fit-content">fill in — specific quote, not generic praise</span></blockquote>
+        <div class="who">— <span class="todo" style="padding:1px 6px">name, title &amp; relationship</span></div>
+      </div>
+      <div class="rec-card">
+        <blockquote><span class="todo" style="display:block;width:fit-content">fill in — specific quote, not generic praise</span></blockquote>
+        <div class="who">— <span class="todo" style="padding:1px 6px">name, title &amp; relationship</span></div>
       </div>
     </div>
   </div>
