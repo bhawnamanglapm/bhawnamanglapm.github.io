@@ -56,8 +56,14 @@
     border-bottom:1px solid var(--line);
   }
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;text-decoration:none;letter-spacing:-.01em}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;text-decoration:none;letter-spacing:-.01em}
   .logo em{font-style:normal;color:var(--pink)}
+  .logo-badge{
+    width:34px;height:34px;border-radius:50%;flex-shrink:0;
+    background:linear-gradient(135deg,var(--pink),#6D28D9);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;
+  }
   .nav-links{display:flex;gap:22px;list-style:none;flex-wrap:wrap}
   .nav-links a{
     text-decoration:none;font-size:12.5px;font-weight:600;
@@ -94,13 +100,44 @@
   .btn{
     display:inline-block;text-decoration:none;cursor:pointer;
     font-family:'Inter',sans-serif;font-weight:700;font-size:15px;letter-spacing:.01em;
-    padding:14px 28px;border:2px solid var(--paper);border-radius:10px;
+    padding:14px 30px;border:2px solid var(--paper);border-radius:999px;
     background:none;color:var(--paper);
     transition:all .18s;
   }
   .btn.primary{background:var(--pink);border-color:var(--pink);color:#fff;box-shadow:var(--shadow)}
-  .btn.primary:hover{background:#3E36C9;border-color:#3E36C9;box-shadow:var(--shadow-hover)}
-  .btn.ghost:hover{border-color:var(--pink);color:var(--pink)}
+  .btn.primary:hover{background:#3E36C9;border-color:#3E36C9;box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+  .btn.ghost:hover{border-color:var(--pink);color:var(--pink);transform:translateY(-2px)}
+
+  /* ---------- Hero panel (gradient) ---------- */
+  .hero-panel{
+    position:relative;overflow:hidden;isolation:isolate;
+    background:linear-gradient(135deg,#4F46E5 0%,#6D28D9 55%,#312E81 100%);
+    border-radius:28px;padding:64px 56px;box-shadow:var(--shadow-hover);
+  }
+  .hero-panel::before{content:"";position:absolute;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);top:-170px;right:-120px;border-radius:50%;z-index:0}
+  .hero-panel::after{content:"";position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(94,234,212,.22),transparent 70%);bottom:-140px;left:-80px;border-radius:50%;z-index:0}
+  .hero-panel > *{position:relative;z-index:1}
+  .hero-avatar{
+    width:84px;height:84px;border-radius:50%;
+    background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.4);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;color:#fff;
+    margin-bottom:28px;backdrop-filter:blur(6px);
+  }
+  .hero-panel .eyebrow{color:#5EEAD4}
+  .hero-panel .eyebrow::before{background:#5EEAD4}
+  .hero-panel h1{color:#fff}
+  .hero-panel h1 .row2{color:#A5F3FC}
+  .hero-panel .hero-sub{color:rgba(255,255,255,.86)}
+  .hero-panel .hero-sub strong{color:#fff}
+  .hero-panel .hero-metric{
+    color:#fff;border-left-color:#5EEAD4;background:rgba(255,255,255,.1);
+    padding:14px 18px;border-radius:12px;
+  }
+  .hero-panel .btn.primary{background:#fff;border-color:#fff;color:#4F46E5}
+  .hero-panel .btn.primary:hover{background:var(--ink-3);border-color:var(--ink-3)}
+  .hero-panel .btn.ghost{border-color:rgba(255,255,255,.55);color:#fff}
+  .hero-panel .btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.12);color:#fff}
 
   /* ---------- Ticker ---------- */
   .ticker{
@@ -188,7 +225,7 @@
   .ai-sub{margin-bottom:56px}
   .ai-sub:last-child{margin-bottom:0}
   .ai-sub-head{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;flex-wrap:wrap}
-  .ai-sub-head h3{font-size:22px;line-height:1.2}
+  .ai-sub-head h3{font-size:22px;line-height:1.2;border-left:3px solid var(--pink);padding-left:14px}
   .ai-letter{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--pink);border:1px solid var(--pink);padding:2px 9px;border-radius:20px}
   .ai-sub p.desc{color:#52525B;font-size:14.5px;margin-bottom:16px;max-width:760px}
   ul.plain{list-style:none}
@@ -214,16 +251,20 @@
 
   .caveat{background:var(--ink-3);border:1px solid var(--line);border-left:3px solid var(--lime);border-radius:12px;padding:18px 22px;font-size:14.5px;color:#3F3F55}
 
-  /* ---------- Experience log ---------- */
+  /* ---------- Experience timeline ---------- */
   #experience{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .log{list-style:none}
-  .log-item{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:28px 0;border-bottom:1px solid var(--line);transition:padding-left .18s}
-  .log-item:hover{padding-left:10px}
-  .log-item:last-child{border-bottom:none}
-  .log-when{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--pink);padding-top:6px}
-  .log-role{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;line-height:1.2}
+  .timeline{list-style:none;position:relative;padding-left:34px;max-width:720px}
+  .timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--line)}
+  .tl-item{position:relative;padding-bottom:32px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-dot{position:absolute;left:-34px;top:6px;width:13px;height:13px;border-radius:50%;background:var(--ink-2);border:3px solid var(--grey);box-sizing:border-box}
+  .tl-dot.current{background:var(--lime);border-color:var(--lime);box-shadow:0 0 0 4px rgba(13,148,136,.18)}
+  .tl-card{background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:22px 26px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+  .tl-card:hover{transform:translateX(4px);box-shadow:var(--shadow-hover)}
+  .log-when{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+  .log-role{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;line-height:1.2}
   .log-org{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--lime);text-transform:uppercase;margin:6px 0 10px}
-  .log-desc{color:#52525B;font-size:14.5px;max-width:640px}
+  .log-desc{color:#52525B;font-size:14.5px;max-width:600px}
 
   /* ---------- Community / toolkit ---------- */
   .split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
@@ -234,13 +275,28 @@
   .panel p{color:#52525B;font-size:15px}
 
   .toolkit-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .toolkit-cat{border:1px solid var(--line);border-radius:16px;padding:26px 28px;background:var(--ink-2);box-shadow:var(--shadow)}
+  .toolkit-cat{border:1px solid var(--line);border-radius:16px;padding:26px 28px;background:var(--ink-2);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+  .toolkit-cat:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+  .cat-icon{width:40px;height:40px;border-radius:50%;background:var(--ink-3);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px}
   .toolkit-cat h4{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
   .chips{display:flex;flex-wrap:wrap;gap:10px}
   .chip{font-family:'IBM Plex Mono',monospace;font-size:12.5px;border:1px solid var(--line);border-radius:20px;padding:8px 14px;color:#33333D;transition:all .18s;cursor:default}
   .chip:hover{border-color:var(--pink);color:var(--pink)}
 
   /* ---------- Impact dashboard ---------- */
+  .stat-orbit{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
+  .stat-circle{
+    width:148px;height:148px;border-radius:50%;flex-shrink:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    background:var(--ink-2);border:1px solid var(--line);box-shadow:var(--shadow);padding:14px;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .stat-circle:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .stat-circle.accent{background:linear-gradient(135deg,var(--pink),#6D28D9);border-color:transparent}
+  .stat-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;line-height:1.15;color:var(--paper)}
+  .stat-circle.accent .stat-num{color:#fff}
+  .stat-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--grey);margin-top:8px}
+  .stat-circle.accent .stat-lbl{color:rgba(255,255,255,.85)}
   .impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
   .impact-card{border:1px solid var(--line);border-radius:16px;padding:28px 24px;background:var(--ink-2);box-shadow:var(--shadow)}
   .impact-card .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:38px;line-height:1;color:var(--pink)}
@@ -262,7 +318,7 @@
   .rec-card .who{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey)}
 
   /* ---------- Contact ---------- */
-  footer{padding:88px 0 56px;border-top:1px solid var(--line)}
+  footer{padding:88px 0 56px;border-top:1px solid var(--line);background:linear-gradient(180deg,var(--ink) 0%,var(--ink-3) 100%)}
   .foot-big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,64px);line-height:1.1;letter-spacing:-.01em;margin-bottom:32px}
   .foot-big a{color:var(--pink);text-decoration:none;position:relative}
   .foot-big a:hover{color:var(--lime)}
@@ -274,14 +330,16 @@
   /* ---------- Responsive ---------- */
   @media (max-width:820px){
     .work-grid,.split,.about-grid,.toolkit-grid,.rec-grid{grid-template-columns:1fr}
-    .log-item{grid-template-columns:1fr;gap:6px}
     .fields{grid-template-columns:1fr}
     .fields dt{margin-top:6px}
     .nav-links{display:none}
     section{padding:56px 0}
     header.hero{padding:56px 0 44px}
+    .hero-panel{padding:40px 26px;border-radius:22px}
     .jhead{padding:18px 20px}
     .jbody{padding:0 20px 22px}
+    .timeline{padding-left:26px}
+    .tl-dot{left:-26px}
   }
 </style>
 </head>
@@ -289,7 +347,7 @@
 
 <nav aria-label="Main">
   <div class="wrap nav-in">
-    <a class="logo" href="#top">Bhawna<em> Mangla</em></a>
+    <a class="logo" href="#top"><span class="logo-badge">BM</span>Bhawna<em> Mangla</em></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#practice">Practice</a></li>
@@ -303,25 +361,28 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <p class="eyebrow">Product Manager · Gurugram, India</p>
-    <h1>
-      <span class="row1">Builds what</span><br>
-      <span class="row2">she learns.</span>
-    </h1>
-    <p class="hero-sub">
-      I turn regulatory complexity and operational mess into products that move
-      real numbers — from a 0→1 partner commission platform at Bajaj Finance to
-      <strong>PMgirlz</strong>, a public, self-directed practice of 10 structured
-      PM journals with 82 published analyses in 6 months.
-    </p>
-    <p class="hero-metric mono">
-      Cut partner onboarding TAT from 7 days → 1 day (86% faster) and drove an
-      80% TAT reduction through a data-first process at Bajaj Finance — while
-      owning PCMS 0→1 for a ₹50,000 Cr+ deposit book.
-    </p>
-    <div class="hero-cta">
-      <a class="btn primary" href="#practice">See the practice</a>
-      <a class="btn ghost" href="#contact">Get in touch</a>
+    <div class="hero-panel">
+      <div class="hero-avatar">BM</div>
+      <p class="eyebrow">Product Manager · Gurugram, India</p>
+      <h1>
+        <span class="row1">Builds what</span><br>
+        <span class="row2">she learns.</span>
+      </h1>
+      <p class="hero-sub">
+        I turn regulatory complexity and operational mess into products that move
+        real numbers — from a 0→1 partner commission platform at Bajaj Finance to
+        <strong>PMgirlz</strong>, a public, self-directed practice of 10 structured
+        PM journals with 82 published analyses in 6 months.
+      </p>
+      <p class="hero-metric mono">
+        Cut partner onboarding TAT from 7 days → 1 day (86% faster) and drove an
+        80% TAT reduction through a data-first process at Bajaj Finance — while
+        owning PCMS 0→1 for a ₹50,000 Cr+ deposit book.
+      </p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#practice">See the practice</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
     </div>
   </div>
 </header>
@@ -962,10 +1023,11 @@
       <h2>Experience</h2>
       <span class="sec-tag">// the shipping log</span>
     </div>
-    <ul class="log">
-      <li class="log-item">
-        <div class="log-when">Recent</div>
-        <div>
+    <ul class="timeline">
+      <li class="tl-item">
+        <span class="tl-dot current"></span>
+        <div class="tl-card">
+          <div class="log-when">Recent</div>
           <div class="log-role">Product Manager — Platforms</div>
           <div class="log-org">Bajaj Finance</div>
           <p class="log-desc">
@@ -976,9 +1038,10 @@
           </p>
         </div>
       </li>
-      <li class="log-item">
-        <div class="log-when">Earlier</div>
-        <div>
+      <li class="tl-item">
+        <span class="tl-dot"></span>
+        <div class="tl-card">
+          <div class="log-when">Earlier</div>
           <div class="log-role">Engineer → Product</div>
           <div class="log-org">Ericsson</div>
           <p class="log-desc">
@@ -987,9 +1050,10 @@
           </p>
         </div>
       </li>
-      <li class="log-item">
-        <div class="log-when">Foundation</div>
-        <div>
+      <li class="tl-item">
+        <span class="tl-dot"></span>
+        <div class="tl-card">
+          <div class="log-when">Foundation</div>
           <div class="log-role">Project &amp; Growth Roles</div>
           <div class="log-org">SmartSites · Leading Edge</div>
           <p class="log-desc">
@@ -998,9 +1062,10 @@
           </p>
         </div>
       </li>
-      <li class="log-item">
-        <div class="log-when">Education</div>
-        <div>
+      <li class="tl-item">
+        <span class="tl-dot"></span>
+        <div class="tl-card">
+          <div class="log-when">Education</div>
           <div class="log-role">MBA · B.Tech (IT)</div>
           <div class="log-org">Amity University (2026) · Jaypee University (2020)</div>
           <p class="log-desc">
@@ -1021,10 +1086,12 @@
     </div>
     <div class="toolkit-grid">
       <div class="toolkit-cat">
+        <div class="cat-icon">🎯</div>
         <h4>Strategy &amp; Prioritization</h4>
         <div class="chips"><span class="chip todo" style="padding:8px 14px">fill in — e.g. RICE, OKRs, Kano, JTBD, opportunity sizing</span></div>
       </div>
       <div class="toolkit-cat">
+        <div class="cat-icon">⚙️</div>
         <h4>Execution</h4>
         <div class="chips">
           <span class="chip">Azure DevOps</span>
@@ -1034,10 +1101,12 @@
         </div>
       </div>
       <div class="toolkit-cat">
+        <div class="cat-icon">📊</div>
         <h4>Data &amp; Experimentation</h4>
         <div class="chips"><span class="chip todo" style="padding:8px 14px">fill in — e.g. SQL, A/B testing platform, Amplitude/Mixpanel/GA</span></div>
       </div>
       <div class="toolkit-cat">
+        <div class="cat-icon">🔧</div>
         <h4>Technical Fluency</h4>
         <div class="chips">
           <span class="chip">eKYC</span>
@@ -1048,6 +1117,7 @@
         </div>
       </div>
       <div class="toolkit-cat" style="grid-column:1/-1">
+        <div class="cat-icon">✍️</div>
         <h4>Communication</h4>
         <div class="chips">
           <span class="chip">PRD Writing</span>
@@ -1063,6 +1133,12 @@
     <div class="sec-head">
       <h2>Impact Dashboard</h2>
       <span class="sec-tag">// true, memorable, career-spanning</span>
+    </div>
+    <div class="stat-orbit">
+      <div class="stat-circle accent"><div class="stat-num">86%</div><div class="stat-lbl">Faster onboarding</div></div>
+      <div class="stat-circle"><div class="stat-num">80%</div><div class="stat-lbl">TAT reduction</div></div>
+      <div class="stat-circle accent"><div class="stat-num">₹50K Cr+</div><div class="stat-lbl">Deposit book</div></div>
+      <div class="stat-circle"><div class="stat-num">82</div><div class="stat-lbl">Analyses, 6 months</div></div>
     </div>
     <div class="impact-grid">
       <div class="impact-card">
