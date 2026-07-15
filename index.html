@@ -66,11 +66,21 @@
   }
   .nav-links{display:flex;gap:22px;list-style:none;flex-wrap:wrap}
   .nav-links a{
-    text-decoration:none;font-size:12.5px;font-weight:600;
+    position:relative;text-decoration:none;font-size:12.5px;font-weight:600;
     text-transform:uppercase;letter-spacing:.08em;color:var(--grey);
     transition:color .18s;
   }
-  .nav-links a:hover{color:var(--pink)}
+  .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;background:var(--pink);transition:right .22s ease}
+  .nav-links a:hover{color:var(--paper)}
+  .nav-links a:hover::after{right:0}
+  .nav-toggle{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:38px;height:38px;border:none;background:none;cursor:pointer;padding:0;
+  }
+  .nav-toggle span{width:22px;height:2px;background:var(--paper);border-radius:2px;transition:transform .25s,opacity .25s;margin:0 auto}
+  .nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.active span:nth-child(2){opacity:0}
+  .nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
   /* ---------- Hero ---------- */
   header.hero{padding:96px 0 60px;position:relative;overflow:hidden}
@@ -114,8 +124,8 @@
     background:linear-gradient(135deg,#4F46E5 0%,#6D28D9 55%,#312E81 100%);
     border-radius:28px;padding:64px 56px;box-shadow:var(--shadow-hover);
   }
-  .hero-panel::before{content:"";position:absolute;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);top:-170px;right:-120px;border-radius:50%;z-index:0}
-  .hero-panel::after{content:"";position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(94,234,212,.22),transparent 70%);bottom:-140px;left:-80px;border-radius:50%;z-index:0}
+  .hero-panel::before{content:"";position:absolute;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);top:-170px;right:-120px;border-radius:50%;z-index:0;animation:floatBlob 11s ease-in-out infinite}
+  .hero-panel::after{content:"";position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(94,234,212,.22),transparent 70%);bottom:-140px;left:-80px;border-radius:50%;z-index:0;animation:floatBlob 13s ease-in-out infinite reverse}
   .hero-panel > *{position:relative;z-index:1}
   .hero-avatar{
     width:84px;height:84px;border-radius:50%;
@@ -149,15 +159,37 @@
   .ticker b{color:#fff;font-weight:700}
   .ticker .dot{padding:12px 20px 10px;color:var(--lime)}
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- Scroll-reveal ---------- */
+  .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+  .js .reveal.in-view{opacity:1;transform:translateY(0)}
+  .js .stat-circle.reveal{transform:translateY(18px) scale(.85)}
+  .js .stat-circle.reveal.in-view{transform:translateY(0) scale(1)}
+  .toolkit-grid > .reveal:nth-child(2),.impact-grid > .reveal:nth-child(2),.stat-orbit > .reveal:nth-child(2){transition-delay:.06s}
+  .toolkit-grid > .reveal:nth-child(3),.impact-grid > .reveal:nth-child(3),.stat-orbit > .reveal:nth-child(3){transition-delay:.12s}
+  .toolkit-grid > .reveal:nth-child(4),.impact-grid > .reveal:nth-child(4),.stat-orbit > .reveal:nth-child(4){transition-delay:.18s}
+  .toolkit-grid > .reveal:nth-child(5),.impact-grid > .reveal:nth-child(5){transition-delay:.24s}
+  .toolkit-grid > .reveal:nth-child(6),.impact-grid > .reveal:nth-child(6){transition-delay:.3s}
+
+  @keyframes floatBlob{0%,100%{transform:translate(0,0)}50%{transform:translate(-18px,18px)}}
+
   @media (prefers-reduced-motion: reduce){
     .ticker-track{animation:none}
     html{scroll-behavior:auto}
     .card,.log-item,.jcard{transition:none}
+    .hero-panel::before,.hero-panel::after{animation:none}
+    .js .reveal{opacity:1;transform:none;transition:none}
   }
 
   /* ---------- Sections ---------- */
   section{padding:80px 0}
-  .sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:40px;flex-wrap:wrap}
+  .sec-head{display:flex;align-items:center;gap:18px;margin-bottom:40px;flex-wrap:wrap}
+  .sec-num{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;
+    width:38px;height:38px;border-radius:50%;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--ink-3);color:var(--pink);border:1px solid var(--line);
+  }
   h2{
     font-family:'Space Grotesk',sans-serif;font-weight:700;
     font-size:clamp(32px,4.2vw,46px);line-height:1.1;letter-spacing:-.01em;
@@ -329,21 +361,44 @@
   .rec-card .who{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey)}
 
   /* ---------- Contact ---------- */
-  footer{padding:88px 0 56px;border-top:1px solid var(--line);background:linear-gradient(180deg,var(--ink) 0%,var(--ink-3) 100%)}
-  .foot-big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,64px);line-height:1.1;letter-spacing:-.01em;margin-bottom:32px}
-  .foot-big a{color:var(--pink);text-decoration:none;position:relative}
-  .foot-big a:hover{color:var(--lime)}
-  .foot-links{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:50px}
+  #contact{background:linear-gradient(180deg,var(--ink) 0%,var(--ink-3) 100%);border-top:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start}
+  .contact-form{display:flex;flex-direction:column;background:var(--ink-2);border:1px solid var(--line);border-radius:20px;padding:32px 34px;box-shadow:var(--shadow)}
+  .contact-form label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin:16px 0 8px}
+  .contact-form label:first-child{margin-top:0}
+  .contact-form input,.contact-form textarea{
+    font-family:'Inter',sans-serif;font-size:15px;color:var(--paper);
+    background:var(--ink-3);border:1px solid var(--line);border-radius:12px;
+    padding:12px 16px;resize:vertical;transition:border-color .2s,box-shadow .2s;
+  }
+  .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(79,70,229,.15)}
+  .contact-form button{margin-top:22px;align-self:flex-start}
+  .form-note{margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--grey)}
+  .form-status{margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--lime);display:none}
+  .form-status.show{display:block}
+  .foot-big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,52px);line-height:1.15;letter-spacing:-.01em;margin-bottom:28px}
+  .foot-big span{color:var(--pink)}
+  .foot-links{display:flex;gap:28px;flex-wrap:wrap}
   .foot-links a{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.04em;color:var(--paper);text-decoration:none;border-bottom:2px solid var(--pink);padding-bottom:3px;transition:color .18s,border-color .18s}
   .foot-links a:hover{color:var(--pink);border-color:var(--lime)}
+  footer{padding:36px 0;border-top:1px solid var(--line)}
   .colophon{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey)}
 
   /* ---------- Responsive ---------- */
   @media (max-width:820px){
-    .work-grid,.split,.about-grid,.toolkit-grid,.rec-grid{grid-template-columns:1fr}
+    .work-grid,.split,.about-grid,.toolkit-grid,.rec-grid,.contact-grid{grid-template-columns:1fr}
     .fields{grid-template-columns:1fr}
     .fields dt{margin-top:6px}
-    .nav-links{display:none}
+    .nav-toggle{display:flex}
+    .nav-links{
+      display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;
+      background:var(--ink-2);border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+      max-height:0;overflow:hidden;transition:max-height .3s ease;
+    }
+    .nav-links.open{max-height:420px}
+    .nav-links li{width:100%}
+    .nav-links a{display:block;padding:16px 28px}
+    .nav-links a::after{display:none}
     section{padding:56px 0}
     header.hero{padding:56px 0 44px}
     .hero-panel{padding:40px 26px;border-radius:22px}
@@ -355,6 +410,17 @@
     .jtrack::before{left:17px}
     .jnum{left:-38px;width:34px;height:34px;font-size:11px}
   }
+  @media (max-width:480px){
+    h1{font-size:clamp(34px,10vw,92px)}
+    .hero-panel{padding:32px 20px}
+    .hero-avatar{width:64px;height:64px;font-size:22px}
+    .hero-cta{flex-direction:column}
+    .hero-cta .btn{width:100%;text-align:center}
+    .stat-circle{width:118px;height:118px}
+    .stat-num{font-size:17px}
+    section{padding:44px 0}
+    .sec-num{width:32px;height:32px;font-size:12px}
+  }
 </style>
 </head>
 <body>
@@ -362,7 +428,10 @@
 <nav aria-label="Main">
   <div class="wrap nav-in">
     <a class="logo" href="#top"><span class="logo-badge">BM</span>Bhawna<em> Mangla</em></a>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#practice">Practice</a></li>
       <li><a href="#ai-skills">AI Skills</a></li>
@@ -417,6 +486,7 @@
 <section id="about">
   <div class="wrap">
     <div class="sec-head">
+      <span class="sec-num">01</span>
       <h2>About</h2>
       <span class="sec-tag">// the throughline</span>
     </div>
@@ -448,6 +518,7 @@
 <section id="practice">
   <div class="wrap">
     <div class="sec-head">
+      <span class="sec-num">02</span>
       <h2>Public Practice — PMgirlz Journals</h2>
       <span class="sec-tag">// judgment, documented in public</span>
     </div>
@@ -870,6 +941,7 @@
 <section id="ai-skills" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
+      <span class="sec-num">03</span>
       <h2>AI Skills</h2>
       <span class="sec-tag">// product management in the AI era</span>
     </div>
@@ -1036,6 +1108,7 @@
 <section id="experience">
   <div class="wrap">
     <div class="sec-head">
+      <span class="sec-num">04</span>
       <h2>Experience</h2>
       <span class="sec-tag">// the shipping log</span>
     </div>
@@ -1097,6 +1170,7 @@
 <section id="toolkit">
   <div class="wrap">
     <div class="sec-head">
+      <span class="sec-num">05</span>
       <h2>Skills &amp; Toolkit</h2>
       <span class="sec-tag">// what I bring on day one</span>
     </div>
@@ -1147,6 +1221,7 @@
 <section id="impact" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
+      <span class="sec-num">06</span>
       <h2>Impact Dashboard</h2>
       <span class="sec-tag">// true, memorable, career-spanning</span>
     </div>
@@ -1189,6 +1264,7 @@
 <section id="leadership">
   <div class="wrap">
     <div class="sec-head">
+      <span class="sec-num">07</span>
       <h2>Leadership &amp; Cross-Functional Influence</h2>
       <span class="sec-tag">// real vignettes, not filled yet</span>
     </div>
@@ -1210,6 +1286,7 @@
 <section id="resume" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
+      <span class="sec-num">08</span>
       <h2>Resume</h2>
       <span class="sec-tag">// download</span>
     </div>
@@ -1226,6 +1303,7 @@
 <section id="recommendations">
   <div class="wrap">
     <div class="sec-head">
+      <span class="sec-num">09</span>
       <h2>Recommendations</h2>
       <span class="sec-tag">// optional, 2–3</span>
     </div>
@@ -1242,23 +1320,104 @@
   </div>
 </section>
 
-<footer id="contact">
+<section id="contact">
   <div class="wrap">
-    <p class="foot-big">
-      Let's build something<br>
-      <a href="mailto:bhawna202019@gmail.com">worth shipping.</a>
-    </p>
-    <div class="foot-links">
-      <a href="mailto:bhawna202019@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/bhawnamangla/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/bhawnamanglapm" target="_blank" rel="noopener">GitHub</a>
+    <div class="sec-head">
+      <span class="sec-num">10</span>
+      <h2>Let's Talk</h2>
+      <span class="sec-tag">// open to Senior PM roles</span>
     </div>
+    <div class="contact-grid">
+      <form class="contact-form" id="contactForm">
+        <label for="cf-name">Name</label>
+        <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+        <label for="cf-email">Email</label>
+        <input type="email" id="cf-email" name="email" placeholder="you@email.com" required>
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" rows="5" placeholder="What are you looking to talk about?" required></textarea>
+        <button type="submit" class="btn primary">Send message</button>
+        <p class="form-note">Opens your email client with this pre-filled — nothing is stored or sent silently.</p>
+        <p class="form-status" id="formStatus">Opening your email client…</p>
+      </form>
+      <div>
+        <p class="foot-big">
+          Let's build something<br>
+          <span>worth shipping.</span>
+        </p>
+        <div class="foot-links">
+          <a href="mailto:bhawna202019@gmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/bhawnamangla/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/bhawnamanglapm" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
     <div class="colophon">
       <span>© 2026 Bhawna Mangla</span>
       <span>Gurugram, India · Open to Senior PM roles</span>
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+
+  // Mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  if(navToggle && navLinks){
+    navToggle.addEventListener('click', function(){
+      var open = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // Scroll-reveal animations
+  var revealSelectors = '.sec-head, .jcard, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .vignette, .resume-panel, .rec-card, .panel, .contact-form, .ptable-wrap, .ptable2-wrap, .pipeline';
+  var revealEls = document.querySelectorAll(revealSelectors);
+  if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    revealEls.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+
+  // Contact form -> mailto (no backend on a static site)
+  var form = document.getElementById('contactForm');
+  var status = document.getElementById('formStatus');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = form.name.value.trim();
+      var email = form.email.value.trim();
+      var message = form.message.value.trim();
+      var subject = encodeURIComponent('Portfolio contact from ' + name);
+      var body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
+      window.location.href = 'mailto:bhawna202019@gmail.com?subject=' + subject + '&body=' + body;
+      if(status){ status.classList.add('show'); }
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
