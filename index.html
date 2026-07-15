@@ -188,13 +188,24 @@
   .metric .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;line-height:1;color:var(--paper)}
   .metric .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin-top:5px}
 
+  /* ---------- Journal timeline track ---------- */
+  .jtrack{position:relative;padding-left:64px}
+  .jtrack::before{content:"";position:absolute;left:27px;top:8px;bottom:8px;width:2px;background:var(--line)}
+
   /* ---------- Journal cards ---------- */
-  .jcard{background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:0;margin-bottom:18px;overflow:hidden;box-shadow:var(--shadow)}
+  .jcard{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:0;margin-bottom:18px;box-shadow:var(--shadow)}
   .jcard.featured{border-color:var(--lime);border-left-width:4px}
   .jhead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;cursor:pointer;list-style:none}
   .jhead::-webkit-details-marker{display:none}
   .jhead-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-  .jnum{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;color:var(--pink);line-height:1}
+  .jnum{
+    position:absolute;left:-58px;top:26px;z-index:2;
+    width:42px;height:42px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12.5px;
+    background:var(--ink-2);border:2px solid var(--grey);color:var(--paper);
+  }
+  .jcard.featured .jnum{background:linear-gradient(135deg,var(--pink),#6D28D9);border-color:transparent;color:#fff}
   .jtitle{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;line-height:1.25}
   .jmeta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin-top:4px}
   .jbadge{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--lime);color:#fff;padding:4px 10px;border-radius:20px;white-space:nowrap}
@@ -340,6 +351,9 @@
     .jbody{padding:0 20px 22px}
     .timeline{padding-left:26px}
     .tl-dot{left:-26px}
+    .jtrack{padding-left:44px}
+    .jtrack::before{left:17px}
+    .jnum{left:-38px;width:34px;height:34px;font-size:11px}
   }
 </style>
 </head>
@@ -450,6 +464,7 @@
       are still open from the source content and are not yet populated.
     </div>
 
+    <div class="jtrack">
     <!-- FEATURED: J4 Swiggy -->
     <article class="jcard featured">
       <div class="jhead" style="cursor:default">
@@ -457,7 +472,7 @@
           <span class="jnum">J4</span>
           <div>
             <div class="jtitle">Metrics &amp; Analytics — Swiggy's Real North Star Metric</div>
-            <div class="jmeta">Analytical Thinking · Featured</div>
+            <div class="jmeta">📈 Analytical Thinking · Featured</div>
           </div>
         </div>
         <span class="jbadge">Featured</span>
@@ -495,7 +510,7 @@
           <span class="jnum">J5</span>
           <div>
             <div class="jtitle">Product Strategy — Why Zepto Won</div>
-            <div class="jmeta">Business Acumen · Featured</div>
+            <div class="jmeta">♟️ Business Acumen · Featured</div>
           </div>
         </div>
         <span class="jbadge">Featured</span>
@@ -532,7 +547,7 @@
           <span class="jnum">J7</span>
           <div>
             <div class="jtitle">Career Lessons — Bajaj Finance → Ericsson → Startup</div>
-            <div class="jmeta">Leadership &amp; Pattern Recognition · Featured</div>
+            <div class="jmeta">🧭 Leadership &amp; Pattern Recognition · Featured</div>
           </div>
         </div>
         <span class="jbadge">Featured</span>
@@ -568,7 +583,7 @@
           <span class="jnum">J1</span>
           <div>
             <div class="jtitle">Product Teardown — MakeMyTrip</div>
-            <div class="jmeta">Product Sense</div>
+            <div class="jmeta">🔍 Product Sense</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -607,7 +622,7 @@
           <span class="jnum">J2</span>
           <div>
             <div class="jtitle">Feature Reverse Engineering — Duolingo's Streak</div>
-            <div class="jmeta">Feature Thinking</div>
+            <div class="jmeta">🧩 Feature Thinking</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -648,7 +663,7 @@
           <span class="jnum">J3</span>
           <div>
             <div class="jtitle">User Psychology — First-Open Observation (Fintech App)</div>
-            <div class="jmeta">User Empathy</div>
+            <div class="jmeta">🧠 User Empathy</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -683,7 +698,7 @@
           <span class="jnum">J6</span>
           <div>
             <div class="jtitle">PM Writing — The PRD Template</div>
-            <div class="jmeta">Communication · Reusable framework</div>
+            <div class="jmeta">✍️ Communication · Reusable framework</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -721,7 +736,7 @@
           <span class="jnum">J8</span>
           <div>
             <div class="jtitle">Decision Journal — Reversible vs. Irreversible Decisions (Bezos Model)</div>
-            <div class="jmeta">Judgment &amp; Decision Making</div>
+            <div class="jmeta">⚖️ Judgment &amp; Decision Making</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -758,7 +773,7 @@
           <span class="jnum">J9</span>
           <div>
             <div class="jtitle">PM Interview — "Influenced Without Authority"</div>
-            <div class="jmeta">Interview Readiness</div>
+            <div class="jmeta">🎤 Interview Readiness</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -793,7 +808,7 @@
           <span class="jnum">J10</span>
           <div>
             <div class="jtitle">Personal Growth — 6-Month Journal Challenge Wrap</div>
-            <div class="jmeta">Self-Awareness &amp; Growth</div>
+            <div class="jmeta">🌱 Self-Awareness &amp; Growth</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -824,6 +839,7 @@
         </div>
       </div>
     </details>
+    </div>
 
     <div class="ptable-wrap" style="margin-top:36px">
       <table class="ptable">
