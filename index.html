@@ -398,9 +398,15 @@
   .form-status.show{display:block}
   .foot-big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,52px);line-height:1.15;letter-spacing:-.01em;margin-bottom:28px}
   .foot-big span{color:var(--pink)}
-  .foot-links{display:flex;gap:28px;flex-wrap:wrap}
-  .foot-links a{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.04em;color:var(--paper);text-decoration:none;border-bottom:2px solid var(--pink);padding-bottom:3px;transition:color .18s,border-color .18s}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap}
+  .foot-links a{display:inline-flex;align-items:center;gap:9px;font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.04em;color:var(--paper);text-decoration:none;border-bottom:2px solid var(--pink);padding-bottom:3px;transition:color .18s,border-color .18s}
   .foot-links a:hover{color:var(--pink);border-color:var(--lime)}
+  .foot-links a:hover .foot-icon{transform:translateY(-1px)}
+  .foot-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .18s}
+  .foot-icon svg{width:14px;height:14px}
+
+  .inline-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;flex-shrink:0;vertical-align:middle;margin-right:1px}
+  .inline-icon svg{width:11px;height:11px}
   footer{padding:36px 0;border-top:1px solid var(--line)}
   .colophon{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey)}
 
@@ -503,8 +509,14 @@
         owning PCMS 0→1 for a ₹50,000 Cr+ deposit book.
       </p>
       <div class="hero-cta">
-        <a class="btn primary" href="#practice">See the practice</a>
-        <a class="btn ghost" href="#contact">Get in touch</a>
+        <a class="btn primary" href="#practice" style="display:inline-flex;align-items:center;gap:9px">
+          See the practice
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn ghost" href="#contact" style="display:inline-flex;align-items:center;gap:9px">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+          Get in touch
+        </a>
       </div>
     </div>
   </div>
@@ -1126,7 +1138,14 @@
 
     <p style="margin-top:16px;font-size:14px;color:var(--grey)">
       Cadence proof point: <span class="todo">fill in — confirmed publishing schedule and date range</span> ·
-      Full archive: <a href="https://www.linkedin.com/in/bhawnamangla/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">browse on LinkedIn</a>
+      Full archive: <a href="https://www.linkedin.com/in/bhawnamangla/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime);display:inline-flex;align-items:center;gap:6px">
+        <span class="inline-icon" style="background:#0A66C2">
+          <svg viewBox="0 0 24 24" fill="#fff">
+            <path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12.02H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v6.33h-4v-5.6c0-1.34-.02-3.05-1.86-3.05-1.87 0-2.16 1.46-2.16 2.96v5.69H9z"/>
+          </svg>
+        </span>
+        browse on LinkedIn
+      </a>
     </p>
   </div>
 </section>
@@ -1554,8 +1573,14 @@
         <div class="resume-meta">Last updated: July 2026</div>
       </div>
       <div style="display:flex;gap:14px;flex-wrap:wrap">
-        <a class="btn primary" href="Bhawna_Mangla_Resume_2026.pdf" download>Download resume</a>
-        <a class="btn ghost" href="mailto:bhawna202019@gmail.com?subject=Resume%20request">Email instead</a>
+        <a class="btn primary" href="Bhawna_Mangla_Resume_2026.pdf" download style="display:inline-flex;align-items:center;gap:9px">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4.5-4.5M12 16l4.5-4.5"/><path d="M4 18v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+          Download resume
+        </a>
+        <a class="btn ghost" href="mailto:bhawna202019@gmail.com?subject=Resume%20request" style="display:inline-flex;align-items:center;gap:9px">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+          Email instead
+        </a>
       </div>
     </div>
   </div>
@@ -1571,19 +1596,19 @@
     <div class="rec-grid">
       <div class="rec-card real">
         <blockquote>"Bhawna has an exceptional ability to manage teams and projects effortlessly while maintaining clarity, structure, and a positive work environment. She balances deadlines, client expectations, and team dynamics with remarkable ease… I highly recommend her for her professionalism, leadership, and outstanding project management skills."</blockquote>
-        <div class="who">Janvi Gulati — UI/UX Designer <span class="rec-meta">· worked with Bhawna, different teams · LinkedIn, Feb 2026</span></div>
+        <div class="who">Janvi Gulati — UI/UX Designer <span class="rec-meta">· worked with Bhawna, different teams · <span class="inline-icon" style="background:#0A66C2"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12.02H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v6.33h-4v-5.6c0-1.34-.02-3.05-1.86-3.05-1.87 0-2.16 1.46-2.16 2.96v5.69H9z"/></svg></span> LinkedIn, Feb 2026</span></div>
       </div>
       <div class="rec-card real">
         <blockquote>"Bhawna takes initiative and leads projects confidently. She doesn't wait to be told what needs to be done — she anticipates needs, offers creative solutions, and keeps projects moving forward smoothly. She is also an excellent communicator, making collaboration easy. Bhawna is an invaluable asset to any team, combining strong design skills with reliability, leadership, and a positive attitude."</blockquote>
-        <div class="who">Allison Crochet — Social Media Project Manager, Smartsites <span class="rec-meta">· worked with Bhawna, different teams · LinkedIn, May 2026</span></div>
+        <div class="who">Allison Crochet — Social Media Project Manager, Smartsites <span class="rec-meta">· worked with Bhawna, different teams · <span class="inline-icon" style="background:#0A66C2"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12.02H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v6.33h-4v-5.6c0-1.34-.02-3.05-1.86-3.05-1.87 0-2.16 1.46-2.16 2.96v5.69H9z"/></svg></span> LinkedIn, May 2026</span></div>
       </div>
       <div class="rec-card real">
         <blockquote>"Clarity of thought and quality results is what you get with Bhawna. Rare person with good listening skills and focused approach. Product management and stakeholder relations is her forte."</blockquote>
-        <div class="who">Prasanna Jain — 21+ yrs, Product &amp; Strategy <span class="rec-meta">· senior to Bhawna, no direct management · LinkedIn, Nov 2023</span></div>
+        <div class="who">Prasanna Jain — 21+ yrs, Product &amp; Strategy <span class="rec-meta">· senior to Bhawna, no direct management · <span class="inline-icon" style="background:#0A66C2"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12.02H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v6.33h-4v-5.6c0-1.34-.02-3.05-1.86-3.05-1.87 0-2.16 1.46-2.16 2.96v5.69H9z"/></svg></span> LinkedIn, Nov 2023</span></div>
       </div>
       <div class="rec-card real">
         <blockquote>"I have worked with many professionals throughout my journey, but Bhawna was a unique one to work. Her work ethics are pristine, and she is easily adjustable to a given situation, ability to go out of her way to help others has made her stand out."</blockquote>
-        <div class="who">Bhupender Rana — Telecom / Networking <span class="rec-meta">· direct manager · LinkedIn, Apr 2022</span></div>
+        <div class="who">Bhupender Rana — Telecom / Networking <span class="rec-meta">· direct manager · <span class="inline-icon" style="background:#0A66C2"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12.02H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v6.33h-4v-5.6c0-1.34-.02-3.05-1.86-3.05-1.87 0-2.16 1.46-2.16 2.96v5.69H9z"/></svg></span> LinkedIn, Apr 2022</span></div>
       </div>
     </div>
   </div>
@@ -1604,7 +1629,10 @@
         <input type="email" id="cf-email" name="email" placeholder="you@email.com" required>
         <label for="cf-message">Message</label>
         <textarea id="cf-message" name="message" rows="5" placeholder="What are you looking to talk about?" required></textarea>
-        <button type="submit" class="btn primary">Send message</button>
+        <button type="submit" class="btn primary" style="display:inline-flex;align-items:center;gap:9px">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Send message
+        </button>
         <p class="form-note">Opens your email client with this pre-filled — nothing is stored or sent silently.</p>
         <p class="form-status" id="formStatus">Opening your email client…</p>
       </form>
@@ -1614,9 +1642,31 @@
           <span>worth shipping.</span>
         </p>
         <div class="foot-links">
-          <a href="mailto:bhawna202019@gmail.com">Email</a>
-          <a href="https://www.linkedin.com/in/bhawnamangla/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/bhawnamanglapm" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:bhawna202019@gmail.com">
+            <span class="foot-icon" style="background:var(--pink)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M2 6l10 7 10-7"/>
+              </svg>
+            </span>
+            Email
+          </a>
+          <a href="https://www.linkedin.com/in/bhawnamangla/" target="_blank" rel="noopener">
+            <span class="foot-icon" style="background:#0A66C2">
+              <svg viewBox="0 0 24 24" fill="#fff">
+                <path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12.02H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v6.33h-4v-5.6c0-1.34-.02-3.05-1.86-3.05-1.87 0-2.16 1.46-2.16 2.96v5.69H9z"/>
+              </svg>
+            </span>
+            LinkedIn
+          </a>
+          <a href="https://github.com/bhawnamanglapm" target="_blank" rel="noopener">
+            <span class="foot-icon" style="background:#181717">
+              <svg viewBox="0 0 24 24" fill="#fff">
+                <path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/>
+              </svg>
+            </span>
+            GitHub
+          </a>
         </div>
       </div>
     </div>
