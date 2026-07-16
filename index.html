@@ -412,6 +412,23 @@
     .jtrack{padding-left:44px}
     .jtrack::before{left:17px}
     .jnum{left:-38px;width:34px;height:34px;font-size:11px}
+
+    /* Stacked cards instead of a horizontally-scrolling table */
+    .ptable2-wrap{overflow-x:visible;border:none;box-shadow:none;border-radius:0}
+    table.ptable2{min-width:0;width:100%;border-collapse:separate;border-spacing:0 12px}
+    table.ptable2 thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+    table.ptable2 tbody tr{
+      display:block;border:1px solid var(--line);border-radius:14px;
+      padding:14px 16px;background:var(--ink-2);box-shadow:var(--shadow);
+    }
+    table.ptable2 td{display:block;padding:8px 0;border-bottom:1px dashed var(--line)}
+    table.ptable2 td:last-child{border-bottom:none;padding-bottom:0}
+    table.ptable2 td:first-child{padding-top:0}
+    table.ptable2 td::before{
+      content:attr(data-label);display:block;
+      font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+      color:var(--lime);margin-bottom:4px;
+    }
   }
   @media (max-width:480px){
     h1{font-size:clamp(34px,10vw,92px)}
@@ -997,17 +1014,17 @@
             <tr><th>Step</th><th>What happens</th><th>Tool/system</th><th>What it demonstrates</th></tr>
           </thead>
           <tbody>
-            <tr><td>1. Ask Claude</td><td>Kick off with a single prompt describing the product goal</td><td class="todo">fill in</td><td>Prompt design, scoping an ambiguous ask into a workable brief</td></tr>
-            <tr><td>2. Research company</td><td>Pull market, competitor, and user context automatically</td><td class="todo">fill in</td><td>Product sense, market research at AI speed</td></tr>
-            <tr><td>3. Generate PRD</td><td>Turn research into a structured PRD (problem, goals, requirements, success metrics)</td><td>Claude</td><td>PM Writing — same rigor as J6, AI-accelerated</td></tr>
-            <tr><td>4. Publish to Notion</td><td>Push the PRD into the team's actual workspace, not a local doc</td><td>Notion MCP/API</td><td>Closing the loop from draft to shared source of truth</td></tr>
-            <tr><td>5. Create Jira stories</td><td>Break the PRD into tracked engineering stories</td><td>Jira MCP/API</td><td>Execution — translating strategy into backlog</td></tr>
-            <tr><td>6. Create Linear issues</td><td>Mirror or route issues into Linear for teams that use it</td><td>Linear MCP/API</td><td>Tool fluency across PM stacks, not locked to one system</td></tr>
-            <tr><td>7. Generate architecture</td><td>Produce a first-pass technical architecture from the PRD</td><td>Claude</td><td>Technical fluency — enough system-design literacy to brief engineering</td></tr>
-            <tr><td>8. Create Miro diagram</td><td>Visualize the architecture for stakeholder review</td><td>Miro MCP/API</td><td>Communication — translating technical decisions into a shared visual</td></tr>
-            <tr><td>9. Commit code</td><td>Land a first implementation pass (scaffold, config, or prototype)</td><td>Claude Code / IDE</td><td>Enough technical fluency to prototype, not just spec</td></tr>
-            <tr><td>10. Push GitHub</td><td>Ship the commit to the actual repo</td><td>GitHub MCP/API</td><td>Real deployment, not a sandbox exercise</td></tr>
-            <tr><td>11. Notify Slack</td><td>Close the loop — tell the team what shipped</td><td>Slack MCP/API</td><td>Stakeholder communication, keeping humans in the loop despite automation</td></tr>
+            <tr><td data-label="Step">1. Ask Claude</td><td data-label="What happens">Kick off with a single prompt describing the product goal</td><td class="todo" data-label="Tool/system">fill in</td><td data-label="What it demonstrates">Prompt design, scoping an ambiguous ask into a workable brief</td></tr>
+            <tr><td data-label="Step">2. Research company</td><td data-label="What happens">Pull market, competitor, and user context automatically</td><td class="todo" data-label="Tool/system">fill in</td><td data-label="What it demonstrates">Product sense, market research at AI speed</td></tr>
+            <tr><td data-label="Step">3. Generate PRD</td><td data-label="What happens">Turn research into a structured PRD (problem, goals, requirements, success metrics)</td><td data-label="Tool/system">Claude</td><td data-label="What it demonstrates">PM Writing — same rigor as J6, AI-accelerated</td></tr>
+            <tr><td data-label="Step">4. Publish to Notion</td><td data-label="What happens">Push the PRD into the team's actual workspace, not a local doc</td><td data-label="Tool/system">Notion MCP/API</td><td data-label="What it demonstrates">Closing the loop from draft to shared source of truth</td></tr>
+            <tr><td data-label="Step">5. Create Jira stories</td><td data-label="What happens">Break the PRD into tracked engineering stories</td><td data-label="Tool/system">Jira MCP/API</td><td data-label="What it demonstrates">Execution — translating strategy into backlog</td></tr>
+            <tr><td data-label="Step">6. Create Linear issues</td><td data-label="What happens">Mirror or route issues into Linear for teams that use it</td><td data-label="Tool/system">Linear MCP/API</td><td data-label="What it demonstrates">Tool fluency across PM stacks, not locked to one system</td></tr>
+            <tr><td data-label="Step">7. Generate architecture</td><td data-label="What happens">Produce a first-pass technical architecture from the PRD</td><td data-label="Tool/system">Claude</td><td data-label="What it demonstrates">Technical fluency — enough system-design literacy to brief engineering</td></tr>
+            <tr><td data-label="Step">8. Create Miro diagram</td><td data-label="What happens">Visualize the architecture for stakeholder review</td><td data-label="Tool/system">Miro MCP/API</td><td data-label="What it demonstrates">Communication — translating technical decisions into a shared visual</td></tr>
+            <tr><td data-label="Step">9. Commit code</td><td data-label="What happens">Land a first implementation pass (scaffold, config, or prototype)</td><td data-label="Tool/system">Claude Code / IDE</td><td data-label="What it demonstrates">Enough technical fluency to prototype, not just spec</td></tr>
+            <tr><td data-label="Step">10. Push GitHub</td><td data-label="What happens">Ship the commit to the actual repo</td><td data-label="Tool/system">GitHub MCP/API</td><td data-label="What it demonstrates">Real deployment, not a sandbox exercise</td></tr>
+            <tr><td data-label="Step">11. Notify Slack</td><td data-label="What happens">Close the loop — tell the team what shipped</td><td data-label="Tool/system">Slack MCP/API</td><td data-label="What it demonstrates">Stakeholder communication, keeping humans in the loop despite automation</td></tr>
           </tbody>
         </table>
       </div>
@@ -1053,13 +1070,13 @@
         <table class="ptable2">
           <thead><tr><th>Workflow stage</th><th>Tool(s) used</th><th>What it's used for</th></tr></thead>
           <tbody>
-            <tr><td>Research &amp; synthesis</td><td>Claude, <span class="chip trend" style="padding:1px 8px;font-size:11px">Perplexity</span></td><td>Pulling market/competitive context and synthesizing it into a structured brief before writing a PRD or case study.</td></tr>
-            <tr><td>Writing (PRDs, memos, specs)</td><td>Claude, <span class="chip trend" style="padding:1px 8px;font-size:11px">Notion AI</span></td><td>First-draft PRDs, exec updates, and journal write-ups, organized in Notion — edited after for accuracy and voice.</td></tr>
-            <tr><td>Prototyping / coding</td><td>Claude Code, <span class="chip trend" style="padding:1px 8px;font-size:11px">Cursor</span></td><td>Scaffolding real prototypes and shipping small builds end-to-end — like this portfolio site — not just throwaway mockups.</td></tr>
-            <tr><td>Visual/design generation</td><td><span class="chip trend" style="padding:1px 8px;font-size:11px">Figma AI</span> <span class="chip trend" style="padding:1px 8px;font-size:11px">Gamma</span></td><td>AI-assisted iteration on design work in Figma, and turning a rough brief into a polished stakeholder deck in Gamma instead of a blank slide.</td></tr>
-            <tr><td>Meeting notes &amp; transcription</td><td><span class="chip trend" style="padding:1px 8px;font-size:11px">Otter.ai</span></td><td>Transcribing and summarizing stakeholder syncs so nothing said in a meeting gets lost by the next standup.</td></tr>
-            <tr><td>Data analysis</td><td>Claude, SQL, Power BI</td><td>Drafting and checking KPI queries, then turning Power BI/Salesforce reports into a plain-English readout for stakeholders.</td></tr>
-            <tr><td>Project/task orchestration</td><td>Claude, <span class="chip trend" style="padding:1px 8px;font-size:11px">Notion</span></td><td>Orchestrating research → PRD → tickets → architecture in one pass, with Notion as the shared source of truth — see the pipeline in Section C.</td></tr>
+            <tr><td data-label="Workflow stage">Research &amp; synthesis</td><td data-label="Tool(s) used">Claude, <span class="chip trend" style="padding:1px 8px;font-size:11px">Perplexity</span></td><td data-label="What it's used for">Pulling market/competitive context and synthesizing it into a structured brief before writing a PRD or case study.</td></tr>
+            <tr><td data-label="Workflow stage">Writing (PRDs, memos, specs)</td><td data-label="Tool(s) used">Claude, <span class="chip trend" style="padding:1px 8px;font-size:11px">Notion AI</span></td><td data-label="What it's used for">First-draft PRDs, exec updates, and journal write-ups, organized in Notion — edited after for accuracy and voice.</td></tr>
+            <tr><td data-label="Workflow stage">Prototyping / coding</td><td data-label="Tool(s) used">Claude Code, <span class="chip trend" style="padding:1px 8px;font-size:11px">Cursor</span></td><td data-label="What it's used for">Scaffolding real prototypes and shipping small builds end-to-end — like this portfolio site — not just throwaway mockups.</td></tr>
+            <tr><td data-label="Workflow stage">Visual/design generation</td><td data-label="Tool(s) used"><span class="chip trend" style="padding:1px 8px;font-size:11px">Figma AI</span> <span class="chip trend" style="padding:1px 8px;font-size:11px">Gamma</span></td><td data-label="What it's used for">AI-assisted iteration on design work in Figma, and turning a rough brief into a polished stakeholder deck in Gamma instead of a blank slide.</td></tr>
+            <tr><td data-label="Workflow stage">Meeting notes &amp; transcription</td><td data-label="Tool(s) used"><span class="chip trend" style="padding:1px 8px;font-size:11px">Otter.ai</span></td><td data-label="What it's used for">Transcribing and summarizing stakeholder syncs so nothing said in a meeting gets lost by the next standup.</td></tr>
+            <tr><td data-label="Workflow stage">Data analysis</td><td data-label="Tool(s) used">Claude, SQL, Power BI</td><td data-label="What it's used for">Drafting and checking KPI queries, then turning Power BI/Salesforce reports into a plain-English readout for stakeholders.</td></tr>
+            <tr><td data-label="Workflow stage">Project/task orchestration</td><td data-label="Tool(s) used">Claude, <span class="chip trend" style="padding:1px 8px;font-size:11px">Notion</span></td><td data-label="What it's used for">Orchestrating research → PRD → tickets → architecture in one pass, with Notion as the shared source of truth — see the pipeline in Section C.</td></tr>
           </tbody>
         </table>
       </div>
@@ -1086,12 +1103,12 @@
         <table class="ptable2">
           <thead><tr><th>Area</th><th>Level</th></tr></thead>
           <tbody>
-            <tr><td>Prompt engineering</td><td class="todo">fill in</td></tr>
-            <tr><td>LLM evaluation &amp; benchmarking</td><td class="todo">fill in</td></tr>
-            <tr><td>RAG / retrieval architecture (product-level)</td><td class="todo">fill in</td></tr>
-            <tr><td>AI agents / tool-use design</td><td class="todo">fill in</td></tr>
-            <tr><td>Responsible AI / governance</td><td class="todo">fill in</td></tr>
-            <tr><td>AI cost &amp; latency trade-offs</td><td class="todo">fill in</td></tr>
+            <tr><td data-label="Area">Prompt engineering</td><td class="todo" data-label="Level">fill in</td></tr>
+            <tr><td data-label="Area">LLM evaluation &amp; benchmarking</td><td class="todo" data-label="Level">fill in</td></tr>
+            <tr><td data-label="Area">RAG / retrieval architecture (product-level)</td><td class="todo" data-label="Level">fill in</td></tr>
+            <tr><td data-label="Area">AI agents / tool-use design</td><td class="todo" data-label="Level">fill in</td></tr>
+            <tr><td data-label="Area">Responsible AI / governance</td><td class="todo" data-label="Level">fill in</td></tr>
+            <tr><td data-label="Area">AI cost &amp; latency trade-offs</td><td class="todo" data-label="Level">fill in</td></tr>
           </tbody>
         </table>
       </div>
