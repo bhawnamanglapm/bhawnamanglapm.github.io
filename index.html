@@ -361,8 +361,11 @@
   /* ---------- Recommendations ---------- */
   .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   .rec-card{border:1px dashed var(--line);border-radius:16px;padding:26px 28px;background:var(--ink-2)}
-  .rec-card blockquote{font-size:15px;color:#52525B;font-style:italic;margin-bottom:14px}
-  .rec-card .who{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey)}
+  .rec-card.real{border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+  .rec-card.real:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+  .rec-card blockquote{font-size:14.5px;color:#3F3F46;font-style:italic;margin-bottom:16px;line-height:1.6}
+  .rec-card .who{font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;color:var(--paper)}
+  .rec-card .rec-meta{display:block;margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:400;letter-spacing:.02em;color:var(--grey);text-transform:none}
 
   /* ---------- Contact ---------- */
   #contact{background:linear-gradient(180deg,var(--ink) 0%,var(--ink-3) 100%);border-top:1px solid var(--line)}
@@ -1344,16 +1347,24 @@
     <div class="sec-head">
       <span class="sec-num">09</span>
       <h2>Recommendations</h2>
-      <span class="sec-tag">// optional, 2–3</span>
+      <span class="sec-tag">// from LinkedIn</span>
     </div>
     <div class="rec-grid">
-      <div class="rec-card">
-        <blockquote><span class="todo" style="display:block;width:fit-content">fill in — specific quote, not generic praise</span></blockquote>
-        <div class="who">— <span class="todo" style="padding:1px 6px">name, title &amp; relationship</span></div>
+      <div class="rec-card real">
+        <blockquote>"Bhawna has an exceptional ability to manage teams and projects effortlessly while maintaining clarity, structure, and a positive work environment. She balances deadlines, client expectations, and team dynamics with remarkable ease… I highly recommend her for her professionalism, leadership, and outstanding project management skills."</blockquote>
+        <div class="who">Janvi Gulati — UI/UX Designer <span class="rec-meta">· worked with Bhawna, different teams · LinkedIn, Feb 2026</span></div>
       </div>
-      <div class="rec-card">
-        <blockquote><span class="todo" style="display:block;width:fit-content">fill in — specific quote, not generic praise</span></blockquote>
-        <div class="who">— <span class="todo" style="padding:1px 6px">name, title &amp; relationship</span></div>
+      <div class="rec-card real">
+        <blockquote>"Bhawna takes initiative and leads projects confidently. She doesn't wait to be told what needs to be done — she anticipates needs, offers creative solutions, and keeps projects moving forward smoothly. She is also an excellent communicator, making collaboration easy. Bhawna is an invaluable asset to any team, combining strong design skills with reliability, leadership, and a positive attitude."</blockquote>
+        <div class="who">Allison Crochet — Social Media Project Manager, Smartsites <span class="rec-meta">· worked with Bhawna, different teams · LinkedIn, May 2026</span></div>
+      </div>
+      <div class="rec-card real">
+        <blockquote>"Clarity of thought and quality results is what you get with Bhawna. Rare person with good listening skills and focused approach. Product management and stakeholder relations is her forte."</blockquote>
+        <div class="who">Prasanna Jain — 21+ yrs, Product &amp; Strategy <span class="rec-meta">· senior to Bhawna, no direct management · LinkedIn, Nov 2023</span></div>
+      </div>
+      <div class="rec-card real">
+        <blockquote>"I have worked with many professionals throughout my journey, but Bhawna was a unique one to work. Her work ethics are pristine, and she is easily adjustable to a given situation, ability to go out of her way to help others has made her stand out."</blockquote>
+        <div class="who">Bhupender Rana — Telecom / Networking <span class="rec-meta">· direct manager · LinkedIn, Apr 2022</span></div>
       </div>
     </div>
   </div>
