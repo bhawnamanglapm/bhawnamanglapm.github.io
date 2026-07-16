@@ -167,9 +167,9 @@
   .js .reveal.in-view{opacity:1;transform:translateY(0)}
   .js .stat-circle.reveal{transform:translateY(18px) scale(.85)}
   .js .stat-circle.reveal.in-view{transform:translateY(0) scale(1)}
-  .toolkit-grid > .reveal:nth-child(2),.impact-grid > .reveal:nth-child(2),.stat-orbit > .reveal:nth-child(2){transition-delay:.06s}
-  .toolkit-grid > .reveal:nth-child(3),.impact-grid > .reveal:nth-child(3),.stat-orbit > .reveal:nth-child(3){transition-delay:.12s}
-  .toolkit-grid > .reveal:nth-child(4),.impact-grid > .reveal:nth-child(4),.stat-orbit > .reveal:nth-child(4){transition-delay:.18s}
+  .toolkit-grid > .reveal:nth-child(2),.impact-grid > .reveal:nth-child(2),.stat-orbit > .reveal:nth-child(2),.strengths-grid > .reveal:nth-child(2){transition-delay:.06s}
+  .toolkit-grid > .reveal:nth-child(3),.impact-grid > .reveal:nth-child(3),.stat-orbit > .reveal:nth-child(3),.strengths-grid > .reveal:nth-child(3){transition-delay:.12s}
+  .toolkit-grid > .reveal:nth-child(4),.impact-grid > .reveal:nth-child(4),.stat-orbit > .reveal:nth-child(4),.strengths-grid > .reveal:nth-child(4){transition-delay:.18s}
   .toolkit-grid > .reveal:nth-child(5),.impact-grid > .reveal:nth-child(5){transition-delay:.24s}
   .toolkit-grid > .reveal:nth-child(6),.impact-grid > .reveal:nth-child(6){transition-delay:.3s}
 
@@ -202,6 +202,27 @@
     text-transform:uppercase;color:var(--grey);
   }
   .sec-intro{max-width:760px;color:#52525B;font-size:15.5px;margin:-16px 0 40px}
+
+  /* ---------- Signature Strengths ---------- */
+  .strengths-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:48px}
+  .strength-card{background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:26px 24px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+  .strength-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .strength-card h4{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;margin-bottom:14px;color:var(--paper)}
+  .strength-card ul{list-style:none}
+  .strength-card li{position:relative;padding-left:16px;margin-bottom:9px;font-size:13.5px;color:#3F3F46;line-height:1.4}
+  .strength-card li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:var(--pink)}
+  .strengths-sub{text-align:center;color:var(--grey);font-size:14.5px;margin:-16px 0 40px}
+  .tool-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center}
+  .tool-icon{
+    width:56px;height:56px;border-radius:14px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;
+  }
+  .tool-icon:hover{transform:translateY(-3px) scale(1.06);box-shadow:var(--shadow-hover)}
+  .tool-icon svg{width:30px;height:30px;display:block}
+  .tool-icon.word{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12.5px;color:#fff;text-align:center;line-height:1.1}
+  .tool-label{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--grey);margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
+  .tool-item{display:flex;flex-direction:column;align-items:center;width:64px}
 
   /* ---------- About ---------- */
   #about{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -390,6 +411,7 @@
   /* ---------- Responsive ---------- */
   @media (max-width:820px){
     .work-grid,.split,.about-grid,.toolkit-grid,.rec-grid,.contact-grid{grid-template-columns:1fr}
+    .strengths-grid{grid-template-columns:1fr 1fr}
     .fields{grid-template-columns:1fr}
     .fields dt{margin-top:6px}
     .nav-toggle{display:flex}
@@ -440,6 +462,7 @@
     .stat-num{font-size:17px}
     section{padding:44px 0}
     .sec-num{width:32px;height:32px;font-size:12px}
+    .strengths-grid{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -452,6 +475,7 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
+      <li><a href="#strengths">Strengths</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#practice">Practice</a></li>
       <li><a href="#ai-skills">AI Skills</a></li>
@@ -503,10 +527,172 @@
   </div>
 </div>
 
-<section id="about">
+<section id="strengths">
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-num">01</span>
+      <h2>My Signature Strengths</h2>
+      <span class="sec-tag">// what sets me apart</span>
+    </div>
+    <div class="strengths-grid">
+      <div class="strength-card">
+        <h4>Product &amp; Strategy</h4>
+        <ul>
+          <li>Product Roadmapping</li>
+          <li>Product Life Cycle Management</li>
+          <li>PRD &amp; Requirements Writing</li>
+          <li>Cross-Functional Prioritization</li>
+        </ul>
+      </div>
+      <div class="strength-card">
+        <h4>Execution &amp; Delivery</h4>
+        <ul>
+          <li>Agile / Scrum Delivery</li>
+          <li>Sprint Planning</li>
+          <li>Stakeholder Management</li>
+          <li>Partner &amp; Vendor Onboarding</li>
+        </ul>
+      </div>
+      <div class="strength-card">
+        <h4>Data &amp; Analysis</h4>
+        <ul>
+          <li>SQL Querying</li>
+          <li>KPI Dashboards (Power BI)</li>
+          <li>Salesforce Reporting</li>
+          <li>Data-Informed Decisions</li>
+        </ul>
+      </div>
+      <div class="strength-card">
+        <h4>AI &amp; Agentic Workflows</h4>
+        <ul>
+          <li>Agentic AI Orchestration</li>
+          <li>Claude Code Prototyping</li>
+          <li>AI-Accelerated PRD Writing</li>
+          <li>AI Workflow Optimization</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="strengths-sub">Tools I work in, day to day</p>
+    <div class="tool-row">
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#fff;border:1px solid var(--line)">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 1a3 3 0 000 6h3V1H8z" fill="#F24E1E"/>
+            <path d="M8 7a3 3 0 100 6h3V7H8z" fill="#A259FF"/>
+            <path d="M8 13a3 3 0 103 3v-3H8z" fill="#0ACF83"/>
+            <path d="M14 1a3 3 0 000 6 3 3 0 000-6z" fill="#FF7262"/>
+            <path d="M14 7a3 3 0 000 6 3 3 0 000-6z" fill="#1ABCFE"/>
+          </svg>
+        </div>
+        <div class="tool-label">Figma</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#fff;border:1px solid var(--line)">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2 2.5 11.2c-.6.6-.6 1.6 0 2.2L12 22l9.5-8.6c.6-.6.6-1.6 0-2.2z" fill="#2684FF"/>
+            <path d="M12 6.4 6 11.7c-.5.5-.5 1.3 0 1.8L12 18.6l6-5.1c.5-.5.5-1.3 0-1.8z" fill="#0052CC"/>
+          </svg>
+        </div>
+        <div class="tool-label">Jira</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#0078D7">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+            <circle cx="8.5" cy="12" r="5"/>
+            <circle cx="15.5" cy="12" r="5"/>
+          </svg>
+        </div>
+        <div class="tool-label">Azure DevOps</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#000">
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#fff">N</span>
+        </div>
+        <div class="tool-label">Notion</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#fff;border:1px solid var(--line)">
+          <svg viewBox="0 0 24 24">
+            <rect x="9" y="1" width="4" height="9" rx="2" fill="#36C5F0"/>
+            <rect x="14" y="9" width="9" height="4" rx="2" fill="#2EB67D"/>
+            <rect x="11" y="14" width="4" height="9" rx="2" fill="#ECB22E"/>
+            <rect x="1" y="11" width="9" height="4" rx="2" fill="#E01E5A"/>
+          </svg>
+        </div>
+        <div class="tool-label">Slack</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#2684FF">
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#fff">C</span>
+        </div>
+        <div class="tool-label">Confluence</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#FFD02F">
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#050038">Mi</span>
+        </div>
+        <div class="tool-label">Miro</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#fff;border:1px solid var(--line)">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="14" width="5" height="8" rx="1" fill="#F2C811"/>
+            <rect x="9.5" y="8" width="5" height="14" rx="1" fill="#F2C811" opacity=".85"/>
+            <rect x="17" y="2" width="5" height="20" rx="1" fill="#F2C811" opacity=".7"/>
+          </svg>
+        </div>
+        <div class="tool-label">Power BI</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#181717">
+          <svg viewBox="0 0 24 24" fill="#fff">
+            <path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/>
+          </svg>
+        </div>
+        <div class="tool-label">GitHub</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#D97757">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <path d="M12 3v18M4.5 7.5l15 9M4.5 16.5l15-9"/>
+          </svg>
+        </div>
+        <div class="tool-label">Claude</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#10A37F">
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;color:#fff">GPT</span>
+        </div>
+        <div class="tool-label">ChatGPT</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-icon" style="background:#5E6AD2">
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#fff">L</span>
+        </div>
+        <div class="tool-label">Linear</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
       <h2>About</h2>
       <span class="sec-tag">// the throughline</span>
     </div>
@@ -538,7 +724,7 @@
 <section id="practice">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">02</span>
+      <span class="sec-num">03</span>
       <h2>Public Practice — PMgirlz Journals</h2>
       <span class="sec-tag">// judgment, documented in public</span>
     </div>
@@ -952,7 +1138,7 @@
 <section id="ai-skills" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">03</span>
+      <span class="sec-num">04</span>
       <h2>AI Skills</h2>
       <span class="sec-tag">// product management in the AI era</span>
     </div>
@@ -1119,7 +1305,7 @@
 <section id="experience">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">04</span>
+      <span class="sec-num">05</span>
       <h2>Experience</h2>
       <span class="sec-tag">// the shipping log</span>
     </div>
@@ -1203,7 +1389,7 @@
 <section id="toolkit">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">05</span>
+      <span class="sec-num">06</span>
       <h2>Skills &amp; Toolkit</h2>
       <span class="sec-tag">// what I bring on day one</span>
     </div>
@@ -1297,7 +1483,7 @@
 <section id="impact" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">06</span>
+      <span class="sec-num">07</span>
       <h2>Impact Dashboard</h2>
       <span class="sec-tag">// true, memorable, career-spanning</span>
     </div>
@@ -1340,7 +1526,7 @@
 <section id="leadership">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">07</span>
+      <span class="sec-num">08</span>
       <h2>Leadership &amp; Cross-Functional Influence</h2>
       <span class="sec-tag">// 2 of 3 still need your story</span>
     </div>
@@ -1362,7 +1548,7 @@
 <section id="resume" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">08</span>
+      <span class="sec-num">09</span>
       <h2>Resume</h2>
       <span class="sec-tag">// download</span>
     </div>
@@ -1382,7 +1568,7 @@
 <section id="recommendations">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">09</span>
+      <span class="sec-num">10</span>
       <h2>Recommendations</h2>
       <span class="sec-tag">// from LinkedIn</span>
     </div>
@@ -1410,7 +1596,7 @@
 <section id="contact">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">10</span>
+      <span class="sec-num">11</span>
       <h2>Let's Talk</h2>
       <span class="sec-tag">// open to Senior PM roles</span>
     </div>
@@ -1473,7 +1659,7 @@
   }
 
   // Scroll-reveal animations
-  var revealSelectors = '.sec-head, .jcard, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .vignette, .resume-panel, .rec-card, .panel, .contact-form, .ptable2-wrap, .pipeline';
+  var revealSelectors = '.sec-head, .jcard, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .vignette, .resume-panel, .rec-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item';
   var revealEls = document.querySelectorAll(revealSelectors);
   if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     revealEls.forEach(function(el){ el.classList.add('reveal'); });
