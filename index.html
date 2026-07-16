@@ -319,6 +319,8 @@
   .toolkit-cat h4{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
   .chips{display:flex;flex-wrap:wrap;gap:10px}
   .chip{font-family:'IBM Plex Mono',monospace;font-size:12.5px;border:1px solid var(--line);border-radius:20px;padding:8px 14px;color:#33333D;transition:all .18s;cursor:default}
+  .chip.trend{border-style:dashed;border-color:var(--pink);color:var(--pink);background:var(--ink-3)}
+  .chip.trend::after{content:" ✦";font-size:10px}
   .chip:hover{border-color:var(--pink);color:var(--pink)}
 
   /* ---------- Impact dashboard ---------- */
@@ -1186,6 +1188,7 @@
       <h2>Skills &amp; Toolkit</h2>
       <span class="sec-tag">// what I bring on day one</span>
     </div>
+    <p style="margin:-16px 0 32px;font-size:13px;color:var(--grey)">Solid chips are proven on the job. <span class="chip trend" style="padding:1px 8px;font-size:11px">Dashed ✦</span> chips are current tools I'm actively building fluency in.</p>
     <div class="toolkit-grid">
       <div class="toolkit-cat">
         <div class="cat-icon">🎯</div>
@@ -1195,6 +1198,8 @@
           <span class="chip">Product Roadmap</span>
           <span class="chip">Product Life Cycle Management</span>
           <span class="chip">OKRs</span>
+          <span class="chip trend">Productboard</span>
+          <span class="chip trend">Aha!</span>
         </div>
       </div>
       <div class="toolkit-cat">
@@ -1208,6 +1213,8 @@
           <span class="chip">Azure DevOps</span>
           <span class="chip">Partner Onboarding</span>
           <span class="chip">Commission Engines</span>
+          <span class="chip trend">Linear</span>
+          <span class="chip trend">Notion</span>
         </div>
       </div>
       <div class="toolkit-cat">
@@ -1217,6 +1224,10 @@
           <span class="chip">SQL</span>
           <span class="chip">Power BI</span>
           <span class="chip">Salesforce CRM</span>
+          <span class="chip trend">Amplitude</span>
+          <span class="chip trend">Mixpanel</span>
+          <span class="chip trend">GA4</span>
+          <span class="chip trend">Statsig</span>
         </div>
       </div>
       <div class="toolkit-cat">
@@ -1230,6 +1241,8 @@
           <span class="chip">Python</span>
           <span class="chip">Linux</span>
           <span class="chip">WireShark</span>
+          <span class="chip trend">REST APIs</span>
+          <span class="chip trend">System Design</span>
         </div>
       </div>
       <div class="toolkit-cat">
@@ -1238,6 +1251,12 @@
         <div class="chips">
           <span class="chip">Agentic AI</span>
           <span class="chip">Claude Code</span>
+          <span class="chip trend">Claude</span>
+          <span class="chip trend">ChatGPT</span>
+          <span class="chip trend">Perplexity</span>
+          <span class="chip trend">Cursor</span>
+          <span class="chip trend">GitHub Copilot</span>
+          <span class="chip trend">Notion AI</span>
         </div>
       </div>
       <div class="toolkit-cat">
@@ -1247,6 +1266,9 @@
           <span class="chip">PRD Writing</span>
           <span class="chip">User Stories</span>
           <span class="chip">Stakeholder Management</span>
+          <span class="chip trend">Confluence</span>
+          <span class="chip trend">Miro</span>
+          <span class="chip trend">Slack</span>
         </div>
       </div>
     </div>
