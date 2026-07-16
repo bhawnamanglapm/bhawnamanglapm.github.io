@@ -23,7 +23,9 @@
     --max:1180px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{overflow-x:hidden}
+  section,header.hero{scroll-margin-top:80px}
   body{
     background:var(--ink);
     color:var(--paper);
@@ -75,7 +77,7 @@
   .nav-links a:hover::after{right:0}
   .nav-toggle{
     display:none;flex-direction:column;justify-content:center;gap:5px;
-    width:38px;height:38px;border:none;background:none;cursor:pointer;padding:0;
+    width:44px;height:44px;border:none;background:none;cursor:pointer;padding:0;
   }
   .nav-toggle span{width:22px;height:2px;background:var(--paper);border-radius:2px;transition:transform .25s,opacity .25s;margin:0 auto}
   .nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -368,7 +370,7 @@
   .contact-form label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin:16px 0 8px}
   .contact-form label:first-child{margin-top:0}
   .contact-form input,.contact-form textarea{
-    font-family:'Inter',sans-serif;font-size:15px;color:var(--paper);
+    font-family:'Inter',sans-serif;font-size:16px;color:var(--paper);
     background:var(--ink-3);border:1px solid var(--line);border-radius:12px;
     padding:12px 16px;resize:vertical;transition:border-color .2s,box-shadow .2s;
   }
@@ -1046,7 +1048,7 @@
 
     <div class="ai-sub">
       <div class="ai-sub-head"><span class="ai-letter">E</span><h3>AI Tools I Actually Use</h3></div>
-      <p class="desc">Breadth across the PM workflow, not just visual generation. Solid text is proven daily use; <span class="chip trend" style="padding:1px 8px;font-size:11px">dashed ✦</span> tools are best-in-class picks I'm actively folding in.</p>
+      <p class="desc">Breadth across the PM workflow, not just visual generation. Solid text is proven daily use; <span class="chip trend" style="padding:1px 8px;font-size:11px">dashed</span> tools are best-in-class picks I'm actively folding in.</p>
       <div class="ptable2-wrap">
         <table class="ptable2">
           <thead><tr><th>Workflow stage</th><th>Tool(s) used</th><th>What it's used for</th></tr></thead>
@@ -1188,7 +1190,7 @@
       <h2>Skills &amp; Toolkit</h2>
       <span class="sec-tag">// what I bring on day one</span>
     </div>
-    <p style="margin:-16px 0 32px;font-size:13px;color:var(--grey)">Solid chips are proven on the job. <span class="chip trend" style="padding:1px 8px;font-size:11px">Dashed ✦</span> chips are current tools I'm actively building fluency in.</p>
+    <p style="margin:-16px 0 32px;font-size:13px;color:var(--grey)">Solid chips are proven on the job. <span class="chip trend" style="padding:1px 8px;font-size:11px">Dashed</span> chips are current tools I'm actively building fluency in.</p>
     <div class="toolkit-grid">
       <div class="toolkit-cat">
         <div class="cat-icon">🎯</div>
@@ -1348,8 +1350,8 @@
       <span class="sec-tag">// download</span>
     </div>
     <div class="resume-panel">
-      <div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px">Bhawna_Mangla_Resume_2026.pdf</div>
+      <div style="min-width:0">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;overflow-wrap:anywhere">Bhawna_Mangla_Resume_2026.pdf</div>
         <div class="resume-meta">Last updated: July 2026</div>
       </div>
       <div style="display:flex;gap:14px;flex-wrap:wrap">
