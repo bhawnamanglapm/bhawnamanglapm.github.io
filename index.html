@@ -249,7 +249,6 @@
 
   /* ---------- Journal cards ---------- */
   .jcard{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:0;margin-bottom:18px;box-shadow:var(--shadow)}
-  .jcard.featured{border-color:var(--lime);border-left-width:4px}
   .jhead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;cursor:pointer;list-style:none}
   .jhead::-webkit-details-marker{display:none}
   .jhead-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
@@ -260,14 +259,11 @@
     font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12.5px;
     background:var(--ink-2);border:2px solid var(--grey);color:var(--paper);
   }
-  .jcard.featured .jnum{background:linear-gradient(135deg,var(--pink),#6D28D9);border-color:transparent;color:#fff}
   .jcase-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);margin-bottom:6px}
   .jtitle{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;line-height:1.25}
   .jmeta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin-top:4px}
-  .jbadge{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--lime);color:#fff;padding:4px 10px;border-radius:20px;white-space:nowrap}
   .jtoggle{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey);white-space:nowrap}
   .jbody{padding:0 28px 28px}
-  .jcard.featured .jbody{padding:0 28px 32px}
   .fields{display:grid;grid-template-columns:220px 1fr;gap:10px 20px;margin-top:8px}
   .fields dt{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--grey);padding-top:2px}
   .fields dd{color:#33333D;font-size:14.5px}
@@ -736,8 +732,7 @@
 
     <div class="practice-note">
       Each entry below runs one representative project per journal, documented using that journal's own
-      field list, kept in order from J1 to J10. Three (J4 Swiggy, J5 Zepto, J7 Career Lessons) are marked
-      "Featured" and shown open in full; the rest are collapsed — click a row to expand. Fields marked
+      field list, kept in order from J1 to J10 — click a row to expand it. Fields marked
       <span class="todo" style="padding:1px 6px">fill in</span> are still open from the source content
       and are not yet populated.
     </div>
@@ -861,19 +856,19 @@
       </div>
     </details>
 
-    <!-- FEATURED: J4 Swiggy -->
-    <article class="jcard featured">
-      <div class="jhead" style="cursor:default">
+    <!-- J4 -->
+    <details class="jcard">
+      <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J4</span>
           <div>
             <div class="jcase-label">Case Study · Metrics &amp; Analytics</div>
             <div class="jtitle">Metrics &amp; Analytics — Swiggy's Real North Star Metric</div>
-            <div class="jmeta">📈 Analytical Thinking · Featured</div>
+            <div class="jmeta">📈 Analytical Thinking</div>
           </div>
         </div>
-        <span class="jbadge">Featured</span>
-      </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Product</dt><dd>Swiggy</dd>
@@ -898,21 +893,21 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </article>
+    </details>
 
-    <!-- FEATURED: J5 Zepto -->
-    <article class="jcard featured">
-      <div class="jhead" style="cursor:default">
+    <!-- J5 -->
+    <details class="jcard">
+      <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J5</span>
           <div>
             <div class="jcase-label">Case Study · Product Strategy</div>
             <div class="jtitle">Product Strategy — Why Zepto Won</div>
-            <div class="jmeta">♟️ Business Acumen · Featured</div>
+            <div class="jmeta">♟️ Business Acumen</div>
           </div>
         </div>
-        <span class="jbadge">Featured</span>
-      </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Company overview</dt><dd><span class="todo">fill in</span></dd>
@@ -936,7 +931,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </article>
+    </details>
 
     <!-- J6 -->
     <details class="jcard">
@@ -977,19 +972,19 @@
       </div>
     </details>
 
-    <!-- FEATURED: J7 Career Lessons -->
-    <article class="jcard featured">
-      <div class="jhead" style="cursor:default">
+    <!-- J7 -->
+    <details class="jcard">
+      <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J7</span>
           <div>
             <div class="jcase-label">Case Study · Career Lessons</div>
             <div class="jtitle">Career Lessons — Bajaj Finance → Ericsson → Startup</div>
-            <div class="jmeta">🧭 Leadership &amp; Pattern Recognition · Featured</div>
+            <div class="jmeta">🧭 Leadership &amp; Pattern Recognition</div>
           </div>
         </div>
-        <span class="jbadge">Featured</span>
-      </div>
+        <span class="jtoggle">expand ▾</span>
+      </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Company overview</dt><dd>BFSI (Bajaj Finance) → Telecom/enterprise (Ericsson) → Startup</dd>
@@ -1012,7 +1007,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </article>
+    </details>
 
     <!-- J8 -->
     <details class="jcard">
