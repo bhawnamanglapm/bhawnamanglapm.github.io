@@ -303,6 +303,9 @@
   .tl-item:last-child{padding-bottom:0}
   .tl-dot{position:absolute;left:-34px;top:6px;width:13px;height:13px;border-radius:50%;background:var(--ink-2);border:3px solid var(--grey);box-sizing:border-box}
   .tl-dot.current{background:var(--lime);border-color:var(--lime);box-shadow:0 0 0 4px rgba(13,148,136,.18)}
+  .tl-dot.break{background:transparent;border:2px dashed var(--grey);width:11px;height:11px;top:4px}
+  .tl-item.tl-break{padding-bottom:22px}
+  .tl-break-label{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-style:italic;color:var(--grey);padding-top:2px}
   .tl-card{background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:22px 26px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
   .tl-card:hover{transform:translateX(4px);box-shadow:var(--shadow-hover)}
   .log-when{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
@@ -1127,38 +1130,60 @@
       <li class="tl-item">
         <span class="tl-dot current"></span>
         <div class="tl-card">
-          <div class="log-when">Recent</div>
-          <div class="log-role">Product Manager — Platforms</div>
-          <div class="log-org">Bajaj Finance</div>
+          <div class="log-when">Sep 2025 — Present</div>
+          <div class="log-role">Product Manager</div>
+          <div class="log-org">Smartsites (UIUX Studio)</div>
           <p class="log-desc">
-            Owned PCMS (0→1) and the Partner Portal revamp for the fixed-deposit
-            partner ecosystem. Worked hands-on with eKYC, Account Aggregator,
-            RBI Digital Lending Guidelines, and Finacle integrations — the
-            unglamorous rails that make fintech products legal and fast.
+            Own intake-to-delivery coordination for 30+ concurrent design projects,
+            cross-verifying requirements with US-based PMs and directing a
+            40-person design team across social, video, web, and branding work.
+            Recurring process syncs with the US team on AI adoption cut average
+            project turnaround from 10 days to 2.
+          </p>
+        </div>
+      </li>
+      <li class="tl-item tl-break">
+        <span class="tl-dot break"></span>
+        <div class="tl-break-label">Career break (personal) — Jan 2025 – Aug 2025</div>
+      </li>
+      <li class="tl-item">
+        <span class="tl-dot"></span>
+        <div class="tl-card">
+          <div class="log-when">Sep 2024 — Dec 2024</div>
+          <div class="log-role">Chief Digital Growth Officer</div>
+          <div class="log-org">Leading Edge Info Solutions, Mohali</div>
+          <p class="log-desc">
+            Spearheaded a 10-person team shipping internal and client websites
+            end-to-end. Engineered AI-based templates for the Sales → Development
+            handoff and led training for 30+ employees across 20+ sessions.
           </p>
         </div>
       </li>
       <li class="tl-item">
         <span class="tl-dot"></span>
         <div class="tl-card">
-          <div class="log-when">Earlier</div>
-          <div class="log-role">Engineer → Product</div>
+          <div class="log-when">Apr 2022 — Apr 2024</div>
+          <div class="log-role">Unit Manager</div>
+          <div class="log-org">Bajaj Finserv</div>
+          <p class="log-desc">
+            Led the revamp of the Partner Portal, Customer Portal, and Partner
+            Onboarding sites — usage 2% → 45% — and cut Fixed Deposit booking
+            turnaround from 7 days to 1. Built PCMS (Payout Calculation
+            Management System), integrating with Finacle to remove a manual
+            Excel dependency.
+          </p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <span class="tl-dot"></span>
+        <div class="tl-card">
+          <div class="log-when">Jan 2021 — Apr 2022</div>
+          <div class="log-role">Domain Support Specialist</div>
           <div class="log-org">Ericsson</div>
           <p class="log-desc">
-            Telecom-scale delivery on the Vietnam Mobile Operator programme —
-            where systems serving millions fail in ways spreadsheets never predict.
-          </p>
-        </div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-dot"></span>
-        <div class="tl-card">
-          <div class="log-when">Foundation</div>
-          <div class="log-role">Project &amp; Growth Roles</div>
-          <div class="log-org">SmartSites · Leading Edge</div>
-          <p class="log-desc">
-            Client-facing project delivery and growth work — the reps that built
-            the stakeholder muscle every platform PM eventually needs.
+            Automated restoration, health-check, and backup processes in
+            Python/Shell on Linux — cutting downtime from hours to minutes for
+            1,000+ users and improving network reliability by 15%.
           </p>
         </div>
       </li>
@@ -1166,8 +1191,8 @@
         <span class="tl-dot"></span>
         <div class="tl-card">
           <div class="log-when">Education</div>
-          <div class="log-role">MBA · B.Tech (IT)</div>
-          <div class="log-org">Amity University (2026) · Jaypee University (2020)</div>
+          <div class="log-role">MBA, Business Analytics · B.Tech, Information Technology</div>
+          <div class="log-org">Amity University (2024–2026, correspondence) · Jaypee University of Information Technology, Solan (2016–2020)</div>
           <p class="log-desc">
             Engineering foundation, business lens on top — plus a running stack of
             AI product certifications, applied immediately on live builds.
