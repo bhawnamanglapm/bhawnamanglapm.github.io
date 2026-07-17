@@ -353,13 +353,17 @@
   ul.plain li .k{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--lime);display:block;margin-bottom:5px}
 
   .pipeline{
-    display:flex;flex-direction:column;gap:0;
-    border:1px solid var(--line);border-radius:16px;background:var(--ink-2);padding:28px;margin-bottom:24px;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;
+    border:1px solid var(--line);border-radius:16px;background:var(--ink-2);padding:20px;margin-bottom:24px;box-shadow:var(--shadow);
   }
-  .pipe-step{display:flex;align-items:center;gap:16px;padding:10px 0}
-  .pipe-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--lime);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .pipe-label{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--paper)}
-  .pipe-arrow{font-family:'IBM Plex Mono',monospace;color:var(--pink);padding-left:16px;font-size:14px}
+  .pipe-step{
+    display:flex;flex-direction:column;gap:8px;padding:14px 16px;
+    background:var(--ink-3);border-radius:12px;
+  }
+  .pipe-top{display:flex;align-items:center;gap:10px}
+  .pipe-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#fff;background:var(--lime);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .pipe-label{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper);font-weight:600}
+  .pipe-caption{font-size:12.5px;color:var(--grey);line-height:1.4}
 
   .ptable2-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin-bottom:20px;box-shadow:var(--shadow)}
   table.ptable2{width:100%;border-collapse:collapse;min-width:820px}
@@ -1311,27 +1315,17 @@
       <div class="ai-sub-head"><span class="ai-letter">C</span><h3>End-to-End AI-Orchestrated PM Workflow</h3></div>
       <p class="desc"><strong style="color:var(--paper)">One prompt → a researched, documented, ticketed, architected, and shipped increment — orchestrated end-to-end.</strong></p>
       <div class="pipeline mono">
-        <div class="pipe-step"><span class="pipe-num">1</span><span class="pipe-label">Ask Claude</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">2</span><span class="pipe-label">Research company</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">3</span><span class="pipe-label">Generate PRD</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">4</span><span class="pipe-label">Publish to Notion</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">5</span><span class="pipe-label">Create Jira stories</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">6</span><span class="pipe-label">Create Linear issues</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">7</span><span class="pipe-label">Generate architecture</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">8</span><span class="pipe-label">Create Miro diagram</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">9</span><span class="pipe-label">Commit code</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">10</span><span class="pipe-label">Push GitHub</span></div>
-        <div class="pipe-arrow">↓</div>
-        <div class="pipe-step"><span class="pipe-num">11</span><span class="pipe-label">Notify Slack</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">1</span><span class="pipe-label">Ask Claude</span></div><span class="pipe-caption">Single prompt, full brief</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">2</span><span class="pipe-label">Research company</span></div><span class="pipe-caption">Market &amp; competitor context</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">3</span><span class="pipe-label">Generate PRD</span></div><span class="pipe-caption">Problem, goals, requirements</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">4</span><span class="pipe-label">Publish to Notion</span></div><span class="pipe-caption">Shared source of truth</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">5</span><span class="pipe-label">Create Jira stories</span></div><span class="pipe-caption">Backlog, ready for eng</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">6</span><span class="pipe-label">Create Linear issues</span></div><span class="pipe-caption">Mirrored across PM stacks</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">7</span><span class="pipe-label">Generate architecture</span></div><span class="pipe-caption">First-pass system design</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">8</span><span class="pipe-label">Create Miro diagram</span></div><span class="pipe-caption">Visual for stakeholders</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">9</span><span class="pipe-label">Commit code</span></div><span class="pipe-caption">Scaffold or prototype</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">10</span><span class="pipe-label">Push GitHub</span></div><span class="pipe-caption">Real repo, real deploy</span></div>
+        <div class="pipe-step"><div class="pipe-top"><span class="pipe-num">11</span><span class="pipe-label">Notify Slack</span></div><span class="pipe-caption">Team notified, loop closed</span></div>
       </div>
 
       <p style="font-size:13.5px;color:var(--grey);margin:20px 0">Demo proof: <span class="todo">fill in — link to a screen recording of this pipeline running end-to-end</span></p>
