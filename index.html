@@ -247,19 +247,25 @@
   .jtrack{position:relative;padding-left:64px}
   .jtrack::before{content:"";position:absolute;left:27px;top:8px;bottom:8px;width:2px;background:var(--line)}
 
-  /* ---------- Journal cards ---------- */
-  .jcard{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:0;margin-bottom:18px;box-shadow:var(--shadow)}
-  .jhead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;cursor:pointer;list-style:none}
-  .jhead::-webkit-details-marker{display:none}
-  .jhead-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  /* ---------- Journal category groups ---------- */
+  .jcat-group{position:relative;margin-bottom:32px}
+  .jcat-group:last-child{margin-bottom:0}
+  .jcat-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;min-height:42px}
+  .jcat-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;color:var(--paper)}
   .jnum{
-    position:absolute;left:-58px;top:26px;z-index:2;
+    position:absolute;left:-58px;top:0;z-index:2;
     width:42px;height:42px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
     font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12.5px;
     background:var(--ink-2);border:2px solid var(--grey);color:var(--paper);
   }
-  .jcase-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);margin-bottom:6px}
+
+  /* ---------- Journal cards ---------- */
+  .jcard{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:0;box-shadow:var(--shadow)}
+  .jcat-group .jcard + .jcard{margin-top:14px}
+  .jhead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;cursor:pointer;list-style:none}
+  .jhead::-webkit-details-marker{display:none}
+  .jhead-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   .jcard-illus{
     width:56px;height:56px;border-radius:50%;flex-shrink:0;
     display:flex;align-items:center;justify-content:center;font-size:26px;
@@ -446,6 +452,8 @@
     .jtrack{padding-left:44px}
     .jtrack::before{left:17px}
     .jnum{left:-38px;width:34px;height:34px;font-size:11px}
+    .jcat-head{min-height:34px}
+    .jcat-title{font-size:16.5px}
     .jcard-illus{width:42px;height:42px;font-size:20px}
 
     /* Stacked cards instead of a horizontally-scrolling table */
@@ -754,27 +762,31 @@
     </p>
 
     <div class="practice-note">
-      Each entry below runs one representative project per journal, documented using that journal's own
-      field list, kept in order from J1 to J10 — click a row to expand it. Fields marked
+      10 categories (J1–J10), each documented using that journal's own field list, kept in order —
+      click a row to expand it. Each category currently holds one representative project and is
+      built to hold more as new ones are published. Fields marked
       <span class="todo" style="padding:1px 6px">fill in</span> are still open from the source content
       and are not yet populated.
     </div>
 
     <div class="jtrack">
-    <!-- J1 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J1</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#60A5FA,#2563EB)">🧳</div>
-          <div>
-            <div class="jcase-label">Product Teardown</div>
-            <div class="jtitle">MakeMyTrip — Booking Flow</div>
-            <div class="jmeta">Product Sense</div>
+    <!-- J1: Product Teardown -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J1</span>
+        <h3 class="jcat-title">Product Teardown</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#60A5FA,#2563EB)">🧳</div>
+            <div>
+              <div class="jtitle">MakeMyTrip — Booking Flow</div>
+              <div class="jmeta">Product Sense</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Product overview</dt><dd><span class="todo">fill in</span></dd>
@@ -800,22 +812,26 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
 
-    <!-- J2 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J2</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#FB923C,#EA580C)">🔥</div>
-          <div>
-            <div class="jcase-label">Feature Reverse Engineering</div>
-            <div class="jtitle">Duolingo — Streak Feature</div>
-            <div class="jmeta">Feature Thinking</div>
+    <!-- J2: Feature Reverse Engineering -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J2</span>
+        <h3 class="jcat-title">Feature Reverse Engineering</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FB923C,#EA580C)">🔥</div>
+            <div>
+              <div class="jtitle">Duolingo — Streak Feature</div>
+              <div class="jmeta">Feature Thinking</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Feature name</dt><dd>Streak</dd>
@@ -843,22 +859,26 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
 
-    <!-- J3 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J3</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#F472B6,#DB2777)">🧠</div>
-          <div>
-            <div class="jcase-label">User Psychology</div>
-            <div class="jtitle">Fintech App — First-Open KYC</div>
-            <div class="jmeta">User Empathy</div>
+    <!-- J3: User Psychology -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J3</span>
+        <h3 class="jcat-title">User Psychology</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#F472B6,#DB2777)">🧠</div>
+            <div>
+              <div class="jtitle">Fintech App — First-Open KYC</div>
+              <div class="jmeta">User Empathy</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Product observed</dt><dd>Fintech app (KYC onboarding flow)</dd>
@@ -880,22 +900,26 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
 
-    <!-- J4 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J4</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#FB7185,#E11D48)">🛵</div>
-          <div>
-            <div class="jcase-label">Metrics &amp; Analytics</div>
-            <div class="jtitle">Swiggy — North Star Metric</div>
-            <div class="jmeta">Analytical Thinking</div>
+    <!-- J4: Metrics &amp; Analytics -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J4</span>
+        <h3 class="jcat-title">Metrics &amp; Analytics</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FB7185,#E11D48)">🛵</div>
+            <div>
+              <div class="jtitle">Swiggy — North Star Metric</div>
+              <div class="jmeta">Analytical Thinking</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Product</dt><dd>Swiggy</dd>
@@ -920,22 +944,26 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
 
-    <!-- J5 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J5</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#A78BFA,#7C3AED)">⚡</div>
-          <div>
-            <div class="jcase-label">Product Strategy</div>
-            <div class="jtitle">Zepto — Dark Store Moat</div>
-            <div class="jmeta">Business Acumen</div>
+    <!-- J5: Product Strategy -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J5</span>
+        <h3 class="jcat-title">Product Strategy</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#A78BFA,#7C3AED)">⚡</div>
+            <div>
+              <div class="jtitle">Zepto — Dark Store Moat</div>
+              <div class="jmeta">Business Acumen</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Company overview</dt><dd><span class="todo">fill in</span></dd>
@@ -959,22 +987,26 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
 
-    <!-- J6 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J6</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#2DD4BF,#0D9488)">📝</div>
-          <div>
-            <div class="jcase-label">PM Writing</div>
-            <div class="jtitle">PRD Template — Decision Memo</div>
-            <div class="jmeta">Communication &amp; Frameworks</div>
+    <!-- J6: PM Writing -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J6</span>
+        <h3 class="jcat-title">PM Writing</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#2DD4BF,#0D9488)">📝</div>
+            <div>
+              <div class="jtitle">PRD Template — Decision Memo</div>
+              <div class="jmeta">Communication &amp; Frameworks</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Problem statements</dt><dd>Field 1 of the PRD template</dd>
@@ -999,22 +1031,26 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
 
-    <!-- J7 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J7</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#818CF8,#4F46E5)">🧭</div>
-          <div>
-            <div class="jcase-label">Career Lessons</div>
-            <div class="jtitle">Bajaj Finance → Ericsson → Startup — 3 PM Lessons</div>
-            <div class="jmeta">Leadership &amp; Pattern Recognition</div>
+    <!-- J7: Career Lessons -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J7</span>
+        <h3 class="jcat-title">Career Lessons</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#818CF8,#4F46E5)">🧭</div>
+            <div>
+              <div class="jtitle">Bajaj Finance → Ericsson → Startup — 3 PM Lessons</div>
+              <div class="jmeta">Leadership &amp; Pattern Recognition</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Company overview</dt><dd>BFSI (Bajaj Finance) → Telecom/enterprise (Ericsson) → Startup</dd>
@@ -1037,22 +1073,26 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
 
-    <!-- J8 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J8</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#94A3B8,#475569)">⚖️</div>
-          <div>
-            <div class="jcase-label">Decision Journal</div>
-            <div class="jtitle">Bezos Model — Two-Way Door Decisions</div>
-            <div class="jmeta">Judgment &amp; Decision Making</div>
+    <!-- J8: Decision Journal -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J8</span>
+        <h3 class="jcat-title">Decision Journal</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#94A3B8,#475569)">⚖️</div>
+            <div>
+              <div class="jtitle">Bezos Model — Two-Way Door Decisions</div>
+              <div class="jmeta">Judgment &amp; Decision Making</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <p style="font-size:14px;color:var(--grey);margin-bottom:14px">This entry pairs the mental model with one specific real decision — the fields below need a real case from your career to complete.</p>
         <dl class="fields">
@@ -1076,22 +1116,26 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
 
-    <!-- J9 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J9</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#FBBF24,#D97706)">🎤</div>
-          <div>
-            <div class="jcase-label">Google PM Interview</div>
-            <div class="jtitle">STAR Method — Influencing Without Authority</div>
-            <div class="jmeta">Interview Readiness</div>
+    <!-- J9: Google PM Interview -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J9</span>
+        <h3 class="jcat-title">Google PM Interview</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FBBF24,#D97706)">🎤</div>
+            <div>
+              <div class="jtitle">STAR Method — Influencing Without Authority</div>
+              <div class="jmeta">Interview Readiness</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Product design questions</dt><dd><span class="todo">fill in</span></dd>
@@ -1113,22 +1157,26 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
 
-    <!-- J10 -->
-    <details class="jcard">
-      <summary class="jhead">
-        <div class="jhead-left">
-          <span class="jnum">J10</span>
-          <div class="jcard-illus" style="background:linear-gradient(135deg,#4ADE80,#16A34A)">🌱</div>
-          <div>
-            <div class="jcase-label">Personal Growth</div>
-            <div class="jtitle">PMgirlz Challenge — 6-Month Wrap</div>
-            <div class="jmeta">Self-Awareness &amp; Growth</div>
+    <!-- J10: Personal Growth -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">J10</span>
+        <h3 class="jcat-title">Personal Growth</h3>
+      </div>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#4ADE80,#16A34A)">🌱</div>
+            <div>
+              <div class="jtitle">PMgirlz Challenge — 6-Month Wrap</div>
+              <div class="jmeta">Self-Awareness &amp; Growth</div>
+            </div>
           </div>
-        </div>
-        <span class="jtoggle">expand ▾</span>
-      </summary>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
       <div class="jbody">
         <dl class="fields">
           <dt>Weekly wins</dt><dd><span class="todo">fill in</span></dd>
@@ -1154,7 +1202,8 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-    </details>
+      </details>
+    </div>
     </div>
 
     <p style="margin-top:16px;font-size:14px;color:var(--grey)">
@@ -1790,7 +1839,7 @@
   }
 
   // Scroll-reveal animations
-  var revealSelectors = '.sec-head, .jcard, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .vignette, .resume-panel, .rec-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item';
+  var revealSelectors = '.sec-head, .jcat-group, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .vignette, .resume-panel, .rec-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item';
   var revealEls = document.querySelectorAll(revealSelectors);
   if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     revealEls.forEach(function(el){ el.classList.add('reveal'); });
