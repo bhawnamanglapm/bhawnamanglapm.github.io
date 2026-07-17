@@ -349,7 +349,11 @@
   /* ---------- Journal cards ---------- */
   .jcard{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:0;box-shadow:var(--shadow)}
   .jcat-group .jcard + .jcard{margin-top:14px}
-  .jhead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;cursor:pointer;list-style:none}
+  .jhead{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;
+    cursor:pointer;list-style:none;width:100%;border:none;background:none;
+    font-family:inherit;color:inherit;text-align:left;border-radius:16px;
+  }
   .jhead::-webkit-details-marker{display:none}
   .jhead-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   .jcard-illus{
@@ -361,12 +365,31 @@
   .jtitle{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;line-height:1.25}
   .jmeta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin-top:4px}
   .jtoggle{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey);white-space:nowrap}
-  .jbody{padding:0 28px 28px}
+  .jbody{display:none}
   .fields{display:grid;grid-template-columns:220px 1fr;gap:10px 20px;margin-top:8px}
   .fields dt{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--grey);padding-top:2px}
   .fields dd{color:#33333D;font-size:14.5px}
   .jlinks{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;gap:24px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px}
   .jlinks .k{color:var(--grey);text-transform:uppercase;letter-spacing:.06em;margin-right:6px}
+
+  /* ---------- Case study full-screen detail view ---------- */
+  html.case-open,html.case-open body{overflow:hidden}
+  .case-overlay{position:fixed;inset:0;z-index:200;background:var(--ink);overflow-y:auto}
+  .case-overlay[hidden]{display:none}
+  .case-overlay-inner{max-width:760px;margin:0 auto;padding:40px 28px 100px}
+  .case-overlay-header{margin-bottom:36px}
+  .case-back{
+    display:inline-flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:0;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--grey);
+    text-transform:uppercase;letter-spacing:.06em;transition:color .18s;
+  }
+  .case-back:hover{color:var(--pink)}
+  .case-overlay-hero{display:flex;align-items:center;gap:20px;margin-bottom:36px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+  .case-overlay-hero .jcard-illus{width:64px;height:64px;font-size:30px;flex-shrink:0}
+  .case-overlay-hero h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;line-height:1.2;margin:4px 0}
+  .jcase-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)}
+  .case-overlay-body .jbody{display:block}
+  .case-overlay-body .fields dd{font-size:15.5px}
 
   .practice-note{
     background:var(--ink-3);border:1px solid var(--line);border-left:3px solid var(--pink);border-radius:12px;
@@ -570,6 +593,9 @@
     .hero-panel{padding:40px 26px;border-radius:22px}
     .jhead{padding:18px 20px}
     .jbody{padding:0 20px 22px}
+    .case-overlay-inner{padding:28px 20px 80px}
+    .case-overlay-hero{flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:28px;padding-bottom:24px}
+    .case-overlay-hero h2{font-size:22px}
     .timeline{padding-left:26px}
     .tl-dot{left:-26px}
     .jtrack{padding-left:44px}
@@ -886,7 +912,7 @@
 
     <div class="practice-note">
       11 categories (J1–J11), each documented using that journal's own field list — click a row
-      to expand it. Fields marked <span class="todo" style="padding:1px 6px">fill in</span> are
+      to open the full write-up. Fields marked <span class="todo" style="padding:1px 6px">fill in</span> are
       open questions I'm still filling in with real examples.
     </div>
 
@@ -897,8 +923,8 @@
         <span class="jnum">J1</span>
         <h3 class="jcat-title">Product Teardown</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="makemytrip-booking-flow">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#60A5FA,#2563EB)">🧳</div>
             <div>
@@ -906,8 +932,8 @@
               <div class="jmeta">Product Sense</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Product overview</dt><dd><span class="todo">fill in</span></dd>
@@ -933,7 +959,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J2: Feature Reverse Engineering -->
@@ -942,8 +968,8 @@
         <span class="jnum">J2</span>
         <h3 class="jcat-title">Feature Reverse Engineering</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="duolingo-streak-feature">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#FB923C,#EA580C)">🔥</div>
             <div>
@@ -951,8 +977,8 @@
               <div class="jmeta">Feature Thinking</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Feature name</dt><dd>Streak</dd>
@@ -980,9 +1006,9 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
-      <details class="jcard">
-        <summary class="jhead">
+      </article>
+      <article class="jcard" data-case="chatgpt-memory-feature">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#10A37F,#0D8968)">🤖</div>
             <div>
@@ -990,8 +1016,8 @@
               <div class="jmeta">AI Feature Design</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Feature name</dt><dd>Memory (persistent cross-conversation memory)</dd>
@@ -1013,7 +1039,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J3: User Psychology -->
@@ -1022,8 +1048,8 @@
         <span class="jnum">J3</span>
         <h3 class="jcat-title">User Psychology</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="fintech-app-first-open-kyc">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#F472B6,#DB2777)">🧠</div>
             <div>
@@ -1031,8 +1057,8 @@
               <div class="jmeta">User Empathy</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Product observed</dt><dd>Fintech app (KYC onboarding flow)</dd>
@@ -1054,7 +1080,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J4: Metrics &amp; Analytics -->
@@ -1063,8 +1089,8 @@
         <span class="jnum">J4</span>
         <h3 class="jcat-title">Metrics &amp; Analytics</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="swiggy-north-star-metric">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#FB7185,#E11D48)">🛵</div>
             <div>
@@ -1072,8 +1098,8 @@
               <div class="jmeta">Analytical Thinking</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Product</dt><dd>Swiggy</dd>
@@ -1098,7 +1124,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J5: Product Strategy -->
@@ -1107,8 +1133,8 @@
         <span class="jnum">J5</span>
         <h3 class="jcat-title">Product Strategy</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="zepto-dark-store-moat">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#A78BFA,#7C3AED)">⚡</div>
             <div>
@@ -1116,8 +1142,8 @@
               <div class="jmeta">Business Acumen</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Company overview</dt><dd><span class="todo">fill in</span></dd>
@@ -1141,7 +1167,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J6: PM Writing -->
@@ -1150,8 +1176,8 @@
         <span class="jnum">J6</span>
         <h3 class="jcat-title">PM Writing</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="prd-template-decision-memo">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#2DD4BF,#0D9488)">📝</div>
             <div>
@@ -1159,8 +1185,8 @@
               <div class="jmeta">Communication &amp; Frameworks</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Problem statements</dt><dd>Field 1 of the PRD template</dd>
@@ -1185,7 +1211,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J7: Career Lessons -->
@@ -1194,8 +1220,8 @@
         <span class="jnum">J7</span>
         <h3 class="jcat-title">Career Lessons</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="bajaj-finance-ericsson-startup-3-pm-lessons">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#818CF8,#4F46E5)">🧭</div>
             <div>
@@ -1203,8 +1229,8 @@
               <div class="jmeta">Leadership &amp; Pattern Recognition</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Company overview</dt><dd>BFSI (Bajaj Finance) → Telecom/enterprise (Ericsson) → Startup</dd>
@@ -1227,7 +1253,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J8: Decision Journal -->
@@ -1236,8 +1262,8 @@
         <span class="jnum">J8</span>
         <h3 class="jcat-title">Decision Journal</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="bezos-model-two-way-door-decisions">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#94A3B8,#475569)">⚖️</div>
             <div>
@@ -1245,8 +1271,8 @@
               <div class="jmeta">Judgment &amp; Decision Making</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Context</dt><dd><span class="todo">fill in — a specific decision made, and what was happening at the time</span></dd>
@@ -1269,7 +1295,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J9: Google PM Interview -->
@@ -1278,8 +1304,8 @@
         <span class="jnum">J9</span>
         <h3 class="jcat-title">Google PM Interview</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="star-method-influencing-without-authority">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#FBBF24,#D97706)">🎤</div>
             <div>
@@ -1287,8 +1313,8 @@
               <div class="jmeta">Interview Readiness</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Product design questions</dt><dd><span class="todo">fill in</span></dd>
@@ -1310,7 +1336,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J10: Personal Growth -->
@@ -1319,8 +1345,8 @@
         <span class="jnum">J10</span>
         <h3 class="jcat-title">Personal Growth</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="pmgirlz-challenge-6-month-wrap">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#4ADE80,#16A34A)">🌱</div>
             <div>
@@ -1328,8 +1354,8 @@
               <div class="jmeta">Self-Awareness &amp; Growth</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Weekly wins</dt><dd><span class="todo">fill in</span></dd>
@@ -1355,7 +1381,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
 
     <!-- J11: Technical Execution -->
@@ -1364,8 +1390,8 @@
         <span class="jnum">J11</span>
         <h3 class="jcat-title">Technical Execution</h3>
       </div>
-      <details class="jcard">
-        <summary class="jhead">
+      <article class="jcard" data-case="pcms-payout-system-integration">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#64748B,#334155)">⚙️</div>
             <div>
@@ -1373,8 +1399,8 @@
               <div class="jmeta">API Integration, SQL &amp; Backlog</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Project</dt><dd>PCMS (Payout Calculation Management System), built 0→1 at Bajaj Finserv</dd>
@@ -1396,9 +1422,9 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
-      <details class="jcard">
-        <summary class="jhead">
+      </article>
+      <article class="jcard" data-case="no-code-build-ops-automation">
+        <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#F59E0B,#D97706)">🧩</div>
             <div>
@@ -1406,8 +1432,8 @@
               <div class="jmeta">No-Code &amp; Automation</div>
             </div>
           </div>
-          <span class="jtoggle">expand ▾</span>
-        </summary>
+          <span class="jtoggle">view case study →</span>
+        </button>
       <div class="jbody">
         <dl class="fields">
           <dt>Project</dt><dd><span class="todo">fill in — what you actually built: an Airtable tracker, a Zapier/Make automation, a Webflow/Bubble prototype, or a Retool internal tool</span></dd>
@@ -1424,7 +1450,7 @@
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>
-      </details>
+      </article>
     </div>
     </div>
 
@@ -2008,6 +2034,26 @@
 </section>
 </main>
 
+<div class="case-overlay" id="caseOverlay" hidden>
+  <div class="case-overlay-inner">
+    <div class="case-overlay-header">
+      <button class="case-back" id="caseBack" type="button">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Case Studies
+      </button>
+    </div>
+    <div class="case-overlay-hero">
+      <div class="jcard-illus" id="caseDetailIllus"></div>
+      <div>
+        <div class="jcase-eyebrow" id="caseDetailCategory"></div>
+        <h2 id="caseDetailTitle"></h2>
+        <div class="jmeta" id="caseDetailMeta"></div>
+      </div>
+    </div>
+    <div class="case-overlay-body" id="caseDetailBody"></div>
+  </div>
+</div>
+
 <footer>
   <div class="wrap">
     <div class="colophon">
@@ -2020,6 +2066,110 @@
 <script>
 (function(){
   document.documentElement.classList.add('js');
+
+  // Case study full-screen detail view
+  var caseOverlay = document.getElementById('caseOverlay');
+  var caseBack = document.getElementById('caseBack');
+  var caseDetailIllus = document.getElementById('caseDetailIllus');
+  var caseDetailCategory = document.getElementById('caseDetailCategory');
+  var caseDetailTitle = document.getElementById('caseDetailTitle');
+  var caseDetailMeta = document.getElementById('caseDetailMeta');
+  var caseDetailBody = document.getElementById('caseDetailBody');
+  var jcards = document.querySelectorAll('.jcard[data-case]');
+  var lastFocusedCard = null;
+  var mainEl = document.getElementById('main-content');
+  var navEl = document.querySelector('nav');
+  var footerEl = document.querySelector('footer');
+
+  function findCardBySlug(slug){
+    for(var i = 0; i < jcards.length; i++){
+      if(jcards[i].getAttribute('data-case') === slug) return jcards[i];
+    }
+    return null;
+  }
+
+  function openCase(card, pushHistory){
+    if(!card || !caseOverlay) return;
+    var illus = card.querySelector('.jcard-illus');
+    var title = card.querySelector('.jtitle');
+    var meta = card.querySelector('.jmeta');
+    var body = card.querySelector('.jbody');
+    var catTitle = card.closest('.jcat-group');
+    catTitle = catTitle ? catTitle.querySelector('.jcat-title') : null;
+
+    caseDetailIllus.innerHTML = illus ? illus.innerHTML : '';
+    caseDetailIllus.setAttribute('style', illus ? illus.getAttribute('style') : '');
+    caseDetailCategory.textContent = catTitle ? catTitle.textContent : '';
+    caseDetailTitle.textContent = title ? title.textContent : '';
+    caseDetailMeta.textContent = meta ? meta.textContent : '';
+    caseDetailBody.innerHTML = body ? body.innerHTML : '';
+
+    caseOverlay.hidden = false;
+    document.documentElement.classList.add('case-open');
+    caseOverlay.scrollTop = 0;
+    lastFocusedCard = card;
+    caseBack.focus();
+    if(mainEl) mainEl.inert = true;
+    if(navEl) navEl.inert = true;
+    if(footerEl) footerEl.inert = true;
+
+    if(pushHistory !== false){
+      var slug = card.getAttribute('data-case');
+      history.pushState({ caseSlug: slug }, '', '#case-' + slug);
+    }
+  }
+
+  function closeCase(pushHistory){
+    if(!caseOverlay || caseOverlay.hidden) return;
+    caseOverlay.hidden = true;
+    document.documentElement.classList.remove('case-open');
+    if(mainEl) mainEl.inert = false;
+    if(navEl) navEl.inert = false;
+    if(footerEl) footerEl.inert = false;
+    if(lastFocusedCard){
+      var btn = lastFocusedCard.querySelector('.jhead');
+      if(btn) btn.focus();
+    }
+    if(pushHistory !== false){
+      history.pushState(null, '', '#practice');
+    }
+  }
+
+  jcards.forEach(function(card){
+    var btn = card.querySelector('.jhead');
+    if(btn){
+      btn.addEventListener('click', function(){ openCase(card); });
+    }
+  });
+
+  if(caseBack){
+    caseBack.addEventListener('click', function(){ closeCase(); });
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && caseOverlay && !caseOverlay.hidden){ closeCase(); }
+  });
+
+  window.addEventListener('popstate', function(){
+    var hash = window.location.hash;
+    if(hash.indexOf('#case-') === 0){
+      var slug = hash.slice(6);
+      var card = findCardBySlug(slug);
+      if(card) openCase(card, false);
+    } else {
+      closeCase(false);
+    }
+  });
+
+  // Support direct-linking / reload on a #case-<slug> URL
+  (function(){
+    var hash = window.location.hash;
+    if(hash.indexOf('#case-') === 0){
+      var slug = hash.slice(6);
+      var card = findCardBySlug(slug);
+      if(card) openCase(card, false);
+    }
+  })();
 
   // Mobile nav toggle
   var navToggle = document.getElementById('navToggle');
