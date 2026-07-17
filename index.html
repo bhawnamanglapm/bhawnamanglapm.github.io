@@ -275,7 +275,7 @@
   .tool-icon svg{width:30px;height:30px;display:block}
   .tool-icon.word{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12.5px;color:#fff;text-align:center;line-height:1.1}
   .tool-label{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--grey);margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
-  .tool-item{display:flex;flex-direction:column;align-items:center;width:64px}
+  .tool-item{display:flex;flex-direction:column;align-items:center;width:64px;text-decoration:none;color:inherit}
 
   /* ---------- About ---------- */
   #about{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -675,7 +675,7 @@
     <p class="strengths-sub">Tools I work in, day to day</p>
     <div class="tool-row">
 
-      <div class="tool-item">
+      <a class="tool-item" href="https://www.figma.com" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#fff;border:1px solid var(--line)">
           <svg viewBox="0 0 24 24">
             <path d="M8 1a3 3 0 000 6h3V1H8z" fill="#F24E1E"/>
@@ -686,9 +686,7 @@
           </svg>
         </div>
         <div class="tool-label">Figma</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#fff;border:1px solid var(--line)">
           <svg viewBox="0 0 24 24">
             <path d="M12 2 2.5 11.2c-.6.6-.6 1.6 0 2.2L12 22l9.5-8.6c.6-.6.6-1.6 0-2.2z" fill="#2684FF"/>
@@ -696,9 +694,7 @@
           </svg>
         </div>
         <div class="tool-label">Jira</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://azure.microsoft.com/en-us/products/devops" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#0078D7">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
             <circle cx="8.5" cy="12" r="5"/>
@@ -706,16 +702,12 @@
           </svg>
         </div>
         <div class="tool-label">Azure DevOps</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://www.notion.so" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#000">
           <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#fff">N</span>
         </div>
         <div class="tool-label">Notion</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://slack.com" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#fff;border:1px solid var(--line)">
           <svg viewBox="0 0 24 24">
             <rect x="9" y="1" width="4" height="9" rx="2" fill="#36C5F0"/>
@@ -725,23 +717,17 @@
           </svg>
         </div>
         <div class="tool-label">Slack</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://www.atlassian.com/software/confluence" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#2684FF">
           <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#fff">C</span>
         </div>
         <div class="tool-label">Confluence</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://miro.com" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#FFD02F">
           <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#050038">Mi</span>
         </div>
         <div class="tool-label">Miro</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://powerbi.microsoft.com" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#fff;border:1px solid var(--line)">
           <svg viewBox="0 0 24 24">
             <rect x="2" y="14" width="5" height="8" rx="1" fill="#F2C811"/>
@@ -750,40 +736,31 @@
           </svg>
         </div>
         <div class="tool-label">Power BI</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://github.com" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#181717">
           <svg viewBox="0 0 24 24" fill="#fff">
             <path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/>
           </svg>
         </div>
         <div class="tool-label">GitHub</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://claude.ai" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#D97757">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
             <path d="M12 3v18M4.5 7.5l15 9M4.5 16.5l15-9"/>
           </svg>
         </div>
         <div class="tool-label">Claude</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://chatgpt.com" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#10A37F">
           <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;color:#fff">GPT</span>
         </div>
         <div class="tool-label">ChatGPT</div>
-      </div>
-
-      <div class="tool-item">
+      </a><a class="tool-item" href="https://linear.app" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:#5E6AD2">
           <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#fff">L</span>
         </div>
         <div class="tool-label">Linear</div>
-      </div>
-
+      </a>
     </div>
   </div>
 </section>
@@ -1785,6 +1762,25 @@
           <div class="elsewhere-desc todo" style="display:inline-block;padding:2px 8px">fill in — YouTube channel URL, if you have one</div>
         </div>
       </div>
+      <div class="elsewhere-card">
+        <span class="elsewhere-icon" style="background:radial-gradient(circle at 30% 107%,#fdf497,#fdf497,#fd5949,#d6249f,#285AEB)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+        </span>
+        <div>
+          <div class="elsewhere-name">Instagram</div>
+          <div class="elsewhere-desc todo" style="display:inline-block;padding:2px 8px">fill in — Instagram handle, if you post there</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:var(--paper);margin-top:36px;margin-bottom:8px">Communities I'm building toward</p>
+    <p style="font-size:13px;color:var(--grey);margin:0 0 20px">Not memberships yet — international PM communities worth being part of, on my list to join.</p>
+    <div class="tool-row" style="justify-content:flex-start;gap:12px">
+      <a class="chip trend" style="text-decoration:none;cursor:pointer" href="https://www.mindtheproduct.com" target="_blank" rel="noopener">Mind the Product</a>
+      <a class="chip trend" style="text-decoration:none;cursor:pointer" href="https://www.productledalliance.com" target="_blank" rel="noopener">Product-Led Alliance</a>
+      <a class="chip trend" style="text-decoration:none;cursor:pointer" href="https://www.womeninproduct.com" target="_blank" rel="noopener">Women in Product</a>
+      <a class="chip trend" style="text-decoration:none;cursor:pointer" href="https://www.productsthatcount.com" target="_blank" rel="noopener">Products That Count</a>
+      <a class="chip trend" style="text-decoration:none;cursor:pointer" href="https://adplist.org" target="_blank" rel="noopener">ADPList</a>
     </div>
   </div>
 </section>
