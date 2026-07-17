@@ -174,7 +174,7 @@
   .nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
   /* ---------- Hero ---------- */
-  header.hero{padding:96px 0 60px;position:relative;overflow:hidden}
+  header.hero{position:relative}
   .eyebrow{
     display:inline-flex;align-items:center;gap:10px;
     font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;
@@ -214,7 +214,7 @@
     position:relative;overflow:hidden;isolation:isolate;
     background-image:linear-gradient(135deg,rgba(79,70,229,.55) 0%,rgba(109,40,217,.55) 55%,rgba(49,46,129,.6) 100%),url('hero-texture.jpg');
     background-size:cover,cover;background-position:center,center;
-    border-radius:28px;padding:64px 56px;box-shadow:var(--shadow-hover);
+    padding:96px 0 76px;
   }
   .hero-panel::before{content:"";position:absolute;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);top:-170px;right:-120px;border-radius:50%;z-index:0;animation:floatBlob 11s ease-in-out infinite}
   .hero-panel::after{content:"";position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(94,234,212,.22),transparent 70%);bottom:-140px;left:-80px;border-radius:50%;z-index:0;animation:floatBlob 13s ease-in-out infinite reverse}
@@ -573,8 +573,7 @@
     .fields{grid-template-columns:1fr}
     .fields dt{margin-top:6px}
     section{padding:56px 0}
-    header.hero{padding:56px 0 44px}
-    .hero-panel{padding:40px 26px;border-radius:22px}
+    .hero-panel{padding:64px 0 52px}
     .jhead{padding:18px 20px}
     .jbody{padding:0 20px 22px}
     .case-overlay-inner{padding:28px 20px 80px}
@@ -608,7 +607,7 @@
   }
   @media (max-width:480px){
     h1{font-size:clamp(34px,10vw,92px)}
-    .hero-panel{padding:32px 20px}
+    .hero-panel{padding:48px 0 40px}
     .hero-avatar{width:64px;height:64px}
     .hero-cta{flex-direction:column}
     .hero-cta .btn{width:100%;text-align:center}
@@ -660,8 +659,8 @@
 
 <main id="main-content">
 <header class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-panel">
+  <div class="hero-panel">
+    <div class="wrap">
       <div class="hero-top">
         <img class="hero-avatar" src="hero-avatar.jpg" alt="Bhawna Mangla smiling outdoors" loading="eager">
         <p class="eyebrow" style="margin-bottom:0">Product Manager · Gurugram, India</p>
