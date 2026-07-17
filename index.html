@@ -260,6 +260,12 @@
     background:var(--ink-2);border:2px solid var(--grey);color:var(--paper);
   }
   .jcase-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);margin-bottom:6px}
+  .jcard-illus{
+    width:56px;height:56px;border-radius:50%;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:26px;
+    box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .jhead:hover .jcard-illus{transform:scale(1.1) rotate(-6deg)}
   .jtitle{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;line-height:1.25}
   .jmeta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin-top:4px}
   .jtoggle{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey);white-space:nowrap}
@@ -440,6 +446,7 @@
     .jtrack{padding-left:44px}
     .jtrack::before{left:17px}
     .jnum{left:-38px;width:34px;height:34px;font-size:11px}
+    .jcard-illus{width:42px;height:42px;font-size:20px}
 
     /* Stacked cards instead of a horizontally-scrolling table */
     .ptable2-wrap{overflow-x:visible;border:none;box-shadow:none;border-radius:0}
@@ -737,8 +744,8 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-num">03</span>
-      <h2>Public Practice — PMgirlz Journals</h2>
-      <span class="sec-tag">// judgment, documented in public</span>
+      <h2>Case Studies</h2>
+      <span class="sec-tag">// from problem to insight, in public</span>
     </div>
     <p class="sec-intro">
       A self-directed practice discipline: 10 structured journals, 82 published analyses in 6 months,
@@ -759,10 +766,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J1</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#60A5FA,#2563EB)">🧳</div>
           <div>
-            <div class="jcase-label">Case Study · Product Teardown</div>
+            <div class="jcase-label">Product Teardown</div>
             <div class="jtitle">Product Teardown — MakeMyTrip</div>
-            <div class="jmeta">🔍 Product Sense</div>
+            <div class="jmeta">Product Sense</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -799,10 +807,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J2</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#FB923C,#EA580C)">🔥</div>
           <div>
-            <div class="jcase-label">Case Study · Feature Reverse Engineering</div>
+            <div class="jcase-label">Feature Reverse Engineering</div>
             <div class="jtitle">Feature Reverse Engineering — Duolingo's Streak</div>
-            <div class="jmeta">🧩 Feature Thinking</div>
+            <div class="jmeta">Feature Thinking</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -841,10 +850,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J3</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#F472B6,#DB2777)">🧠</div>
           <div>
-            <div class="jcase-label">Case Study · User Psychology</div>
+            <div class="jcase-label">User Psychology</div>
             <div class="jtitle">User Psychology — First-Open Observation (Fintech App)</div>
-            <div class="jmeta">🧠 User Empathy</div>
+            <div class="jmeta">User Empathy</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -877,10 +887,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J4</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#FB7185,#E11D48)">🛵</div>
           <div>
-            <div class="jcase-label">Case Study · Metrics &amp; Analytics</div>
+            <div class="jcase-label">Metrics &amp; Analytics</div>
             <div class="jtitle">Metrics &amp; Analytics — Swiggy's Real North Star Metric</div>
-            <div class="jmeta">📈 Analytical Thinking</div>
+            <div class="jmeta">Analytical Thinking</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -916,10 +927,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J5</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#A78BFA,#7C3AED)">⚡</div>
           <div>
-            <div class="jcase-label">Case Study · Product Strategy</div>
+            <div class="jcase-label">Product Strategy</div>
             <div class="jtitle">Product Strategy — Why Zepto Won</div>
-            <div class="jmeta">♟️ Business Acumen</div>
+            <div class="jmeta">Business Acumen</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -954,10 +966,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J6</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#2DD4BF,#0D9488)">📝</div>
           <div>
-            <div class="jcase-label">Case Study · PM Writing</div>
+            <div class="jcase-label">PM Writing</div>
             <div class="jtitle">PM Writing — The PRD Template</div>
-            <div class="jmeta">✍️ Communication · Reusable framework</div>
+            <div class="jmeta">Communication · Reusable framework</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -993,10 +1006,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J7</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#818CF8,#4F46E5)">🧭</div>
           <div>
-            <div class="jcase-label">Case Study · Career Lessons</div>
+            <div class="jcase-label">Career Lessons</div>
             <div class="jtitle">Career Lessons — Bajaj Finance → Ericsson → Startup</div>
-            <div class="jmeta">🧭 Leadership &amp; Pattern Recognition</div>
+            <div class="jmeta">Leadership &amp; Pattern Recognition</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -1030,10 +1044,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J8</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#94A3B8,#475569)">⚖️</div>
           <div>
-            <div class="jcase-label">Case Study · Decision Journal</div>
+            <div class="jcase-label">Decision Journal</div>
             <div class="jtitle">Decision Journal — Reversible vs. Irreversible Decisions (Bezos Model)</div>
-            <div class="jmeta">⚖️ Judgment &amp; Decision Making</div>
+            <div class="jmeta">Judgment &amp; Decision Making</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -1068,10 +1083,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J9</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#FBBF24,#D97706)">🎤</div>
           <div>
-            <div class="jcase-label">Case Study · Google PM Interview</div>
+            <div class="jcase-label">Google PM Interview</div>
             <div class="jtitle">PM Interview — "Influenced Without Authority"</div>
-            <div class="jmeta">🎤 Interview Readiness</div>
+            <div class="jmeta">Interview Readiness</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
@@ -1104,10 +1120,11 @@
       <summary class="jhead">
         <div class="jhead-left">
           <span class="jnum">J10</span>
+          <div class="jcard-illus" style="background:linear-gradient(135deg,#4ADE80,#16A34A)">🌱</div>
           <div>
-            <div class="jcase-label">Case Study · Personal Growth</div>
+            <div class="jcase-label">Personal Growth</div>
             <div class="jtitle">Personal Growth — 6-Month Journal Challenge Wrap</div>
-            <div class="jmeta">🌱 Self-Awareness &amp; Growth</div>
+            <div class="jmeta">Self-Awareness &amp; Growth</div>
           </div>
         </div>
         <span class="jtoggle">expand ▾</span>
