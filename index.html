@@ -118,17 +118,48 @@
     display:flex;align-items:center;justify-content:center;
     font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;
   }
-  .nav-links{display:flex;gap:22px;list-style:none;flex-wrap:wrap}
-  .nav-links a{
+  .nav-panel{display:flex;align-items:center;gap:28px}
+  .nav-links{display:flex;gap:22px;list-style:none;align-items:center}
+  .nav-links > li > a{
     position:relative;text-decoration:none;font-size:12.5px;font-weight:600;
     text-transform:uppercase;letter-spacing:.08em;color:var(--grey);
     transition:color .18s;
   }
-  .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;background:var(--pink);transition:right .22s ease}
-  .nav-links a:hover{color:var(--paper)}
-  .nav-links a:hover::after{right:0}
+  .nav-links > li > a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;background:var(--pink);transition:right .22s ease}
+  .nav-links > li > a:hover{color:var(--paper)}
+  .nav-links > li > a:hover::after{right:0}
   .nav-links a.active{color:var(--pink)}
-  .nav-links a.active::after{right:0}
+  .nav-links > li > a.active::after{right:0}
+
+  .nav-more{position:relative}
+  .nav-more-btn{
+    display:flex;align-items:center;gap:4px;background:none;border:none;padding:0;cursor:pointer;
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--grey);transition:color .18s;
+  }
+  .nav-more-btn:hover{color:var(--paper)}
+  .nav-more:has(a.active) > .nav-more-btn{color:var(--pink)}
+  .nav-more-menu{
+    position:absolute;top:100%;right:0;margin-top:16px;
+    background:var(--ink-2);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-hover);
+    padding:8px;min-width:170px;list-style:none;z-index:10;
+    opacity:0;visibility:hidden;transform:translateY(6px);
+    transition:opacity .18s,transform .18s,visibility .18s;
+  }
+  .nav-more:hover .nav-more-menu,.nav-more:focus-within .nav-more-menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .nav-more-menu a{display:block;padding:9px 12px;border-radius:8px;font-size:12.5px;font-weight:500;text-transform:none;letter-spacing:0;color:var(--paper);text-decoration:none}
+  .nav-more-menu a:hover,.nav-more-menu a.active{background:var(--ink-3);color:var(--pink)}
+
+  .nav-cta{display:flex;align-items:center;gap:10px}
+  .nav-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.06em;padding:9px 16px;border-radius:20px;text-decoration:none;
+    border:1px solid var(--line);color:var(--paper);transition:all .18s;white-space:nowrap;
+  }
+  .nav-btn:hover{border-color:var(--pink);color:var(--pink)}
+  .nav-btn.primary{background:var(--pink);border-color:var(--pink);color:#fff}
+  .nav-btn.primary:hover{background:#3E36C9;border-color:#3E36C9;color:#fff}
+
   .nav-toggle{
     display:none;flex-direction:column;justify-content:center;gap:5px;
     width:44px;height:44px;border:none;background:none;cursor:pointer;padding:0;
@@ -502,22 +533,38 @@
   .colophon{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey)}
 
   /* ---------- Responsive ---------- */
+  @media (max-width:1100px){
+    .nav-toggle{display:flex}
+    .nav-panel{
+      display:flex;flex-direction:column;align-items:stretch;gap:0;
+      position:absolute;top:64px;left:0;right:0;
+      background:var(--ink-2);border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+      max-height:0;overflow-y:auto;transition:max-height .3s ease;
+    }
+    .nav-panel.open{max-height:calc(100vh - 64px)}
+    .nav-links{flex-direction:column;gap:0;width:100%}
+    .nav-links li{width:100%}
+    .nav-links > li > a{display:block;padding:16px 28px;border-left:3px solid transparent}
+    .nav-links > li > a::after{display:none}
+    .nav-links a.active{border-left-color:var(--pink);background:var(--ink-3)}
+
+    .nav-more{width:100%}
+    .nav-more-btn{display:none}
+    .nav-more-menu{
+      position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:none;
+      border-radius:0;padding:0;margin:0;background:none;width:100%;
+    }
+    .nav-more-menu a{padding:16px 28px 16px 44px;font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;border-left:3px solid transparent;border-radius:0;color:var(--grey)}
+    .nav-more-menu a:hover,.nav-more-menu a.active{background:var(--ink-3);color:var(--pink);border-left-color:var(--pink)}
+
+    .nav-cta{flex-direction:column;padding:16px 28px;gap:10px;width:100%}
+    .nav-btn{text-align:center;padding:12px 16px}
+  }
   @media (max-width:820px){
     .work-grid,.split,.about-grid,.toolkit-grid,.rec-grid,.contact-grid{grid-template-columns:1fr}
     .strengths-grid{grid-template-columns:1fr 1fr}
     .fields{grid-template-columns:1fr}
     .fields dt{margin-top:6px}
-    .nav-toggle{display:flex}
-    .nav-links{
-      display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;
-      background:var(--ink-2);border-bottom:1px solid var(--line);box-shadow:var(--shadow);
-      max-height:0;overflow-y:auto;transition:max-height .3s ease;
-    }
-    .nav-links.open{max-height:calc(100vh - 64px)}
-    .nav-links li{width:100%}
-    .nav-links a{display:block;padding:16px 28px;border-left:3px solid transparent}
-    .nav-links a::after{display:none}
-    .nav-links a.active{border-left-color:var(--pink);background:var(--ink-3)}
     section{padding:56px 0}
     header.hero{padding:56px 0 44px}
     .hero-panel{padding:40px 26px;border-radius:22px}
@@ -573,19 +620,31 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#strengths">Strengths</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#practice">Practice</a></li>
-      <li><a href="#ai-skills">AI Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#toolkit">Toolkit</a></li>
-      <li><a href="#impact">Impact</a></li>
-      <li><a href="#resume">Resume</a></li>
-      <li><a href="#recommendations">Recommendations</a></li>
-      <li><a href="#elsewhere">Elsewhere</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="nav-panel" id="navLinks">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#practice">Practice</a></li>
+        <li><a href="#ai-skills">AI Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#toolkit">Toolkit</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li class="nav-more">
+          <button class="nav-more-btn" type="button" aria-haspopup="true" aria-expanded="false">
+            More
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul class="nav-more-menu">
+            <li><a href="#strengths">Strengths</a></li>
+            <li><a href="#recommendations">Recommendations</a></li>
+            <li><a href="#elsewhere">Elsewhere</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="nav-cta">
+        <a class="nav-btn" href="#resume">Resume</a>
+        <a class="nav-btn primary" href="#contact">Let's Talk</a>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -1981,7 +2040,7 @@
   }
 
   // Scroll-spy: highlight the nav link for the section currently in view
-  var navAnchorEls = navLinks ? navLinks.querySelectorAll('a') : [];
+  var navAnchorEls = navLinks ? navLinks.querySelectorAll('a:not(.nav-btn)') : [];
   var spySections = Array.prototype.slice.call(navAnchorEls).map(function(a){
     var id = a.getAttribute('href').slice(1);
     return { link: a, section: document.getElementById(id) };
