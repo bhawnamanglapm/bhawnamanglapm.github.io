@@ -445,6 +445,19 @@
   .rec-card .who{font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;color:var(--paper)}
   .rec-card .rec-meta{display:block;margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:400;letter-spacing:.02em;color:var(--grey);text-transform:none}
 
+  /* ---------- Elsewhere ---------- */
+  .elsewhere-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .elsewhere-card{
+    display:flex;align-items:center;gap:16px;padding:22px 24px;border-radius:16px;
+    background:var(--ink-2);border:1px dashed var(--line);text-decoration:none;color:inherit;
+  }
+  .elsewhere-card.real{border-style:solid;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+  .elsewhere-card.real:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+  .elsewhere-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .elsewhere-icon svg{width:20px;height:20px}
+  .elsewhere-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--paper);margin-bottom:4px}
+  .elsewhere-desc{font-size:13px;color:var(--grey);line-height:1.5}
+
   /* ---------- Contact ---------- */
   #contact{background:linear-gradient(180deg,var(--ink) 0%,var(--ink-3) 100%);border-top:1px solid var(--line)}
   .contact-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start}
@@ -559,6 +572,7 @@
       <li><a href="#impact">Impact</a></li>
       <li><a href="#resume">Resume</a></li>
       <li><a href="#recommendations">Recommendations</a></li>
+      <li><a href="#elsewhere">Elsewhere</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -1725,10 +1739,60 @@
   </div>
 </section>
 
-<section id="contact">
+<section id="elsewhere">
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-num">10</span>
+      <h2>Elsewhere</h2>
+      <span class="sec-tag">// where else to find my work</span>
+    </div>
+    <div class="elsewhere-grid">
+      <a class="elsewhere-card real" href="https://github.com/bhawnamanglapm" target="_blank" rel="noopener">
+        <span class="elsewhere-icon" style="background:#181717">
+          <svg viewBox="0 0 24 24" fill="#fff">
+            <path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/>
+          </svg>
+        </span>
+        <div>
+          <div class="elsewhere-name">GitHub</div>
+          <div class="elsewhere-desc">Code for this portfolio and other builds.</div>
+        </div>
+      </a>
+      <a class="elsewhere-card real" href="https://www.linkedin.com/in/bhawnamangla/" target="_blank" rel="noopener">
+        <span class="elsewhere-icon" style="background:#0A66C2">
+          <svg viewBox="0 0 24 24" fill="#fff">
+            <path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12.02H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v6.33h-4v-5.6c0-1.34-.02-3.05-1.86-3.05-1.87 0-2.16 1.46-2.16 2.96v5.69H9z"/>
+          </svg>
+        </span>
+        <div>
+          <div class="elsewhere-name">LinkedIn</div>
+          <div class="elsewhere-desc">PMgirlz journals, recommendations, professional updates.</div>
+        </div>
+      </a>
+      <div class="elsewhere-card">
+        <span class="elsewhere-icon" style="background:#000;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:#fff">M</span>
+        <div>
+          <div class="elsewhere-name">Medium</div>
+          <div class="elsewhere-desc todo" style="display:inline-block;padding:2px 8px">fill in — Medium profile URL, if you publish there</div>
+        </div>
+      </div>
+      <div class="elsewhere-card">
+        <span class="elsewhere-icon" style="background:#FF0000">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M9.5 8v8l6.5-4-6.5-4z"/></svg>
+        </span>
+        <div>
+          <div class="elsewhere-name">YouTube</div>
+          <div class="elsewhere-desc todo" style="display:inline-block;padding:2px 8px">fill in — YouTube channel URL, if you have one</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">11</span>
       <h2>Let's Talk</h2>
       <span class="sec-tag">// open to Senior PM roles</span>
     </div>
@@ -1837,7 +1901,7 @@
   }
 
   // Scroll-reveal animations
-  var revealSelectors = '.sec-head, .jcat-group, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .resume-panel, .rec-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item';
+  var revealSelectors = '.sec-head, .jcat-group, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .resume-panel, .rec-card, .elsewhere-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item';
   var revealEls = document.querySelectorAll(revealSelectors);
   if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     revealEls.forEach(function(el){ el.classList.add('reveal'); });
