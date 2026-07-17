@@ -1882,6 +1882,42 @@
     revealEls.forEach(function(el){ io.observe(el); });
   }
 
+  // Count-up animation for impact numbers
+  var countEls = document.querySelectorAll('.stat-num, .impact-card .num:not(.todo)');
+  if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && countEls.length){
+    var numRe = /\d+(\.\d+)?/g;
+    var countIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        countIo.unobserve(entry.target);
+        var el = entry.target;
+        var template = el.textContent;
+        var targets = (template.match(numRe) || []).map(Number);
+        if(!targets.length) return;
+        var duration = 1200;
+        var start = null;
+        function frame(ts){
+          if(start === null) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var i = 0;
+          el.textContent = template.replace(numRe, function(match){
+            var target = targets[i++];
+            var current = target * eased;
+            return Number.isInteger(target) ? Math.round(current).toString() : current.toFixed(1);
+          });
+          if(progress < 1){
+            requestAnimationFrame(frame);
+          } else {
+            el.textContent = template;
+          }
+        }
+        requestAnimationFrame(frame);
+      });
+    }, { threshold: 0.4 });
+    countEls.forEach(function(el){ countIo.observe(el); });
+  }
+
   // Contact form -> mailto (no backend on a static site)
   var form = document.getElementById('contactForm');
   var status = document.getElementById('formStatus');
