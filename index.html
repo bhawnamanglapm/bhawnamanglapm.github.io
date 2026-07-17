@@ -24,7 +24,7 @@
 
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#4F46E5">
-<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
 <script type="application/ld+json">
 {
@@ -90,7 +90,6 @@
   }
   .skip-link:focus{top:12px}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
-  .bebas{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.01em}
   .mono{font-family:'IBM Plex Mono',monospace}
 
   /* ---------- TODO marker ---------- */
@@ -264,7 +263,7 @@
   @media (prefers-reduced-motion: reduce){
     .ticker-track{animation:none}
     html{scroll-behavior:auto}
-    .card,.log-item,.jcard{transition:none}
+    .jcard{transition:none}
     .hero-panel::before,.hero-panel::after{animation:none}
     .js .reveal{opacity:1;transform:none;transition:none}
   }
@@ -306,7 +305,6 @@
   }
   .tool-icon:hover{transform:translateY(-3px) scale(1.06);box-shadow:var(--shadow-hover)}
   .tool-icon svg{width:30px;height:30px;display:block}
-  .tool-icon.word{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12.5px;color:#fff;text-align:center;line-height:1.1}
   .tool-label{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--grey);margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
   .tool-item{display:flex;flex-direction:column;align-items:center;width:64px;text-decoration:none;color:inherit}
 
@@ -316,18 +314,6 @@
   .about-block{margin-bottom:20px}
   .about-block .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:8px}
   .about-block p{color:#52525B;font-size:15.5px}
-
-  /* ---------- generic cards ---------- */
-  .work-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .card{background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:34px 30px;position:relative;box-shadow:var(--shadow);transition:transform .2s, box-shadow .2s, border-color .2s}
-  .card:hover{transform:translateY(-4px);border-color:var(--pink);box-shadow:var(--shadow-hover)}
-  .card-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
-  .card h3{font-size:24px;line-height:1.2;margin-bottom:12px}
-  .card p{color:#52525B;font-size:15px;margin-bottom:14px}
-  .metric-row{display:flex;gap:26px;flex-wrap:wrap;margin-top:6px}
-  .metric{border-top:2px solid var(--pink);padding-top:10px;min-width:120px}
-  .metric .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;line-height:1;color:var(--paper)}
-  .metric .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin-top:5px}
 
   /* ---------- Journal timeline track ---------- */
   .jtrack{position:relative;padding-left:64px}
@@ -450,14 +436,7 @@
   .log-org{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--lime);text-transform:uppercase;margin:6px 0 10px}
   .log-desc{color:#52525B;font-size:14.5px;max-width:600px}
 
-  /* ---------- Community / toolkit ---------- */
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .panel{border:1px solid var(--line);border-radius:16px;padding:36px 32px;background:var(--ink-2);box-shadow:var(--shadow)}
-  .panel h3{font-size:26px;line-height:1.2;margin-bottom:6px}
-  .panel h3 span{color:var(--pink)}
-  .panel .role{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:16px}
-  .panel p{color:#52525B;font-size:15px}
-
+  /* ---------- Toolkit ---------- */
   .toolkit-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
   .toolkit-cat{border:1px solid var(--line);border-radius:16px;padding:26px 28px;background:var(--ink-2);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
   .toolkit-cat:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
@@ -584,7 +563,7 @@
     .nav-btn{text-align:center;padding:12px 16px}
   }
   @media (max-width:820px){
-    .work-grid,.split,.about-grid,.toolkit-grid,.rec-grid,.contact-grid{grid-template-columns:1fr}
+    .about-grid,.toolkit-grid,.rec-grid,.contact-grid{grid-template-columns:1fr}
     .strengths-grid{grid-template-columns:1fr 1fr}
     .fields{grid-template-columns:1fr}
     .fields dt{margin-top:6px}
