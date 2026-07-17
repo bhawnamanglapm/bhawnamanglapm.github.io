@@ -919,6 +919,39 @@
         </div>
       </div>
       </details>
+      <details class="jcard">
+        <summary class="jhead">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#10A37F,#0D8968)">🤖</div>
+            <div>
+              <div class="jtitle">ChatGPT — Memory Feature</div>
+              <div class="jmeta">AI Feature Design</div>
+            </div>
+          </div>
+          <span class="jtoggle">expand ▾</span>
+        </summary>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Feature name</dt><dd>Memory (persistent cross-conversation memory)</dd>
+          <dt>Product</dt><dd>ChatGPT</dd>
+          <dt>User problem</dt><dd>Users repeat context in every new conversation; the assistant "forgets" preferences, ongoing projects, and prior corrections</dd>
+          <dt>Business problem</dt><dd>Session-to-session experience feels disposable without persistence — a real retention and differentiation lever against competitors without it</dd>
+          <dt>Why it exists</dt><dd>Personalization compounds engagement — the more the assistant "knows" a user, the higher the switching cost to a competitor</dd>
+          <dt>What to remember vs. forget</dt><dd>Explicit user statements vs. inferred preferences</dd>
+          <dt>Guardrails</dt><dd>User-visible memory management (view/edit/delete), opt-out control, no silent retention of sensitive data</dd>
+          <dt>Evaluation challenge</dt><dd>No ground-truth "correct" memory — success has to be measured by correction rate and re-engagement, not accuracy</dd>
+          <dt>Trade-offs</dt><dd>Personalization vs. privacy; more useful over time vs. "creepiness" risk if memory surfaces unprompted</dd>
+          <dt>Failure/abuse case</dt><dd>Stale memory — the model over-indexes on outdated info (e.g. remembering a job the user has since left), requiring a decay/update strategy, not just accumulation</dd>
+          <dt>Redesign idea</dt><dd>Confidence-weighted memory with visible "last updated" timestamps, so users can trust and correct what's remembered in-line</dd>
+          <dt>Reusable insight</dt><dd>The general pattern for any AI feature with implicit state — the PM's real job is designing the correction and visibility mechanism, not the memory mechanism itself</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </details>
     </div>
 
     <!-- J3: User Psychology -->
@@ -1286,7 +1319,7 @@
       <h2>AI Skills</h2>
       <span class="sec-tag">// product management in the AI era</span>
     </div>
-    <p class="sec-intro">Three sections carry the strongest signal: the orchestrated Claude → tools pipeline (C), an applied AI product teardown (D), and evidence of AI use in daily workflow (A). The rest are structured as a working checklist.</p>
+    <p class="sec-intro">Two sections carry the strongest signal: the orchestrated Claude → tools pipeline (C) and evidence of AI use in daily workflow (A). The rest are structured as a working checklist. An applied AI product teardown (ChatGPT's Memory feature) now lives in Case Studies, under Feature Reverse Engineering.</p>
 
     <div class="ai-sub">
       <div class="ai-sub-head"><span class="ai-letter">A</span><h3>AI in my own PM workflow</h3></div>
@@ -1337,34 +1370,7 @@
     </div>
 
     <div class="ai-sub">
-      <div class="ai-sub-head"><span class="ai-letter">D</span><h3>AI Product Teardown — ChatGPT Memory</h3></div>
-      <div class="jcard" style="margin-bottom:0">
-        <div class="jbody" style="padding-top:24px">
-          <dl class="fields">
-            <dt>Feature name</dt><dd>Memory (persistent cross-conversation memory)</dd>
-            <dt>Product</dt><dd>ChatGPT</dd>
-            <dt>User problem</dt><dd>Users repeat context in every new conversation; the assistant "forgets" preferences, ongoing projects, and prior corrections</dd>
-            <dt>Business problem</dt><dd>Session-to-session experience feels disposable without persistence — a real retention and differentiation lever against competitors without it</dd>
-            <dt>Why it exists</dt><dd>Personalization compounds engagement — the more the assistant "knows" a user, the higher the switching cost to a competitor</dd>
-            <dt>What to remember vs. forget</dt><dd>Explicit user statements vs. inferred preferences</dd>
-            <dt>Guardrails</dt><dd>User-visible memory management (view/edit/delete), opt-out control, no silent retention of sensitive data</dd>
-            <dt>Evaluation challenge</dt><dd>No ground-truth "correct" memory — success has to be measured by correction rate and re-engagement, not accuracy</dd>
-            <dt>Trade-offs</dt><dd>Personalization vs. privacy; more useful over time vs. "creepiness" risk if memory surfaces unprompted</dd>
-            <dt>Failure/abuse case</dt><dd>Stale memory — the model over-indexes on outdated info (e.g. remembering a job the user has since left), requiring a decay/update strategy, not just accumulation</dd>
-            <dt>Redesign idea</dt><dd>Confidence-weighted memory with visible "last updated" timestamps, so users can trust and correct what's remembered in-line</dd>
-            <dt>Reusable insight</dt><dd>The general pattern for any AI feature with implicit state — the PM's real job is designing the correction and visibility mechanism, not the memory mechanism itself</dd>
-          </dl>
-          <div class="jlinks">
-            <span><span class="k">Link</span><span class="todo">fill in</span></span>
-            <span><span class="k">Image</span><span class="todo">fill in</span></span>
-            <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ai-sub">
-      <div class="ai-sub-head"><span class="ai-letter">E</span><h3>AI Tools I Actually Use</h3></div>
+      <div class="ai-sub-head"><span class="ai-letter">D</span><h3>AI Tools I Actually Use</h3></div>
       <p class="desc">Breadth across the PM workflow, not just visual generation. Solid text is proven daily use; <span class="chip trend" style="padding:1px 8px;font-size:11px">dashed</span> tools are best-in-class picks I'm actively folding in.</p>
       <div class="ptable2-wrap">
         <table class="ptable2">
@@ -1432,7 +1438,7 @@
     </div>
 
     <div class="ai-sub">
-      <div class="ai-sub-head"><span class="ai-letter">F</span><h3>Judgment Signal — A Time I Said No to AI</h3></div>
+      <div class="ai-sub-head"><span class="ai-letter">E</span><h3>Judgment Signal — A Time I Said No to AI</h3></div>
       <ul class="plain">
         <li><span class="k">Context</span><span class="todo">fill in — a feature or request where AI was proposed/expected</span></li>
         <li><span class="k">Why I pushed back</span><span class="todo">fill in</span></li>
