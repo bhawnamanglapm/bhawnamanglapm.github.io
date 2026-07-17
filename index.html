@@ -67,6 +67,7 @@
     --max:1180px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
+  img{max-width:100%;height:auto;display:block}
   html{scroll-behavior:smooth;overflow-x:hidden}
   body{overflow-x:hidden}
   section,header.hero{scroll-margin-top:80px}
@@ -176,7 +177,8 @@
   /* ---------- Hero panel (gradient) ---------- */
   .hero-panel{
     position:relative;overflow:hidden;isolation:isolate;
-    background:linear-gradient(135deg,#4F46E5 0%,#6D28D9 55%,#312E81 100%);
+    background-image:linear-gradient(135deg,rgba(79,70,229,.88) 0%,rgba(109,40,217,.88) 55%,rgba(49,46,129,.92) 100%),url('hero-texture.jpg');
+    background-size:cover,cover;background-position:center,center;
     border-radius:28px;padding:64px 56px;box-shadow:var(--shadow-hover);
   }
   .hero-panel::before{content:"";position:absolute;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);top:-170px;right:-120px;border-radius:50%;z-index:0;animation:floatBlob 11s ease-in-out infinite}
@@ -431,6 +433,15 @@
   .impact-card{border:1px solid var(--line);border-radius:16px;padding:28px 24px;background:var(--ink-2);box-shadow:var(--shadow)}
   .impact-card .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:38px;line-height:1;color:var(--pink)}
   .impact-card .lbl{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--grey);margin-top:10px}
+
+  .recognition-card{
+    display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-top:24px;
+    border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--ink-2);box-shadow:var(--shadow);
+  }
+  .recognition-card img{width:220px;height:auto;border-radius:10px;flex-shrink:0;display:block}
+  .recognition-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);margin-bottom:6px}
+  .recognition-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;margin-bottom:6px}
+  .recognition-desc{font-size:14px;color:var(--grey)}
 
   /* ---------- Resume ---------- */
   .resume-panel{border:1px solid var(--line);border-radius:16px;padding:36px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;background:var(--ink-2);box-shadow:var(--shadow)}
@@ -1735,6 +1746,14 @@
         <div class="lbl">Revenue influenced</div>
       </div>
     </div>
+    <div class="recognition-card">
+      <img src="heroes-award.jpg" alt="Recognition screen reading: Congratulations Ms. Bhawna Mangla, Heroes Award, Exceptional Performance in FY'23" loading="lazy">
+      <div>
+        <div class="recognition-label">Recognition</div>
+        <div class="recognition-title">Heroes Award — Exceptional Performance, FY'23</div>
+        <div class="recognition-desc">Company-wide recognition <span class="todo" style="padding:1px 6px">fill in — confirm employer, likely Bajaj Finserv given the FY'23 timing</span> for performance impact.</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1982,7 +2001,7 @@
   }
 
   // Scroll-reveal animations
-  var revealSelectors = '.sec-head, .jcat-group, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .resume-panel, .rec-card, .elsewhere-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item, .ai-sub';
+  var revealSelectors = '.sec-head, .jcat-group, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .resume-panel, .rec-card, .elsewhere-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item, .ai-sub, .recognition-card';
   var revealEls = document.querySelectorAll(revealSelectors);
   if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     revealEls.forEach(function(el){ el.classList.add('reveal'); });
