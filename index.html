@@ -352,6 +352,10 @@
   ul.plain li:last-child{border-bottom:none}
   ul.plain li .k{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--lime);display:block;margin-bottom:5px}
 
+  .code-block{background:var(--paper);border-radius:12px;padding:18px 20px;margin-top:16px}
+  .code-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#5EEAD4;margin-bottom:10px}
+  .code-block pre{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);white-space:pre-wrap;line-height:1.6;overflow-x:auto}
+
   .pipeline{
     display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;
     border:1px solid var(--line);border-radius:16px;background:var(--ink-2);padding:20px;margin-bottom:24px;box-shadow:var(--shadow);
@@ -569,6 +573,7 @@
       <li><a href="#ai-skills">AI Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#toolkit">Toolkit</a></li>
+      <li><a href="#technical-depth">Technical Depth</a></li>
       <li><a href="#impact">Impact</a></li>
       <li><a href="#resume">Resume</a></li>
       <li><a href="#recommendations">Recommendations</a></li>
@@ -1620,10 +1625,64 @@
   </div>
 </section>
 
-<section id="impact" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+<section id="technical-depth">
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-num">07</span>
+      <h2>Technical &amp; Execution Depth</h2>
+      <span class="sec-tag">// what interviewers actually probe</span>
+    </div>
+    <p class="sec-intro">Three areas PM interviews test past product sense: working with system integrations and APIs, querying data directly, and running a real backlog. Grounded in real system work where I have it, framework-first where I don't yet have a polished example.</p>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">A</span><h3>System &amp; API Integration</h3></div>
+      <p class="desc">Real integration work, not a theoretical answer to "have you worked with APIs."</p>
+      <div class="jcard" style="margin-bottom:0">
+        <div class="jbody" style="padding-top:24px">
+          <dl class="fields">
+            <dt>What I integrated</dt><dd>PCMS (Payout Calculation Management System) ↔ Finacle, Bajaj Finserv's core banking system</dd>
+            <dt>Why</dt><dd>Partner payout calculations ran through a manual Excel process; integrating PCMS with Finacle removed that dependency so payouts calculate directly off live account data</dd>
+            <dt>My role</dt><dd>Owned the integration requirements end-to-end while building PCMS 0→1 — scoped what data needed to flow, in what direction, and on what trigger, working directly with engineering</dd>
+            <dt>Outcome</dt><dd>Partner onboarding TAT dropped from 7 days to 1; also removed a recurring manual reconciliation step</dd>
+            <dt>Integration type</dt><dd><span class="todo">fill in — REST / SOAP / batch file, whatever it actually was</span></dd>
+            <dt>Auth &amp; error handling</dt><dd><span class="todo">fill in — how failures or retries were handled, if that was part of what you owned</span></dd>
+            <dt>What this demonstrates</dt><dd>Comfort scoping a technical integration with engineering, not just writing a PRD and handing it off</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">B</span><h3>SQL</h3></div>
+      <p class="desc">Used for checking KPI queries and validating reports before they go to stakeholders — working proficiency, not a certification.</p>
+      <ul class="plain">
+        <li><span class="k">Comfortable with</span>SELECT, JOINs, GROUP BY / aggregations, filtering — day-to-day query reading and light writing</li>
+        <li><span class="k">Building toward</span><span class="todo">fill in — e.g. window functions, CTEs, query optimization, if applicable</span></li>
+        <li><span class="k">How I use it</span>Drafting and checking KPI queries, then turning the result into a plain-English readout for stakeholders — same pattern used with Power BI and Salesforce reporting</li>
+      </ul>
+      <div class="code-block">
+        <div class="code-label">Sample query</div>
+        <pre><span class="todo" style="display:inline-block">fill in — a real query you've written, e.g. a weekly active partner count or a payout reconciliation check</span></pre>
+      </div>
+    </div>
+
+    <div class="ai-sub">
+      <div class="ai-sub-head"><span class="ai-letter">C</span><h3>Backlog Management</h3></div>
+      <p class="desc">How I actually triage and sequence work, not just the tool I click through.</p>
+      <ul class="plain">
+        <li><span class="k">Tools</span>Jira and Azure DevOps, hands-on — creating epics/stories, grooming, sprint planning</li>
+        <li><span class="k">Prioritization approach</span>Impact vs. effort as a first pass, then a hard look at what's actually blocking a partner or a revenue number this sprint — what's on the critical path outranks a bigger reach/impact score</li>
+        <li><span class="k">Handling competing asks</span><span class="todo">fill in — a real example of re-sequencing the backlog under stakeholder pressure</span></li>
+        <li><span class="k">Real backlog example</span><span class="todo">fill in — a sanitized screenshot or snippet of an actual backlog you've run</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="impact" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">08</span>
       <h2>Impact Dashboard</h2>
       <span class="sec-tag">// true, memorable, career-spanning</span>
     </div>
@@ -1665,7 +1724,7 @@
 <section id="resume" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">08</span>
+      <span class="sec-num">09</span>
       <h2>Resume</h2>
       <span class="sec-tag">// download</span>
     </div>
@@ -1691,7 +1750,7 @@
 <section id="recommendations">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">09</span>
+      <span class="sec-num">10</span>
       <h2>Recommendations</h2>
       <span class="sec-tag">// from LinkedIn</span>
     </div>
@@ -1719,7 +1778,7 @@
 <section id="elsewhere">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">10</span>
+      <span class="sec-num">11</span>
       <h2>Elsewhere</h2>
       <span class="sec-tag">// where else to find my work</span>
     </div>
@@ -1788,7 +1847,7 @@
 <section id="contact">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">11</span>
+      <span class="sec-num">12</span>
       <h2>Let's Talk</h2>
       <span class="sec-tag">// open to Senior PM roles</span>
     </div>
@@ -1897,7 +1956,7 @@
   }
 
   // Scroll-reveal animations
-  var revealSelectors = '.sec-head, .jcat-group, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .resume-panel, .rec-card, .elsewhere-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item';
+  var revealSelectors = '.sec-head, .jcat-group, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .resume-panel, .rec-card, .elsewhere-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item, .ai-sub, .code-block';
   var revealEls = document.querySelectorAll(revealSelectors);
   if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     revealEls.forEach(function(el){ el.classList.add('reveal'); });
