@@ -219,10 +219,11 @@
   .hero-panel::before{content:"";position:absolute;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);top:-170px;right:-120px;border-radius:50%;z-index:0;animation:floatBlob 11s ease-in-out infinite}
   .hero-panel::after{content:"";position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(94,234,212,.22),transparent 70%);bottom:-140px;left:-80px;border-radius:50%;z-index:0;animation:floatBlob 13s ease-in-out infinite reverse}
   .hero-panel > *{position:relative;z-index:1}
+  .hero-top{display:flex;align-items:center;gap:18px;margin-bottom:24px}
   .hero-avatar{
-    width:84px;height:84px;border-radius:50%;object-fit:cover;
+    width:76px;height:76px;border-radius:50%;object-fit:cover;flex-shrink:0;
     border:2px solid rgba(255,255,255,.4);
-    margin-bottom:28px;box-shadow:0 4px 18px rgba(0,0,0,.25);
+    box-shadow:0 4px 18px rgba(0,0,0,.25);
   }
   .hero-panel .eyebrow{color:#8AF0E0}
   .hero-panel .eyebrow::before{background:#8AF0E0}
@@ -661,8 +662,10 @@
 <header class="hero" id="top">
   <div class="wrap">
     <div class="hero-panel">
-      <img class="hero-avatar" src="hero-avatar.jpg" alt="Bhawna Mangla smiling outdoors" loading="eager">
-      <p class="eyebrow">Product Manager · Gurugram, India</p>
+      <div class="hero-top">
+        <img class="hero-avatar" src="hero-avatar.jpg" alt="Bhawna Mangla smiling outdoors" loading="eager">
+        <p class="eyebrow" style="margin-bottom:0">Product Manager · Gurugram, India</p>
+      </div>
       <h1>
         <span class="row1">Builds what</span><br>
         <span class="row2">she learns.</span>
