@@ -429,11 +429,6 @@
   .impact-card .lbl{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--grey);margin-top:10px}
   .impact-card .flag{display:block;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--lime);text-transform:uppercase;letter-spacing:.05em}
 
-  /* ---------- Leadership vignettes ---------- */
-  .vignette{border:1px solid var(--line);border-left:3px solid var(--pink);border-radius:12px;padding:24px 26px;margin-bottom:16px;background:var(--ink-2);box-shadow:var(--shadow)}
-  .vignette h3{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);margin-bottom:10px}
-  .vignette p{color:#3F3F46;font-size:14.5px;line-height:1.65;max-width:720px}
-
   /* ---------- Resume ---------- */
   .resume-panel{border:1px solid var(--line);border-radius:16px;padding:36px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;background:var(--ink-2);box-shadow:var(--shadow)}
   .resume-meta{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--grey)}
@@ -559,7 +554,6 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#toolkit">Toolkit</a></li>
       <li><a href="#impact">Impact</a></li>
-      <li><a href="#leadership">Leadership</a></li>
       <li><a href="#resume">Resume</a></li>
       <li><a href="#recommendations">Recommendations</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -1733,32 +1727,10 @@
   </div>
 </section>
 
-<section id="leadership">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-num">08</span>
-      <h2>Leadership &amp; Cross-Functional Influence</h2>
-      <span class="sec-tag">// 2 of 3 still need your story</span>
-    </div>
-    <div class="vignette">
-      <h3>Conflict resolution</h3>
-      <p class="todo" style="display:block;width:fit-content">fill in — a specific disagreement with eng or design, how you resolved it, and the outcome</p>
-    </div>
-    <div class="vignette">
-      <h3>Influencing without authority</h3>
-      <p class="todo" style="display:block;width:fit-content">fill in — a time you got an exec or peer team to change direction without having power over them</p>
-    </div>
-    <div class="vignette">
-      <h3>Mentoring / growing others</h3>
-      <p>At Leading Edge, I ran a skills audit across the team building our client websites and found the same few gaps kept showing up in different people. Rather than a generic onboarding deck, I built a customized development program around exactly those gaps — over 20 sessions for 30+ people — so the training was solving problems people actually had, not covering material they'd already outgrown.</p>
-    </div>
-  </div>
-</section>
-
 <section id="resume" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">09</span>
+      <span class="sec-num">08</span>
       <h2>Resume</h2>
       <span class="sec-tag">// download</span>
     </div>
@@ -1784,7 +1756,7 @@
 <section id="recommendations">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">10</span>
+      <span class="sec-num">09</span>
       <h2>Recommendations</h2>
       <span class="sec-tag">// from LinkedIn</span>
     </div>
@@ -1812,7 +1784,7 @@
 <section id="contact">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">11</span>
+      <span class="sec-num">10</span>
       <h2>Let's Talk</h2>
       <span class="sec-tag">// open to Senior PM roles</span>
     </div>
@@ -1921,7 +1893,7 @@
   }
 
   // Scroll-reveal animations
-  var revealSelectors = '.sec-head, .jcat-group, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .vignette, .resume-panel, .rec-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item';
+  var revealSelectors = '.sec-head, .jcat-group, .tl-card, .toolkit-cat, .stat-circle, .impact-card, .resume-panel, .rec-card, .panel, .contact-form, .ptable2-wrap, .pipeline, .strength-card, .tool-item';
   var revealEls = document.querySelectorAll(revealSelectors);
   if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     revealEls.forEach(function(el){ el.classList.add('reveal'); });
