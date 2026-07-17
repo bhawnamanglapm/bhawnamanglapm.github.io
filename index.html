@@ -409,6 +409,8 @@
 
   .inline-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;flex-shrink:0;vertical-align:middle;margin-right:1px}
   .inline-icon svg{width:11px;height:11px}
+  .inline-icon.txt{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:9px;color:#fff}
+  .tool-tag{display:inline-flex;align-items:center;gap:6px;margin:2px 0}
   footer{padding:36px 0;border-top:1px solid var(--line)}
   .colophon{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey)}
 
@@ -1273,13 +1275,62 @@
         <table class="ptable2">
           <thead><tr><th>Workflow stage</th><th>Tool(s) used</th><th>What it's used for</th></tr></thead>
           <tbody>
-            <tr><td data-label="Workflow stage">Research &amp; synthesis</td><td data-label="Tool(s) used">Claude, <span class="chip trend" style="padding:1px 8px;font-size:11px">Perplexity</span></td><td data-label="What it's used for">Pulling market/competitive context and synthesizing it into a structured brief before writing a PRD or case study.</td></tr>
-            <tr><td data-label="Workflow stage">Writing (PRDs, memos, specs)</td><td data-label="Tool(s) used">Claude, <span class="chip trend" style="padding:1px 8px;font-size:11px">Notion AI</span></td><td data-label="What it's used for">First-draft PRDs, exec updates, and journal write-ups, organized in Notion — edited after for accuracy and voice.</td></tr>
-            <tr><td data-label="Workflow stage">Prototyping / coding</td><td data-label="Tool(s) used">Claude Code, <span class="chip trend" style="padding:1px 8px;font-size:11px">Cursor</span></td><td data-label="What it's used for">Scaffolding real prototypes and shipping small builds end-to-end — like this portfolio site — not just throwaway mockups.</td></tr>
-            <tr><td data-label="Workflow stage">Visual/design generation</td><td data-label="Tool(s) used"><span class="chip trend" style="padding:1px 8px;font-size:11px">Figma AI</span> <span class="chip trend" style="padding:1px 8px;font-size:11px">Gamma</span></td><td data-label="What it's used for">AI-assisted iteration on design work in Figma, and turning a rough brief into a polished stakeholder deck in Gamma instead of a blank slide.</td></tr>
-            <tr><td data-label="Workflow stage">Meeting notes &amp; transcription</td><td data-label="Tool(s) used"><span class="chip trend" style="padding:1px 8px;font-size:11px">Otter.ai</span></td><td data-label="What it's used for">Transcribing and summarizing stakeholder syncs so nothing said in a meeting gets lost by the next standup.</td></tr>
-            <tr><td data-label="Workflow stage">Data analysis</td><td data-label="Tool(s) used">Claude, SQL, Power BI</td><td data-label="What it's used for">Drafting and checking KPI queries, then turning Power BI/Salesforce reports into a plain-English readout for stakeholders.</td></tr>
-            <tr><td data-label="Workflow stage">Project/task orchestration</td><td data-label="Tool(s) used">Claude, <span class="chip trend" style="padding:1px 8px;font-size:11px">Notion</span></td><td data-label="What it's used for">Orchestrating research → PRD → tickets → architecture in one pass, with Notion as the shared source of truth — see the pipeline in Section C.</td></tr>
+            <tr>
+              <td data-label="Workflow stage">Research &amp; synthesis</td>
+              <td data-label="Tool(s) used">
+                <span class="tool-tag"><span class="inline-icon" style="background:#D97757"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M4.5 7.5l15 9M4.5 16.5l15-9"/></svg></span>Claude</span>,
+                <span class="tool-tag"><span class="inline-icon txt" style="background:#20808D">P</span><span class="chip trend" style="padding:1px 8px;font-size:11px">Perplexity</span></span>
+              </td>
+              <td data-label="What it's used for">Pulling market/competitive context and synthesizing it into a structured brief before writing a PRD or case study.</td>
+            </tr>
+            <tr>
+              <td data-label="Workflow stage">Writing (PRDs, memos, specs)</td>
+              <td data-label="Tool(s) used">
+                <span class="tool-tag"><span class="inline-icon" style="background:#D97757"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M4.5 7.5l15 9M4.5 16.5l15-9"/></svg></span>Claude</span>,
+                <span class="tool-tag"><span class="inline-icon txt" style="background:#000">N</span><span class="chip trend" style="padding:1px 8px;font-size:11px">Notion AI</span></span>
+              </td>
+              <td data-label="What it's used for">First-draft PRDs, exec updates, and journal write-ups, organized in Notion — edited after for accuracy and voice.</td>
+            </tr>
+            <tr>
+              <td data-label="Workflow stage">Prototyping / coding</td>
+              <td data-label="Tool(s) used">
+                <span class="tool-tag"><span class="inline-icon" style="background:#D97757"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M4.5 7.5l15 9M4.5 16.5l15-9"/></svg></span>Claude Code</span>,
+                <span class="tool-tag"><span class="inline-icon" style="background:#000"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4 2l14 6-6 2-2 6z"/></svg></span><span class="chip trend" style="padding:1px 8px;font-size:11px">Cursor</span></span>
+              </td>
+              <td data-label="What it's used for">Scaffolding real prototypes and shipping small builds end-to-end — like this portfolio site — not just throwaway mockups.</td>
+            </tr>
+            <tr>
+              <td data-label="Workflow stage">Visual/design generation</td>
+              <td data-label="Tool(s) used">
+                <span class="tool-tag"><span class="inline-icon" style="background:#fff;border:1px solid var(--line)"><svg viewBox="0 0 24 24"><path d="M8 1a3 3 0 000 6h3V1H8z" fill="#F24E1E"/><path d="M8 7a3 3 0 100 6h3V7H8z" fill="#A259FF"/><path d="M8 13a3 3 0 103 3v-3H8z" fill="#0ACF83"/><path d="M14 1a3 3 0 000 6 3 3 0 000-6z" fill="#FF7262"/><path d="M14 7a3 3 0 000 6 3 3 0 000-6z" fill="#1ABCFE"/></svg></span><span class="chip trend" style="padding:1px 8px;font-size:11px">Figma AI</span></span>
+                <span class="tool-tag"><span class="inline-icon txt" style="background:#7A5AF8">G</span><span class="chip trend" style="padding:1px 8px;font-size:11px">Gamma</span></span>
+              </td>
+              <td data-label="What it's used for">AI-assisted iteration on design work in Figma, and turning a rough brief into a polished stakeholder deck in Gamma instead of a blank slide.</td>
+            </tr>
+            <tr>
+              <td data-label="Workflow stage">Meeting notes &amp; transcription</td>
+              <td data-label="Tool(s) used">
+                <span class="tool-tag"><span class="inline-icon txt" style="background:#1E90A3">O</span><span class="chip trend" style="padding:1px 8px;font-size:11px">Otter.ai</span></span>
+              </td>
+              <td data-label="What it's used for">Transcribing and summarizing stakeholder syncs so nothing said in a meeting gets lost by the next standup.</td>
+            </tr>
+            <tr>
+              <td data-label="Workflow stage">Data analysis</td>
+              <td data-label="Tool(s) used">
+                <span class="tool-tag"><span class="inline-icon" style="background:#D97757"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M4.5 7.5l15 9M4.5 16.5l15-9"/></svg></span>Claude</span>,
+                <span class="tool-tag"><span class="inline-icon" style="background:#336791"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></span>SQL</span>,
+                <span class="tool-tag"><span class="inline-icon" style="background:#fff;border:1px solid var(--line)"><svg viewBox="0 0 24 24"><rect x="2" y="14" width="5" height="8" rx="1" fill="#F2C811"/><rect x="9.5" y="8" width="5" height="14" rx="1" fill="#F2C811" opacity=".85"/><rect x="17" y="2" width="5" height="20" rx="1" fill="#F2C811" opacity=".7"/></svg></span>Power BI</span>
+              </td>
+              <td data-label="What it's used for">Drafting and checking KPI queries, then turning Power BI/Salesforce reports into a plain-English readout for stakeholders.</td>
+            </tr>
+            <tr>
+              <td data-label="Workflow stage">Project/task orchestration</td>
+              <td data-label="Tool(s) used">
+                <span class="tool-tag"><span class="inline-icon" style="background:#D97757"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M4.5 7.5l15 9M4.5 16.5l15-9"/></svg></span>Claude</span>,
+                <span class="tool-tag"><span class="inline-icon txt" style="background:#000">N</span><span class="chip trend" style="padding:1px 8px;font-size:11px">Notion</span></span>
+              </td>
+              <td data-label="What it's used for">Orchestrating research → PRD → tickets → architecture in one pass, with Notion as the shared source of truth — see the pipeline in Section C.</td>
+            </tr>
           </tbody>
         </table>
       </div>
