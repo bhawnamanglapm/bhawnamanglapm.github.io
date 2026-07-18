@@ -326,8 +326,12 @@
   /* ---------- Journal category groups ---------- */
   .jcat-group{position:relative;margin-bottom:32px}
   .jcat-group:last-child{margin-bottom:0}
-  .jcat-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;min-height:42px}
+  .jcat-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;min-height:42px;flex-wrap:wrap}
   .jcat-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;color:var(--paper)}
+  .jcat-updated{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--lime);background:var(--ink-3);border-radius:20px;padding:4px 11px;margin-left:auto;
+  }
   .jnum{
     position:absolute;left:-58px;top:0;z-index:2;
     width:42px;height:42px;border-radius:50%;
@@ -2079,6 +2083,19 @@
       return 0;
     });
     groups.forEach(function(g){ track.appendChild(g); });
+
+    // Show a "last worked on" badge for categories with dated cards.
+    groups.forEach(function(g){
+      if(!g.dataset.sortDate) return;
+      var head = g.querySelector('.jcat-head');
+      if(!head || head.querySelector('.jcat-updated')) return;
+      var d = new Date(g.dataset.sortDate + 'T00:00:00');
+      var label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      var badge = document.createElement('span');
+      badge.className = 'jcat-updated';
+      badge.textContent = 'Last worked on ' + label;
+      head.appendChild(badge);
+    });
   })();
 
   // Case study full-screen detail view
