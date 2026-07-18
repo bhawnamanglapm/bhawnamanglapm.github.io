@@ -996,7 +996,7 @@
         </div>
       </div>
       </article>
-      <article class="jcard" data-case="chatgpt-memory-feature">
+      <article class="jcard" data-case="chatgpt-memory-feature" data-updated="2026-07-17">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#10A37F,#0D8968)">🤖</div>
@@ -1379,7 +1379,7 @@
         <span class="jnum">J11</span>
         <h3 class="jcat-title">Technical Execution</h3>
       </div>
-      <article class="jcard" data-case="pcms-payout-system-integration">
+      <article class="jcard" data-case="pcms-payout-system-integration" data-updated="2026-07-17">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#64748B,#334155)">⚙️</div>
@@ -2056,6 +2056,30 @@
 <script>
 (function(){
   document.documentElement.classList.add('js');
+
+  // Order Case Studies categories by most-recently-worked-on date first.
+  // Add data-updated="YYYY-MM-DD" to a .jcard when its content is filled
+  // in/edited — the category holding it moves up automatically on next load.
+  // Categories with no dated cards yet keep their original J1..J11 order,
+  // placed after every dated category.
+  (function(){
+    var track = document.querySelector('.jtrack');
+    if(!track) return;
+    var groups = Array.prototype.slice.call(track.querySelectorAll('.jcat-group'));
+    groups.forEach(function(g){
+      var dates = Array.prototype.slice.call(g.querySelectorAll('.jcard[data-updated]'))
+        .map(function(c){ return c.getAttribute('data-updated'); });
+      g.dataset.sortDate = dates.length ? dates.sort().slice(-1)[0] : '';
+    });
+    groups.sort(function(a, b){
+      var da = a.dataset.sortDate, db = b.dataset.sortDate;
+      if(da && db) return da === db ? 0 : (da < db ? 1 : -1);
+      if(da && !db) return -1;
+      if(!da && db) return 1;
+      return 0;
+    });
+    groups.forEach(function(g){ track.appendChild(g); });
+  })();
 
   // Case study full-screen detail view
   var caseOverlay = document.getElementById('caseOverlay');
