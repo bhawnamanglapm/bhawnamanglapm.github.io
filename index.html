@@ -380,6 +380,22 @@
   .cs-narrative li{color:#33333D;font-size:14.5px;line-height:1.6;margin-bottom:7px}
   .cs-narrative li strong{color:var(--paper)}
 
+  /* ---------- PRD doc header + priority badges ---------- */
+  .prd-meta{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:4px 0 22px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+  }
+  .prd-meta div{background:var(--ink-2);padding:10px 14px}
+  .prd-meta .k{display:block;color:var(--grey);text-transform:uppercase;letter-spacing:.05em;font-size:10px;margin-bottom:4px}
+  .prd-meta .v{color:var(--paper);font-weight:600}
+  .prio{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;
+    padding:2px 8px;border-radius:5px;white-space:nowrap}
+  .prio.p0{background:rgba(220,38,38,.12);color:#B91C1C}
+  .prio.p1{background:rgba(217,119,6,.12);color:#B45309}
+  .prio.p2{background:rgba(107,114,128,.14);color:#4B5563}
+  @media (max-width:820px){.prd-meta{grid-template-columns:1fr 1fr}}
+
   /* ---------- Case study full-screen detail view ---------- */
   html.case-open,html.case-open body{overflow:hidden}
   .case-overlay{position:fixed;inset:0;z-index:200;background:var(--ink);overflow-y:auto}
@@ -1155,29 +1171,136 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Product &amp; one-liner</dt><dd>"Wayfare AI" — a conversational trip-planning assistant that turns "plan me a trip" into a bookable, weather- and budget-aware itinerary in one session.</dd>
-          <dt>Problem statement</dt><dd>Planning a multi-day trip today means 8–12 open tabs (flights, hotels, blogs, weather, maps) and hours of manual cross-referencing. Users abandon planning mid-way and either overpay on a generic package or under-plan and lose time on-trip re-deciding.</dd>
-          <dt>Target users</dt><dd>"First-timer Farah" — plans 1 international trip/yr, wants 2–3 easy choices, not raw options. "Optimizer Omar" — books 6+ trips/yr, wants full control and only trusts AI suggestions he can see the reasoning behind. "Reactive Rhea" — mid-trip, needs the plan to adapt live when a flight delays or weather turns.</dd>
-          <dt>User stories</dt><dd>
-            1. As a first-time planner, I want to type "5 days in Vietnam under ₹60k" and get a full day-by-day itinerary, so I don't have to research every leg myself.<br>
-            2. As a budget-conscious traveller, I want to see how each day's plan affects my total spend, so I can swap a paid activity for a free one without recalculating manually.<br>
-            3. As a traveller with a delayed flight, I want the itinerary to auto-reflow, so I don't have to redo the plan mid-trip.<br>
-            4. As a returning user, I want the assistant to remember my dietary and pace preferences, so I don't re-explain them every trip.<br>
-            5. As a skeptical planner, I want to see <em>why</em> a restaurant or attraction was recommended, so I can trust or override the suggestion.
-          </dd>
-          <dt>Core capabilities</dt><dd>Destination recommendation from loose intent · day-by-day itinerary generation · budget optimizer (reallocates spend across flight/hotel/activities to hit a target) · weather-aware sequencing · restaurant/attraction recommendation by rating + proximity + price band · disruption re-planning when a flight is delayed.</dd>
-          <dt>MVP scope</dt><dd><strong>In:</strong> single-destination domestic trips, 3–7 days — itinerary generation + budget optimizer + weather sequencing.<br><strong>Out (v2+):</strong> multi-city routing, shared/group itineraries, live disruption reflow (needs flight-status API integration — sequenced after MVP validates itinerary quality).</dd>
-          <dt>Key flows / wireframe notes</dt><dd>
-            1. <em>Intent capture</em> — single chat-style input + 3 quick-pick chips (budget band, trip length, vibe), not a 12-field form.<br>
-            2. <em>Itinerary review</em> — day-by-day vertical timeline, each activity swappable via a "Why this?" expand showing rating/distance/price reasoning.<br>
-            3. <em>Budget bar</em> — persistent sticky bar showing spend-to-date vs. target, updating live as items are swapped.<br>
-            4. <em>Book/hold</em> — itinerary converts to a bookable checklist (flight, hotel, key activities) with per-leg deep links.
-          </dd>
-          <dt>Success metrics</dt><dd>North Star: itineraries that convert to at least one booked leg. Supporting: time-to-first-itinerary (target &lt;90s), swap rate per itinerary (trust signal on first-pass suggestions), budget-target adherence rate, D7 return rate for pre-trip re-edits.</dd>
-          <dt>Guardrails / risks</dt><dd>Hallucinated venue details (wrong hours, permanently closed) need a live data-freshness check, not just training-time accuracy. Recommendation logic must stay auditable and explainable so it doesn't over-fit to popular/sponsored listings (same scoring discipline as the Hotel Recommendation Engine project below).</dd>
-          <dt>Reusable insight</dt><dd>The hard PM problem isn't generating an itinerary — it's designing the trust layer (the "why this?" reasoning, swap-not-regenerate interaction) that lets a user hand over planning without feeling like they lost control of the trip.</dd>
-        </dl>
+        <div class="cs-facts">
+          <span class="chip">Goals &amp; Non-Goals</span>
+          <span class="chip">P0/P1/P2 requirements</span>
+          <span class="chip">Phased launch plan</span>
+          <span class="chip">Open questions, not just answers</span>
+        </div>
+
+        <div class="prd-meta">
+          <div><span class="k">Doc type</span><span class="v">PRD</span></div>
+          <div><span class="k">Status</span><span class="v">Draft v1.2</span></div>
+          <div><span class="k">Owner</span><span class="v">Bhawna Mangla (PM)</span></div>
+          <div><span class="k">Last updated</span><span class="v">Jul 2026</span></div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>TL;DR</h4>
+          <p>
+            <strong>"Wayfare AI"</strong> — a conversational trip-planning assistant that turns
+            "plan me a trip" into a bookable, weather- and budget-aware itinerary in one session.
+            MVP scope: single-destination domestic trips only, 3–7 days. Ships itinerary
+            generation, a budget optimizer, and weather-aware sequencing; explicitly does not
+            attempt multi-city routing, group itineraries, or live disruption reflow in v1 — see
+            Goals &amp; Non-Goals below for why.
+          </p>
+
+          <h4>Problem Statement</h4>
+          <p>
+            Planning a multi-day trip today means 8–12 open tabs (flights, hotels, blogs, weather,
+            maps) and hours of manual cross-referencing. Users abandon planning mid-way and either
+            overpay on a generic package or under-plan and lose time on-trip re-deciding.
+          </p>
+
+          <h4>Goals &amp; Non-Goals</h4>
+          <p><strong>Goals (v1):</strong></p>
+          <ul>
+            <li><strong>G1:</strong> Cut time-to-first-itinerary to under 90 seconds for a first-time planner.</li>
+            <li><strong>G2:</strong> Convert at least one booked leg per generated itinerary, at a target rate set post-launch (the North Star, below).</li>
+            <li><strong>G3:</strong> Let a budget-conscious traveller swap any single item without manually recalculating the rest of the plan.</li>
+          </ul>
+          <p><strong>Non-Goals (explicitly out of scope for v1):</strong></p>
+          <ul>
+            <li>Multi-city or multi-destination routing.</li>
+            <li>Shared or group itineraries.</li>
+            <li>Live disruption reflow — needs a flight-status API integration not yet built; sequenced for v2 once MVP itinerary quality is validated, not because it's unimportant (it's Reactive Rhea's entire use case, see below).</li>
+            <li>Replacing a travel agent for complex international multi-leg trips — this is a single-destination planning aid, not a full-service booking replacement.</li>
+          </ul>
+
+          <h4>Users &amp; Use Cases</h4>
+          <ul>
+            <li><strong>"First-timer Farah"</strong> — plans 1 international trip/yr, wants 2–3 easy choices, not raw options.</li>
+            <li><strong>"Optimizer Omar"</strong> — books 6+ trips/yr, wants full control and only trusts AI suggestions he can see the reasoning behind.</li>
+            <li><strong>"Reactive Rhea"</strong> — mid-trip, needs the plan to adapt live when a flight delays or weather turns (her use case is explicitly a Non-Goal for v1 — see above).</li>
+          </ul>
+          <p><strong>User stories:</strong></p>
+          <ul>
+            <li>As a first-time planner, I want to type "5 days in Vietnam under ₹60k" and get a full day-by-day itinerary, so I don't have to research every leg myself.</li>
+            <li>As a budget-conscious traveller, I want to see how each day's plan affects my total spend, so I can swap a paid activity for a free one without recalculating manually.</li>
+            <li>As a returning user, I want the assistant to remember my dietary and pace preferences, so I don't re-explain them every trip.</li>
+            <li>As a skeptical planner, I want to see <em>why</em> a restaurant or attraction was recommended, so I can trust or override the suggestion.</li>
+          </ul>
+
+          <h4>Requirements</h4>
+          <p>Prioritized P0 (must ship for MVP) through P2 (explicitly post-MVP):</p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Requirement</th><th>Priority</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Requirement">Destination recommendation from loose intent</td><td data-label="Priority"><span class="prio p0">P0</span></td><td data-label="Notes">Parses budget band, trip length, vibe from a single input</td></tr>
+              <tr><td data-label="Requirement">Day-by-day itinerary generation</td><td data-label="Priority"><span class="prio p0">P0</span></td><td data-label="Notes">The core deliverable; every other requirement supports it</td></tr>
+              <tr><td data-label="Requirement">Budget optimizer</td><td data-label="Priority"><span class="prio p0">P0</span></td><td data-label="Notes">Reallocates spend across flight/hotel/activities to hit a target</td></tr>
+              <tr><td data-label="Requirement">Weather-aware sequencing</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Outdoor-heavy days scheduled against the best forecast window</td></tr>
+              <tr><td data-label="Requirement">Restaurant/attraction recommendation</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Rating + proximity + price band, with visible reasoning</td></tr>
+              <tr><td data-label="Requirement">Preference memory (dietary, pace)</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Persists across sessions for returning users</td></tr>
+              <tr><td data-label="Requirement">Disruption re-planning on delay</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1 — needs flight-status API integration</td></tr>
+              <tr><td data-label="Requirement">Multi-city routing</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1</td></tr>
+              <tr><td data-label="Requirement">Shared/group itineraries</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Design — Key Flows</h4>
+          <ul>
+            <li><strong>Intent capture</strong> — single chat-style input + 3 quick-pick chips (budget band, trip length, vibe), not a 12-field form.</li>
+            <li><strong>Itinerary review</strong> — day-by-day vertical timeline, each activity swappable via a "Why this?" expand showing rating/distance/price reasoning.</li>
+            <li><strong>Budget bar</strong> — persistent sticky bar showing spend-to-date vs. target, updating live as items are swapped.</li>
+            <li><strong>Book/hold</strong> — itinerary converts to a bookable checklist (flight, hotel, key activities) with per-leg deep links.</li>
+          </ul>
+
+          <h4>Success Metrics</h4>
+          <p>
+            <strong>North Star:</strong> itineraries that convert to at least one booked leg.
+            <strong>Supporting:</strong> time-to-first-itinerary (target &lt;90s, ties to G1),
+            swap rate per itinerary (a trust signal on first-pass suggestion quality — high swap
+            rate means the first draft isn't landing), budget-target adherence rate, D7 return
+            rate for pre-trip re-edits.
+          </p>
+
+          <h4>Launch Plan</h4>
+          <ul>
+            <li><strong>Phase 1 (MVP):</strong> single-destination domestic trips, 3–7 days. Itinerary generation + budget optimizer + weather sequencing only — the three P0 requirements.</li>
+            <li><strong>Phase 2:</strong> multi-city routing + persistent preference memory, gated on Phase 1 hitting its swap-rate and time-to-itinerary targets — no point routing multiple cities if the single-city itinerary isn't trusted yet.</li>
+            <li><strong>Phase 3:</strong> live disruption reflow (Reactive Rhea's use case), gated on a flight-status API integration that doesn't exist yet.</li>
+          </ul>
+
+          <h4>Risks &amp; Open Questions</h4>
+          <p>
+            <strong>Risk:</strong> hallucinated venue details (wrong hours, permanently closed)
+            need a live data-freshness check, not just training-time accuracy. Recommendation
+            logic must stay auditable and explainable so it doesn't over-fit to popular/sponsored
+            listings (same scoring discipline as the
+            <a href="#case-hotel-recommendation-engine" data-open-case="hotel-recommendation-engine" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Hotel Recommendation Engine</a> project).
+          </p>
+          <p><strong>Open questions this doc doesn't resolve:</strong></p>
+          <ul>
+            <li>Should the budget optimizer be allowed to suggest a <em>different destination</em> than requested if it saves &gt;30% of budget — or does that override user intent in a way that breaks trust?</li>
+            <li>What's the fallback UX when no itinerary can be generated within the stated budget — degrade gracefully with a "closest match," or refuse and ask the user to adjust?</li>
+            <li>Does surfacing restaurant/attraction rankings require a sponsored-placement disclosure, and who owns that legal review before launch?</li>
+          </ul>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            The hard PM problem isn't generating an itinerary — it's designing the trust layer
+            (the "why this?" reasoning, swap-not-regenerate interaction) that lets a user hand
+            over planning without feeling like they lost control of the trip.
+          </p>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in — wireframe screenshots</span></span>
