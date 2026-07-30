@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Support AI Copilot — Interactive Demo</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:           #f9f9f7;
+    --surface-1:      #fcfcfb;
+    --surface-2:      #f2f1ed;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --border:         rgba(11,11,11,0.10);
+    --brand-accent:   #4F46E5;
+    --brand-lime:     #0A766D;
+    --brand-warn:     #B45309;
+    --brand-danger:   #B42318;
+    --bubble-bot:     #eceae5;
+    --bubble-user:    #4F46E5;
+    --bubble-user-text: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface-1: #1a1a19; --surface-2: #232320;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+      --border: rgba(255,255,255,0.10);
+      --brand-accent: #8B7FF0; --brand-lime: #2DD4BF; --brand-warn: #F59E0B; --brand-danger: #F87171;
+      --bubble-bot: #2e2e2a; --bubble-user: #8B7FF0; --bubble-user-text: #0d0d0d;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19; --surface-2: #232320;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --border: rgba(255,255,255,0.10);
+    --brand-accent: #8B7FF0; --brand-lime: #2DD4BF; --brand-warn: #F59E0B; --brand-danger: #F87171;
+    --bubble-bot: #2e2e2a; --bubble-user: #8B7FF0; --bubble-user-text: #0d0d0d;
+  }
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{margin:0;background:var(--page);color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;}
+  .wrap{max-width:1160px;margin:0 auto;padding:32px 20px 70px}
+  .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-lime);font-weight:600;margin:0 0 8px}
+  h1{font-size:clamp(22px,3.2vw,32px);margin:0 0 10px;letter-spacing:-.01em}
+  .subtitle{color:var(--text-secondary);font-size:14.5px;line-height:1.6;max-width:820px;margin:0}
+
+  .disclaimer{
+    margin-top:16px;padding:14px 18px;border-radius:10px;background:var(--surface-1);
+    border:1px solid var(--border);border-left:3px solid var(--brand-warn);
+    font-size:13px;color:var(--text-secondary);line-height:1.55;
+  }
+  .disclaimer strong{color:var(--brand-warn)}
+  .disclaimer a{color:var(--brand-accent)}
+
+  .layout{display:grid;grid-template-columns:1fr 300px;gap:22px;margin-top:26px}
+  @media (max-width:860px){ .layout{grid-template-columns:1fr} }
+
+  .panel{background:var(--surface-1);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .chat-panel{min-height:560px}
+  .panel-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+  .panel-title{font-weight:700;font-size:13.5px}
+  .panel-sub{font-size:11.5px;color:var(--text-muted)}
+  .reset-btn{
+    font-size:11.5px;font-weight:600;color:var(--text-secondary);background:var(--surface-2);
+    border:1px solid var(--border);border-radius:20px;padding:5px 12px;cursor:pointer;
+  }
+  .reset-btn:hover{color:var(--text-primary);border-color:var(--brand-accent)}
+
+  .chips-row{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)}
+  .chip-btn{
+    font-size:12px;font-weight:600;color:var(--brand-accent);background:transparent;
+    border:1px solid var(--brand-accent);border-radius:20px;padding:6px 12px;cursor:pointer;
+    transition:background .15s,color .15s;
+  }
+  .chip-btn:hover{background:var(--brand-accent);color:#fff}
+  .chip-btn:disabled{opacity:.4;cursor:not-allowed;background:transparent;color:var(--brand-accent)}
+
+  .messages{flex:1;padding:18px 16px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;max-height:520px}
+  .msg{max-width:78%;display:flex;flex-direction:column;gap:4px}
+  .msg.bot{align-self:flex-start}
+  .msg.user{align-self:flex-end;align-items:flex-end}
+  .bubble{padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.5}
+  .msg.bot .bubble{background:var(--bubble-bot);color:var(--text-primary);border-radius:14px 14px 14px 3px}
+  .msg.user .bubble{background:var(--bubble-user);color:var(--bubble-user-text);border-radius:14px 14px 3px 14px}
+  .msg-meta{font-size:10.5px;color:var(--text-muted);padding:0 3px}
+  .msg-reason{
+    font-size:11.5px;color:var(--text-secondary);border-left:2px solid var(--brand-accent);
+    padding:4px 0 4px 8px;cursor:pointer;
+  }
+  .msg-reason .arrow{display:inline-block;transition:transform .15s;margin-right:3px}
+  .msg-reason.open .arrow{transform:rotate(90deg)}
+  .msg-reason-body{font-size:11.5px;color:var(--text-secondary);padding-left:8px;margin-top:3px;display:none}
+  .msg-reason.open + .msg-reason-body{display:block}
+
+  .gate-card{
+    border:1.5px solid var(--brand-warn);border-radius:10px;padding:12px 14px;background:rgba(180,83,9,.06);
+    max-width:340px;align-self:flex-start;
+  }
+  .gate-title{font-size:11px;font-weight:700;color:var(--brand-warn);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+  .gate-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--text-primary);margin-bottom:4px}
+  .gate-row span:first-child{color:var(--text-secondary);flex-shrink:0}
+  .gate-row span:last-child{font-weight:700;text-align:right}
+  .gate-actions{display:flex;gap:8px;margin-top:10px}
+  .gate-btn{flex:1;text-align:center;border-radius:8px;padding:8px;font-size:13px;font-weight:700;cursor:pointer;border:none}
+  .gate-btn.confirm{background:var(--brand-accent);color:#fff}
+  .gate-btn.cancel{background:transparent;border:1.5px solid var(--border);color:var(--text-secondary)}
+  .gate-btn:hover{opacity:.88}
+
+  .handoff-card{
+    border:1px solid var(--border);border-radius:10px;padding:10px 12px;max-width:340px;align-self:flex-start;
+    background:var(--surface-2);
+  }
+  .handoff-h{font-size:10.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px}
+  .handoff-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px dashed var(--border);color:var(--text-primary)}
+  .handoff-row:last-child{border-bottom:none}
+  .handoff-row span:last-child{color:var(--text-secondary);text-align:right;max-width:60%}
+
+  .input-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border)}
+  .input-row input{
+    flex:1;border:1px solid var(--border);border-radius:20px;padding:10px 14px;font-size:13.5px;
+    background:var(--page);color:var(--text-primary);outline:none;
+  }
+  .input-row input:focus{border-color:var(--brand-accent)}
+  .input-row button{
+    background:var(--brand-accent);color:#fff;border:none;border-radius:20px;padding:0 18px;
+    font-size:13px;font-weight:700;cursor:pointer;
+  }
+  .input-row button:disabled{opacity:.4;cursor:not-allowed}
+
+  .log-panel{max-height:560px}
+  .log-empty{padding:20px 16px;font-size:12.5px;color:var(--text-muted);line-height:1.6}
+  .log-list{list-style:none;margin:0;padding:10px 12px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+  .log-row{border:1px solid var(--border);border-radius:8px;padding:8px 10px;background:var(--surface-2)}
+  .log-top{display:flex;justify-content:space-between;align-items:center;gap:6px}
+  .log-action{font-size:12px;font-weight:700;color:var(--text-primary)}
+  .log-flag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;flex-shrink:0}
+  .log-flag.ok{background:rgba(10,118,109,.15);color:var(--brand-lime)}
+  .log-flag.review{background:rgba(180,83,9,.15);color:var(--brand-warn)}
+  .log-meta{font-size:10.5px;color:var(--text-muted);margin-top:3px}
+
+  .status-banner{
+    margin:0 16px 12px;padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;
+    display:none;align-items:center;gap:6px;
+  }
+  .status-banner.show{display:flex}
+  .status-banner.human{background:rgba(180,83,9,.1);color:var(--brand-warn);border:1px solid rgba(180,83,9,.3)}
+
+  .callout{
+    margin-top:22px;padding:14px 16px;border-radius:10px;background:var(--surface-1);
+    border:1px solid var(--border);font-size:13px;color:var(--text-secondary);line-height:1.6;
+  }
+  .callout strong{color:var(--text-primary)}
+  footer{margin-top:22px;font-size:12px;color:var(--text-muted)}
+  footer a{color:var(--brand-accent)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="eyebrow">Travel-Tech Practice · T5</p>
+  <h1>Travel Support AI Copilot — Interactive Demo</h1>
+  <p class="subtitle">
+    Try the flows this design scopes: cancel a booking, ask about baggage, change a date, or
+    trigger an escalation. Watch the intent classification, confirmation gate, and audit log
+    respond in real time.
+  </p>
+  <div class="disclaimer">
+    <strong>What this actually is:</strong> a rule-based simulation running entirely in your
+    browser — keyword matching stands in for intent classification, and the "tool calls" return
+    fixed illustrative numbers, not a live booking system. A public static site can't safely hold
+    an API key to call a real LLM (anyone could copy it from page source), so this demonstrates
+    the <em>architecture and guardrails</em> from the
+    <a href="https://bhawnamanglapm.github.io/travel-tech-more.html#case-travel-support-ai-copilot">full case study (T5)</a>
+    — the confirmation gate, the escalation handoff, the audit trail — working end to end, not a
+    claim that this is production-grade language understanding.
+  </div>
+
+  <div class="layout">
+    <div class="panel chat-panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Support Copilot</div>
+          <div class="panel-sub" id="panelSub">Try a quick-start below, or type your own</div>
+        </div>
+        <button class="reset-btn" id="resetBtn" type="button">Reset conversation</button>
+      </div>
+      <div class="chips-row" id="chipsRow">
+        <button class="chip-btn" data-q="I need to cancel my flight tomorrow">Cancel my flight</button>
+        <button class="chip-btn" data-q="How much baggage can I bring?">Ask about baggage</button>
+        <button class="chip-btn" data-q="I want to change my travel date">Change my date</button>
+        <button class="chip-btn" data-q="I want to dispute a charge on my card">Dispute a charge</button>
+      </div>
+      <div class="status-banner human" id="humanBanner">🧑‍💼 Connected to a human agent — the copilot has handed off with full context.</div>
+      <div class="messages" id="messages"></div>
+      <div class="input-row">
+        <input type="text" id="userInput" placeholder="Type a message…" autocomplete="off">
+        <button id="sendBtn" type="button">Send</button>
+      </div>
+    </div>
+
+    <div class="panel log-panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Agent Action Log</div>
+          <div class="panel-sub">Autonomous tool calls only</div>
+        </div>
+      </div>
+      <div class="log-empty" id="logEmpty">No autonomous actions yet — this fills in when the copilot actually executes something (a cancellation, a refund, a date change), not just when it answers a question.</div>
+      <ul class="log-list" id="logList" style="display:none"></ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>What to try:</strong> cancel a flight to see the confirmation gate (it never
+    auto-executes); ask about baggage to see a fully autonomous answer with no gate needed; ask to
+    change your date to see a lighter single-step confirmation with an intentionally-flagged
+    audit entry; or mention a dispute to see the hard-escalation path that never runs
+    autonomously, regardless of how confident the model is.
+  </div>
+
+  <footer>
+    Part of the <a href="https://bhawnamanglapm.github.io/travel-tech-more.html#case-travel-support-ai-copilot">Travel Support AI Copilot (T5)</a> case study · see the <a href="wireframes.html">key flow wireframes</a>.
+  </footer>
+</div>
+
+<script>
+(function(){
+  var messagesEl = document.getElementById('messages');
+  var inputEl = document.getElementById('userInput');
+  var sendBtn = document.getElementById('sendBtn');
+  var resetBtn = document.getElementById('resetBtn');
+  var chipsRow = document.getElementById('chipsRow');
+  var logEmpty = document.getElementById('logEmpty');
+  var logList = document.getElementById('logList');
+  var humanBanner = document.getElementById('humanBanner');
+  var panelSub = document.getElementById('panelSub');
+
+  var state = { awaitingGate: null, escalated: false };
+
+  function scrollToBottom(){ messagesEl.scrollTop = messagesEl.scrollHeight; }
+
+  function addUserMsg(text){
+    var div = document.createElement('div');
+    div.className = 'msg user';
+    div.innerHTML = '<div class="bubble"></div>';
+    div.querySelector('.bubble').textContent = text;
+    messagesEl.appendChild(div);
+    scrollToBottom();
+  }
+
+  function addBotMsg(text, meta, reason){
+    var div = document.createElement('div');
+    div.className = 'msg bot';
+    var html = '<div class="bubble"></div>';
+    if(meta) html += '<div class="msg-meta"></div>';
+    div.innerHTML = html;
+    div.querySelector('.bubble').textContent = text;
+    if(meta) div.querySelector('.msg-meta').textContent = meta;
+    if(reason){
+      var r = document.createElement('div');
+      r.className = 'msg-reason';
+      r.innerHTML = '<span class="arrow">▸</span>Why?';
+      var rb = document.createElement('div');
+      rb.className = 'msg-reason-body';
+      rb.textContent = reason;
+      r.addEventListener('click', function(){
+        r.classList.toggle('open');
+      });
+      div.appendChild(r);
+      div.appendChild(rb);
+    }
+    messagesEl.appendChild(div);
+    scrollToBottom();
+  }
+
+  function addGateCard(title, rows, onConfirm, onCancel){
+    var div = document.createElement('div');
+    div.className = 'msg bot';
+    var card = document.createElement('div');
+    card.className = 'gate-card';
+    var h = document.createElement('div');
+    h.className = 'gate-title';
+    h.textContent = title;
+    card.appendChild(h);
+    rows.forEach(function(r){
+      var row = document.createElement('div');
+      row.className = 'gate-row';
+      row.innerHTML = '<span></span><span></span>';
+      row.children[0].textContent = r[0];
+      row.children[1].textContent = r[1];
+      card.appendChild(row);
+    });
+    var actions = document.createElement('div');
+    actions.className = 'gate-actions';
+    var cancelBtn = document.createElement('button');
+    cancelBtn.className = 'gate-btn cancel';
+    cancelBtn.textContent = 'Cancel';
+    var confirmBtn = document.createElement('button');
+    confirmBtn.className = 'gate-btn confirm';
+    confirmBtn.textContent = 'Confirm';
+    confirmBtn.addEventListener('click', function(){
+      cancelBtn.disabled = true; confirmBtn.disabled = true;
+      confirmBtn.style.opacity = '.5'; cancelBtn.style.opacity = '.5';
+      onConfirm();
+    });
+    cancelBtn.addEventListener('click', function(){
+      cancelBtn.disabled = true; confirmBtn.disabled = true;
+      confirmBtn.style.opacity = '.5'; cancelBtn.style.opacity = '.5';
+      onCancel();
+    });
+    actions.appendChild(cancelBtn);
+    actions.appendChild(confirmBtn);
+    card.appendChild(actions);
+    div.appendChild(card);
+    messagesEl.appendChild(div);
+    scrollToBottom();
+  }
+
+  function addHandoffCard(rows){
+    var div = document.createElement('div');
+    div.className = 'msg bot';
+    var card = document.createElement('div');
+    card.className = 'handoff-card';
+    var h = document.createElement('div');
+    h.className = 'handoff-h';
+    h.textContent = 'Handoff summary';
+    card.appendChild(h);
+    rows.forEach(function(r){
+      var row = document.createElement('div');
+      row.className = 'handoff-row';
+      row.innerHTML = '<span></span><span></span>';
+      row.children[0].textContent = r[0];
+      row.children[1].textContent = r[1];
+      card.appendChild(row);
+    });
+    div.appendChild(card);
+    messagesEl.appendChild(div);
+    scrollToBottom();
+  }
+
+  function logAction(action, confidence, flag, note){
+    logEmpty.style.display = 'none';
+    logList.style.display = 'flex';
+    logList.style.flexDirection = 'column';
+    var li = document.createElement('li');
+    li.className = 'log-row';
+    var flagClass = flag === 'REVIEW' ? 'review' : 'ok';
+    li.innerHTML =
+      '<div class="log-top"><span class="log-action"></span><span class="log-flag ' + flagClass + '"></span></div>' +
+      '<div class="log-meta"></div>';
+    li.querySelector('.log-action').textContent = action;
+    li.querySelector('.log-flag').textContent = flag;
+    li.querySelector('.log-meta').textContent = note;
+    logList.insertBefore(li, logList.firstChild);
+  }
+
+  function classify(text){
+    var t = text.toLowerCase();
+    if(/visa|dispute|fraud|lawyer|sue\b|chargeback/.test(t)) return { intent: 'hard_escalation', confidence: 1.0 };
+    if(/cancel/.test(t)) return { intent: 'cancel_booking', confidence: 0.96 };
+    if(/baggage|luggage|\bbag\b|check-?in weight/.test(t)) return { intent: 'baggage_query', confidence: 0.99 };
+    if(/change|reschedule|different date|move.*flight|new date/.test(t)) return { intent: 'change_booking_date', confidence: 0.91 };
+    return { intent: 'unclassified', confidence: 0.42 };
+  }
+
+  function setEscalated(){
+    state.escalated = true;
+    humanBanner.classList.add('show');
+    inputEl.disabled = true;
+    sendBtn.disabled = true;
+    Array.prototype.forEach.call(chipsRow.querySelectorAll('.chip-btn'), function(b){ b.disabled = true; });
+    panelSub.textContent = 'Conversation handed off to a human agent';
+  }
+
+  function handleMessage(text){
+    if(state.escalated || state.awaitingGate) return;
+    addUserMsg(text);
+    var result = classify(text);
+
+    setTimeout(function(){
+      if(result.intent === 'hard_escalation'){
+        addBotMsg("This needs a specialist — connecting you now. They already have everything below, you won't need to repeat it.", 'Intent: ' + result.intent + ' (' + result.confidence.toFixed(2) + ') → hard non-goal, escalates every time');
+        addHandoffCard([
+          ['Issue', 'Dispute / chargeback'],
+          ['Tried', 'Nothing autonomous — policy escalation'],
+          ['Escalated because', 'Hard non-goal, never handled by the bot regardless of confidence']
+        ]);
+        setEscalated();
+        return;
+      }
+
+      if(result.intent === 'unclassified'){
+        addBotMsg("I'm not fully sure I understood that — let me connect you with a specialist rather than guess.", 'Intent: unclassified (' + result.confidence.toFixed(2) + ') → below the 0.85 escalation threshold');
+        addHandoffCard([
+          ['Issue', 'Unclassified query'],
+          ['Escalated because', 'Intent confidence below threshold (0.85)']
+        ]);
+        setEscalated();
+        return;
+      }
+
+      if(result.intent === 'baggage_query'){
+        addBotMsg('Your Economy Saver fare includes 15kg check-in. Extra baggage is ₹500/kg if you add it now, or ₹800/kg at the airport — want me to add extra baggage to this booking?', 'Intent: baggage_query (' + result.confidence.toFixed(2) + ')', 'Tool call: fetch fare rules for this booking\'s fare class. No confirmation gate — this is an answer, not an irreversible action, so it resolves in one turn.');
+        return;
+      }
+
+      if(result.intent === 'cancel_booking'){
+        addBotMsg("Found your DEL–BOM booking for tomorrow. Cancelling inside 24hrs of departure means a partial refund under this fare's rules — you'd get back part of what you paid. Want the exact amount?", 'Intent: cancel_booking (' + result.confidence.toFixed(2) + ')', 'Tool call: refund_policy_engine(fare_class, hours_to_departure)');
+        setTimeout(function(){
+          state.awaitingGate = 'cancel';
+          addGateCard('This can\'t be undone', [
+            ['Flight', 'DEL → BOM, Tomorrow'],
+            ['Refund', '₹3,200 of ₹5,800'],
+            ['Arrives', '5–7 business days']
+          ], function(){
+            addBotMsg('Done — booking cancelled, ₹3,200 refund initiated, arrives in 5–7 business days. Reference CXL-48213.');
+            logAction('issue_refund + cancel_booking', 0.96, 'OK', 'Confirmed by user · confidence 0.96 · both calls logged together');
+            state.awaitingGate = null;
+          }, function(){
+            addBotMsg("No problem — I've left your booking as it is.");
+            state.awaitingGate = null;
+          });
+        }, 500);
+        return;
+      }
+
+      if(result.intent === 'change_booking_date'){
+        addBotMsg('I can move this to a new date. Based on availability, the closest option adds a ₹450 fare difference. Want me to apply that change?', 'Intent: change_booking_date (' + result.confidence.toFixed(2) + ')', 'Tool call: check seat availability + fare_difference_calculator(new_date)');
+        setTimeout(function(){
+          state.awaitingGate = 'change';
+          addGateCard('Confirm date change', [
+            ['New date', 'Fri, 3 days later'],
+            ['Fare difference', '+ ₹450'],
+          ], function(){
+            addBotMsg('Done — booking moved, updated ticket emailed to you.');
+            logAction('change_booking_date', 0.84, 'REVIEW', 'Confidence below the auto-clear line for fare-difference changes — flagged for a support-ops spot-check, still executed since it was user-confirmed');
+            state.awaitingGate = null;
+          }, function(){
+            addBotMsg("No problem — your booking is unchanged.");
+            state.awaitingGate = null;
+          });
+        }, 500);
+        return;
+      }
+    }, 450);
+  }
+
+  function sendFromInput(){
+    var text = inputEl.value.trim();
+    if(!text || state.escalated || state.awaitingGate) return;
+    inputEl.value = '';
+    handleMessage(text);
+  }
+
+  sendBtn.addEventListener('click', sendFromInput);
+  inputEl.addEventListener('keydown', function(e){
+    if(e.key === 'Enter') sendFromInput();
+  });
+
+  chipsRow.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.chip-btn') : null;
+    if(!btn || btn.disabled || state.escalated || state.awaitingGate) return;
+    handleMessage(btn.getAttribute('data-q'));
+  });
+
+  resetBtn.addEventListener('click', function(){
+    state.awaitingGate = null;
+    state.escalated = false;
+    messagesEl.innerHTML = '';
+    logList.innerHTML = '';
+    logList.style.display = 'none';
+    logEmpty.style.display = 'block';
+    humanBanner.classList.remove('show');
+    inputEl.disabled = false;
+    sendBtn.disabled = false;
+    panelSub.textContent = 'Try a quick-start below, or type your own';
+    Array.prototype.forEach.call(chipsRow.querySelectorAll('.chip-btn'), function(b){ b.disabled = false; });
+    addBotMsg("Hi — I can help with cancellations, baggage questions, or date changes. What's going on?");
+  });
+
+  addBotMsg("Hi — I can help with cancellations, baggage questions, or date changes. What's going on?");
+})();
+</script>
+
+</body>
+</html>
