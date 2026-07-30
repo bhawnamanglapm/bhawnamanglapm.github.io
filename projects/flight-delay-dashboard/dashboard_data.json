@@ -1,0 +1,331 @@
+{
+  "kpis": {
+    "total_flights": 8000,
+    "on_time_pct": 84.4,
+    "avg_delay_minutes": 9.2,
+    "cancellation_pct": 1.14
+  },
+  "routes": [
+    {
+      "route": "DEL-GOI",
+      "avg_delay": 12.6,
+      "delayed_pct": 34.1,
+      "flights": 220
+    },
+    {
+      "route": "DEL-BOM",
+      "avg_delay": 10.3,
+      "delayed_pct": 19.0,
+      "flights": 1197
+    },
+    {
+      "route": "BOM-COK",
+      "avg_delay": 10.3,
+      "delayed_pct": 19.2,
+      "flights": 494
+    },
+    {
+      "route": "DEL-BLR",
+      "avg_delay": 10.0,
+      "delayed_pct": 18.0,
+      "flights": 857
+    },
+    {
+      "route": "DEL-CCU",
+      "avg_delay": 9.9,
+      "delayed_pct": 19.3,
+      "flights": 581
+    },
+    {
+      "route": "DEL-PNQ",
+      "avg_delay": 9.7,
+      "delayed_pct": 16.3,
+      "flights": 399
+    },
+    {
+      "route": "COK-BOM",
+      "avg_delay": 9.6,
+      "delayed_pct": 16.2,
+      "flights": 364
+    },
+    {
+      "route": "DEL-HYD",
+      "avg_delay": 9.6,
+      "delayed_pct": 16.3,
+      "flights": 638
+    },
+    {
+      "route": "BLR-COK",
+      "avg_delay": 9.5,
+      "delayed_pct": 18.6,
+      "flights": 263
+    },
+    {
+      "route": "BOM-GOI",
+      "avg_delay": 9.1,
+      "delayed_pct": 14.9,
+      "flights": 582
+    },
+    {
+      "route": "DEL-AMD",
+      "avg_delay": 9.0,
+      "delayed_pct": 15.4,
+      "flights": 495
+    },
+    {
+      "route": "BOM-BLR",
+      "avg_delay": 7.3,
+      "delayed_pct": 7.3,
+      "flights": 836
+    },
+    {
+      "route": "HYD-MAA",
+      "avg_delay": 7.2,
+      "delayed_pct": 6.3,
+      "flights": 158
+    },
+    {
+      "route": "BLR-HYD",
+      "avg_delay": 6.7,
+      "delayed_pct": 7.4,
+      "flights": 488
+    },
+    {
+      "route": "MAA-CCU",
+      "avg_delay": 6.6,
+      "delayed_pct": 7.4,
+      "flights": 337
+    }
+  ],
+  "airlines": [
+    {
+      "airline": "Coastal Wings",
+      "airline_type": "Regional/turboprop",
+      "avg_delay": 10.7,
+      "delayed_pct": 21.7,
+      "flights": 609,
+      "cancel_rate": 1.3
+    },
+    {
+      "airline": "Metro Express",
+      "airline_type": "LCC",
+      "avg_delay": 10.3,
+      "delayed_pct": 20.0,
+      "flights": 1972,
+      "cancel_rate": 1.15
+    },
+    {
+      "airline": "Skyline National",
+      "airline_type": "Full-service",
+      "avg_delay": 9.8,
+      "delayed_pct": 17.4,
+      "flights": 1277,
+      "cancel_rate": 1.24
+    },
+    {
+      "airline": "IndiFly",
+      "airline_type": "LCC",
+      "avg_delay": 8.8,
+      "delayed_pct": 13.7,
+      "flights": 2338,
+      "cancel_rate": 1.06
+    },
+    {
+      "airline": "BlueSky Air",
+      "airline_type": "Full-service",
+      "avg_delay": 7.6,
+      "delayed_pct": 9.7,
+      "flights": 1713,
+      "cancel_rate": 1.1
+    }
+  ],
+  "seasons": [
+    {
+      "season": "Winter",
+      "avg_delay": 11.9,
+      "delayed_pct": 28.7
+    },
+    {
+      "season": "Spring",
+      "avg_delay": 7.5,
+      "delayed_pct": 7.8
+    },
+    {
+      "season": "Summer",
+      "avg_delay": 8.3,
+      "delayed_pct": 11.0
+    },
+    {
+      "season": "Monsoon",
+      "avg_delay": 9.5,
+      "delayed_pct": 16.4
+    },
+    {
+      "season": "Post-Monsoon",
+      "avg_delay": 7.5,
+      "delayed_pct": 7.9
+    }
+  ],
+  "times": [
+    {
+      "time_bucket": "Early Morning (05-08)",
+      "avg_delay": 8.3,
+      "delayed_pct": 12.4
+    },
+    {
+      "time_bucket": "Morning (08-11)",
+      "avg_delay": 8.3,
+      "delayed_pct": 12.1
+    },
+    {
+      "time_bucket": "Afternoon (11-15)",
+      "avg_delay": 8.8,
+      "delayed_pct": 14.4
+    },
+    {
+      "time_bucket": "Evening (15-19)",
+      "avg_delay": 9.8,
+      "delayed_pct": 17.8
+    },
+    {
+      "time_bucket": "Night (19-23)",
+      "avg_delay": 11.0,
+      "delayed_pct": 21.5
+    }
+  ],
+  "months": [
+    {
+      "month": 1,
+      "avg_delay": 14.5,
+      "label": "Jan"
+    },
+    {
+      "month": 2,
+      "avg_delay": 7.2,
+      "label": "Feb"
+    },
+    {
+      "month": 3,
+      "avg_delay": 7.3,
+      "label": "Mar"
+    },
+    {
+      "month": 4,
+      "avg_delay": 7.7,
+      "label": "Apr"
+    },
+    {
+      "month": 5,
+      "avg_delay": 7.3,
+      "label": "May"
+    },
+    {
+      "month": 6,
+      "avg_delay": 9.5,
+      "label": "Jun"
+    },
+    {
+      "month": 7,
+      "avg_delay": 9.3,
+      "label": "Jul"
+    },
+    {
+      "month": 8,
+      "avg_delay": 9.5,
+      "label": "Aug"
+    },
+    {
+      "month": 9,
+      "avg_delay": 9.7,
+      "label": "Sep"
+    },
+    {
+      "month": 10,
+      "avg_delay": 7.7,
+      "label": "Oct"
+    },
+    {
+      "month": 11,
+      "avg_delay": 7.3,
+      "label": "Nov"
+    },
+    {
+      "month": 12,
+      "avg_delay": 14.4,
+      "label": "Dec"
+    }
+  ],
+  "heatmap": [
+    {
+      "route": "DEL-GOI",
+      "Winter": 16.6,
+      "Spring": 6.9,
+      "Summer": 9.2,
+      "Monsoon": 17.5,
+      "Post-Monsoon": 6.7
+    },
+    {
+      "route": "DEL-BOM",
+      "Winter": 15.9,
+      "Spring": 8.4,
+      "Summer": 8.3,
+      "Monsoon": 8.3,
+      "Post-Monsoon": 8.8
+    },
+    {
+      "route": "BOM-COK",
+      "Winter": 7.3,
+      "Spring": 7.0,
+      "Summer": 13.0,
+      "Monsoon": 14.7,
+      "Post-Monsoon": 7.8
+    },
+    {
+      "route": "DEL-BLR",
+      "Winter": 15.8,
+      "Spring": 8.5,
+      "Summer": 7.5,
+      "Monsoon": 7.8,
+      "Post-Monsoon": 8.3
+    },
+    {
+      "route": "DEL-CCU",
+      "Winter": 14.9,
+      "Spring": 8.4,
+      "Summer": 7.6,
+      "Monsoon": 7.8,
+      "Post-Monsoon": 7.7
+    },
+    {
+      "route": "DEL-PNQ",
+      "Winter": 16.5,
+      "Spring": 7.0,
+      "Summer": 7.8,
+      "Monsoon": 7.5,
+      "Post-Monsoon": 7.2
+    },
+    {
+      "route": "COK-BOM",
+      "Winter": 6.7,
+      "Spring": 7.6,
+      "Summer": 8.9,
+      "Monsoon": 16.7,
+      "Post-Monsoon": 7.2
+    },
+    {
+      "route": "DEL-HYD",
+      "Winter": 15.8,
+      "Spring": 7.7,
+      "Summer": 8.2,
+      "Monsoon": 7.7,
+      "Post-Monsoon": 8.1
+    }
+  ],
+  "season_order": [
+    "Winter",
+    "Spring",
+    "Summer",
+    "Monsoon",
+    "Post-Monsoon"
+  ]
+}
