@@ -1106,10 +1106,15 @@
             identifiable carrier), real Indian city-pair routes (airport congestion at Delhi/Mumbai/
             Bengaluru and effects like North Indian winter fog are public aviation-industry knowledge,
             not a claim about any company), and additive delay effects for route congestion, season,
-            and time-of-day. The first pass came out at a 48.9% on-time rate — implausibly low for
-            any real airline — so I re-tuned the distribution parameters until the fleet-wide numbers
-            matched a plausible real-world range, while keeping the underlying patterns (winter fog,
-            monsoon, evening cascade) intact.
+            and time-of-day. Delay minutes are drawn from a <strong>gamma distribution</strong>, not a
+            normal one — real delays are right-skewed with a hard floor at zero, and gamma is bounded
+            at zero and long-tailed by construction, which a normal distribution isn't. The first pass
+            came out at a 48.9% on-time rate — implausibly low for any real airline — so I re-tuned the
+            distribution parameters until the fleet-wide numbers matched a plausible real-world range,
+            while keeping the underlying patterns (winter fog, monsoon, evening cascade) intact. Full
+            calculation, every parameter, and the reasoning behind each one are documented in the
+            dashboard's own
+            <a href="projects/flight-delay-dashboard/dashboard.html#methodology" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Methodology section</a>.
           </p>
 
           <h4>The Analysis</h4>
