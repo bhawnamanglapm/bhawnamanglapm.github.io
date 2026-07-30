@@ -1114,7 +1114,66 @@
             while keeping the underlying patterns (winter fog, monsoon, evening cascade) intact. Full
             calculation, every parameter, and the reasoning behind each one are documented in the
             dashboard's own
-            <a href="projects/flight-delay-dashboard/dashboard.html#methodology" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Methodology section</a>.
+            <a href="projects/flight-delay-dashboard/dashboard.html#methodology" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Methodology section</a>,
+            summarized here in full.
+          </p>
+
+          <h4>Methodology — the calculation, step by step</h4>
+          <p>For every one of the 8,000 simulated flights:</p>
+          <ul>
+            <li>Draw a <strong>base delay</strong> from Gamma(shape=1.3, scale=3.2) — mean ≈ 4.2 minutes, right-skewed.</li>
+            <li>Multiply by that flight's <strong>airline reliability index</strong> (a single fixed number per airline, see table below) — the only airline-level effect in the model, kept deliberately simple so differences between the fictional carriers stay modest rather than dramatic.</li>
+            <li>Multiply by a <strong>time-of-day multiplier</strong> (0.90 Early Morning → 1.55 Night) — models how delays cascade later into an operating day.</li>
+            <li>Add a fixed <strong>route congestion term</strong> (see table below), scaled by 0.35 — a stand-in for how much busier Delhi/Mumbai/Bengaluru are than smaller airports.</li>
+            <li>If the route is monsoon-sensitive <em>and</em> the month falls in Jun–Sep, add an extra Gamma(1.6, 5.0) term (mean ≈ 8 min).</li>
+            <li>If the route is fog-sensitive <em>and</em> the month is Dec/Jan, add an extra Gamma(1.8, 6.0) term (mean ≈ 10.8 min), amplified 1.3× for Early Morning departures — fog is worst at dawn.</li>
+            <li>Cancellation is decided separately, as its own probability: a 0.6% base rate, +1.8pp if monsoon-exposed that month, +2.4pp if fog-exposed that month. If cancelled, delay is zeroed — a cancellation is a different outcome from "a very late flight," not the same thing at the extreme end.</li>
+            <li>A flight counts as <strong>delayed</strong> if its final delay exceeds 15 minutes (the standard on-time threshold) and it wasn't cancelled.</li>
+          </ul>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Airline (fictional)</th><th>Type</th><th>Reliability index</th></tr></thead>
+              <tbody>
+                <tr><td>BlueSky Air</td><td>Full-service</td><td>0.75 (best)</td></tr>
+                <tr><td>IndiFly</td><td>LCC</td><td>1.00</td></tr>
+                <tr><td>Skyline National</td><td>Full-service</td><td>1.15</td></tr>
+                <tr><td>Metro Express</td><td>LCC</td><td>1.25</td></tr>
+                <tr><td>Coastal Wings</td><td>Regional/turboprop</td><td>1.35 (worst)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Route</th><th>Congestion term (min)</th><th>Monsoon-sensitive</th><th>Fog-sensitive</th></tr></thead>
+              <tbody>
+                <tr><td>DEL-BOM</td><td>9</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-BLR</td><td>7</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-GOI</td><td>7</td><td>Yes</td><td>Yes</td></tr>
+                <tr><td>DEL-HYD</td><td>7</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-CCU</td><td>6</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-AMD</td><td>6</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-PNQ</td><td>6</td><td>—</td><td>Yes</td></tr>
+                <tr><td>BOM-BLR</td><td>6</td><td>—</td><td>—</td></tr>
+                <tr><td>BOM-COK</td><td>5</td><td>Yes</td><td>—</td></tr>
+                <tr><td>COK-BOM</td><td>5</td><td>Yes</td><td>—</td></tr>
+                <tr><td>BLR-HYD</td><td>4</td><td>—</td><td>—</td></tr>
+                <tr><td>MAA-CCU</td><td>4</td><td>—</td><td>—</td></tr>
+                <tr><td>BLR-COK</td><td>4</td><td>Yes</td><td>—</td></tr>
+                <tr><td>HYD-MAA</td><td>4</td><td>—</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Why these specific numbers: not derived from any real source — chosen, then iterated.
+            The first draft produced an implausible 48.9% on-time rate; I scaled the base gamma
+            parameters and congestion multiplier down until the fleet-wide rate landed at 84.4% —
+            inside a plausible real-world range — while preserving the relative shape of every
+            effect (which season is worst, which route is worst, night vs. morning). What this
+            deliberately doesn't model: real distributional parameters fit from a published
+            dataset (none was reachable from this environment), or flight-to-flight correlation
+            (a delayed inbound aircraft delaying its own next outbound leg) — a real airline
+            operations model would need that, and it's a materially harder problem than this
+            exercise set out to solve.
           </p>
 
           <h4>The Analysis</h4>
