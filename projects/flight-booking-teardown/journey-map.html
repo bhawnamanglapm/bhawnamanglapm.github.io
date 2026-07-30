@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Booking Teardown — Journey &amp; Funnel Map</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --page:           #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --grid:           #e1e0d9;
+    --border:         rgba(11,11,11,0.10);
+    --brand-accent:   #4F46E5;
+    --brand-lime:     #0A766D;
+    --seq-100: #cde2fb; --seq-200: #9ec5f4; --seq-300: #6da7ec;
+    --seq-400: #3987e5; --seq-500: #256abf; --seq-600: #184f95;
+    --rakesh: #2a78d6; --priya: #eb6834; --anita: #1baf7a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19; --page: #0d0d0d;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+      --grid: #2c2c2a; --border: rgba(255,255,255,0.10);
+      --brand-accent: #8B7FF0; --brand-lime: #2DD4BF;
+      --seq-100: #184f95; --seq-200: #1c5cab; --seq-300: #256abf;
+      --seq-400: #3987e5; --seq-500: #5598e7; --seq-600: #86b6ef;
+      --rakesh: #3987e5; --priya: #d95926; --anita: #199e70;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19; --page: #0d0d0d;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --grid: #2c2c2a; --border: rgba(255,255,255,0.10);
+    --brand-accent: #8B7FF0; --brand-lime: #2DD4BF;
+    --seq-100: #184f95; --seq-200: #1c5cab; --seq-300: #256abf;
+    --seq-400: #3987e5; --seq-500: #5598e7; --seq-600: #86b6ef;
+    --rakesh: #3987e5; --priya: #d95926; --anita: #199e70;
+  }
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{margin:0;background:var(--page);color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:36px 24px 80px}
+  .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-lime);font-weight:600;margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 10px;letter-spacing:-.01em}
+  .subtitle{color:var(--text-secondary);font-size:15px;line-height:1.6;max-width:760px;margin:0}
+  .disclaimer{
+    margin-top:16px;padding:14px 18px;border-radius:10px;background:var(--surface-1);
+    border:1px solid var(--border);border-left:3px solid var(--brand-accent);
+    font-size:13.5px;color:var(--text-secondary);line-height:1.55;
+  }
+  .disclaimer strong{color:var(--text-primary)}
+  .disclaimer a{color:var(--brand-accent)}
+
+  .legend{display:flex;flex-wrap:wrap;gap:18px;margin:28px 0 20px;font-size:12.5px;color:var(--text-secondary)}
+  .legend-item{display:flex;align-items:center;gap:7px}
+  .legend-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+
+  .funnel{display:flex;flex-direction:column;gap:4px}
+  .stage{
+    display:grid;grid-template-columns:150px 1fr 320px;gap:20px;align-items:center;
+    padding:16px 0;border-bottom:1px solid var(--grid);
+  }
+  .stage:last-child{border-bottom:none}
+  .stage-label{font-weight:700;font-size:15px}
+  .stage-pct{font-family:inherit;font-size:12.5px;color:var(--text-muted);margin-top:3px;font-variant-numeric:tabular-nums}
+  .stage-bar-track{height:34px;background:var(--surface-1);border:1px solid var(--border);border-radius:8px;position:relative;overflow:hidden}
+  .stage-bar-fill{height:100%;border-radius:7px 0 0 7px;display:flex;align-items:center;padding:0 12px;color:#fff;font-weight:700;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .stage-drop{font-size:11.5px;color:var(--text-muted);margin-top:4px}
+  .stage-drop strong{color:var(--brand-accent)}
+  .stage-notes{font-size:13px;line-height:1.55;color:var(--text-secondary)}
+  .stage-notes .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+  .tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;border:1px solid var(--border)}
+  .tag.pain{color:#c0392b;border-color:#c0392b44;background:rgba(192,57,43,0.08)}
+  .tag.rec{color:var(--brand-accent);border-color:var(--brand-accent);background:rgba(79,70,229,0.08)}
+  .persona-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+  .callout{
+    margin-top:28px;padding:16px 18px;border-radius:10px;background:var(--surface-1);
+    border:1px solid var(--border);font-size:13.5px;color:var(--text-secondary);line-height:1.6;
+  }
+  .callout strong{color:var(--text-primary)}
+
+  footer{margin-top:32px;font-size:12.5px;color:var(--text-muted)}
+  footer a{color:var(--brand-accent)}
+
+  @media (max-width:820px){
+    .stage{grid-template-columns:1fr;gap:8px}
+    .stage-bar-track{height:30px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="eyebrow">Travel-Tech Practice · T1</p>
+  <h1>Flight Booking Teardown — Journey &amp; Funnel Map</h1>
+  <p class="subtitle">
+    Where the MakeMyTrip booking funnel actually leaks, which persona feels it hardest at each
+    stage, and which of the 10 recommendations from the teardown targets it.
+  </p>
+  <div class="disclaimer">
+    <strong>Same modeled numbers as the Booking Funnel Analysis (T8)</strong> — this page
+    visualizes that project's stage-to-stage conversion rates (Search→Results ~92%, Results→Fare
+    Review ~38%, Fare Review→Traveller Info ~61%, Traveller Info→Payment ~74%, Payment→Confirmation
+    ~88%) rather than inventing a second set of numbers for the same funnel. See
+    <a href="https://bhawnamanglapm.github.io/#case-ota-booking-funnel-analysis">T8</a> for the
+    full funnel analysis and A/B test hypotheses.
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--rakesh)"></span>Value Rakesh (price-sensitive)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--priya)"></span>Business Priya (reliability-focused)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--anita)"></span>Family Planner Anita (group complexity)</div>
+  </div>
+
+  <div class="funnel" role="img" aria-label="Booking funnel from Search to Confirmation, narrowing from 100% to 13.9% of the original searchers, with the steepest drop between Results and Fare Review">
+    <div class="stage">
+      <div>
+        <div class="stage-label">Search</div>
+        <div class="stage-pct">100% (baseline)</div>
+      </div>
+      <div class="stage-bar-track"><div class="stage-bar-fill" style="width:100%;background:var(--seq-600)">100%</div></div>
+      <div class="stage-notes">
+        <div class="tag-row"><span class="tag rec">Rec #6: smart filter defaults</span></div>
+        Entry point for all three personas. No major drop-off here yet — the friction starts once results load.
+      </div>
+    </div>
+
+    <div class="stage">
+      <div>
+        <div class="stage-label">Results</div>
+        <div class="stage-pct">92% <span class="stage-drop">(<strong>−8%</strong>)</span></div>
+      </div>
+      <div class="stage-bar-track"><div class="stage-bar-fill" style="width:92%;background:var(--seq-500)">92%</div></div>
+      <div class="stage-notes">
+        <div class="tag-row">
+          <span class="tag pain">Filter fatigue</span>
+          <span class="tag rec">Rec #3, #6</span>
+        </div>
+        12+ filter dimensions, no smart default; no persistent price comparison across dates.
+        <span class="persona-dot" style="background:var(--rakesh)"></span> hits Rakesh hardest — he's actively comparing.
+      </div>
+    </div>
+
+    <div class="stage">
+      <div>
+        <div class="stage-label">Fare Review</div>
+        <div class="stage-pct">35% <span class="stage-drop">(<strong>−57%</strong> — biggest leak)</span></div>
+      </div>
+      <div class="stage-bar-track"><div class="stage-bar-fill" style="width:35%;background:var(--seq-400)">35%</div></div>
+      <div class="stage-notes">
+        <div class="tag-row">
+          <span class="tag pain">Price shock</span>
+          <span class="tag pain">Add-on dark pattern</span>
+          <span class="tag pain">Baggage buried</span>
+          <span class="tag rec">Rec #1, #2, #4, #5</span>
+        </div>
+        Fare inflation between search-result and fare-review price, pre-selected add-ons, buried
+        baggage policy. <span class="persona-dot" style="background:var(--rakesh)"></span> Rakesh
+        (price shock) and <span class="persona-dot" style="background:var(--anita)"></span> Anita
+        (unclear total-fare breakdown) both hit their worst moment here — this is why the Cut step
+        in the teardown prioritizes fixing this stage first.
+      </div>
+    </div>
+
+    <div class="stage">
+      <div>
+        <div class="stage-label">Traveller Info</div>
+        <div class="stage-pct">21% <span class="stage-drop">(<strong>−39%</strong>)</span></div>
+      </div>
+      <div class="stage-bar-track"><div class="stage-bar-fill" style="width:21%;background:var(--seq-300)">21%</div></div>
+      <div class="stage-notes">
+        <div class="tag-row">
+          <span class="tag pain">Group-entry complexity</span>
+          <span class="tag rec">Rec #9</span>
+        </div>
+        Logged-out users are funnelled into account creation here, not upfront.
+        <span class="persona-dot" style="background:var(--anita)"></span> Anita feels this most —
+        entering 4+ passengers manually with no shared-itinerary shortcut.
+      </div>
+    </div>
+
+    <div class="stage">
+      <div>
+        <div class="stage-label">Payment</div>
+        <div class="stage-pct">16% <span class="stage-drop">(<strong>−26%</strong>)</span></div>
+      </div>
+      <div class="stage-bar-track"><div class="stage-bar-fill" style="width:16%;background:var(--seq-200);color:var(--text-primary)">16%</div></div>
+      <div class="stage-notes">
+        <div class="tag-row">
+          <span class="tag pain">OTP / payment retry friction</span>
+          <span class="tag rec">Rec #7</span>
+        </div>
+        <span class="persona-dot" style="background:var(--priya)"></span> Priya (last-minute,
+        time-pressed) is most exposed — a failed payment retry costs her the fare she needs to lock in now.
+      </div>
+    </div>
+
+    <div class="stage">
+      <div>
+        <div class="stage-label">Confirmation</div>
+        <div class="stage-pct">14% <span class="stage-drop">(<strong>−12%</strong>)</span></div>
+      </div>
+      <div class="stage-bar-track"><div class="stage-bar-fill" style="width:14%;background:var(--seq-100);color:var(--text-primary)">14%</div></div>
+      <div class="stage-notes">
+        <div class="tag-row">
+          <span class="tag rec">Rec #8, #10</span>
+        </div>
+        Post-purchase, not a drop-off cause — this is where the delay-risk badge and "manage trip"
+        nudges pick up. <span class="persona-dot" style="background:var(--priya)"></span> Priya
+        relies on "My Trips" for rebooking flexibility from here on.
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Reading it:</strong> Results → Fare Review is the single steepest drop in the entire
+    funnel (92% → 35%, a 57-point fall) — more than double the next-largest drop. That's the
+    concrete evidence behind the teardown's "Cut" step: fixing Fare Review's price-shock and
+    dark-pattern add-ons for Rakesh's segment isn't a guess, it's where the funnel data says the
+    leak actually is.
+  </div>
+
+  <footer>
+    Part of the <a href="https://bhawnamanglapm.github.io/#case-makemytrip-flight-booking-teardown">Flight Booking Teardown (T1)</a>
+    case study. Funnel percentages sourced from the <a href="https://bhawnamanglapm.github.io/#case-ota-booking-funnel-analysis">Booking Funnel Analysis (T8)</a>.
+  </footer>
+</div>
+
+</body>
+</html>
