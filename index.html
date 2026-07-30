@@ -340,6 +340,7 @@
     font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12.5px;
     background:var(--ink-2);border:2px solid var(--grey);color:var(--paper);
   }
+  .jnum.done{background:var(--lime);border-color:var(--lime);color:#fff;box-shadow:0 0 0 4px rgba(13,148,136,.18)}
 
   /* ---------- Journal cards ---------- */
   .jcard{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:0;box-shadow:var(--shadow)}
@@ -981,11 +982,16 @@
       is still in progress.
     </div>
 
+    <p style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--grey);margin:18px 0 4px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--lime);color:#fff;font-weight:700;font-size:9px">✓</span>
+      Green number = actually built (T1, T2, T3, T8). Grey = roadmap, not built yet.
+    </p>
+
     <div class="jtrack">
     <!-- T1: Flight Booking Product Teardown -->
     <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum">T1</span>
+        <span class="jnum done">T1</span>
         <h3 class="jcat-title">Flight Booking Product Teardown</h3>
       </div>
       <article class="jcard" data-case="makemytrip-flight-booking-teardown" data-updated="2026-07-30">
@@ -1188,7 +1194,7 @@
     <!-- T2: AI Trip Planner -->
     <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum">T2</span>
+        <span class="jnum done">T2</span>
         <h3 class="jcat-title">AI Trip Planner — PRD</h3>
       </div>
       <article class="jcard" data-case="ai-trip-planner-prd" data-updated="2026-07-30">
@@ -1351,7 +1357,7 @@
     <!-- T3: Flight Delay Prediction Dashboard -->
     <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum">T3</span>
+        <span class="jnum done">T3</span>
         <h3 class="jcat-title">Flight Delay Prediction Dashboard</h3>
       </div>
       <article class="jcard" data-case="flight-delay-prediction-dashboard" data-updated="2026-07-30">
@@ -1656,7 +1662,7 @@
     <!-- T8: Booking Funnel Analysis -->
     <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum">T8</span>
+        <span class="jnum done">T8</span>
         <h3 class="jcat-title">Booking Funnel Analysis</h3>
       </div>
       <article class="jcard" data-case="ota-booking-funnel-analysis" data-updated="2026-07-30">
