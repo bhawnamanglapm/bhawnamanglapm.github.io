@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Support AI Copilot — Key Flow Wireframes</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:           #f9f9f7;
+    --surface-1:      #fcfcfb;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --border:         rgba(11,11,11,0.10);
+    --brand-accent:   #4F46E5;
+    --brand-lime:     #0A766D;
+    --brand-warn:     #B45309;
+    /* Wireframe-specific grayscale — deliberately low-fidelity, not a branded UI */
+    --wf-frame:       #1c1c1c;
+    --wf-screen:      #ffffff;
+    --wf-box:         #eceae5;
+    --wf-box-line:    #c7c4bc;
+    --wf-text:        #3a3a3a;
+    --wf-muted:       #a8a49b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface-1: #1a1a19;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+      --border: rgba(255,255,255,0.10);
+      --brand-accent: #8B7FF0; --brand-lime: #2DD4BF; --brand-warn: #F59E0B;
+      --wf-frame: #050505; --wf-screen: #232320; --wf-box: #2e2e2a; --wf-box-line: #454540;
+      --wf-text: #d8d6cf; --wf-muted: #74716a;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --border: rgba(255,255,255,0.10);
+    --brand-accent: #8B7FF0; --brand-lime: #2DD4BF; --brand-warn: #F59E0B;
+    --wf-frame: #050505; --wf-screen: #232320; --wf-box: #2e2e2a; --wf-box-line: #454540;
+    --wf-text: #d8d6cf; --wf-muted: #74716a;
+  }
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{margin:0;background:var(--page);color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;}
+  .wrap{max-width:1160px;margin:0 auto;padding:36px 24px 80px}
+  .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-lime);font-weight:600;margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 10px;letter-spacing:-.01em}
+  .subtitle{color:var(--text-secondary);font-size:15px;line-height:1.6;max-width:820px;margin:0}
+  .disclaimer{
+    margin-top:16px;padding:14px 18px;border-radius:10px;background:var(--surface-1);
+    border:1px solid var(--border);border-left:3px solid var(--brand-accent);
+    font-size:13.5px;color:var(--text-secondary);line-height:1.55;
+  }
+  .disclaimer strong{color:var(--text-primary)}
+  .disclaimer a{color:var(--brand-accent)}
+
+  .gap-note{
+    margin-top:12px;padding:10px 14px;border-radius:8px;
+    background:rgba(180,83,9,.08);border:1px solid rgba(180,83,9,.28);
+    font-size:12.5px;color:var(--text-secondary);line-height:1.5;
+  }
+  .gap-note strong{color:var(--brand-warn)}
+
+  .screens{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:36px}
+  .screen-block{display:flex;flex-direction:column;align-items:center}
+  .screen-num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--brand-accent);
+    background:var(--surface-1);border:1px solid var(--border);border-radius:20px;
+    padding:3px 10px;margin-bottom:12px;
+  }
+  .screen-title{font-weight:700;font-size:15px;margin-bottom:4px;text-align:center}
+  .screen-req{font-size:11.5px;color:var(--text-muted);margin-bottom:16px;text-align:center}
+  .screen-gap{
+    font-size:10.5px;color:var(--brand-warn);margin-bottom:12px;text-align:center;
+    font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  }
+
+  .phone{
+    width:100%;max-width:230px;aspect-ratio:9/18.5;background:var(--wf-frame);
+    border-radius:26px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,.15);
+  }
+  .phone-screen{
+    width:100%;height:100%;background:var(--wf-screen);border-radius:18px;
+    overflow:hidden;position:relative;display:flex;flex-direction:column;
+  }
+  .phone-notch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:50px;height:5px;border-radius:4px;background:var(--wf-frame);z-index:2}
+  .ph-header{padding:16px 10px 8px;font-size:10px;font-weight:700;color:var(--wf-text);text-align:center;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px dashed var(--wf-box-line)}
+  .ph-body{flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+
+  /* Wireframe primitives — deliberately boxy/grayscale */
+  .wf-bubble{background:var(--wf-box);border:1px solid var(--wf-box-line);border-radius:10px 10px 10px 2px;padding:8px 10px;font-size:9px;color:var(--wf-text);align-self:flex-start;max-width:82%}
+  .wf-bubble.user{background:transparent;border-style:dashed;border-radius:10px 10px 2px 10px;align-self:flex-end}
+  .wf-confidence{font-size:6.5px;color:var(--wf-muted);margin-top:3px}
+  .wf-reason{font-size:7px;color:var(--wf-text);border-left:2px solid var(--brand-accent);padding-left:6px;margin-top:3px}
+  .wf-input{border:1.5px dashed var(--wf-box-line);border-radius:8px;padding:8px 9px;font-size:8.5px;color:var(--wf-muted);margin-top:4px}
+  .wf-chip-row{display:flex;gap:5px;flex-wrap:wrap}
+  .wf-chip{border:1px solid var(--wf-box-line);border-radius:20px;padding:3px 8px;font-size:7.5px;color:var(--wf-text);background:var(--wf-box)}
+  .wf-btn{background:var(--brand-accent);color:#fff;text-align:center;border-radius:8px;padding:8px;font-size:9px;font-weight:700;margin-top:auto}
+  .wf-btn.ghost{background:transparent;border:1.5px solid var(--wf-box-line);color:var(--wf-text)}
+  .wf-btn-row{display:flex;gap:6px;margin-top:auto}
+  .wf-btn-row .wf-btn{margin-top:0;flex:1}
+
+  .wf-gate{border:1.5px solid var(--brand-warn);border-radius:9px;padding:8px;background:rgba(180,83,9,.06)}
+  .wf-gate .title{font-size:8px;font-weight:700;color:var(--brand-warn);text-transform:uppercase;letter-spacing:.03em;margin-bottom:5px}
+  .wf-gate .row{display:flex;justify-content:space-between;font-size:8px;color:var(--wf-text);margin-bottom:3px}
+  .wf-gate .row span:last-child{font-weight:700}
+
+  .wf-context-card{border:1px solid var(--wf-box-line);border-radius:8px;padding:8px}
+  .wf-context-card .h{font-size:7.5px;font-weight:700;color:var(--wf-muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:5px}
+  .wf-context-row{display:flex;justify-content:space-between;font-size:7.5px;color:var(--wf-text);padding:2px 0;border-bottom:1px dashed var(--wf-box-line)}
+  .wf-context-row:last-child{border-bottom:none}
+  .wf-context-row span:last-child{color:var(--wf-muted)}
+
+  .wf-audit-row{border:1px solid var(--wf-box-line);border-radius:7px;padding:6px 7px;display:flex;flex-direction:column;gap:2px}
+  .wf-audit-row .top{display:flex;justify-content:space-between;font-size:7.5px;font-weight:700;color:var(--wf-text)}
+  .wf-audit-row .meta{font-size:6.5px;color:var(--wf-muted)}
+  .wf-flag{font-size:6.5px;font-weight:700;padding:1px 5px;border-radius:8px}
+  .wf-flag.ok{background:rgba(10,118,109,.14);color:var(--brand-lime)}
+  .wf-flag.review{background:rgba(180,83,9,.14);color:var(--brand-warn)}
+
+  .annotations{
+    margin-top:16px;background:var(--surface-1);border:1px solid var(--border);border-radius:10px;
+    padding:12px 14px;font-size:12px;color:var(--text-secondary);line-height:1.55;width:100%;max-width:230px;
+  }
+  .annotations ul{margin:0;padding-left:16px}
+  .annotations li{margin-bottom:5px}
+  .annotations strong{color:var(--text-primary)}
+
+  .callout{
+    margin-top:36px;padding:16px 18px;border-radius:10px;background:var(--surface-1);
+    border:1px solid var(--border);font-size:13.5px;color:var(--text-secondary);line-height:1.6;
+  }
+  .callout strong{color:var(--text-primary)}
+  footer{margin-top:28px;font-size:12.5px;color:var(--text-muted)}
+  footer a{color:var(--brand-accent)}
+
+  @media (max-width:980px){
+    .screens{grid-template-columns:1fr 1fr;row-gap:36px}
+  }
+  @media (max-width:560px){
+    .screens{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="eyebrow">Travel-Tech Practice · T5</p>
+  <h1>Travel Support AI Copilot — Key Flow Wireframes</h1>
+  <p class="subtitle">
+    Low-fidelity wireframes for the 4 screens that carry this design's guardrail architecture —
+    intentionally boxy and grayscale, since this is a wireframe fidelity level, not a finished UI.
+  </p>
+  <div class="disclaimer">
+    <strong>Scope note:</strong> see the
+    <a href="https://bhawnamanglapm.github.io/travel-tech-more.html#case-travel-support-ai-copilot">full case study (T5)</a>
+    for the conversation-flow transcripts, agent architecture, evaluation approach, and risks
+    these screens map to.
+  </div>
+  <div class="gap-note">
+    <strong>Why these 4 screens specifically:</strong> each one exists to close a gap that shows
+    up repeatedly in travel support bots today — most either can't take real action at all (pure
+    FAQ bots) or take action with no visible reasoning, no confirmation step, and no memory once a
+    human takes over. These screens are the direct answer to those four failure modes, not
+    generic chat-UI decoration.
+  </div>
+
+  <div class="screens">
+
+    <div class="screen-block">
+      <span class="screen-num">Screen 1</span>
+      <div class="screen-title">Reasoning You Can See</div>
+      <div class="screen-req">Maps to: Agent Architecture — intent + tool-call layer</div>
+      <div class="screen-gap">Fixes: black-box answers</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="ph-header">Support Copilot</div>
+          <div class="ph-body">
+            <div class="wf-bubble user">"How much would I get back if I cancel?"</div>
+            <div class="wf-bubble">You'd get back ₹3,200 of ₹5,800 paid.<div class="wf-confidence">Intent: cancel_booking · 0.96 confidence</div></div>
+            <div class="wf-reason">Why this amount? Economy Saver fare, cancelled 22hrs before departure → 55% refund per fare rule R-14. <u>See full fare rule</u></div>
+            <div class="wf-btn ghost">Not what I expected →</div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <ul>
+          <li><strong>Reasoning is one tap away</strong>, not buried or absent — same trust-layer pattern as Wayfare AI's "Why this?" (T2).</li>
+          <li>Most support bots today show a number with no rule behind it, so a user has no way to check it's right.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="screen-block">
+      <span class="screen-num">Screen 2</span>
+      <div class="screen-title">Confirm Before It's Irreversible</div>
+      <div class="screen-req">Maps to: Guardrail — confirmation gate</div>
+      <div class="screen-gap">Fixes: silent autonomous actions</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="ph-header">Confirm Cancellation</div>
+          <div class="ph-body">
+            <div class="wf-gate">
+              <div class="title">This can't be undone</div>
+              <div class="row"><span>Flight</span><span>DEL → BOM, Tomorrow</span></div>
+              <div class="row"><span>Refund</span><span>₹3,200 of ₹5,800</span></div>
+              <div class="row"><span>Arrives</span><span>5–7 business days</span></div>
+            </div>
+            <div class="wf-btn-row">
+              <div class="wf-btn ghost">Cancel</div>
+              <div class="wf-btn">Confirm</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <ul>
+          <li><strong>Never fires on the first pass</strong> — every irreversible or money-moving action stops here first, no exceptions.</li>
+          <li>Industry bots today tend to over-correct one way or the other: too cautious to act at all, or acting without a visible stop-and-confirm step.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="screen-block">
+      <span class="screen-num">Screen 3</span>
+      <div class="screen-title">Context Follows You to a Human</div>
+      <div class="screen-req">Maps to: Agent Architecture — escalation router</div>
+      <div class="screen-gap">Fixes: repeat-yourself handoffs</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="ph-header">Connecting You</div>
+          <div class="ph-body">
+            <div class="wf-bubble">This needs a specialist — connecting you now. They already have everything below, you won't need to repeat it.</div>
+            <div class="wf-context-card">
+              <div class="h">Handoff summary</div>
+              <div class="wf-context-row"><span>PNR</span><span>6XK92P</span></div>
+              <div class="wf-context-row"><span>Issue</span><span>Refund dispute &gt; ceiling</span></div>
+              <div class="wf-context-row"><span>Tried</span><span>Standard refund quoted</span></div>
+              <div class="wf-context-row"><span>Escalated because</span><span>Amount over auto-approval limit</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <ul>
+          <li><strong>Structured handoff, not a transcript dump</strong> — the human agent opens straight into what matters.</li>
+          <li>"Please repeat your issue" after a bot handoff is one of the most common complaints about support bots today — this screen is the direct fix.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="screen-block">
+      <span class="screen-num">Screen 4</span>
+      <div class="screen-title">Audit Trail for Support Ops</div>
+      <div class="screen-req">Maps to: Guardrail — full audit trail</div>
+      <div class="screen-gap">Fixes: invisible autonomous actions</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="ph-header">Agent Action Log</div>
+          <div class="ph-body">
+            <div class="wf-audit-row">
+              <div class="top"><span>issue_refund · ₹3,200</span><span class="wf-flag ok">OK</span></div>
+              <div class="meta">Confidence 0.96 · confirmed by user · 09:14</div>
+            </div>
+            <div class="wf-audit-row">
+              <div class="top"><span>cancel_booking · PNR 6XK92P</span><span class="wf-flag ok">OK</span></div>
+              <div class="meta">Confidence 0.96 · confirmed by user · 09:14</div>
+            </div>
+            <div class="wf-audit-row">
+              <div class="top"><span>change_booking_date</span><span class="wf-flag review">REVIEW</span></div>
+              <div class="meta">Confidence 0.81 · fare diff. flagged · 11:02</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <ul>
+          <li><strong>Every autonomous action logged</strong>, not just conversations — this is what a wrong-action-rate audit (see T5's Evaluation Approach) actually reads.</li>
+          <li>Most bots today are a black box even to the ops team running them — no per-action log, only aggregate ticket-deflection dashboards.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout">
+    <strong>Reading it:</strong> Screens 1 and 2 are what the traveller sees; Screens 3 and 4 are
+    what makes the system safe to operate at all — a handoff a human agent can act on immediately,
+    and a log support ops can audit. A copilot that only gets Screens 1–2 right still fails the
+    business the moment something needs to go to a human or get reviewed after the fact.
+  </div>
+
+  <footer>
+    Part of the <a href="https://bhawnamanglapm.github.io/travel-tech-more.html#case-travel-support-ai-copilot">Travel Support AI Copilot (T5)</a> case study.
+  </footer>
+</div>
+
+</body>
+</html>
