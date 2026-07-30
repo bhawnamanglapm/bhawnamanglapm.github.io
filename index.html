@@ -957,6 +957,7 @@
           <span class="chip">HEART framework (Google)</span>
           <span class="chip">OKR-aligned recommendation</span>
           <span class="chip">RICE + MoSCoW</span>
+          <span class="chip">Business model &amp; risk analysis</span>
         </div>
 
         <div class="cs-narrative">
@@ -968,6 +969,20 @@
             (<strong>existing, mature product</strong>). Scope: MakeMyTrip's flight search →
             booking flow specifically, not hotels or holidays — narrower on purpose, so the
             analysis goes deep on one flow instead of shallow across three.
+          </p>
+          <p>
+            <strong>Business model:</strong> the flight vertical monetizes through airline
+            commissions/overrides, a convenience fee layered on the base fare, and ancillary
+            revenue (seat selection, insurance, baggage). That matters here specifically —
+            add-on pre-selection and the late-stage fee reveal found below aren't accidental UX
+            oversights, they're revenue mechanisms. Any recommendation that removes them has a
+            real, quantifiable cost, not just an upside; see Risks &amp; Trade-offs below.
+          </p>
+          <p>
+            <strong>North Star Metric (company level):</strong> completed bookings per unique
+            searcher — normalizes for the high browsing-only traffic that never intends to book.
+            This teardown is scoped to moving that metric one funnel stage at a time, starting
+            with the stage that leaks hardest.
           </p>
 
           <h4>I — Identify the Customer</h4>
@@ -988,6 +1003,13 @@
             review (baggage/meal add-ons) → traveller details → payment → confirmation + "My
             Trips." Logged-out users are funnelled into account creation at payment, not upfront —
             reduces search friction but adds a late-stage form-fill tax.
+          </p>
+          <p>
+            <strong>Retention loop:</strong> "My Trips" functions as a lifecycle retention engine,
+            not just a post-booking utility tab — it's the reason a user reopens the app at all
+            after booking (rebooking, cancellation, web check-in). That's why Business Priya's
+            reliance on it post-confirmation (see the funnel map below) is a commercial signal, not
+            just a UX nicety — it's the retention mechanism the acquisition funnel below feeds into.
           </p>
           <p><strong>Needs uncovered, mapped to the journey above:</strong></p>
           <ul>
@@ -1062,6 +1084,22 @@
 
         <div class="cs-narrative">
           <p style="margin-top:12px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle — the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a booking-funnel fix.</p>
+
+          <h4>Risks &amp; Trade-offs</h4>
+          <p>Every recommendation above has a cost, not just an upside — naming it here, not after launch:</p>
+          <ul>
+            <li><strong>All-in fare display</strong> — the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
+            <li><strong>Opt-in add-ons</strong> — directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete — it needs a revenue-per-booking floor agreed with Finance before shipping, not just a UX sign-off.</li>
+            <li><strong>Baggage/meal policy inline</strong> — minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
+            <li><strong>Delay-risk badge</strong> — risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T3</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
+          </ul>
+          <p>
+            <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind the A/B test
+            already scoped in the <a href="#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>,
+            with revenue-per-booking as a guardrail metric alongside conversion — not conversion
+            alone. A win on Fare Review conversion that quietly craters ancillary revenue isn't
+            actually a win.
+          </p>
 
           <h4>S — Summarize Recommendation</h4>
           <p>
