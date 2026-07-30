@@ -913,7 +913,9 @@
     <div class="practice-note">
       <strong>3 flagship projects</strong> (T1, T2, T8) are fully written — personas, journeys,
       feature recs, RICE/MoSCoW scoring, PRD structure, and success metrics, in the same style
-      as the Case Studies practice below. The remaining 7 are scoped and sequenced, marked
+      as the Case Studies practice below. <strong>T3 is actually built</strong> — a live,
+      interactive dashboard with a real (synthetic, clearly labeled) dataset behind it, not just
+      a write-up. The remaining 6 are scoped and sequenced, marked
       <span class="todo" style="padding:1px 6px">fill in</span> where the actual build/write-up
       is still in progress.
     </div>
@@ -1049,29 +1051,29 @@
         <span class="jnum">T3</span>
         <h3 class="jcat-title">Flight Delay Prediction Dashboard</h3>
       </div>
-      <article class="jcard" data-case="flight-delay-prediction-dashboard">
+      <article class="jcard" data-case="flight-delay-prediction-dashboard" data-updated="2026-07-30">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#FB923C,#C2410C)">📉</div>
             <div>
               <div class="jtitle">Flight Delay Prediction Dashboard</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — scope defined</div>
+              <div class="jmeta">⭐⭐⭐⭐ Built — see live dashboard</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <dl class="fields">
-          <dt>Scope</dt><dd>Analyze historical flight data to answer: which routes delay most, delay patterns by airline, and delay trends by season or time of day — visualized as a dashboard.</dd>
-          <dt>Dataset</dt><dd><span class="todo">fill in — e.g. DGCA, US BTS, or a Kaggle flight-delay dataset</span></dd>
-          <dt>Dashboard tool</dt><dd><span class="todo">fill in — Power BI, Tableau, or Excel</span></dd>
-          <dt>KPIs tracked</dt><dd><span class="todo">fill in — e.g. on-time %, avg delay minutes, delay-by-route heatmap</span></dd>
-          <dt>Skills demonstrated</dt><dd>Data analysis, KPI tracking, dashboard design — feeds the "delay-risk badge" recommendation in the Flight Booking Teardown above.</dd>
-          <dt>Outcome / insight</dt><dd><span class="todo">fill in — once built</span></dd>
+          <dt>Scope</dt><dd>Analyze flight data to answer: which routes delay most, delay patterns by airline, and delay trends by season or time of day — visualized as an interactive dashboard.</dd>
+          <dt>Dataset</dt><dd>8,000 flights, generated rather than pulled live — the environment this was built in can't reach DGCA/BTS/Kaggle. Airlines are fictional labels (IndiFly, Metro Express, BlueSky Air, Skyline National, Coastal Wings) so no numbers are attributed to a real carrier; routes use real Indian city pairs, since hub congestion and seasonal effects (North Indian winter fog, western-coast monsoon) are public aviation-industry patterns, not a claim about any one company. Full generator script + methodology documented in the repo.</dd>
+          <dt>Dashboard tool</dt><dd>Built as a self-contained interactive HTML/JS dashboard (not Power BI/Tableau — no GUI access in this environment) — horizontal bar charts, a route×season heatmap, hover tooltips, a table-view fallback, and full dark-mode support, following a CVD-validated color palette.</dd>
+          <dt>KPIs tracked</dt><dd>On-time rate (≤15min), average delay per flight, cancellation rate, delay % by route/airline/season/time-of-day.</dd>
+          <dt>Skills demonstrated</dt><dd>Data analysis, KPI dashboarding, accessible chart design (colorblind-safe palette, keyboard-focusable tooltips, table-view parity) — feeds the "delay-risk badge" recommendation in the Flight Booking Teardown above.</dd>
+          <dt>Outcome / insight</dt><dd>84.4% on-time, 9.2min average delay across the modeled fleet. Worst route: DEL-GOI (12.6min avg, 34% delayed &gt;15min) — a route that's both winter-fog- and monsoon-sensitive in the model. Winter is the worst season by a wide margin (11.9min avg vs. 7.5min in Spring/Post-Monsoon) — the modeled North Indian fog effect. Delays cascade through the day: Night flights average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations compound delays leg-to-leg.</dd>
         </dl>
         <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Link</span><a href="https://claude.ai/code/artifact/c979cd64-9ac0-446b-b6df-645e7f7ce664" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">live dashboard →</a></span>
+          <span><span class="k">Image</span><span class="todo">fill in — dashboard screenshot</span></span>
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
         </div>
       </div>

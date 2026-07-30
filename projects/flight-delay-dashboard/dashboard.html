@@ -1,0 +1,424 @@
+<title>Flight Delay Prediction Dashboard</title>
+<style>
+  /* Tokens live on :root (not the .viz-root wrapper div) so that `body`,
+     an ANCESTOR of .viz-root, can also resolve them — CSS custom properties
+     only cascade to descendants of where they're defined. */
+  :root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --page:           #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --grid:           #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    /* Brand chrome (links, eyebrow, accents) — matches the parent portfolio's
+       own tokens (--pink/--lime), kept separate from the chart marks below,
+       which use a CVD-validated categorical/sequential palette instead. */
+    --brand-accent:   #4F46E5;
+    --brand-lime:     #0A766D;
+    --series-1: #2a78d6; /* blue */
+    --series-2: #eb6834; /* orange */
+    --series-3: #1baf7a; /* aqua */
+    --series-4: #eda100; /* yellow */
+    --series-5: #e87ba4; /* magenta */
+    --seq-100: #cde2fb; --seq-200: #9ec5f4; --seq-300: #6da7ec;
+    --seq-400: #3987e5; --seq-500: #256abf; --seq-600: #184f95; --seq-700: #0d366b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19; --page: #0d0d0d;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+      --grid: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+      --brand-accent: #8B7FF0; --brand-lime: #2DD4BF;
+      --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+      --series-4: #c98500; --series-5: #d55181;
+      --seq-100: #184f95; --seq-200: #1c5cab; --seq-300: #256abf;
+      --seq-400: #3987e5; --seq-500: #5598e7; --seq-600: #86b6ef; --seq-700: #b7d3f6;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19; --page: #0d0d0d;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --grid: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+    --brand-accent: #8B7FF0; --brand-lime: #2DD4BF;
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+    --series-4: #c98500; --series-5: #d55181;
+    --seq-100: #184f95; --seq-200: #1c5cab; --seq-300: #256abf;
+    --seq-400: #3987e5; --seq-500: #5598e7; --seq-600: #86b6ef; --seq-700: #b7d3f6;
+  }
+
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{margin:0;background:var(--page);color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:36px 24px 80px}
+  header.page-head{margin-bottom:28px}
+  .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-lime);font-weight:600;margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 10px;letter-spacing:-.01em}
+  .subtitle{color:var(--text-secondary);font-size:15px;line-height:1.6;max-width:760px;margin:0}
+  .disclaimer{
+    margin-top:16px;padding:14px 18px;border-radius:10px;background:var(--surface-1);
+    border:1px solid var(--border);border-left:3px solid var(--brand-accent);
+    font-size:13.5px;color:var(--text-secondary);line-height:1.55;
+  }
+  .disclaimer strong{color:var(--text-primary)}
+
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0}
+  .kpi{background:var(--surface-1);border:1px solid var(--border);border-top:2px solid var(--brand-accent);border-radius:10px 10px 12px 12px;padding:18px 20px}
+  .kpi .label{font-size:12px;color:var(--text-muted);margin-bottom:8px}
+  .kpi .value{font-size:28px;font-weight:600;font-variant-numeric:tabular-nums}
+
+  .card{background:var(--surface-1);border:1px solid var(--border);border-radius:14px;padding:24px 26px;margin-bottom:22px}
+  .card h2{font-size:16px;margin:0 0 4px}
+  .card .card-sub{font-size:13px;color:var(--text-muted);margin:0 0 18px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;font-size:12.5px;color:var(--text-secondary)}
+  .legend-item{display:flex;align-items:center;gap:6px}
+  .legend-swatch{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+  .bar-row{display:flex;align-items:center;gap:10px;padding:5px 0;position:relative}
+  .bar-cat{width:150px;flex-shrink:0;font-size:12.5px;color:var(--text-secondary);text-align:right;padding-right:4px}
+  .bar-track{flex:1;position:relative;height:20px}
+  .bar-fill{position:absolute;left:0;top:2px;height:16px;border-radius:8px 8px 8px 8px;cursor:pointer;transition:filter .12s}
+  .bar-fill:hover,.bar-fill:focus-visible{filter:brightness(1.08)}
+  .bar-val{font-size:12px;color:var(--text-secondary);margin-left:6px;white-space:nowrap;min-width:38px}
+
+  .tooltip{
+    position:fixed;pointer-events:none;background:var(--text-primary);color:var(--page);
+    font-size:12.5px;padding:9px 12px;border-radius:8px;line-height:1.5;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:50;opacity:0;transition:opacity .1s;
+    max-width:240px;
+  }
+  .tooltip.show{opacity:1}
+  .tooltip .tt-strong{font-weight:700;font-size:13.5px}
+  .tooltip .tt-key{display:inline-block;width:9px;height:2px;margin-right:6px;vertical-align:middle}
+
+  table.data-table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+  table.data-table th,table.data-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--grid)}
+  table.data-table th{color:var(--text-muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+  table.data-table tr:last-child td{border-bottom:none}
+  details.table-toggle{margin-top:8px}
+  details.table-toggle summary{cursor:pointer;font-size:13px;color:var(--brand-accent);font-weight:600;list-style:none}
+  details.table-toggle summary::-webkit-details-marker{display:none}
+  details.table-toggle summary::before{content:"▸ ";}
+  details.table-toggle[open] summary::before{content:"▾ ";}
+  details.table-toggle .table-wrap{margin-top:12px;overflow-x:auto}
+
+  .heat-wrap{overflow-x:auto}
+  table.heatmap{border-collapse:separate;border-spacing:3px;font-size:12.5px}
+  table.heatmap th{color:var(--text-muted);font-weight:600;font-size:11px;text-transform:uppercase;padding:6px 8px;text-align:center}
+  table.heatmap th.rowhead{text-align:right;color:var(--text-secondary);font-weight:500;text-transform:none;font-size:12.5px}
+  table.heatmap td{padding:0;text-align:center}
+  .heat-cell{
+    width:74px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:6px;
+    font-variant-numeric:tabular-nums;font-weight:600;cursor:pointer;
+  }
+
+  .caption{font-size:12.5px;color:var(--text-muted);margin-top:10px}
+
+  @media (max-width:820px){
+    .kpi-row{grid-template-columns:1fr 1fr}
+    .two-col{grid-template-columns:1fr}
+    .bar-cat{width:110px;font-size:11.5px}
+  }
+</style>
+
+<div class="viz-root">
+<div class="wrap">
+  <header class="page-head">
+    <p class="eyebrow">Travel-Tech Practice · T3</p>
+    <h1>Flight Delay Prediction Dashboard</h1>
+    <p class="subtitle">
+      Which routes delay the most, how delay patterns differ by airline, and how
+      delays trend by season and time of day — analyzed from a modeled domestic
+      flight dataset (8,000 flights).
+    </p>
+    <div class="disclaimer">
+      <strong>Synthetic, modeled data — not a real airline's published performance.</strong>
+      Airlines here are fictional labels (IndiFly, Metro Express, BlueSky Air, Skyline
+      National, Coastal Wings) so no numbers are attributed to a real, identifiable
+      carrier. Routes use real Indian city pairs, since hub congestion (Delhi/Mumbai/
+      Bengaluru) and seasonal effects (North Indian winter fog, western-coast monsoon)
+      are well-documented public aviation-industry patterns, not a claim about any one
+      company. Full generator + methodology in the repo (see footer link).
+    </div>
+  </header>
+
+  <section class="kpi-row" id="kpiRow" aria-label="Headline metrics"></section>
+
+  <section class="card">
+    <h2>Which routes delay the most?</h2>
+    <p class="card-sub">Average delay per flight (minutes), all 15 tracked routes, ranked highest to lowest.</p>
+    <div id="routeChart" role="img" aria-label="Bar chart of average delay minutes by route"></div>
+    <details class="table-toggle"><summary>View as table</summary>
+      <div class="table-wrap" id="routeTable"></div>
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>Delay patterns by airline</h2>
+    <p class="card-sub">Average delay (minutes) per flight, by airline. Hover or focus a bar for on-time and cancellation detail.</p>
+    <div id="airlineChart" role="img" aria-label="Bar chart of average delay minutes by airline"></div>
+    <details class="table-toggle"><summary>View as table</summary>
+      <div class="table-wrap" id="airlineTable"></div>
+    </details>
+  </section>
+
+  <section class="two-col">
+    <div class="card">
+      <h2>Delay trend by season</h2>
+      <p class="card-sub">Average delay (minutes), Dec–Feb through Oct–Nov.</p>
+      <div id="seasonChart" role="img" aria-label="Bar chart of average delay minutes by season"></div>
+    </div>
+    <div class="card">
+      <h2>Delay trend by time of day</h2>
+      <p class="card-sub">Average delay (minutes) — delays cascade later in the day.</p>
+      <div id="timeChart" role="img" aria-label="Bar chart of average delay minutes by time of day"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Route × season — where the worst combinations are</h2>
+    <p class="card-sub">Top 8 routes by average delay minutes, broken out by season. Darker = worse.</p>
+    <div class="heat-wrap" id="heatmap" role="img" aria-label="Heatmap of average delay minutes by route and season"></div>
+    <p class="caption">Reading it: Delhi-origin routes (DEL-GOI, DEL-BOM, DEL-BLR, DEL-CCU, DEL-PNQ, DEL-HYD) spike in Winter — the modeled North Indian fog effect. Coastal/monsoon-sensitive routes (BOM-COK, COK-BOM, DEL-GOI) spike separately in Monsoon.</p>
+  </section>
+
+  <footer class="caption" style="margin-top:8px">
+    Dataset, generator script, and full methodology: see <code>projects/flight-delay-dashboard/</code>
+    in the portfolio repo. Built as part of the
+    <a href="https://bhawnamanglapm.github.io/#travel-tech" style="color:var(--brand-accent)">Travel-Tech Practice</a> section.
+  </footer>
+</div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const DATA = {"kpis": {"total_flights": 8000, "on_time_pct": 84.4, "avg_delay_minutes": 9.2, "cancellation_pct": 1.14}, "routes": [{"route": "DEL-GOI", "avg_delay": 12.6, "delayed_pct": 34.1, "flights": 220}, {"route": "DEL-BOM", "avg_delay": 10.3, "delayed_pct": 19.0, "flights": 1197}, {"route": "BOM-COK", "avg_delay": 10.3, "delayed_pct": 19.2, "flights": 494}, {"route": "DEL-BLR", "avg_delay": 10.0, "delayed_pct": 18.0, "flights": 857}, {"route": "DEL-CCU", "avg_delay": 9.9, "delayed_pct": 19.3, "flights": 581}, {"route": "DEL-PNQ", "avg_delay": 9.7, "delayed_pct": 16.3, "flights": 399}, {"route": "COK-BOM", "avg_delay": 9.6, "delayed_pct": 16.2, "flights": 364}, {"route": "DEL-HYD", "avg_delay": 9.6, "delayed_pct": 16.3, "flights": 638}, {"route": "BLR-COK", "avg_delay": 9.5, "delayed_pct": 18.6, "flights": 263}, {"route": "BOM-GOI", "avg_delay": 9.1, "delayed_pct": 14.9, "flights": 582}, {"route": "DEL-AMD", "avg_delay": 9.0, "delayed_pct": 15.4, "flights": 495}, {"route": "BOM-BLR", "avg_delay": 7.3, "delayed_pct": 7.3, "flights": 836}, {"route": "HYD-MAA", "avg_delay": 7.2, "delayed_pct": 6.3, "flights": 158}, {"route": "BLR-HYD", "avg_delay": 6.7, "delayed_pct": 7.4, "flights": 488}, {"route": "MAA-CCU", "avg_delay": 6.6, "delayed_pct": 7.4, "flights": 337}], "airlines": [{"airline": "Coastal Wings", "airline_type": "Regional/turboprop", "avg_delay": 10.7, "delayed_pct": 21.7, "flights": 609, "cancel_rate": 1.3}, {"airline": "Metro Express", "airline_type": "LCC", "avg_delay": 10.3, "delayed_pct": 20.0, "flights": 1972, "cancel_rate": 1.15}, {"airline": "Skyline National", "airline_type": "Full-service", "avg_delay": 9.8, "delayed_pct": 17.4, "flights": 1277, "cancel_rate": 1.24}, {"airline": "IndiFly", "airline_type": "LCC", "avg_delay": 8.8, "delayed_pct": 13.7, "flights": 2338, "cancel_rate": 1.06}, {"airline": "BlueSky Air", "airline_type": "Full-service", "avg_delay": 7.6, "delayed_pct": 9.7, "flights": 1713, "cancel_rate": 1.1}], "seasons": [{"season": "Winter", "avg_delay": 11.9, "delayed_pct": 28.7}, {"season": "Spring", "avg_delay": 7.5, "delayed_pct": 7.8}, {"season": "Summer", "avg_delay": 8.3, "delayed_pct": 11.0}, {"season": "Monsoon", "avg_delay": 9.5, "delayed_pct": 16.4}, {"season": "Post-Monsoon", "avg_delay": 7.5, "delayed_pct": 7.9}], "times": [{"time_bucket": "Early Morning (05-08)", "avg_delay": 8.3, "delayed_pct": 12.4}, {"time_bucket": "Morning (08-11)", "avg_delay": 8.3, "delayed_pct": 12.1}, {"time_bucket": "Afternoon (11-15)", "avg_delay": 8.8, "delayed_pct": 14.4}, {"time_bucket": "Evening (15-19)", "avg_delay": 9.8, "delayed_pct": 17.8}, {"time_bucket": "Night (19-23)", "avg_delay": 11.0, "delayed_pct": 21.5}], "months": [{"month": 1, "avg_delay": 14.5, "label": "Jan"}, {"month": 2, "avg_delay": 7.2, "label": "Feb"}, {"month": 3, "avg_delay": 7.3, "label": "Mar"}, {"month": 4, "avg_delay": 7.7, "label": "Apr"}, {"month": 5, "avg_delay": 7.3, "label": "May"}, {"month": 6, "avg_delay": 9.5, "label": "Jun"}, {"month": 7, "avg_delay": 9.3, "label": "Jul"}, {"month": 8, "avg_delay": 9.5, "label": "Aug"}, {"month": 9, "avg_delay": 9.7, "label": "Sep"}, {"month": 10, "avg_delay": 7.7, "label": "Oct"}, {"month": 11, "avg_delay": 7.3, "label": "Nov"}, {"month": 12, "avg_delay": 14.4, "label": "Dec"}], "heatmap": [{"route": "DEL-GOI", "Winter": 16.6, "Spring": 6.9, "Summer": 9.2, "Monsoon": 17.5, "Post-Monsoon": 6.7}, {"route": "DEL-BOM", "Winter": 15.9, "Spring": 8.4, "Summer": 8.3, "Monsoon": 8.3, "Post-Monsoon": 8.8}, {"route": "BOM-COK", "Winter": 7.3, "Spring": 7.0, "Summer": 13.0, "Monsoon": 14.7, "Post-Monsoon": 7.8}, {"route": "DEL-BLR", "Winter": 15.8, "Spring": 8.5, "Summer": 7.5, "Monsoon": 7.8, "Post-Monsoon": 8.3}, {"route": "DEL-CCU", "Winter": 14.9, "Spring": 8.4, "Summer": 7.6, "Monsoon": 7.8, "Post-Monsoon": 7.7}, {"route": "DEL-PNQ", "Winter": 16.5, "Spring": 7.0, "Summer": 7.8, "Monsoon": 7.5, "Post-Monsoon": 7.2}, {"route": "COK-BOM", "Winter": 6.7, "Spring": 7.6, "Summer": 8.9, "Monsoon": 16.7, "Post-Monsoon": 7.2}, {"route": "DEL-HYD", "Winter": 15.8, "Spring": 7.7, "Summer": 8.2, "Monsoon": 7.7, "Post-Monsoon": 8.1}], "season_order": ["Winter", "Spring", "Summer", "Monsoon", "Post-Monsoon"]};
+
+const cs = getComputedStyle(document.querySelector('.viz-root'));
+function cssVar(name){ return cs.getPropertyValue(name).trim(); }
+
+const tooltip = document.getElementById('tooltip');
+function showTooltip(evt, html){
+  tooltip.innerHTML = html;
+  tooltip.classList.add('show');
+  const x = evt.clientX + 14, y = evt.clientY + 14;
+  tooltip.style.left = Math.min(x, window.innerWidth - 260) + 'px';
+  tooltip.style.top = Math.min(y, window.innerHeight - 100) + 'px';
+}
+function hideTooltip(){ tooltip.classList.remove('show'); }
+
+function fmtMin(v){ return v.toFixed(1) + ' min'; }
+function fmtPct(v){ return v.toFixed(1) + '%'; }
+
+// ---------- KPI tiles ----------
+(function renderKpis(){
+  const k = DATA.kpis;
+  const items = [
+    { label: 'Flights analyzed', value: k.total_flights.toLocaleString() },
+    { label: 'On-time rate (≤15 min)', value: fmtPct(k.on_time_pct) },
+    { label: 'Avg delay per flight', value: fmtMin(k.avg_delay_minutes) },
+    { label: 'Cancellation rate', value: fmtPct(k.cancellation_pct) },
+  ];
+  const row = document.getElementById('kpiRow');
+  items.forEach(it => {
+    const div = document.createElement('div');
+    div.className = 'kpi';
+    const l = document.createElement('div'); l.className = 'label'; l.textContent = it.label;
+    const v = document.createElement('div'); v.className = 'value'; v.textContent = it.value;
+    div.appendChild(l); div.appendChild(v);
+    row.appendChild(div);
+  });
+})();
+
+// ---------- Generic single-hue horizontal bar chart ----------
+function renderBarChart(containerId, rows, opts){
+  const container = document.getElementById(containerId);
+  const maxVal = Math.max(...rows.map(r => opts.value(r)));
+  rows.forEach((r, i) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    const cat = document.createElement('div');
+    cat.className = 'bar-cat';
+    cat.textContent = opts.label(r);
+    const track = document.createElement('div');
+    track.className = 'bar-track';
+    const fill = document.createElement('div');
+    fill.className = 'bar-fill';
+    fill.tabIndex = 0;
+    const pct = (opts.value(r) / maxVal) * 100;
+    fill.style.width = pct + '%';
+    fill.style.background = opts.color ? opts.color(r, i) : cssVar('--series-1');
+    const valSpan = document.createElement('span');
+    valSpan.className = 'bar-val';
+    valSpan.textContent = opts.value(r).toFixed(1);
+    track.appendChild(fill);
+    row.appendChild(cat);
+    row.appendChild(track);
+    row.appendChild(valSpan);
+    container.appendChild(row);
+
+    const showTT = (evt) => showTooltip(evt, opts.tooltip(r));
+    fill.addEventListener('pointermove', showTT);
+    fill.addEventListener('focus', (e) => showTooltip({clientX: fill.getBoundingClientRect().right, clientY: fill.getBoundingClientRect().top}, opts.tooltip(r)));
+    fill.addEventListener('pointerleave', hideTooltip);
+    fill.addEventListener('blur', hideTooltip);
+  });
+}
+
+// ---------- Route chart ----------
+renderBarChart('routeChart', DATA.routes, {
+  label: r => r.route,
+  value: r => r.avg_delay,
+  color: () => cssVar('--series-1'),
+  tooltip: r => `<div class="tt-strong">${fmtMin(r.avg_delay)}</div>${r.route} · ${fmtPct(r.delayed_pct)} delayed &gt;15min<br>${r.flights.toLocaleString()} flights analyzed`,
+});
+
+// Route table
+(function(){
+  const wrap = document.getElementById('routeTable');
+  const table = document.createElement('table');
+  table.className = 'data-table';
+  table.innerHTML = '<thead><tr><th>Route</th><th>Avg delay</th><th>% delayed &gt;15min</th><th>Flights</th></tr></thead>';
+  const tbody = document.createElement('tbody');
+  DATA.routes.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.route}</td><td>${fmtMin(r.avg_delay)}</td><td>${fmtPct(r.delayed_pct)}</td><td>${r.flights.toLocaleString()}</td>`;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+})();
+
+// ---------- Airline chart (categorical) ----------
+const airlineColors = ['--series-1','--series-2','--series-3','--series-4','--series-5'];
+renderBarChart('airlineChart', DATA.airlines, {
+  label: r => r.airline,
+  value: r => r.avg_delay,
+  color: (r, i) => cssVar(airlineColors[i % airlineColors.length]),
+  tooltip: r => `<div class="tt-strong">${fmtMin(r.avg_delay)}</div>${r.airline} (${r.airline_type})<br>${fmtPct(r.delayed_pct)} delayed &gt;15min · ${fmtPct(r.cancel_rate)} cancelled`,
+});
+
+(function(){
+  const legend = document.createElement('div');
+  legend.className = 'legend';
+  DATA.airlines.forEach((r, i) => {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    const sw = document.createElement('span');
+    sw.className = 'legend-swatch';
+    sw.style.background = cssVar(airlineColors[i % airlineColors.length]);
+    item.appendChild(sw);
+    item.appendChild(document.createTextNode(r.airline + ' (' + r.airline_type + ')'));
+    legend.appendChild(item);
+  });
+  document.getElementById('airlineChart').before(legend);
+})();
+
+(function(){
+  const wrap = document.getElementById('airlineTable');
+  const table = document.createElement('table');
+  table.className = 'data-table';
+  table.innerHTML = '<thead><tr><th>Airline</th><th>Type</th><th>Avg delay</th><th>% delayed &gt;15min</th><th>Cancel rate</th></tr></thead>';
+  const tbody = document.createElement('tbody');
+  DATA.airlines.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.airline}</td><td>${r.airline_type}</td><td>${fmtMin(r.avg_delay)}</td><td>${fmtPct(r.delayed_pct)}</td><td>${fmtPct(r.cancel_rate)}</td>`;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+})();
+
+// ---------- Season & time-of-day (ordinal single hue) ----------
+renderBarChart('seasonChart', DATA.seasons, {
+  label: r => r.season,
+  value: r => r.avg_delay,
+  color: () => cssVar('--series-1'),
+  tooltip: r => `<div class="tt-strong">${fmtMin(r.avg_delay)}</div>${r.season} · ${fmtPct(r.delayed_pct)} delayed &gt;15min`,
+});
+renderBarChart('timeChart', DATA.times, {
+  label: r => r.time_bucket.replace(/\s*\(.*\)/, ''),
+  value: r => r.avg_delay,
+  color: () => cssVar('--series-1'),
+  tooltip: r => `<div class="tt-strong">${fmtMin(r.avg_delay)}</div>${r.time_bucket} · ${fmtPct(r.delayed_pct)} delayed &gt;15min`,
+});
+
+// ---------- Heatmap ----------
+(function(){
+  const seasons = DATA.season_order;
+  const allVals = DATA.heatmap.flatMap(row => seasons.map(s => row[s]).filter(v => v != null));
+  const min = Math.min(...allVals), max = Math.max(...allVals);
+  const seqSteps = ['--seq-100','--seq-200','--seq-300','--seq-400','--seq-500','--seq-600','--seq-700'];
+
+  function colorFor(v){
+    const t = (v - min) / (max - min || 1);
+    const idx = Math.min(seqSteps.length - 1, Math.floor(t * seqSteps.length));
+    return cssVar(seqSteps[idx]);
+  }
+  // Pick text color from the ACTUAL fill's luminance, not from `t` — the dark-mode
+  // ramp is intentionally inverted (low value = near-surface dark, high value =
+  // bright) so a t-based guess picks the wrong text color for half the cells.
+  function relativeLuminance(hex){
+    const h = hex.replace('#', '');
+    const r = parseInt(h.substring(0,2), 16) / 255;
+    const g = parseInt(h.substring(2,4), 16) / 255;
+    const b = parseInt(h.substring(4,6), 16) / 255;
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+  function textFor(v){
+    // Dark ink on a light fill, white ink on a dark fill — independent of page
+    // theme, since only the fill's own luminance determines legible contrast.
+    return relativeLuminance(colorFor(v)) > 0.55 ? '#0b0b0b' : '#ffffff';
+  }
+
+  const wrap = document.getElementById('heatmap');
+  const table = document.createElement('table');
+  table.className = 'heatmap';
+  const thead = document.createElement('tr');
+  thead.innerHTML = '<th class="rowhead">Route</th>' + seasons.map(s => `<th>${s}</th>`).join('');
+  table.appendChild(thead);
+
+  DATA.heatmap.forEach(row => {
+    const tr = document.createElement('tr');
+    const rowhead = document.createElement('th');
+    rowhead.className = 'rowhead';
+    rowhead.textContent = row.route;
+    tr.appendChild(rowhead);
+    seasons.forEach(s => {
+      const td = document.createElement('td');
+      const v = row[s];
+      const cell = document.createElement('div');
+      cell.className = 'heat-cell';
+      cell.tabIndex = 0;
+      if(v == null){
+        cell.style.background = 'var(--grid)';
+        cell.textContent = '–';
+      } else {
+        cell.style.background = colorFor(v);
+        cell.style.color = textFor(v);
+        cell.textContent = v.toFixed(1);
+        const tt = () => `<div class="tt-strong">${fmtMin(v)}</div>${row.route} · ${s}`;
+        cell.addEventListener('pointermove', (e) => showTooltip(e, tt()));
+        cell.addEventListener('focus', () => {
+          const r = cell.getBoundingClientRect();
+          showTooltip({clientX:r.right, clientY:r.top}, tt());
+        });
+        cell.addEventListener('pointerleave', hideTooltip);
+        cell.addEventListener('blur', hideTooltip);
+      }
+      td.appendChild(cell);
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
+  wrap.appendChild(table);
+})();
+</script>
