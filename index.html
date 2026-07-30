@@ -952,39 +952,92 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Product &amp; scope</dt><dd>MakeMyTrip web + app — domestic flight search → booking flow. Scoped to flights only, not hotels/holidays, to keep the teardown deep rather than broad.</dd>
-          <dt>Primary personas</dt><dd>"Value Rakesh" (28, IT professional, 4–5 domestic trips/yr) — price-sensitive, compares 3+ apps before booking. "Business Priya" (34, consulting manager) — books last-minute, values reliability and rebooking flexibility over price. "Family Planner Anita" (41) — books for 4+ pax, needs group-seat clarity and abandons on unclear total-fare breakdowns.</dd>
-          <dt>User journey</dt><dd>Home search widget → results list (filters/sort) → fare review (baggage/meal add-ons) → traveller details → payment → confirmation + "My Trips." Logged-out users are funnelled into account creation at payment, not upfront — reduces search friction but adds a late-stage form-fill tax.</dd>
-          <dt>Pain points identified</dt><dd>
-            1. Fare inflation between search-result price and fare-review price (taxes/fees revealed late) erodes trust.<br>
-            2. Filter fatigue — 12+ filter dimensions with no smart-default ranking for time-pressed users.<br>
-            3. Add-on pre-selection (insurance, seat) defaults to "on," reading as a dark pattern at checkout.<br>
-            4. Baggage policy buried a tap deep — a top cause of post-booking support contact.<br>
-            5. No persistent price comparison across dates — users manually reopen search in a new tab.
-          </dd>
-          <dt>Funnel analysis</dt><dd>Modeled as Search → Results → Fare Review → Traveller Info → Payment → Confirmation. The biggest modeled drop-off sits between Results and Fare Review (price-shock from add-on fees), with a second leak between Traveller Info and Payment (form fatigue + OTP retry friction).</dd>
-          <dt>Competitor comparison</dt><dd>
-            <strong>Price transparency:</strong> ixigo surfaces the convenience fee earlier in the flow than MakeMyTrip; Booking.com's flights product (smaller India share) shows all-in price at search.<br>
-            <strong>Trust signals:</strong> ixigo leads with "flight confirm guarantee" messaging; MakeMyTrip leans on loyalty/coupon stacking instead.<br>
-            <strong>Post-booking servicing:</strong> MakeMyTrip's "My Trips" is the strongest lifecycle surface of the three — best-in-class for rebooking/cancellation self-serve.
-          </dd>
-          <dt>10 feature recommendations</dt><dd>
-            <ol style="padding-left:18px;margin:0">
-              <li>All-in fare display at the results level — kill the late-stage price reveal.</li>
-              <li>Opt-in (not opt-out) add-ons at fare review.</li>
-              <li>Persistent "compare dates" strip on results instead of reopening search.</li>
-              <li>Baggage/meal policy inline on the fare card, not a tap away.</li>
-              <li>One-tap "hold my seat 15 min" for indecisive high-intent users.</li>
-              <li>Smart filter defaults ranked by price + duration + layover, not price alone.</li>
-              <li>Payment retry with saved card + biometric re-auth to cut payment-stage drop-off.</li>
-              <li>Proactive delay-risk badge on results (feeds the Flight Delay Dashboard project below).</li>
-              <li>Group-booking mode for 4+ pax with a shared itinerary link.</li>
-              <li>Post-booking "manage trip" nudges (web check-in, gate-change alerts) via push.</li>
-            </ol>
-          </dd>
-          <dt>Success metrics</dt><dd>North Star: completed bookings per unique searcher (normalizes for browsing-only traffic). Supporting: fare-review→payment conversion, add-on opt-in rate, payment-retry success rate, CSAT on baggage/policy clarity.</dd>
-        </dl>
+        <div class="cs-facts">
+          <span class="chip">CIRCLES method</span>
+          <span class="chip">HEART framework (Google)</span>
+          <span class="chip">OKR-aligned recommendation</span>
+          <span class="chip">RICE + MoSCoW</span>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>C — Comprehend the Situation</h4>
+          <p>
+            The clarifying questions I'd ask before touching the product, the way a Google PM
+            interview expects: which platform (web vs. app — <strong>both</strong>), domestic or
+            international (<strong>domestic only</strong>), and an existing product or a new one
+            (<strong>existing, mature product</strong>). Scope: MakeMyTrip's flight search →
+            booking flow specifically, not hotels or holidays — narrower on purpose, so the
+            analysis goes deep on one flow instead of shallow across three.
+          </p>
+
+          <h4>I — Identify the Customer</h4>
+          <p>
+            Three personas span the segmentation axes that actually predict booking behavior —
+            price sensitivity, time pressure, and party complexity — not demographic axes like age
+            or city, which don't:
+          </p>
+          <ul>
+            <li><strong>"Value Rakesh"</strong> (28, IT professional, 4–5 domestic trips/yr) — price-sensitive, compares 3+ apps before booking.</li>
+            <li><strong>"Business Priya"</strong> (34, consulting manager) — books last-minute, values reliability and rebooking flexibility over price.</li>
+            <li><strong>"Family Planner Anita"</strong> (41) — books for 4+ pax, needs group-seat clarity and abandons on unclear total-fare breakdowns.</li>
+          </ul>
+
+          <h4>R — Report the Customer's Needs</h4>
+          <p>
+            <strong>Journey:</strong> Home search widget → results list (filters/sort) → fare
+            review (baggage/meal add-ons) → traveller details → payment → confirmation + "My
+            Trips." Logged-out users are funnelled into account creation at payment, not upfront —
+            reduces search friction but adds a late-stage form-fill tax.
+          </p>
+          <p><strong>Needs uncovered, mapped to the journey above:</strong></p>
+          <ul>
+            <li><strong>Trust/transparency need</strong> — fare inflation between search-result price and fare-review price (taxes/fees revealed late) erodes trust; add-on pre-selection (insurance, seat) defaults to "on," reading as a dark pattern at checkout.</li>
+            <li><strong>Time-efficiency need</strong> — filter fatigue (12+ dimensions, no smart default) and no persistent price comparison across dates force users to manually reopen search in a new tab.</li>
+            <li><strong>Clarity/control need</strong> — baggage policy buried a tap deep, a top cause of post-booking support contact.</li>
+          </ul>
+          <p>
+            <strong>Funnel:</strong> Search → Results → Fare Review → Traveller Info → Payment →
+            Confirmation. The biggest modeled drop-off sits between Results and Fare Review
+            (price-shock from add-on fees — modeled at ~38% conversion in the
+            <a href="#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>),
+            with a second leak between Traveller Info and Payment (form fatigue + OTP retry friction).
+          </p>
+          <p>
+            <strong>Competitors:</strong> ixigo surfaces the convenience fee earlier than
+            MakeMyTrip and leads with "flight confirm guarantee" trust messaging; Booking.com's
+            flights product (smaller India share) shows all-in price at search. MakeMyTrip's "My
+            Trips" is the strongest post-booking lifecycle surface of the three.
+          </p>
+
+          <h4>C — Cut Through Prioritization</h4>
+          <p>
+            Of the three personas, I'd prioritize <strong>Value Rakesh's need first.</strong>
+            Price-sensitive comparison shoppers are both the largest segment of OTA search traffic
+            and the segment most exposed to the single biggest funnel leak above — the
+            fare-review price shock hits a price-anchored searcher hardest. Business Priya's
+            reliability need and Family Planner Anita's group-booking complexity are real, but
+            lower-frequency — worth a later cycle, not this one. Everything below is scoped to
+            fixing Rakesh's need first.
+          </p>
+
+          <h4>L — List Solutions</h4>
+          <ol style="padding-left:18px;margin:0 0 14px;color:#33333D;font-size:14.5px;line-height:1.6">
+            <li style="margin-bottom:7px">All-in fare display at the results level — kill the late-stage price reveal.</li>
+            <li style="margin-bottom:7px">Opt-in (not opt-out) add-ons at fare review.</li>
+            <li style="margin-bottom:7px">Persistent "compare dates" strip on results instead of reopening search.</li>
+            <li style="margin-bottom:7px">Baggage/meal policy inline on the fare card, not a tap away.</li>
+            <li style="margin-bottom:7px">One-tap "hold my seat 15 min" for indecisive high-intent users.</li>
+            <li style="margin-bottom:7px">Smart filter defaults ranked by price + duration + layover, not price alone.</li>
+            <li style="margin-bottom:7px">Payment retry with saved card + biometric re-auth to cut payment-stage drop-off.</li>
+            <li style="margin-bottom:7px">Proactive delay-risk badge on results (feeds the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>).</li>
+            <li style="margin-bottom:7px">Group-booking mode for 4+ pax with a shared itinerary link.</li>
+            <li>Post-booking "manage trip" nudges (web check-in, gate-change alerts) via push.</li>
+          </ol>
+
+          <h4>E — Evaluate Trade-offs</h4>
+          <p>RICE-scored, ranked by priority:</p>
+        </div>
+
         <div class="ptable2-wrap">
           <table class="ptable2">
             <thead><tr><th>Feature (RICE-scored)</th><th>Reach × Impact × Confidence</th><th>Effort</th><th>RICE / priority</th></tr></thead>
@@ -998,7 +1051,38 @@
             </tbody>
           </table>
         </div>
-        <p style="font-size:13.5px;color:var(--grey);margin-bottom:16px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle — the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a booking-funnel fix.</p>
+
+        <div class="cs-narrative">
+          <p style="margin-top:12px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle — the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a booking-funnel fix.</p>
+
+          <h4>S — Summarize Recommendation</h4>
+          <p>
+            Ship <strong>all-in fare display</strong> and <strong>opt-in add-ons</strong> first —
+            RICE 13.5 and 14.4, the two highest-scored and lowest-effort items on the list. Together
+            they remove the exact price-shock that costs the funnel its single biggest leak, for
+            the segment (Rakesh) chosen in the Cut step above. Everything else on this list
+            sequences behind those two.
+          </p>
+
+          <h4>Success Metrics — the HEART Framework</h4>
+          <p>Using Google's own HEART framework (Rodden et al.) instead of a single catch-all "engagement" number:</p>
+          <ul>
+            <li><strong>Happiness</strong> — CSAT specifically on "pricing clarity" (post-booking survey); NPS delta before/after the all-in pricing rollout.</li>
+            <li><strong>Engagement</strong> — searches per session; % of sessions using the new compare-dates strip.</li>
+            <li><strong>Adoption</strong> — % of eligible searchers who see and interact with the all-in fare display / opt-in add-on toggle in month one.</li>
+            <li><strong>Retention</strong> — repeat booking rate within 90 days, segmented by whether a user's first booking hit the old opt-out add-on flow or the new opt-in one.</li>
+            <li><strong>Task success</strong> — Results→Fare Review conversion (the primary funnel-leak metric, North Star for this cycle), search-to-confirmation completion rate, time-to-book.</li>
+          </ul>
+
+          <h4>Tied to an OKR</h4>
+          <p><strong>Objective:</strong> Remove price-shock and trust friction from fare review for price-sensitive searchers.</p>
+          <ul>
+            <li><strong>KR1:</strong> Increase Results→Fare Review conversion from the ~38% modeled baseline (see <a href="#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis, T8</a>) to 50%+ within one quarter.</li>
+            <li><strong>KR2:</strong> Reduce "hidden fees" CSAT verbatims by 50%.</li>
+            <li><strong>KR3:</strong> Ship both P1/Must recommendations this quarter, validated against the A/B hypotheses already scoped in T8.</li>
+          </ul>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
