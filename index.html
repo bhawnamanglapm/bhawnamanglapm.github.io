@@ -381,6 +381,21 @@
   .cs-narrative li{color:#33333D;font-size:14.5px;line-height:1.6;margin-bottom:7px}
   .cs-narrative li strong{color:var(--paper)}
 
+  /* ---------- Show more (progressive disclosure inside long case studies) ---------- */
+  details.cs-showmore{margin:18px 0}
+  details.cs-showmore summary{
+    cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;
+    color:var(--pink);padding:12px 18px;border:1px solid var(--line);border-radius:24px;
+    background:var(--ink-2);transition:border-color .18s,color .18s;
+  }
+  details.cs-showmore summary::-webkit-details-marker{display:none}
+  details.cs-showmore summary::before{content:"▸";font-size:11px;transition:transform .2s}
+  details.cs-showmore[open] summary::before{transform:rotate(90deg)}
+  details.cs-showmore summary:hover{border-color:var(--pink)}
+  details.cs-showmore[open] summary{margin-bottom:14px}
+  details.cs-showmore .sm-count{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--grey);text-transform:none;letter-spacing:0}
+
   /* ---------- PRD doc header + priority badges ---------- */
   .prd-meta{
     display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
@@ -1085,6 +1100,8 @@
         </a>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full interactive Journey &amp; Funnel Map (also available in dark mode).</p>
 
+        <details class="cs-showmore">
+          <summary>Show more — Cut, List Solutions, RICE scoring, Risks, Summarize, HEART metrics, OKRs <span class="sm-count">(the full CIRCLES back half)</span></summary>
         <div class="cs-narrative">
           <p>
             <strong>Competitors:</strong> ixigo surfaces the convenience fee earlier than
@@ -1182,6 +1199,7 @@
             <li><strong>KR3:</strong> Ship both P1/Must recommendations this quarter, validated against the A/B hypotheses already scoped in T8.</li>
           </ul>
         </div>
+        </details>
 
         <div class="jlinks">
           <span><span class="k">Link</span><a href="projects/flight-booking-teardown/journey-map.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">journey &amp; funnel map →</a></span>
@@ -1306,6 +1324,8 @@
         </a>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode).</p>
 
+        <details class="cs-showmore">
+          <summary>Show more — Success Metrics, Launch Plan, Risks &amp; Open Questions, Reusable Insight <span class="sm-count">(the rest of the PRD)</span></summary>
         <div class="cs-narrative">
           <h4>Success Metrics</h4>
           <p>
@@ -1345,6 +1365,7 @@
             over planning without feeling like they lost control of the trip.
           </p>
         </div>
+        </details>
 
         <div class="jlinks">
           <span><span class="k">Link</span><a href="projects/ai-trip-planner/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
@@ -1413,7 +1434,11 @@
             <a href="projects/flight-delay-dashboard/dashboard.html#methodology" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Methodology section</a>,
             summarized here in full.
           </p>
+        </div>
 
+        <details class="cs-showmore">
+          <summary>Show more — full calculation methodology, parameter tables <span class="sm-count">(every number, and why)</span></summary>
+        <div class="cs-narrative">
           <h4>Methodology — the calculation, step by step</h4>
           <p>For every one of the 8,000 simulated flights:</p>
           <ul>
@@ -1471,7 +1496,10 @@
             operations model would need that, and it's a materially harder problem than this
             exercise set out to solve.
           </p>
+        </div>
+        </details>
 
+        <div class="cs-narrative">
           <h4>The Analysis</h4>
           <p>
             With the dataset built, I grouped it four ways — by route, by airline, by season, and by
@@ -2107,7 +2135,7 @@
     <!-- J1: Product Teardown -->
     <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum">J1</span>
+        <span class="jnum done">J1</span>
         <h3 class="jcat-title">Product Teardown</h3>
       </div>
       <p style="font-size:14.5px;color:var(--grey);margin:-4px 0 4px">
