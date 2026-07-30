@@ -932,11 +932,41 @@
       <span class="sec-tag">// where I'm headed next</span>
     </div>
     <p class="sec-intro">
-      Ten self-directed projects aimed squarely at travel-tech PM roles — OTAs, airlines, and
-      travel-AI platforms like MakeMyTrip, ixigo, Booking.com, Expedia, Amadeus, and Sabre.
-      Same pattern as the Case Studies below (turning operational complexity into shipped
-      product judgment), pointed at a new domain. Three are fully scoped out end-to-end;
-      the rest are next up.
+      Seventeen self-directed projects aimed squarely at travel-tech PM roles — OTAs, airlines,
+      marketplaces, mobility, and travel-AI platforms like MakeMyTrip, ixigo, Booking.com,
+      Expedia, Airbnb, Uber, Amadeus, and Sabre. Same pattern as the Case Studies below (turning
+      operational complexity into shipped product judgment), pointed at a new domain. Three are
+      fully scoped out end-to-end; the rest are next up.
+    </p>
+
+    <p style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:var(--paper);margin:32px 0 6px">Systems Coverage Map</p>
+    <p style="font-size:13.5px;color:var(--grey);margin:0 0 16px">
+      Travel-tech breaks into 12 recognizable "core systems" — this maps which of the 17 projects
+      above covers which, so gaps are visible rather than accidental.
+    </p>
+    <div class="ptable2-wrap">
+      <table class="ptable2">
+        <thead><tr><th>#</th><th>Core system</th><th>Status</th><th>Covered by</th><th>Example companies</th></tr></thead>
+        <tbody>
+          <tr><td data-label="#">1</td><td data-label="System">Booking Systems</td><td data-label="Status">Covered</td><td data-label="Covered by">T1, T8</td><td data-label="Companies">Booking.com, Expedia, MakeMyTrip</td></tr>
+          <tr><td data-label="#">2</td><td data-label="System">Search Systems</td><td data-label="Status">Covered</td><td data-label="Covered by">T11</td><td data-label="Companies">Google Flights, Skyscanner, Kayak</td></tr>
+          <tr><td data-label="#">3</td><td data-label="System">Marketplace Systems</td><td data-label="Status">Covered</td><td data-label="Covered by">T12</td><td data-label="Companies">Airbnb, GetYourGuide</td></tr>
+          <tr><td data-label="#">4</td><td data-label="System">Mobility Systems</td><td data-label="Status">Covered</td><td data-label="Covered by">T13</td><td data-label="Companies">Uber, BlaBlaCar</td></tr>
+          <tr><td data-label="#">5</td><td data-label="System">Hospitality Systems</td><td data-label="Status">Partial</td><td data-label="Covered by">T6</td><td data-label="Companies">OYO, Agoda</td></tr>
+          <tr><td data-label="#">6</td><td data-label="System">Trip Planning Systems</td><td data-label="Status">Covered</td><td data-label="Covered by">T2</td><td data-label="Companies">Tripadvisor, Wanderlog</td></tr>
+          <tr><td data-label="#">7</td><td data-label="System">Experience Marketplace</td><td data-label="Status">Covered</td><td data-label="Covered by">T14</td><td data-label="Companies">Viator, Klook</td></tr>
+          <tr><td data-label="#">8</td><td data-label="System">Travel Distribution Systems</td><td data-label="Status">Covered</td><td data-label="Covered by">T17</td><td data-label="Companies">Amadeus, Sabre</td></tr>
+          <tr><td data-label="#">9</td><td data-label="System">Travel Payments Systems</td><td data-label="Status">Covered</td><td data-label="Covered by">T16</td><td data-label="Companies">Stripe, Adyen</td></tr>
+          <tr><td data-label="#">10</td><td data-label="System">Travel Discovery Systems</td><td data-label="Status">Covered</td><td data-label="Covered by">T15</td><td data-label="Companies">Tripadvisor, Yelp</td></tr>
+          <tr><td data-label="#">11</td><td data-label="System">Travel Data &amp; Analytics</td><td data-label="Status">Partial</td><td data-label="Covered by">T3</td><td data-label="Companies">Palantir, Snowflake</td></tr>
+          <tr><td data-label="#">12</td><td data-label="System">Travel AI Systems</td><td data-label="Status">Covered</td><td data-label="Covered by">T2, T5, T6</td><td data-label="Companies">Google, Microsoft</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12.5px;color:var(--grey);margin:10px 0 24px">
+      "Partial" means the existing project touches the system from one angle (recommendation
+      logic, delay prediction) but not its full scope (hotel distribution/inventory management;
+      demand forecasting and pricing optimization) — an honest gap, not a hidden one.
     </p>
 
     <div class="practice-note">
@@ -944,7 +974,9 @@
       feature recs, RICE/MoSCoW scoring, PRD structure, and success metrics, in the same style
       as the Case Studies practice below. <strong>T3 is actually built</strong> — a live,
       interactive dashboard with a real (synthetic, clearly labeled) dataset behind it, not just
-      a write-up. The remaining 6 are scoped and sequenced, marked
+      a write-up. The remaining 13 (including T11–T17, added to close specific system-coverage
+      gaps) are scoped and sequenced as study guides — each names the concepts to learn before
+      building it, not just a one-line pitch — marked
       <span class="todo" style="padding:1px 6px">fill in</span> where the actual build/write-up
       is still in progress.
     </div>
@@ -1740,6 +1772,293 @@
           <dt>PRD template</dt><dd>Reuses the Problem → User Stories → Business Goals → Requirements → Acceptance Criteria → Success Metrics → Launch Plan structure from the PM Writing case study (J6) below.</dd>
           <dt>Progress</dt><dd><span class="todo">fill in — 0 of 6+ written; track completion here as each PRD ships</span></dd>
           <dt>Skills demonstrated</dt><dd>PRD writing at range and speed — breadth across a feature roadmap rather than depth on one project.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
+    <!-- T11: Flight Search & Price Comparison Engine -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T11</span>
+        <h3 class="jcat-title">Flight Search &amp; Price Comparison Engine</h3>
+      </div>
+      <article class="jcard" data-case="flight-search-price-comparison">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#22D3EE,#0E7490)">🔍</div>
+            <div>
+              <div class="jtitle">Flight Search &amp; Price Comparison Engine</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Search Systems — Google Flights, Skyscanner, Kayak. The engine that turns "Delhi to Bangkok, next week" into a ranked, comparable set of fares across airlines and OTAs.</dd>
+          <dt>What PMs build here</dt><dd>Meta-search (aggregating other platforms' inventory and referring out) vs. direct search (querying and selling your own inventory) — a fundamentally different product and monetization model from a booking system, even though the search box looks identical to a user.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Meta-search vs. OTA economics</strong> — Skyscanner/Kayak don't sell tickets, they refer (CPC or referral fee); a booking platform earns margin on the fare. Same search box, opposite business model.<br>
+            2. <strong>Real-time fare staleness</strong> — GDS/airline APIs rate-limit and cache; a shown fare can go stale between search and click-through. "Fare no longer available" is a core UX problem here, not an edge case.<br>
+            3. <strong>Ranking trade-offs</strong> — cheapest-for-user vs. highest-referral-fee-for-business; how a meta-search product decides what "best result" even means.<br>
+            4. <strong>Flexible-date search</strong> (±3 days, whole-month calendar view) as a distinct product surface from single-date search, with a very different backend query pattern.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How does Google Flights' ranking differ from Skyscanner's? What's the actual fare-staleness recovery flow when a user clicks through to a dead price? How is a meta-search product's North Star (clicks-to-partner) different from an OTA's (completed bookings)?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Marketplace/aggregator business models, ranking algorithm trade-offs, real-time data staleness handling — distinct from the single-inventory booking-flow thinking in T1.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
+    <!-- T12: Travel Marketplace Platform -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T12</span>
+        <h3 class="jcat-title">Travel Marketplace Platform</h3>
+      </div>
+      <article class="jcard" data-case="travel-marketplace-platform">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#F472B6,#BE185D)">🤝</div>
+            <div>
+              <div class="jtitle">Travel Marketplace Platform</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Marketplace Systems — Airbnb, GetYourGuide. Two-sided platforms connecting hosts/suppliers with guests/travellers, where trust and liquidity are the core problems, not booking UX.</dd>
+          <dt>What PMs build here</dt><dd>Everything a single-inventory OTA (T1) doesn't need: supply-side onboarding, trust and safety systems, and a matching/ranking model that has to weigh host quality alongside price.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Two-sided liquidity</strong> — no guests without hosts, no hosts without guests. Which side do you subsidize first, and how do you measure "liquidity" as a real metric, not a slogan?<br>
+            2. <strong>Trust &amp; safety as core product</strong> — reviews, ID verification, host guarantees, guest screening — the actual mechanism that makes a stranger's home bookable at all.<br>
+            3. <strong>Marketplace ranking</strong> — host quality signals vs. price vs. availability vs. novelty; very different from ranking a fixed airline-fare inventory.<br>
+            4. <strong>Take-rate design</strong> — host fee vs. guest fee vs. blended, and the transparency trade-offs each creates in the checkout UX.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How does Airbnb's search ranking balance host quality vs. price vs. novelty? What's the trust-building flow a first-time host actually goes through? How does GetYourGuide's supply-side onboarding differ from Airbnb's, given smaller/more numerous suppliers?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Two-sided marketplace dynamics, trust &amp; safety product design, supply-side (not just demand-side) product thinking.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
+    <!-- T13: Ride-Sharing & Mobility Booking -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T13</span>
+        <h3 class="jcat-title">Ride-Sharing &amp; Mobility Booking</h3>
+      </div>
+      <article class="jcard" data-case="ride-sharing-mobility-booking">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#A3E635,#4D7C0F)">🚗</div>
+            <div>
+              <div class="jtitle">Ride-Sharing &amp; Mobility Booking</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Mobility Systems — Uber, BlaBlaCar. Real-time matching between riders and drivers/co-travellers, dynamic pricing, and ETA-driven trust — a live-match product, not a browse-and-book one.</dd>
+          <dt>What PMs build here</dt><dd>Dispatch/matching algorithms and pricing mechanics that respond in seconds, not the search-and-compare flows every other system on this list uses.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Real-time supply/demand matching</strong> — the product surface is a live match, not a list of results to browse; latency itself is a feature.<br>
+            2. <strong>Surge/dynamic pricing</strong> — the most studied and most controversial pricing mechanism in travel-tech; balancing driver-supply incentive against rider price sensitivity and perceived fairness.<br>
+            3. <strong>ETA accuracy as trust</strong> — a wrong ETA is a broken promise, not a UX nitpick; it's the primary trust mechanic in a product with no browsable inventory to build confidence from.<br>
+            4. <strong>Marketplace vs. peer-to-peer</strong> — Uber owns dispatch and pricing outright; BlaBlaCar is closer to a trust-and-coordination layer over independently-arranged car-share trips.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How would you redesign surge pricing to reduce rider anger while preserving driver supply incentives? What's BlaBlaCar's trust model for a multi-hour shared car ride, versus Uber's for a 10-minute trip?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Real-time marketplace/dispatch systems, dynamic pricing design, trust mechanics in a zero-inventory-browse product.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
+    <!-- T14: Tours & Activities Marketplace -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T14</span>
+        <h3 class="jcat-title">Tours &amp; Activities Marketplace</h3>
+      </div>
+      <article class="jcard" data-case="tours-activities-marketplace">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FCA5A5,#B91C1C)">🎫</div>
+            <div>
+              <div class="jtitle">Tours &amp; Activities Marketplace</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Experience Marketplace — Viator, Klook. Discovery and booking for bookable experiences (tours, tickets, activities) — a catalog/inventory problem more than a real-time-matching one.</dd>
+          <dt>What PMs build here</dt><dd>Supply-side tooling for thousands of small local operators (not a handful of airlines), and the cross-sell integration point where "book a flight" surfaces "things to do at your destination."</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Perishable inventory at small scale</strong> — an unsold tour slot today is gone forever, the same yield-management problem as an airline seat, but per-operator volume is tiny compared to an airline.<br>
+            2. <strong>Long-tail supply</strong> — thousands of small local operators instead of a handful of airlines; supply-side tooling and quality control look completely different from T1's world.<br>
+            3. <strong>Instant confirmation vs. request-to-book</strong> — some experiences confirm immediately, others need the operator to manually accept; a real trust/UX trade-off, not just an engineering detail.<br>
+            4. <strong>Cross-sell placement</strong> — where in a booking flow (like T1's) should experience upsells actually appear, and does that belong to this system or the booking system it's bolted onto?
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How does Klook's supply-side operator tooling differ from a single-inventory OTA's? Where in the funnel (see T8) should an experience upsell actually be placed, and what does it cannibalize if placed too early?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Long-tail supply management, perishable-inventory yield thinking at small scale, cross-sell/attach-rate product design.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
+    <!-- T15: Travel Discovery & Reviews Platform -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T15</span>
+        <h3 class="jcat-title">Travel Discovery &amp; Reviews Platform</h3>
+      </div>
+      <article class="jcard" data-case="travel-discovery-reviews-platform">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FDE047,#A16207)">⭐</div>
+            <div>
+              <div class="jtitle">Travel Discovery &amp; Reviews Platform</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Travel Discovery Systems — Tripadvisor, Yelp. Pre-booking inspiration and trust — reviews, rankings, and content that influence a decision made and completed somewhere else entirely.</dd>
+          <dt>What PMs build here</dt><dd>A non-transactional product: most Tripadvisor traffic never books on Tripadvisor. The PM problem is monetizing influence, not completing a purchase.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Monetizing a non-transactional product</strong> — referral/ads revenue instead of booking margin; a fundamentally different business model than every OTA on this list.<br>
+            2. <strong>Review fraud &amp; fake-review detection</strong> — the core trust problem: how do you know a 5-star review is real, without over-flagging genuine negative ones?<br>
+            3. <strong>Content ranking vs. e-commerce ranking</strong> — a "best restaurant" ranking has no purchase event forcing a decision; different signals matter than in a booking-funnel ranking (T8).<br>
+            4. <strong>SEO as the primary growth channel</strong> — discovery platforms live or die on organic search traffic in a way booking platforms (T1) don't have to.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How would you detect and penalize fake reviews without over-flagging real negative ones? What's Tripadvisor's actual North Star metric if it isn't bookings?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Non-transactional business models, trust/fraud detection systems, content ranking, SEO-driven growth strategy.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
+    <!-- T16: Travel Payments & Refunds System -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T16</span>
+        <h3 class="jcat-title">Travel Payments &amp; Refunds System</h3>
+      </div>
+      <article class="jcard" data-case="travel-payments-refunds-system">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#5EEAD4,#0F766E)">💳</div>
+            <div>
+              <div class="jtitle">Travel Payments &amp; Refunds System</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Travel Payments Systems — Stripe, Adyen. The payment infrastructure underneath every other system here — a single itinerary can touch 4+ currencies and vendors at once.</dd>
+          <dt>What PMs build here</dt><dd>Multi-currency, multi-method payment handling and refund/dispute resolution at travel-specific scale and complexity, not a generic checkout flow.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Split payments &amp; multi-vendor settlement</strong> — one trip booking might pay an airline, a hotel, and a local tour operator; who gets paid when, and who eats a refund when one leg cancels?<br>
+            2. <strong>Chargeback &amp; dispute handling</strong> — travel has uniquely high dispute rates (cancelled flights, no-show hotels) — a payments PM's core recurring headache.<br>
+            3. <strong>Currency conversion &amp; FX risk</strong> — who absorbs the exchange-rate movement between the booking date and the travel date, months later?<br>
+            4. <strong>Refund policy as a product surface</strong>, not a policy doc — partial refunds, cash vs. credit, voucher expiry are UX decisions with real financial modeling behind each one.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How would you design a refund policy for a 3-vendor itinerary where only one vendor cancels? What's the actual dispute-resolution flow when a traveller claims non-delivery of a paid-for service?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Payments infrastructure design, multi-party settlement logic, dispute/refund policy as product design — not just a support-team script.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
+    <!-- T17: Airline/Hotel Distribution System (GDS) -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T17</span>
+        <h3 class="jcat-title">Airline/Hotel Distribution System (GDS)</h3>
+      </div>
+      <article class="jcard" data-case="airline-hotel-distribution-gds">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#A5B4FC,#4338CA)">🔌</div>
+            <div>
+              <div class="jtitle">Airline/Hotel Distribution System (GDS)</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Travel Distribution Systems — Amadeus IT Group, Sabre Corporation. The B2B plumbing that makes every other system on this list possible — the GDS is what an OTA's search actually queries behind the scenes.</dd>
+          <dt>What PMs build here</dt><dd>B2B infrastructure for travel agencies and OTAs, not a consumer product — API reliability, partner SLAs, and integration timelines are the actual PM discipline, not UX polish.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>GDS as B2B infrastructure</strong> — the customer is a travel agency or OTA, not a traveller; a completely different PM discipline than every consumer-facing system above.<br>
+            2. <strong>NDC (New Distribution Capability)</strong> — the airline industry's real, current push to bypass traditional GDS with direct API access; an active disruption to this exact business model, worth naming by name.<br>
+            3. <strong>Inventory synchronization latency</strong> — a seat sold on one channel must be un-sold everywhere else within seconds, or the airline oversells.<br>
+            4. <strong>Switching costs &amp; lock-in</strong> — why airlines and agencies rarely change GDS providers; the actual moat this multi-decade business runs on.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            Why is NDC a genuine threat to Amadeus/Sabre's business model, and how would a PM there respond? What does a GDS integration project actually look like from an OTA's engineering side (ties to T1's "technical execution" comfort)?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>B2B/infrastructure product management, API-as-product thinking, understanding a legacy moat well enough to know what threatens it.</dd>
         </dl>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
