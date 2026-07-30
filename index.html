@@ -367,6 +367,19 @@
   .jlinks{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;gap:24px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px}
   .jlinks .k{color:var(--grey);text-transform:uppercase;letter-spacing:.06em;margin-right:6px}
 
+  /* ---------- Narrative case study (Problem/Approach/Analysis/Findings/Recommendations) ---------- */
+  .cs-facts{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 22px}
+  .cs-facts .chip{font-size:11.5px;padding:6px 12px}
+  .cs-narrative h4{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;
+    border-left:3px solid var(--pink);padding-left:14px;margin:26px 0 10px;
+  }
+  .cs-narrative h4:first-child{margin-top:0}
+  .cs-narrative p{color:#33333D;font-size:14.5px;line-height:1.65;margin-bottom:10px;max-width:720px}
+  .cs-narrative ul{margin:10px 0 4px;padding-left:20px}
+  .cs-narrative li{color:#33333D;font-size:14.5px;line-height:1.6;margin-bottom:7px}
+  .cs-narrative li strong{color:var(--paper)}
+
   /* ---------- Case study full-screen detail view ---------- */
   html.case-open,html.case-open body{overflow:hidden}
   .case-overlay{position:fixed;inset:0;z-index:200;background:var(--ink);overflow-y:auto}
@@ -1063,14 +1076,79 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>Analyze flight data to answer: which routes delay most, delay patterns by airline, and delay trends by season or time of day — visualized as an interactive dashboard.</dd>
-          <dt>Dataset</dt><dd>8,000 flights, generated rather than pulled live — the environment this was built in can't reach DGCA/BTS/Kaggle. Airlines are fictional labels (IndiFly, Metro Express, BlueSky Air, Skyline National, Coastal Wings) so no numbers are attributed to a real carrier; routes use real Indian city pairs, since hub congestion and seasonal effects (North Indian winter fog, western-coast monsoon) are public aviation-industry patterns, not a claim about any one company. Full generator script + methodology documented in the repo.</dd>
-          <dt>Dashboard tool</dt><dd>Built as a self-contained interactive HTML/JS dashboard (not Power BI/Tableau — no GUI access in this environment) — horizontal bar charts, a route×season heatmap, hover tooltips, a table-view fallback, and full dark-mode support, following a CVD-validated color palette.</dd>
-          <dt>KPIs tracked</dt><dd>On-time rate (≤15min), average delay per flight, cancellation rate, delay % by route/airline/season/time-of-day.</dd>
-          <dt>Skills demonstrated</dt><dd>Data analysis, KPI dashboarding, accessible chart design (colorblind-safe palette, keyboard-focusable tooltips, table-view parity) — feeds the "delay-risk badge" recommendation in the Flight Booking Teardown above.</dd>
-          <dt>Outcome / insight</dt><dd>84.4% on-time, 9.2min average delay across the modeled fleet. Worst route: DEL-GOI (12.6min avg, 34% delayed &gt;15min) — a route that's both winter-fog- and monsoon-sensitive in the model. Winter is the worst season by a wide margin (11.9min avg vs. 7.5min in Spring/Post-Monsoon) — the modeled North Indian fog effect. Delays cascade through the day: Night flights average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations compound delays leg-to-leg.</dd>
-        </dl>
+        <div class="cs-facts">
+          <span class="chip">8,000 flights analyzed</span>
+          <span class="chip">Self-contained HTML/JS dashboard</span>
+          <span class="chip">CVD-validated palette</span>
+          <span class="chip">Full dark-mode support</span>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>The Problem</h4>
+          <p>
+            An OTA or airline can't act on delay risk it hasn't aggregated. A single flight-status
+            page tells one traveller their flight is late; nothing rolls that up into the pattern a
+            PM actually needs — which routes are structurally unreliable, which airlines run tighter
+            operations, and when in the calendar or the day risk spikes. This project builds that
+            rollup, answering the three questions a travel-tech PM would actually be asked before
+            shipping something like the "delay-risk badge" recommended in the
+            <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a>:
+            which routes delay most, how airlines differ, and how season and time of day shape delay risk.
+          </p>
+
+          <h4>My Approach</h4>
+          <p>
+            The honest constraint first: this was built in an environment that can't reach DGCA, US
+            BTS, or Kaggle to pull a real historical dataset. Rather than present scraped-looking
+            numbers that weren't actually real, I built a modeled dataset instead and said so
+            directly on the dashboard — 8,000 flights generated from parameters I chose and
+            documented: fictional airline names (so no delay number is ever attributed to a real,
+            identifiable carrier), real Indian city-pair routes (airport congestion at Delhi/Mumbai/
+            Bengaluru and effects like North Indian winter fog are public aviation-industry knowledge,
+            not a claim about any company), and additive delay effects for route congestion, season,
+            and time-of-day. The first pass came out at a 48.9% on-time rate — implausibly low for
+            any real airline — so I re-tuned the distribution parameters until the fleet-wide numbers
+            matched a plausible real-world range, while keeping the underlying patterns (winter fog,
+            monsoon, evening cascade) intact.
+          </p>
+
+          <h4>The Analysis</h4>
+          <p>
+            With the dataset built, I grouped it four ways — by route, by airline, by season, and by
+            time of day — computing average delay, the share of flights delayed over 15 minutes, and
+            cancellation rate for each. A single "worst route" or "worst season" number hides the
+            risk that actually matters operationally, which is where two dimensions compound — so I
+            cross-tabbed the top 8 routes against all 5 seasons into a heatmap instead of stopping at
+            one-dimensional rankings.
+          </p>
+
+          <h4>Key Findings</h4>
+          <ul>
+            <li><strong>84.4% on-time</strong> fleet-wide, 9.2min average delay, 1.1% cancellation rate.</li>
+            <li><strong>DEL-GOI is the single worst route</strong> (12.6min avg, 34% delayed &gt;15min) — the only route in the model that's both winter-fog- <em>and</em> monsoon-sensitive, so it takes a hit twice a year instead of once.</li>
+            <li><strong>Winter is the worst season by a wide margin</strong> (11.9min avg vs. 7.5min in Spring/Post-Monsoon) — every Delhi-origin route in the heatmap spikes in December–January.</li>
+            <li><strong>Delays compound through the day</strong> — Night departures average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations cascade delays leg-to-leg.</li>
+            <li><strong>Airline-level spread is real but secondary</strong> — the gap between the most and least reliable modeled carrier (7.6–10.7min) is smaller than the gap between Winter and Spring (7.5–11.9min). Route and season explain more than carrier choice does.</li>
+          </ul>
+
+          <h4>Recommendations</h4>
+          <p>What a PM would actually do with this, if it were live data instead of modeled data:</p>
+          <ul>
+            <li><strong>Surface delay risk during booking, not after.</strong> Feed a route + season + time-of-day risk score into the delay-risk badge recommended in the Flight Booking Teardown, so a traveller sees it before they book, not after they're already delayed.</li>
+            <li><strong>Pad schedule buffers seasonally, not year-round.</strong> A flat on-time SLA misses that Delhi-origin routes need a materially wider buffer specifically in December–January, not every month.</li>
+            <li><strong>Treat Night departures as an upstream ops problem.</strong> Since delay compounds through the day in this model, the fix is earlier-leg reliability, not just padding the last flight of the day.</li>
+            <li><strong>Re-run this against real DGCA/BTS data before shipping anything downstream of it.</strong> This dashboard's job was to prove the analysis and the product judgment, not to replace a real data pipeline.</li>
+          </ul>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            A delay dashboard's real product risk isn't the chart — it's presenting modeled or
+            incomplete data as if it were ground truth. The discipline that matters here is the same
+            one from the AI Trip Planner's guardrails: say what's real, say what's modeled, and never
+            let a polished visualization imply more certainty than the underlying data supports.
+          </p>
+        </div>
+
         <a href="projects/flight-delay-dashboard/dashboard.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
           <img src="projects/flight-delay-dashboard/screenshots/dashboard-light.png" alt="Flight Delay Prediction Dashboard — KPI tiles (8,000 flights, 84.4% on-time, 9.2min avg delay) and a bar chart ranking all 15 routes by average delay, DEL-GOI worst at 12.6 minutes" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
         </a>
@@ -2614,6 +2692,20 @@
     var btn = card.querySelector('.jhead');
     if(btn){
       btn.addEventListener('click', function(){ openCase(card); });
+    }
+  });
+
+  // In-content cross-references between case studies, e.g.
+  // <a data-open-case="some-slug">, work whether clicked from the page
+  // or from inside an already-open overlay (a plain #case-slug href only
+  // fires history's popstate on back/forward, not on the initial click).
+  document.addEventListener('click', function(e){
+    var link = e.target.closest ? e.target.closest('[data-open-case]') : null;
+    if(!link) return;
+    var target = findCardBySlug(link.getAttribute('data-open-case'));
+    if(target){
+      e.preventDefault();
+      openCase(target);
     }
   });
 
