@@ -37,18 +37,564 @@
 <section style="padding-top:56px">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Travel-Tech Practice — full roadmap</h2>
-      <span class="sec-tag">// T4–T17</span>
+      <h2>Travel-Tech Practice — full list</h2>
+      <span class="sec-tag">// T1–T17</span>
     </div>
     <p class="sec-intro">
-      14 more travel-tech projects — T8 (Booking Funnel Analysis) is fully written, same depth
-      as the flagships; T4–T7 and T9–T17 are scoped as study guides, each naming the concepts to
-      learn before building it, not just a one-line pitch. The 3 fully built flagships
-      (T1, T2, T3) live on the main portfolio page —
-      <a href="index.html#travel-tech" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">back to those</a>.
+      All 17 travel-tech projects. T1, T2, and T3 are the fully built flagships — they're also
+      pinned to the top of the
+      <a href="index.html#travel-tech" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">main portfolio page</a>.
+      T8 (Booking Funnel Analysis) is fully written too, same depth as the flagships; T4–T7 and
+      T9–T17 are scoped as study guides, each naming the concepts to learn before building it, not
+      just a one-line pitch.
     </p>
 
     <div class="jtrack">
+    <!-- T1: Flight Booking Product Teardown -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T1</span>
+        <h3 class="jcat-title">Flight Booking Product Teardown</h3>
+      </div>
+      <article class="jcard" data-case="makemytrip-flight-booking-teardown" data-updated="2026-07-30">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#38BDF8,#0284C7)">✈️</div>
+            <div>
+              <div class="jtitle">MakeMyTrip — Flight Booking Teardown</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Flagship — fully scoped</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">CIRCLES method</span>
+          <span class="chip">HEART framework (Google)</span>
+          <span class="chip">OKR-aligned recommendation</span>
+          <span class="chip">RICE + MoSCoW</span>
+          <span class="chip">Business model &amp; risk analysis</span>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>C — Comprehend the Situation</h4>
+          <p>
+            The clarifying questions I'd ask before touching the product, the way a Google PM
+            interview expects: which platform (web vs. app — <strong>both</strong>), domestic or
+            international (<strong>domestic only</strong>), and an existing product or a new one
+            (<strong>existing, mature product</strong>). Scope: MakeMyTrip's flight search →
+            booking flow specifically, not hotels or holidays — narrower on purpose, so the
+            analysis goes deep on one flow instead of shallow across three.
+          </p>
+          <p>
+            <strong>Business model:</strong> the flight vertical monetizes through airline
+            commissions/overrides, a convenience fee layered on the base fare, and ancillary
+            revenue (seat selection, insurance, baggage). That matters here specifically —
+            add-on pre-selection and the late-stage fee reveal found below aren't accidental UX
+            oversights, they're revenue mechanisms. Any recommendation that removes them has a
+            real, quantifiable cost, not just an upside; see Risks &amp; Trade-offs below.
+          </p>
+          <p>
+            <strong>North Star Metric (company level):</strong> completed bookings per unique
+            searcher — normalizes for the high browsing-only traffic that never intends to book.
+            This teardown is scoped to moving that metric one funnel stage at a time, starting
+            with the stage that leaks hardest.
+          </p>
+
+          <h4>I — Identify the Customer</h4>
+          <p>
+            Three personas span the segmentation axes that actually predict booking behavior —
+            price sensitivity, time pressure, and party complexity — not demographic axes like age
+            or city, which don't:
+          </p>
+          <ul>
+            <li><strong>"Value Rakesh"</strong> (28, IT professional, 4–5 domestic trips/yr) — price-sensitive, compares 3+ apps before booking.</li>
+            <li><strong>"Business Priya"</strong> (34, consulting manager) — books last-minute, values reliability and rebooking flexibility over price.</li>
+            <li><strong>"Family Planner Anita"</strong> (41) — books for 4+ pax, needs group-seat clarity and abandons on unclear total-fare breakdowns.</li>
+          </ul>
+
+          <h4>R — Report the Customer's Needs</h4>
+          <p>
+            <strong>Journey:</strong> Home search widget → results list (filters/sort) → fare
+            review (baggage/meal add-ons) → traveller details → payment → confirmation + "My
+            Trips." Logged-out users are funnelled into account creation at payment, not upfront —
+            reduces search friction but adds a late-stage form-fill tax.
+          </p>
+          <p>
+            <strong>Retention loop:</strong> "My Trips" functions as a lifecycle retention engine,
+            not just a post-booking utility tab — it's the reason a user reopens the app at all
+            after booking (rebooking, cancellation, web check-in). That's why Business Priya's
+            reliance on it post-confirmation (see the funnel map below) is a commercial signal, not
+            just a UX nicety — it's the retention mechanism the acquisition funnel below feeds into.
+          </p>
+          <p><strong>Needs uncovered, mapped to the journey above:</strong></p>
+          <ul>
+            <li><strong>Trust/transparency need</strong> — fare inflation between search-result price and fare-review price (taxes/fees revealed late) erodes trust; add-on pre-selection (insurance, seat) defaults to "on," reading as a dark pattern at checkout.</li>
+            <li><strong>Time-efficiency need</strong> — filter fatigue (12+ dimensions, no smart default) and no persistent price comparison across dates force users to manually reopen search in a new tab.</li>
+            <li><strong>Clarity/control need</strong> — baggage policy buried a tap deep, a top cause of post-booking support contact.</li>
+          </ul>
+          <p>
+            <strong>Funnel:</strong> Search → Results → Fare Review → Traveller Info → Payment →
+            Confirmation. The biggest modeled drop-off sits between Results and Fare Review
+            (price-shock from add-on fees — modeled at ~38% conversion in the
+            <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>),
+            with a second leak between Traveller Info and Payment (form fatigue + OTP retry friction).
+          </p>
+        </div>
+
+        <a href="projects/flight-booking-teardown/journey-map.html" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
+          <img src="projects/flight-booking-teardown/screenshots/journey-map-light.png" alt="Journey and funnel map from Search to Confirmation, showing the funnel narrowing from 100% to 14%, with the steepest drop (92% to 35%) at Fare Review, annotated with pain points, persona impact, and which recommendation targets each stage" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full interactive Journey &amp; Funnel Map (also available in dark mode).</p>
+
+        <details class="cs-showmore">
+          <summary>Show more — Cut, List Solutions, RICE scoring, Risks, Summarize, HEART metrics, OKRs <span class="sm-count">(the full CIRCLES back half)</span></summary>
+        <div class="cs-narrative">
+          <p>
+            <strong>Competitors:</strong> ixigo surfaces the convenience fee earlier than
+            MakeMyTrip and leads with "flight confirm guarantee" trust messaging; Booking.com's
+            flights product (smaller India share) shows all-in price at search. MakeMyTrip's "My
+            Trips" is the strongest post-booking lifecycle surface of the three.
+          </p>
+
+          <h4>C — Cut Through Prioritization</h4>
+          <p>
+            Of the three personas, I'd prioritize <strong>Value Rakesh's need first.</strong>
+            Price-sensitive comparison shoppers are both the largest segment of OTA search traffic
+            and the segment most exposed to the single biggest funnel leak above — the
+            fare-review price shock hits a price-anchored searcher hardest. Business Priya's
+            reliability need and Family Planner Anita's group-booking complexity are real, but
+            lower-frequency — worth a later cycle, not this one. Everything below is scoped to
+            fixing Rakesh's need first.
+          </p>
+
+          <h4>L — List Solutions</h4>
+          <ol style="padding-left:18px;margin:0 0 14px;color:#33333D;font-size:14.5px;line-height:1.6">
+            <li style="margin-bottom:7px">All-in fare display at the results level — kill the late-stage price reveal.</li>
+            <li style="margin-bottom:7px">Opt-in (not opt-out) add-ons at fare review.</li>
+            <li style="margin-bottom:7px">Persistent "compare dates" strip on results instead of reopening search.</li>
+            <li style="margin-bottom:7px">Baggage/meal policy inline on the fare card, not a tap away.</li>
+            <li style="margin-bottom:7px">One-tap "hold my seat 15 min" for indecisive high-intent users.</li>
+            <li style="margin-bottom:7px">Smart filter defaults ranked by price + duration + layover, not price alone.</li>
+            <li style="margin-bottom:7px">Payment retry with saved card + biometric re-auth to cut payment-stage drop-off.</li>
+            <li style="margin-bottom:7px">Proactive delay-risk badge on results (feeds the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>).</li>
+            <li style="margin-bottom:7px">Group-booking mode for 4+ pax with a shared itinerary link.</li>
+            <li>Post-booking "manage trip" nudges (web check-in, gate-change alerts) via push.</li>
+          </ol>
+
+          <h4>E — Evaluate Trade-offs</h4>
+          <p>RICE-scored, ranked by priority:</p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Feature (RICE-scored)</th><th>Reach × Impact × Confidence</th><th>Effort</th><th>RICE / priority</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Feature">Opt-in add-ons at fare review</td><td data-label="R×I×C">8 × 2 × 0.9</td><td data-label="Effort">1</td><td data-label="RICE">14.4 — <strong>P1 / Must</strong></td></tr>
+              <tr><td data-label="Feature">All-in fare display at results</td><td data-label="R×I×C">10 × 3 × 0.9</td><td data-label="Effort">2</td><td data-label="RICE">13.5 — <strong>P1 / Must</strong></td></tr>
+              <tr><td data-label="Feature">Baggage/meal policy inline</td><td data-label="R×I×C">9 × 1.5 × 0.8</td><td data-label="Effort">1</td><td data-label="RICE">10.8 — <strong>P1 / Must</strong></td></tr>
+              <tr><td data-label="Feature">Delay-risk badge on results</td><td data-label="R×I×C">10 × 2 × 0.6</td><td data-label="Effort">3</td><td data-label="RICE">4.0 — <strong>P2 / Should</strong></td></tr>
+              <tr><td data-label="Feature">Payment retry + biometric re-auth</td><td data-label="R×I×C">5 × 3 × 0.7</td><td data-label="Effort">3</td><td data-label="RICE">3.5 — <strong>P2 / Should</strong></td></tr>
+              <tr><td data-label="Feature">Persistent compare-dates strip</td><td data-label="R×I×C">6 × 2 × 0.7</td><td data-label="Effort">3</td><td data-label="RICE">2.8 — <strong>P3 / Could</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <p style="margin-top:12px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle — the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a booking-funnel fix.</p>
+
+          <h4>Risks &amp; Trade-offs</h4>
+          <p>Every recommendation above has a cost, not just an upside — naming it here, not after launch:</p>
+          <ul>
+            <li><strong>All-in fare display</strong> — the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
+            <li><strong>Opt-in add-ons</strong> — directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete — it needs a revenue-per-booking floor agreed with Finance before shipping, not just a UX sign-off.</li>
+            <li><strong>Baggage/meal policy inline</strong> — minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
+            <li><strong>Delay-risk badge</strong> — risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T3</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
+          </ul>
+          <p>
+            <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind the A/B test
+            already scoped in the <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>,
+            with revenue-per-booking as a guardrail metric alongside conversion — not conversion
+            alone. A win on Fare Review conversion that quietly craters ancillary revenue isn't
+            actually a win.
+          </p>
+
+          <h4>S — Summarize Recommendation</h4>
+          <p>
+            Ship <strong>all-in fare display</strong> and <strong>opt-in add-ons</strong> first —
+            RICE 13.5 and 14.4, the two highest-scored and lowest-effort items on the list. Together
+            they remove the exact price-shock that costs the funnel its single biggest leak, for
+            the segment (Rakesh) chosen in the Cut step above. Everything else on this list
+            sequences behind those two.
+          </p>
+
+          <h4>Success Metrics — the HEART Framework</h4>
+          <p>Using Google's own HEART framework (Rodden et al.) instead of a single catch-all "engagement" number:</p>
+          <ul>
+            <li><strong>Happiness</strong> — CSAT specifically on "pricing clarity" (post-booking survey); NPS delta before/after the all-in pricing rollout.</li>
+            <li><strong>Engagement</strong> — searches per session; % of sessions using the new compare-dates strip.</li>
+            <li><strong>Adoption</strong> — % of eligible searchers who see and interact with the all-in fare display / opt-in add-on toggle in month one.</li>
+            <li><strong>Retention</strong> — repeat booking rate within 90 days, segmented by whether a user's first booking hit the old opt-out add-on flow or the new opt-in one.</li>
+            <li><strong>Task success</strong> — Results→Fare Review conversion (the primary funnel-leak metric, North Star for this cycle), search-to-confirmation completion rate, time-to-book.</li>
+          </ul>
+
+          <h4>Tied to an OKR</h4>
+          <p><strong>Objective:</strong> Remove price-shock and trust friction from fare review for price-sensitive searchers.</p>
+          <ul>
+            <li><strong>KR1:</strong> Increase Results→Fare Review conversion from the ~38% modeled baseline (see <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis, T8</a>) to 50%+ within one quarter.</li>
+            <li><strong>KR2:</strong> Reduce "hidden fees" CSAT verbatims by 50%.</li>
+            <li><strong>KR3:</strong> Ship both P1/Must recommendations this quarter, validated against the A/B hypotheses already scoped in T8.</li>
+          </ul>
+        </div>
+        </details>
+
+        <div class="jlinks">
+          <span><span class="k">Link</span><a href="projects/flight-booking-teardown/journey-map.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">journey &amp; funnel map →</a></span>
+          <span><span class="k">Image</span><a href="projects/flight-booking-teardown/screenshots/journey-map-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
+    <!-- T2: AI Trip Planner -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T2</span>
+        <h3 class="jcat-title">AI Trip Planner — PRD</h3>
+      </div>
+      <article class="jcard" data-case="ai-trip-planner-prd" data-updated="2026-07-30">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#C084FC,#9333EA)">🧭</div>
+            <div>
+              <div class="jtitle">"Wayfare AI" — Trip Planner PRD</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Flagship — fully scoped</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">Goals &amp; Non-Goals</span>
+          <span class="chip">P0/P1/P2 requirements</span>
+          <span class="chip">Phased launch plan</span>
+          <span class="chip">Open questions, not just answers</span>
+        </div>
+
+        <div class="prd-meta">
+          <div><span class="k">Doc type</span><span class="v">PRD</span></div>
+          <div><span class="k">Status</span><span class="v">Draft v1.2</span></div>
+          <div><span class="k">Owner</span><span class="v">Bhawna Mangla (PM)</span></div>
+          <div><span class="k">Last updated</span><span class="v">Jul 2026</span></div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>TL;DR</h4>
+          <p>
+            <strong>"Wayfare AI"</strong> — a conversational trip-planning assistant that turns
+            "plan me a trip" into a bookable, weather- and budget-aware itinerary in one session.
+            MVP scope: single-destination domestic trips only, 3–7 days. Ships itinerary
+            generation, a budget optimizer, and weather-aware sequencing; explicitly does not
+            attempt multi-city routing, group itineraries, or live disruption reflow in v1 — see
+            Goals &amp; Non-Goals below for why.
+          </p>
+
+          <h4>Problem Statement</h4>
+          <p>
+            Planning a multi-day trip today means 8–12 open tabs (flights, hotels, blogs, weather,
+            maps) and hours of manual cross-referencing. Users abandon planning mid-way and either
+            overpay on a generic package or under-plan and lose time on-trip re-deciding.
+          </p>
+
+          <h4>Goals &amp; Non-Goals</h4>
+          <p><strong>Goals (v1):</strong></p>
+          <ul>
+            <li><strong>G1:</strong> Cut time-to-first-itinerary to under 90 seconds for a first-time planner.</li>
+            <li><strong>G2:</strong> Convert at least one booked leg per generated itinerary, at a target rate set post-launch (the North Star, below).</li>
+            <li><strong>G3:</strong> Let a budget-conscious traveller swap any single item without manually recalculating the rest of the plan.</li>
+          </ul>
+          <p><strong>Non-Goals (explicitly out of scope for v1):</strong></p>
+          <ul>
+            <li>Multi-city or multi-destination routing.</li>
+            <li>Shared or group itineraries.</li>
+            <li>Live disruption reflow — needs a flight-status API integration not yet built; sequenced for v2 once MVP itinerary quality is validated, not because it's unimportant (it's Reactive Rhea's entire use case, see below).</li>
+            <li>Replacing a travel agent for complex international multi-leg trips — this is a single-destination planning aid, not a full-service booking replacement.</li>
+          </ul>
+
+          <h4>Users &amp; Use Cases</h4>
+          <ul>
+            <li><strong>"First-timer Farah"</strong> — plans 1 international trip/yr, wants 2–3 easy choices, not raw options.</li>
+            <li><strong>"Optimizer Omar"</strong> — books 6+ trips/yr, wants full control and only trusts AI suggestions he can see the reasoning behind.</li>
+            <li><strong>"Reactive Rhea"</strong> — mid-trip, needs the plan to adapt live when a flight delays or weather turns (her use case is explicitly a Non-Goal for v1 — see above).</li>
+          </ul>
+          <p><strong>User stories:</strong></p>
+          <ul>
+            <li>As a first-time planner, I want to type "5 days in Vietnam under ₹60k" and get a full day-by-day itinerary, so I don't have to research every leg myself.</li>
+            <li>As a budget-conscious traveller, I want to see how each day's plan affects my total spend, so I can swap a paid activity for a free one without recalculating manually.</li>
+            <li>As a returning user, I want the assistant to remember my dietary and pace preferences, so I don't re-explain them every trip.</li>
+            <li>As a skeptical planner, I want to see <em>why</em> a restaurant or attraction was recommended, so I can trust or override the suggestion.</li>
+          </ul>
+
+          <h4>Requirements</h4>
+          <p>Prioritized P0 (must ship for MVP) through P2 (explicitly post-MVP):</p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Requirement</th><th>Priority</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Requirement">Destination recommendation from loose intent</td><td data-label="Priority"><span class="prio p0">P0</span></td><td data-label="Notes">Parses budget band, trip length, vibe from a single input</td></tr>
+              <tr><td data-label="Requirement">Day-by-day itinerary generation</td><td data-label="Priority"><span class="prio p0">P0</span></td><td data-label="Notes">The core deliverable; every other requirement supports it</td></tr>
+              <tr><td data-label="Requirement">Budget optimizer</td><td data-label="Priority"><span class="prio p0">P0</span></td><td data-label="Notes">Reallocates spend across flight/hotel/activities to hit a target</td></tr>
+              <tr><td data-label="Requirement">Weather-aware sequencing</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Outdoor-heavy days scheduled against the best forecast window</td></tr>
+              <tr><td data-label="Requirement">Restaurant/attraction recommendation</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Rating + proximity + price band, with visible reasoning</td></tr>
+              <tr><td data-label="Requirement">Preference memory (dietary, pace)</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Persists across sessions for returning users</td></tr>
+              <tr><td data-label="Requirement">Disruption re-planning on delay</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1 — needs flight-status API integration</td></tr>
+              <tr><td data-label="Requirement">Multi-city routing</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1</td></tr>
+              <tr><td data-label="Requirement">Shared/group itineraries</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Design — Key Flows</h4>
+          <ul>
+            <li><strong>Intent capture</strong> — single chat-style input + 3 quick-pick chips (budget band, trip length, vibe), not a 12-field form.</li>
+            <li><strong>Itinerary review</strong> — day-by-day vertical timeline, each activity swappable via a "Why this?" expand showing rating/distance/price reasoning.</li>
+            <li><strong>Budget bar</strong> — persistent sticky bar showing spend-to-date vs. target, updating live as items are swapped.</li>
+            <li><strong>Book/hold</strong> — itinerary converts to a bookable checklist (flight, hotel, key activities) with per-leg deep links.</li>
+          </ul>
+        </div>
+
+        <a href="projects/ai-trip-planner/wireframes.html" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
+          <img src="projects/ai-trip-planner/screenshots/wireframes-light.png" alt="Four low-fidelity wireframes for Wayfare AI: Intent Capture (chat input plus quick-pick chips), Itinerary Review (day-by-day timeline with a Why this? expand), Budget Bar (sticky spend-vs-target progress bar), and Book/Hold (per-leg booking checklist)" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode).</p>
+
+        <details class="cs-showmore">
+          <summary>Show more — Success Metrics, Launch Plan, Risks &amp; Open Questions, Reusable Insight <span class="sm-count">(the rest of the PRD)</span></summary>
+        <div class="cs-narrative">
+          <h4>Success Metrics</h4>
+          <p>
+            <strong>North Star:</strong> itineraries that convert to at least one booked leg.
+            <strong>Supporting:</strong> time-to-first-itinerary (target &lt;90s, ties to G1),
+            swap rate per itinerary (a trust signal on first-pass suggestion quality — high swap
+            rate means the first draft isn't landing), budget-target adherence rate, D7 return
+            rate for pre-trip re-edits.
+          </p>
+
+          <h4>Launch Plan</h4>
+          <ul>
+            <li><strong>Phase 1 (MVP):</strong> single-destination domestic trips, 3–7 days. Itinerary generation + budget optimizer + weather sequencing only — the three P0 requirements.</li>
+            <li><strong>Phase 2:</strong> multi-city routing + persistent preference memory, gated on Phase 1 hitting its swap-rate and time-to-itinerary targets — no point routing multiple cities if the single-city itinerary isn't trusted yet.</li>
+            <li><strong>Phase 3:</strong> live disruption reflow (Reactive Rhea's use case), gated on a flight-status API integration that doesn't exist yet.</li>
+          </ul>
+
+          <h4>Risks &amp; Open Questions</h4>
+          <p>
+            <strong>Risk:</strong> hallucinated venue details (wrong hours, permanently closed)
+            need a live data-freshness check, not just training-time accuracy. Recommendation
+            logic must stay auditable and explainable so it doesn't over-fit to popular/sponsored
+            listings (same scoring discipline as the
+            <a href="travel-tech-more.html#case-hotel-recommendation-engine" data-open-case="hotel-recommendation-engine" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Hotel Recommendation Engine</a> project).
+          </p>
+          <p><strong>Open questions this doc doesn't resolve:</strong></p>
+          <ul>
+            <li>Should the budget optimizer be allowed to suggest a <em>different destination</em> than requested if it saves &gt;30% of budget — or does that override user intent in a way that breaks trust?</li>
+            <li>What's the fallback UX when no itinerary can be generated within the stated budget — degrade gracefully with a "closest match," or refuse and ask the user to adjust?</li>
+            <li>Does surfacing restaurant/attraction rankings require a sponsored-placement disclosure, and who owns that legal review before launch?</li>
+          </ul>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            The hard PM problem isn't generating an itinerary — it's designing the trust layer
+            (the "why this?" reasoning, swap-not-regenerate interaction) that lets a user hand
+            over planning without feeling like they lost control of the trip.
+          </p>
+        </div>
+        </details>
+
+        <div class="jlinks">
+          <span><span class="k">Link</span><a href="projects/ai-trip-planner/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
+          <span><span class="k">Image</span><a href="projects/ai-trip-planner/screenshots/wireframes-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
+    <!-- T3: Flight Delay Prediction Dashboard -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T3</span>
+        <h3 class="jcat-title">Flight Delay Prediction Dashboard</h3>
+      </div>
+      <article class="jcard" data-case="flight-delay-prediction-dashboard" data-updated="2026-07-30">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FB923C,#C2410C)">📉</div>
+            <div>
+              <div class="jtitle">Flight Delay Prediction Dashboard</div>
+              <div class="jmeta">⭐⭐⭐⭐ Built — see live dashboard</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">8,000 flights analyzed</span>
+          <span class="chip">Self-contained HTML/JS dashboard</span>
+          <span class="chip">CVD-validated palette</span>
+          <span class="chip">Full dark-mode support</span>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>The Problem</h4>
+          <p>
+            An OTA or airline can't act on delay risk it hasn't aggregated. A single flight-status
+            page tells one traveller their flight is late; nothing rolls that up into the pattern a
+            PM actually needs — which routes are structurally unreliable, which airlines run tighter
+            operations, and when in the calendar or the day risk spikes. This project builds that
+            rollup, answering the three questions a travel-tech PM would actually be asked before
+            shipping something like the "delay-risk badge" recommended in the
+            <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a>:
+            which routes delay most, how airlines differ, and how season and time of day shape delay risk.
+          </p>
+
+          <h4>My Approach</h4>
+          <p>
+            The honest constraint first: this was built in an environment that can't reach DGCA, US
+            BTS, or Kaggle to pull a real historical dataset. Rather than present scraped-looking
+            numbers that weren't actually real, I built a modeled dataset instead and said so
+            directly on the dashboard — 8,000 flights generated from parameters I chose and
+            documented: fictional airline names (so no delay number is ever attributed to a real,
+            identifiable carrier), real Indian city-pair routes (airport congestion at Delhi/Mumbai/
+            Bengaluru and effects like North Indian winter fog are public aviation-industry knowledge,
+            not a claim about any company), and additive delay effects for route congestion, season,
+            and time-of-day. Delay minutes are drawn from a <strong>gamma distribution</strong>, not a
+            normal one — real delays are right-skewed with a hard floor at zero, and gamma is bounded
+            at zero and long-tailed by construction, which a normal distribution isn't. The first pass
+            came out at a 48.9% on-time rate — implausibly low for any real airline — so I re-tuned the
+            distribution parameters until the fleet-wide numbers matched a plausible real-world range,
+            while keeping the underlying patterns (winter fog, monsoon, evening cascade) intact. Full
+            calculation, every parameter, and the reasoning behind each one are documented in the
+            dashboard's own
+            <a href="projects/flight-delay-dashboard/dashboard.html#methodology" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Methodology section</a>,
+            summarized here in full.
+          </p>
+        </div>
+
+        <details class="cs-showmore">
+          <summary>Show more — full calculation methodology, parameter tables <span class="sm-count">(every number, and why)</span></summary>
+        <div class="cs-narrative">
+          <h4>Methodology — the calculation, step by step</h4>
+          <p>For every one of the 8,000 simulated flights:</p>
+          <ul>
+            <li>Draw a <strong>base delay</strong> from Gamma(shape=1.3, scale=3.2) — mean ≈ 4.2 minutes, right-skewed.</li>
+            <li>Multiply by that flight's <strong>airline reliability index</strong> (a single fixed number per airline, see table below) — the only airline-level effect in the model, kept deliberately simple so differences between the fictional carriers stay modest rather than dramatic.</li>
+            <li>Multiply by a <strong>time-of-day multiplier</strong> (0.90 Early Morning → 1.55 Night) — models how delays cascade later into an operating day.</li>
+            <li>Add a fixed <strong>route congestion term</strong> (see table below), scaled by 0.35 — a stand-in for how much busier Delhi/Mumbai/Bengaluru are than smaller airports.</li>
+            <li>If the route is monsoon-sensitive <em>and</em> the month falls in Jun–Sep, add an extra Gamma(1.6, 5.0) term (mean ≈ 8 min).</li>
+            <li>If the route is fog-sensitive <em>and</em> the month is Dec/Jan, add an extra Gamma(1.8, 6.0) term (mean ≈ 10.8 min), amplified 1.3× for Early Morning departures — fog is worst at dawn.</li>
+            <li>Cancellation is decided separately, as its own probability: a 0.6% base rate, +1.8pp if monsoon-exposed that month, +2.4pp if fog-exposed that month. If cancelled, delay is zeroed — a cancellation is a different outcome from "a very late flight," not the same thing at the extreme end.</li>
+            <li>A flight counts as <strong>delayed</strong> if its final delay exceeds 15 minutes (the standard on-time threshold) and it wasn't cancelled.</li>
+          </ul>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Airline (fictional)</th><th>Type</th><th>Reliability index</th></tr></thead>
+              <tbody>
+                <tr><td>BlueSky Air</td><td>Full-service</td><td>0.75 (best)</td></tr>
+                <tr><td>IndiFly</td><td>LCC</td><td>1.00</td></tr>
+                <tr><td>Skyline National</td><td>Full-service</td><td>1.15</td></tr>
+                <tr><td>Metro Express</td><td>LCC</td><td>1.25</td></tr>
+                <tr><td>Coastal Wings</td><td>Regional/turboprop</td><td>1.35 (worst)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Route</th><th>Congestion term (min)</th><th>Monsoon-sensitive</th><th>Fog-sensitive</th></tr></thead>
+              <tbody>
+                <tr><td>DEL-BOM</td><td>9</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-BLR</td><td>7</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-GOI</td><td>7</td><td>Yes</td><td>Yes</td></tr>
+                <tr><td>DEL-HYD</td><td>7</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-CCU</td><td>6</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-AMD</td><td>6</td><td>—</td><td>Yes</td></tr>
+                <tr><td>DEL-PNQ</td><td>6</td><td>—</td><td>Yes</td></tr>
+                <tr><td>BOM-BLR</td><td>6</td><td>—</td><td>—</td></tr>
+                <tr><td>BOM-COK</td><td>5</td><td>Yes</td><td>—</td></tr>
+                <tr><td>COK-BOM</td><td>5</td><td>Yes</td><td>—</td></tr>
+                <tr><td>BLR-HYD</td><td>4</td><td>—</td><td>—</td></tr>
+                <tr><td>MAA-CCU</td><td>4</td><td>—</td><td>—</td></tr>
+                <tr><td>BLR-COK</td><td>4</td><td>Yes</td><td>—</td></tr>
+                <tr><td>HYD-MAA</td><td>4</td><td>—</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Why these specific numbers: not derived from any real source — chosen, then iterated.
+            The first draft produced an implausible 48.9% on-time rate; I scaled the base gamma
+            parameters and congestion multiplier down until the fleet-wide rate landed at 84.4% —
+            inside a plausible real-world range — while preserving the relative shape of every
+            effect (which season is worst, which route is worst, night vs. morning). What this
+            deliberately doesn't model: real distributional parameters fit from a published
+            dataset (none was reachable from this environment), or flight-to-flight correlation
+            (a delayed inbound aircraft delaying its own next outbound leg) — a real airline
+            operations model would need that, and it's a materially harder problem than this
+            exercise set out to solve.
+          </p>
+        </div>
+        </details>
+
+        <div class="cs-narrative">
+          <h4>The Analysis</h4>
+          <p>
+            With the dataset built, I grouped it four ways — by route, by airline, by season, and by
+            time of day — computing average delay, the share of flights delayed over 15 minutes, and
+            cancellation rate for each. A single "worst route" or "worst season" number hides the
+            risk that actually matters operationally, which is where two dimensions compound — so I
+            cross-tabbed the top 8 routes against all 5 seasons into a heatmap instead of stopping at
+            one-dimensional rankings.
+          </p>
+
+          <h4>Key Findings</h4>
+          <ul>
+            <li><strong>84.4% on-time</strong> fleet-wide, 9.2min average delay, 1.1% cancellation rate.</li>
+            <li><strong>DEL-GOI is the single worst route</strong> (12.6min avg, 34% delayed &gt;15min) — the only route in the model that's both winter-fog- <em>and</em> monsoon-sensitive, so it takes a hit twice a year instead of once.</li>
+            <li><strong>Winter is the worst season by a wide margin</strong> (11.9min avg vs. 7.5min in Spring/Post-Monsoon) — every Delhi-origin route in the heatmap spikes in December–January.</li>
+            <li><strong>Delays compound through the day</strong> — Night departures average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations cascade delays leg-to-leg.</li>
+            <li><strong>Airline-level spread is real but secondary</strong> — the gap between the most and least reliable modeled carrier (7.6–10.7min) is smaller than the gap between Winter and Spring (7.5–11.9min). Route and season explain more than carrier choice does.</li>
+          </ul>
+
+          <h4>Recommendations</h4>
+          <p>What a PM would actually do with this, if it were live data instead of modeled data:</p>
+          <ul>
+            <li><strong>Surface delay risk during booking, not after.</strong> Feed a route + season + time-of-day risk score into the delay-risk badge recommended in the Flight Booking Teardown, so a traveller sees it before they book, not after they're already delayed.</li>
+            <li><strong>Pad schedule buffers seasonally, not year-round.</strong> A flat on-time SLA misses that Delhi-origin routes need a materially wider buffer specifically in December–January, not every month.</li>
+            <li><strong>Treat Night departures as an upstream ops problem.</strong> Since delay compounds through the day in this model, the fix is earlier-leg reliability, not just padding the last flight of the day.</li>
+            <li><strong>Re-run this against real DGCA/BTS data before shipping anything downstream of it.</strong> This dashboard's job was to prove the analysis and the product judgment, not to replace a real data pipeline.</li>
+          </ul>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            A delay dashboard's real product risk isn't the chart — it's presenting modeled or
+            incomplete data as if it were ground truth. The discipline that matters here is the same
+            one from the AI Trip Planner's guardrails: say what's real, say what's modeled, and never
+            let a polished visualization imply more certainty than the underlying data supports.
+          </p>
+        </div>
+
+        <a href="projects/flight-delay-dashboard/dashboard.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
+          <img src="projects/flight-delay-dashboard/screenshots/dashboard-light.png" alt="Flight Delay Prediction Dashboard — KPI tiles (8,000 flights, 84.4% on-time, 9.2min avg delay) and a bar chart ranking all 15 routes by average delay, DEL-GOI worst at 12.6 minutes" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click the screenshot to open the live, interactive dashboard (also available in dark mode).</p>
+        <div class="jlinks">
+          <span><span class="k">Link</span><a href="projects/flight-delay-dashboard/dashboard.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">live dashboard →</a></span>
+          <span><span class="k">Image</span><a href="projects/flight-delay-dashboard/screenshots/dashboard-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
     <!-- T4: Airline Operations Dashboard -->
     <div class="jcat-group">
       <div class="jcat-head">
