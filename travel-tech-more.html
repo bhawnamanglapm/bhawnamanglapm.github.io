@@ -632,33 +632,224 @@
     <!-- T5: Customer Support AI Copilot -->
     <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum">T5</span>
+        <span class="jnum done">T5</span>
         <h3 class="jcat-title">Customer Support AI Copilot</h3>
       </div>
-      <article class="jcard" data-case="travel-support-ai-copilot">
+      <article class="jcard" data-case="travel-support-ai-copilot" data-updated="2026-07-30">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#2DD4BF,#0D9488)">💬</div>
             <div>
               <div class="jtitle">Travel Support AI Copilot</div>
-              <div class="jmeta">⭐⭐⭐⭐⭐ Roadmap — scope defined</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Flagship — fully scoped</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>An AI assistant that handles booking changes, processes cancellations, recommends refunds, answers baggage questions, and assists with visa queries.</dd>
-          <dt>Conversation flows</dt><dd><span class="todo">fill in — map 2-3 core flows, e.g. cancellation + refund recommendation</span></dd>
-          <dt>Agent architecture</dt><dd><span class="todo">fill in — intent routing, tool/API calls, escalation-to-human path</span></dd>
-          <dt>KPIs</dt><dd><span class="todo">fill in — e.g. deflection rate, resolution time, CSAT</span></dd>
-          <dt>Business impact</dt><dd><span class="todo">fill in — modeled support-cost or TAT reduction</span></dd>
-          <dt>Skills demonstrated</dt><dd>Agentic AI orchestration, support-ops design — direct extension of the AI-orchestrated PM workflow in the AI Skills section.</dd>
-        </dl>
+        <div class="cs-facts">
+          <span class="chip">Agentic AI, not just Q&amp;A</span>
+          <span class="chip">3 core conversation flows</span>
+          <span class="chip">Escalation &amp; guardrail architecture</span>
+          <span class="chip">Deflection vs. safety trade-off</span>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>The Problem</h4>
+          <p>
+            The support queries that pile up fastest at an OTA — "cancel my flight," "how much
+            baggage can I bring," "can I change the travel date" — are also the most repetitive
+            and rule-governed. A human agent resolving them one ticket at a time is expensive and
+            slow at OTA volumes; a plain FAQ chatbot that only answers questions can't actually
+            act on a booking. The gap this project scopes is the one in between: an assistant that
+            can both answer <em>and</em> execute — cancel a booking, initiate a refund, apply a
+            fare rule — which is a materially different (and riskier) design problem than a
+            Q&amp;A bot, because it can now make a costly, sometimes irreversible mistake on its
+            own.
+          </p>
+
+          <h4>Scope &amp; Non-Goals</h4>
+          <p>
+            <strong>In scope:</strong> cancellations, refund recommendations, baggage-allowance
+            questions, and date/name booking changes — the four query types responsible for most
+            repetitive support volume. <strong>Explicitly routed to a human, never handled
+            autonomously:</strong> visa <em>legal</em> advice (a compliance and liability
+            question, not a support one — the bot can point to the airline/embassy's own
+            documentation but never advise), disputes and fraud claims, and any refund above a
+            fixed autonomous-action ceiling (see Guardrails below).
+          </p>
+
+          <h4>Where Today's Industry Falls Short</h4>
+          <p>
+            Before designing the flows, it's worth naming the pattern this design is deliberately
+            not repeating. Travel and OTA support bots in production today tend to fail in one of
+            four recurring ways — this isn't a claim about any specific company's product, it's
+            the pattern visible across the category:
+          </p>
+          <ul>
+            <li><strong>Answer-only, can't act</strong> — most bots can tell you the cancellation policy but can't actually cancel anything; the moment a user needs an action taken, they're back in a queue for a human, which defeats the point of automating the repetitive cases in the first place.</li>
+            <li><strong>Black-box numbers</strong> — the few bots that do quote a refund or fee rarely show the rule behind it, so a user has no way to check it's right, which is the same trust erosion the fare-shock problem in the <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a> causes at the booking stage.</li>
+            <li><strong>Silent or absent confirmation</strong> — bots that can act either skip a confirmation step entirely (risky) or are so conservative they add friction to low-risk actions too (annoying) — few calibrate the gate to the actual risk of the specific action, the way Flow 1 vs. Flow 2 do below.</li>
+            <li><strong>Context loss at handoff</strong> — "please repeat your issue" after being passed to a human is one of the most common support complaints in the category; the bot's understanding of the problem evaporates the moment escalation happens.</li>
+          </ul>
+          <p>
+            The wireframes below (Screens 1–4) are the direct, one-to-one answer to these four
+            gaps, not generic chat-UI decoration — each screen is annotated with the specific
+            failure mode it closes.
+          </p>
+
+          <h4>Flow 1 — Cancellation + Refund Recommendation (highest-risk flow)</h4>
+          <p>
+            The flow with the most at stake: it ends in an irreversible action (a cancelled
+            booking) and moves real money. Representative flow, illustrating the decision points
+            — not a transcript from a live system:
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Turn</th><th>Speaker</th><th>Message</th><th>System</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Turn">1</td><td data-label="Speaker">User</td><td data-label="Message">"I need to cancel my Delhi–Mumbai flight tomorrow"</td><td data-label="System">Intent: cancel_booking (0.96) → PNR lookup</td></tr>
+              <tr><td data-label="Turn">2</td><td data-label="Speaker">Agent</td><td data-label="Message">"Found your DEL–BOM booking. Cancelling inside 24hrs of departure means a partial refund under this fare's rules — you'd get back part of what you paid. Want the exact amount?"</td><td data-label="System">Tool call: refund_policy_engine(fare_class, hours_to_departure)</td></tr>
+              <tr><td data-label="Turn">3</td><td data-label="Speaker">User</td><td data-label="Message">"Yes, how much"</td><td data-label="System">—</td></tr>
+              <tr><td data-label="Turn">4</td><td data-label="Speaker">Agent</td><td data-label="Message">"You'd get back ₹3,200 of ₹5,800 paid. Confirm cancellation?"</td><td data-label="System"><strong>Confirmation gate</strong> — irreversible action, requires explicit user confirmation before executing (guardrail, not optional)</td></tr>
+              <tr><td data-label="Turn">5</td><td data-label="Speaker">User</td><td data-label="Message">"Confirmed"</td><td data-label="System">—</td></tr>
+              <tr><td data-label="Turn">6</td><td data-label="Speaker">Agent</td><td data-label="Message">"Done — booking cancelled, ₹3,200 refund initiated, arrives in 5–7 business days. Reference CXL-48213."</td><td data-label="System">Tool calls: cancel_booking() + issue_refund() — both logged to the audit trail below</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
+          <img src="projects/travel-support-copilot/screenshots/wireframes-light.png" alt="Four wireframes for the Travel Support AI Copilot: Reasoning You Can See (visible confidence and fare-rule reasoning), Confirm Before It's Irreversible (a confirmation gate before cancel/refund actions), Context Follows You to a Human (a structured handoff summary instead of a repeat-yourself transcript), and Audit Trail for Support Ops (every autonomous action logged with a confidence score and review flag)" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode) — each screen is annotated with the specific industry gap it closes.</p>
+
+        <details class="cs-showmore">
+          <summary>Show more — Flows 2 &amp; 3, agent architecture, guardrails, evaluation, metrics, risks <span class="sm-count">(the safety-critical half)</span></summary>
+
+        <div class="cs-narrative">
+          <h4>Flow 2 — Baggage Policy Question (lowest-risk flow)</h4>
+          <p>
+            The contrast case: a pure information lookup with no action taken and nothing to
+            confirm, so it needs none of Flow 1's guardrails.
+          </p>
+          <ul>
+            <li><strong>User:</strong> "How much check-in baggage do I get on my booking?"</li>
+            <li><strong>Agent</strong> (intent: baggage_query, 0.99 confidence) → tool call: fetch fare rules for the booking's specific fare class → <strong>"Your Economy Saver fare includes 15kg check-in. Extra baggage is ₹500/kg if you add it now, or ₹800/kg at the airport — want me to add extra baggage to this booking?"</strong></li>
+          </ul>
+          <p>
+            Fully autonomous end-to-end — answered <em>and</em> resolved the likely follow-up
+            (add baggage) without a human, because nothing here is irreversible or high-value
+            enough to need a confirmation gate.
+          </p>
+
+          <h4>Flow 3 — Booking Date Change (medium-risk flow)</h4>
+          <p>
+            Sits between the two above: it's an action (not just information) but a correctable
+            one, so it gets a lighter version of Flow 1's gate — confirm the fare difference, but
+            no separate human-escalation trigger unless the fare-difference lookup itself fails.
+            Intent: change_booking_date → tool call: check seat availability + fare difference on
+            new date → agent states the fare difference and change fee → single confirmation →
+            executes change_booking() and emails the updated ticket.
+          </p>
+
+          <h4>Agent Architecture</h4>
+          <p>
+            Four layers, in order: <strong>(1) Intent router</strong> — classifies the incoming
+            message into one of the in-scope intents above, or "unclassified" → human.
+            <strong>(2) Tool-calling layer</strong> — each intent maps to a fixed set of callable
+            tools (PNR lookup, refund_policy_engine, fare-difference calculator, cancel_booking,
+            issue_refund, change_booking) — the agent can only call tools on this allow-list, it
+            cannot invent new actions. <strong>(3) Confirmation gate</strong> — any tool call that
+            is irreversible or moves money (cancel_booking, issue_refund) requires an explicit
+            user confirmation turn before executing, never fires on the first pass.
+            <strong>(4) Escalation router</strong> — triggers on low intent-confidence
+            (&lt;0.85), a tool call failing twice, explicit user frustration signals, or any
+            query touching a hard non-goal (visa advice, disputes) — handed to a human agent with
+            the full conversation transcript attached, not restarted from zero.
+          </p>
+
+          <h4>Guardrails</h4>
+          <p>
+            This is the part of the design that actually differentiates a support <em>copilot</em>
+            from a support <em>chatbot</em> — and the part a scope doc for an agent that can take
+            real actions can't skip:
+          </p>
+          <ul>
+            <li><strong>Autonomous-action ceiling</strong> — the agent may autonomously execute cancellations/refunds up to a fixed rupee ceiling; above it, the same flow runs but ends in a human-approval step instead of auto-executing.</li>
+            <li><strong>Confirmation before irreversible actions</strong> — never optional, shown in Flow 1 above; a wrong autonomous cancellation is far more costly to trust than a wrong autonomous baggage-fee quote.</li>
+            <li><strong>No autonomous visa/legal advice</strong> — the intent router treats this as a hard non-goal, not a confidence threshold — it escalates every time, regardless of how confident the model is in an answer.</li>
+            <li><strong>Full audit trail</strong> — every tool call the agent executes (not just conversations) is logged with the triggering intent, confidence score, and outcome, reviewable by support ops — the same operational-audit discipline as the PCMS payout reconciliation work (see Technical Execution, J11).</li>
+          </ul>
+
+          <h4>Evaluation Approach</h4>
+          <p>
+            Deflection rate alone is a misleading headline metric here — a bot can "deflect" a
+            ticket by giving an answer that satisfies the user in the moment but is wrong, which
+            shows up as a good deflection number and a bad outcome. Evaluation needs three lenses,
+            not one: <strong>resolution accuracy</strong> (sampled human audit of closed
+            bot-handled tickets, not just the bot's own confidence score), <strong>wrong-action
+            rate</strong> — the safety metric, tracking autonomous actions a human reviewer would
+            have executed differently, weighted far more heavily than any convenience metric — and
+            <strong>escalation-appropriateness</strong>, checking the router escalates when it
+            should as often as it deflects when it shouldn't.
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Metric</th><th>What it's really measuring</th><th>Why it's on this list</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Metric">Containment rate</td><td data-label="Measuring">% of in-scope tickets resolved without a human</td><td data-label="Why">The headline efficiency number — but never read alone (see below)</td></tr>
+              <tr><td data-label="Metric">Wrong-action rate</td><td data-label="Measuring">Autonomous actions a human audit would reverse or flag</td><td data-label="Why">The safety guardrail metric — this one has veto power over containment rate</td></tr>
+              <tr><td data-label="Metric">CSAT on bot-resolved tickets</td><td data-label="Measuring">Satisfaction specifically on containment, not overall support CSAT</td><td data-label="Why">A ticket can be "contained" and still leave the user unhappy</td></tr>
+              <tr><td data-label="Metric">Escalation-appropriateness</td><td data-label="Measuring">Did the router escalate the tickets it should have</td><td data-label="Why">Catches an agent that's overconfident, not just one that's under-confident</td></tr>
+              <tr><td data-label="Metric">Time-to-resolution</td><td data-label="Measuring">End-to-end, bot-handled vs. human-handled tickets</td><td data-label="Why">The business-facing efficiency number, once the safety metrics above clear</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Business Impact (modeled, not measured)</h4>
+          <p>
+            Illustrative, not a real support-cost figure: if cancellation, baggage, and
+            date-change queries together are a modeled ~35% of ticket volume, and the copilot
+            fully contains half of those (the baggage-query type especially, since it needs no
+            guardrail and resolves in one turn), that's roughly a sixth of total support volume
+            handled at near-zero marginal cost instead of a human agent's fully-loaded
+            cost-per-ticket. The number that actually matters for a launch decision, though, is
+            the wrong-action rate at that containment level — a model here would need real
+            historical ticket data to size properly, which is exactly why this stays a scope doc
+            and not a "built" project, unlike the modeled-but-labeled dataset in the
+            <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>.
+          </p>
+
+          <h4>Risks</h4>
+          <p>
+            The risk that actually matters isn't "the bot gives a bad answer" — a Q&amp;A chatbot
+            has that risk too, and it's recoverable. It's <strong>the bot takes a bad
+            action</strong>: an autonomous cancellation or refund that shouldn't have happened is
+            real money and a damaged booking, not just an unhelpful chat log. Every guardrail
+            above exists to keep that specific failure mode's blast radius small and recoverable
+            (confirmation gates, action ceilings, audit trails) rather than trying to prevent it
+            outright, which no confidence threshold can fully guarantee.
+          </p>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            The same lesson as the ChatGPT Memory Feature teardown (Feature Reverse Engineering,
+            J2) shows up again here in a higher-stakes form: the hard PM problem in agentic AI
+            isn't language understanding or intent classification — those are largely solved. It's
+            designing the guardrail and escalation layer that keeps the agent's inevitable
+            mistakes cheap and reversible instead of expensive and permanent.
+          </p>
+        </div>
+        </details>
+
         <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+          <span><span class="k">Link</span><a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
+          <span><span class="k">Image</span><a href="projects/travel-support-copilot/screenshots/wireframes-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
         </div>
       </div>
       </article>
