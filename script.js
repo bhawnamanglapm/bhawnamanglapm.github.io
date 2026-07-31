@@ -63,7 +63,12 @@
 
   function findCardBySlug(slug){
     for(var i = 0; i < jcards.length; i++){
-      if(jcards[i].getAttribute('data-case') === slug) return jcards[i];
+      if(jcards[i].getAttribute('data-case') === slug){
+        // Never open a card that's hidden (work-in-progress, not ready to publish)
+        // even via a stale cross-reference link or a directly-typed URL hash.
+        if(jcards[i].closest('.hide-wip')) return null;
+        return jcards[i];
+      }
     }
     return null;
   }
