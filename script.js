@@ -262,19 +262,36 @@
     countEls.forEach(function(el){ countIo.observe(el); });
   }
 
-  // Contact form -> mailto (no backend on a static site)
+  // Contact form -> Web3Forms (sends real email, no backend of our own)
   var form = document.getElementById('contactForm');
   var status = document.getElementById('formStatus');
   if(form){
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var name = form.name.value.trim();
-      var email = form.email.value.trim();
-      var message = form.message.value.trim();
-      var subject = encodeURIComponent('Portfolio contact from ' + name);
-      var body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
-      window.location.href = 'mailto:bhawna202019@gmail.com?subject=' + subject + '&body=' + body;
-      if(status){ status.classList.add('show'); }
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if(submitBtn){ submitBtn.disabled = true; }
+      if(status){ status.classList.remove('error'); status.classList.add('show'); status.textContent = 'Sending…'; }
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      })
+        .then(function(res){ return res.json(); })
+        .then(function(data){
+          if(data.success){
+            if(status){ status.textContent = "Sent — I'll get back to you soon."; }
+            form.reset();
+          } else {
+            if(status){ status.classList.add('error'); status.textContent = "Something went wrong — email me directly instead."; }
+          }
+        })
+        .catch(function(){
+          if(status){ status.classList.add('error'); status.textContent = "Couldn't send — email me directly instead."; }
+        })
+        .finally(function(){
+          if(submitBtn){ submitBtn.disabled = false; }
+        });
     });
   }
 })();
