@@ -1165,29 +1165,30 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Funnel scope</dt><dd>OTA flight booking funnel: Search → Results → Details (fare review) → Traveller Info → Payment → Confirmation.</dd>
-          <dt>Biggest drop-off</dt><dd>Results → Details (modeled ~62% loss) — the fare-review price reveal is the single largest funnel leak. Users who arrive price-anchored from the results page bounce once taxes, fees, and add-ons inflate the total.</dd>
-          <dt>Root-cause reasoning</dt><dd>
-            1. <strong>Anchoring bias</strong> — once a user sees a low headline fare, any upward revision reads as deception, regardless of accuracy.<br>
-            2. <strong>Add-on defaults</strong> — pre-selected insurance/seat fees compound the price-shock instead of being clearly separable.<br>
-            3. <strong>No fare-lock</strong> — an indecisive user has no reason to stay on the page vs. reopening a new tab to compare.
-          </dd>
-          <dt>Improvement ideas</dt><dd>
-            1. Show all-in price (base + tax + fees) at the results stage, even at the cost of a slightly less eye-catching headline number.<br>
-            2. Make add-ons opt-in with one clear toggle, not a pre-ticked line item.<br>
-            3. Add a 10-minute fare-lock CTA on the details page for indecisive users.<br>
-            4. Autofill/remember traveller info for repeat and return-trip bookings.<br>
-            5. Auto-retry payment with the saved method before falling back to full re-entry on a gateway timeout.
-          </dd>
-          <dt>A/B test hypotheses</dt><dd>
-            1. <strong>All-in pricing:</strong> showing all-in fare at results increases Results→Details conversion by removing price-shock, possibly at a small cost to search-engine click-through.<br>
-            2. <strong>Opt-in add-ons:</strong> switching seat/insurance from pre-selected to opt-in increases Details→Traveller Info conversion, even if average order value dips slightly.<br>
-            3. <strong>Fare-lock:</strong> a visible "hold this fare 10 min" CTA increases session-to-booking conversion, measurable via reduced multi-tab bounce in session replay.
-          </dd>
-          <dt>Success metrics to track</dt><dd>Stage-to-stage conversion (especially Results→Details), overall search-to-confirmation conversion, average time-in-funnel, fare-review abandonment rate segmented by add-on opt-in vs. opt-out cohort.</dd>
-          <dt>Reusable insight</dt><dd>A funnel chart only shows where users leave — the RICE-worthy work is pairing each drop-off with a testable behavioral reason (anchoring, default bias, form fatigue), not recommending "reduce friction" everywhere.</dd>
-        </dl>
+        <div class="cs-facts">
+          <span class="chip">5-stage funnel model</span>
+          <span class="chip">Root-cause diagnosis, not just a chart</span>
+          <span class="chip">3 A/B test hypotheses</span>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>The Problem</h4>
+          <p>
+            A funnel chart only shows where users leave — the actual PM work is pairing each
+            drop-off with a testable behavioral reason instead of recommending "reduce friction"
+            everywhere. This case study models a realistic OTA flight-booking funnel end to end
+            and does that pairing for the stage that leaks hardest.
+          </p>
+
+          <h4>The Funnel</h4>
+          <p>
+            Search → Results → Details (fare review) → Traveller Info → Payment → Confirmation.
+            The biggest drop-off by far is Results → Details, a modeled ~62% loss — the fare-review
+            price reveal is the single largest leak in the funnel. Users arrive price-anchored from
+            the results page and bounce once taxes, fees, and add-ons inflate the total.
+          </p>
+        </div>
+
         <div class="ptable2-wrap">
           <table class="ptable2">
             <thead><tr><th>Funnel stage</th><th>Modeled conversion</th><th>Primary friction</th></tr></thead>
@@ -1200,6 +1201,47 @@
             </tbody>
           </table>
         </div>
+
+        <div class="cs-narrative">
+          <h4>Root-Cause Reasoning</h4>
+          <p>Three behavioral mechanisms explain most of the Results → Details leak:</p>
+          <ul>
+            <li><strong>Anchoring bias</strong> — once a user sees a low headline fare, any upward revision reads as deception, regardless of accuracy.</li>
+            <li><strong>Add-on defaults</strong> — pre-selected insurance/seat fees compound the price-shock instead of being clearly separable.</li>
+            <li><strong>No fare-lock</strong> — an indecisive user has no reason to stay on the page vs. reopening a new tab to compare.</li>
+          </ul>
+
+          <h4>Recommendations</h4>
+          <ul>
+            <li>Show all-in price (base + tax + fees) at the results stage, even at the cost of a slightly less eye-catching headline number.</li>
+            <li>Make add-ons opt-in with one clear toggle, not a pre-ticked line item.</li>
+            <li>Add a 10-minute fare-lock CTA on the details page for indecisive users.</li>
+            <li>Autofill/remember traveller info for repeat and return-trip bookings.</li>
+            <li>Auto-retry payment with the saved method before falling back to full re-entry on a gateway timeout.</li>
+          </ul>
+
+          <h4>Test Plan</h4>
+          <ul>
+            <li><strong>All-in pricing:</strong> showing all-in fare at results increases Results→Details conversion by removing price-shock, possibly at a small cost to search-engine click-through.</li>
+            <li><strong>Opt-in add-ons:</strong> switching seat/insurance from pre-selected to opt-in increases Details→Traveller Info conversion, even if average order value dips slightly.</li>
+            <li><strong>Fare-lock:</strong> a visible "hold this fare 10 min" CTA increases session-to-booking conversion, measurable via reduced multi-tab bounce in session replay.</li>
+          </ul>
+
+          <h4>Success Metrics</h4>
+          <p>
+            Stage-to-stage conversion (especially Results→Details), overall search-to-confirmation
+            conversion, average time-in-funnel, and fare-review abandonment rate segmented by
+            add-on opt-in vs. opt-out cohort.
+          </p>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            A funnel chart only shows where users leave — the RICE-worthy work is pairing each
+            drop-off with a testable behavioral reason (anchoring, default bias, form fatigue),
+            not recommending "reduce friction" everywhere.
+          </p>
+        </div>
+
         <div class="jlinks hide-wip">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in — funnel chart screenshot</span></span>
