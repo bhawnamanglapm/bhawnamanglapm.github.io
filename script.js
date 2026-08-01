@@ -9,40 +9,50 @@
   (function(){
     var tracks = document.querySelectorAll('.jtrack');
     tracks.forEach(function(track){
-      var groups = Array.prototype.slice.call(track.querySelectorAll('.jcat-group'));
-      groups.forEach(function(g){
-        var dates = Array.prototype.slice.call(g.querySelectorAll('.jcard[data-updated]'))
-          .map(function(c){ return c.getAttribute('data-updated'); });
-        g.dataset.sortDate = dates.length ? dates.sort().slice(-1)[0] : '';
-      });
-      groups.sort(function(a, b){
-        var da = a.dataset.sortDate, db = b.dataset.sortDate;
-        if(da && db) return da === db ? 0 : (da < db ? 1 : -1);
-        if(da && !db) return -1;
-        if(!da && db) return 1;
-        return 0;
-      });
-      groups.forEach(function(g){ track.appendChild(g); });
+      // Sort within each .cat-section independently, so the curated category
+      // order (Product Teardown, AI & Agentic Product Design, ...) stays
+      // fixed while the projects inside each category still reorder by
+      // recency. Tracks with no .cat-section wrapper (e.g. the homepage's
+      // flat flagship list) fall back to sorting the whole track, as before.
+      var catSections = Array.prototype.slice.call(track.querySelectorAll(':scope > .cat-section'));
+      var containers = catSections.length ? catSections : [track];
 
-      // Non-.jcat-group children (e.g. the "Show more" link to an expanded
-      // roadmap page) aren't touched by the sort above, which otherwise
-      // leaves them stranded at the top since appendChild moves the sorted
-      // groups to the end — keep them pinned after the sorted groups instead.
+      containers.forEach(function(container){
+        var groups = Array.prototype.slice.call(container.querySelectorAll(':scope > .jcat-group'));
+        groups.forEach(function(g){
+          var dates = Array.prototype.slice.call(g.querySelectorAll('.jcard[data-updated]'))
+            .map(function(c){ return c.getAttribute('data-updated'); });
+          g.dataset.sortDate = dates.length ? dates.sort().slice(-1)[0] : '';
+        });
+        groups.sort(function(a, b){
+          var da = a.dataset.sortDate, db = b.dataset.sortDate;
+          if(da && db) return da === db ? 0 : (da < db ? 1 : -1);
+          if(da && !db) return -1;
+          if(!da && db) return 1;
+          return 0;
+        });
+        groups.forEach(function(g){ container.appendChild(g); });
+
+        // Show a "last worked on" badge for categories with dated cards.
+        groups.forEach(function(g){
+          if(!g.dataset.sortDate) return;
+          var head = g.querySelector('.jcat-head');
+          if(!head || head.querySelector('.jcat-updated')) return;
+          var d = new Date(g.dataset.sortDate + 'T00:00:00');
+          var label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          var badge = document.createElement('span');
+          badge.className = 'jcat-updated';
+          badge.textContent = 'Last worked on ' + label;
+          head.appendChild(badge);
+        });
+      });
+
+      // Non-.jcat-group/.cat-section children (e.g. the "Show more" link to
+      // an expanded roadmap page) aren't touched by the sort above, which
+      // otherwise leaves them stranded at the top since appendChild moves
+      // the sorted groups to the end — keep them pinned after instead.
       var trailing = track.querySelectorAll(':scope > a.track-showmore');
       trailing.forEach(function(el){ track.appendChild(el); });
-
-      // Show a "last worked on" badge for categories with dated cards.
-      groups.forEach(function(g){
-        if(!g.dataset.sortDate) return;
-        var head = g.querySelector('.jcat-head');
-        if(!head || head.querySelector('.jcat-updated')) return;
-        var d = new Date(g.dataset.sortDate + 'T00:00:00');
-        var label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        var badge = document.createElement('span');
-        badge.className = 'jcat-updated';
-        badge.textContent = 'Last worked on ' + label;
-        head.appendChild(badge);
-      });
     });
   })();
 

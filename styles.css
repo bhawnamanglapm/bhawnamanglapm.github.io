@@ -271,6 +271,13 @@
   .jtrack{position:relative;padding-left:64px}
   .jtrack::before{content:"";position:absolute;left:27px;top:8px;bottom:8px;width:2px;background:var(--line)}
 
+  /* ---------- Case-study category sections ---------- */
+  .cat-section{margin-bottom:48px}
+  .cat-section:last-of-type{margin-bottom:0}
+  .cat-head{display:flex;align-items:baseline;gap:14px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .cat-head h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;color:var(--paper);letter-spacing:-.01em}
+  .cat-tag{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey)}
+
   /* ---------- Journal category groups ---------- */
   .jcat-group{position:relative;margin-bottom:32px}
   .jcat-group:last-child{margin-bottom:0}
@@ -599,6 +606,8 @@
     .jnum{left:-38px;width:34px;height:34px;font-size:11px}
     .jcat-head{min-height:34px}
     .jcat-title{font-size:16.5px}
+    .cat-head h2{font-size:19px}
+    .cat-section{margin-bottom:36px}
     .jcard-illus{width:42px;height:42px;font-size:20px}
 
     /* Stacked cards instead of a horizontally-scrolling table */

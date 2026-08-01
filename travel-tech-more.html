@@ -83,8 +83,9 @@
     </p>
 
     <div class="jtrack">
-    <!-- T1: Flight Booking Product Teardown -->
-    <div class="jcat-group">
+    <div class="cat-section" id="cat-product-teardown">
+      <div class="cat-head"><h2>Product Teardown</h2><span class="cat-tag">// reverse-engineering how existing products work, end to end</span></div>
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum done">T1</span>
         <h3 class="jcat-title">Flight Booking Product Teardown</h3>
@@ -291,9 +292,206 @@
       </div>
       </article>
     </div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T11</span>
+        <h3 class="jcat-title">Flight Search &amp; Price Comparison Engine</h3>
+      </div>
+      <article class="jcard" data-case="flight-search-price-comparison">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#22D3EE,#0E7490)">🔍</div>
+            <div>
+              <div class="jtitle">Flight Search &amp; Price Comparison Engine</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Search Systems — Google Flights, Skyscanner, Kayak. The engine that turns "Delhi to Bangkok, next week" into a ranked, comparable set of fares across airlines and OTAs.</dd>
+          <dt>What PMs build here</dt><dd>Meta-search (aggregating other platforms' inventory and referring out) vs. direct search (querying and selling your own inventory) — a fundamentally different product and monetization model from a booking system, even though the search box looks identical to a user.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Meta-search vs. OTA economics</strong> — Skyscanner/Kayak don't sell tickets, they refer (CPC or referral fee); a booking platform earns margin on the fare. Same search box, opposite business model.<br>
+            2. <strong>Real-time fare staleness</strong> — GDS/airline APIs rate-limit and cache; a shown fare can go stale between search and click-through. "Fare no longer available" is a core UX problem here, not an edge case.<br>
+            3. <strong>Ranking trade-offs</strong> — cheapest-for-user vs. highest-referral-fee-for-business; how a meta-search product decides what "best result" even means.<br>
+            4. <strong>Flexible-date search</strong> (±3 days, whole-month calendar view) as a distinct product surface from single-date search, with a very different backend query pattern.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How does Google Flights' ranking differ from Skyscanner's? What's the actual fare-staleness recovery flow when a user clicks through to a dead price? How is a meta-search product's North Star (clicks-to-partner) different from an OTA's (completed bookings)?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Marketplace/aggregator business models, ranking algorithm trade-offs, real-time data staleness handling — distinct from the single-inventory booking-flow thinking in T1.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T12</span>
+        <h3 class="jcat-title">Travel Marketplace Platform</h3>
+      </div>
+      <article class="jcard" data-case="travel-marketplace-platform">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#F472B6,#BE185D)">🤝</div>
+            <div>
+              <div class="jtitle">Travel Marketplace Platform</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Marketplace Systems — Airbnb, GetYourGuide. Two-sided platforms connecting hosts/suppliers with guests/travellers, where trust and liquidity are the core problems, not booking UX.</dd>
+          <dt>What PMs build here</dt><dd>Everything a single-inventory OTA (T1) doesn't need: supply-side onboarding, trust and safety systems, and a matching/ranking model that has to weigh host quality alongside price.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Two-sided liquidity</strong> — no guests without hosts, no hosts without guests. Which side do you subsidize first, and how do you measure "liquidity" as a real metric, not a slogan?<br>
+            2. <strong>Trust &amp; safety as core product</strong> — reviews, ID verification, host guarantees, guest screening — the actual mechanism that makes a stranger's home bookable at all.<br>
+            3. <strong>Marketplace ranking</strong> — host quality signals vs. price vs. availability vs. novelty; very different from ranking a fixed airline-fare inventory.<br>
+            4. <strong>Take-rate design</strong> — host fee vs. guest fee vs. blended, and the transparency trade-offs each creates in the checkout UX.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How does Airbnb's search ranking balance host quality vs. price vs. novelty? What's the trust-building flow a first-time host actually goes through? How does GetYourGuide's supply-side onboarding differ from Airbnb's, given smaller/more numerous suppliers?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Two-sided marketplace dynamics, trust &amp; safety product design, supply-side (not just demand-side) product thinking.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T13</span>
+        <h3 class="jcat-title">Ride-Sharing &amp; Mobility Booking</h3>
+      </div>
+      <article class="jcard" data-case="ride-sharing-mobility-booking">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#A3E635,#4D7C0F)">🚗</div>
+            <div>
+              <div class="jtitle">Ride-Sharing &amp; Mobility Booking</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Mobility Systems — Uber, BlaBlaCar. Real-time matching between riders and drivers/co-travellers, dynamic pricing, and ETA-driven trust — a live-match product, not a browse-and-book one.</dd>
+          <dt>What PMs build here</dt><dd>Dispatch/matching algorithms and pricing mechanics that respond in seconds, not the search-and-compare flows every other system on this list uses.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Real-time supply/demand matching</strong> — the product surface is a live match, not a list of results to browse; latency itself is a feature.<br>
+            2. <strong>Surge/dynamic pricing</strong> — the most studied and most controversial pricing mechanism in travel-tech; balancing driver-supply incentive against rider price sensitivity and perceived fairness.<br>
+            3. <strong>ETA accuracy as trust</strong> — a wrong ETA is a broken promise, not a UX nitpick; it's the primary trust mechanic in a product with no browsable inventory to build confidence from.<br>
+            4. <strong>Marketplace vs. peer-to-peer</strong> — Uber owns dispatch and pricing outright; BlaBlaCar is closer to a trust-and-coordination layer over independently-arranged car-share trips.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How would you redesign surge pricing to reduce rider anger while preserving driver supply incentives? What's BlaBlaCar's trust model for a multi-hour shared car ride, versus Uber's for a 10-minute trip?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Real-time marketplace/dispatch systems, dynamic pricing design, trust mechanics in a zero-inventory-browse product.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T14</span>
+        <h3 class="jcat-title">Tours &amp; Activities Marketplace</h3>
+      </div>
+      <article class="jcard" data-case="tours-activities-marketplace">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FCA5A5,#B91C1C)">🎫</div>
+            <div>
+              <div class="jtitle">Tours &amp; Activities Marketplace</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Experience Marketplace — Viator, Klook. Discovery and booking for bookable experiences (tours, tickets, activities) — a catalog/inventory problem more than a real-time-matching one.</dd>
+          <dt>What PMs build here</dt><dd>Supply-side tooling for thousands of small local operators (not a handful of airlines), and the cross-sell integration point where "book a flight" surfaces "things to do at your destination."</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Perishable inventory at small scale</strong> — an unsold tour slot today is gone forever, the same yield-management problem as an airline seat, but per-operator volume is tiny compared to an airline.<br>
+            2. <strong>Long-tail supply</strong> — thousands of small local operators instead of a handful of airlines; supply-side tooling and quality control look completely different from T1's world.<br>
+            3. <strong>Instant confirmation vs. request-to-book</strong> — some experiences confirm immediately, others need the operator to manually accept; a real trust/UX trade-off, not just an engineering detail.<br>
+            4. <strong>Cross-sell placement</strong> — where in a booking flow (like T1's) should experience upsells actually appear, and does that belong to this system or the booking system it's bolted onto?
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How does Klook's supply-side operator tooling differ from a single-inventory OTA's? Where in the funnel (see T8) should an experience upsell actually be placed, and what does it cannibalize if placed too early?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Long-tail supply management, perishable-inventory yield thinking at small scale, cross-sell/attach-rate product design.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T15</span>
+        <h3 class="jcat-title">Travel Discovery &amp; Reviews Platform</h3>
+      </div>
+      <article class="jcard" data-case="travel-discovery-reviews-platform">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FDE047,#A16207)">⭐</div>
+            <div>
+              <div class="jtitle">Travel Discovery &amp; Reviews Platform</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Core system &amp; companies</dt><dd>Travel Discovery Systems — Tripadvisor, Yelp. Pre-booking inspiration and trust — reviews, rankings, and content that influence a decision made and completed somewhere else entirely.</dd>
+          <dt>What PMs build here</dt><dd>A non-transactional product: most Tripadvisor traffic never books on Tripadvisor. The PM problem is monetizing influence, not completing a purchase.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Monetizing a non-transactional product</strong> — referral/ads revenue instead of booking margin; a fundamentally different business model than every OTA on this list.<br>
+            2. <strong>Review fraud &amp; fake-review detection</strong> — the core trust problem: how do you know a 5-star review is real, without over-flagging genuine negative ones?<br>
+            3. <strong>Content ranking vs. e-commerce ranking</strong> — a "best restaurant" ranking has no purchase event forcing a decision; different signals matter than in a booking-funnel ranking (T8).<br>
+            4. <strong>SEO as the primary growth channel</strong> — discovery platforms live or die on organic search traffic in a way booking platforms (T1) don't have to.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How would you detect and penalize fake reviews without over-flagging real negative ones? What's Tripadvisor's actual North Star metric if it isn't bookings?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Non-transactional business models, trust/fraud detection systems, content ranking, SEO-driven growth strategy.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+    </div>
 
-    <!-- T2: AI Trip Planner -->
-    <div class="jcat-group">
+    <div class="cat-section" id="cat-ai-and-agentic-product-design">
+      <div class="cat-head"><h2>AI &amp; Agentic Product Design</h2><span class="cat-tag">// designing new AI-driven systems, not just prompting one</span></div>
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum done">T2</span>
         <h3 class="jcat-title">AI Trip Planner — PRD</h3>
@@ -460,9 +658,290 @@
       </div>
       </article>
     </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T5</span>
+        <h3 class="jcat-title">Customer Support AI Copilot</h3>
+      </div>
+      <article class="jcard" data-case="travel-support-ai-copilot" data-updated="2026-07-30">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#2DD4BF,#0D9488)">💬</div>
+            <div>
+              <div class="jtitle">Travel Support AI Copilot</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Built — try the live demo</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">Live interactive demo</span>
+          <span class="chip">Agentic AI, not just Q&amp;A</span>
+          <span class="chip">3 core conversation flows</span>
+          <span class="chip">Escalation &amp; guardrail architecture</span>
+          <span class="chip">Deflection vs. safety trade-off</span>
+        </div>
 
-    <!-- T3: Flight Delay Prediction Dashboard -->
-    <div class="jcat-group">
+        <div class="cs-narrative">
+          <h4>The Problem</h4>
+          <p>
+            The support queries that pile up fastest at an OTA — "cancel my flight," "how much
+            baggage can I bring," "can I change the travel date" — are also the most repetitive
+            and rule-governed. A human agent resolving them one ticket at a time is expensive and
+            slow at OTA volumes; a plain FAQ chatbot that only answers questions can't actually
+            act on a booking. The gap this project scopes is the one in between: an assistant that
+            can both answer <em>and</em> execute — cancel a booking, initiate a refund, apply a
+            fare rule — which is a materially different (and riskier) design problem than a
+            Q&amp;A bot, because it can now make a costly, sometimes irreversible mistake on its
+            own.
+          </p>
+
+          <h4>Scope &amp; Non-Goals</h4>
+          <p>
+            <strong>In scope:</strong> cancellations, refund recommendations, baggage-allowance
+            questions, and date/name booking changes — the four query types responsible for most
+            repetitive support volume. <strong>Explicitly routed to a human, never handled
+            autonomously:</strong> visa <em>legal</em> advice (a compliance and liability
+            question, not a support one — the bot can point to the airline/embassy's own
+            documentation but never advise), disputes and fraud claims, and any refund above a
+            fixed autonomous-action ceiling (see Guardrails below).
+          </p>
+
+          <h4>Where Today's Industry Falls Short</h4>
+          <p>
+            Before designing the flows, it's worth naming the pattern this design is deliberately
+            not repeating. Travel and OTA support bots in production today tend to fail in one of
+            four recurring ways — this isn't a claim about any specific company's product, it's
+            the pattern visible across the category:
+          </p>
+          <ul>
+            <li><strong>Answer-only, can't act</strong> — most bots can tell you the cancellation policy but can't actually cancel anything; the moment a user needs an action taken, they're back in a queue for a human, which defeats the point of automating the repetitive cases in the first place.</li>
+            <li><strong>Black-box numbers</strong> — the few bots that do quote a refund or fee rarely show the rule behind it, so a user has no way to check it's right, which is the same trust erosion the fare-shock problem in the <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a> causes at the booking stage.</li>
+            <li><strong>Silent or absent confirmation</strong> — bots that can act either skip a confirmation step entirely (risky) or are so conservative they add friction to low-risk actions too (annoying) — few calibrate the gate to the actual risk of the specific action, the way Flow 1 vs. Flow 2 do below.</li>
+            <li><strong>Context loss at handoff</strong> — "please repeat your issue" after being passed to a human is one of the most common support complaints in the category; the bot's understanding of the problem evaporates the moment escalation happens.</li>
+          </ul>
+          <p>
+            The wireframes further down (Screens 1–4) are the direct, one-to-one answer to these
+            four gaps, not generic chat-UI decoration — each screen is annotated with the specific
+            failure mode it closes. But rather than leave it at mockups, the architecture below is
+            also built and actually running:
+          </p>
+        </div>
+
+        <a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
+          <picture>
+            <source srcset="projects/travel-support-copilot/screenshots/demo-light.webp" type="image/webp">
+            <img src="projects/travel-support-copilot/screenshots/demo-light.png" alt="Interactive demo of the Travel Support AI Copilot: a chat panel where a user asks to cancel a flight, the copilot shows its reasoning, a confirmation gate appears before the irreversible action executes, and the confirmed cancellation and refund are logged in the Agent Action Log panel" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          </picture>
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">
+          Click to open the live, interactive demo (also available in dark mode) — a rule-based
+          simulation of the flows and guardrails below, running entirely in your browser. A public
+          static site can't safely hold an API key to call a real LLM, so this demonstrates the
+          <em>architecture</em> working end to end (confirmation gate, escalation handoff, audit
+          trail), not a claim of production-grade language understanding — labeled as exactly that
+          on the demo page itself.
+        </p>
+
+        <div class="cs-narrative">
+          <h4>Flow 1 — Cancellation + Refund Recommendation (highest-risk flow)</h4>
+          <p>
+            The flow with the most at stake: it ends in an irreversible action (a cancelled
+            booking) and moves real money. Representative flow, illustrating the decision points
+            — not a transcript from a live system:
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Turn</th><th>Speaker</th><th>Message</th><th>System</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Turn">1</td><td data-label="Speaker">User</td><td data-label="Message">"I need to cancel my Delhi–Mumbai flight tomorrow"</td><td data-label="System">Intent: cancel_booking (0.96) → PNR lookup</td></tr>
+              <tr><td data-label="Turn">2</td><td data-label="Speaker">Agent</td><td data-label="Message">"Found your DEL–BOM booking. Cancelling inside 24hrs of departure means a partial refund under this fare's rules — you'd get back part of what you paid. Want the exact amount?"</td><td data-label="System">Tool call: refund_policy_engine(fare_class, hours_to_departure)</td></tr>
+              <tr><td data-label="Turn">3</td><td data-label="Speaker">User</td><td data-label="Message">"Yes, how much"</td><td data-label="System">—</td></tr>
+              <tr><td data-label="Turn">4</td><td data-label="Speaker">Agent</td><td data-label="Message">"You'd get back ₹3,200 of ₹5,800 paid. Confirm cancellation?"</td><td data-label="System"><strong>Confirmation gate</strong> — irreversible action, requires explicit user confirmation before executing (guardrail, not optional)</td></tr>
+              <tr><td data-label="Turn">5</td><td data-label="Speaker">User</td><td data-label="Message">"Confirmed"</td><td data-label="System">—</td></tr>
+              <tr><td data-label="Turn">6</td><td data-label="Speaker">Agent</td><td data-label="Message">"Done — booking cancelled, ₹3,200 refund initiated, arrives in 5–7 business days. Reference CXL-48213."</td><td data-label="System">Tool calls: cancel_booking() + issue_refund() — both logged to the audit trail below</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
+          <picture>
+            <source srcset="projects/travel-support-copilot/screenshots/wireframes-light.webp" type="image/webp">
+            <img src="projects/travel-support-copilot/screenshots/wireframes-light.png" alt="Four wireframes for the Travel Support AI Copilot: Reasoning You Can See (visible confidence and fare-rule reasoning), Confirm Before It's Irreversible (a confirmation gate before cancel/refund actions), Context Follows You to a Human (a structured handoff summary instead of a repeat-yourself transcript), and Audit Trail for Support Ops (every autonomous action logged with a confidence score and review flag)" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          </picture>
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode) — each screen is annotated with the specific industry gap it closes.</p>
+
+        <details class="cs-showmore">
+          <summary>Show more — Flows 2 &amp; 3, agent architecture, guardrails, evaluation, metrics, risks <span class="sm-count">(the safety-critical half)</span></summary>
+
+        <div class="cs-narrative">
+          <h4>Flow 2 — Baggage Policy Question (lowest-risk flow)</h4>
+          <p>
+            The contrast case: a pure information lookup with no action taken and nothing to
+            confirm, so it needs none of Flow 1's guardrails.
+          </p>
+          <ul>
+            <li><strong>User:</strong> "How much check-in baggage do I get on my booking?"</li>
+            <li><strong>Agent</strong> (intent: baggage_query, 0.99 confidence) → tool call: fetch fare rules for the booking's specific fare class → <strong>"Your Economy Saver fare includes 15kg check-in. Extra baggage is ₹500/kg if you add it now, or ₹800/kg at the airport — want me to add extra baggage to this booking?"</strong></li>
+          </ul>
+          <p>
+            Fully autonomous end-to-end — answered <em>and</em> resolved the likely follow-up
+            (add baggage) without a human, because nothing here is irreversible or high-value
+            enough to need a confirmation gate.
+          </p>
+
+          <h4>Flow 3 — Booking Date Change (medium-risk flow)</h4>
+          <p>
+            Sits between the two above: it's an action (not just information) but a correctable
+            one, so it gets a lighter version of Flow 1's gate — confirm the fare difference, but
+            no separate human-escalation trigger unless the fare-difference lookup itself fails.
+            Intent: change_booking_date → tool call: check seat availability + fare difference on
+            new date → agent states the fare difference and change fee → single confirmation →
+            executes change_booking() and emails the updated ticket.
+          </p>
+
+          <h4>Agent Architecture</h4>
+          <p>
+            Four layers, in order: <strong>(1) Intent router</strong> — classifies the incoming
+            message into one of the in-scope intents above, or "unclassified" → human.
+            <strong>(2) Tool-calling layer</strong> — each intent maps to a fixed set of callable
+            tools (PNR lookup, refund_policy_engine, fare-difference calculator, cancel_booking,
+            issue_refund, change_booking) — the agent can only call tools on this allow-list, it
+            cannot invent new actions. <strong>(3) Confirmation gate</strong> — any tool call that
+            is irreversible or moves money (cancel_booking, issue_refund) requires an explicit
+            user confirmation turn before executing, never fires on the first pass.
+            <strong>(4) Escalation router</strong> — triggers on low intent-confidence
+            (&lt;0.85), a tool call failing twice, explicit user frustration signals, or any
+            query touching a hard non-goal (visa advice, disputes) — handed to a human agent with
+            the full conversation transcript attached, not restarted from zero.
+          </p>
+
+          <h4>Guardrails</h4>
+          <p>
+            This is the part of the design that actually differentiates a support <em>copilot</em>
+            from a support <em>chatbot</em> — and the part a scope doc for an agent that can take
+            real actions can't skip:
+          </p>
+          <ul>
+            <li><strong>Autonomous-action ceiling</strong> — the agent may autonomously execute cancellations/refunds up to a fixed rupee ceiling; above it, the same flow runs but ends in a human-approval step instead of auto-executing.</li>
+            <li><strong>Confirmation before irreversible actions</strong> — never optional, shown in Flow 1 above; a wrong autonomous cancellation is far more costly to trust than a wrong autonomous baggage-fee quote.</li>
+            <li><strong>No autonomous visa/legal advice</strong> — the intent router treats this as a hard non-goal, not a confidence threshold — it escalates every time, regardless of how confident the model is in an answer.</li>
+            <li><strong>Full audit trail</strong> — every tool call the agent executes (not just conversations) is logged with the triggering intent, confidence score, and outcome, reviewable by support ops — the same operational-audit discipline as the PCMS payout reconciliation work (see Technical Execution, T27).</li>
+          </ul>
+
+          <h4>Evaluation Approach</h4>
+          <p>
+            Deflection rate alone is a misleading headline metric here — a bot can "deflect" a
+            ticket by giving an answer that satisfies the user in the moment but is wrong, which
+            shows up as a good deflection number and a bad outcome. Evaluation needs three lenses,
+            not one: <strong>resolution accuracy</strong> (sampled human audit of closed
+            bot-handled tickets, not just the bot's own confidence score), <strong>wrong-action
+            rate</strong> — the safety metric, tracking autonomous actions a human reviewer would
+            have executed differently, weighted far more heavily than any convenience metric — and
+            <strong>escalation-appropriateness</strong>, checking the router escalates when it
+            should as often as it deflects when it shouldn't.
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Metric</th><th>What it's really measuring</th><th>Why it's on this list</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Metric">Containment rate</td><td data-label="Measuring">% of in-scope tickets resolved without a human</td><td data-label="Why">The headline efficiency number — but never read alone (see below)</td></tr>
+              <tr><td data-label="Metric">Wrong-action rate</td><td data-label="Measuring">Autonomous actions a human audit would reverse or flag</td><td data-label="Why">The safety guardrail metric — this one has veto power over containment rate</td></tr>
+              <tr><td data-label="Metric">CSAT on bot-resolved tickets</td><td data-label="Measuring">Satisfaction specifically on containment, not overall support CSAT</td><td data-label="Why">A ticket can be "contained" and still leave the user unhappy</td></tr>
+              <tr><td data-label="Metric">Escalation-appropriateness</td><td data-label="Measuring">Did the router escalate the tickets it should have</td><td data-label="Why">Catches an agent that's overconfident, not just one that's under-confident</td></tr>
+              <tr><td data-label="Metric">Time-to-resolution</td><td data-label="Measuring">End-to-end, bot-handled vs. human-handled tickets</td><td data-label="Why">The business-facing efficiency number, once the safety metrics above clear</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Business Impact (modeled, not measured)</h4>
+          <p>
+            Illustrative, not a real support-cost figure: if cancellation, baggage, and
+            date-change queries together are a modeled ~35% of ticket volume, and the copilot
+            fully contains half of those (the baggage-query type especially, since it needs no
+            guardrail and resolves in one turn), that's roughly a sixth of total support volume
+            handled at near-zero marginal cost instead of a human agent's fully-loaded
+            cost-per-ticket. The number that actually matters for a launch decision, though, is
+            the wrong-action rate at that containment level — a model here would need real
+            historical ticket data to size properly, which is exactly why this stays a scope doc
+            and not a "built" project, unlike the modeled-but-labeled dataset in the
+            <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>.
+          </p>
+
+          <h4>Risks</h4>
+          <p>
+            The risk that actually matters isn't "the bot gives a bad answer" — a Q&amp;A chatbot
+            has that risk too, and it's recoverable. It's <strong>the bot takes a bad
+            action</strong>: an autonomous cancellation or refund that shouldn't have happened is
+            real money and a damaged booking, not just an unhelpful chat log. Every guardrail
+            above exists to keep that specific failure mode's blast radius small and recoverable
+            (confirmation gates, action ceilings, audit trails) rather than trying to prevent it
+            outright, which no confidence threshold can fully guarantee.
+          </p>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            The same lesson as the ChatGPT Memory Feature teardown (Feature Reverse Engineering,
+            T18) shows up again here in a higher-stakes form: the hard PM problem in agentic AI
+            isn't language understanding or intent classification — those are largely solved. It's
+            designing the guardrail and escalation layer that keeps the agent's inevitable
+            mistakes cheap and reversible instead of expensive and permanent.
+          </p>
+        </div>
+        </details>
+
+        <div class="jlinks">
+          <span><span class="k">Live demo</span><a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">try it →</a></span>
+          <span><span class="k">Link</span><a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
+          <span><span class="k">Image</span><a href="projects/travel-support-copilot/screenshots/wireframes-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T6</span>
+        <h3 class="jcat-title">Hotel Recommendation Engine</h3>
+      </div>
+      <article class="jcard" data-case="hotel-recommendation-engine">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FB7185,#BE123C)">🏨</div>
+            <div>
+              <div class="jtitle">Hotel Recommendation Engine</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Scope</dt><dd>Design how hotel recommendations are generated using budget, location, ratings, amenities, and past bookings — plus how I'd evaluate recommendation quality.</dd>
+          <dt>Recommendation logic</dt><dd><span class="todo">fill in — weighted scoring model across the 5 inputs above</span></dd>
+          <dt>Evaluation approach</dt><dd><span class="todo">fill in — offline (precision@k) vs. online (click-through, booking rate) evaluation</span></dd>
+          <dt>Skills demonstrated</dt><dd>Recommendation system design, explainability — same auditability standard called out in the AI Trip Planner's guardrails above.</dd>
+          <dt>Outcome / insight</dt><dd><span class="todo">fill in — once built</span></dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+    </div>
+
+    <div class="cat-section" id="cat-metrics-and-analytics">
+      <div class="cat-head"><h2>Metrics &amp; Analytics</h2><span class="cat-tag">// KPI design, dashboards, and the metric tree behind them</span></div>
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum done">T3</span>
         <h3 class="jcat-title">Flight Delay Prediction Dashboard</h3>
@@ -637,8 +1116,7 @@
       </div>
       </article>
     </div>
-    <!-- T4: Airline Operations Dashboard -->
-    <div class="jcat-group hide-wip">
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
         <span class="jnum">T4</span>
         <h3 class="jcat-title">Airline Operations Dashboard</h3>
@@ -670,327 +1148,7 @@
       </div>
       </article>
     </div>
-
-    <!-- T5: Customer Support AI Copilot -->
-    <div class="jcat-group">
-      <div class="jcat-head">
-        <span class="jnum done">T5</span>
-        <h3 class="jcat-title">Customer Support AI Copilot</h3>
-      </div>
-      <article class="jcard" data-case="travel-support-ai-copilot" data-updated="2026-07-30">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#2DD4BF,#0D9488)">💬</div>
-            <div>
-              <div class="jtitle">Travel Support AI Copilot</div>
-              <div class="jmeta">⭐⭐⭐⭐⭐ Built — try the live demo</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <div class="cs-facts">
-          <span class="chip">Live interactive demo</span>
-          <span class="chip">Agentic AI, not just Q&amp;A</span>
-          <span class="chip">3 core conversation flows</span>
-          <span class="chip">Escalation &amp; guardrail architecture</span>
-          <span class="chip">Deflection vs. safety trade-off</span>
-        </div>
-
-        <div class="cs-narrative">
-          <h4>The Problem</h4>
-          <p>
-            The support queries that pile up fastest at an OTA — "cancel my flight," "how much
-            baggage can I bring," "can I change the travel date" — are also the most repetitive
-            and rule-governed. A human agent resolving them one ticket at a time is expensive and
-            slow at OTA volumes; a plain FAQ chatbot that only answers questions can't actually
-            act on a booking. The gap this project scopes is the one in between: an assistant that
-            can both answer <em>and</em> execute — cancel a booking, initiate a refund, apply a
-            fare rule — which is a materially different (and riskier) design problem than a
-            Q&amp;A bot, because it can now make a costly, sometimes irreversible mistake on its
-            own.
-          </p>
-
-          <h4>Scope &amp; Non-Goals</h4>
-          <p>
-            <strong>In scope:</strong> cancellations, refund recommendations, baggage-allowance
-            questions, and date/name booking changes — the four query types responsible for most
-            repetitive support volume. <strong>Explicitly routed to a human, never handled
-            autonomously:</strong> visa <em>legal</em> advice (a compliance and liability
-            question, not a support one — the bot can point to the airline/embassy's own
-            documentation but never advise), disputes and fraud claims, and any refund above a
-            fixed autonomous-action ceiling (see Guardrails below).
-          </p>
-
-          <h4>Where Today's Industry Falls Short</h4>
-          <p>
-            Before designing the flows, it's worth naming the pattern this design is deliberately
-            not repeating. Travel and OTA support bots in production today tend to fail in one of
-            four recurring ways — this isn't a claim about any specific company's product, it's
-            the pattern visible across the category:
-          </p>
-          <ul>
-            <li><strong>Answer-only, can't act</strong> — most bots can tell you the cancellation policy but can't actually cancel anything; the moment a user needs an action taken, they're back in a queue for a human, which defeats the point of automating the repetitive cases in the first place.</li>
-            <li><strong>Black-box numbers</strong> — the few bots that do quote a refund or fee rarely show the rule behind it, so a user has no way to check it's right, which is the same trust erosion the fare-shock problem in the <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a> causes at the booking stage.</li>
-            <li><strong>Silent or absent confirmation</strong> — bots that can act either skip a confirmation step entirely (risky) or are so conservative they add friction to low-risk actions too (annoying) — few calibrate the gate to the actual risk of the specific action, the way Flow 1 vs. Flow 2 do below.</li>
-            <li><strong>Context loss at handoff</strong> — "please repeat your issue" after being passed to a human is one of the most common support complaints in the category; the bot's understanding of the problem evaporates the moment escalation happens.</li>
-          </ul>
-          <p>
-            The wireframes further down (Screens 1–4) are the direct, one-to-one answer to these
-            four gaps, not generic chat-UI decoration — each screen is annotated with the specific
-            failure mode it closes. But rather than leave it at mockups, the architecture below is
-            also built and actually running:
-          </p>
-        </div>
-
-        <a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
-          <picture>
-            <source srcset="projects/travel-support-copilot/screenshots/demo-light.webp" type="image/webp">
-            <img src="projects/travel-support-copilot/screenshots/demo-light.png" alt="Interactive demo of the Travel Support AI Copilot: a chat panel where a user asks to cancel a flight, the copilot shows its reasoning, a confirmation gate appears before the irreversible action executes, and the confirmed cancellation and refund are logged in the Agent Action Log panel" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          </picture>
-        </a>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">
-          Click to open the live, interactive demo (also available in dark mode) — a rule-based
-          simulation of the flows and guardrails below, running entirely in your browser. A public
-          static site can't safely hold an API key to call a real LLM, so this demonstrates the
-          <em>architecture</em> working end to end (confirmation gate, escalation handoff, audit
-          trail), not a claim of production-grade language understanding — labeled as exactly that
-          on the demo page itself.
-        </p>
-
-        <div class="cs-narrative">
-          <h4>Flow 1 — Cancellation + Refund Recommendation (highest-risk flow)</h4>
-          <p>
-            The flow with the most at stake: it ends in an irreversible action (a cancelled
-            booking) and moves real money. Representative flow, illustrating the decision points
-            — not a transcript from a live system:
-          </p>
-        </div>
-
-        <div class="ptable2-wrap">
-          <table class="ptable2">
-            <thead><tr><th>Turn</th><th>Speaker</th><th>Message</th><th>System</th></tr></thead>
-            <tbody>
-              <tr><td data-label="Turn">1</td><td data-label="Speaker">User</td><td data-label="Message">"I need to cancel my Delhi–Mumbai flight tomorrow"</td><td data-label="System">Intent: cancel_booking (0.96) → PNR lookup</td></tr>
-              <tr><td data-label="Turn">2</td><td data-label="Speaker">Agent</td><td data-label="Message">"Found your DEL–BOM booking. Cancelling inside 24hrs of departure means a partial refund under this fare's rules — you'd get back part of what you paid. Want the exact amount?"</td><td data-label="System">Tool call: refund_policy_engine(fare_class, hours_to_departure)</td></tr>
-              <tr><td data-label="Turn">3</td><td data-label="Speaker">User</td><td data-label="Message">"Yes, how much"</td><td data-label="System">—</td></tr>
-              <tr><td data-label="Turn">4</td><td data-label="Speaker">Agent</td><td data-label="Message">"You'd get back ₹3,200 of ₹5,800 paid. Confirm cancellation?"</td><td data-label="System"><strong>Confirmation gate</strong> — irreversible action, requires explicit user confirmation before executing (guardrail, not optional)</td></tr>
-              <tr><td data-label="Turn">5</td><td data-label="Speaker">User</td><td data-label="Message">"Confirmed"</td><td data-label="System">—</td></tr>
-              <tr><td data-label="Turn">6</td><td data-label="Speaker">Agent</td><td data-label="Message">"Done — booking cancelled, ₹3,200 refund initiated, arrives in 5–7 business days. Reference CXL-48213."</td><td data-label="System">Tool calls: cancel_booking() + issue_refund() — both logged to the audit trail below</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
-          <picture>
-            <source srcset="projects/travel-support-copilot/screenshots/wireframes-light.webp" type="image/webp">
-            <img src="projects/travel-support-copilot/screenshots/wireframes-light.png" alt="Four wireframes for the Travel Support AI Copilot: Reasoning You Can See (visible confidence and fare-rule reasoning), Confirm Before It's Irreversible (a confirmation gate before cancel/refund actions), Context Follows You to a Human (a structured handoff summary instead of a repeat-yourself transcript), and Audit Trail for Support Ops (every autonomous action logged with a confidence score and review flag)" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          </picture>
-        </a>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode) — each screen is annotated with the specific industry gap it closes.</p>
-
-        <details class="cs-showmore">
-          <summary>Show more — Flows 2 &amp; 3, agent architecture, guardrails, evaluation, metrics, risks <span class="sm-count">(the safety-critical half)</span></summary>
-
-        <div class="cs-narrative">
-          <h4>Flow 2 — Baggage Policy Question (lowest-risk flow)</h4>
-          <p>
-            The contrast case: a pure information lookup with no action taken and nothing to
-            confirm, so it needs none of Flow 1's guardrails.
-          </p>
-          <ul>
-            <li><strong>User:</strong> "How much check-in baggage do I get on my booking?"</li>
-            <li><strong>Agent</strong> (intent: baggage_query, 0.99 confidence) → tool call: fetch fare rules for the booking's specific fare class → <strong>"Your Economy Saver fare includes 15kg check-in. Extra baggage is ₹500/kg if you add it now, or ₹800/kg at the airport — want me to add extra baggage to this booking?"</strong></li>
-          </ul>
-          <p>
-            Fully autonomous end-to-end — answered <em>and</em> resolved the likely follow-up
-            (add baggage) without a human, because nothing here is irreversible or high-value
-            enough to need a confirmation gate.
-          </p>
-
-          <h4>Flow 3 — Booking Date Change (medium-risk flow)</h4>
-          <p>
-            Sits between the two above: it's an action (not just information) but a correctable
-            one, so it gets a lighter version of Flow 1's gate — confirm the fare difference, but
-            no separate human-escalation trigger unless the fare-difference lookup itself fails.
-            Intent: change_booking_date → tool call: check seat availability + fare difference on
-            new date → agent states the fare difference and change fee → single confirmation →
-            executes change_booking() and emails the updated ticket.
-          </p>
-
-          <h4>Agent Architecture</h4>
-          <p>
-            Four layers, in order: <strong>(1) Intent router</strong> — classifies the incoming
-            message into one of the in-scope intents above, or "unclassified" → human.
-            <strong>(2) Tool-calling layer</strong> — each intent maps to a fixed set of callable
-            tools (PNR lookup, refund_policy_engine, fare-difference calculator, cancel_booking,
-            issue_refund, change_booking) — the agent can only call tools on this allow-list, it
-            cannot invent new actions. <strong>(3) Confirmation gate</strong> — any tool call that
-            is irreversible or moves money (cancel_booking, issue_refund) requires an explicit
-            user confirmation turn before executing, never fires on the first pass.
-            <strong>(4) Escalation router</strong> — triggers on low intent-confidence
-            (&lt;0.85), a tool call failing twice, explicit user frustration signals, or any
-            query touching a hard non-goal (visa advice, disputes) — handed to a human agent with
-            the full conversation transcript attached, not restarted from zero.
-          </p>
-
-          <h4>Guardrails</h4>
-          <p>
-            This is the part of the design that actually differentiates a support <em>copilot</em>
-            from a support <em>chatbot</em> — and the part a scope doc for an agent that can take
-            real actions can't skip:
-          </p>
-          <ul>
-            <li><strong>Autonomous-action ceiling</strong> — the agent may autonomously execute cancellations/refunds up to a fixed rupee ceiling; above it, the same flow runs but ends in a human-approval step instead of auto-executing.</li>
-            <li><strong>Confirmation before irreversible actions</strong> — never optional, shown in Flow 1 above; a wrong autonomous cancellation is far more costly to trust than a wrong autonomous baggage-fee quote.</li>
-            <li><strong>No autonomous visa/legal advice</strong> — the intent router treats this as a hard non-goal, not a confidence threshold — it escalates every time, regardless of how confident the model is in an answer.</li>
-            <li><strong>Full audit trail</strong> — every tool call the agent executes (not just conversations) is logged with the triggering intent, confidence score, and outcome, reviewable by support ops — the same operational-audit discipline as the PCMS payout reconciliation work (see Technical Execution, J11).</li>
-          </ul>
-
-          <h4>Evaluation Approach</h4>
-          <p>
-            Deflection rate alone is a misleading headline metric here — a bot can "deflect" a
-            ticket by giving an answer that satisfies the user in the moment but is wrong, which
-            shows up as a good deflection number and a bad outcome. Evaluation needs three lenses,
-            not one: <strong>resolution accuracy</strong> (sampled human audit of closed
-            bot-handled tickets, not just the bot's own confidence score), <strong>wrong-action
-            rate</strong> — the safety metric, tracking autonomous actions a human reviewer would
-            have executed differently, weighted far more heavily than any convenience metric — and
-            <strong>escalation-appropriateness</strong>, checking the router escalates when it
-            should as often as it deflects when it shouldn't.
-          </p>
-        </div>
-
-        <div class="ptable2-wrap">
-          <table class="ptable2">
-            <thead><tr><th>Metric</th><th>What it's really measuring</th><th>Why it's on this list</th></tr></thead>
-            <tbody>
-              <tr><td data-label="Metric">Containment rate</td><td data-label="Measuring">% of in-scope tickets resolved without a human</td><td data-label="Why">The headline efficiency number — but never read alone (see below)</td></tr>
-              <tr><td data-label="Metric">Wrong-action rate</td><td data-label="Measuring">Autonomous actions a human audit would reverse or flag</td><td data-label="Why">The safety guardrail metric — this one has veto power over containment rate</td></tr>
-              <tr><td data-label="Metric">CSAT on bot-resolved tickets</td><td data-label="Measuring">Satisfaction specifically on containment, not overall support CSAT</td><td data-label="Why">A ticket can be "contained" and still leave the user unhappy</td></tr>
-              <tr><td data-label="Metric">Escalation-appropriateness</td><td data-label="Measuring">Did the router escalate the tickets it should have</td><td data-label="Why">Catches an agent that's overconfident, not just one that's under-confident</td></tr>
-              <tr><td data-label="Metric">Time-to-resolution</td><td data-label="Measuring">End-to-end, bot-handled vs. human-handled tickets</td><td data-label="Why">The business-facing efficiency number, once the safety metrics above clear</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="cs-narrative">
-          <h4>Business Impact (modeled, not measured)</h4>
-          <p>
-            Illustrative, not a real support-cost figure: if cancellation, baggage, and
-            date-change queries together are a modeled ~35% of ticket volume, and the copilot
-            fully contains half of those (the baggage-query type especially, since it needs no
-            guardrail and resolves in one turn), that's roughly a sixth of total support volume
-            handled at near-zero marginal cost instead of a human agent's fully-loaded
-            cost-per-ticket. The number that actually matters for a launch decision, though, is
-            the wrong-action rate at that containment level — a model here would need real
-            historical ticket data to size properly, which is exactly why this stays a scope doc
-            and not a "built" project, unlike the modeled-but-labeled dataset in the
-            <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>.
-          </p>
-
-          <h4>Risks</h4>
-          <p>
-            The risk that actually matters isn't "the bot gives a bad answer" — a Q&amp;A chatbot
-            has that risk too, and it's recoverable. It's <strong>the bot takes a bad
-            action</strong>: an autonomous cancellation or refund that shouldn't have happened is
-            real money and a damaged booking, not just an unhelpful chat log. Every guardrail
-            above exists to keep that specific failure mode's blast radius small and recoverable
-            (confirmation gates, action ceilings, audit trails) rather than trying to prevent it
-            outright, which no confidence threshold can fully guarantee.
-          </p>
-
-          <h4>Reusable Insight</h4>
-          <p>
-            The same lesson as the ChatGPT Memory Feature teardown (Feature Reverse Engineering,
-            J2) shows up again here in a higher-stakes form: the hard PM problem in agentic AI
-            isn't language understanding or intent classification — those are largely solved. It's
-            designing the guardrail and escalation layer that keeps the agent's inevitable
-            mistakes cheap and reversible instead of expensive and permanent.
-          </p>
-        </div>
-        </details>
-
-        <div class="jlinks">
-          <span><span class="k">Live demo</span><a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">try it →</a></span>
-          <span><span class="k">Link</span><a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
-          <span><span class="k">Image</span><a href="projects/travel-support-copilot/screenshots/wireframes-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T6: Hotel Recommendation Engine -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T6</span>
-        <h3 class="jcat-title">Hotel Recommendation Engine</h3>
-      </div>
-      <article class="jcard" data-case="hotel-recommendation-engine">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#FB7185,#BE123C)">🏨</div>
-            <div>
-              <div class="jtitle">Hotel Recommendation Engine</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>Design how hotel recommendations are generated using budget, location, ratings, amenities, and past bookings — plus how I'd evaluate recommendation quality.</dd>
-          <dt>Recommendation logic</dt><dd><span class="todo">fill in — weighted scoring model across the 5 inputs above</span></dd>
-          <dt>Evaluation approach</dt><dd><span class="todo">fill in — offline (precision@k) vs. online (click-through, booking rate) evaluation</span></dd>
-          <dt>Skills demonstrated</dt><dd>Recommendation system design, explainability — same auditability standard called out in the AI Trip Planner's guardrails above.</dd>
-          <dt>Outcome / insight</dt><dd><span class="todo">fill in — once built</span></dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T7: Travel Loyalty Program Redesign -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T7</span>
-        <h3 class="jcat-title">Travel Loyalty Program Redesign</h3>
-      </div>
-      <article class="jcard" data-case="travel-loyalty-program-redesign">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#FBBF24,#D97706)">🎖️</div>
-            <div>
-              <div class="jtitle">Travel Loyalty Program Redesign</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>Improve a loyalty program for an OTA or airline — user research, current pain points, new earning/redemption rules, gamification ideas, KPIs.</dd>
-          <dt>Current pain points</dt><dd><span class="todo">fill in — e.g. redemption friction, tier stagnation</span></dd>
-          <dt>New earning/redemption rules</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Gamification ideas</dt><dd><span class="todo">fill in — streaks, milestone tiers, surprise-and-delight unlocks</span></dd>
-          <dt>KPIs</dt><dd><span class="todo">fill in — e.g. repeat booking rate, tier upgrade rate, redemption rate</span></dd>
-          <dt>Skills demonstrated</dt><dd>Retention/lifecycle design — the loyalty counterpart to the funnel-conversion work in the Booking Funnel Analysis below.</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T8: Booking Funnel Analysis -->
-    <div class="jcat-group">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum done">T8</span>
         <h3 class="jcat-title">Booking Funnel Analysis</h3>
@@ -1050,31 +1208,39 @@
       </div>
       </article>
     </div>
-
-    <!-- T9: Visa Application Tracker -->
-    <div class="jcat-group hide-wip">
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
-        <span class="jnum">T9</span>
-        <h3 class="jcat-title">Visa Application Tracker</h3>
+        <span class="jnum">T20</span>
+        <h3 class="jcat-title">Cross-industry example</h3>
       </div>
-      <article class="jcard" data-case="visa-application-tracker">
+      <article class="jcard" data-case="swiggy-north-star-metric">
         <button class="jhead" type="button">
           <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#4ADE80,#15803D)">🛂</div>
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FB7185,#E11D48)">🛵</div>
             <div>
-              <div class="jtitle">Visa Application Tracker</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — scope defined</div>
+              <div class="jtitle">Swiggy — North Star Metric</div>
+              <div class="jmeta">Analytical Thinking</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <dl class="fields">
-          <dt>Scope</dt><dd>A product where users track visa application status, receive document reminders, estimate processing time, and securely store travel documents.</dd>
-          <dt>Core flows</dt><dd><span class="todo">fill in — status tracking, reminders, document vault</span></dd>
-          <dt>Compliance considerations</dt><dd>Secure document storage directly reuses the eKYC/RBI digital-lending compliance discipline from the fintech toolkit — data sensitivity, not just UX, is the hard part here.</dd>
-          <dt>Skills demonstrated</dt><dd>Regulated/documentation-heavy product design, notification/reminder system design.</dd>
-          <dt>Outcome / insight</dt><dd><span class="todo">fill in — once built</span></dd>
+          <dt>Product</dt><dd>Swiggy</dd>
+          <dt>Feature analyzed</dt><dd>Order/delivery experience</dd>
+          <dt>North Star metric (proposed)</dt><dd>Orders delivered on time, per active user</dd>
+          <dt>Acquisition metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Activation metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Retention metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Revenue metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Referral metrics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Metric tree</dt><dd>Orders placed (acquisition, inflatable with discounts) → on-time delivery (what users actually value) → normalized per active user (removes growth-inflation noise)</dd>
+          <dt>Leading indicators</dt><dd>Delivery partner availability</dd>
+          <dt>Lagging indicators</dt><dd>NPS, repeat order rate</dd>
+          <dt>Guardrail metrics</dt><dd>Restaurant cancellation rate</dd>
+          <dt>Hypotheses</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Experiment ideas</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Expected impact</dt><dd><span class="todo">fill in</span></dd>
         </dl>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
@@ -1084,331 +1250,14 @@
       </div>
       </article>
     </div>
-
-    <!-- T10: Travel PRD Portfolio -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T10</span>
-        <h3 class="jcat-title">Travel PRD Portfolio</h3>
-      </div>
-      <article class="jcard" data-case="travel-prd-portfolio">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#94A3B8,#475569)">📋</div>
-            <div>
-              <div class="jtitle">Travel PRD Portfolio (5–10 PRDs)</div>
-              <div class="jmeta">⭐⭐⭐⭐⭐ Roadmap — scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>Short PRDs, one per feature: price alerts, smart refunds, waitlist for sold-out flights, multi-city planner, carbon footprint calculator, AI travel assistant.</dd>
-          <dt>PRD template</dt><dd>Reuses the Problem → User Stories → Business Goals → Requirements → Acceptance Criteria → Success Metrics → Launch Plan structure from the PM Writing case study (J6) below.</dd>
-          <dt>Progress</dt><dd><span class="todo">fill in — 0 of 6+ written; track completion here as each PRD ships</span></dd>
-          <dt>Skills demonstrated</dt><dd>PRD writing at range and speed — breadth across a feature roadmap rather than depth on one project.</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
     </div>
 
-    <!-- T11: Flight Search & Price Comparison Engine -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T11</span>
-        <h3 class="jcat-title">Flight Search &amp; Price Comparison Engine</h3>
-      </div>
-      <article class="jcard" data-case="flight-search-price-comparison">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#22D3EE,#0E7490)">🔍</div>
-            <div>
-              <div class="jtitle">Flight Search &amp; Price Comparison Engine</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Search Systems — Google Flights, Skyscanner, Kayak. The engine that turns "Delhi to Bangkok, next week" into a ranked, comparable set of fares across airlines and OTAs.</dd>
-          <dt>What PMs build here</dt><dd>Meta-search (aggregating other platforms' inventory and referring out) vs. direct search (querying and selling your own inventory) — a fundamentally different product and monetization model from a booking system, even though the search box looks identical to a user.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Meta-search vs. OTA economics</strong> — Skyscanner/Kayak don't sell tickets, they refer (CPC or referral fee); a booking platform earns margin on the fare. Same search box, opposite business model.<br>
-            2. <strong>Real-time fare staleness</strong> — GDS/airline APIs rate-limit and cache; a shown fare can go stale between search and click-through. "Fare no longer available" is a core UX problem here, not an edge case.<br>
-            3. <strong>Ranking trade-offs</strong> — cheapest-for-user vs. highest-referral-fee-for-business; how a meta-search product decides what "best result" even means.<br>
-            4. <strong>Flexible-date search</strong> (±3 days, whole-month calendar view) as a distinct product surface from single-date search, with a very different backend query pattern.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How does Google Flights' ranking differ from Skyscanner's? What's the actual fare-staleness recovery flow when a user clicks through to a dead price? How is a meta-search product's North Star (clicks-to-partner) different from an OTA's (completed bookings)?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Marketplace/aggregator business models, ranking algorithm trade-offs, real-time data staleness handling — distinct from the single-inventory booking-flow thinking in T1.</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T12: Travel Marketplace Platform -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T12</span>
-        <h3 class="jcat-title">Travel Marketplace Platform</h3>
-      </div>
-      <article class="jcard" data-case="travel-marketplace-platform">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#F472B6,#BE185D)">🤝</div>
-            <div>
-              <div class="jtitle">Travel Marketplace Platform</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Marketplace Systems — Airbnb, GetYourGuide. Two-sided platforms connecting hosts/suppliers with guests/travellers, where trust and liquidity are the core problems, not booking UX.</dd>
-          <dt>What PMs build here</dt><dd>Everything a single-inventory OTA (T1) doesn't need: supply-side onboarding, trust and safety systems, and a matching/ranking model that has to weigh host quality alongside price.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Two-sided liquidity</strong> — no guests without hosts, no hosts without guests. Which side do you subsidize first, and how do you measure "liquidity" as a real metric, not a slogan?<br>
-            2. <strong>Trust &amp; safety as core product</strong> — reviews, ID verification, host guarantees, guest screening — the actual mechanism that makes a stranger's home bookable at all.<br>
-            3. <strong>Marketplace ranking</strong> — host quality signals vs. price vs. availability vs. novelty; very different from ranking a fixed airline-fare inventory.<br>
-            4. <strong>Take-rate design</strong> — host fee vs. guest fee vs. blended, and the transparency trade-offs each creates in the checkout UX.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How does Airbnb's search ranking balance host quality vs. price vs. novelty? What's the trust-building flow a first-time host actually goes through? How does GetYourGuide's supply-side onboarding differ from Airbnb's, given smaller/more numerous suppliers?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Two-sided marketplace dynamics, trust &amp; safety product design, supply-side (not just demand-side) product thinking.</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T13: Ride-Sharing & Mobility Booking -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T13</span>
-        <h3 class="jcat-title">Ride-Sharing &amp; Mobility Booking</h3>
-      </div>
-      <article class="jcard" data-case="ride-sharing-mobility-booking">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#A3E635,#4D7C0F)">🚗</div>
-            <div>
-              <div class="jtitle">Ride-Sharing &amp; Mobility Booking</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Mobility Systems — Uber, BlaBlaCar. Real-time matching between riders and drivers/co-travellers, dynamic pricing, and ETA-driven trust — a live-match product, not a browse-and-book one.</dd>
-          <dt>What PMs build here</dt><dd>Dispatch/matching algorithms and pricing mechanics that respond in seconds, not the search-and-compare flows every other system on this list uses.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Real-time supply/demand matching</strong> — the product surface is a live match, not a list of results to browse; latency itself is a feature.<br>
-            2. <strong>Surge/dynamic pricing</strong> — the most studied and most controversial pricing mechanism in travel-tech; balancing driver-supply incentive against rider price sensitivity and perceived fairness.<br>
-            3. <strong>ETA accuracy as trust</strong> — a wrong ETA is a broken promise, not a UX nitpick; it's the primary trust mechanic in a product with no browsable inventory to build confidence from.<br>
-            4. <strong>Marketplace vs. peer-to-peer</strong> — Uber owns dispatch and pricing outright; BlaBlaCar is closer to a trust-and-coordination layer over independently-arranged car-share trips.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How would you redesign surge pricing to reduce rider anger while preserving driver supply incentives? What's BlaBlaCar's trust model for a multi-hour shared car ride, versus Uber's for a 10-minute trip?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Real-time marketplace/dispatch systems, dynamic pricing design, trust mechanics in a zero-inventory-browse product.</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T14: Tours & Activities Marketplace -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T14</span>
-        <h3 class="jcat-title">Tours &amp; Activities Marketplace</h3>
-      </div>
-      <article class="jcard" data-case="tours-activities-marketplace">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#FCA5A5,#B91C1C)">🎫</div>
-            <div>
-              <div class="jtitle">Tours &amp; Activities Marketplace</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Experience Marketplace — Viator, Klook. Discovery and booking for bookable experiences (tours, tickets, activities) — a catalog/inventory problem more than a real-time-matching one.</dd>
-          <dt>What PMs build here</dt><dd>Supply-side tooling for thousands of small local operators (not a handful of airlines), and the cross-sell integration point where "book a flight" surfaces "things to do at your destination."</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Perishable inventory at small scale</strong> — an unsold tour slot today is gone forever, the same yield-management problem as an airline seat, but per-operator volume is tiny compared to an airline.<br>
-            2. <strong>Long-tail supply</strong> — thousands of small local operators instead of a handful of airlines; supply-side tooling and quality control look completely different from T1's world.<br>
-            3. <strong>Instant confirmation vs. request-to-book</strong> — some experiences confirm immediately, others need the operator to manually accept; a real trust/UX trade-off, not just an engineering detail.<br>
-            4. <strong>Cross-sell placement</strong> — where in a booking flow (like T1's) should experience upsells actually appear, and does that belong to this system or the booking system it's bolted onto?
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How does Klook's supply-side operator tooling differ from a single-inventory OTA's? Where in the funnel (see T8) should an experience upsell actually be placed, and what does it cannibalize if placed too early?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Long-tail supply management, perishable-inventory yield thinking at small scale, cross-sell/attach-rate product design.</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T15: Travel Discovery & Reviews Platform -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T15</span>
-        <h3 class="jcat-title">Travel Discovery &amp; Reviews Platform</h3>
-      </div>
-      <article class="jcard" data-case="travel-discovery-reviews-platform">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#FDE047,#A16207)">⭐</div>
-            <div>
-              <div class="jtitle">Travel Discovery &amp; Reviews Platform</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Travel Discovery Systems — Tripadvisor, Yelp. Pre-booking inspiration and trust — reviews, rankings, and content that influence a decision made and completed somewhere else entirely.</dd>
-          <dt>What PMs build here</dt><dd>A non-transactional product: most Tripadvisor traffic never books on Tripadvisor. The PM problem is monetizing influence, not completing a purchase.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Monetizing a non-transactional product</strong> — referral/ads revenue instead of booking margin; a fundamentally different business model than every OTA on this list.<br>
-            2. <strong>Review fraud &amp; fake-review detection</strong> — the core trust problem: how do you know a 5-star review is real, without over-flagging genuine negative ones?<br>
-            3. <strong>Content ranking vs. e-commerce ranking</strong> — a "best restaurant" ranking has no purchase event forcing a decision; different signals matter than in a booking-funnel ranking (T8).<br>
-            4. <strong>SEO as the primary growth channel</strong> — discovery platforms live or die on organic search traffic in a way booking platforms (T1) don't have to.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How would you detect and penalize fake reviews without over-flagging real negative ones? What's Tripadvisor's actual North Star metric if it isn't bookings?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Non-transactional business models, trust/fraud detection systems, content ranking, SEO-driven growth strategy.</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T16: Travel Payments & Refunds System -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T16</span>
-        <h3 class="jcat-title">Travel Payments &amp; Refunds System</h3>
-      </div>
-      <article class="jcard" data-case="travel-payments-refunds-system">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#5EEAD4,#0F766E)">💳</div>
-            <div>
-              <div class="jtitle">Travel Payments &amp; Refunds System</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Travel Payments Systems — Stripe, Adyen. The payment infrastructure underneath every other system here — a single itinerary can touch 4+ currencies and vendors at once.</dd>
-          <dt>What PMs build here</dt><dd>Multi-currency, multi-method payment handling and refund/dispute resolution at travel-specific scale and complexity, not a generic checkout flow.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Split payments &amp; multi-vendor settlement</strong> — one trip booking might pay an airline, a hotel, and a local tour operator; who gets paid when, and who eats a refund when one leg cancels?<br>
-            2. <strong>Chargeback &amp; dispute handling</strong> — travel has uniquely high dispute rates (cancelled flights, no-show hotels) — a payments PM's core recurring headache.<br>
-            3. <strong>Currency conversion &amp; FX risk</strong> — who absorbs the exchange-rate movement between the booking date and the travel date, months later?<br>
-            4. <strong>Refund policy as a product surface</strong>, not a policy doc — partial refunds, cash vs. credit, voucher expiry are UX decisions with real financial modeling behind each one.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How would you design a refund policy for a 3-vendor itinerary where only one vendor cancels? What's the actual dispute-resolution flow when a traveller claims non-delivery of a paid-for service?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Payments infrastructure design, multi-party settlement logic, dispute/refund policy as product design — not just a support-team script.</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T17: Airline/Hotel Distribution System (GDS) -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T17</span>
-        <h3 class="jcat-title">Airline/Hotel Distribution System (GDS)</h3>
-      </div>
-      <article class="jcard" data-case="airline-hotel-distribution-gds">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#A5B4FC,#4338CA)">🔌</div>
-            <div>
-              <div class="jtitle">Airline/Hotel Distribution System (GDS)</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Travel Distribution Systems — Amadeus IT Group, Sabre Corporation. The B2B plumbing that makes every other system on this list possible — the GDS is what an OTA's search actually queries behind the scenes.</dd>
-          <dt>What PMs build here</dt><dd>B2B infrastructure for travel agencies and OTAs, not a consumer product — API reliability, partner SLAs, and integration timelines are the actual PM discipline, not UX polish.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>GDS as B2B infrastructure</strong> — the customer is a travel agency or OTA, not a traveller; a completely different PM discipline than every consumer-facing system above.<br>
-            2. <strong>NDC (New Distribution Capability)</strong> — the airline industry's real, current push to bypass traditional GDS with direct API access; an active disruption to this exact business model, worth naming by name.<br>
-            3. <strong>Inventory synchronization latency</strong> — a seat sold on one channel must be un-sold everywhere else within seconds, or the airline oversells.<br>
-            4. <strong>Switching costs &amp; lock-in</strong> — why airlines and agencies rarely change GDS providers; the actual moat this multi-decade business runs on.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            Why is NDC a genuine threat to Amadeus/Sabre's business model, and how would a PM there respond? What does a GDS integration project actually look like from an OTA's engineering side (ties to T1's "technical execution" comfort)?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>B2B/infrastructure product management, API-as-product thinking, understanding a legacy moat well enough to know what threatens it.</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-    <!-- T18: Feature Reverse Engineering -->
-    <div class="jcat-group hide-wip">
+    <div class="cat-section" id="cat-feature-reverse-engineering">
+      <div class="cat-head"><h2>Feature Reverse Engineering</h2><span class="cat-tag">// dissecting a single shipped feature</span></div>
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
         <span class="jnum">T18</span>
-        <h3 class="jcat-title">Feature Reverse Engineering</h3>
+        <h3 class="jcat-title">Cross-industry examples</h3>
       </div>
       <article class="jcard" data-case="duolingo-streak-feature">
         <button class="jhead" type="button">
@@ -1483,38 +1332,34 @@
       </div>
       </article>
     </div>
+    </div>
 
-    <!-- T19: User Psychology -->
-    <div class="jcat-group hide-wip">
+    <div class="cat-section" id="cat-product-strategy">
+      <div class="cat-head"><h2>Product Strategy</h2><span class="cat-tag">// business model, moat, and competitive positioning</span></div>
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
-        <span class="jnum">T19</span>
-        <h3 class="jcat-title">User Psychology</h3>
+        <span class="jnum">T7</span>
+        <h3 class="jcat-title">Travel Loyalty Program Redesign</h3>
       </div>
-      <article class="jcard" data-case="fintech-app-first-open-kyc">
+      <article class="jcard" data-case="travel-loyalty-program-redesign">
         <button class="jhead" type="button">
           <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#F472B6,#DB2777)">🧠</div>
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FBBF24,#D97706)">🎖️</div>
             <div>
-              <div class="jtitle">Fintech App — First-Open KYC</div>
-              <div class="jmeta">User Empathy</div>
+              <div class="jtitle">Travel Loyalty Program Redesign</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — scope defined</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <dl class="fields">
-          <dt>Product observed</dt><dd>Fintech app (KYC onboarding flow)</dd>
-          <dt>User action</dt><dd>First open, attempting to complete KYC with no instructions</dd>
-          <dt>Emotional trigger</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Friction point</dt><dd>7-step KYC flow; users abandoned at step 4 of 7</dd>
-          <dt>Motivation</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Habit loop</dt><dd>Broken — daily check-ins expected by the product, but zero streak/return mechanism exists</dd>
-          <dt>Cognitive bias</dt><dd>Anchoring — complexity on the first screen set user expectations for the whole flow</dd>
-          <dt>User quotes</dt><dd>User said "finally" on reaching the dashboard — read as relief, not delight</dd>
-          <dt>Behavioral patterns</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Product implications</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Business implications</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Lessons</dt><dd>User empathy is the most analytical thing a PM can do — it isn't a "soft" skill</dd>
+          <dt>Scope</dt><dd>Improve a loyalty program for an OTA or airline — user research, current pain points, new earning/redemption rules, gamification ideas, KPIs.</dd>
+          <dt>Current pain points</dt><dd><span class="todo">fill in — e.g. redemption friction, tier stagnation</span></dd>
+          <dt>New earning/redemption rules</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Gamification ideas</dt><dd><span class="todo">fill in — streaks, milestone tiers, surprise-and-delight unlocks</span></dd>
+          <dt>KPIs</dt><dd><span class="todo">fill in — e.g. repeat booking rate, tier upgrade rate, redemption rate</span></dd>
+          <dt>Skills demonstrated</dt><dd>Retention/lifecycle design — the loyalty counterpart to the funnel-conversion work in the Booking Funnel Analysis below.</dd>
         </dl>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
@@ -1524,41 +1369,36 @@
       </div>
       </article>
     </div>
-
-    <!-- T20: Metrics &amp; Analytics -->
-    <div class="jcat-group hide-wip">
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
-        <span class="jnum">T20</span>
-        <h3 class="jcat-title">Metrics &amp; Analytics</h3>
+        <span class="jnum">T17</span>
+        <h3 class="jcat-title">Airline/Hotel Distribution System (GDS)</h3>
       </div>
-      <article class="jcard" data-case="swiggy-north-star-metric">
+      <article class="jcard" data-case="airline-hotel-distribution-gds">
         <button class="jhead" type="button">
           <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#FB7185,#E11D48)">🛵</div>
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#A5B4FC,#4338CA)">🔌</div>
             <div>
-              <div class="jtitle">Swiggy — North Star Metric</div>
-              <div class="jmeta">Analytical Thinking</div>
+              <div class="jtitle">Airline/Hotel Distribution System (GDS)</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <dl class="fields">
-          <dt>Product</dt><dd>Swiggy</dd>
-          <dt>Feature analyzed</dt><dd>Order/delivery experience</dd>
-          <dt>North Star metric (proposed)</dt><dd>Orders delivered on time, per active user</dd>
-          <dt>Acquisition metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Activation metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Retention metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Revenue metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Referral metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Metric tree</dt><dd>Orders placed (acquisition, inflatable with discounts) → on-time delivery (what users actually value) → normalized per active user (removes growth-inflation noise)</dd>
-          <dt>Leading indicators</dt><dd>Delivery partner availability</dd>
-          <dt>Lagging indicators</dt><dd>NPS, repeat order rate</dd>
-          <dt>Guardrail metrics</dt><dd>Restaurant cancellation rate</dd>
-          <dt>Hypotheses</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Experiment ideas</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Expected impact</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Core system &amp; companies</dt><dd>Travel Distribution Systems — Amadeus IT Group, Sabre Corporation. The B2B plumbing that makes every other system on this list possible — the GDS is what an OTA's search actually queries behind the scenes.</dd>
+          <dt>What PMs build here</dt><dd>B2B infrastructure for travel agencies and OTAs, not a consumer product — API reliability, partner SLAs, and integration timelines are the actual PM discipline, not UX polish.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>GDS as B2B infrastructure</strong> — the customer is a travel agency or OTA, not a traveller; a completely different PM discipline than every consumer-facing system above.<br>
+            2. <strong>NDC (New Distribution Capability)</strong> — the airline industry's real, current push to bypass traditional GDS with direct API access; an active disruption to this exact business model, worth naming by name.<br>
+            3. <strong>Inventory synchronization latency</strong> — a seat sold on one channel must be un-sold everywhere else within seconds, or the airline oversells.<br>
+            4. <strong>Switching costs &amp; lock-in</strong> — why airlines and agencies rarely change GDS providers; the actual moat this multi-decade business runs on.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            Why is NDC a genuine threat to Amadeus/Sabre's business model, and how would a PM there respond? What does a GDS integration project actually look like from an OTA's engineering side (ties to T1's "technical execution" comfort)?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>B2B/infrastructure product management, API-as-product thinking, understanding a legacy moat well enough to know what threatens it.</dd>
         </dl>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
@@ -1568,12 +1408,10 @@
       </div>
       </article>
     </div>
-
-    <!-- T21: Product Strategy -->
-    <div class="jcat-group hide-wip">
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
         <span class="jnum">T21</span>
-        <h3 class="jcat-title">Product Strategy</h3>
+        <h3 class="jcat-title">Cross-industry example</h3>
       </div>
       <article class="jcard" data-case="zepto-dark-store-moat">
         <button class="jhead" type="button">
@@ -1611,12 +1449,45 @@
       </div>
       </article>
     </div>
+    </div>
 
-    <!-- T22: PM Writing -->
-    <div class="jcat-group hide-wip">
+    <div class="cat-section" id="cat-pm-writing">
+      <div class="cat-head"><h2>PM Writing</h2><span class="cat-tag">// PRDs, decision memos, and structured product docs</span></div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T10</span>
+        <h3 class="jcat-title">Travel PRD Portfolio</h3>
+      </div>
+      <article class="jcard" data-case="travel-prd-portfolio">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#94A3B8,#475569)">📋</div>
+            <div>
+              <div class="jtitle">Travel PRD Portfolio (5–10 PRDs)</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Roadmap — scope defined</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Scope</dt><dd>Short PRDs, one per feature: price alerts, smart refunds, waitlist for sold-out flights, multi-city planner, carbon footprint calculator, AI travel assistant.</dd>
+          <dt>PRD template</dt><dd>Reuses the Problem → User Stories → Business Goals → Requirements → Acceptance Criteria → Success Metrics → Launch Plan structure from the PM Writing case study (T22) below.</dd>
+          <dt>Progress</dt><dd><span class="todo">fill in — 0 of 6+ written; track completion here as each PRD ships</span></dd>
+          <dt>Skills demonstrated</dt><dd>PRD writing at range and speed — breadth across a feature roadmap rather than depth on one project.</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
         <span class="jnum">T22</span>
-        <h3 class="jcat-title">PM Writing</h3>
+        <h3 class="jcat-title">Cross-industry example</h3>
       </div>
       <article class="jcard" data-case="prd-template-decision-memo">
         <button class="jhead" type="button">
@@ -1655,39 +1526,33 @@
       </div>
       </article>
     </div>
+    </div>
 
-    <!-- T23: Career Lessons -->
-    <div class="jcat-group hide-wip">
+    <div class="cat-section" id="cat-technical-execution">
+      <div class="cat-head"><h2>Technical Execution</h2><span class="cat-tag">// API integration, SQL, and backlog discipline</span></div>
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
-        <span class="jnum">T23</span>
-        <h3 class="jcat-title">Career Lessons</h3>
+        <span class="jnum">T9</span>
+        <h3 class="jcat-title">Visa Application Tracker</h3>
       </div>
-      <article class="jcard" data-case="bajaj-finance-ericsson-startup-3-pm-lessons">
+      <article class="jcard" data-case="visa-application-tracker">
         <button class="jhead" type="button">
           <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#818CF8,#4F46E5)">🧭</div>
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#4ADE80,#15803D)">🛂</div>
             <div>
-              <div class="jtitle">Bajaj Finance → Ericsson → Startup — 3 PM Lessons</div>
-              <div class="jmeta">Leadership &amp; Pattern Recognition</div>
+              <div class="jtitle">Visa Application Tracker</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — scope defined</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <dl class="fields">
-          <dt>Company overview</dt><dd>BFSI (Bajaj Finance) → Telecom/enterprise (Ericsson) → Startup</dd>
-          <dt>Role</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Responsibilities</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Leadership lessons</dt><dd>At Ericsson — enterprise PMs operate with global stakeholders and slow decision cycles; the PM has to "be the constant"</dd>
-          <dt>Product lessons</dt><dd>At the startup — speed is the product; ship, learn, adapt; PM scope is roughly 10× wider than in a large org</dd>
-          <dt>Execution lessons</dt><dd>At Bajaj Finance — a data-first culture drove an <strong>80% reduction in TAT</strong> (turnaround time) — real, quantified outcome, also in the Impact Dashboard below</dd>
-          <dt>Team dynamics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Stakeholder conflicts</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Customer complaints</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Why projects succeeded/failed</dt><dd><span class="todo">fill in</span></dd>
-          <dt>People dynamics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Personal mistakes</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Key learnings</dt><dd>Each environment shaped a different kind of PM — the combination of BFSI rigor, enterprise stakeholder management, and startup speed is the actual differentiator</dd>
+          <dt>Scope</dt><dd>A product where users track visa application status, receive document reminders, estimate processing time, and securely store travel documents.</dd>
+          <dt>Core flows</dt><dd><span class="todo">fill in — status tracking, reminders, document vault</span></dd>
+          <dt>Compliance considerations</dt><dd>Secure document storage directly reuses the eKYC/RBI digital-lending compliance discipline from the fintech toolkit — data sensitivity, not just UX, is the hard part here.</dd>
+          <dt>Skills demonstrated</dt><dd>Regulated/documentation-heavy product design, notification/reminder system design.</dd>
+          <dt>Outcome / insight</dt><dd><span class="todo">fill in — once built</span></dd>
         </dl>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
@@ -1697,39 +1562,36 @@
       </div>
       </article>
     </div>
-
-    <!-- T24: Decision Journal -->
-    <div class="jcat-group hide-wip">
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
-        <span class="jnum">T24</span>
-        <h3 class="jcat-title">Decision Journal</h3>
+        <span class="jnum">T16</span>
+        <h3 class="jcat-title">Travel Payments &amp; Refunds System</h3>
       </div>
-      <article class="jcard" data-case="bezos-model-two-way-door-decisions">
+      <article class="jcard" data-case="travel-payments-refunds-system">
         <button class="jhead" type="button">
           <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#94A3B8,#475569)">⚖️</div>
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#5EEAD4,#0F766E)">💳</div>
             <div>
-              <div class="jtitle">Bezos Model — Two-Way Door Decisions</div>
-              <div class="jmeta">Judgment &amp; Decision Making</div>
+              <div class="jtitle">Travel Payments &amp; Refunds System</div>
+              <div class="jmeta">⭐⭐⭐⭐ Roadmap — study guide + scope defined</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <dl class="fields">
-          <dt>Context</dt><dd><span class="todo">fill in — a specific decision made, and what was happening at the time</span></dd>
-          <dt>Goal</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Constraints</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Assumptions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Available data</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Options considered</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Pros/cons</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Final decision</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Expected outcome</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Risks</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Actual outcome</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Lessons learned</dt><dd>Most PM decisions are "two-way doors" (reversible) — decide fast, ship, learn, iterate. Most PMs mistakenly treat them like "one-way doors," which is why products move slowly.</dd>
-          <dt>What would be done differently</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Core system &amp; companies</dt><dd>Travel Payments Systems — Stripe, Adyen. The payment infrastructure underneath every other system here — a single itinerary can touch 4+ currencies and vendors at once.</dd>
+          <dt>What PMs build here</dt><dd>Multi-currency, multi-method payment handling and refund/dispute resolution at travel-specific scale and complexity, not a generic checkout flow.</dd>
+          <dt>Key concepts to learn</dt><dd>
+            1. <strong>Split payments &amp; multi-vendor settlement</strong> — one trip booking might pay an airline, a hotel, and a local tour operator; who gets paid when, and who eats a refund when one leg cancels?<br>
+            2. <strong>Chargeback &amp; dispute handling</strong> — travel has uniquely high dispute rates (cancelled flights, no-show hotels) — a payments PM's core recurring headache.<br>
+            3. <strong>Currency conversion &amp; FX risk</strong> — who absorbs the exchange-rate movement between the booking date and the travel date, months later?<br>
+            4. <strong>Refund policy as a product surface</strong>, not a policy doc — partial refunds, cash vs. credit, voucher expiry are UX decisions with real financial modeling behind each one.
+          </dd>
+          <dt>Questions a future teardown should answer</dt><dd>
+            How would you design a refund policy for a 3-vendor itinerary where only one vendor cancels? What's the actual dispute-resolution flow when a traveller claims non-delivery of a paid-for service?
+          </dd>
+          <dt>Skills demonstrated</dt><dd>Payments infrastructure design, multi-party settlement logic, dispute/refund policy as product design — not just a support-team script.</dd>
         </dl>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
@@ -1739,98 +1601,10 @@
       </div>
       </article>
     </div>
-
-    <!-- T25: Google PM Interview -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T25</span>
-        <h3 class="jcat-title">Google PM Interview</h3>
-      </div>
-      <article class="jcard" data-case="star-method-influencing-without-authority">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#FBBF24,#D97706)">🎤</div>
-            <div>
-              <div class="jtitle">STAR Method — Influencing Without Authority</div>
-              <div class="jmeta">Interview Readiness</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Product design questions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Execution questions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Estimation questions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Strategy questions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Leadership questions</dt><dd>"Tell me about a time you influenced without authority"</dd>
-          <dt>Frameworks used</dt><dd>STAR — Situation → Task → Action (data, relationships, shared goals) → Result</dd>
-          <dt>Assumptions made</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Final answer</dt><dd><span class="todo">fill in — your own real example; this is the story an interviewer will actually probe, worth writing in full</span></dd>
-          <dt>Feedback</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Improvements</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Common mistakes</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Reusable insights</dt><dd>This question tests whether you can lead without a title, read stakeholder dynamics, and drive alignment without forcing it</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T26: Personal Growth -->
-    <div class="jcat-group hide-wip">
-      <div class="jcat-head">
-        <span class="jnum">T26</span>
-        <h3 class="jcat-title">Personal Growth</h3>
-      </div>
-      <article class="jcard" data-case="pmgirlz-challenge-6-month-wrap">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#4ADE80,#16A34A)">🌱</div>
-            <div>
-              <div class="jtitle">PMgirlz Challenge — 6-Month Wrap</div>
-              <div class="jmeta">Self-Awareness &amp; Growth</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <dl class="fields">
-          <dt>Weekly wins</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Failures</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Feedback</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Skills improved</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Skills lacking</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Books read</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Articles read</dt><dd><span class="todo">fill in</span></dd>
-          <dt>PM concepts learned</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Networking efforts</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Interview prep status</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Monthly goals</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Quarterly goals</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Career vision</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Next actions</dt><dd>Launching the "PMgirlz" community — "no PM should figure this out alone"</dd>
-          <dt>6-month final tallies</dt><dd><span class="todo">fill in — real counts per category, once case studies are actually published</span></dd>
-          <dt>Biggest insight</dt><dd>"Journals build judgment, not just knowledge. Judgment is the compound interest of a PM career."</dd>
-        </dl>
-        <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-
-    <!-- T27: Technical Execution -->
-    <div class="jcat-group hide-wip">
+<div class="jcat-group hide-wip">
       <div class="jcat-head">
         <span class="jnum">T27</span>
-        <h3 class="jcat-title">Technical Execution</h3>
+        <h3 class="jcat-title">Cross-industry examples</h3>
       </div>
       <article class="jcard" data-case="pcms-payout-system-integration" data-updated="2026-07-17">
         <button class="jhead" type="button">
@@ -1894,6 +1668,229 @@
       </div>
       </article>
     </div>
+    </div>
+
+    <div class="cat-section" id="cat-user-psychology">
+      <div class="cat-head"><h2>User Psychology</h2><span class="cat-tag">// behavioral analysis of a real user flow</span></div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T19</span>
+        <h3 class="jcat-title">Cross-industry example</h3>
+      </div>
+      <article class="jcard" data-case="fintech-app-first-open-kyc">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#F472B6,#DB2777)">🧠</div>
+            <div>
+              <div class="jtitle">Fintech App — First-Open KYC</div>
+              <div class="jmeta">User Empathy</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Product observed</dt><dd>Fintech app (KYC onboarding flow)</dd>
+          <dt>User action</dt><dd>First open, attempting to complete KYC with no instructions</dd>
+          <dt>Emotional trigger</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Friction point</dt><dd>7-step KYC flow; users abandoned at step 4 of 7</dd>
+          <dt>Motivation</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Habit loop</dt><dd>Broken — daily check-ins expected by the product, but zero streak/return mechanism exists</dd>
+          <dt>Cognitive bias</dt><dd>Anchoring — complexity on the first screen set user expectations for the whole flow</dd>
+          <dt>User quotes</dt><dd>User said "finally" on reaching the dashboard — read as relief, not delight</dd>
+          <dt>Behavioral patterns</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Product implications</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Business implications</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Lessons</dt><dd>User empathy is the most analytical thing a PM can do — it isn't a "soft" skill</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+    </div>
+
+    <div class="cat-section" id="cat-career-lessons">
+      <div class="cat-head"><h2>Career Lessons</h2><span class="cat-tag">// what four years across three companies actually taught</span></div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T23</span>
+        <h3 class="jcat-title">Cross-industry example</h3>
+      </div>
+      <article class="jcard" data-case="bajaj-finance-ericsson-startup-3-pm-lessons">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#818CF8,#4F46E5)">🧭</div>
+            <div>
+              <div class="jtitle">Bajaj Finance → Ericsson → Startup — 3 PM Lessons</div>
+              <div class="jmeta">Leadership &amp; Pattern Recognition</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Company overview</dt><dd>BFSI (Bajaj Finance) → Telecom/enterprise (Ericsson) → Startup</dd>
+          <dt>Role</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Responsibilities</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Leadership lessons</dt><dd>At Ericsson — enterprise PMs operate with global stakeholders and slow decision cycles; the PM has to "be the constant"</dd>
+          <dt>Product lessons</dt><dd>At the startup — speed is the product; ship, learn, adapt; PM scope is roughly 10× wider than in a large org</dd>
+          <dt>Execution lessons</dt><dd>At Bajaj Finance — a data-first culture drove an <strong>80% reduction in TAT</strong> (turnaround time) — real, quantified outcome, also in the Impact Dashboard below</dd>
+          <dt>Team dynamics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Stakeholder conflicts</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Customer complaints</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Why projects succeeded/failed</dt><dd><span class="todo">fill in</span></dd>
+          <dt>People dynamics</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Personal mistakes</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Key learnings</dt><dd>Each environment shaped a different kind of PM — the combination of BFSI rigor, enterprise stakeholder management, and startup speed is the actual differentiator</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+    </div>
+
+    <div class="cat-section" id="cat-decision-journal">
+      <div class="cat-head"><h2>Decision Journal</h2><span class="cat-tag">// real decisions, real trade-offs, real outcomes</span></div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T24</span>
+        <h3 class="jcat-title">Cross-industry example</h3>
+      </div>
+      <article class="jcard" data-case="bezos-model-two-way-door-decisions">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#94A3B8,#475569)">⚖️</div>
+            <div>
+              <div class="jtitle">Bezos Model — Two-Way Door Decisions</div>
+              <div class="jmeta">Judgment &amp; Decision Making</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Context</dt><dd><span class="todo">fill in — a specific decision made, and what was happening at the time</span></dd>
+          <dt>Goal</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Constraints</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Assumptions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Available data</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Options considered</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Pros/cons</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Final decision</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Expected outcome</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Risks</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Actual outcome</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Lessons learned</dt><dd>Most PM decisions are "two-way doors" (reversible) — decide fast, ship, learn, iterate. Most PMs mistakenly treat them like "one-way doors," which is why products move slowly.</dd>
+          <dt>What would be done differently</dt><dd><span class="todo">fill in</span></dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+    </div>
+
+    <div class="cat-section" id="cat-google-pm-interview">
+      <div class="cat-head"><h2>Google PM Interview</h2><span class="cat-tag">// interview-format practice, STAR method and beyond</span></div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T25</span>
+        <h3 class="jcat-title">Cross-industry example</h3>
+      </div>
+      <article class="jcard" data-case="star-method-influencing-without-authority">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#FBBF24,#D97706)">🎤</div>
+            <div>
+              <div class="jtitle">STAR Method — Influencing Without Authority</div>
+              <div class="jmeta">Interview Readiness</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Product design questions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Execution questions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Estimation questions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Strategy questions</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Leadership questions</dt><dd>"Tell me about a time you influenced without authority"</dd>
+          <dt>Frameworks used</dt><dd>STAR — Situation → Task → Action (data, relationships, shared goals) → Result</dd>
+          <dt>Assumptions made</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Final answer</dt><dd><span class="todo">fill in — your own real example; this is the story an interviewer will actually probe, worth writing in full</span></dd>
+          <dt>Feedback</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Improvements</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Common mistakes</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Reusable insights</dt><dd>This question tests whether you can lead without a title, read stakeholder dynamics, and drive alignment without forcing it</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+    </div>
+
+    <div class="cat-section" id="cat-personal-growth">
+      <div class="cat-head"><h2>Personal Growth</h2><span class="cat-tag">// self-directed practice, tracked honestly</span></div>
+<div class="jcat-group hide-wip">
+      <div class="jcat-head">
+        <span class="jnum">T26</span>
+        <h3 class="jcat-title">Cross-industry example</h3>
+      </div>
+      <article class="jcard" data-case="pmgirlz-challenge-6-month-wrap">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#4ADE80,#16A34A)">🌱</div>
+            <div>
+              <div class="jtitle">PMgirlz Challenge — 6-Month Wrap</div>
+              <div class="jmeta">Self-Awareness &amp; Growth</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <dl class="fields">
+          <dt>Weekly wins</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Failures</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Feedback</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Skills improved</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Skills lacking</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Books read</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Articles read</dt><dd><span class="todo">fill in</span></dd>
+          <dt>PM concepts learned</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Networking efforts</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Interview prep status</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Monthly goals</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Quarterly goals</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Career vision</dt><dd><span class="todo">fill in</span></dd>
+          <dt>Next actions</dt><dd>Launching the "PMgirlz" community — "no PM should figure this out alone"</dd>
+          <dt>6-month final tallies</dt><dd><span class="todo">fill in — real counts per category, once case studies are actually published</span></dd>
+          <dt>Biggest insight</dt><dd>"Journals build judgment, not just knowledge. Judgment is the compound interest of a PM career."</dd>
+        </dl>
+        <div class="jlinks">
+          <span><span class="k">Link</span><span class="todo">fill in</span></span>
+          <span><span class="k">Image</span><span class="todo">fill in</span></span>
+          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+        </div>
+      </div>
+      </article>
+    </div>
+    </div>
+
     </div>
 
     <p style="margin-top:16px;font-size:14px;color:var(--grey)">
