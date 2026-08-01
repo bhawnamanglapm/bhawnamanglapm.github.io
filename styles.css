@@ -229,6 +229,10 @@
     font-family:'Space Grotesk',sans-serif;font-weight:700;
     font-size:clamp(32px,4.2vw,46px);line-height:1.1;letter-spacing:-.01em;
   }
+  .sec-head h1{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;
+    font-size:clamp(32px,4.2vw,46px);line-height:1.1;letter-spacing:-.01em;
+  }
   h3{font-family:'Space Grotesk',sans-serif;font-weight:700}
   .sec-tag{
     font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;
