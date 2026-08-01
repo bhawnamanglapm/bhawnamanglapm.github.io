@@ -1199,7 +1199,7 @@
             <div class="jcard-illus" style="background:linear-gradient(135deg,#818CF8,#4338CA)">🧑‍💼</div>
             <div>
               <div class="jtitle">Career Copilot — 18-Agent Job Application System</div>
-              <div class="jmeta">⭐⭐⭐⭐⭐ Built — all 18 agents sample-verified</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Built — live dashboard, narrated demo video</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
@@ -1207,6 +1207,7 @@
       <div class="jbody">
         <div class="cs-facts">
           <span class="chip">18 specialized agents</span>
+          <span class="chip">Live demo video of the real dashboard</span>
           <span class="chip">Planner / Critic / Supervisor orchestration</span>
           <span class="chip">Structured JSON contracts, no free-text parsing</span>
           <span class="chip">Evidence-traceability as the core design bet</span>
@@ -1256,6 +1257,35 @@
             </tbody>
           </table>
         </div>
+
+        <div class="cs-narrative">
+          <h4>The Dashboard</h4>
+          <p>
+            A production-quality Streamlit dashboard sits on top of the pipeline — not a generic
+            agent-builder UI, only this project's 18 agents. <strong>Demo mode</strong> (default, no
+            key needed) replays the project's own hand-verified sample outputs so anyone can
+            exercise the full app — upload, live execution graph, history, and analytics — at zero
+            cost. <strong>Live mode</strong> unlocks real API calls behind an admin-set passcode,
+            with a hard spend ceiling (<code>LIVE_MODE_COST_LIMIT_USD</code>): cumulative estimated
+            cost is checked after every single agent call, and the run stops immediately — no
+            further agents, no Critic, no Supervisor, since those would themselves spend more — the
+            moment the ceiling is met, with a clear "stopped early" banner and whatever completed
+            still saved. The agent catalog itself isn't hardcoded: it's scanned live from
+            <code>career_copilot/agents/*.py</code>, so a new agent shows up in the execution graph
+            and Settings page without touching any dashboard file.
+          </p>
+        </div>
+
+        <p style="margin:4px 0 4px">
+          <a href="projects/career-copilot/demo.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;border:1px solid var(--line);background:var(--ink-3);color:var(--lime);text-decoration:none;font-weight:600;font-size:14px">
+            ▶ Watch the ~2.5-minute narrated demo — the real dashboard running the live pipeline
+          </a>
+        </p>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">
+          A genuine screen recording (Demo mode — no live API calls), not a mockup — uploading a
+          resume/JD, the execution graph filling in live, then a tour of every history/analytics
+          page.
+        </p>
 
         <div class="cs-narrative">
           <h4>Non-Fabrication as a Structural Constraint</h4>
@@ -1333,7 +1363,8 @@
         </details>
 
         <div class="jlinks">
-          <span><span class="k">Link</span>Private repo — code available on request</span>
+          <span><span class="k">Link</span><a href="https://github.com/bhawnamanglapm/Claude" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GitHub repo →</a></span>
+          <span><span class="k">Live demo</span><a href="projects/career-copilot/demo.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">watch it run →</a></span>
           <span><span class="k">Status</span>All 18 agents built, sample-verified end to end</span>
         </div>
       </div>

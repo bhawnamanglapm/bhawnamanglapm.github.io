@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Copilot — Live Demo</title>
+<meta name="description" content="A narrated screen recording of Career Copilot's real Streamlit dashboard running the live 18-agent pipeline end to end, from Bhawna Mangla's PM portfolio.">
+<link rel="canonical" href="https://bhawnamanglapm.github.io/projects/career-copilot/demo.html">
+<style>
+  :root {
+    color-scheme: light;
+    --page:           #f9f9f7;
+    --surface-1:      #fcfcfb;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --border:         rgba(11,11,11,0.10);
+    --brand-accent:   #4F46E5;
+    --brand-lime:     #0A766D;
+    --brand-warn:     #B45309;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface-1: #1a1a19;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+      --border: rgba(255,255,255,0.10);
+      --brand-accent: #8B7FF0; --brand-lime: #2DD4BF; --brand-warn: #F59E0B;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --border: rgba(255,255,255,0.10);
+    --brand-accent: #8B7FF0; --brand-lime: #2DD4BF; --brand-warn: #F59E0B;
+  }
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{margin:0;background:var(--page);color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 70px}
+  .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-lime);font-weight:600;margin:0 0 8px}
+  h1{font-size:clamp(22px,3.2vw,32px);margin:0 0 10px;letter-spacing:-.01em}
+  .subtitle{color:var(--text-secondary);font-size:14.5px;line-height:1.6;max-width:780px;margin:0}
+
+  .disclaimer{
+    margin-top:16px;padding:14px 18px;border-radius:10px;background:var(--surface-1);
+    border:1px solid var(--border);border-left:3px solid var(--brand-lime);
+    font-size:13px;color:var(--text-secondary);line-height:1.6;
+  }
+  .disclaimer strong{color:var(--brand-lime)}
+  .disclaimer a{color:var(--brand-accent)}
+
+  video{
+    width:100%;display:block;margin-top:26px;border-radius:14px;
+    border:1px solid var(--border);background:#000;
+    box-shadow:0 8px 30px rgba(0,0,0,.12);
+  }
+
+  .script-toggle{margin-top:16px}
+  .script-toggle summary{
+    cursor:pointer;font-size:13px;font-weight:600;color:var(--text-primary);
+    padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:var(--surface-1);
+  }
+  .script-body{
+    margin-top:10px;padding:14px 18px;border:1px solid var(--border);border-radius:10px;
+    font-size:13px;color:var(--text-secondary);line-height:1.7;background:var(--surface-1);
+    white-space:pre-wrap;
+  }
+
+  footer{margin-top:26px;font-size:12px;color:var(--text-muted)}
+  footer a{color:var(--brand-accent)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="eyebrow">AI & Agentic Product Design · T29</p>
+  <h1>Career Copilot — Live Demo</h1>
+  <p class="subtitle">
+    A ~2.5-minute narrated screen recording of the real dashboard: uploading a resume and JD,
+    running the live 18-agent pipeline, watching the execution graph light up in real time, then a
+    tour of the history, company-research, resume-versions, and analytics pages.
+  </p>
+  <div class="disclaimer">
+    <strong>What this actually is:</strong> a genuine recording of the running Streamlit dashboard
+    (Demo mode — replays this project's own hand-verified sample outputs, not a live API call), not
+    a mockup or an animated illustration. The voiceover track was synthesized with a local offline
+    TTS engine rather than a cloud service or a human recording — the script it reads from is
+    below, if you'd rather read than listen. See the
+    <a href="https://bhawnamanglapm.github.io/travel-tech-more.html#case-career-copilot-ai-agents">full case study (T29)</a>
+    for the architecture, orchestration layer, and lessons behind what's shown here.
+  </div>
+
+  <video controls preload="metadata" playsinline>
+    <source src="demo.mp4" type="video/mp4">
+    Your browser doesn't support embedded video. <a href="demo.mp4">Download the recording directly</a>.
+  </video>
+
+  <details class="script-toggle">
+    <summary>Read the voiceover script instead</summary>
+    <div class="script-body">0:00–0:07 — Home page, empty state
+"Meet Career Copilot — a dashboard that runs eighteen AI agents to handle your job application, end to end."
+
+0:07–0:15 — Uploading resume, switching JD to paste text
+"Upload a resume... and paste in the job description you're targeting."
+
+0:15–0:24 — Filling candidate name, company, title, years of experience
+"Add the company, the role, and how many years of experience you have — that's the entire input."
+
+0:24–0:32 — Filled form, scrolling down to the Run button
+"Everything else — the tailored resume, the research, the interview prep — gets generated automatically from here."
+
+0:32–0:40 — Clicking Run Pipeline
+"Click Run, and watch it work in real time."
+
+0:40–0:55 — Live execution graph filling in, agents turning green
+"Every agent lights up as it executes — resume analysis, ATS scoring, company research, gap analysis, interview prep. This graph is generated live from each agent's real dependencies — it's not a fixed diagram."
+
+0:55–1:05 — Pipeline complete, ATS score, artifacts list
+"In under a minute, it's done — a quality-gate verdict, an ATS score, and every document ready to open."
+
+1:05–1:11 — Previous Applications page
+"Every past application is saved here, side by side, ready to compare."
+
+1:11–1:17 — Companies page
+"Company research is saved too, and reused automatically the next time you apply there."
+
+1:17–1:23 — Resume Versions page
+"Every tailored resume version is tracked, with its ATS score right alongside it."
+
+1:23–1:31 — Outputs page, expanding a file
+"And every file the run produced — resumes, reports, cover letters — is right here to preview or download."
+
+1:31–1:37 — History page
+"A full execution log — every agent, every run, every outcome."
+
+1:37–1:48 — Analytics page, scrolling through charts
+"Analytics roll it all up — applications over time, ATS trends, and the skills that keep showing up as gaps."
+
+1:48–1:57 — Settings page, agent catalog, expanding Critic Agent
+"This agent catalog isn't hardcoded — it's scanned live from the actual code. Add a new agent, and it just shows up."
+
+1:57–2:10 — Back to home, populated metric cards
+"That's Career Copilot — eighteen agents, one workflow, from a blank form to a finished application, ready to submit."
+
+2:10–2:22 — Hold on final frame
+"Try it yourself, free, in Demo mode."</div>
+  </details>
+
+  <footer>
+    <a href="https://bhawnamanglapm.github.io/travel-tech-more.html#case-career-copilot-ai-agents">← Back to the Career Copilot case study</a>
+  </footer>
+</div>
+
+</body>
+</html>
