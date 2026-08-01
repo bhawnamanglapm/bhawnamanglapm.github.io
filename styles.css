@@ -287,6 +287,10 @@
     font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
     color:var(--lime);background:var(--ink-3);border-radius:20px;padding:4px 11px;margin-left:auto;
   }
+  .jcat-category{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--grey);background:var(--ink-3);border-radius:20px;padding:4px 11px;
+  }
   .jnum{
     position:absolute;left:-58px;top:0;z-index:2;
     width:42px;height:42px;border-radius:50%;
