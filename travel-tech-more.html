@@ -77,9 +77,11 @@
       T1, T2, and T3 are the fully built flagships — they're also pinned to the top of the
       <a href="index.html#travel-tech" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">main portfolio page</a>.
       T5 (Travel Support AI Copilot, with a working live demo) and T8 (Booking Funnel Analysis)
-      are written to the same depth. T1–T17 are travel tech; T18–T27 are cross-industry practice
-      categories — feature reverse engineering, user psychology, metrics, strategy, and more.
-      The rest publishes here as each is genuinely scoped and written up, not before.
+      are written to the same depth. T28 (Weft) and T29 (Career Copilot) are real, shipped products
+      pulled in from their own GitHub repos, not travel-tech scope docs. T1–T17 are travel tech;
+      T18–T27 are cross-industry practice categories — feature reverse engineering, user psychology,
+      metrics, strategy, and more. The rest publishes here as each is genuinely scoped and written
+      up, not before.
     </p>
 
     <div class="jtrack">
@@ -988,6 +990,351 @@
           <span><span class="k">Live demo</span><a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">try it →</a></span>
           <span><span class="k">Link</span><a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
           <span><span class="k">Image</span><a href="projects/travel-support-copilot/screenshots/wireframes-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T28</span>
+        <h3 class="jcat-title">Weft — Workflow-to-Automation Copilot</h3>
+      </div>
+      <article class="jcard" data-case="weft-workflow-copilot" data-updated="2026-07-12">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#38BDF8,#0369A1)">🧵</div>
+            <div>
+              <div class="jtitle">Weft — Workflow-to-Automation Copilot</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Built — all 8 MVP milestones shipped</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">Chrome MV3 extension, fully local</span>
+          <span class="chip">Multi-session workflow merge</span>
+          <span class="chip">Automation-brief + ticket export</span>
+          <span class="chip">ROI tracked, not just discovered</span>
+          <span class="chip">Privacy-by-structure architecture</span>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>The Problem</h4>
+          <p>
+            Three gaps stack on top of each other, and most tools only fix the first: nobody
+            actually knows how work gets done — the real process lives in muscle memory across a
+            dozen browser tabs, and documented SOPs are fiction. The insight dies in a slide — the
+            distance from "here's an inefficiency" to someone actually building the fix is where
+            most optimization effort quietly expires. And nobody proves it worked — optimization
+            gets bought on ROI, but almost nobody closes the loop from "we changed X" to "it saved
+            ₹Y / Z hours." Process-mining incumbents like Celonis and UiPath attack the first gap
+            with heavy, IT-led, six-figure deployments — and stop there. Weft attacks all three,
+            lightly, from the browser.
+          </p>
+
+          <h4>The Mechanism — Observer, Not Agent</h4>
+          <p>
+            Weft is a browser-side observer, not a tool that logs in for you. The user is already
+            logged in; Weft watches while <em>they</em> work — no credentials collected or stored,
+            no form values, no page content, no screenshots. It captures the <em>structure</em> of
+            the workflow (which step, which system, what kind of action) using stable element
+            roles and labels, never the data on screen. Anything textual that's retained passes a
+            PII-redaction pass, and a privacy preview shows the user exactly what will be stored
+            before it saves — closing a real hole found during a later security review, where
+            structural ARIA roles on a data grid could otherwise leak on-screen content (a customer
+            name in a table cell) even though form values were already masked.
+          </p>
+
+          <h4>The Closed Loop</h4>
+          <p>
+            Most task-mining tools stop at a map. Weft's actual product thesis is closing the loop
+            all the way to a measured outcome:
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Step">1. Capture</td><td data-label="What happens">User records a task once — and a few more times, because one recording is one person's happy path</td></tr>
+              <tr><td data-label="Step">2. Merge</td><td data-label="What happens">Sessions align into a single map: main path plus variant branches, with how often each occurs</td></tr>
+              <tr><td data-label="Step">3. Analyze</td><td data-label="What happens">Each step is classified against a step-signature taxonomy and gets an AI/automation suggestion with an estimated saving</td></tr>
+              <tr><td data-label="Step">4. Spec</td><td data-label="What happens">Each kept opportunity becomes an automation brief — problem, systems touched, approach, effort estimate</td></tr>
+              <tr><td data-label="Step">5. Hand off</td><td data-label="What happens">The brief exports as a groomable Jira/Linear-ready ticket instead of a dead PDF</td></tr>
+              <tr><td data-label="Step">6. Measure</td><td data-label="What happens">Once shipped, the realized saving is tracked and rolled into an ROI view — hours and money saved, estimate vs. actual</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Principles (Product Constraints, Not Marketing)</h4>
+          <p>
+            Because this product watches people work, four rules are enforced structurally, not
+            just promised: capture is <strong>worker-initiated</strong> only, on the user's own
+            click, never covert or remotely triggered; it's <strong>worker-owned</strong> — the
+            person reviews and can redact or delete what was captured before anything is shared;
+            Weft <strong>never produces individual performance metrics</strong> — timing data finds
+            process bottlenecks, never rates a person; and it's <strong>private by structure</strong>
+            — the sensitive part is designed to never be captured, rather than protected after the
+            fact. These also defuse the biggest adoption and legal risk: recording workers is
+            regulated (EU works councils; varying rules across India, Singapore, Dubai), and
+            worker-initiated, worker-owned, local-only capture sidesteps most of it.
+          </p>
+        </div>
+
+        <details class="cs-showmore">
+          <summary>Show more — architecture, build status, business model, and the validation plan <span class="sm-count">(the technical and strategic half)</span></summary>
+
+        <div class="cs-narrative">
+          <h4>Architecture</h4>
+          <p>
+            Vite + <code>@crxjs/vite-plugin</code> + React + TypeScript, content script + service
+            worker + side panel, all local storage — no backend, no accounts, no network calls.
+            Reconstruction and merge are rules-based and client-side (segment by URL/submit/domain
+            change/idle time; classify against the taxonomy; merge by step identity rather than
+            literal position, so a single inserted or skipped step in one session doesn't break
+            alignment for every step after it) — chosen over ML because a wrong-but-explainable map
+            the user can fix beats an opaque one, and there's no training data yet to justify the
+            complexity.
+          </p>
+
+          <h4>Build Status</h4>
+          <p>
+            All 8 MVP milestones are built and gate-verified, end to end: scaffold → capture +
+            masking + PII redaction → reconstruction spike → privacy preview → multi-session merge
+            → map + analysis + register → brief + ticket export + ROI tracker → consent + metrics +
+            polish. A subsequent hardening pass (an internal security/architecture review, not a
+            third-party pen test) found and fixed a real capture-time privacy leak, redaction gaps,
+            a cross-tab data-bleed bug, and a service-worker resilience issue where a single failure
+            could permanently break the extension.
+          </p>
+
+          <h4>The AI-Opportunity Layer</h4>
+          <p>
+            Each captured step is classified by a step-signature taxonomy that maps to a likely
+            intervention — this is the differentiated core, not the map itself:
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Step signature</th><th>Likely intervention</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Signature">Repetitive + rule-based</td><td data-label="Intervention">RPA / scripted automation</td></tr>
+              <tr><td data-label="Signature">Copy between systems</td><td data-label="Intervention">Integration / API bridge</td></tr>
+              <tr><td data-label="Signature">Judgment on unstructured text</td><td data-label="Intervention">LLM assist</td></tr>
+              <tr><td data-label="Signature">Lookup / verification</td><td data-label="Intervention">Automated validation</td></tr>
+              <tr><td data-label="Signature">Wait / handoff</td><td data-label="Intervention">Process redesign, not tech</td></tr>
+              <tr><td data-label="Signature">Approval / decision</td><td data-label="Intervention">Policy automation + exception routing</td></tr>
+              <tr><td data-label="Signature">Exception branch (from merge)</td><td data-label="Intervention">Often the highest-value target — only visible once a workflow's been captured more than once</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Business Model &amp; Moat</h4>
+          <p>
+            Land free/low-cost self-serve for a single workflow; expand paid per-team, priced
+            against value delivered (opportunities implemented / hours saved) rather than seats, so
+            price stays aligned with the ROI the buyer already cares about. The wedge is mid-market
+            teams Celonis/UiPath structurally can't serve without cannibalizing their enterprise
+            motion. The moat isn't the map — task mining already exists — it's the compounding
+            <strong>outcome-data asset</strong>: every captured session, every thumbs-up/down, and
+            every implemented-and-measured result teaches Weft which step patterns lead to
+            interventions that actually saved money, which incumbents can't see because their tools
+            stop at discovery.
+          </p>
+
+          <h4>Validation Plan — Riskiest Assumption First</h4>
+          <p>
+            Tests are sequenced by what would kill the product, cheapest first, with kill criteria
+            set before each test — not "ship and see":
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Riskiest assumption</th><th>Cheapest honest test</th><th>Proceed if</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Assumption">A click-stream becomes a readable, correct map</td><td data-label="Test">Reconstruct 10 real sessions by hand; show them back</td><td data-label="Proceed if">≥8/10 rated "that's right"</td></tr>
+              <tr><td data-label="Assumption">Merging sessions surfaces real variants, not noise</td><td data-label="Test">Hand-merge 3 captures of one workflow</td><td data-label="Proceed if">Variants found match what practitioners confirm exist</td></tr>
+              <tr><td data-label="Assumption">Teams will actually act on a brief</td><td data-label="Test">Hand a generated brief to an eng/ops team</td><td data-label="Proceed if">≥2 briefs become real, owned tickets</td></tr>
+              <tr><td data-label="Assumption">Realized savings can be measured credibly</td><td data-label="Test">Track estimate vs. actual on 2 implemented items</td><td data-label="Proceed if">Estimates land within a defensible range; team trusts the number</td></tr>
+              <tr><td data-label="Assumption">There's a buyer with budget</td><td data-label="Test">Pitch the ROI view; ask "pay how much, from whose budget?"</td><td data-label="Proceed if">≥2 credible "yes, from [budget]"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Reusable Insight</h4>
+          <p>
+            The disciplined part of this build wasn't cramming every good idea into the MVP — it
+            was sorting six review-raised gaps by altitude. The ones that made the product invalid
+            or unsellable without them (multi-session merge, page-content privacy) earned MVP slots;
+            the ones with an expensive half (implementation hand-off, suggestion quality) got
+            right-sized MVP features with the expensive part deferred; and the ones that were really
+            principles or strategy, not build (worker-owned consent, the moat) got decided, not
+            coded. Knowing which gap belongs at which altitude is the actual PM work — not just
+            reacting to every piece of feedback the same way.
+          </p>
+        </div>
+        </details>
+
+        <div class="jlinks">
+          <span><span class="k">Link</span><a href="https://github.com/bhawnamanglapm/Weft" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GitHub repo →</a></span>
+          <span><span class="k">Docs</span><a href="https://github.com/bhawnamanglapm/Weft/blob/main/weft-prd.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full PRD →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T29</span>
+        <h3 class="jcat-title">Career Copilot — 18-Agent Job Application System</h3>
+      </div>
+      <article class="jcard" data-case="career-copilot-ai-agents" data-updated="2026-07-10">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#818CF8,#4338CA)">🧑‍💼</div>
+            <div>
+              <div class="jtitle">Career Copilot — 18-Agent Job Application System</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Built — all 18 agents sample-verified</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">18 specialized agents</span>
+          <span class="chip">Planner / Critic / Supervisor orchestration</span>
+          <span class="chip">Structured JSON contracts, no free-text parsing</span>
+          <span class="chip">Evidence-traceability as the core design bet</span>
+          <span class="chip">Non-fabrication enforced structurally, not just prompted</span>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>The Problem</h4>
+          <p>
+            A serious job application takes 6–8 hours of fragmented, error-prone manual work:
+            decoding what a JD actually screens for, researching a company beyond stale memory,
+            honestly assessing fit, tailoring a resume without breaking ATS parsing, building
+            interview answers, and drafting several pieces of outreach copy — each from scratch,
+            with no consistent quality bar. Generic AI chat makes this faster but not safer: it
+            produces confident, plausible-sounding output that's frequently wrong in ways the
+            candidate can't detect — invented metrics, inflated scope, interview answers built on
+            facts not in the candidate's real history. In an interview, a fabricated claim doesn't
+            fail quietly — it fails in front of the person deciding whether to hire you.
+          </p>
+
+          <h4>The Core Design Bet</h4>
+          <p>
+            The bet that shaped every architectural decision: a job-application AI system's most
+            important property isn't fluency, it's <strong>evidence-traceability</strong> — every
+            claim it produces must resolve to something the candidate's actual resume states or a
+            cited, real source, and the system must say "I don't have evidence for this" rather
+            than invent something plausible. That single constraint drove everything from
+            per-field null-ability in the schemas to a dedicated review agent whose entire job is
+            catching violations of it.
+          </p>
+
+          <h4>Architecture</h4>
+          <p>
+            18 agents across four categories, wired together by <code>pipeline.py</code> in real
+            dependency order (topologically sorted, not a hardcoded sequence):
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Category</th><th>Agents</th><th>Job</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Category">Extraction</td><td data-label="Agents">Resume Analysis, JD Intelligence, ATS Optimization, Resume Rewrite, Gap Analysis, Skill Evidence, Recruiter Simulation, Interview Coach, LinkedIn Optimization, Application Assets</td><td data-label="Job">Read the resume/JD and re-derive findings independently, so a later agent can cross-check them instead of trusting one chain blindly</td></tr>
+              <tr><td data-label="Category">Research</td><td data-label="Agents">Company Intelligence, Learning &amp; Certification, Career Strategy</td><td data-label="Job">Two-phase: a search-enabled research call, then a separate non-searching structuring call — so a wrong fact and a malformed JSON field are never the same failure</td></tr>
+              <tr><td data-label="Category">Synthesis</td><td data-label="Agents">Portfolio Recommendation, Final Report</td><td data-label="Job">Compose other agents' already-structured findings into a new artifact, rather than re-reading the source documents</td></tr>
+              <tr><td data-label="Category">Orchestration</td><td data-label="Agents">Planner, Critic, Supervisor</td><td data-label="Job">Reason about the other 15 agents, not resumes or JDs — grounded in one shared, machine-readable registry</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Non-Fabrication as a Structural Constraint</h4>
+          <p>
+            Early on, non-fabrication was enforced entirely through system-prompt instructions
+            ("never invent facts"). That's necessary but not sufficient — a model instructed to be
+            helpful will still often fill a gap with something plausible rather than leave it
+            empty, because empty <em>feels</em> unhelpful. The fix that actually held under review
+            was structural: giving fields explicit null-ability and bracketed-placeholder
+            conventions (<code>[Recruiter Name]</code>) as part of the schema itself, so "I don't
+            have this" has a designated, expected place to go instead of competing with "make
+            something up" as an implicit default.
+          </p>
+
+          <h4>Verification Approach</h4>
+          <p>
+            Every numeric claim across all 18 agents' sample outputs — ATS score arithmetic,
+            gap-analysis row counts, skill-evidence confidence distributions, placeholder counts —
+            was independently recomputed with a script against the underlying JSON, not just
+            asserted in prose. Critic Agent's first real review pass came back almost entirely
+            clean (14 of 15 agents approved or approved-with-minor-notes) — read correctly as a red
+            flag, not a green light, since a critic that always says "looks good" is
+            indistinguishable from one that isn't actually checking. The fix wasn't forcing it to
+            find more issues artificially; it was giving it one concrete, mechanical task it
+            couldn't fake — recompute every stated total against the numbers it's supposedly
+            summarizing. That's what caught the one real bug in the project (Learning &amp;
+            Certification's stated total didn't match the sum of its own line items).
+          </p>
+        </div>
+
+        <details class="cs-showmore">
+          <summary>Show more — the orchestration layer and lessons the build actually surfaced <span class="sm-count">(the review-and-verdict half)</span></summary>
+
+        <div class="cs-narrative">
+          <h4>The Orchestration Layer</h4>
+          <p>
+            Planner, Critic, and Supervisor don't analyze resumes, JDs, or companies themselves —
+            they reason about the <em>other 15 agents</em>. Their shared ground truth is
+            <code>AGENT_REGISTRY</code>, a machine-readable catalog of every agent's
+            required/optional inputs and real dependencies, built directly from how each agent is
+            implemented, with every <code>agent_id</code> and <code>depends_on</code> reference in
+            a Planner-generated plan programmatically checked against it before acceptance. This
+            makes an entire class of hallucination — inventing an agent, or a dependency, that
+            doesn't exist — structurally impossible rather than just less likely. Supervisor is the
+            top-level entry point: it cross-checks Planner's execution plan against what actually
+            ran, cross-checks every Critic-flagged issue against a named, specific fix rather than
+            a general assurance, and renders a single go/no-go verdict while carrying forward every
+            limitation the other 17 agents raised — instead of letting the verdict imply more
+            confidence than the system actually earned.
+          </p>
+
+          <h4>What This Build Actually Surfaced</h4>
+          <p>
+            A shared registry beats trusting an agent's self-description — the tempting shortcut
+            was describing the other agents inside each orchestrator's own system prompt, but that
+            drifts the moment an agent's real required fields change and nobody updates three
+            separate prompt descriptions; one machine-readable source of truth doesn't drift.
+            Two-phase research beats one-phase "search and format" — combining "search the web"
+            and "structure the answer" into a single model call conflates two different failure
+            modes (wrong facts vs. wrong JSON), so splitting them means a review can tell which one
+            actually broke. And "insufficient evidence" has to be a first-class schema value, not a
+            prompt suggestion — the lesson underneath the core design bet itself.
+          </p>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            The hard part of building a trustworthy multi-agent system isn't getting one agent to
+            produce good output — it's designing the layer that keeps 18 agents honest about what
+            they don't know, and makes that layer's own claims checkable rather than just
+            plausible. Verification-by-recomputation, structural null-ability, and a shared
+            dependency registry are three different tools solving the same underlying problem:
+            trust that has to be earned by the system's design, not asserted in its prompts.
+          </p>
+        </div>
+        </details>
+
+        <div class="jlinks">
+          <span><span class="k">Link</span>Private repo — code available on request</span>
+          <span><span class="k">Status</span>All 18 agents built, sample-verified end to end</span>
         </div>
       </div>
       </article>
