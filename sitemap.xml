@@ -11,11 +11,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bhawnamanglapm.github.io/case-studies-more.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://bhawnamanglapm.github.io/projects/travel-support-copilot/demo.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
