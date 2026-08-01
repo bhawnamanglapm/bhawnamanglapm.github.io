@@ -309,20 +309,39 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Search Systems — Google Flights, Skyscanner, Kayak. The engine that turns "Delhi to Bangkok, next week" into a ranked, comparable set of fares across airlines and OTAs.</dd>
-          <dt>What PMs build here</dt><dd>Meta-search (aggregating other platforms' inventory and referring out) vs. direct search (querying and selling your own inventory) — a fundamentally different product and monetization model from a booking system, even though the search box looks identical to a user.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Meta-search vs. OTA economics</strong> — Skyscanner/Kayak don't sell tickets, they refer (CPC or referral fee); a booking platform earns margin on the fare. Same search box, opposite business model.<br>
-            2. <strong>Real-time fare staleness</strong> — GDS/airline APIs rate-limit and cache; a shown fare can go stale between search and click-through. "Fare no longer available" is a core UX problem here, not an edge case.<br>
-            3. <strong>Ranking trade-offs</strong> — cheapest-for-user vs. highest-referral-fee-for-business; how a meta-search product decides what "best result" even means.<br>
-            4. <strong>Flexible-date search</strong> (±3 days, whole-month calendar view) as a distinct product surface from single-date search, with a very different backend query pattern.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How does Google Flights' ranking differ from Skyscanner's? What's the actual fare-staleness recovery flow when a user clicks through to a dead price? How is a meta-search product's North Star (clicks-to-partner) different from an OTA's (completed bookings)?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Marketplace/aggregator business models, ranking algorithm trade-offs, real-time data staleness handling — distinct from the single-inventory booking-flow thinking in T1.</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The System</h4>
+          <p>
+            Search Systems — Google Flights, Skyscanner, Kayak. The engine that turns "Delhi to
+            Bangkok, next week" into a ranked, comparable set of fares across airlines and OTAs.
+            What PMs build here is meta-search (aggregating other platforms' inventory and
+            referring out) vs. direct search (querying and selling your own inventory) — a
+            fundamentally different product and monetization model from a booking system, even
+            though the search box looks identical to a user.
+          </p>
+
+          <h4>Key Concepts</h4>
+          <ul>
+            <li><strong>Meta-search vs. OTA economics</strong> — Skyscanner/Kayak don't sell tickets, they refer (CPC or referral fee); a booking platform earns margin on the fare. Same search box, opposite business model.</li>
+            <li><strong>Real-time fare staleness</strong> — GDS/airline APIs rate-limit and cache; a shown fare can go stale between search and click-through. "Fare no longer available" is a core UX problem here, not an edge case.</li>
+            <li><strong>Ranking trade-offs</strong> — cheapest-for-user vs. highest-referral-fee-for-business; how a meta-search product decides what "best result" even means.</li>
+            <li><strong>Flexible-date search</strong> (±3 days, whole-month calendar view) as a distinct product surface from single-date search, with a very different backend query pattern.</li>
+          </ul>
+
+          <h4>Open Questions</h4>
+          <p>
+            How does Google Flights' ranking differ from Skyscanner's? What's the actual
+            fare-staleness recovery flow when a user clicks through to a dead price? How is a
+            meta-search product's North Star (clicks-to-partner) different from an OTA's
+            (completed bookings)?
+          </p>
+
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Marketplace/aggregator business models, ranking algorithm trade-offs, real-time data
+            staleness handling — distinct from the single-inventory booking-flow thinking in T1.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -348,20 +367,38 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Marketplace Systems — Airbnb, GetYourGuide. Two-sided platforms connecting hosts/suppliers with guests/travellers, where trust and liquidity are the core problems, not booking UX.</dd>
-          <dt>What PMs build here</dt><dd>Everything a single-inventory OTA (T1) doesn't need: supply-side onboarding, trust and safety systems, and a matching/ranking model that has to weigh host quality alongside price.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Two-sided liquidity</strong> — no guests without hosts, no hosts without guests. Which side do you subsidize first, and how do you measure "liquidity" as a real metric, not a slogan?<br>
-            2. <strong>Trust &amp; safety as core product</strong> — reviews, ID verification, host guarantees, guest screening — the actual mechanism that makes a stranger's home bookable at all.<br>
-            3. <strong>Marketplace ranking</strong> — host quality signals vs. price vs. availability vs. novelty; very different from ranking a fixed airline-fare inventory.<br>
-            4. <strong>Take-rate design</strong> — host fee vs. guest fee vs. blended, and the transparency trade-offs each creates in the checkout UX.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How does Airbnb's search ranking balance host quality vs. price vs. novelty? What's the trust-building flow a first-time host actually goes through? How does GetYourGuide's supply-side onboarding differ from Airbnb's, given smaller/more numerous suppliers?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Two-sided marketplace dynamics, trust &amp; safety product design, supply-side (not just demand-side) product thinking.</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The System</h4>
+          <p>
+            Marketplace Systems — Airbnb, GetYourGuide. Two-sided platforms connecting
+            hosts/suppliers with guests/travellers, where trust and liquidity are the core
+            problems, not booking UX. What PMs build here is everything a single-inventory OTA
+            (T1) doesn't need: supply-side onboarding, trust and safety systems, and a
+            matching/ranking model that has to weigh host quality alongside price.
+          </p>
+
+          <h4>Key Concepts</h4>
+          <ul>
+            <li><strong>Two-sided liquidity</strong> — no guests without hosts, no hosts without guests. Which side do you subsidize first, and how do you measure "liquidity" as a real metric, not a slogan?</li>
+            <li><strong>Trust &amp; safety as core product</strong> — reviews, ID verification, host guarantees, guest screening — the actual mechanism that makes a stranger's home bookable at all.</li>
+            <li><strong>Marketplace ranking</strong> — host quality signals vs. price vs. availability vs. novelty; very different from ranking a fixed airline-fare inventory.</li>
+            <li><strong>Take-rate design</strong> — host fee vs. guest fee vs. blended, and the transparency trade-offs each creates in the checkout UX.</li>
+          </ul>
+
+          <h4>Open Questions</h4>
+          <p>
+            How does Airbnb's search ranking balance host quality vs. price vs. novelty? What's
+            the trust-building flow a first-time host actually goes through? How does
+            GetYourGuide's supply-side onboarding differ from Airbnb's, given smaller/more
+            numerous suppliers?
+          </p>
+
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Two-sided marketplace dynamics, trust &amp; safety product design, supply-side (not
+            just demand-side) product thinking.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -387,20 +424,37 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Mobility Systems — Uber, BlaBlaCar. Real-time matching between riders and drivers/co-travellers, dynamic pricing, and ETA-driven trust — a live-match product, not a browse-and-book one.</dd>
-          <dt>What PMs build here</dt><dd>Dispatch/matching algorithms and pricing mechanics that respond in seconds, not the search-and-compare flows every other system on this list uses.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Real-time supply/demand matching</strong> — the product surface is a live match, not a list of results to browse; latency itself is a feature.<br>
-            2. <strong>Surge/dynamic pricing</strong> — the most studied and most controversial pricing mechanism in travel-tech; balancing driver-supply incentive against rider price sensitivity and perceived fairness.<br>
-            3. <strong>ETA accuracy as trust</strong> — a wrong ETA is a broken promise, not a UX nitpick; it's the primary trust mechanic in a product with no browsable inventory to build confidence from.<br>
-            4. <strong>Marketplace vs. peer-to-peer</strong> — Uber owns dispatch and pricing outright; BlaBlaCar is closer to a trust-and-coordination layer over independently-arranged car-share trips.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How would you redesign surge pricing to reduce rider anger while preserving driver supply incentives? What's BlaBlaCar's trust model for a multi-hour shared car ride, versus Uber's for a 10-minute trip?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Real-time marketplace/dispatch systems, dynamic pricing design, trust mechanics in a zero-inventory-browse product.</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The System</h4>
+          <p>
+            Mobility Systems — Uber, BlaBlaCar. Real-time matching between riders and
+            drivers/co-travellers, dynamic pricing, and ETA-driven trust — a live-match product,
+            not a browse-and-book one. What PMs build here is dispatch/matching algorithms and
+            pricing mechanics that respond in seconds, not the search-and-compare flows every
+            other system on this list uses.
+          </p>
+
+          <h4>Key Concepts</h4>
+          <ul>
+            <li><strong>Real-time supply/demand matching</strong> — the product surface is a live match, not a list of results to browse; latency itself is a feature.</li>
+            <li><strong>Surge/dynamic pricing</strong> — the most studied and most controversial pricing mechanism in travel-tech; balancing driver-supply incentive against rider price sensitivity and perceived fairness.</li>
+            <li><strong>ETA accuracy as trust</strong> — a wrong ETA is a broken promise, not a UX nitpick; it's the primary trust mechanic in a product with no browsable inventory to build confidence from.</li>
+            <li><strong>Marketplace vs. peer-to-peer</strong> — Uber owns dispatch and pricing outright; BlaBlaCar is closer to a trust-and-coordination layer over independently-arranged car-share trips.</li>
+          </ul>
+
+          <h4>Open Questions</h4>
+          <p>
+            How would you redesign surge pricing to reduce rider anger while preserving driver
+            supply incentives? What's BlaBlaCar's trust model for a multi-hour shared car ride,
+            versus Uber's for a 10-minute trip?
+          </p>
+
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Real-time marketplace/dispatch systems, dynamic pricing design, trust mechanics in a
+            zero-inventory-browse product.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -426,20 +480,37 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Experience Marketplace — Viator, Klook. Discovery and booking for bookable experiences (tours, tickets, activities) — a catalog/inventory problem more than a real-time-matching one.</dd>
-          <dt>What PMs build here</dt><dd>Supply-side tooling for thousands of small local operators (not a handful of airlines), and the cross-sell integration point where "book a flight" surfaces "things to do at your destination."</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Perishable inventory at small scale</strong> — an unsold tour slot today is gone forever, the same yield-management problem as an airline seat, but per-operator volume is tiny compared to an airline.<br>
-            2. <strong>Long-tail supply</strong> — thousands of small local operators instead of a handful of airlines; supply-side tooling and quality control look completely different from T1's world.<br>
-            3. <strong>Instant confirmation vs. request-to-book</strong> — some experiences confirm immediately, others need the operator to manually accept; a real trust/UX trade-off, not just an engineering detail.<br>
-            4. <strong>Cross-sell placement</strong> — where in a booking flow (like T1's) should experience upsells actually appear, and does that belong to this system or the booking system it's bolted onto?
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How does Klook's supply-side operator tooling differ from a single-inventory OTA's? Where in the funnel (see T8) should an experience upsell actually be placed, and what does it cannibalize if placed too early?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Long-tail supply management, perishable-inventory yield thinking at small scale, cross-sell/attach-rate product design.</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The System</h4>
+          <p>
+            Experience Marketplace — Viator, Klook. Discovery and booking for bookable
+            experiences (tours, tickets, activities) — a catalog/inventory problem more than a
+            real-time-matching one. What PMs build here is supply-side tooling for thousands of
+            small local operators (not a handful of airlines), and the cross-sell integration
+            point where "book a flight" surfaces "things to do at your destination."
+          </p>
+
+          <h4>Key Concepts</h4>
+          <ul>
+            <li><strong>Perishable inventory at small scale</strong> — an unsold tour slot today is gone forever, the same yield-management problem as an airline seat, but per-operator volume is tiny compared to an airline.</li>
+            <li><strong>Long-tail supply</strong> — thousands of small local operators instead of a handful of airlines; supply-side tooling and quality control look completely different from T1's world.</li>
+            <li><strong>Instant confirmation vs. request-to-book</strong> — some experiences confirm immediately, others need the operator to manually accept; a real trust/UX trade-off, not just an engineering detail.</li>
+            <li><strong>Cross-sell placement</strong> — where in a booking flow (like T1's) should experience upsells actually appear, and does that belong to this system or the booking system it's bolted onto?</li>
+          </ul>
+
+          <h4>Open Questions</h4>
+          <p>
+            How does Klook's supply-side operator tooling differ from a single-inventory OTA's?
+            Where in the funnel (see T8) should an experience upsell actually be placed, and what
+            does it cannibalize if placed too early?
+          </p>
+
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Long-tail supply management, perishable-inventory yield thinking at small scale,
+            cross-sell/attach-rate product design.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -465,20 +536,36 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Travel Discovery Systems — Tripadvisor, Yelp. Pre-booking inspiration and trust — reviews, rankings, and content that influence a decision made and completed somewhere else entirely.</dd>
-          <dt>What PMs build here</dt><dd>A non-transactional product: most Tripadvisor traffic never books on Tripadvisor. The PM problem is monetizing influence, not completing a purchase.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Monetizing a non-transactional product</strong> — referral/ads revenue instead of booking margin; a fundamentally different business model than every OTA on this list.<br>
-            2. <strong>Review fraud &amp; fake-review detection</strong> — the core trust problem: how do you know a 5-star review is real, without over-flagging genuine negative ones?<br>
-            3. <strong>Content ranking vs. e-commerce ranking</strong> — a "best restaurant" ranking has no purchase event forcing a decision; different signals matter than in a booking-funnel ranking (T8).<br>
-            4. <strong>SEO as the primary growth channel</strong> — discovery platforms live or die on organic search traffic in a way booking platforms (T1) don't have to.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How would you detect and penalize fake reviews without over-flagging real negative ones? What's Tripadvisor's actual North Star metric if it isn't bookings?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Non-transactional business models, trust/fraud detection systems, content ranking, SEO-driven growth strategy.</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The System</h4>
+          <p>
+            Travel Discovery Systems — Tripadvisor, Yelp. Pre-booking inspiration and trust —
+            reviews, rankings, and content that influence a decision made and completed somewhere
+            else entirely. What PMs build here is a non-transactional product: most Tripadvisor
+            traffic never books on Tripadvisor. The PM problem is monetizing influence, not
+            completing a purchase.
+          </p>
+
+          <h4>Key Concepts</h4>
+          <ul>
+            <li><strong>Monetizing a non-transactional product</strong> — referral/ads revenue instead of booking margin; a fundamentally different business model than every OTA on this list.</li>
+            <li><strong>Review fraud &amp; fake-review detection</strong> — the core trust problem: how do you know a 5-star review is real, without over-flagging genuine negative ones?</li>
+            <li><strong>Content ranking vs. e-commerce ranking</strong> — a "best restaurant" ranking has no purchase event forcing a decision; different signals matter than in a booking-funnel ranking (T8).</li>
+            <li><strong>SEO as the primary growth channel</strong> — discovery platforms live or die on organic search traffic in a way booking platforms (T1) don't have to.</li>
+          </ul>
+
+          <h4>Open Questions</h4>
+          <p>
+            How would you detect and penalize fake reviews without over-flagging real negative
+            ones? What's Tripadvisor's actual North Star metric if it isn't bookings?
+          </p>
+
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Non-transactional business models, trust/fraud detection systems, content ranking,
+            SEO-driven growth strategy.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -922,13 +1009,21 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>Design how hotel recommendations are generated using budget, location, ratings, amenities, and past bookings — plus how I'd evaluate recommendation quality.</dd>
-          <dt>Recommendation logic</dt><dd><span class="todo">fill in — weighted scoring model across the 5 inputs above</span></dd>
-          <dt>Evaluation approach</dt><dd><span class="todo">fill in — offline (precision@k) vs. online (click-through, booking rate) evaluation</span></dd>
-          <dt>Skills demonstrated</dt><dd>Recommendation system design, explainability — same auditability standard called out in the AI Trip Planner's guardrails above.</dd>
-          <dt>Outcome / insight</dt><dd><span class="todo">fill in — once built</span></dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>Scope</h4>
+          <p>
+            Design how hotel recommendations are generated using budget, location, ratings,
+            amenities, and past bookings — plus how I'd evaluate recommendation quality.
+            <span class="todo">fill in — weighted scoring model across the 5 inputs, and the
+            offline (precision@k) vs. online (click-through, booking rate) evaluation approach</span>
+          </p>
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Recommendation system design, explainability — the same auditability standard called
+            out in the AI Trip Planner's guardrails above.
+            <span class="todo">Outcome/insight: fill in — once built</span>
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1133,13 +1228,21 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>Dashboards for on-time performance, load factor, revenue per flight, cancellation rate, customer complaints, and baggage handling performance — relevant to airline and operations-focused PM roles.</dd>
-          <dt>Dashboard tool</dt><dd><span class="todo">fill in — Power BI or Tableau</span></dd>
-          <dt>KPIs tracked</dt><dd><span class="todo">fill in — one KPI per dashboard area above</span></dd>
-          <dt>Skills demonstrated</dt><dd>Operations analytics, KPI design, cross-functional dashboarding (same SQL/Power BI discipline used for PCMS reporting at Bajaj Finance).</dd>
-          <dt>Outcome / insight</dt><dd><span class="todo">fill in — once built</span></dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>Scope</h4>
+          <p>
+            Dashboards for on-time performance, load factor, revenue per flight, cancellation
+            rate, customer complaints, and baggage handling performance — relevant to airline and
+            operations-focused PM roles. <span class="todo">fill in — which dashboard tool (Power
+            BI or Tableau) and one KPI per area above</span>
+          </p>
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Operations analytics, KPI design, cross-functional dashboarding — the same SQL/Power
+            BI discipline used for PCMS reporting at Bajaj Finance.
+            <span class="todo">Outcome/insight: fill in — once built</span>
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1267,23 +1370,23 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Product</dt><dd>Swiggy</dd>
-          <dt>Feature analyzed</dt><dd>Order/delivery experience</dd>
-          <dt>North Star metric (proposed)</dt><dd>Orders delivered on time, per active user</dd>
-          <dt>Acquisition metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Activation metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Retention metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Revenue metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Referral metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Metric tree</dt><dd>Orders placed (acquisition, inflatable with discounts) → on-time delivery (what users actually value) → normalized per active user (removes growth-inflation noise)</dd>
-          <dt>Leading indicators</dt><dd>Delivery partner availability</dd>
-          <dt>Lagging indicators</dt><dd>NPS, repeat order rate</dd>
-          <dt>Guardrail metrics</dt><dd>Restaurant cancellation rate</dd>
-          <dt>Hypotheses</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Experiment ideas</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Expected impact</dt><dd><span class="todo">fill in</span></dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Analysis</h4>
+          <p>
+            Swiggy's order/delivery experience, with a proposed North Star metric: orders
+            delivered on time, per active user. <span class="todo">fill in — acquisition,
+            activation, retention, revenue, and referral metrics</span>
+          </p>
+
+          <h4>Metric Tree</h4>
+          <p>
+            Orders placed (acquisition, inflatable with discounts) → on-time delivery (what users
+            actually value) → normalized per active user (removes growth-inflation noise).
+            Leading indicator: delivery partner availability. Lagging indicators: NPS, repeat
+            order rate. Guardrail metric: restaurant cancellation rate.
+            <span class="todo">fill in — hypotheses, experiment ideas, expected impact</span>
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1313,26 +1416,27 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Feature name</dt><dd>Streak</dd>
-          <dt>Product</dt><dd>Duolingo</dd>
-          <dt>User problem</dt><dd>Learners forget → feel guilty → quit</dd>
-          <dt>Business problem</dt><dd>D30 retention collapses without an intervention loop</dd>
-          <dt>Why it exists</dt><dd>Loss aversion outperforms achievement motivation as a retention lever</dd>
-          <dt>User flow</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Workflow</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Assumptions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Edge cases</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Failure scenarios</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Abuse cases</dt><dd>"Streak freeze" normalizes breaks while still keeping users inside the ecosystem</dd>
-          <dt>Launch strategy</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Adoption metrics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Retention impact</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Revenue impact</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Trade-offs</dt><dd>Creates user anxiety alongside motivation — not a free win</dd>
-          <dt>Redesign ideas</dt><dd>Surface a visible "grace period" upfront to reduce anxiety while preserving the retention hook</dd>
-          <dt>Future roadmap</dt><dd><span class="todo">fill in</span></dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Feature</h4>
+          <p>
+            Duolingo's Streak — the daily-use counter that resets on a missed day. The user
+            problem: learners forget, feel guilty, then quit. The business problem: D30 retention
+            collapses without an intervention loop. Streak exists because loss aversion
+            outperforms achievement motivation as a retention lever.
+            <span class="todo">fill in — user flow, workflow, assumptions, edge cases, failure
+            scenarios</span>
+          </p>
+
+          <h4>Trade-offs &amp; Redesign</h4>
+          <p>
+            The "streak freeze" mechanic is the interesting abuse case here — it normalizes
+            breaks while still keeping users inside the ecosystem. But the feature creates user
+            anxiety alongside motivation; it's not a free win. A redesign worth considering:
+            surface a visible "grace period" upfront to reduce that anxiety while preserving the
+            retention hook. <span class="todo">fill in — launch strategy, adoption metrics,
+            retention impact, revenue impact, future roadmap</span>
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1352,20 +1456,47 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Feature name</dt><dd>Memory (persistent cross-conversation memory)</dd>
-          <dt>Product</dt><dd>ChatGPT</dd>
-          <dt>User problem</dt><dd>Users repeat context in every new conversation; the assistant "forgets" preferences, ongoing projects, and prior corrections</dd>
-          <dt>Business problem</dt><dd>Session-to-session experience feels disposable without persistence — a real retention and differentiation lever against competitors without it</dd>
-          <dt>Why it exists</dt><dd>Personalization compounds engagement — the more the assistant "knows" a user, the higher the switching cost to a competitor</dd>
-          <dt>What to remember vs. forget</dt><dd>Explicit user statements vs. inferred preferences</dd>
-          <dt>Guardrails</dt><dd>User-visible memory management (view/edit/delete), opt-out control, no silent retention of sensitive data</dd>
-          <dt>Evaluation challenge</dt><dd>No ground-truth "correct" memory — success has to be measured by correction rate and re-engagement, not accuracy</dd>
-          <dt>Trade-offs</dt><dd>Personalization vs. privacy; more useful over time vs. "creepiness" risk if memory surfaces unprompted</dd>
-          <dt>Failure/abuse case</dt><dd>Stale memory — the model over-indexes on outdated info (e.g. remembering a job the user has since left), requiring a decay/update strategy, not just accumulation</dd>
-          <dt>Redesign idea</dt><dd>Confidence-weighted memory with visible "last updated" timestamps, so users can trust and correct what's remembered in-line</dd>
-          <dt>Reusable insight</dt><dd>The general pattern for any AI feature with implicit state — the PM's real job is designing the correction and visibility mechanism, not the memory mechanism itself</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Feature</h4>
+          <p>
+            ChatGPT's Memory — persistent, cross-conversation memory. The user problem: people
+            repeat context in every new conversation; the assistant "forgets" preferences,
+            ongoing projects, and prior corrections. The business problem: a session-to-session
+            experience that feels disposable without persistence is a real retention and
+            differentiation lever against competitors without it. Memory exists because
+            personalization compounds engagement — the more the assistant "knows" a user, the
+            higher the switching cost to a competitor.
+          </p>
+
+          <h4>Design Decisions</h4>
+          <p>
+            What gets remembered vs. forgotten: explicit user statements vs. inferred
+            preferences. The guardrails: user-visible memory management (view/edit/delete),
+            opt-out control, no silent retention of sensitive data.
+          </p>
+
+          <h4>The Hard Problem</h4>
+          <p>
+            There's no ground-truth "correct" memory — success has to be measured by correction
+            rate and re-engagement, not accuracy. That creates a real trade-off between
+            personalization and privacy: more useful over time, but a "creepiness" risk if memory
+            surfaces unprompted. The sharpest failure mode is stale memory — the model
+            over-indexing on outdated info (e.g. remembering a job the user has since left) —
+            which needs a decay/update strategy, not just accumulation.
+          </p>
+
+          <h4>Redesign Idea</h4>
+          <p>
+            Confidence-weighted memory with visible "last updated" timestamps, so users can trust
+            and correct what's remembered in-line.
+          </p>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            The general pattern for any AI feature with implicit state — the PM's real job is
+            designing the correction and visibility mechanism, not the memory mechanism itself.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1395,14 +1526,22 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>Improve a loyalty program for an OTA or airline — user research, current pain points, new earning/redemption rules, gamification ideas, KPIs.</dd>
-          <dt>Current pain points</dt><dd><span class="todo">fill in — e.g. redemption friction, tier stagnation</span></dd>
-          <dt>New earning/redemption rules</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Gamification ideas</dt><dd><span class="todo">fill in — streaks, milestone tiers, surprise-and-delight unlocks</span></dd>
-          <dt>KPIs</dt><dd><span class="todo">fill in — e.g. repeat booking rate, tier upgrade rate, redemption rate</span></dd>
-          <dt>Skills demonstrated</dt><dd>Retention/lifecycle design — the loyalty counterpart to the funnel-conversion work in the Booking Funnel Analysis below.</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>Scope</h4>
+          <p>
+            Improve a loyalty program for an OTA or airline — user research, current pain points,
+            new earning/redemption rules, gamification ideas, KPIs.
+            <span class="todo">fill in — current pain points (e.g. redemption friction, tier
+            stagnation), new earning/redemption rules, gamification ideas (streaks, milestone
+            tiers, surprise-and-delight unlocks), and KPIs (repeat booking rate, tier upgrade
+            rate, redemption rate)</span>
+          </p>
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Retention/lifecycle design — the loyalty counterpart to the funnel-conversion work in
+            the Booking Funnel Analysis above.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1428,20 +1567,37 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Travel Distribution Systems — Amadeus IT Group, Sabre Corporation. The B2B plumbing that makes every other system on this list possible — the GDS is what an OTA's search actually queries behind the scenes.</dd>
-          <dt>What PMs build here</dt><dd>B2B infrastructure for travel agencies and OTAs, not a consumer product — API reliability, partner SLAs, and integration timelines are the actual PM discipline, not UX polish.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>GDS as B2B infrastructure</strong> — the customer is a travel agency or OTA, not a traveller; a completely different PM discipline than every consumer-facing system above.<br>
-            2. <strong>NDC (New Distribution Capability)</strong> — the airline industry's real, current push to bypass traditional GDS with direct API access; an active disruption to this exact business model, worth naming by name.<br>
-            3. <strong>Inventory synchronization latency</strong> — a seat sold on one channel must be un-sold everywhere else within seconds, or the airline oversells.<br>
-            4. <strong>Switching costs &amp; lock-in</strong> — why airlines and agencies rarely change GDS providers; the actual moat this multi-decade business runs on.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            Why is NDC a genuine threat to Amadeus/Sabre's business model, and how would a PM there respond? What does a GDS integration project actually look like from an OTA's engineering side (ties to T1's "technical execution" comfort)?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>B2B/infrastructure product management, API-as-product thinking, understanding a legacy moat well enough to know what threatens it.</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The System</h4>
+          <p>
+            Travel Distribution Systems — Amadeus IT Group, Sabre Corporation. The B2B plumbing
+            that makes every other system on this list possible — the GDS is what an OTA's search
+            actually queries behind the scenes. What PMs build here is B2B infrastructure for
+            travel agencies and OTAs, not a consumer product — API reliability, partner SLAs, and
+            integration timelines are the actual PM discipline, not UX polish.
+          </p>
+
+          <h4>Key Concepts</h4>
+          <ul>
+            <li><strong>GDS as B2B infrastructure</strong> — the customer is a travel agency or OTA, not a traveller; a completely different PM discipline than every consumer-facing system above.</li>
+            <li><strong>NDC (New Distribution Capability)</strong> — the airline industry's real, current push to bypass traditional GDS with direct API access; an active disruption to this exact business model, worth naming by name.</li>
+            <li><strong>Inventory synchronization latency</strong> — a seat sold on one channel must be un-sold everywhere else within seconds, or the airline oversells.</li>
+            <li><strong>Switching costs &amp; lock-in</strong> — why airlines and agencies rarely change GDS providers; the actual moat this multi-decade business runs on.</li>
+          </ul>
+
+          <h4>Open Questions</h4>
+          <p>
+            Why is NDC a genuine threat to Amadeus/Sabre's business model, and how would a PM
+            there respond? What does a GDS integration project actually look like from an OTA's
+            engineering side (ties to T1's "technical execution" comfort)?
+          </p>
+
+          <h4>Skills Demonstrated</h4>
+          <p>
+            B2B/infrastructure product management, API-as-product thinking, understanding a
+            legacy moat well enough to know what threatens it.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1467,22 +1623,29 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Company overview</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Industry</dt><dd>Quick commerce / India</dd>
-          <dt>TAM/SAM/SOM</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Business model</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Pricing strategy</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Growth strategy</dt><dd>Category expansion beyond core delivery</dd>
-          <dt>Competitors</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Competitive advantage</dt><dd>Precision over scale — dark store density concentrated in top-10 pin codes rather than broad coverage</dd>
-          <dt>Network effects</dt><dd>Orders → better placement/inventory decisions → faster delivery → more orders (flywheel)</dd>
-          <dt>Moats</dt><dd>Dark store density in high-density pin codes</dd>
-          <dt>Risks</dt><dd>Thin margins</dd>
-          <dt>SWOT</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Future predictions (1/3/5 yr)</dt><dd>5-year — profitability path runs through premium SKUs, not core delivery margin</dd>
-          <dt>Strategic recommendations</dt><dd><span class="todo">fill in</span></dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Business</h4>
+          <p>
+            <span class="todo">fill in — company overview, TAM/SAM/SOM, business model, pricing
+            strategy</span>. Industry: quick commerce / India. Growth strategy: category expansion
+            beyond core delivery. <span class="todo">Competitors: fill in</span>.
+          </p>
+
+          <h4>The Moat</h4>
+          <p>
+            The competitive advantage is precision over scale — dark store density concentrated
+            in top-10 pin codes rather than broad coverage. The network effect: orders → better
+            placement/inventory decisions → faster delivery → more orders (flywheel). The moat
+            itself is dark store density in high-density pin codes. The risk is thin margins.
+            <span class="todo">fill in — SWOT, strategic recommendations</span>
+          </p>
+
+          <h4>Outlook</h4>
+          <p>
+            5-year prediction: the profitability path runs through premium SKUs, not core
+            delivery margin.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1512,12 +1675,22 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>Short PRDs, one per feature: price alerts, smart refunds, waitlist for sold-out flights, multi-city planner, carbon footprint calculator, AI travel assistant.</dd>
-          <dt>PRD template</dt><dd>Reuses the Problem → User Stories → Business Goals → Requirements → Acceptance Criteria → Success Metrics → Launch Plan structure from the PM Writing case study (T22) below.</dd>
-          <dt>Progress</dt><dd><span class="todo">fill in — 0 of 6+ written; track completion here as each PRD ships</span></dd>
-          <dt>Skills demonstrated</dt><dd>PRD writing at range and speed — breadth across a feature roadmap rather than depth on one project.</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>Scope</h4>
+          <p>
+            Short PRDs, one per feature: price alerts, smart refunds, waitlist for sold-out
+            flights, multi-city planner, carbon footprint calculator, AI travel assistant. Each
+            reuses the Problem → User Stories → Business Goals → Requirements → Acceptance
+            Criteria → Success Metrics → Launch Plan structure from the PM Writing case study
+            (T22) below. <span class="todo">Progress: fill in — 0 of 6+ written; track completion
+            here as each PRD ships</span>
+          </p>
+          <h4>Skills Demonstrated</h4>
+          <p>
+            PRD writing at range and speed — breadth across a feature roadmap rather than depth
+            on one project.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1543,23 +1716,23 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Problem statements</dt><dd>Field 1 of the PRD template</dd>
-          <dt>User stories</dt><dd>Field 2 of the PRD template</dd>
-          <dt>Business goals</dt><dd>Field 3 of the PRD template</dd>
-          <dt>Requirements</dt><dd>Field 4 of the PRD template</dd>
-          <dt>Acceptance criteria</dt><dd>Field 5 of the PRD template</dd>
-          <dt>Success metrics</dt><dd>Field 6 of the PRD template</dd>
-          <dt>Launch plans</dt><dd>Field 7 of the PRD template</dd>
-          <dt>Executive updates</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Stakeholder memos</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Product vision docs</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Roadmap summaries</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Release notes</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Decision proposals</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Positioning line</dt><dd>"A PRD isn't a spec doc. It's a decision memo in disguise."</dd>
-          <dt>Proof point</dt><dd><span class="todo">fill in — PRD count</span></dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Template</h4>
+          <p>
+            A PRD structured as seven fields — problem statement, user stories, business goals,
+            requirements, acceptance criteria, success metrics, launch plan — the same structure
+            reused across the Travel PRD Portfolio (T10) and the AI Trip Planner PRD (T2).
+            <span class="todo">fill in — executive updates, stakeholder memos, product vision
+            docs, roadmap summaries, release notes, and decision proposals as additional writing
+            samples</span>
+          </p>
+
+          <h4>Positioning</h4>
+          <p>
+            "A PRD isn't a spec doc. It's a decision memo in disguise."
+            <span class="todo">Proof point: fill in — PRD count</span>
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1589,13 +1762,26 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Scope</dt><dd>A product where users track visa application status, receive document reminders, estimate processing time, and securely store travel documents.</dd>
-          <dt>Core flows</dt><dd><span class="todo">fill in — status tracking, reminders, document vault</span></dd>
-          <dt>Compliance considerations</dt><dd>Secure document storage directly reuses the eKYC/RBI digital-lending compliance discipline from the fintech toolkit — data sensitivity, not just UX, is the hard part here.</dd>
-          <dt>Skills demonstrated</dt><dd>Regulated/documentation-heavy product design, notification/reminder system design.</dd>
-          <dt>Outcome / insight</dt><dd><span class="todo">fill in — once built</span></dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>Scope</h4>
+          <p>
+            A product where users track visa application status, receive document reminders,
+            estimate processing time, and securely store travel documents.
+            <span class="todo">fill in — the core flows: status tracking, reminders, document
+            vault</span>
+          </p>
+          <h4>Compliance Considerations</h4>
+          <p>
+            Secure document storage directly reuses the eKYC/RBI digital-lending compliance
+            discipline from the fintech toolkit — data sensitivity, not just UX, is the hard part
+            here.
+          </p>
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Regulated/documentation-heavy product design, notification/reminder system design.
+            <span class="todo">Outcome/insight: fill in — once built</span>
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1621,20 +1807,37 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Core system &amp; companies</dt><dd>Travel Payments Systems — Stripe, Adyen. The payment infrastructure underneath every other system here — a single itinerary can touch 4+ currencies and vendors at once.</dd>
-          <dt>What PMs build here</dt><dd>Multi-currency, multi-method payment handling and refund/dispute resolution at travel-specific scale and complexity, not a generic checkout flow.</dd>
-          <dt>Key concepts to learn</dt><dd>
-            1. <strong>Split payments &amp; multi-vendor settlement</strong> — one trip booking might pay an airline, a hotel, and a local tour operator; who gets paid when, and who eats a refund when one leg cancels?<br>
-            2. <strong>Chargeback &amp; dispute handling</strong> — travel has uniquely high dispute rates (cancelled flights, no-show hotels) — a payments PM's core recurring headache.<br>
-            3. <strong>Currency conversion &amp; FX risk</strong> — who absorbs the exchange-rate movement between the booking date and the travel date, months later?<br>
-            4. <strong>Refund policy as a product surface</strong>, not a policy doc — partial refunds, cash vs. credit, voucher expiry are UX decisions with real financial modeling behind each one.
-          </dd>
-          <dt>Questions a future teardown should answer</dt><dd>
-            How would you design a refund policy for a 3-vendor itinerary where only one vendor cancels? What's the actual dispute-resolution flow when a traveller claims non-delivery of a paid-for service?
-          </dd>
-          <dt>Skills demonstrated</dt><dd>Payments infrastructure design, multi-party settlement logic, dispute/refund policy as product design — not just a support-team script.</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The System</h4>
+          <p>
+            Travel Payments Systems — Stripe, Adyen. The payment infrastructure underneath every
+            other system here — a single itinerary can touch 4+ currencies and vendors at once.
+            What PMs build here is multi-currency, multi-method payment handling and
+            refund/dispute resolution at travel-specific scale and complexity, not a generic
+            checkout flow.
+          </p>
+
+          <h4>Key Concepts</h4>
+          <ul>
+            <li><strong>Split payments &amp; multi-vendor settlement</strong> — one trip booking might pay an airline, a hotel, and a local tour operator; who gets paid when, and who eats a refund when one leg cancels?</li>
+            <li><strong>Chargeback &amp; dispute handling</strong> — travel has uniquely high dispute rates (cancelled flights, no-show hotels) — a payments PM's core recurring headache.</li>
+            <li><strong>Currency conversion &amp; FX risk</strong> — who absorbs the exchange-rate movement between the booking date and the travel date, months later?</li>
+            <li><strong>Refund policy as a product surface</strong>, not a policy doc — partial refunds, cash vs. credit, voucher expiry are UX decisions with real financial modeling behind each one.</li>
+          </ul>
+
+          <h4>Open Questions</h4>
+          <p>
+            How would you design a refund policy for a 3-vendor itinerary where only one vendor
+            cancels? What's the actual dispute-resolution flow when a traveller claims
+            non-delivery of a paid-for service?
+          </p>
+
+          <h4>Skills Demonstrated</h4>
+          <p>
+            Payments infrastructure design, multi-party settlement logic, dispute/refund policy
+            as product design — not just a support-team script.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1660,20 +1863,53 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Project</dt><dd>PCMS (Payout Calculation Management System), built 0→1 at Bajaj Finserv</dd>
-          <dt>System integrated</dt><dd>PCMS ↔ Finacle, Bajaj Finserv's core banking system</dd>
-          <dt>Why</dt><dd>Partner payout calculations ran through a manual Excel process; integrating PCMS with Finacle let payouts calculate directly off live account data</dd>
-          <dt>My role</dt><dd>Owned the integration requirements end-to-end — scoped what data needed to flow, in what direction, and on what trigger, working directly with engineering</dd>
-          <dt>Integration type</dt><dd><span class="todo">fill in — REST / SOAP / batch file, whatever it actually was</span></dd>
-          <dt>Tools used</dt><dd>Postman for testing and validating API requests/responses during integration work</dd>
-          <dt>SQL &amp; data work</dt><dd>Drafted and validated KPI queries (SELECT, JOINs, GROUP BY / aggregations) before they went to stakeholders — same pattern used for Power BI and Salesforce reporting</dd>
-          <dt>Sample query</dt><dd><span class="todo">fill in — a real query you've written, e.g. a payout reconciliation check</span></dd>
-          <dt>Backlog &amp; sequencing</dt><dd>Ran the build in Jira and Azure DevOps — epics broken into stories, prioritized by what was actually blocking partner onboarding or a revenue number that sprint, not just a reach/impact score</dd>
-          <dt>Handling competing asks</dt><dd><span class="todo">fill in — a real example of re-sequencing this backlog under stakeholder pressure</span></dd>
-          <dt>Outcome</dt><dd>FD booking turnaround dropped from 7 days to 1; also removed a recurring manual reconciliation step</dd>
-          <dt>Reusable insight</dt><dd>Comfort scoping a technical integration with engineering, not just writing a PRD and handing it off — the same rigor applies whether the "backlog" is a PRD's stories or a data-migration checklist</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Project</h4>
+          <p>
+            PCMS (Payout Calculation Management System) was built 0→1 at Bajaj Finserv,
+            integrating with Finacle, Bajaj Finserv's core banking system. Partner payout
+            calculations previously ran through a manual Excel process; connecting PCMS to
+            Finacle let payouts calculate directly off live account data instead.
+          </p>
+
+          <h4>My Role</h4>
+          <p>
+            I owned the integration requirements end-to-end — scoping what data needed to
+            flow, in what direction, and on what trigger, working directly with engineering.
+            Integration type: <span class="todo">fill in — REST / SOAP / batch file, whatever
+            it actually was</span>. I used Postman to test and validate API requests/responses
+            during integration work.
+          </p>
+
+          <h4>SQL &amp; Data Work</h4>
+          <p>
+            I drafted and validated KPI queries (SELECT, JOINs, GROUP BY / aggregations)
+            before they went to stakeholders — the same pattern used for Power BI and
+            Salesforce reporting. Sample query: <span class="todo">fill in — a real query
+            you've written, e.g. a payout reconciliation check</span>.
+          </p>
+
+          <h4>Backlog &amp; Sequencing</h4>
+          <p>
+            I ran the build in Jira and Azure DevOps — epics broken into stories, prioritized
+            by what was actually blocking partner onboarding or a revenue number that sprint,
+            not just a reach/impact score. <span class="todo">fill in — a real example of
+            re-sequencing this backlog under stakeholder pressure</span>.
+          </p>
+
+          <h4>Outcome</h4>
+          <p>
+            FD booking turnaround dropped from 7 days to 1; the integration also removed a
+            recurring manual reconciliation step.
+          </p>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            Comfort scoping a technical integration with engineering, not just writing a PRD
+            and handing it off — the same rigor applies whether the "backlog" is a PRD's
+            stories or a data-migration checklist.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1693,15 +1929,32 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Project</dt><dd><span class="todo">fill in — what you actually built: an Airtable tracker, a Zapier/Make automation, a Webflow/Bubble prototype, or a Retool internal tool</span></dd>
-          <dt>Tools used</dt><dd><span class="todo">fill in — which of Zapier, Make, Airtable, Webflow, Bubble, or Retool you actually used</span></dd>
-          <dt>Problem</dt><dd><span class="todo">fill in — the manual process or gap this replaced</span></dd>
-          <dt>Why no-code</dt><dd><span class="todo">fill in — why this was faster to build without waiting on engineering time</span></dd>
-          <dt>My role</dt><dd><span class="todo">fill in — did you build it solo, or scope it and hand off to someone else</span></dd>
-          <dt>Outcome</dt><dd><span class="todo">fill in — time saved, adoption, or what it replaced</span></dd>
-          <dt>Reusable insight</dt><dd><span class="todo">fill in</span></dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Project</h4>
+          <p>
+            <span class="todo">fill in — what you actually built: an Airtable tracker, a
+            Zapier/Make automation, a Webflow/Bubble prototype, or a Retool internal tool</span>,
+            using <span class="todo">fill in — which of Zapier, Make, Airtable, Webflow,
+            Bubble, or Retool you actually used</span>.
+          </p>
+
+          <h4>The Problem</h4>
+          <p>
+            <span class="todo">fill in — the manual process or gap this replaced</span>. No-code
+            was the right call because <span class="todo">fill in — why this was faster to
+            build without waiting on engineering time</span>.
+          </p>
+
+          <h4>My Role &amp; Outcome</h4>
+          <p>
+            <span class="todo">fill in — did you build it solo, or scope it and hand off to
+            someone else</span>. Outcome: <span class="todo">fill in — time saved, adoption,
+            or what it replaced</span>.
+          </p>
+
+          <h4>Reusable Insight</h4>
+          <p><span class="todo">fill in</span></p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1731,20 +1984,30 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Product observed</dt><dd>Fintech app (KYC onboarding flow)</dd>
-          <dt>User action</dt><dd>First open, attempting to complete KYC with no instructions</dd>
-          <dt>Emotional trigger</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Friction point</dt><dd>7-step KYC flow; users abandoned at step 4 of 7</dd>
-          <dt>Motivation</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Habit loop</dt><dd>Broken — daily check-ins expected by the product, but zero streak/return mechanism exists</dd>
-          <dt>Cognitive bias</dt><dd>Anchoring — complexity on the first screen set user expectations for the whole flow</dd>
-          <dt>User quotes</dt><dd>User said "finally" on reaching the dashboard — read as relief, not delight</dd>
-          <dt>Behavioral patterns</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Product implications</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Business implications</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Lessons</dt><dd>User empathy is the most analytical thing a PM can do — it isn't a "soft" skill</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Observation</h4>
+          <p>
+            A fintech app's KYC onboarding flow, watched on first open with no instructions.
+            <span class="todo">Emotional trigger: fill in</span>. The friction point: a 7-step KYC
+            flow where users abandoned at step 4 of 7. <span class="todo">Motivation: fill
+            in</span>.
+          </p>
+
+          <h4>Behavioral Signals</h4>
+          <p>
+            The habit loop is broken — daily check-ins are expected by the product, but zero
+            streak/return mechanism exists. The cognitive bias at play is anchoring — complexity
+            on the first screen set user expectations for the whole flow. One user said "finally"
+            on reaching the dashboard, read as relief, not delight.
+            <span class="todo">fill in — behavioral patterns, product implications, business
+            implications</span>
+          </p>
+
+          <h4>Lessons</h4>
+          <p>
+            User empathy is the most analytical thing a PM can do — it isn't a "soft" skill.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1774,21 +2037,46 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Company overview</dt><dd>BFSI (Bajaj Finance) → Telecom/enterprise (Ericsson) → Startup</dd>
-          <dt>Role</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Responsibilities</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Leadership lessons</dt><dd>At Ericsson — enterprise PMs operate with global stakeholders and slow decision cycles; the PM has to "be the constant"</dd>
-          <dt>Product lessons</dt><dd>At the startup — speed is the product; ship, learn, adapt; PM scope is roughly 10× wider than in a large org</dd>
-          <dt>Execution lessons</dt><dd>At Bajaj Finance — a data-first culture cut Fixed Deposit booking turnaround from 7 days to 1 and drove a <strong>30% increase in sales-team operational efficiency</strong> through the FD Partner Onboarding App — real, quantified outcomes, also in the Impact Dashboard below</dd>
-          <dt>Team dynamics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Stakeholder conflicts</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Customer complaints</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Why projects succeeded/failed</dt><dd><span class="todo">fill in</span></dd>
-          <dt>People dynamics</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Personal mistakes</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Key learnings</dt><dd>Each environment shaped a different kind of PM — the combination of BFSI rigor, enterprise stakeholder management, and startup speed is the actual differentiator</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>Three Companies, Three Kinds of PM</h4>
+          <p>
+            BFSI (Bajaj Finance) → Telecom/enterprise (Ericsson) → Startup. Role and
+            responsibilities at each: <span class="todo">fill in</span>.
+          </p>
+
+          <h4>Leadership Lessons — Ericsson</h4>
+          <p>
+            Enterprise PMs operate with global stakeholders and slow decision cycles; the PM
+            has to "be the constant."
+          </p>
+
+          <h4>Product Lessons — the Startup</h4>
+          <p>
+            Speed is the product; ship, learn, adapt. PM scope is roughly 10× wider than in a
+            large org.
+          </p>
+
+          <h4>Execution Lessons — Bajaj Finance</h4>
+          <p>
+            A data-first culture cut Fixed Deposit booking turnaround from 7 days to 1 and
+            drove a <strong>30% increase in sales-team operational efficiency</strong> through
+            the FD Partner Onboarding App — real, quantified outcomes, also in the Impact
+            Dashboard below.
+          </p>
+
+          <h4>Team &amp; People Dynamics</h4>
+          <p>
+            Stakeholder conflicts, customer complaints, why specific projects succeeded or
+            failed, people dynamics, and personal mistakes along the way:
+            <span class="todo">fill in</span>.
+          </p>
+
+          <h4>Key Learnings</h4>
+          <p>
+            Each environment shaped a different kind of PM — the combination of BFSI rigor,
+            enterprise stakeholder management, and startup speed is the actual differentiator.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1818,21 +2106,39 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Context</dt><dd><span class="todo">fill in — a specific decision made, and what was happening at the time</span></dd>
-          <dt>Goal</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Constraints</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Assumptions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Available data</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Options considered</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Pros/cons</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Final decision</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Expected outcome</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Risks</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Actual outcome</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Lessons learned</dt><dd>Most PM decisions are "two-way doors" (reversible) — decide fast, ship, learn, iterate. Most PMs mistakenly treat them like "one-way doors," which is why products move slowly.</dd>
-          <dt>What would be done differently</dt><dd><span class="todo">fill in</span></dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Decision</h4>
+          <p>
+            <span class="todo">fill in — a specific decision made, and what was happening at
+            the time</span>. Goal, constraints, and assumptions going in:
+            <span class="todo">fill in</span>.
+          </p>
+
+          <h4>Weighing the Options</h4>
+          <p>
+            Available data, options considered, and their pros/cons:
+            <span class="todo">fill in</span>.
+          </p>
+
+          <h4>The Call</h4>
+          <p>
+            Final decision, expected outcome, and known risks at the time:
+            <span class="todo">fill in</span>.
+          </p>
+
+          <h4>What Actually Happened</h4>
+          <p>
+            Actual outcome and what would be done differently in hindsight:
+            <span class="todo">fill in</span>.
+          </p>
+
+          <h4>Lessons Learned</h4>
+          <p>
+            Most PM decisions are "two-way doors" (reversible) — decide fast, ship, learn,
+            iterate. Most PMs mistakenly treat them like "one-way doors," which is why
+            products move slowly.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1862,20 +2168,38 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Product design questions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Execution questions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Estimation questions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Strategy questions</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Leadership questions</dt><dd>"Tell me about a time you influenced without authority"</dd>
-          <dt>Frameworks used</dt><dd>STAR — Situation → Task → Action (data, relationships, shared goals) → Result</dd>
-          <dt>Assumptions made</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Final answer</dt><dd><span class="todo">fill in — your own real example; this is the story an interviewer will actually probe, worth writing in full</span></dd>
-          <dt>Feedback</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Improvements</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Common mistakes</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Reusable insights</dt><dd>This question tests whether you can lead without a title, read stakeholder dynamics, and drive alignment without forcing it</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Question</h4>
+          <p>
+            "Tell me about a time you influenced without authority" — a leadership question,
+            alongside product design, execution, estimation, and strategy questions worked
+            through the same way: <span class="todo">fill in</span>.
+          </p>
+
+          <h4>The Framework</h4>
+          <p>
+            STAR — Situation → Task → Action (data, relationships, shared goals) → Result.
+            Assumptions made going into the answer: <span class="todo">fill in</span>.
+          </p>
+
+          <h4>The Answer</h4>
+          <p>
+            <span class="todo">fill in — your own real example; this is the story an
+            interviewer will actually probe, worth writing in full</span>.
+          </p>
+
+          <h4>Feedback &amp; Improvements</h4>
+          <p>
+            Feedback received, common mistakes to avoid, and what to improve next round:
+            <span class="todo">fill in</span>.
+          </p>
+
+          <h4>Reusable Insight</h4>
+          <p>
+            This question tests whether you can lead without a title, read stakeholder
+            dynamics, and drive alignment without forcing it.
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -1905,24 +2229,38 @@
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
-        <dl class="fields">
-          <dt>Weekly wins</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Failures</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Feedback</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Skills improved</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Skills lacking</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Books read</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Articles read</dt><dd><span class="todo">fill in</span></dd>
-          <dt>PM concepts learned</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Networking efforts</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Interview prep status</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Monthly goals</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Quarterly goals</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Career vision</dt><dd><span class="todo">fill in</span></dd>
-          <dt>Next actions</dt><dd>Launching the "PMgirlz" community — "no PM should figure this out alone"</dd>
-          <dt>6-month final tallies</dt><dd><span class="todo">fill in — real counts per category, once case studies are actually published</span></dd>
-          <dt>Biggest insight</dt><dd>"Journals build judgment, not just knowledge. Judgment is the compound interest of a PM career."</dd>
-        </dl>
+        <div class="cs-narrative">
+          <h4>The Challenge</h4>
+          <p>
+            A self-directed 6-month tracking exercise across weekly wins, failures, and
+            feedback: <span class="todo">fill in</span>.
+          </p>
+
+          <h4>What Grew</h4>
+          <p>
+            Skills improved, skills still lacking, books and articles read, and PM concepts
+            learned along the way: <span class="todo">fill in</span>.
+          </p>
+
+          <h4>Building Toward Something</h4>
+          <p>
+            Networking efforts, interview prep status, and monthly/quarterly goals against a
+            longer career vision: <span class="todo">fill in</span>. Next action: launching the
+            "PMgirlz" community — "no PM should figure this out alone."
+          </p>
+
+          <h4>6-Month Tallies</h4>
+          <p>
+            <span class="todo">fill in — real counts per category, once case studies are
+            actually published</span>.
+          </p>
+
+          <h4>Biggest Insight</h4>
+          <p>
+            "Journals build judgment, not just knowledge. Judgment is the compound interest of
+            a PM career."
+          </p>
+        </div>
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
