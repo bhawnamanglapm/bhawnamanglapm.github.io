@@ -2175,9 +2175,9 @@
     </div>
     </div>
 
-    <div class="cat-section hide-wip" id="cat-pm-writing">
+    <div class="cat-section" id="cat-pm-writing">
       <div class="cat-head"><h2>PM Writing</h2><span class="cat-tag">// PRDs, decision memos, and structured product docs</span></div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum">T10</span>
         <h3 class="jcat-title">Travel PRD Portfolio</h3>
@@ -2197,12 +2197,34 @@
         <div class="cs-narrative">
           <h4>Scope</h4>
           <p>
-            Short PRDs, one per feature: price alerts, smart refunds, waitlist for sold-out
-            flights, multi-city planner, carbon footprint calculator, AI travel assistant. Each
-            reuses the Problem → User Stories → Business Goals → Requirements → Acceptance
-            Criteria → Success Metrics → Launch Plan structure from the PM Writing case study
-            (T22) below. <span class="todo">Progress: fill in — 0 of 6+ written; track completion
-            here as each PRD ships</span>
+            Short PRDs, one per feature, each reusing the Problem → User Stories → Business Goals
+            → Requirements → Acceptance Criteria → Success Metrics → Launch Plan structure from
+            the PM Writing case study (T22) below. The point of this set isn't depth on any one
+            of them — the AI Trip Planner PRD (T2) already proves that — it's range: can the same
+            structure hold up across six genuinely different feature shapes without turning into
+            a template exercise.
+          </p>
+          <h4>Why These Six</h4>
+          <p>
+            Each was picked for a different reason a PM actually has to reason through, not
+            because the list needed padding. <strong>Price alerts</strong> — pure retention
+            mechanic, no new inventory required, the easiest one to justify to an engineering
+            team on effort alone. <strong>Smart refunds</strong> — the trust problem: refund
+            policy already gets fought over in the payments work above (T16); this is the
+            user-facing half of that same fight. <strong>Waitlist for sold-out flights</strong> —
+            a demand-signal play as much as a feature: it tells the business what routes to add
+            capacity on, not just what to build. <strong>Multi-city planner</strong> — explicitly
+            the complexity the AI Trip Planner (T2) scoped out of its v1; this is where that
+            deferred requirement would actually get written up. <strong>Carbon footprint
+            calculator</strong> — the one feature here that's regulation-adjacent rather than
+            revenue-adjacent, worth including precisely because it forces a different kind of
+            requirement (disclosure accuracy) than the other five. <strong>AI travel
+            assistant</strong> — the hardest one to scope honestly, since "AI assistant" is
+            where PRDs most often turn into vague feature wishlists instead of real requirements.
+          </p>
+          <p>
+            <span class="todo">Progress: 0 of 6 actually written — this page tracks real
+            completion, not intent; a PRD only gets checked off once it exists</span>
           </p>
           <h4>Skills Demonstrated</h4>
           <p>
@@ -2218,7 +2240,7 @@
       </div>
       </article>
     </div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum">T22</span>
         <h3 class="jcat-title">Cross-industry example</h3>
@@ -2240,16 +2262,36 @@
           <p>
             A PRD structured as seven fields — problem statement, user stories, business goals,
             requirements, acceptance criteria, success metrics, launch plan — the same structure
-            reused across the Travel PRD Portfolio (T10) and the AI Trip Planner PRD (T2).
-            <span class="todo">fill in — executive updates, stakeholder memos, product vision
-            docs, roadmap summaries, release notes, and decision proposals as additional writing
-            samples</span>
+            reused across the Travel PRD Portfolio (T10) and the AI Trip Planner PRD (T2). Seven
+            fields, not twelve — every extra section is a section a stakeholder skims past, and a
+            skimmed section is worse than a missing one because it creates the illusion the
+            question got answered.
           </p>
 
           <h4>Positioning</h4>
           <p>
-            "A PRD isn't a spec doc. It's a decision memo in disguise."
-            <span class="todo">Proof point: fill in — PRD count</span>
+            "A PRD isn't a spec doc. It's a decision memo in disguise." The tell is which section
+            gets read first: nobody opens a PRD to find out how a button works — they open it to
+            find out whether the thing is worth building at all, which is a Goals and Requirements
+            question, not an Acceptance Criteria one. Write the doc in that order and most of the
+            actual disagreement in a review happens on page one, where it's cheap to argue about,
+            instead of surfacing three weeks into build.
+          </p>
+
+          <h4>Where This Template Breaks</h4>
+          <p>
+            It's built for a feature with a defined shape — something that has a clear "done."
+            It strains on genuinely open-ended, discovery-stage work, where forcing Acceptance
+            Criteria this early just produces confident-sounding fiction. The honest fix isn't a
+            different template; it's admitting the doc is a hypothesis memo at that stage, not a
+            requirements doc, and labeling it that way instead of dressing it up as more certain
+            than it is.
+          </p>
+
+          <p>
+            <span class="todo">fill in — executive updates, stakeholder memos, product vision
+            docs, roadmap summaries, release notes, and decision proposals as additional writing
+            samples, once written</span>
           </p>
         </div>
         <div class="jlinks">
@@ -2262,9 +2304,9 @@
     </div>
     </div>
 
-    <div class="cat-section hide-wip" id="cat-technical-execution">
+    <div class="cat-section" id="cat-technical-execution">
       <div class="cat-head"><h2>Technical Execution</h2><span class="cat-tag">// API integration, SQL, and backlog discipline</span></div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum">T9</span>
         <h3 class="jcat-title">Visa Application Tracker</h3>
@@ -2284,10 +2326,23 @@
         <div class="cs-narrative">
           <h4>Scope</h4>
           <p>
-            A product where users track visa application status, receive document reminders,
-            estimate processing time, and securely store travel documents.
-            <span class="todo">fill in — the core flows: status tracking, reminders, document
-            vault</span>
+            Visas are the one travel step nobody enjoys and everybody procrastinates on. This
+            tracks application status across embassies and visa-processing services, nudges the
+            user before a document actually goes bad — not after — estimates realistic processing
+            time by visa type and country, and stores the underlying documents somewhere more
+            durable than a phone's downloads folder.
+          </p>
+          <h4>Core Flows</h4>
+          <p>
+            Status tracking pulls from whatever an embassy, VFS, or BLS portal actually exposes —
+            scraping where there's no real API, because most consulates don't have one, which is
+            an honest constraint worth naming up front rather than assuming away. Reminders run
+            on two independent clocks at once: one counting down to the application deadline,
+            another counting down to passport or document expiry — the second one being the clock
+            people actually forget about, since it's not the one they were watching. The document
+            vault is the unglamorous but load-bearing piece: encrypted storage for passport scans,
+            photos, bank statements, and invitation letters, each with its own expiry flag so a
+            document going stale in storage doesn't turn into a problem at the airport counter.
           </p>
           <h4>Compliance Considerations</h4>
           <p>
@@ -2297,8 +2352,9 @@
           </p>
           <h4>Skills Demonstrated</h4>
           <p>
-            Regulated/documentation-heavy product design, notification/reminder system design.
-            <span class="todo">Outcome/insight: fill in — once built</span>
+            Regulated, documentation-heavy product design, and notification design that has to
+            reason about two independent deadlines instead of one.
+            <span class="todo">Outcome: not built yet — stays labeled that way until it is</span>
           </p>
         </div>
         <div class="jlinks">
@@ -2309,7 +2365,7 @@
       </div>
       </article>
     </div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum">T16</span>
         <h3 class="jcat-title">Travel Payments &amp; Refunds System</h3>
@@ -2365,7 +2421,7 @@
       </div>
       </article>
     </div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum">T27</span>
         <h3 class="jcat-title">Cross-industry examples</h3>
@@ -2436,7 +2492,7 @@
         </div>
       </div>
       </article>
-      <article class="jcard" data-case="no-code-build-ops-automation">
+      <article class="jcard hide-wip" data-case="no-code-build-ops-automation">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#F59E0B,#D97706)">🧩</div>
