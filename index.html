@@ -398,7 +398,7 @@
     <div class="practice-note">
       <strong>3 flagship projects</strong> (T1, T2, T3) anchor this practice. T1 and T2 are fully
       written — personas, journeys, feature recs, RICE/MoSCoW scoring, PRD structure, and success
-      metrics. <strong>T3 goes further</strong> — a live, interactive dashboard with a real
+      metrics. <strong>T3 goes further</strong>: a live, interactive dashboard with a real
       (synthetic, clearly labeled) dataset behind it, not just a write-up. All three are shown
       below; <strong>T5 (Travel Support AI Copilot, with a working live demo)</strong> and
       <strong>T8 (Booking Funnel Analysis)</strong>, also fully written, are on the
@@ -493,9 +493,9 @@
           </p>
           <p><strong>Needs uncovered, mapped to the journey above:</strong></p>
           <ul>
-            <li><strong>Trust/transparency need</strong> — fare inflation between search-result price and fare-review price (taxes/fees revealed late) erodes trust; add-on pre-selection (insurance, seat) defaults to "on," reading as a dark pattern at checkout.</li>
-            <li><strong>Time-efficiency need</strong> — filter fatigue (12+ dimensions, no smart default) and no persistent price comparison across dates force users to manually reopen search in a new tab.</li>
-            <li><strong>Clarity/control need</strong> — baggage policy buried a tap deep, a top cause of post-booking support contact.</li>
+            <li><strong>Trust/transparency need</strong>: fare inflation between search-result price and fare-review price (taxes/fees revealed late) erodes trust; add-on pre-selection (insurance, seat) defaults to "on," reading as a dark pattern at checkout.</li>
+            <li><strong>Time-efficiency need</strong>: filter fatigue (12+ dimensions, no smart default) and no persistent price comparison across dates force users to manually reopen search in a new tab.</li>
+            <li><strong>Clarity/control need</strong>: baggage policy buried a tap deep, a top cause of post-booking support contact.</li>
           </ul>
           <p>
             <strong>Funnel:</strong> Search → Results → Fare Review → Traveller Info → Payment →
@@ -573,10 +573,10 @@
           <h4>Risks &amp; Trade-offs</h4>
           <p>Every recommendation above has a cost, not just an upside — naming it here, not after launch:</p>
           <ul>
-            <li><strong>All-in fare display</strong> — the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
-            <li><strong>Opt-in add-ons</strong> — directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete — it needs a revenue-per-booking floor agreed with Finance before shipping, not just a UX sign-off.</li>
-            <li><strong>Baggage/meal policy inline</strong> — minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
-            <li><strong>Delay-risk badge</strong> — risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T3</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
+            <li><strong>All-in fare display</strong>: the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
+            <li><strong>Opt-in add-ons</strong>: directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete — it needs a revenue-per-booking floor agreed with Finance before shipping, not just a UX sign-off.</li>
+            <li><strong>Baggage/meal policy inline</strong>: minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
+            <li><strong>Delay-risk badge</strong>: risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T3</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
           </ul>
           <p>
             <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind the A/B test
@@ -598,11 +598,11 @@
           <h4>Success Metrics — the HEART Framework</h4>
           <p>Using Google's own HEART framework (Rodden et al.) instead of a single catch-all "engagement" number:</p>
           <ul>
-            <li><strong>Happiness</strong> — CSAT specifically on "pricing clarity" (post-booking survey); NPS delta before/after the all-in pricing rollout.</li>
-            <li><strong>Engagement</strong> — searches per session; % of sessions using the new compare-dates strip.</li>
-            <li><strong>Adoption</strong> — % of eligible searchers who see and interact with the all-in fare display / opt-in add-on toggle in month one.</li>
-            <li><strong>Retention</strong> — repeat booking rate within 90 days, segmented by whether a user's first booking hit the old opt-out add-on flow or the new opt-in one.</li>
-            <li><strong>Task success</strong> — Results→Fare Review conversion (the primary funnel-leak metric, North Star for this cycle), search-to-confirmation completion rate, time-to-book.</li>
+            <li><strong>Happiness</strong>: CSAT specifically on "pricing clarity" (post-booking survey); NPS delta before/after the all-in pricing rollout.</li>
+            <li><strong>Engagement</strong>: searches per session; % of sessions using the new compare-dates strip.</li>
+            <li><strong>Adoption</strong>: % of eligible searchers who see and interact with the all-in fare display / opt-in add-on toggle in month one.</li>
+            <li><strong>Retention</strong>: repeat booking rate within 90 days, segmented by whether a user's first booking hit the old opt-out add-on flow or the new opt-in one.</li>
+            <li><strong>Task success</strong>: Results→Fare Review conversion (the primary funnel-leak metric, North Star for this cycle), search-to-confirmation completion rate, time-to-book.</li>
           </ul>
 
           <h4>Tied to an OKR</h4>
@@ -659,7 +659,7 @@
         <div class="cs-narrative">
           <h4>TL;DR</h4>
           <p>
-            <strong>"Wayfare AI"</strong> — a conversational trip-planning assistant that turns
+            <strong>"Wayfare AI"</strong>: a conversational trip-planning assistant that turns
             "plan me a trip" into a bookable, weather- and budget-aware itinerary in one session.
             MVP scope: single-destination domestic trips only, 3–7 days. Ships itinerary
             generation, a budget optimizer, and weather-aware sequencing; explicitly does not
@@ -691,9 +691,9 @@
 
           <h4>Users &amp; Use Cases</h4>
           <ul>
-            <li><strong>"First-timer Farah"</strong> — plans 1 international trip/yr, wants 2–3 easy choices, not raw options.</li>
-            <li><strong>"Optimizer Omar"</strong> — books 6+ trips/yr, wants full control and only trusts AI suggestions he can see the reasoning behind.</li>
-            <li><strong>"Reactive Rhea"</strong> — mid-trip, needs the plan to adapt live when a flight delays or weather turns (her use case is explicitly a Non-Goal for v1 — see above).</li>
+            <li><strong>"First-timer Farah"</strong>: plans 1 international trip/yr, wants 2–3 easy choices, not raw options.</li>
+            <li><strong>"Optimizer Omar"</strong>: books 6+ trips/yr, wants full control and only trusts AI suggestions he can see the reasoning behind.</li>
+            <li><strong>"Reactive Rhea"</strong>: mid-trip, needs the plan to adapt live when a flight delays or weather turns (her use case is explicitly a Non-Goal for v1 — see above).</li>
           </ul>
           <p><strong>User stories:</strong></p>
           <ul>
@@ -727,10 +727,10 @@
         <div class="cs-narrative">
           <h4>Design — Key Flows</h4>
           <ul>
-            <li><strong>Intent capture</strong> — single chat-style input + 3 quick-pick chips (budget band, trip length, vibe), not a 12-field form.</li>
-            <li><strong>Itinerary review</strong> — day-by-day vertical timeline, each activity swappable via a "Why this?" expand showing rating/distance/price reasoning.</li>
-            <li><strong>Budget bar</strong> — persistent sticky bar showing spend-to-date vs. target, updating live as items are swapped.</li>
-            <li><strong>Book/hold</strong> — itinerary converts to a bookable checklist (flight, hotel, key activities) with per-leg deep links.</li>
+            <li><strong>Intent capture</strong>: single chat-style input + 3 quick-pick chips (budget band, trip length, vibe), not a 12-field form.</li>
+            <li><strong>Itinerary review</strong>: day-by-day vertical timeline, each activity swappable via a "Why this?" expand showing rating/distance/price reasoning.</li>
+            <li><strong>Budget bar</strong>: persistent sticky bar showing spend-to-date vs. target, updating live as items are swapped.</li>
+            <li><strong>Book/hold</strong>: itinerary converts to a bookable checklist (flight, hotel, key activities) with per-leg deep links.</li>
           </ul>
         </div>
 
@@ -934,8 +934,8 @@
             <li><strong>84.4% on-time</strong> fleet-wide, 9.2min average delay, 1.1% cancellation rate.</li>
             <li><strong>DEL-GOI is the single worst route</strong> (12.6min avg, 34% delayed &gt;15min) — the only route in the model that's both winter-fog- <em>and</em> monsoon-sensitive, so it takes a hit twice a year instead of once.</li>
             <li><strong>Winter is the worst season by a wide margin</strong> (11.9min avg vs. 7.5min in Spring/Post-Monsoon) — every Delhi-origin route in the heatmap spikes in December–January.</li>
-            <li><strong>Delays compound through the day</strong> — Night departures average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations cascade delays leg-to-leg.</li>
-            <li><strong>Airline-level spread is real but secondary</strong> — the gap between the most and least reliable modeled carrier (7.6–10.7min) is smaller than the gap between Winter and Spring (7.5–11.9min). Route and season explain more than carrier choice does.</li>
+            <li><strong>Delays compound through the day</strong>: Night departures average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations cascade delays leg-to-leg.</li>
+            <li><strong>Airline-level spread is real but secondary</strong>: the gap between the most and least reliable modeled carrier (7.6–10.7min) is smaller than the gap between Winter and Spring (7.5–11.9min). Route and season explain more than carrier choice does.</li>
           </ul>
 
           <h4>Recommendations</h4>

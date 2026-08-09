@@ -125,10 +125,10 @@
           <p>
             <strong>Business model:</strong> the flight vertical monetizes through airline
             commissions/overrides, a convenience fee layered on the base fare, and ancillary
-            revenue (seat selection, insurance, baggage). That matters here specifically —
-            add-on pre-selection and the late-stage fee reveal found below aren't accidental UX
-            oversights, they're revenue mechanisms. Any recommendation that removes them has a
-            real, quantifiable cost, not just an upside; see Risks &amp; Trade-offs below.
+            revenue (seat selection, insurance, baggage). That matters here specifically. Add-on
+            pre-selection and the late-stage fee reveal found below aren't accidental UX
+            oversights; they're revenue mechanisms, and removing them has a real, quantifiable
+            cost. See Risks &amp; Trade-offs below.
           </p>
           <p>
             <strong>North Star Metric (company level):</strong> completed bookings per unique
@@ -157,17 +157,18 @@
             reduces search friction but adds a late-stage form-fill tax.
           </p>
           <p>
-            <strong>Retention loop:</strong> "My Trips" functions as a lifecycle retention engine,
-            not just a post-booking utility tab — it's the reason a user reopens the app at all
-            after booking (rebooking, cancellation, web check-in). That's why Business Priya's
-            reliance on it post-confirmation (see the funnel map below) is a commercial signal, not
-            just a UX nicety — it's the retention mechanism the acquisition funnel below feeds into.
+            <strong>Retention loop:</strong> "My Trips" is a lifecycle retention engine wearing a
+            post-booking utility tab as a disguise. It's why a user reopens the app at all after
+            booking (rebooking, cancellation, web check-in), and why Business Priya's reliance on
+            it post-confirmation (see the funnel map below) reads as a commercial signal rather
+            than a UX nicety: it's the retention mechanism the acquisition funnel below actually
+            feeds into.
           </p>
           <p><strong>Needs uncovered, mapped to the journey above:</strong></p>
           <ul>
-            <li><strong>Trust/transparency need</strong> — fare inflation between search-result price and fare-review price (taxes/fees revealed late) erodes trust; add-on pre-selection (insurance, seat) defaults to "on," reading as a dark pattern at checkout.</li>
-            <li><strong>Time-efficiency need</strong> — filter fatigue (12+ dimensions, no smart default) and no persistent price comparison across dates force users to manually reopen search in a new tab.</li>
-            <li><strong>Clarity/control need</strong> — baggage policy buried a tap deep, a top cause of post-booking support contact.</li>
+            <li><strong>Trust/transparency need</strong>: fare inflation between search-result price and fare-review price (taxes/fees revealed late) erodes trust; add-on pre-selection (insurance, seat) defaults to "on," reading as a dark pattern at checkout.</li>
+            <li><strong>Time-efficiency need</strong>: filter fatigue (12+ dimensions, no smart default) and no persistent price comparison across dates force users to manually reopen search in a new tab.</li>
+            <li><strong>Clarity/control need</strong>: baggage policy buried a tap deep, a top cause of post-booking support contact.</li>
           </ul>
           <p>
             <strong>Funnel:</strong> Search → Results → Fare Review → Traveller Info → Payment →
@@ -243,12 +244,12 @@
           <p style="margin-top:12px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle — the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a booking-funnel fix.</p>
 
           <h4>Risks &amp; Trade-offs</h4>
-          <p>Every recommendation above has a cost, not just an upside — naming it here, not after launch:</p>
+          <p>Every recommendation above has a real cost. Naming it here, before launch, not after:</p>
           <ul>
-            <li><strong>All-in fare display</strong> — the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
-            <li><strong>Opt-in add-ons</strong> — directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete — it needs a revenue-per-booking floor agreed with Finance before shipping, not just a UX sign-off.</li>
-            <li><strong>Baggage/meal policy inline</strong> — minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
-            <li><strong>Delay-risk badge</strong> — risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T3</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
+            <li><strong>All-in fare display</strong>: the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
+            <li><strong>Opt-in add-ons</strong>: directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete: it needs a revenue-per-booking floor agreed with Finance before shipping, beyond a simple UX sign-off.</li>
+            <li><strong>Baggage/meal policy inline</strong>: minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
+            <li><strong>Delay-risk badge</strong>: risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T3</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
           </ul>
           <p>
             <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind the A/B test
@@ -270,11 +271,11 @@
           <h4>Success Metrics — the HEART Framework</h4>
           <p>Using Google's own HEART framework (Rodden et al.) instead of a single catch-all "engagement" number:</p>
           <ul>
-            <li><strong>Happiness</strong> — CSAT specifically on "pricing clarity" (post-booking survey); NPS delta before/after the all-in pricing rollout.</li>
-            <li><strong>Engagement</strong> — searches per session; % of sessions using the new compare-dates strip.</li>
-            <li><strong>Adoption</strong> — % of eligible searchers who see and interact with the all-in fare display / opt-in add-on toggle in month one.</li>
-            <li><strong>Retention</strong> — repeat booking rate within 90 days, segmented by whether a user's first booking hit the old opt-out add-on flow or the new opt-in one.</li>
-            <li><strong>Task success</strong> — Results→Fare Review conversion (the primary funnel-leak metric, North Star for this cycle), search-to-confirmation completion rate, time-to-book.</li>
+            <li><strong>Happiness</strong>: CSAT specifically on "pricing clarity" (post-booking survey); NPS delta before/after the all-in pricing rollout.</li>
+            <li><strong>Engagement</strong>: searches per session; % of sessions using the new compare-dates strip.</li>
+            <li><strong>Adoption</strong>: % of eligible searchers who see and interact with the all-in fare display / opt-in add-on toggle in month one.</li>
+            <li><strong>Retention</strong>: repeat booking rate within 90 days, segmented by whether a user's first booking hit the old opt-out add-on flow or the new opt-in one.</li>
+            <li><strong>Task success</strong>: Results→Fare Review conversion (the primary funnel-leak metric, North Star for this cycle), search-to-confirmation completion rate, time-to-book.</li>
           </ul>
 
           <h4>Tied to an OKR</h4>
@@ -324,9 +325,9 @@
 
           <h4>Key Concepts</h4>
           <ul>
-            <li><strong>Meta-search vs. OTA economics</strong> — Skyscanner/Kayak don't sell tickets, they refer (CPC or referral fee); a booking platform earns margin on the fare. Same search box, opposite business model.</li>
-            <li><strong>Real-time fare staleness</strong> — GDS/airline APIs rate-limit and cache; a shown fare can go stale between search and click-through. "Fare no longer available" is a core UX problem here, not an edge case.</li>
-            <li><strong>Ranking trade-offs</strong> — cheapest-for-user vs. highest-referral-fee-for-business; how a meta-search product decides what "best result" even means.</li>
+            <li><strong>Meta-search vs. OTA economics</strong>: Skyscanner/Kayak don't sell tickets, they refer (CPC or referral fee); a booking platform earns margin on the fare. Same search box, opposite business model.</li>
+            <li><strong>Real-time fare staleness</strong>: GDS/airline APIs rate-limit and cache; a shown fare can go stale between search and click-through. "Fare no longer available" is a core UX problem here, not an edge case.</li>
+            <li><strong>Ranking trade-offs</strong>: cheapest-for-user vs. highest-referral-fee-for-business; how a meta-search product decides what "best result" even means.</li>
             <li><strong>Flexible-date search</strong> (±3 days, whole-month calendar view) as a distinct product surface from single-date search, with a very different backend query pattern.</li>
           </ul>
 
@@ -381,10 +382,10 @@
 
           <h4>Key Concepts</h4>
           <ul>
-            <li><strong>Two-sided liquidity</strong> — no guests without hosts, no hosts without guests. Which side do you subsidize first, and how do you measure "liquidity" as a real metric, not a slogan?</li>
-            <li><strong>Trust &amp; safety as core product</strong> — reviews, ID verification, host guarantees, guest screening — the actual mechanism that makes a stranger's home bookable at all.</li>
-            <li><strong>Marketplace ranking</strong> — host quality signals vs. price vs. availability vs. novelty; very different from ranking a fixed airline-fare inventory.</li>
-            <li><strong>Take-rate design</strong> — host fee vs. guest fee vs. blended, and the transparency trade-offs each creates in the checkout UX.</li>
+            <li><strong>Two-sided liquidity</strong>: no guests without hosts, no hosts without guests. Which side do you subsidize first, and how do you measure "liquidity" as a real metric, not a slogan?</li>
+            <li><strong>Trust &amp; safety as core product</strong>: reviews, ID verification, host guarantees, guest screening — the actual mechanism that makes a stranger's home bookable at all.</li>
+            <li><strong>Marketplace ranking</strong>: host quality signals vs. price vs. availability vs. novelty; very different from ranking a fixed airline-fare inventory.</li>
+            <li><strong>Take-rate design</strong>: host fee vs. guest fee vs. blended, and the transparency trade-offs each creates in the checkout UX.</li>
           </ul>
 
           <h4>Open Questions</h4>
@@ -438,10 +439,10 @@
 
           <h4>Key Concepts</h4>
           <ul>
-            <li><strong>Real-time supply/demand matching</strong> — the product surface is a live match, not a list of results to browse; latency itself is a feature.</li>
-            <li><strong>Surge/dynamic pricing</strong> — the most studied and most controversial pricing mechanism in travel-tech; balancing driver-supply incentive against rider price sensitivity and perceived fairness.</li>
-            <li><strong>ETA accuracy as trust</strong> — a wrong ETA is a broken promise, not a UX nitpick; it's the primary trust mechanic in a product with no browsable inventory to build confidence from.</li>
-            <li><strong>Marketplace vs. peer-to-peer</strong> — Uber owns dispatch and pricing outright; BlaBlaCar is closer to a trust-and-coordination layer over independently-arranged car-share trips.</li>
+            <li><strong>Real-time supply/demand matching</strong>: the product surface is a live match, not a list of results to browse; latency itself is a feature.</li>
+            <li><strong>Surge/dynamic pricing</strong>: the most studied and most controversial pricing mechanism in travel-tech; balancing driver-supply incentive against rider price sensitivity and perceived fairness.</li>
+            <li><strong>ETA accuracy as trust</strong>: a wrong ETA is a broken promise, not a UX nitpick; it's the primary trust mechanic in a product with no browsable inventory to build confidence from.</li>
+            <li><strong>Marketplace vs. peer-to-peer</strong>: Uber owns dispatch and pricing outright; BlaBlaCar is closer to a trust-and-coordination layer over independently-arranged car-share trips.</li>
           </ul>
 
           <h4>Open Questions</h4>
@@ -494,10 +495,10 @@
 
           <h4>Key Concepts</h4>
           <ul>
-            <li><strong>Perishable inventory at small scale</strong> — an unsold tour slot today is gone forever, the same yield-management problem as an airline seat, but per-operator volume is tiny compared to an airline.</li>
-            <li><strong>Long-tail supply</strong> — thousands of small local operators instead of a handful of airlines; supply-side tooling and quality control look completely different from T1's world.</li>
-            <li><strong>Instant confirmation vs. request-to-book</strong> — some experiences confirm immediately, others need the operator to manually accept; a real trust/UX trade-off, not just an engineering detail.</li>
-            <li><strong>Cross-sell placement</strong> — where in a booking flow (like T1's) should experience upsells actually appear, and does that belong to this system or the booking system it's bolted onto?</li>
+            <li><strong>Perishable inventory at small scale</strong>: an unsold tour slot today is gone forever, the same yield-management problem as an airline seat, but per-operator volume is tiny compared to an airline.</li>
+            <li><strong>Long-tail supply</strong>: thousands of small local operators instead of a handful of airlines; supply-side tooling and quality control look completely different from T1's world.</li>
+            <li><strong>Instant confirmation vs. request-to-book</strong>: some experiences confirm immediately, others need the operator to manually accept; a real trust/UX trade-off, not just an engineering detail.</li>
+            <li><strong>Cross-sell placement</strong>: where in a booking flow (like T1's) should experience upsells actually appear, and does that belong to this system or the booking system it's bolted onto?</li>
           </ul>
 
           <h4>Open Questions</h4>
@@ -550,10 +551,10 @@
 
           <h4>Key Concepts</h4>
           <ul>
-            <li><strong>Monetizing a non-transactional product</strong> — referral/ads revenue instead of booking margin; a fundamentally different business model than every OTA on this list.</li>
-            <li><strong>Review fraud &amp; fake-review detection</strong> — the core trust problem: how do you know a 5-star review is real, without over-flagging genuine negative ones?</li>
-            <li><strong>Content ranking vs. e-commerce ranking</strong> — a "best restaurant" ranking has no purchase event forcing a decision; different signals matter than in a booking-funnel ranking (T8).</li>
-            <li><strong>SEO as the primary growth channel</strong> — discovery platforms live or die on organic search traffic in a way booking platforms (T1) don't have to.</li>
+            <li><strong>Monetizing a non-transactional product</strong>: referral/ads revenue instead of booking margin; a fundamentally different business model than every OTA on this list.</li>
+            <li><strong>Review fraud &amp; fake-review detection</strong>: the core trust problem: how do you know a 5-star review is real, without over-flagging genuine negative ones?</li>
+            <li><strong>Content ranking vs. e-commerce ranking</strong>: a "best restaurant" ranking has no purchase event forcing a decision; different signals matter than in a booking-funnel ranking (T8).</li>
+            <li><strong>SEO as the primary growth channel</strong>: discovery platforms live or die on organic search traffic in a way booking platforms (T1) don't have to.</li>
           </ul>
 
           <h4>Open Questions</h4>
@@ -579,7 +580,7 @@
     </div>
 
     <div class="cat-section" id="cat-ai-and-agentic-product-design">
-      <div class="cat-head"><h2>AI &amp; Agentic Product Design</h2><span class="cat-tag">// designing new AI-driven systems, not just prompting one</span></div>
+      <div class="cat-head"><h2>AI &amp; Agentic Product Design</h2><span class="cat-tag">// designing new AI-driven systems beyond a wrapped prompt</span></div>
 <div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum done">T2</span>
@@ -614,7 +615,7 @@
         <div class="cs-narrative">
           <h4>TL;DR</h4>
           <p>
-            <strong>"Wayfare AI"</strong> — a conversational trip-planning assistant that turns
+            <strong>"Wayfare AI"</strong>: a conversational trip-planning assistant that turns
             "plan me a trip" into a bookable, weather- and budget-aware itinerary in one session.
             MVP scope: single-destination domestic trips only, 3–7 days. Ships itinerary
             generation, a budget optimizer, and weather-aware sequencing; explicitly does not
@@ -646,9 +647,9 @@
 
           <h4>Users &amp; Use Cases</h4>
           <ul>
-            <li><strong>"First-timer Farah"</strong> — plans 1 international trip/yr, wants 2–3 easy choices, not raw options.</li>
-            <li><strong>"Optimizer Omar"</strong> — books 6+ trips/yr, wants full control and only trusts AI suggestions he can see the reasoning behind.</li>
-            <li><strong>"Reactive Rhea"</strong> — mid-trip, needs the plan to adapt live when a flight delays or weather turns (her use case is explicitly a Non-Goal for v1 — see above).</li>
+            <li><strong>"First-timer Farah"</strong>: plans 1 international trip/yr, wants 2–3 easy choices, not raw options.</li>
+            <li><strong>"Optimizer Omar"</strong>: books 6+ trips/yr, wants full control and only trusts AI suggestions he can see the reasoning behind.</li>
+            <li><strong>"Reactive Rhea"</strong>: mid-trip, needs the plan to adapt live when a flight delays or weather turns (her use case is explicitly a Non-Goal for v1 — see above).</li>
           </ul>
           <p><strong>User stories:</strong></p>
           <ul>
@@ -682,10 +683,10 @@
         <div class="cs-narrative">
           <h4>Design — Key Flows</h4>
           <ul>
-            <li><strong>Intent capture</strong> — single chat-style input + 3 quick-pick chips (budget band, trip length, vibe), not a 12-field form.</li>
-            <li><strong>Itinerary review</strong> — day-by-day vertical timeline, each activity swappable via a "Why this?" expand showing rating/distance/price reasoning.</li>
-            <li><strong>Budget bar</strong> — persistent sticky bar showing spend-to-date vs. target, updating live as items are swapped.</li>
-            <li><strong>Book/hold</strong> — itinerary converts to a bookable checklist (flight, hotel, key activities) with per-leg deep links.</li>
+            <li><strong>Intent capture</strong>: single chat-style input + 3 quick-pick chips (budget band, trip length, vibe), not a 12-field form.</li>
+            <li><strong>Itinerary review</strong>: day-by-day vertical timeline, each activity swappable via a "Why this?" expand showing rating/distance/price reasoning.</li>
+            <li><strong>Budget bar</strong>: persistent sticky bar showing spend-to-date vs. target, updating live as items are swapped.</li>
+            <li><strong>Book/hold</strong>: itinerary converts to a bookable checklist (flight, hotel, key activities) with per-leg deep links.</li>
           </ul>
         </div>
 
@@ -704,22 +705,23 @@
           <p>
             <strong>North Star:</strong> itineraries that convert to at least one booked leg.
             <strong>Supporting:</strong> time-to-first-itinerary (target &lt;90s, ties to G1),
-            swap rate per itinerary (a trust signal on first-pass suggestion quality — high swap
-            rate means the first draft isn't landing), budget-target adherence rate, D7 return
+            swap rate per itinerary (a trust signal on first-pass suggestion quality: a high swap
+            rate means the first draft is missing the mark), budget-target adherence rate, D7 return
             rate for pre-trip re-edits.
           </p>
 
           <h4>Launch Plan</h4>
           <ul>
             <li><strong>Phase 1 (MVP):</strong> single-destination domestic trips, 3–7 days. Itinerary generation + budget optimizer + weather sequencing only — the three P0 requirements.</li>
-            <li><strong>Phase 2:</strong> multi-city routing + persistent preference memory, gated on Phase 1 hitting its swap-rate and time-to-itinerary targets — no point routing multiple cities if the single-city itinerary isn't trusted yet.</li>
+            <li><strong>Phase 2:</strong> multi-city routing + persistent preference memory, gated on Phase 1 hitting its swap-rate and time-to-itinerary targets. Routing multiple cities is premature if the single-city itinerary still isn't trusted.</li>
             <li><strong>Phase 3:</strong> live disruption reflow (Reactive Rhea's use case), gated on a flight-status API integration that doesn't exist yet.</li>
           </ul>
 
           <h4>Risks &amp; Open Questions</h4>
           <p>
             <strong>Risk:</strong> hallucinated venue details (wrong hours, permanently closed)
-            need a live data-freshness check, not just training-time accuracy. Recommendation
+            need a live data-freshness check; training-time accuracy alone won't catch them.
+            Recommendation
             logic must stay auditable and explainable so it doesn't over-fit to popular/sponsored
             listings (same scoring discipline as the
             Hotel Recommendation Engine project, still on the roadmap).
@@ -731,11 +733,11 @@
             <li>Does surfacing restaurant/attraction rankings require a sponsored-placement disclosure, and who owns that legal review before launch?</li>
           </ul>
 
-          <h4>Reusable Insight</h4>
+          <h4>Why Trust Is the Real Problem</h4>
           <p>
-            The hard PM problem isn't generating an itinerary — it's designing the trust layer
-            (the "why this?" reasoning, swap-not-regenerate interaction) that lets a user hand
-            over planning without feeling like they lost control of the trip.
+            Generating an itinerary is the easy half. The real PM problem is the trust layer
+            around it: the "why this?" reasoning, the swap-not-regenerate interaction, whatever
+            lets a user hand over planning without feeling like they lost control of the trip.
           </p>
         </div>
         </details>
@@ -773,7 +775,7 @@
         </div>
 
         <div class="cs-narrative">
-          <h4>The Problem</h4>
+          <h4>Where the Volume Comes From</h4>
           <p>
             The support queries that pile up fastest at an OTA — "cancel my flight," "how much
             baggage can I bring," "can I change the travel date" — are also the most repetitive
@@ -801,14 +803,14 @@
           <p>
             Before designing the flows, it's worth naming the pattern this design is deliberately
             not repeating. Travel and OTA support bots in production today tend to fail in one of
-            four recurring ways — this isn't a claim about any specific company's product, it's
-            the pattern visible across the category:
+            four recurring ways. This is a pattern visible across the category, not a claim about
+            any specific company's product:
           </p>
           <ul>
-            <li><strong>Answer-only, can't act</strong> — most bots can tell you the cancellation policy but can't actually cancel anything; the moment a user needs an action taken, they're back in a queue for a human, which defeats the point of automating the repetitive cases in the first place.</li>
-            <li><strong>Black-box numbers</strong> — the few bots that do quote a refund or fee rarely show the rule behind it, so a user has no way to check it's right, which is the same trust erosion the fare-shock problem in the <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a> causes at the booking stage.</li>
-            <li><strong>Silent or absent confirmation</strong> — bots that can act either skip a confirmation step entirely (risky) or are so conservative they add friction to low-risk actions too (annoying) — few calibrate the gate to the actual risk of the specific action, the way Flow 1 vs. Flow 2 do below.</li>
-            <li><strong>Context loss at handoff</strong> — "please repeat your issue" after being passed to a human is one of the most common support complaints in the category; the bot's understanding of the problem evaporates the moment escalation happens.</li>
+            <li><strong>Answer-only, can't act</strong>: most bots can tell you the cancellation policy but can't actually cancel anything; the moment a user needs an action taken, they're back in a queue for a human, which defeats the point of automating the repetitive cases in the first place.</li>
+            <li><strong>Black-box numbers</strong>: the few bots that do quote a refund or fee rarely show the rule behind it, so a user has no way to check it's right, which is the same trust erosion the fare-shock problem in the <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a> causes at the booking stage.</li>
+            <li><strong>Silent or absent confirmation</strong>: bots that can act either skip a confirmation step entirely (risky) or are so conservative they add friction to low-risk actions too (annoying) — few calibrate the gate to the actual risk of the specific action, the way Flow 1 vs. Flow 2 do below.</li>
+            <li><strong>Context loss at handoff</strong>: "please repeat your issue" after being passed to a human is one of the most common support complaints in the category; the bot's understanding of the problem evaporates the moment escalation happens.</li>
           </ul>
           <p>
             The wireframes further down (Screens 1–4) are the direct, one-to-one answer to these
@@ -849,7 +851,7 @@
               <tr><td data-label="Turn">1</td><td data-label="Speaker">User</td><td data-label="Message">"I need to cancel my Delhi–Mumbai flight tomorrow"</td><td data-label="System">Intent: cancel_booking (0.96) → PNR lookup</td></tr>
               <tr><td data-label="Turn">2</td><td data-label="Speaker">Agent</td><td data-label="Message">"Found your DEL–BOM booking. Cancelling inside 24hrs of departure means a partial refund under this fare's rules — you'd get back part of what you paid. Want the exact amount?"</td><td data-label="System">Tool call: refund_policy_engine(fare_class, hours_to_departure)</td></tr>
               <tr><td data-label="Turn">3</td><td data-label="Speaker">User</td><td data-label="Message">"Yes, how much"</td><td data-label="System">—</td></tr>
-              <tr><td data-label="Turn">4</td><td data-label="Speaker">Agent</td><td data-label="Message">"You'd get back ₹3,200 of ₹5,800 paid. Confirm cancellation?"</td><td data-label="System"><strong>Confirmation gate</strong> — irreversible action, requires explicit user confirmation before executing (guardrail, not optional)</td></tr>
+              <tr><td data-label="Turn">4</td><td data-label="Speaker">Agent</td><td data-label="Message">"You'd get back ₹3,200 of ₹5,800 paid. Confirm cancellation?"</td><td data-label="System"><strong>Confirmation gate</strong>: irreversible action, requires explicit user confirmation before executing (guardrail, not optional)</td></tr>
               <tr><td data-label="Turn">5</td><td data-label="Speaker">User</td><td data-label="Message">"Confirmed"</td><td data-label="System">—</td></tr>
               <tr><td data-label="Turn">6</td><td data-label="Speaker">Agent</td><td data-label="Message">"Done — booking cancelled, ₹3,200 refund initiated, arrives in 5–7 business days. Reference CXL-48213."</td><td data-label="System">Tool calls: cancel_booking() + issue_refund() — both logged to the audit trail below</td></tr>
             </tbody>
@@ -885,8 +887,8 @@
 
           <h4>Flow 3 — Booking Date Change (medium-risk flow)</h4>
           <p>
-            Sits between the two above: it's an action (not just information) but a correctable
-            one, so it gets a lighter version of Flow 1's gate — confirm the fare difference, but
+            Sits between the two above: it's an action, so pure information-lookup rules don't
+            apply, but a correctable one, so it gets a lighter version of Flow 1's gate — confirm the fare difference, but
             no separate human-escalation trigger unless the fare-difference lookup itself fails.
             Intent: change_booking_date → tool call: check seat availability + fare difference on
             new date → agent states the fare difference and change fee → single confirmation →
@@ -895,15 +897,15 @@
 
           <h4>Agent Architecture</h4>
           <p>
-            Four layers, in order: <strong>(1) Intent router</strong> — classifies the incoming
+            Four layers, in order: <strong>(1) Intent router</strong>: classifies the incoming
             message into one of the in-scope intents above, or "unclassified" → human.
-            <strong>(2) Tool-calling layer</strong> — each intent maps to a fixed set of callable
+            <strong>(2) Tool-calling layer</strong>: each intent maps to a fixed set of callable
             tools (PNR lookup, refund_policy_engine, fare-difference calculator, cancel_booking,
             issue_refund, change_booking) — the agent can only call tools on this allow-list, it
-            cannot invent new actions. <strong>(3) Confirmation gate</strong> — any tool call that
+            cannot invent new actions. <strong>(3) Confirmation gate</strong>: any tool call that
             is irreversible or moves money (cancel_booking, issue_refund) requires an explicit
             user confirmation turn before executing, never fires on the first pass.
-            <strong>(4) Escalation router</strong> — triggers on low intent-confidence
+            <strong>(4) Escalation router</strong>: triggers on low intent-confidence
             (&lt;0.85), a tool call failing twice, explicit user frustration signals, or any
             query touching a hard non-goal (visa advice, disputes) — handed to a human agent with
             the full conversation transcript attached, not restarted from zero.
@@ -916,10 +918,10 @@
             real actions can't skip:
           </p>
           <ul>
-            <li><strong>Autonomous-action ceiling</strong> — the agent may autonomously execute cancellations/refunds up to a fixed rupee ceiling; above it, the same flow runs but ends in a human-approval step instead of auto-executing.</li>
-            <li><strong>Confirmation before irreversible actions</strong> — never optional, shown in Flow 1 above; a wrong autonomous cancellation is far more costly to trust than a wrong autonomous baggage-fee quote.</li>
-            <li><strong>No autonomous visa/legal advice</strong> — the intent router treats this as a hard non-goal, not a confidence threshold — it escalates every time, regardless of how confident the model is in an answer.</li>
-            <li><strong>Full audit trail</strong> — every tool call the agent executes (not just conversations) is logged with the triggering intent, confidence score, and outcome, reviewable by support ops — the same operational-audit discipline as the PCMS payout reconciliation work (see Technical Execution, T27).</li>
+            <li><strong>Autonomous-action ceiling</strong>: the agent may autonomously execute cancellations/refunds up to a fixed rupee ceiling; above it, the same flow runs but ends in a human-approval step instead of auto-executing.</li>
+            <li><strong>Confirmation before irreversible actions</strong>: never optional, shown in Flow 1 above; a wrong autonomous cancellation is far more costly to trust than a wrong autonomous baggage-fee quote.</li>
+            <li><strong>No autonomous visa/legal advice</strong>: the intent router treats this as a hard non-goal, not a confidence threshold — it escalates every time, regardless of how confident the model is in an answer.</li>
+            <li><strong>Full audit trail</strong>: every tool call the agent executes, conversations included, is logged with the triggering intent, confidence score, and outcome, reviewable by support ops — the same operational-audit discipline as the PCMS payout reconciliation work (see Technical Execution, T27).</li>
           </ul>
 
           <h4>Evaluation Approach</h4>
@@ -927,9 +929,9 @@
             Deflection rate alone is a misleading headline metric here — a bot can "deflect" a
             ticket by giving an answer that satisfies the user in the moment but is wrong, which
             shows up as a good deflection number and a bad outcome. Evaluation needs three lenses,
-            not one: <strong>resolution accuracy</strong> (sampled human audit of closed
-            bot-handled tickets, not just the bot's own confidence score), <strong>wrong-action
-            rate</strong> — the safety metric, tracking autonomous actions a human reviewer would
+            not one: <strong>resolution accuracy</strong> (a sampled human audit of closed
+            bot-handled tickets weighed against the bot's own confidence score), <strong>wrong-action
+            rate</strong>: the safety metric, tracking autonomous actions a human reviewer would
             have executed differently, weighted far more heavily than any convenience metric — and
             <strong>escalation-appropriateness</strong>, checking the router escalates when it
             should as often as it deflects when it shouldn't.
@@ -943,7 +945,7 @@
               <tr><td data-label="Metric">Containment rate</td><td data-label="Measuring">% of in-scope tickets resolved without a human</td><td data-label="Why">The headline efficiency number — but never read alone (see below)</td></tr>
               <tr><td data-label="Metric">Wrong-action rate</td><td data-label="Measuring">Autonomous actions a human audit would reverse or flag</td><td data-label="Why">The safety guardrail metric — this one has veto power over containment rate</td></tr>
               <tr><td data-label="Metric">CSAT on bot-resolved tickets</td><td data-label="Measuring">Satisfaction specifically on containment, not overall support CSAT</td><td data-label="Why">A ticket can be "contained" and still leave the user unhappy</td></tr>
-              <tr><td data-label="Metric">Escalation-appropriateness</td><td data-label="Measuring">Did the router escalate the tickets it should have</td><td data-label="Why">Catches an agent that's overconfident, not just one that's under-confident</td></tr>
+              <tr><td data-label="Metric">Escalation-appropriateness</td><td data-label="Measuring">Did the router escalate the tickets it should have</td><td data-label="Why">Catches an overconfident agent as readily as an under-confident one</td></tr>
               <tr><td data-label="Metric">Time-to-resolution</td><td data-label="Measuring">End-to-end, bot-handled vs. human-handled tickets</td><td data-label="Why">The business-facing efficiency number, once the safety metrics above clear</td></tr>
             </tbody>
           </table>
@@ -968,14 +970,14 @@
           <p>
             The risk that actually matters isn't "the bot gives a bad answer" — a Q&amp;A chatbot
             has that risk too, and it's recoverable. It's <strong>the bot takes a bad
-            action</strong>: an autonomous cancellation or refund that shouldn't have happened is
-            real money and a damaged booking, not just an unhelpful chat log. Every guardrail
+            action</strong>: an autonomous cancellation or refund that shouldn't have happened costs
+            real money and leaves a damaged booking behind, well past an unhelpful chat log's worth of harm. Every guardrail
             above exists to keep that specific failure mode's blast radius small and recoverable
             (confirmation gates, action ceilings, audit trails) rather than trying to prevent it
             outright, which no confidence threshold can fully guarantee.
           </p>
 
-          <h4>Reusable Insight</h4>
+          <h4>What Carries Over From T18</h4>
           <p>
             The same lesson as the ChatGPT Memory Feature teardown (Feature Reverse Engineering,
             T18) shows up again here in a higher-stakes form: the hard PM problem in agentic AI
@@ -1020,7 +1022,7 @@
         </div>
 
         <div class="cs-narrative">
-          <h4>The Problem</h4>
+          <h4>The Gap Nobody's Closing</h4>
           <p>
             Three gaps stack on top of each other, and most tools only fix the first: nobody
             actually knows how work gets done — the real process lives in muscle memory across a
@@ -1072,9 +1074,9 @@
           <p>
             Because this product watches people work, four rules are enforced structurally, not
             just promised: capture is <strong>worker-initiated</strong> only, on the user's own
-            click, never covert or remotely triggered; it's <strong>worker-owned</strong> — the
+            click, never covert or remotely triggered; it's <strong>worker-owned</strong>: the
             person reviews and can redact or delete what was captured before anything is shared;
-            Weft <strong>never produces individual performance metrics</strong> — timing data finds
+            Weft <strong>never produces individual performance metrics</strong>: timing data finds
             process bottlenecks, never rates a person; and it's <strong>private by structure</strong>
             — the sensitive part is designed to never be captured, rather than protected after the
             fact. These also defuse the biggest adoption and legal risk: recording workers is
@@ -1139,8 +1141,8 @@
             against value delivered (opportunities implemented / hours saved) rather than seats, so
             price stays aligned with the ROI the buyer already cares about. The wedge is mid-market
             teams Celonis/UiPath structurally can't serve without cannibalizing their enterprise
-            motion. The moat isn't the map — task mining already exists — it's the compounding
-            <strong>outcome-data asset</strong>: every captured session, every thumbs-up/down, and
+            motion. Task mining itself is already a commodity; the moat is the compounding
+            <strong>outcome-data asset</strong> built on top of it: every captured session, every thumbs-up/down, and
             every implemented-and-measured result teaches Weft which step patterns lead to
             interventions that actually saved money, which incumbents can't see because their tools
             stop at discovery.
@@ -1167,7 +1169,7 @@
         </div>
 
         <div class="cs-narrative">
-          <h4>Reusable Insight</h4>
+          <h4>What the Scoping Discipline Bought</h4>
           <p>
             The disciplined part of this build wasn't cramming every good idea into the MVP — it
             was sorting six review-raised gaps by altitude. The ones that made the product invalid
@@ -1216,7 +1218,7 @@
         </div>
 
         <div class="cs-narrative">
-          <h4>The Problem</h4>
+          <h4>The Actual Time Cost</h4>
           <p>
             A serious job application takes 6–8 hours of fragmented, error-prone manual work:
             decoding what a JD actually screens for, researching a company beyond stale memory,
@@ -1232,7 +1234,7 @@
           <h4>The Core Design Bet</h4>
           <p>
             The bet that shaped every architectural decision: a job-application AI system's most
-            important property isn't fluency, it's <strong>evidence-traceability</strong> — every
+            important property is <strong>evidence-traceability</strong>, well ahead of fluency: every
             claim it produces must resolve to something the candidate's actual resume states or a
             cited, real source, and the system must say "I don't have evidence for this" rather
             than invent something plausible. That single constraint drove everything from
@@ -1271,7 +1273,7 @@
             cost is checked after every single agent call, and the run stops immediately — no
             further agents, no Critic, no Supervisor, since those would themselves spend more — the
             moment the ceiling is met, with a clear "stopped early" banner and whatever completed
-            still saved. The agent catalog itself isn't hardcoded: it's scanned live from
+            still saved. The agent catalog itself is scanned live rather than hardcoded, from
             <code>career_copilot/agents/*.py</code>, so a new agent shows up in the execution graph
             and Settings page without touching any dashboard file.
           </p>
@@ -1309,7 +1311,7 @@
             asserted in prose. Critic Agent's first real review pass came back almost entirely
             clean (14 of 15 agents approved or approved-with-minor-notes) — read correctly as a red
             flag, not a green light, since a critic that always says "looks good" is
-            indistinguishable from one that isn't actually checking. The fix wasn't forcing it to
+            indistinguishable from one that skipped the check entirely. The fix wasn't forcing it to
             find more issues artificially; it was giving it one concrete, mechanical task it
             couldn't fake — recompute every stated total against the numbers it's supposedly
             summarizing. That's what caught the one real bug in the project (Learning &amp;
@@ -1351,12 +1353,12 @@
             prompt suggestion — the lesson underneath the core design bet itself.
           </p>
 
-          <h4>Reusable Insight</h4>
+          <h4>What Actually Made This Hard</h4>
           <p>
-            The hard part of building a trustworthy multi-agent system isn't getting one agent to
-            produce good output — it's designing the layer that keeps 18 agents honest about what
-            they don't know, and makes that layer's own claims checkable rather than just
-            plausible. Verification-by-recomputation, structural null-ability, and a shared
+            Getting one agent to produce good output turned out to be the easy part. The hard part
+            of building a trustworthy multi-agent system is designing the layer that keeps 18
+            agents honest about what they don't know, and makes that layer's own claims checkable
+            rather than just plausible. Verification-by-recomputation, structural null-ability, and a shared
             dependency registry are three different tools solving the same underlying problem:
             trust that has to be earned by the system's design, not asserted in its prompts.
           </p>
@@ -1446,7 +1448,7 @@
         </div>
 
         <div class="cs-narrative">
-          <h4>The Problem</h4>
+          <h4>Why Nobody Acts on This Today</h4>
           <p>
             An OTA or airline can't act on delay risk it hasn't aggregated. A single flight-status
             page tells one traveller their flight is late; nothing rolls that up into the pattern a
@@ -1560,8 +1562,8 @@
             <li><strong>84.4% on-time</strong> fleet-wide, 9.2min average delay, 1.1% cancellation rate.</li>
             <li><strong>DEL-GOI is the single worst route</strong> (12.6min avg, 34% delayed &gt;15min) — the only route in the model that's both winter-fog- <em>and</em> monsoon-sensitive, so it takes a hit twice a year instead of once.</li>
             <li><strong>Winter is the worst season by a wide margin</strong> (11.9min avg vs. 7.5min in Spring/Post-Monsoon) — every Delhi-origin route in the heatmap spikes in December–January.</li>
-            <li><strong>Delays compound through the day</strong> — Night departures average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations cascade delays leg-to-leg.</li>
-            <li><strong>Airline-level spread is real but secondary</strong> — the gap between the most and least reliable modeled carrier (7.6–10.7min) is smaller than the gap between Winter and Spring (7.5–11.9min). Route and season explain more than carrier choice does.</li>
+            <li><strong>Delays compound through the day</strong>: Night departures average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations cascade delays leg-to-leg.</li>
+            <li><strong>Airline-level spread is real but secondary</strong>: the gap between the most and least reliable modeled carrier (7.6–10.7min) is smaller than the gap between Winter and Spring (7.5–11.9min). Route and season explain more than carrier choice does.</li>
           </ul>
 
           <h4>Recommendations</h4>
@@ -1569,14 +1571,14 @@
           <ul>
             <li><strong>Surface delay risk during booking, not after.</strong> Feed a route + season + time-of-day risk score into the delay-risk badge recommended in the Flight Booking Teardown, so a traveller sees it before they book, not after they're already delayed.</li>
             <li><strong>Pad schedule buffers seasonally, not year-round.</strong> A flat on-time SLA misses that Delhi-origin routes need a materially wider buffer specifically in December–January, not every month.</li>
-            <li><strong>Treat Night departures as an upstream ops problem.</strong> Since delay compounds through the day in this model, the fix is earlier-leg reliability, not just padding the last flight of the day.</li>
+            <li><strong>Treat Night departures as an upstream ops problem.</strong> Since delay compounds through the day in this model, padding the last flight of the day treats a symptom; the real fix is earlier-leg reliability.</li>
             <li><strong>Re-run this against real DGCA/BTS data before shipping anything downstream of it.</strong> This dashboard's job was to prove the analysis and the product judgment, not to replace a real data pipeline.</li>
           </ul>
 
-          <h4>Reusable Insight</h4>
+          <h4>Where the Real Risk Sits</h4>
           <p>
-            A delay dashboard's real product risk isn't the chart — it's presenting modeled or
-            incomplete data as if it were ground truth. The discipline that matters here is the same
+            The chart itself is rarely a delay dashboard's real product risk. The risk is presenting
+            modeled or incomplete data as if it were ground truth. The discipline that matters here is the same
             one from the AI Trip Planner's guardrails: say what's real, say what's modeled, and never
             let a polished visualization imply more certainty than the underlying data supports.
           </p>
@@ -1660,7 +1662,7 @@
         </div>
 
         <div class="cs-narrative">
-          <h4>The Problem</h4>
+          <h4>What a Funnel Chart Leaves Out</h4>
           <p>
             A funnel chart only shows where users leave — the actual PM work is pairing each
             drop-off with a testable behavioral reason instead of recommending "reduce friction"
@@ -1694,9 +1696,9 @@
           <h4>Root-Cause Reasoning</h4>
           <p>Three behavioral mechanisms explain most of the Results → Details leak:</p>
           <ul>
-            <li><strong>Anchoring bias</strong> — once a user sees a low headline fare, any upward revision reads as deception, regardless of accuracy.</li>
-            <li><strong>Add-on defaults</strong> — pre-selected insurance/seat fees compound the price-shock instead of being clearly separable.</li>
-            <li><strong>No fare-lock</strong> — an indecisive user has no reason to stay on the page vs. reopening a new tab to compare.</li>
+            <li><strong>Anchoring bias</strong>: once a user sees a low headline fare, any upward revision reads as deception, regardless of accuracy.</li>
+            <li><strong>Add-on defaults</strong>: pre-selected insurance/seat fees compound the price-shock instead of being clearly separable.</li>
+            <li><strong>No fare-lock</strong>: an indecisive user has no reason to stay on the page vs. reopening a new tab to compare.</li>
           </ul>
 
           <h4>Recommendations</h4>
@@ -1722,7 +1724,7 @@
             add-on opt-in vs. opt-out cohort.
           </p>
 
-          <h4>Reusable Insight</h4>
+          <h4>What This Generalizes To</h4>
           <p>
             A funnel chart only shows where users leave — the RICE-worthy work is pairing each
             drop-off with a testable behavioral reason (anchoring, default bias, form fatigue),
@@ -1761,12 +1763,12 @@
             Swiggy's order/delivery experience, with a proposed North Star metric: orders
             delivered on time, per active user. AARRR read on the same funnel: <strong>Acquisition</strong>
             — app installs and first-order conversion from restaurant/city expansion.
-            <strong>Activation</strong> — a new user's first on-time delivery, since a late or
+            <strong>Activation</strong>: a new user's first on-time delivery, since a late or
             broken first order is the single highest-leverage churn moment. <strong>Retention</strong>
             — repeat order rate and days-between-orders, the actual denominator the North Star
-            metric normalizes against. <strong>Revenue</strong> — average order value plus delivery
+            metric normalizes against. <strong>Revenue</strong>: average order value plus delivery
             and platform fees, weighed against the subsidy cost of promotions that inflate raw
-            order counts without improving the on-time number. <strong>Referral</strong> — organic
+            order counts without improving the on-time number. <strong>Referral</strong>: organic
             share, which correlates far more with delivery reliability than with any discount
             campaign.
           </p>
@@ -1785,7 +1787,7 @@
             a rupee spent improving delivery-partner availability in a lagging zone outperforms
             the same rupee spent on a discount in that zone. Test: in a matched pair of pin codes,
             run a delivery-partner-availability improvement in one and an equivalent-cost discount
-            campaign in the other; compare 30-day repeat-order rate, not just order volume, since
+            campaign in the other; compare 30-day repeat-order rate alongside order volume, since
             volume alone would favor the discount and hide the actual retention effect. Expected
             impact: if the hypothesis holds, the availability intervention should show a smaller
             immediate order-volume bump but a larger 30-day repeat-rate lift — the pattern that
@@ -1934,7 +1936,7 @@
             personalization and privacy: more useful over time, but a "creepiness" risk if memory
             surfaces unprompted. The sharpest failure mode is stale memory — the model
             over-indexing on outdated info (e.g. remembering a job the user has since left) —
-            which needs a decay/update strategy, not just accumulation.
+            which needs a decay/update strategy layered on top of plain accumulation.
           </p>
 
           <h4>Redesign Idea</h4>
@@ -1943,7 +1945,7 @@
             and correct what's remembered in-line.
           </p>
 
-          <h4>Reusable Insight</h4>
+          <h4>The Broader Pattern Here</h4>
           <p>
             The general pattern for any AI feature with implicit state — the PM's real job is
             designing the correction and visibility mechanism, not the memory mechanism itself.
@@ -2002,7 +2004,7 @@
             Earning: shift part of the accrual from pure spend-based points to
             behavior-based points — completing a review, booking during a shoulder season the
             business wants to fill, or booking further in advance — so the program can be tuned
-            toward business-value behavior, not just transaction volume. Redemption: guarantee a
+            toward business-value behavior instead of raw transaction volume. Redemption: guarantee a
             minimum real-value redemption path (even if less attractive than a rare premium
             reward) so points always feel spendable, closing the "earn but can't use" trust gap.
             Gamification: a visible streak for consecutive-quarter bookings (the same loss-aversion
@@ -2017,13 +2019,13 @@
           <h4>KPIs</h4>
           <p>
             Repeat booking rate within the program (the core retention signal), tier upgrade rate
-            (whether the redesigned progress visibility actually moves people, not just whether
-            points accrue), redemption rate (whether the "always spendable" fix actually closes
+            (whether the redesigned progress visibility actually moves people, separate from whether
+            points simply accrue), redemption rate (whether the "always spendable" fix actually closes
             the trust gap), and — as a guardrail — cost-per-loyalty-booking, since a redesign
-            that drives repeat bookings by giving away margin isn't actually a win.
+            that drives repeat bookings purely by giving away margin is a loss dressed up as a win.
           </p>
 
-          <h4>Skills Demonstrated</h4>
+          <h4>What This Draws On</h4>
           <p>
             Retention/lifecycle design — the loyalty counterpart to the funnel-conversion work in
             the Booking Funnel Analysis above.
@@ -2066,10 +2068,10 @@
 
           <h4>Key Concepts</h4>
           <ul>
-            <li><strong>GDS as B2B infrastructure</strong> — the customer is a travel agency or OTA, not a traveller; a completely different PM discipline than every consumer-facing system above.</li>
-            <li><strong>NDC (New Distribution Capability)</strong> — the airline industry's real, current push to bypass traditional GDS with direct API access; an active disruption to this exact business model, worth naming by name.</li>
-            <li><strong>Inventory synchronization latency</strong> — a seat sold on one channel must be un-sold everywhere else within seconds, or the airline oversells.</li>
-            <li><strong>Switching costs &amp; lock-in</strong> — why airlines and agencies rarely change GDS providers; the actual moat this multi-decade business runs on.</li>
+            <li><strong>GDS as B2B infrastructure</strong>: the customer is a travel agency or OTA, not a traveller; a completely different PM discipline than every consumer-facing system above.</li>
+            <li><strong>NDC (New Distribution Capability)</strong>: the airline industry's real, current push to bypass traditional GDS with direct API access; an active disruption to this exact business model, worth naming by name.</li>
+            <li><strong>Inventory synchronization latency</strong>: a seat sold on one channel must be un-sold everywhere else within seconds, or the airline oversells.</li>
+            <li><strong>Switching costs &amp; lock-in</strong>: why airlines and agencies rarely change GDS providers; the actual moat this multi-decade business runs on.</li>
           </ul>
 
           <h4>Open Questions</h4>
@@ -2079,7 +2081,7 @@
             engineering side (ties to T1's "technical execution" comfort)?
           </p>
 
-          <h4>Skills Demonstrated</h4>
+          <h4>Where This Skill Set Applies</h4>
           <p>
             B2B/infrastructure product management, API-as-product thinking, understanding a
             legacy moat well enough to know what threatens it.
@@ -2143,10 +2145,10 @@
 
           <h4>SWOT</h4>
           <ul>
-            <li><strong>Strengths</strong> — dense, defensible urban delivery infrastructure; fast, habit-forming delivery times that raise the switching cost once a user's routine forms around it.</li>
-            <li><strong>Weaknesses</strong> — structurally thin per-order margins at low basket sizes; heavy dependence on continued VC funding to sustain the dark-store buildout ahead of profitability.</li>
-            <li><strong>Opportunities</strong> — category expansion into higher-margin verticals; private-label/in-house brands, which is where several competitors in this category have already started moving to fix the margin problem.</li>
-            <li><strong>Threats</strong> — at least three other well-funded players running the identical playbook in the same cities; regulatory attention on deep discounting and gig-worker labor practices in the quick-commerce sector; a plausible consolidation wave that could compress the number of viable players.</li>
+            <li><strong>Strengths</strong>: dense, defensible urban delivery infrastructure; fast, habit-forming delivery times that raise the switching cost once a user's routine forms around it.</li>
+            <li><strong>Weaknesses</strong>: structurally thin per-order margins at low basket sizes; heavy dependence on continued VC funding to sustain the dark-store buildout ahead of profitability.</li>
+            <li><strong>Opportunities</strong>: category expansion into higher-margin verticals; private-label/in-house brands, which is where several competitors in this category have already started moving to fix the margin problem.</li>
+            <li><strong>Threats</strong>: at least three other well-funded players running the identical playbook in the same cities; regulatory attention on deep discounting and gig-worker labor practices in the quick-commerce sector; a plausible consolidation wave that could compress the number of viable players.</li>
           </ul>
 
           <h4>Strategic Recommendations</h4>
@@ -2199,34 +2201,34 @@
           <p>
             Short PRDs, one per feature, each reusing the Problem → User Stories → Business Goals
             → Requirements → Acceptance Criteria → Success Metrics → Launch Plan structure from
-            the PM Writing case study (T22) below. The point of this set isn't depth on any one
-            of them — the AI Trip Planner PRD (T2) already proves that — it's range: can the same
+            the PM Writing case study (T22) below. Depth on any one of these isn't the point here —
+            the AI Trip Planner PRD (T2) already proves that. The point is range: can the same
             structure hold up across six genuinely different feature shapes without turning into
             a template exercise.
           </p>
           <h4>Why These Six</h4>
           <p>
             Each was picked for a different reason a PM actually has to reason through, not
-            because the list needed padding. <strong>Price alerts</strong> — pure retention
+            because the list needed padding. <strong>Price alerts</strong>: pure retention
             mechanic, no new inventory required, the easiest one to justify to an engineering
-            team on effort alone. <strong>Smart refunds</strong> — the trust problem: refund
+            team on effort alone. <strong>Smart refunds</strong>: the trust problem: refund
             policy already gets fought over in the payments work above (T16); this is the
             user-facing half of that same fight. <strong>Waitlist for sold-out flights</strong> —
             a demand-signal play as much as a feature: it tells the business what routes to add
-            capacity on, not just what to build. <strong>Multi-city planner</strong> — explicitly
+            capacity on, beyond simply telling engineering what to build. <strong>Multi-city planner</strong>: explicitly
             the complexity the AI Trip Planner (T2) scoped out of its v1; this is where that
             deferred requirement would actually get written up. <strong>Carbon footprint
-            calculator</strong> — the one feature here that's regulation-adjacent rather than
+            calculator</strong>: the one feature here that's regulation-adjacent rather than
             revenue-adjacent, worth including precisely because it forces a different kind of
             requirement (disclosure accuracy) than the other five. <strong>AI travel
-            assistant</strong> — the hardest one to scope honestly, since "AI assistant" is
+            assistant</strong>: the hardest one to scope honestly, since "AI assistant" is
             where PRDs most often turn into vague feature wishlists instead of real requirements.
           </p>
           <p>
             <span class="todo">Progress: 0 of 6 actually written — this page tracks real
             completion, not intent; a PRD only gets checked off once it exists</span>
           </p>
-          <h4>Skills Demonstrated</h4>
+          <h4>What This Portfolio Proves</h4>
           <p>
             PRD writing at range and speed — breadth across a feature roadmap rather than depth
             on one project.
@@ -2270,7 +2272,7 @@
 
           <h4>Positioning</h4>
           <p>
-            "A PRD isn't a spec doc. It's a decision memo in disguise." The tell is which section
+            "A PRD reads like a spec doc. It works like a decision memo in disguise." The tell is which section
             gets read first: nobody opens a PRD to find out how a button works — they open it to
             find out whether the thing is worth building at all, which is a Goals and Requirements
             question, not an Acceptance Criteria one. Write the doc in that order and most of the
@@ -2282,10 +2284,10 @@
           <p>
             It's built for a feature with a defined shape — something that has a clear "done."
             It strains on genuinely open-ended, discovery-stage work, where forcing Acceptance
-            Criteria this early just produces confident-sounding fiction. The honest fix isn't a
-            different template; it's admitting the doc is a hypothesis memo at that stage, not a
-            requirements doc, and labeling it that way instead of dressing it up as more certain
-            than it is.
+            Criteria this early just produces confident-sounding fiction. Swapping in a different
+            template doesn't fix that; the honest fix is admitting the doc is a hypothesis memo at
+            that stage, not a requirements doc, and labeling it that way instead of dressing it up
+            as more certain than it is.
           </p>
 
           <p>
@@ -2347,10 +2349,10 @@
           <h4>Compliance Considerations</h4>
           <p>
             Secure document storage directly reuses the eKYC/RBI digital-lending compliance
-            discipline from the fintech toolkit — data sensitivity, not just UX, is the hard part
-            here.
+            discipline from the fintech toolkit — data sensitivity is the hard part here, ahead of
+            the UX itself.
           </p>
-          <h4>Skills Demonstrated</h4>
+          <h4>What This Required</h4>
           <p>
             Regulated, documentation-heavy product design, and notification design that has to
             reason about two independent deadlines instead of one.
@@ -2394,9 +2396,9 @@
 
           <h4>Key Concepts</h4>
           <ul>
-            <li><strong>Split payments &amp; multi-vendor settlement</strong> — one trip booking might pay an airline, a hotel, and a local tour operator; who gets paid when, and who eats a refund when one leg cancels?</li>
-            <li><strong>Chargeback &amp; dispute handling</strong> — travel has uniquely high dispute rates (cancelled flights, no-show hotels) — a payments PM's core recurring headache.</li>
-            <li><strong>Currency conversion &amp; FX risk</strong> — who absorbs the exchange-rate movement between the booking date and the travel date, months later?</li>
+            <li><strong>Split payments &amp; multi-vendor settlement</strong>: one trip booking might pay an airline, a hotel, and a local tour operator; who gets paid when, and who eats a refund when one leg cancels?</li>
+            <li><strong>Chargeback &amp; dispute handling</strong>: travel has uniquely high dispute rates (cancelled flights, no-show hotels) — a payments PM's core recurring headache.</li>
+            <li><strong>Currency conversion &amp; FX risk</strong>: who absorbs the exchange-rate movement between the booking date and the travel date, months later?</li>
             <li><strong>Refund policy as a product surface</strong>, not a policy doc — partial refunds, cash vs. credit, voucher expiry are UX decisions with real financial modeling behind each one.</li>
           </ul>
 
@@ -2407,10 +2409,10 @@
             non-delivery of a paid-for service?
           </p>
 
-          <h4>Skills Demonstrated</h4>
+          <h4>What This Calls On</h4>
           <p>
             Payments infrastructure design, multi-party settlement logic, dispute/refund policy
-            as product design — not just a support-team script.
+            treated as product design rather than left as a support-team script.
           </p>
         </div>
         <div class="jlinks">
@@ -2468,7 +2470,7 @@
           <p>
             I ran the build in Jira and Azure DevOps — epics broken into stories, prioritized
             by what was actually blocking partner onboarding or a revenue number that sprint,
-            not just a reach/impact score. <span class="todo">fill in — a real example of
+            ahead of a formal reach/impact score. <span class="todo">fill in — a real example of
             re-sequencing this backlog under stakeholder pressure</span>.
           </p>
 
@@ -2478,9 +2480,9 @@
             recurring manual reconciliation step.
           </p>
 
-          <h4>Reusable Insight</h4>
+          <h4>What Transfers From This</h4>
           <p>
-            Comfort scoping a technical integration with engineering, not just writing a PRD
+            Comfort scoping a technical integration directly with engineering, beyond writing a PRD
             and handing it off — the same rigor applies whether the "backlog" is a PRD's
             stories or a data-migration checklist.
           </p>
