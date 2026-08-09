@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Does This Read Human? — A Content Audit | Bhawna Mangla</title>
+<meta name="description" content="A data-backed audit of whether this portfolio's writing reads AI-generated or human, with real counted patterns and a fix plan — part of how this site gets built and kept honest.">
+
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="canonical" href="https://bhawnamanglapm.github.io/style-audit.html">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bhawnamanglapm.github.io/style-audit.html">
+<meta property="og:title" content="Does This Read Human? — A Content Audit | Bhawna Mangla">
+<meta property="og:description" content="A data-backed audit of whether this portfolio's writing reads AI-generated or human, with real counted patterns and a fix plan.">
+<meta property="og:image" content="https://bhawnamanglapm.github.io/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Does This Read Human? — A Content Audit | Bhawna Mangla">
+<meta name="twitter:description" content="A data-backed audit of whether this portfolio's writing reads AI-generated or human, with real counted patterns and a fix plan.">
+<meta name="twitter:image" content="https://bhawnamanglapm.github.io/og-image.jpg">
+
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#4F46E5">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Does This Read Human? — A Content Audit",
+  "url": "https://bhawnamanglapm.github.io/style-audit.html",
+  "description": "A data-backed audit of whether this portfolio's writing reads AI-generated or human, with real counted patterns and a fix plan.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Bhawna Mangla — Product Manager Portfolio",
+    "url": "https://bhawnamanglapm.github.io/"
+  },
+  "author": { "@type": "Person", "name": "Bhawna Mangla" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .audit-verdict{border:1px solid var(--line);border-left:4px solid var(--pink);border-radius:14px;background:var(--ink-2);box-shadow:var(--shadow);padding:24px 26px;margin:8px 0 30px}
+  .audit-verdict .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);display:block;margin-bottom:8px}
+  .audit-verdict h2{margin:0 0 10px;font-size:22px}
+  .audit-verdict p{margin:0;color:var(--grey);font-size:15px;max-width:64ch}
+
+  .audit-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:0 0 8px}
+  .audit-stat{border:1px solid var(--line);border-radius:14px;background:var(--ink-2);box-shadow:var(--shadow);padding:16px 18px}
+  .audit-stat .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;color:var(--pink)}
+  .audit-stat .l{font-size:12.5px;color:var(--grey);margin-top:6px;line-height:1.4}
+  .audit-stat .bench{font-size:10.5px;color:#9CA3AF;margin-top:5px}
+
+  .audit-quote{font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.6;background:var(--ink-2);border:1px solid var(--line);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:10px 15px;margin:8px 0}
+  .audit-quote mark{background:rgba(79,70,229,.14);color:var(--pink);padding:1px 3px;border-radius:3px;font-weight:600}
+
+  .audit-human{border:1px dashed var(--line);border-radius:14px;background:var(--ink-2);padding:20px 24px;margin:0 0 14px}
+  .audit-human .tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);border:1px solid var(--lime);border-radius:20px;padding:2px 10px;display:inline-block;margin-bottom:10px}
+  .audit-human h3{margin:0 0 6px;font-size:16px}
+  .audit-human p{margin:0;color:var(--grey);font-size:14px}
+
+  ol.audit-fix{list-style:none;counter-reset:fx;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+  ol.audit-fix li{counter-increment:fx;position:relative;padding:14px 18px 14px 52px;border:1px solid var(--line);border-radius:12px;background:var(--ink-2);font-size:14px;color:var(--grey)}
+  ol.audit-fix li::before{content:counter(fx);position:absolute;left:14px;top:14px;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;color:var(--pink);background:rgba(79,70,229,.1);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  ol.audit-fix li strong{color:var(--paper)}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<nav aria-label="Main">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="logo-badge">BM</span>Bhawna<em> Mangla</em></a>
+    <a class="nav-btn primary" href="index.html">← Back to portfolio</a>
+  </div>
+</nav>
+
+<main id="main-content">
+<section style="padding-top:56px">
+  <div class="wrap">
+    <div class="sec-head">
+      <h1>Does this read human, or does it read AI?</h1>
+      <span class="sec-tag">// a real audit, not a vibe check</span>
+    </div>
+    <p class="sec-intro">
+      This site is built with AI, and I'd rather say that plainly than have someone else notice
+      it first. So instead of just hoping the writing holds up, I counted it: every case study on
+      this site, run against the actual patterns that make AI writing recognizable, with the real
+      numbers and the real offending sentences below. Same discipline as the rest of this
+      portfolio — show the gaps, not just the polish.
+    </p>
+
+    <div class="audit-verdict">
+      <span class="k">Verdict</span>
+      <h2>Not there yet. The facts are real; the sentences were AI-shaped.</h2>
+      <p>
+        The substance — the metrics, the trade-offs, the architecture decisions — is specific and
+        genuine throughout. The prose that carries it, though, had clear, measurable
+        machine-writing fingerprints: one construction repeated dozens of times, a heading
+        vocabulary that converged across unrelated case studies, and an em-dash habit far outside
+        normal human range. Below is exactly what I found, and what I'm doing about it.
+      </p>
+    </div>
+
+    <div class="cs-narrative">
+      <h4>The Hard Numbers</h4>
+      <p>Counted directly against the live site text — not sampled, not estimated.</p>
+    </div>
+
+    <div class="audit-stats">
+      <div class="audit-stat"><div class="n">1 / 35</div><div class="l">words per em-dash</div><div class="bench">human range: ~1 per 150–300</div></div>
+      <div class="audit-stat"><div class="n">45×</div><div class="l">"not just X, it's Y"</div><div class="bench">across 29 case studies</div></div>
+      <div class="audit-stat"><div class="n">23×</div><div class="l">"X isn't Y" hard contrast</div><div class="bench">same rhetorical move</div></div>
+      <div class="audit-stat"><div class="n">32%</div><div class="l">of h4 headings are repeats</div><div class="bench">112 unique of 165 total</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--grey);margin:10px 0 30px">
+      "Skills Demonstrated" appears as a heading 12 times. "Reusable Insight" appears 10 times.
+      "The System," "Key Concepts," and "Open Questions" each appear 7 times. A person writing 29
+      case studies over months doesn't converge on the same closing heading that often — a
+      template applied in one sitting does.
+    </p>
+
+    <div class="cs-narrative">
+      <h4>What Was Actually Doing It</h4>
+      <p>Four specific patterns, pulled with real examples, not a general impression.</p>
+
+      <p><strong>The em-dash reflex — 580 uses.</strong> Used for asides, contrasts, and
+      appositives almost interchangeably, at roughly 4–8× a typical human professional writer's
+      rate.</p>
+      <div class="audit-quote">a live, interactive dashboard <mark>—</mark> not just a write-up</div>
+      <div class="audit-quote">delay minutes are drawn from a gamma distribution, not a normal one <mark>—</mark> real delays are right-skewed</div>
+
+      <p><strong>The "not just X, it's Y" elevation — 45 uses.</strong> A reflex for making
+      something sound more significant than its plain description. Reads as insight the first
+      time, formula by the fifth.</p>
+      <div class="audit-quote">"My Trips" functions as a lifecycle retention engine, <mark>not just</mark> a post-booking utility tab</div>
+      <div class="audit-quote">every recommendation above has a cost, <mark>not just</mark> an upside</div>
+
+      <p><strong>The "X isn't Y" hard contrast — 23 uses.</strong> Close cousin of the pattern
+      above — declaring what a thing definitely isn't before saying what it is.</p>
+      <div class="audit-quote">"a PRD <mark>isn't</mark> a spec doc. It's a decision memo in disguise."</div>
+
+      <p><strong>Template convergence across case studies — 32% repeat rate.</strong> Different
+      products, different industries, the same section skeleton — the B2B "study guide" entries
+      all run The System → Key Concepts → Open Questions → Skills Demonstrated, and nearly every
+      case study closes on a section literally called Reusable Insight.</p>
+    </div>
+
+    <div style="border-left:3px solid var(--pink);background:rgba(79,70,229,.06);border-radius:0 12px 12px 0;padding:16px 22px;margin:22px 0 34px;font-size:14.5px;color:var(--paper)">
+      <strong style="color:var(--pink)">Why this happened:</strong> most of this site was drafted
+      by one AI system across a small number of long sessions, not accumulated the way a person
+      actually writes a portfolio — one case study at a time, over months. Consistency of voice is
+      usually a good thing. Here it's consistency of <em>which model wrote it</em>, and that's the
+      real tell, more than any single sentence.
+    </div>
+
+    <div class="cs-narrative">
+      <h4>What Already Reads Human</h4>
+      <p>Fairness matters here too — not everything on this site has this problem.</p>
+    </div>
+
+    <div class="audit-human">
+      <span class="tag">Reads human</span>
+      <h3>Specific, checkable numbers</h3>
+      <p>"₹50,000 Cr+ deposit book," "FD booking turnaround from 7 days to 1," "Heroes Award,"
+      "integrating with Finacle via REST APIs" — real, verifiable, oddly specific facts. AI filler
+      tends toward round, vague claims; this doesn't.</p>
+    </div>
+    <div class="audit-human">
+      <span class="tag">Reads human</span>
+      <h3>The visible "TODO" gaps</h3>
+      <p>AI optimizing for looking finished fakes completeness. This site does the opposite — over
+      a hundred honestly-labeled gaps, still marked incomplete instead of quietly papered over.
+      That restraint reads as trustworthy, not machine-polished.</p>
+    </div>
+    <div class="audit-human">
+      <span class="tag">Reads human</span>
+      <h3>The recommendations section</h3>
+      <p>Literally other people's words, quoted from LinkedIn — the single most human text on the
+      whole site, because it's the only text nobody here wrote.</p>
+    </div>
+
+    <div class="cs-narrative">
+      <h4>Fix Plan</h4>
+      <p>Concrete, not "try to sound more human."</p>
+    </div>
+    <ol class="audit-fix">
+      <li><strong>Cut the em-dash count by half</strong> — a mechanical pass forcing every third
+      or fourth one into a period, a comma, or a parenthetical instead. The goal isn't zero, it's
+      breaking the reflex.</li>
+      <li><strong>Cap "not just X" and "X isn't Y" at one use per case study.</strong> Both are
+      fine occasionally; the problem was 45 and 23 uses in the same voice.</li>
+      <li><strong>Let headings be bespoke per case study</strong> instead of picked from a
+      six-heading rotation — if two case studies would naturally get the same heading, that's a
+      sign to write toward what's actually different about each one.</li>
+      <li><strong>Write the remaining personal categories</strong> (Career Lessons, Decision
+      Journal, Google PM Interview, Personal Growth) <strong>starting from my own raw words</strong>,
+      not a clean draft to approve. Lightly-edited real voice beats a polished AI draft every
+      time — this is the highest-leverage fix on the list.</li>
+    </ol>
+
+    <p style="margin-top:30px;font-size:13px;color:var(--grey)">
+      Counted against the live site content, updated as the fixes above actually ship — not a
+      one-time badge.
+    </p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="colophon">
+      <span>© 2026 Bhawna Mangla</span>
+      <span>Gurugram, India · Open to Senior PM roles</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
