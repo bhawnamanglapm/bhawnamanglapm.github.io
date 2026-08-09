@@ -1759,8 +1759,16 @@
           <h4>The Analysis</h4>
           <p>
             Swiggy's order/delivery experience, with a proposed North Star metric: orders
-            delivered on time, per active user. <span class="todo">fill in — acquisition,
-            activation, retention, revenue, and referral metrics</span>
+            delivered on time, per active user. AARRR read on the same funnel: <strong>Acquisition</strong>
+            — app installs and first-order conversion from restaurant/city expansion.
+            <strong>Activation</strong> — a new user's first on-time delivery, since a late or
+            broken first order is the single highest-leverage churn moment. <strong>Retention</strong>
+            — repeat order rate and days-between-orders, the actual denominator the North Star
+            metric normalizes against. <strong>Revenue</strong> — average order value plus delivery
+            and platform fees, weighed against the subsidy cost of promotions that inflate raw
+            order counts without improving the on-time number. <strong>Referral</strong> — organic
+            share, which correlates far more with delivery reliability than with any discount
+            campaign.
           </p>
 
           <h4>Metric Tree</h4>
@@ -1769,7 +1777,20 @@
             actually value) → normalized per active user (removes growth-inflation noise).
             Leading indicator: delivery partner availability. Lagging indicators: NPS, repeat
             order rate. Guardrail metric: restaurant cancellation rate.
-            <span class="todo">fill in — hypotheses, experiment ideas, expected impact</span>
+          </p>
+
+          <h4>Hypotheses &amp; Experiments</h4>
+          <p>
+            Hypothesis: on-time delivery is a stronger repeat-order predictor than price, meaning
+            a rupee spent improving delivery-partner availability in a lagging zone outperforms
+            the same rupee spent on a discount in that zone. Test: in a matched pair of pin codes,
+            run a delivery-partner-availability improvement in one and an equivalent-cost discount
+            campaign in the other; compare 30-day repeat-order rate, not just order volume, since
+            volume alone would favor the discount and hide the actual retention effect. Expected
+            impact: if the hypothesis holds, the availability intervention should show a smaller
+            immediate order-volume bump but a larger 30-day repeat-rate lift — the pattern that
+            would justify shifting budget from blanket discounting toward delivery-reliability
+            infrastructure in underperforming zones.
           </p>
         </div>
         <div class="jlinks">
@@ -1782,9 +1803,9 @@
     </div>
     </div>
 
-    <div class="cat-section hide-wip" id="cat-feature-reverse-engineering">
+    <div class="cat-section" id="cat-feature-reverse-engineering">
       <div class="cat-head"><h2>Feature Reverse Engineering</h2><span class="cat-tag">// dissecting a single shipped feature</span></div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum">T18</span>
         <h3 class="jcat-title">Cross-industry examples</h3>
@@ -1808,8 +1829,41 @@
             problem: learners forget, feel guilty, then quit. The business problem: D30 retention
             collapses without an intervention loop. Streak exists because loss aversion
             outperforms achievement motivation as a retention lever.
-            <span class="todo">fill in — user flow, workflow, assumptions, edge cases, failure
-            scenarios</span>
+          </p>
+
+          <h4>User Flow &amp; Workflow</h4>
+          <p>
+            Complete at least one lesson before the user's local day rolls over → the streak
+            counter increments and the flame icon updates → as the day-end window approaches with
+            no lesson yet done, a reminder notification fires. Under the hood: streak state is
+            per-user and evaluated against local midnight, not server time — the single detail
+            that makes "what counts as today" a genuinely nontrivial edge case (see below).
+            "Streak Freeze" can be pre-equipped as an item to auto-preserve the streak through one
+            missed day; "Streak Repair" lets a user restore a broken streak after the fact,
+            monetized alongside the free-currency ("gems") economy and the paid subscription tier.
+          </p>
+
+          <h4>Assumptions &amp; Edge Cases</h4>
+          <p>
+            The design bets that loss aversion (not wanting to lose an accumulated number) beats
+            pure achievement-seeking as a daily-return driver, and that a single short lesson is
+            low enough friction to sustain the habit. Real edge cases this creates: timezone
+            travel shifts the local-midnight boundary mid-streak; offline lesson completions have
+            to sync before that boundary or the streak silently breaks; very long-running streaks
+            (some users publicly report 1,000+ days) turn loss aversion into extreme lock-in,
+            which is a retention asset but also a support-ticket and goodwill liability the moment
+            a bug breaks one.
+          </p>
+
+          <h4>Failure &amp; Abuse Scenarios</h4>
+          <p>
+            The most-discussed failure mode: users protect the streak with the fastest, easiest
+            lesson available rather than one that reflects real learning progress — the metric
+            gets gamed against the product's actual goal. The anxiety side can also overcorrect:
+            a user who fears an inevitable eventual miss disengages entirely rather than risk it,
+            which is the opposite of the intended effect. Streak Freeze mitigates the anxiety but
+            introduces its own abuse case: it can become a crutch that quietly reduces real daily
+            engagement while the visible number keeps climbing.
           </p>
 
           <h4>Trade-offs &amp; Redesign</h4>
@@ -1818,8 +1872,21 @@
             breaks while still keeping users inside the ecosystem. But the feature creates user
             anxiety alongside motivation; it's not a free win. A redesign worth considering:
             surface a visible "grace period" upfront to reduce that anxiety while preserving the
-            retention hook. <span class="todo">fill in — launch strategy, adoption metrics,
-            retention impact, revenue impact, future roadmap</span>
+            retention hook.
+          </p>
+
+          <h4>Launch, Adoption &amp; Business Impact</h4>
+          <p>
+            Streak is one of Duolingo's oldest gamification mechanics, broadly rolled out well
+            before the company's more recent AI-driven feature set, then iterated on over years —
+            Streak Freeze and Streak Repair came later as monetization and retention levers, and
+            "Friend Streaks" (a shared streak between two mutual users) is a natural, later
+            extension of the same loss-aversion mechanic applied socially. Duolingo has publicly
+            described streaks as one of its strongest engagement and retention correlators in
+            shareholder communications and its own product writing — <span class="todo">fill
+            in a specific cited figure if one is worth quoting directly, and a source link</span>
+            — directionally credible given how central the mechanic remains to the product, even
+            without an internally-verified number to cite here.
           </p>
         </div>
         <div class="jlinks">
@@ -1892,9 +1959,9 @@
     </div>
     </div>
 
-    <div class="cat-section hide-wip" id="cat-product-strategy">
+    <div class="cat-section" id="cat-product-strategy">
       <div class="cat-head"><h2>Product Strategy</h2><span class="cat-tag">// business model, moat, and competitive positioning</span></div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum">T7</span>
         <h3 class="jcat-title">Travel Loyalty Program Redesign</h3>
@@ -1914,13 +1981,48 @@
         <div class="cs-narrative">
           <h4>Scope</h4>
           <p>
-            Improve a loyalty program for an OTA or airline — user research, current pain points,
-            new earning/redemption rules, gamification ideas, KPIs.
-            <span class="todo">fill in — current pain points (e.g. redemption friction, tier
-            stagnation), new earning/redemption rules, gamification ideas (streaks, milestone
-            tiers, surprise-and-delight unlocks), and KPIs (repeat booking rate, tier upgrade
-            rate, redemption rate)</span>
+            Redesign a loyalty program for an OTA or airline — the same lifecycle-design problem
+            every points program eventually hits: it drives initial sign-up, then stops driving
+            behavior once a user stalls mid-tier.
           </p>
+
+          <h4>Current Pain Points</h4>
+          <p>
+            Redemption friction — points that are easy to earn but hard to actually spend
+            (blackout dates, limited reward inventory) train users to stop valuing them, which
+            defeats the program's purpose. Tier stagnation — a user who reaches a mid-tier and
+            realizes the next tier is unreachable within a normal booking cadence disengages
+            entirely rather than working toward it. Opaque earning rules — when users can't
+            predict what a booking will actually earn them, the program stops functioning as a
+            behavioral lever at the moment of booking, which is the only moment that matters.
+          </p>
+
+          <h4>Redesign — Earning, Redemption &amp; Gamification</h4>
+          <p>
+            Earning: shift part of the accrual from pure spend-based points to
+            behavior-based points — completing a review, booking during a shoulder season the
+            business wants to fill, or booking further in advance — so the program can be tuned
+            toward business-value behavior, not just transaction volume. Redemption: guarantee a
+            minimum real-value redemption path (even if less attractive than a rare premium
+            reward) so points always feel spendable, closing the "earn but can't use" trust gap.
+            Gamification: a visible streak for consecutive-quarter bookings (the same loss-aversion
+            mechanic as Duolingo's Streak, see Feature Reverse Engineering above, applied to a
+            much lower-frequency behavior); milestone tiers with a clearly visible "X bookings to
+            next tier" progress indicator instead of an opaque point threshold; occasional
+            surprise-and-delight unlocks (an unexpected small perk) to reward loyalty outside the
+            predictable earn/redeem loop, which research on variable reward schedules suggests
+            sustains engagement better than a purely predictable one.
+          </p>
+
+          <h4>KPIs</h4>
+          <p>
+            Repeat booking rate within the program (the core retention signal), tier upgrade rate
+            (whether the redesigned progress visibility actually moves people, not just whether
+            points accrue), redemption rate (whether the "always spendable" fix actually closes
+            the trust gap), and — as a guardrail — cost-per-loyalty-booking, since a redesign
+            that drives repeat bookings by giving away margin isn't actually a win.
+          </p>
+
           <h4>Skills Demonstrated</h4>
           <p>
             Retention/lifecycle design — the loyalty counterpart to the funnel-conversion work in
@@ -1935,7 +2037,7 @@
       </div>
       </article>
     </div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum">T17</span>
         <h3 class="jcat-title">Airline/Hotel Distribution System (GDS)</h3>
@@ -1991,7 +2093,7 @@
       </div>
       </article>
     </div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum">T21</span>
         <h3 class="jcat-title">Cross-industry example</h3>
@@ -2011,9 +2113,24 @@
         <div class="cs-narrative">
           <h4>The Business</h4>
           <p>
-            <span class="todo">fill in — company overview, TAM/SAM/SOM, business model, pricing
-            strategy</span>. Industry: quick commerce / India. Growth strategy: category expansion
-            beyond core delivery. <span class="todo">Competitors: fill in</span>.
+            Zepto is an Indian quick-commerce company (founded 2021, Mumbai) promising grocery
+            and daily-essentials delivery in roughly 10 minutes, built on a network of
+            hyperlocal "dark stores" — small, delivery-only micro-fulfillment centers rather than
+            customer-facing retail. Industry: quick commerce / India, one of the most heavily
+            VC-funded and fiercely contested categories in Indian consumer tech.
+            <span class="todo">fill in — precise TAM/SAM/SOM figures, with a cited source; a
+            defensible estimate needs real market-sizing data, not a guess</span>. Business model:
+            revenue from delivery fees plus retail margin on grocery/FMCG items, at high order
+            frequency and low basket size per order — the opposite unit-economics shape of a
+            traditional e-commerce order. Growth strategy: category expansion beyond core grocery
+            into adjacent high-margin categories (electronics, beauty, pharmacy) once the delivery
+            network exists.
+          </p>
+          <p>
+            Competitors: Blinkit (Zomato-owned), Swiggy Instamart, BigBasket's quick-commerce arm
+            (Tata-owned), and newer entrants like Flipkart Minutes and Amazon Now — all racing on
+            the same dark-store-density playbook, which makes this one of the clearest
+            multi-player moat questions in Indian consumer tech right now.
           </p>
 
           <h4>The Moat</h4>
@@ -2022,7 +2139,24 @@
             in top-10 pin codes rather than broad coverage. The network effect: orders → better
             placement/inventory decisions → faster delivery → more orders (flywheel). The moat
             itself is dark store density in high-density pin codes. The risk is thin margins.
-            <span class="todo">fill in — SWOT, strategic recommendations</span>
+          </p>
+
+          <h4>SWOT</h4>
+          <ul>
+            <li><strong>Strengths</strong> — dense, defensible urban delivery infrastructure; fast, habit-forming delivery times that raise the switching cost once a user's routine forms around it.</li>
+            <li><strong>Weaknesses</strong> — structurally thin per-order margins at low basket sizes; heavy dependence on continued VC funding to sustain the dark-store buildout ahead of profitability.</li>
+            <li><strong>Opportunities</strong> — category expansion into higher-margin verticals; private-label/in-house brands, which is where several competitors in this category have already started moving to fix the margin problem.</li>
+            <li><strong>Threats</strong> — at least three other well-funded players running the identical playbook in the same cities; regulatory attention on deep discounting and gig-worker labor practices in the quick-commerce sector; a plausible consolidation wave that could compress the number of viable players.</li>
+          </ul>
+
+          <h4>Strategic Recommendations</h4>
+          <p>
+            Don't compete on core delivery-speed parity once it's table stakes across all major
+            players — compete on basket economics. Push private-label penetration in
+            high-frequency categories (staples, household) to improve gross margin per order
+            without relying on delivery-fee increases that would hurt the retention the density
+            moat already bought. Treat premium/high-margin SKU categories (electronics, beauty)
+            as the actual profitability lever, not the core grocery business.
           </p>
 
           <h4>Outlook</h4>
