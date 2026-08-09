@@ -116,10 +116,10 @@
           <h4>C — Comprehend the Situation</h4>
           <p>
             The clarifying questions I'd ask before touching the product, the way a Google PM
-            interview expects: which platform (web vs. app — <strong>both</strong>), domestic or
+            interview expects: which platform (web vs. app: <strong>both</strong>), domestic or
             international (<strong>domestic only</strong>), and an existing product or a new one
             (<strong>existing, mature product</strong>). Scope: MakeMyTrip's flight search →
-            booking flow specifically, not hotels or holidays — narrower on purpose, so the
+            booking flow specifically, not hotels or holidays, narrower on purpose so the
             analysis goes deep on one flow instead of shallow across three.
           </p>
           <p>
@@ -132,29 +132,29 @@
           </p>
           <p>
             <strong>North Star Metric (company level):</strong> completed bookings per unique
-            searcher — normalizes for the high browsing-only traffic that never intends to book.
+            searcher, which normalizes for the high browsing-only traffic that never intends to book.
             This teardown is scoped to moving that metric one funnel stage at a time, starting
             with the stage that leaks hardest.
           </p>
 
           <h4>I — Identify the Customer</h4>
           <p>
-            Three personas span the segmentation axes that actually predict booking behavior —
-            price sensitivity, time pressure, and party complexity — not demographic axes like age
+            Three personas span the segmentation axes that actually predict booking behavior:
+            price sensitivity, time pressure, and party complexity, not demographic axes like age
             or city, which don't:
           </p>
           <ul>
-            <li><strong>"Value Rakesh"</strong> (28, IT professional, 4–5 domestic trips/yr) — price-sensitive, compares 3+ apps before booking.</li>
-            <li><strong>"Business Priya"</strong> (34, consulting manager) — books last-minute, values reliability and rebooking flexibility over price.</li>
-            <li><strong>"Family Planner Anita"</strong> (41) — books for 4+ pax, needs group-seat clarity and abandons on unclear total-fare breakdowns.</li>
+            <li><strong>"Value Rakesh"</strong> (28, IT professional, 4–5 domestic trips/yr): price-sensitive, compares 3+ apps before booking.</li>
+            <li><strong>"Business Priya"</strong> (34, consulting manager): books last-minute, values reliability and rebooking flexibility over price.</li>
+            <li><strong>"Family Planner Anita"</strong> (41): books for 4+ pax, needs group-seat clarity and abandons on unclear total-fare breakdowns.</li>
           </ul>
 
           <h4>R — Report the Customer's Needs</h4>
           <p>
             <strong>Journey:</strong> Home search widget → results list (filters/sort) → fare
             review (baggage/meal add-ons) → traveller details → payment → confirmation + "My
-            Trips." Logged-out users are funnelled into account creation at payment, not upfront —
-            reduces search friction but adds a late-stage form-fill tax.
+            Trips." Logged-out users are funnelled into account creation at payment, not upfront;
+            that reduces search friction but adds a late-stage form-fill tax.
           </p>
           <p>
             <strong>Retention loop:</strong> "My Trips" is a lifecycle retention engine wearing a
@@ -173,7 +173,7 @@
           <p>
             <strong>Funnel:</strong> Search → Results → Fare Review → Traveller Info → Payment →
             Confirmation. The biggest modeled drop-off sits between Results and Fare Review
-            (price-shock from add-on fees — modeled at ~38% conversion in the
+            (price-shock from add-on fees: modeled at ~38% conversion in the
             <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>),
             with a second leak between Traveller Info and Payment (form fatigue + OTP retry friction).
           </p>
@@ -201,16 +201,16 @@
           <p>
             Of the three personas, I'd prioritize <strong>Value Rakesh's need first.</strong>
             Price-sensitive comparison shoppers are both the largest segment of OTA search traffic
-            and the segment most exposed to the single biggest funnel leak above — the
+            and the segment most exposed to the single biggest funnel leak above: the
             fare-review price shock hits a price-anchored searcher hardest. Business Priya's
             reliability need and Family Planner Anita's group-booking complexity are real, but
-            lower-frequency — worth a later cycle, not this one. Everything below is scoped to
+            lower-frequency, worth a later cycle rather than this one. Everything below is scoped to
             fixing Rakesh's need first.
           </p>
 
           <h4>L — List Solutions</h4>
           <ol style="padding-left:18px;margin:0 0 14px;color:#33333D;font-size:14.5px;line-height:1.6">
-            <li style="margin-bottom:7px">All-in fare display at the results level — kill the late-stage price reveal.</li>
+            <li style="margin-bottom:7px">All-in fare display at the results level: kill the late-stage price reveal.</li>
             <li style="margin-bottom:7px">Opt-in (not opt-out) add-ons at fare review.</li>
             <li style="margin-bottom:7px">Persistent "compare dates" strip on results instead of reopening search.</li>
             <li style="margin-bottom:7px">Baggage/meal policy inline on the fare card, not a tap away.</li>
@@ -230,18 +230,18 @@
           <table class="ptable2">
             <thead><tr><th>Feature (RICE-scored)</th><th>Reach × Impact × Confidence</th><th>Effort</th><th>RICE / priority</th></tr></thead>
             <tbody>
-              <tr><td data-label="Feature">Opt-in add-ons at fare review</td><td data-label="R×I×C">8 × 2 × 0.9</td><td data-label="Effort">1</td><td data-label="RICE">14.4 — <strong>P1 / Must</strong></td></tr>
-              <tr><td data-label="Feature">All-in fare display at results</td><td data-label="R×I×C">10 × 3 × 0.9</td><td data-label="Effort">2</td><td data-label="RICE">13.5 — <strong>P1 / Must</strong></td></tr>
-              <tr><td data-label="Feature">Baggage/meal policy inline</td><td data-label="R×I×C">9 × 1.5 × 0.8</td><td data-label="Effort">1</td><td data-label="RICE">10.8 — <strong>P1 / Must</strong></td></tr>
-              <tr><td data-label="Feature">Delay-risk badge on results</td><td data-label="R×I×C">10 × 2 × 0.6</td><td data-label="Effort">3</td><td data-label="RICE">4.0 — <strong>P2 / Should</strong></td></tr>
-              <tr><td data-label="Feature">Payment retry + biometric re-auth</td><td data-label="R×I×C">5 × 3 × 0.7</td><td data-label="Effort">3</td><td data-label="RICE">3.5 — <strong>P2 / Should</strong></td></tr>
-              <tr><td data-label="Feature">Persistent compare-dates strip</td><td data-label="R×I×C">6 × 2 × 0.7</td><td data-label="Effort">3</td><td data-label="RICE">2.8 — <strong>P3 / Could</strong></td></tr>
+              <tr><td data-label="Feature">Opt-in add-ons at fare review</td><td data-label="R×I×C">8 × 2 × 0.9</td><td data-label="Effort">1</td><td data-label="RICE">14.4 · <strong>P1 / Must</strong></td></tr>
+              <tr><td data-label="Feature">All-in fare display at results</td><td data-label="R×I×C">10 × 3 × 0.9</td><td data-label="Effort">2</td><td data-label="RICE">13.5 · <strong>P1 / Must</strong></td></tr>
+              <tr><td data-label="Feature">Baggage/meal policy inline</td><td data-label="R×I×C">9 × 1.5 × 0.8</td><td data-label="Effort">1</td><td data-label="RICE">10.8 · <strong>P1 / Must</strong></td></tr>
+              <tr><td data-label="Feature">Delay-risk badge on results</td><td data-label="R×I×C">10 × 2 × 0.6</td><td data-label="Effort">3</td><td data-label="RICE">4.0 · <strong>P2 / Should</strong></td></tr>
+              <tr><td data-label="Feature">Payment retry + biometric re-auth</td><td data-label="R×I×C">5 × 3 × 0.7</td><td data-label="Effort">3</td><td data-label="RICE">3.5 · <strong>P2 / Should</strong></td></tr>
+              <tr><td data-label="Feature">Persistent compare-dates strip</td><td data-label="R×I×C">6 × 2 × 0.7</td><td data-label="Effort">3</td><td data-label="RICE">2.8 · <strong>P3 / Could</strong></td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="cs-narrative">
-          <p style="margin-top:12px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle — the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a booking-funnel fix.</p>
+          <p style="margin-top:12px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle: the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a booking-funnel fix.</p>
 
           <h4>Risks &amp; Trade-offs</h4>
           <p>Every recommendation above has a real cost. Naming it here, before launch, not after:</p>
@@ -254,21 +254,21 @@
           <p>
             <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind the A/B test
             already scoped in the <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>,
-            with revenue-per-booking as a guardrail metric alongside conversion — not conversion
-            alone. A win on Fare Review conversion that quietly craters ancillary revenue isn't
-            actually a win.
+            with revenue-per-booking as a guardrail metric alongside conversion, not conversion
+            alone. A win on Fare Review conversion that quietly craters ancillary revenue is a
+            loss dressed up as a win.
           </p>
 
           <h4>S — Summarize Recommendation</h4>
           <p>
-            Ship <strong>all-in fare display</strong> and <strong>opt-in add-ons</strong> first —
+            Ship <strong>all-in fare display</strong> and <strong>opt-in add-ons</strong> first:
             RICE 13.5 and 14.4, the two highest-scored and lowest-effort items on the list. Together
             they remove the exact price-shock that costs the funnel its single biggest leak, for
             the segment (Rakesh) chosen in the Cut step above. Everything else on this list
             sequences behind those two.
           </p>
 
-          <h4>Success Metrics — the HEART Framework</h4>
+          <h4>Success Metrics: the HEART Framework</h4>
           <p>Using Google's own HEART framework (Rodden et al.) instead of a single catch-all "engagement" number:</p>
           <ul>
             <li><strong>Happiness</strong>: CSAT specifically on "pricing clarity" (post-booking survey); NPS delta before/after the all-in pricing rollout.</li>
@@ -318,7 +318,7 @@
             Search Systems — Google Flights, Skyscanner, Kayak. The engine that turns "Delhi to
             Bangkok, next week" into a ranked, comparable set of fares across airlines and OTAs.
             What PMs build here is meta-search (aggregating other platforms' inventory and
-            referring out) vs. direct search (querying and selling your own inventory) — a
+            referring out) vs. direct search (querying and selling your own inventory): a
             fundamentally different product and monetization model from a booking system, even
             though the search box looks identical to a user.
           </p>
@@ -487,7 +487,7 @@
           <h4>The System</h4>
           <p>
             Experience Marketplace — Viator, Klook. Discovery and booking for bookable
-            experiences (tours, tickets, activities) — a catalog/inventory problem more than a
+            experiences (tours, tickets, activities): a catalog/inventory problem more than a
             real-time-matching one. What PMs build here is supply-side tooling for thousands of
             small local operators (not a handful of airlines), and the cross-sell integration
             point where "book a flight" surfaces "things to do at your destination."
@@ -619,7 +619,7 @@
             "plan me a trip" into a bookable, weather- and budget-aware itinerary in one session.
             MVP scope: single-destination domestic trips only, 3–7 days. Ships itinerary
             generation, a budget optimizer, and weather-aware sequencing; explicitly does not
-            attempt multi-city routing, group itineraries, or live disruption reflow in v1 — see
+            attempt multi-city routing, group itineraries, or live disruption reflow in v1; see
             Goals &amp; Non-Goals below for why.
           </p>
 
@@ -641,15 +641,15 @@
           <ul>
             <li>Multi-city or multi-destination routing.</li>
             <li>Shared or group itineraries.</li>
-            <li>Live disruption reflow — needs a flight-status API integration not yet built; sequenced for v2 once MVP itinerary quality is validated, not because it's unimportant (it's Reactive Rhea's entire use case, see below).</li>
-            <li>Replacing a travel agent for complex international multi-leg trips — this is a single-destination planning aid, not a full-service booking replacement.</li>
+            <li>Live disruption reflow: needs a flight-status API integration not yet built; sequenced for v2 once MVP itinerary quality is validated, not because it's unimportant (it's Reactive Rhea's entire use case, see below).</li>
+            <li>Replacing a travel agent for complex international multi-leg trips: this is a single-destination planning aid, not a full-service booking replacement.</li>
           </ul>
 
           <h4>Users &amp; Use Cases</h4>
           <ul>
             <li><strong>"First-timer Farah"</strong>: plans 1 international trip/yr, wants 2–3 easy choices, not raw options.</li>
             <li><strong>"Optimizer Omar"</strong>: books 6+ trips/yr, wants full control and only trusts AI suggestions he can see the reasoning behind.</li>
-            <li><strong>"Reactive Rhea"</strong>: mid-trip, needs the plan to adapt live when a flight delays or weather turns (her use case is explicitly a Non-Goal for v1 — see above).</li>
+            <li><strong>"Reactive Rhea"</strong>: mid-trip, needs the plan to adapt live when a flight delays or weather turns (her use case is explicitly a Non-Goal for v1; see above).</li>
           </ul>
           <p><strong>User stories:</strong></p>
           <ul>
@@ -673,7 +673,7 @@
               <tr><td data-label="Requirement">Weather-aware sequencing</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Outdoor-heavy days scheduled against the best forecast window</td></tr>
               <tr><td data-label="Requirement">Restaurant/attraction recommendation</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Rating + proximity + price band, with visible reasoning</td></tr>
               <tr><td data-label="Requirement">Preference memory (dietary, pace)</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Persists across sessions for returning users</td></tr>
-              <tr><td data-label="Requirement">Disruption re-planning on delay</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1 — needs flight-status API integration</td></tr>
+              <tr><td data-label="Requirement">Disruption re-planning on delay</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1; needs flight-status API integration</td></tr>
               <tr><td data-label="Requirement">Multi-city routing</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1</td></tr>
               <tr><td data-label="Requirement">Shared/group itineraries</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1</td></tr>
             </tbody>
@@ -681,7 +681,7 @@
         </div>
 
         <div class="cs-narrative">
-          <h4>Design — Key Flows</h4>
+          <h4>Design: Key Flows</h4>
           <ul>
             <li><strong>Intent capture</strong>: single chat-style input + 3 quick-pick chips (budget band, trip length, vibe), not a 12-field form.</li>
             <li><strong>Itinerary review</strong>: day-by-day vertical timeline, each activity swappable via a "Why this?" expand showing rating/distance/price reasoning.</li>
@@ -712,7 +712,7 @@
 
           <h4>Launch Plan</h4>
           <ul>
-            <li><strong>Phase 1 (MVP):</strong> single-destination domestic trips, 3–7 days. Itinerary generation + budget optimizer + weather sequencing only — the three P0 requirements.</li>
+            <li><strong>Phase 1 (MVP):</strong> single-destination domestic trips, 3–7 days. Itinerary generation + budget optimizer + weather sequencing only: the three P0 requirements.</li>
             <li><strong>Phase 2:</strong> multi-city routing + persistent preference memory, gated on Phase 1 hitting its swap-rate and time-to-itinerary targets. Routing multiple cities is premature if the single-city itinerary still isn't trusted.</li>
             <li><strong>Phase 3:</strong> live disruption reflow (Reactive Rhea's use case), gated on a flight-status API integration that doesn't exist yet.</li>
           </ul>
@@ -728,8 +728,8 @@
           </p>
           <p><strong>Open questions this doc doesn't resolve:</strong></p>
           <ul>
-            <li>Should the budget optimizer be allowed to suggest a <em>different destination</em> than requested if it saves &gt;30% of budget — or does that override user intent in a way that breaks trust?</li>
-            <li>What's the fallback UX when no itinerary can be generated within the stated budget — degrade gracefully with a "closest match," or refuse and ask the user to adjust?</li>
+            <li>Should the budget optimizer be allowed to suggest a <em>different destination</em> than requested if it saves &gt;30% of budget, or does that override user intent in a way that breaks trust?</li>
+            <li>What's the fallback UX when no itinerary can be generated within the stated budget: degrade gracefully with a "closest match," or refuse and ask the user to adjust?</li>
             <li>Does surfacing restaurant/attraction rankings require a sponsored-placement disclosure, and who owns that legal review before launch?</li>
           </ul>
 
@@ -777,13 +777,13 @@
         <div class="cs-narrative">
           <h4>Where the Volume Comes From</h4>
           <p>
-            The support queries that pile up fastest at an OTA — "cancel my flight," "how much
-            baggage can I bring," "can I change the travel date" — are also the most repetitive
+            The support queries that pile up fastest at an OTA ("cancel my flight," "how much
+            baggage can I bring," "can I change the travel date") are also the most repetitive
             and rule-governed. A human agent resolving them one ticket at a time is expensive and
             slow at OTA volumes; a plain FAQ chatbot that only answers questions can't actually
             act on a booking. The gap this project scopes is the one in between: an assistant that
-            can both answer <em>and</em> execute — cancel a booking, initiate a refund, apply a
-            fare rule — which is a materially different (and riskier) design problem than a
+            can both answer <em>and</em> execute (cancel a booking, initiate a refund, apply a
+            fare rule), which is a materially different (and riskier) design problem than a
             Q&amp;A bot, because it can now make a costly, sometimes irreversible mistake on its
             own.
           </p>
@@ -791,10 +791,10 @@
           <h4>Scope &amp; Non-Goals</h4>
           <p>
             <strong>In scope:</strong> cancellations, refund recommendations, baggage-allowance
-            questions, and date/name booking changes — the four query types responsible for most
+            questions, and date/name booking changes: the four query types responsible for most
             repetitive support volume. <strong>Explicitly routed to a human, never handled
             autonomously:</strong> visa <em>legal</em> advice (a compliance and liability
-            question, not a support one — the bot can point to the airline/embassy's own
+            question, not a support one; the bot can point to the airline/embassy's own
             documentation but never advise), disputes and fraud claims, and any refund above a
             fixed autonomous-action ceiling (see Guardrails below).
           </p>
@@ -809,12 +809,12 @@
           <ul>
             <li><strong>Answer-only, can't act</strong>: most bots can tell you the cancellation policy but can't actually cancel anything; the moment a user needs an action taken, they're back in a queue for a human, which defeats the point of automating the repetitive cases in the first place.</li>
             <li><strong>Black-box numbers</strong>: the few bots that do quote a refund or fee rarely show the rule behind it, so a user has no way to check it's right, which is the same trust erosion the fare-shock problem in the <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a> causes at the booking stage.</li>
-            <li><strong>Silent or absent confirmation</strong>: bots that can act either skip a confirmation step entirely (risky) or are so conservative they add friction to low-risk actions too (annoying) — few calibrate the gate to the actual risk of the specific action, the way Flow 1 vs. Flow 2 do below.</li>
+            <li><strong>Silent or absent confirmation</strong>: bots that can act either skip a confirmation step entirely (risky) or are so conservative they add friction to low-risk actions too (annoying): few calibrate the gate to the actual risk of the specific action, the way Flow 1 vs. Flow 2 do below.</li>
             <li><strong>Context loss at handoff</strong>: "please repeat your issue" after being passed to a human is one of the most common support complaints in the category; the bot's understanding of the problem evaporates the moment escalation happens.</li>
           </ul>
           <p>
             The wireframes further down (Screens 1–4) are the direct, one-to-one answer to these
-            four gaps, not generic chat-UI decoration — each screen is annotated with the specific
+            four gaps, not generic chat-UI decoration; each screen is annotated with the specific
             failure mode it closes. But rather than leave it at mockups, the architecture below is
             also built and actually running:
           </p>
@@ -827,20 +827,20 @@
           </picture>
         </a>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">
-          Click to open the live, interactive demo (also available in dark mode) — a rule-based
+          Click to open the live, interactive demo (also available in dark mode): a rule-based
           simulation of the flows and guardrails below, running entirely in your browser. A public
           static site can't safely hold an API key to call a real LLM, so this demonstrates the
           <em>architecture</em> working end to end (confirmation gate, escalation handoff, audit
-          trail), not a claim of production-grade language understanding — labeled as exactly that
+          trail), not a claim of production-grade language understanding; labeled as exactly that
           on the demo page itself.
         </p>
 
         <div class="cs-narrative">
-          <h4>Flow 1 — Cancellation + Refund Recommendation (highest-risk flow)</h4>
+          <h4>Flow 1: Cancellation + Refund Recommendation (highest-risk flow)</h4>
           <p>
             The flow with the most at stake: it ends in an irreversible action (a cancelled
-            booking) and moves real money. Representative flow, illustrating the decision points
-            — not a transcript from a live system:
+            booking) and moves real money. Representative flow, illustrating the decision points,
+            not a transcript from a live system:
           </p>
         </div>
 
@@ -853,7 +853,7 @@
               <tr><td data-label="Turn">3</td><td data-label="Speaker">User</td><td data-label="Message">"Yes, how much"</td><td data-label="System">—</td></tr>
               <tr><td data-label="Turn">4</td><td data-label="Speaker">Agent</td><td data-label="Message">"You'd get back ₹3,200 of ₹5,800 paid. Confirm cancellation?"</td><td data-label="System"><strong>Confirmation gate</strong>: irreversible action, requires explicit user confirmation before executing (guardrail, not optional)</td></tr>
               <tr><td data-label="Turn">5</td><td data-label="Speaker">User</td><td data-label="Message">"Confirmed"</td><td data-label="System">—</td></tr>
-              <tr><td data-label="Turn">6</td><td data-label="Speaker">Agent</td><td data-label="Message">"Done — booking cancelled, ₹3,200 refund initiated, arrives in 5–7 business days. Reference CXL-48213."</td><td data-label="System">Tool calls: cancel_booking() + issue_refund() — both logged to the audit trail below</td></tr>
+              <tr><td data-label="Turn">6</td><td data-label="Speaker">Agent</td><td data-label="Message">"Done — booking cancelled, ₹3,200 refund initiated, arrives in 5–7 business days. Reference CXL-48213."</td><td data-label="System">Tool calls: cancel_booking() + issue_refund(): both logged to the audit trail below</td></tr>
             </tbody>
           </table>
         </div>
@@ -864,13 +864,13 @@
             <img src="projects/travel-support-copilot/screenshots/wireframes-light.png" alt="Four wireframes for the Travel Support AI Copilot: Reasoning You Can See (visible confidence and fare-rule reasoning), Confirm Before It's Irreversible (a confirmation gate before cancel/refund actions), Context Follows You to a Human (a structured handoff summary instead of a repeat-yourself transcript), and Audit Trail for Support Ops (every autonomous action logged with a confidence score and review flag)" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
           </picture>
         </a>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode) — each screen is annotated with the specific industry gap it closes.</p>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode): each screen is annotated with the specific industry gap it closes.</p>
 
         <details class="cs-showmore">
-          <summary>Show more — Flows 2 &amp; 3, agent architecture, guardrails, evaluation, metrics, risks <span class="sm-count">(the safety-critical half)</span></summary>
+          <summary>Show more: Flows 2 &amp; 3, agent architecture, guardrails, evaluation, metrics, risks <span class="sm-count">(the safety-critical half)</span></summary>
 
         <div class="cs-narrative">
-          <h4>Flow 2 — Baggage Policy Question (lowest-risk flow)</h4>
+          <h4>Flow 2: Baggage Policy Question (lowest-risk flow)</h4>
           <p>
             The contrast case: a pure information lookup with no action taken and nothing to
             confirm, so it needs none of Flow 1's guardrails.
@@ -880,15 +880,15 @@
             <li><strong>Agent</strong> (intent: baggage_query, 0.99 confidence) → tool call: fetch fare rules for the booking's specific fare class → <strong>"Your Economy Saver fare includes 15kg check-in. Extra baggage is ₹500/kg if you add it now, or ₹800/kg at the airport — want me to add extra baggage to this booking?"</strong></li>
           </ul>
           <p>
-            Fully autonomous end-to-end — answered <em>and</em> resolved the likely follow-up
+            Fully autonomous end-to-end: answered <em>and</em> resolved the likely follow-up
             (add baggage) without a human, because nothing here is irreversible or high-value
             enough to need a confirmation gate.
           </p>
 
-          <h4>Flow 3 — Booking Date Change (medium-risk flow)</h4>
+          <h4>Flow 3: Booking Date Change (medium-risk flow)</h4>
           <p>
             Sits between the two above: it's an action, so pure information-lookup rules don't
-            apply, but a correctable one, so it gets a lighter version of Flow 1's gate — confirm the fare difference, but
+            apply, but a correctable one, so it gets a lighter version of Flow 1's gate: confirm the fare difference, but
             no separate human-escalation trigger unless the fare-difference lookup itself fails.
             Intent: change_booking_date → tool call: check seat availability + fare difference on
             new date → agent states the fare difference and change fee → single confirmation →
@@ -901,38 +901,38 @@
             message into one of the in-scope intents above, or "unclassified" → human.
             <strong>(2) Tool-calling layer</strong>: each intent maps to a fixed set of callable
             tools (PNR lookup, refund_policy_engine, fare-difference calculator, cancel_booking,
-            issue_refund, change_booking) — the agent can only call tools on this allow-list, it
+            issue_refund, change_booking): the agent can only call tools on this allow-list, it
             cannot invent new actions. <strong>(3) Confirmation gate</strong>: any tool call that
             is irreversible or moves money (cancel_booking, issue_refund) requires an explicit
             user confirmation turn before executing, never fires on the first pass.
             <strong>(4) Escalation router</strong>: triggers on low intent-confidence
             (&lt;0.85), a tool call failing twice, explicit user frustration signals, or any
-            query touching a hard non-goal (visa advice, disputes) — handed to a human agent with
+            query touching a hard non-goal (visa advice, disputes): handed to a human agent with
             the full conversation transcript attached, not restarted from zero.
           </p>
 
           <h4>Guardrails</h4>
           <p>
             This is the part of the design that actually differentiates a support <em>copilot</em>
-            from a support <em>chatbot</em> — and the part a scope doc for an agent that can take
+            from a support <em>chatbot</em>, and the part a scope doc for an agent that can take
             real actions can't skip:
           </p>
           <ul>
             <li><strong>Autonomous-action ceiling</strong>: the agent may autonomously execute cancellations/refunds up to a fixed rupee ceiling; above it, the same flow runs but ends in a human-approval step instead of auto-executing.</li>
             <li><strong>Confirmation before irreversible actions</strong>: never optional, shown in Flow 1 above; a wrong autonomous cancellation is far more costly to trust than a wrong autonomous baggage-fee quote.</li>
-            <li><strong>No autonomous visa/legal advice</strong>: the intent router treats this as a hard non-goal, not a confidence threshold — it escalates every time, regardless of how confident the model is in an answer.</li>
-            <li><strong>Full audit trail</strong>: every tool call the agent executes, conversations included, is logged with the triggering intent, confidence score, and outcome, reviewable by support ops — the same operational-audit discipline as the PCMS payout reconciliation work (see Technical Execution, T27).</li>
+            <li><strong>No autonomous visa/legal advice</strong>: the intent router treats this as a hard non-goal, not a confidence threshold; it escalates every time, regardless of how confident the model is in an answer.</li>
+            <li><strong>Full audit trail</strong>: every tool call the agent executes, conversations included, is logged with the triggering intent, confidence score, and outcome, reviewable by support ops, the same operational-audit discipline as the PCMS payout reconciliation work (see Technical Execution, T27).</li>
           </ul>
 
           <h4>Evaluation Approach</h4>
           <p>
-            Deflection rate alone is a misleading headline metric here — a bot can "deflect" a
+            Deflection rate alone is a misleading headline metric here: a bot can "deflect" a
             ticket by giving an answer that satisfies the user in the moment but is wrong, which
             shows up as a good deflection number and a bad outcome. Evaluation needs three lenses,
             not one: <strong>resolution accuracy</strong> (a sampled human audit of closed
             bot-handled tickets weighed against the bot's own confidence score), <strong>wrong-action
             rate</strong>: the safety metric, tracking autonomous actions a human reviewer would
-            have executed differently, weighted far more heavily than any convenience metric — and
+            have executed differently, weighted far more heavily than any convenience metric, and
             <strong>escalation-appropriateness</strong>, checking the router escalates when it
             should as often as it deflects when it shouldn't.
           </p>
@@ -942,8 +942,8 @@
           <table class="ptable2">
             <thead><tr><th>Metric</th><th>What it's really measuring</th><th>Why it's on this list</th></tr></thead>
             <tbody>
-              <tr><td data-label="Metric">Containment rate</td><td data-label="Measuring">% of in-scope tickets resolved without a human</td><td data-label="Why">The headline efficiency number — but never read alone (see below)</td></tr>
-              <tr><td data-label="Metric">Wrong-action rate</td><td data-label="Measuring">Autonomous actions a human audit would reverse or flag</td><td data-label="Why">The safety guardrail metric — this one has veto power over containment rate</td></tr>
+              <tr><td data-label="Metric">Containment rate</td><td data-label="Measuring">% of in-scope tickets resolved without a human</td><td data-label="Why">The headline efficiency number, but never read alone (see below)</td></tr>
+              <tr><td data-label="Metric">Wrong-action rate</td><td data-label="Measuring">Autonomous actions a human audit would reverse or flag</td><td data-label="Why">The safety guardrail metric: this one has veto power over containment rate</td></tr>
               <tr><td data-label="Metric">CSAT on bot-resolved tickets</td><td data-label="Measuring">Satisfaction specifically on containment, not overall support CSAT</td><td data-label="Why">A ticket can be "contained" and still leave the user unhappy</td></tr>
               <tr><td data-label="Metric">Escalation-appropriateness</td><td data-label="Measuring">Did the router escalate the tickets it should have</td><td data-label="Why">Catches an overconfident agent as readily as an under-confident one</td></tr>
               <tr><td data-label="Metric">Time-to-resolution</td><td data-label="Measuring">End-to-end, bot-handled vs. human-handled tickets</td><td data-label="Why">The business-facing efficiency number, once the safety metrics above clear</td></tr>
@@ -960,7 +960,7 @@
             guardrail and resolves in one turn), that's roughly a sixth of total support volume
             handled at near-zero marginal cost instead of a human agent's fully-loaded
             cost-per-ticket. The number that actually matters for a launch decision, though, is
-            the wrong-action rate at that containment level — a model here would need real
+            the wrong-action rate at that containment level; a model here would need real
             historical ticket data to size properly, which is exactly why this stays a scope doc
             and not a "built" project, unlike the modeled-but-labeled dataset in the
             <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>.
@@ -968,7 +968,7 @@
 
           <h4>Risks</h4>
           <p>
-            The risk that actually matters isn't "the bot gives a bad answer" — a Q&amp;A chatbot
+            The risk that actually matters isn't "the bot gives a bad answer": a Q&amp;A chatbot
             has that risk too, and it's recoverable. It's <strong>the bot takes a bad
             action</strong>: an autonomous cancellation or refund that shouldn't have happened costs
             real money and leaves a damaged booking behind, well past an unhelpful chat log's worth of harm. Every guardrail
@@ -981,7 +981,7 @@
           <p>
             The same lesson as the ChatGPT Memory Feature teardown (Feature Reverse Engineering,
             T18) shows up again here in a higher-stakes form: the hard PM problem in agentic AI
-            isn't language understanding or intent classification — those are largely solved. It's
+            isn't language understanding or intent classification (those are largely solved). It's
             designing the guardrail and escalation layer that keeps the agent's inevitable
             mistakes cheap and reversible instead of expensive and permanent.
           </p>
@@ -1025,17 +1025,17 @@
           <h4>The Gap Nobody's Closing</h4>
           <p>
             Three gaps stack on top of each other, and most tools only fix the first: nobody
-            actually knows how work gets done — the real process lives in muscle memory across a
-            dozen browser tabs, and documented SOPs are fiction. The insight dies in a slide — the
-            distance from "here's an inefficiency" to someone actually building the fix is where
-            most optimization effort quietly expires. And nobody proves it worked — optimization
+            actually knows how work gets done. The real process lives in muscle memory across a
+            dozen browser tabs, and documented SOPs are fiction. The insight dies in a slide, too:
+            the distance from "here's an inefficiency" to someone actually building the fix is where
+            most optimization effort quietly expires. And nobody proves it worked: optimization
             gets bought on ROI, but almost nobody closes the loop from "we changed X" to "it saved
             ₹Y / Z hours." Process-mining incumbents like Celonis and UiPath attack the first gap
-            with heavy, IT-led, six-figure deployments — and stop there. Weft attacks all three,
+            with heavy, IT-led, six-figure deployments, and stop there. Weft attacks all three,
             lightly, from the browser.
           </p>
 
-          <h4>The Mechanism — Observer, Not Agent</h4>
+          <h4>The Mechanism: Observer, Not Agent</h4>
           <p>
             Weft is a browser-side observer, not a tool that logs in for you. The user is already
             logged in; Weft watches while <em>they</em> work — no credentials collected or stored,
@@ -1043,7 +1043,7 @@
             the workflow (which step, which system, what kind of action) using stable element
             roles and labels, never the data on screen. Anything textual that's retained passes a
             PII-redaction pass, and a privacy preview shows the user exactly what will be stored
-            before it saves — closing a real hole found during a later security review, where
+            before it saves, closing a real hole found during a later security review, where
             structural ARIA roles on a data grid could otherwise leak on-screen content (a customer
             name in a table cell) even though form values were already masked.
           </p>
@@ -1059,12 +1059,12 @@
           <table class="ptable2">
             <thead><tr><th>Step</th><th>What happens</th></tr></thead>
             <tbody>
-              <tr><td data-label="Step">1. Capture</td><td data-label="What happens">User records a task once — and a few more times, because one recording is one person's happy path</td></tr>
+              <tr><td data-label="Step">1. Capture</td><td data-label="What happens">User records a task once, and a few more times, because one recording is one person's happy path</td></tr>
               <tr><td data-label="Step">2. Merge</td><td data-label="What happens">Sessions align into a single map: main path plus variant branches, with how often each occurs</td></tr>
               <tr><td data-label="Step">3. Analyze</td><td data-label="What happens">Each step is classified against a step-signature taxonomy and gets an AI/automation suggestion with an estimated saving</td></tr>
-              <tr><td data-label="Step">4. Spec</td><td data-label="What happens">Each kept opportunity becomes an automation brief — problem, systems touched, approach, effort estimate</td></tr>
+              <tr><td data-label="Step">4. Spec</td><td data-label="What happens">Each kept opportunity becomes an automation brief: problem, systems touched, approach, effort estimate</td></tr>
               <tr><td data-label="Step">5. Hand off</td><td data-label="What happens">The brief exports as a groomable Jira/Linear-ready ticket instead of a dead PDF</td></tr>
-              <tr><td data-label="Step">6. Measure</td><td data-label="What happens">Once shipped, the realized saving is tracked and rolled into an ROI view — hours and money saved, estimate vs. actual</td></tr>
+              <tr><td data-label="Step">6. Measure</td><td data-label="What happens">Once shipped, the realized saving is tracked and rolled into an ROI view: hours and money saved, estimate vs. actual</td></tr>
             </tbody>
           </table>
         </div>
@@ -1077,8 +1077,8 @@
             click, never covert or remotely triggered; it's <strong>worker-owned</strong>: the
             person reviews and can redact or delete what was captured before anything is shared;
             Weft <strong>never produces individual performance metrics</strong>: timing data finds
-            process bottlenecks, never rates a person; and it's <strong>private by structure</strong>
-            — the sensitive part is designed to never be captured, rather than protected after the
+            process bottlenecks, never rates a person; and it's <strong>private by structure</strong>,
+            meaning the sensitive part is designed to never be captured, rather than protected after the
             fact. These also defuse the biggest adoption and legal risk: recording workers is
             regulated (EU works councils; varying rules across India, Singapore, Dubai), and
             worker-initiated, worker-owned, local-only capture sidesteps most of it.
@@ -1086,17 +1086,17 @@
         </div>
 
         <details class="cs-showmore">
-          <summary>Show more — architecture, build status, business model, and the validation plan <span class="sm-count">(the technical and strategic half)</span></summary>
+          <summary>Show more: architecture, build status, business model, and the validation plan <span class="sm-count">(the technical and strategic half)</span></summary>
 
         <div class="cs-narrative">
           <h4>Architecture</h4>
           <p>
             Vite + <code>@crxjs/vite-plugin</code> + React + TypeScript, content script + service
-            worker + side panel, all local storage — no backend, no accounts, no network calls.
+            worker + side panel, all local storage: no backend, no accounts, no network calls.
             Reconstruction and merge are rules-based and client-side (segment by URL/submit/domain
             change/idle time; classify against the taxonomy; merge by step identity rather than
             literal position, so a single inserted or skipped step in one session doesn't break
-            alignment for every step after it) — chosen over ML because a wrong-but-explainable map
+            alignment for every step after it): chosen over ML because a wrong-but-explainable map
             the user can fix beats an opaque one, and there's no training data yet to justify the
             complexity.
           </p>
@@ -1115,7 +1115,7 @@
           <h4>The AI-Opportunity Layer</h4>
           <p>
             Each captured step is classified by a step-signature taxonomy that maps to a likely
-            intervention — this is the differentiated core, not the map itself:
+            intervention. This is the differentiated core, not the map itself:
           </p>
         </div>
 
@@ -1129,7 +1129,7 @@
               <tr><td data-label="Signature">Lookup / verification</td><td data-label="Intervention">Automated validation</td></tr>
               <tr><td data-label="Signature">Wait / handoff</td><td data-label="Intervention">Process redesign, not tech</td></tr>
               <tr><td data-label="Signature">Approval / decision</td><td data-label="Intervention">Policy automation + exception routing</td></tr>
-              <tr><td data-label="Signature">Exception branch (from merge)</td><td data-label="Intervention">Often the highest-value target — only visible once a workflow's been captured more than once</td></tr>
+              <tr><td data-label="Signature">Exception branch (from merge)</td><td data-label="Intervention">Often the highest-value target, only visible once a workflow's been captured more than once</td></tr>
             </tbody>
           </table>
         </div>
@@ -1148,10 +1148,10 @@
             stop at discovery.
           </p>
 
-          <h4>Validation Plan — Riskiest Assumption First</h4>
+          <h4>Validation Plan: Riskiest Assumption First</h4>
           <p>
             Tests are sequenced by what would kill the product, cheapest first, with kill criteria
-            set before each test — not "ship and see":
+            set before each test, not "ship and see":
           </p>
         </div>
 
@@ -1171,13 +1171,13 @@
         <div class="cs-narrative">
           <h4>What the Scoping Discipline Bought</h4>
           <p>
-            The disciplined part of this build wasn't cramming every good idea into the MVP — it
+            The disciplined part of this build wasn't cramming every good idea into the MVP; it
             was sorting six review-raised gaps by altitude. The ones that made the product invalid
             or unsellable without them (multi-session merge, page-content privacy) earned MVP slots;
             the ones with an expensive half (implementation hand-off, suggestion quality) got
             right-sized MVP features with the expensive part deferred; and the ones that were really
             principles or strategy, not build (worker-owned consent, the moat) got decided, not
-            coded. Knowing which gap belongs at which altitude is the actual PM work — not just
+            coded. Knowing which gap belongs at which altitude is the actual PM work, well beyond
             reacting to every piece of feedback the same way.
           </p>
         </div>
@@ -1223,12 +1223,12 @@
             A serious job application takes 6–8 hours of fragmented, error-prone manual work:
             decoding what a JD actually screens for, researching a company beyond stale memory,
             honestly assessing fit, tailoring a resume without breaking ATS parsing, building
-            interview answers, and drafting several pieces of outreach copy — each from scratch,
+            interview answers, and drafting several pieces of outreach copy, each from scratch,
             with no consistent quality bar. Generic AI chat makes this faster but not safer: it
             produces confident, plausible-sounding output that's frequently wrong in ways the
-            candidate can't detect — invented metrics, inflated scope, interview answers built on
-            facts not in the candidate's real history. In an interview, a fabricated claim doesn't
-            fail quietly — it fails in front of the person deciding whether to hire you.
+            candidate can't detect (invented metrics, inflated scope, interview answers built on
+            facts not in the candidate's real history). In an interview, a fabricated claim doesn't
+            fail quietly; it fails in front of the person deciding whether to hire you.
           </p>
 
           <h4>The Core Design Bet</h4>
@@ -1254,9 +1254,9 @@
             <thead><tr><th>Category</th><th>Agents</th><th>Job</th></tr></thead>
             <tbody>
               <tr><td data-label="Category">Extraction</td><td data-label="Agents">Resume Analysis, JD Intelligence, ATS Optimization, Resume Rewrite, Gap Analysis, Skill Evidence, Recruiter Simulation, Interview Coach, LinkedIn Optimization, Application Assets</td><td data-label="Job">Read the resume/JD and re-derive findings independently, so a later agent can cross-check them instead of trusting one chain blindly</td></tr>
-              <tr><td data-label="Category">Research</td><td data-label="Agents">Company Intelligence, Learning &amp; Certification, Career Strategy</td><td data-label="Job">Two-phase: a search-enabled research call, then a separate non-searching structuring call — so a wrong fact and a malformed JSON field are never the same failure</td></tr>
+              <tr><td data-label="Category">Research</td><td data-label="Agents">Company Intelligence, Learning &amp; Certification, Career Strategy</td><td data-label="Job">Two-phase: a search-enabled research call, then a separate non-searching structuring call, so a wrong fact and a malformed JSON field are never the same failure</td></tr>
               <tr><td data-label="Category">Synthesis</td><td data-label="Agents">Portfolio Recommendation, Final Report</td><td data-label="Job">Compose other agents' already-structured findings into a new artifact, rather than re-reading the source documents</td></tr>
-              <tr><td data-label="Category">Orchestration</td><td data-label="Agents">Planner, Critic, Supervisor</td><td data-label="Job">Reason about the other 15 agents, not resumes or JDs — grounded in one shared, machine-readable registry</td></tr>
+              <tr><td data-label="Category">Orchestration</td><td data-label="Agents">Planner, Critic, Supervisor</td><td data-label="Job">Reason about the other 15 agents, not resumes or JDs; grounded in one shared, machine-readable registry</td></tr>
             </tbody>
           </table>
         </div>
@@ -1264,14 +1264,14 @@
         <div class="cs-narrative">
           <h4>The Dashboard</h4>
           <p>
-            A production-quality Streamlit dashboard sits on top of the pipeline — not a generic
+            A production-quality Streamlit dashboard sits on top of the pipeline, well past a generic
             agent-builder UI, only this project's 18 agents. <strong>Demo mode</strong> (default, no
             key needed) replays the project's own hand-verified sample outputs so anyone can
-            exercise the full app — upload, live execution graph, history, and analytics — at zero
+            exercise the full app (upload, live execution graph, history, and analytics) at zero
             cost. <strong>Live mode</strong> unlocks real API calls behind an admin-set passcode,
             with a hard spend ceiling (<code>LIVE_MODE_COST_LIMIT_USD</code>): cumulative estimated
-            cost is checked after every single agent call, and the run stops immediately — no
-            further agents, no Critic, no Supervisor, since those would themselves spend more — the
+            cost is checked after every single agent call, and the run stops immediately (no
+            further agents, no Critic, no Supervisor, since those would themselves spend more) the
             moment the ceiling is met, with a clear "stopped early" banner and whatever completed
             still saved. The agent catalog itself is scanned live rather than hardcoded, from
             <code>career_copilot/agents/*.py</code>, so a new agent shows up in the execution graph
@@ -1281,11 +1281,11 @@
 
         <p style="margin:4px 0 4px">
           <a href="projects/career-copilot/demo.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;border:1px solid var(--line);background:var(--ink-3);color:var(--lime);text-decoration:none;font-weight:600;font-size:14px">
-            ▶ Watch the 2:16 narrated demo — the real dashboard running the live pipeline
+            ▶ Watch the 2:16 narrated demo: the real dashboard running the live pipeline
           </a>
         </p>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">
-          A genuine screen recording (Demo mode — no live API calls), not a mockup — uploading a
+          A genuine screen recording (Demo mode, no live API calls), not a mockup: uploading a
           resume/JD, the execution graph filling in live, then a tour of every history/analytics
           page.
         </p>
@@ -1294,7 +1294,7 @@
           <h4>Non-Fabrication as a Structural Constraint</h4>
           <p>
             Early on, non-fabrication was enforced entirely through system-prompt instructions
-            ("never invent facts"). That's necessary but not sufficient — a model instructed to be
+            ("never invent facts"). That's necessary but not sufficient: a model instructed to be
             helpful will still often fill a gap with something plausible rather than leave it
             empty, because empty <em>feels</em> unhelpful. The fix that actually held under review
             was structural: giving fields explicit null-ability and bracketed-placeholder
@@ -1305,52 +1305,52 @@
 
           <h4>Verification Approach</h4>
           <p>
-            Every numeric claim across all 18 agents' sample outputs — ATS score arithmetic,
-            gap-analysis row counts, skill-evidence confidence distributions, placeholder counts —
+            Every numeric claim across all 18 agents' sample outputs (ATS score arithmetic,
+            gap-analysis row counts, skill-evidence confidence distributions, placeholder counts)
             was independently recomputed with a script against the underlying JSON, not just
             asserted in prose. Critic Agent's first real review pass came back almost entirely
-            clean (14 of 15 agents approved or approved-with-minor-notes) — read correctly as a red
+            clean (14 of 15 agents approved or approved-with-minor-notes): read correctly as a red
             flag, not a green light, since a critic that always says "looks good" is
             indistinguishable from one that skipped the check entirely. The fix wasn't forcing it to
             find more issues artificially; it was giving it one concrete, mechanical task it
-            couldn't fake — recompute every stated total against the numbers it's supposedly
+            couldn't fake: recompute every stated total against the numbers it's supposedly
             summarizing. That's what caught the one real bug in the project (Learning &amp;
             Certification's stated total didn't match the sum of its own line items).
           </p>
         </div>
 
         <details class="cs-showmore">
-          <summary>Show more — the orchestration layer and lessons the build actually surfaced <span class="sm-count">(the review-and-verdict half)</span></summary>
+          <summary>Show more: the orchestration layer and lessons the build actually surfaced <span class="sm-count">(the review-and-verdict half)</span></summary>
 
         <div class="cs-narrative">
           <h4>The Orchestration Layer</h4>
           <p>
-            Planner, Critic, and Supervisor don't analyze resumes, JDs, or companies themselves —
+            Planner, Critic, and Supervisor don't analyze resumes, JDs, or companies themselves;
             they reason about the <em>other 15 agents</em>. Their shared ground truth is
             <code>AGENT_REGISTRY</code>, a machine-readable catalog of every agent's
             required/optional inputs and real dependencies, built directly from how each agent is
             implemented, with every <code>agent_id</code> and <code>depends_on</code> reference in
             a Planner-generated plan programmatically checked against it before acceptance. This
-            makes an entire class of hallucination — inventing an agent, or a dependency, that
-            doesn't exist — structurally impossible rather than just less likely. Supervisor is the
+            makes an entire class of hallucination (inventing an agent, or a dependency, that
+            doesn't exist) structurally impossible rather than just less likely. Supervisor is the
             top-level entry point: it cross-checks Planner's execution plan against what actually
             ran, cross-checks every Critic-flagged issue against a named, specific fix rather than
             a general assurance, and renders a single go/no-go verdict while carrying forward every
-            limitation the other 17 agents raised — instead of letting the verdict imply more
+            limitation the other 17 agents raised, instead of letting the verdict imply more
             confidence than the system actually earned.
           </p>
 
           <h4>What This Build Actually Surfaced</h4>
           <p>
-            A shared registry beats trusting an agent's self-description — the tempting shortcut
+            A shared registry beats trusting an agent's self-description. The tempting shortcut
             was describing the other agents inside each orchestrator's own system prompt, but that
             drifts the moment an agent's real required fields change and nobody updates three
             separate prompt descriptions; one machine-readable source of truth doesn't drift.
-            Two-phase research beats one-phase "search and format" — combining "search the web"
+            Two-phase research beats one-phase "search and format": combining "search the web"
             and "structure the answer" into a single model call conflates two different failure
             modes (wrong facts vs. wrong JSON), so splitting them means a review can tell which one
             actually broke. And "insufficient evidence" has to be a first-class schema value, not a
-            prompt suggestion — the lesson underneath the core design bet itself.
+            prompt suggestion; that's the lesson underneath the core design bet itself.
           </p>
 
           <h4>What Actually Made This Hard</h4>
@@ -1452,7 +1452,7 @@
           <p>
             An OTA or airline can't act on delay risk it hasn't aggregated. A single flight-status
             page tells one traveller their flight is late; nothing rolls that up into the pattern a
-            PM actually needs — which routes are structurally unreliable, which airlines run tighter
+            PM actually needs: which routes are structurally unreliable, which airlines run tighter
             operations, and when in the calendar or the day risk spikes. This project builds that
             rollup, answering the three questions a travel-tech PM would actually be asked before
             shipping something like the "delay-risk badge" recommended in the
@@ -1465,15 +1465,15 @@
             The honest constraint first: this was built in an environment that can't reach DGCA, US
             BTS, or Kaggle to pull a real historical dataset. Rather than present scraped-looking
             numbers that weren't actually real, I built a modeled dataset instead and said so
-            directly on the dashboard — 8,000 flights generated from parameters I chose and
+            directly on the dashboard: 8,000 flights generated from parameters I chose and
             documented: fictional airline names (so no delay number is ever attributed to a real,
             identifiable carrier), real Indian city-pair routes (airport congestion at Delhi/Mumbai/
             Bengaluru and effects like North Indian winter fog are public aviation-industry knowledge,
             not a claim about any company), and additive delay effects for route congestion, season,
             and time-of-day. Delay minutes are drawn from a <strong>gamma distribution</strong>, not a
-            normal one — real delays are right-skewed with a hard floor at zero, and gamma is bounded
+            normal one: real delays are right-skewed with a hard floor at zero, and gamma is bounded
             at zero and long-tailed by construction, which a normal distribution isn't. The first pass
-            came out at a 48.9% on-time rate — implausibly low for any real airline — so I re-tuned the
+            came out at a 48.9% on-time rate (implausibly low for any real airline), so I re-tuned the
             distribution parameters until the fleet-wide numbers matched a plausible real-world range,
             while keeping the underlying patterns (winter fog, monsoon, evening cascade) intact. Full
             calculation, every parameter, and the reasoning behind each one are documented in the
@@ -1484,18 +1484,18 @@
         </div>
 
         <details class="cs-showmore">
-          <summary>Show more — full calculation methodology, parameter tables <span class="sm-count">(every number, and why)</span></summary>
+          <summary>Show more: full calculation methodology, parameter tables <span class="sm-count">(every number, and why)</span></summary>
         <div class="cs-narrative">
-          <h4>Methodology — the calculation, step by step</h4>
+          <h4>Methodology: the calculation, step by step</h4>
           <p>For every one of the 8,000 simulated flights:</p>
           <ul>
-            <li>Draw a <strong>base delay</strong> from Gamma(shape=1.3, scale=3.2) — mean ≈ 4.2 minutes, right-skewed.</li>
-            <li>Multiply by that flight's <strong>airline reliability index</strong> (a single fixed number per airline, see table below) — the only airline-level effect in the model, kept deliberately simple so differences between the fictional carriers stay modest rather than dramatic.</li>
-            <li>Multiply by a <strong>time-of-day multiplier</strong> (0.90 Early Morning → 1.55 Night) — models how delays cascade later into an operating day.</li>
-            <li>Add a fixed <strong>route congestion term</strong> (see table below), scaled by 0.35 — a stand-in for how much busier Delhi/Mumbai/Bengaluru are than smaller airports.</li>
+            <li>Draw a <strong>base delay</strong> from Gamma(shape=1.3, scale=3.2): mean ≈ 4.2 minutes, right-skewed.</li>
+            <li>Multiply by that flight's <strong>airline reliability index</strong> (a single fixed number per airline, see table below), the only airline-level effect in the model, kept deliberately simple so differences between the fictional carriers stay modest rather than dramatic.</li>
+            <li>Multiply by a <strong>time-of-day multiplier</strong> (0.90 Early Morning → 1.55 Night) to model how delays cascade later into an operating day.</li>
+            <li>Add a fixed <strong>route congestion term</strong> (see table below), scaled by 0.35, a stand-in for how much busier Delhi/Mumbai/Bengaluru are than smaller airports.</li>
             <li>If the route is monsoon-sensitive <em>and</em> the month falls in Jun–Sep, add an extra Gamma(1.6, 5.0) term (mean ≈ 8 min).</li>
-            <li>If the route is fog-sensitive <em>and</em> the month is Dec/Jan, add an extra Gamma(1.8, 6.0) term (mean ≈ 10.8 min), amplified 1.3× for Early Morning departures — fog is worst at dawn.</li>
-            <li>Cancellation is decided separately, as its own probability: a 0.6% base rate, +1.8pp if monsoon-exposed that month, +2.4pp if fog-exposed that month. If cancelled, delay is zeroed — a cancellation is a different outcome from "a very late flight," not the same thing at the extreme end.</li>
+            <li>If the route is fog-sensitive <em>and</em> the month is Dec/Jan, add an extra Gamma(1.8, 6.0) term (mean ≈ 10.8 min), amplified 1.3× for Early Morning departures, since fog is worst at dawn.</li>
+            <li>Cancellation is decided separately, as its own probability: a 0.6% base rate, +1.8pp if monsoon-exposed that month, +2.4pp if fog-exposed that month. If cancelled, delay is zeroed; a cancellation is a different outcome from "a very late flight," not the same thing at the extreme end.</li>
             <li>A flight counts as <strong>delayed</strong> if its final delay exceeds 15 minutes (the standard on-time threshold) and it wasn't cancelled.</li>
           </ul>
           <div class="ptable2-wrap">
@@ -1532,14 +1532,14 @@
             </table>
           </div>
           <p>
-            Why these specific numbers: not derived from any real source — chosen, then iterated.
+            Why these specific numbers: not derived from any real source, chosen and then iterated.
             The first draft produced an implausible 48.9% on-time rate; I scaled the base gamma
-            parameters and congestion multiplier down until the fleet-wide rate landed at 84.4% —
-            inside a plausible real-world range — while preserving the relative shape of every
+            parameters and congestion multiplier down until the fleet-wide rate landed at 84.4%,
+            inside a plausible real-world range, while preserving the relative shape of every
             effect (which season is worst, which route is worst, night vs. morning). What this
             deliberately doesn't model: real distributional parameters fit from a published
             dataset (none was reachable from this environment), or flight-to-flight correlation
-            (a delayed inbound aircraft delaying its own next outbound leg) — a real airline
+            (a delayed inbound aircraft delaying its own next outbound leg). A real airline
             operations model would need that, and it's a materially harder problem than this
             exercise set out to solve.
           </p>
@@ -1549,10 +1549,10 @@
         <div class="cs-narrative">
           <h4>The Analysis</h4>
           <p>
-            With the dataset built, I grouped it four ways — by route, by airline, by season, and by
-            time of day — computing average delay, the share of flights delayed over 15 minutes, and
+            With the dataset built, I grouped it four ways (by route, by airline, by season, and by
+            time of day), computing average delay, the share of flights delayed over 15 minutes, and
             cancellation rate for each. A single "worst route" or "worst season" number hides the
-            risk that actually matters operationally, which is where two dimensions compound — so I
+            risk that actually matters operationally, which is where two dimensions compound, so I
             cross-tabbed the top 8 routes against all 5 seasons into a heatmap instead of stopping at
             one-dimensional rankings.
           </p>
@@ -1560,8 +1560,8 @@
           <h4>Key Findings</h4>
           <ul>
             <li><strong>84.4% on-time</strong> fleet-wide, 9.2min average delay, 1.1% cancellation rate.</li>
-            <li><strong>DEL-GOI is the single worst route</strong> (12.6min avg, 34% delayed &gt;15min) — the only route in the model that's both winter-fog- <em>and</em> monsoon-sensitive, so it takes a hit twice a year instead of once.</li>
-            <li><strong>Winter is the worst season by a wide margin</strong> (11.9min avg vs. 7.5min in Spring/Post-Monsoon) — every Delhi-origin route in the heatmap spikes in December–January.</li>
+            <li><strong>DEL-GOI is the single worst route</strong> (12.6min avg, 34% delayed &gt;15min): the only route in the model that's both winter-fog- <em>and</em> monsoon-sensitive, so it takes a hit twice a year instead of once.</li>
+            <li><strong>Winter is the worst season by a wide margin</strong> (11.9min avg vs. 7.5min in Spring/Post-Monsoon): every Delhi-origin route in the heatmap spikes in December–January.</li>
             <li><strong>Delays compound through the day</strong>: Night departures average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations cascade delays leg-to-leg.</li>
             <li><strong>Airline-level spread is real but secondary</strong>: the gap between the most and least reliable modeled carrier (7.6–10.7min) is smaller than the gap between Winter and Spring (7.5–11.9min). Route and season explain more than carrier choice does.</li>
           </ul>
@@ -1664,7 +1664,7 @@
         <div class="cs-narrative">
           <h4>What a Funnel Chart Leaves Out</h4>
           <p>
-            A funnel chart only shows where users leave — the actual PM work is pairing each
+            A funnel chart only shows where users leave. The actual PM work is pairing each
             drop-off with a testable behavioral reason instead of recommending "reduce friction"
             everywhere. This case study models a realistic OTA flight-booking funnel end to end
             and does that pairing for the stage that leaks hardest.
@@ -1673,7 +1673,7 @@
           <h4>The Funnel</h4>
           <p>
             Search → Results → Details (fare review) → Traveller Info → Payment → Confirmation.
-            The biggest drop-off by far is Results → Details, a modeled ~62% loss — the fare-review
+            The biggest drop-off by far is Results → Details, a modeled ~62% loss: the fare-review
             price reveal is the single largest leak in the funnel. Users arrive price-anchored from
             the results page and bounce once taxes, fees, and add-ons inflate the total.
           </p>
@@ -1684,7 +1684,7 @@
             <thead><tr><th>Funnel stage</th><th>Modeled conversion</th><th>Primary friction</th></tr></thead>
             <tbody>
               <tr><td data-label="Stage">Search → Results</td><td data-label="Conversion">~92%</td><td data-label="Friction">Slow results load on heavily filtered searches</td></tr>
-              <tr><td data-label="Stage">Results → Details (fare review)</td><td data-label="Conversion">~38%</td><td data-label="Friction">Price at search ≠ price at fare review — biggest leak</td></tr>
+              <tr><td data-label="Stage">Results → Details (fare review)</td><td data-label="Conversion">~38%</td><td data-label="Friction">Price at search ≠ price at fare review: biggest leak</td></tr>
               <tr><td data-label="Stage">Details → Traveller Info</td><td data-label="Conversion">~61%</td><td data-label="Friction">Add-on upsell screens before core info capture</td></tr>
               <tr><td data-label="Stage">Traveller Info → Payment</td><td data-label="Conversion">~74%</td><td data-label="Friction">Repeat manual entry for return-trip co-travellers</td></tr>
               <tr><td data-label="Stage">Payment → Confirmation</td><td data-label="Conversion">~88%</td><td data-label="Friction">OTP/gateway timeouts on mobile networks</td></tr>
@@ -1726,7 +1726,7 @@
 
           <h4>What This Generalizes To</h4>
           <p>
-            A funnel chart only shows where users leave — the RICE-worthy work is pairing each
+            A funnel chart only shows where users leave. The RICE-worthy work is pairing each
             drop-off with a testable behavioral reason (anchoring, default bias, form fatigue),
             not recommending "reduce friction" everywhere.
           </p>
@@ -1827,7 +1827,7 @@
         <div class="cs-narrative">
           <h4>The Feature</h4>
           <p>
-            Duolingo's Streak — the daily-use counter that resets on a missed day. The user
+            Duolingo's Streak: the daily-use counter that resets on a missed day. The user
             problem: learners forget, feel guilty, then quit. The business problem: D30 retention
             collapses without an intervention loop. Streak exists because loss aversion
             outperforms achievement motivation as a retention lever.
@@ -1838,7 +1838,7 @@
             Complete at least one lesson before the user's local day rolls over → the streak
             counter increments and the flame icon updates → as the day-end window approaches with
             no lesson yet done, a reminder notification fires. Under the hood: streak state is
-            per-user and evaluated against local midnight, not server time — the single detail
+            per-user and evaluated against local midnight, not server time, the single detail
             that makes "what counts as today" a genuinely nontrivial edge case (see below).
             "Streak Freeze" can be pre-equipped as an item to auto-preserve the streak through one
             missed day; "Streak Repair" lets a user restore a broken streak after the fact,
@@ -1860,7 +1860,7 @@
           <h4>Failure &amp; Abuse Scenarios</h4>
           <p>
             The most-discussed failure mode: users protect the streak with the fastest, easiest
-            lesson available rather than one that reflects real learning progress — the metric
+            lesson available rather than one that reflects real learning progress: the metric
             gets gamed against the product's actual goal. The anxiety side can also overcorrect:
             a user who fears an inevitable eventual miss disengages entirely rather than risk it,
             which is the opposite of the intended effect. Streak Freeze mitigates the anxiety but
@@ -1870,7 +1870,7 @@
 
           <h4>Trade-offs &amp; Redesign</h4>
           <p>
-            The "streak freeze" mechanic is the interesting abuse case here — it normalizes
+            The "streak freeze" mechanic is the interesting abuse case here: it normalizes
             breaks while still keeping users inside the ecosystem. But the feature creates user
             anxiety alongside motivation; it's not a free win. A redesign worth considering:
             surface a visible "grace period" upfront to reduce that anxiety while preserving the
@@ -1880,14 +1880,14 @@
           <h4>Launch, Adoption &amp; Business Impact</h4>
           <p>
             Streak is one of Duolingo's oldest gamification mechanics, broadly rolled out well
-            before the company's more recent AI-driven feature set, then iterated on over years —
+            before the company's more recent AI-driven feature set, then iterated on over years.
             Streak Freeze and Streak Repair came later as monetization and retention levers, and
             "Friend Streaks" (a shared streak between two mutual users) is a natural, later
             extension of the same loss-aversion mechanic applied socially. Duolingo has publicly
             described streaks as one of its strongest engagement and retention correlators in
-            shareholder communications and its own product writing — <span class="todo">fill
-            in a specific cited figure if one is worth quoting directly, and a source link</span>
-            — directionally credible given how central the mechanic remains to the product, even
+            shareholder communications and its own product writing (<span class="todo">fill
+            in a specific cited figure if one is worth quoting directly, and a source link</span>),
+            directionally credible given how central the mechanic remains to the product, even
             without an internally-verified number to cite here.
           </p>
         </div>
@@ -1913,12 +1913,12 @@
         <div class="cs-narrative">
           <h4>The Feature</h4>
           <p>
-            ChatGPT's Memory — persistent, cross-conversation memory. The user problem: people
+            ChatGPT's Memory: persistent, cross-conversation memory. The user problem: people
             repeat context in every new conversation; the assistant "forgets" preferences,
             ongoing projects, and prior corrections. The business problem: a session-to-session
             experience that feels disposable without persistence is a real retention and
             differentiation lever against competitors without it. Memory exists because
-            personalization compounds engagement — the more the assistant "knows" a user, the
+            personalization compounds engagement: the more the assistant "knows" a user, the
             higher the switching cost to a competitor.
           </p>
 
@@ -1931,11 +1931,11 @@
 
           <h4>The Hard Problem</h4>
           <p>
-            There's no ground-truth "correct" memory — success has to be measured by correction
+            There's no ground-truth "correct" memory; success has to be measured by correction
             rate and re-engagement, not accuracy. That creates a real trade-off between
             personalization and privacy: more useful over time, but a "creepiness" risk if memory
-            surfaces unprompted. The sharpest failure mode is stale memory — the model
-            over-indexing on outdated info (e.g. remembering a job the user has since left) —
+            surfaces unprompted. The sharpest failure mode is stale memory: the model
+            over-indexing on outdated info (e.g. remembering a job the user has since left),
             which needs a decay/update strategy layered on top of plain accumulation.
           </p>
 
@@ -1947,7 +1947,7 @@
 
           <h4>The Broader Pattern Here</h4>
           <p>
-            The general pattern for any AI feature with implicit state — the PM's real job is
+            The general pattern for any AI feature with implicit state: the PM's real job is
             designing the correction and visibility mechanism, not the memory mechanism itself.
           </p>
         </div>
@@ -1983,27 +1983,27 @@
         <div class="cs-narrative">
           <h4>Scope</h4>
           <p>
-            Redesign a loyalty program for an OTA or airline — the same lifecycle-design problem
+            Redesign a loyalty program for an OTA or airline: the same lifecycle-design problem
             every points program eventually hits: it drives initial sign-up, then stops driving
             behavior once a user stalls mid-tier.
           </p>
 
           <h4>Current Pain Points</h4>
           <p>
-            Redemption friction — points that are easy to earn but hard to actually spend
+            Redemption friction: points that are easy to earn but hard to actually spend
             (blackout dates, limited reward inventory) train users to stop valuing them, which
-            defeats the program's purpose. Tier stagnation — a user who reaches a mid-tier and
+            defeats the program's purpose. Tier stagnation: a user who reaches a mid-tier and
             realizes the next tier is unreachable within a normal booking cadence disengages
-            entirely rather than working toward it. Opaque earning rules — when users can't
+            entirely rather than working toward it. Opaque earning rules: when users can't
             predict what a booking will actually earn them, the program stops functioning as a
             behavioral lever at the moment of booking, which is the only moment that matters.
           </p>
 
-          <h4>Redesign — Earning, Redemption &amp; Gamification</h4>
+          <h4>Redesign: Earning, Redemption &amp; Gamification</h4>
           <p>
             Earning: shift part of the accrual from pure spend-based points to
-            behavior-based points — completing a review, booking during a shoulder season the
-            business wants to fill, or booking further in advance — so the program can be tuned
+            behavior-based points (completing a review, booking during a shoulder season the
+            business wants to fill, or booking further in advance) so the program can be tuned
             toward business-value behavior instead of raw transaction volume. Redemption: guarantee a
             minimum real-value redemption path (even if less attractive than a rare premium
             reward) so points always feel spendable, closing the "earn but can't use" trust gap.
@@ -2021,13 +2021,13 @@
             Repeat booking rate within the program (the core retention signal), tier upgrade rate
             (whether the redesigned progress visibility actually moves people, separate from whether
             points simply accrue), redemption rate (whether the "always spendable" fix actually closes
-            the trust gap), and — as a guardrail — cost-per-loyalty-booking, since a redesign
+            the trust gap), and, as a guardrail, cost-per-loyalty-booking, since a redesign
             that drives repeat bookings purely by giving away margin is a loss dressed up as a win.
           </p>
 
           <h4>What This Draws On</h4>
           <p>
-            Retention/lifecycle design — the loyalty counterpart to the funnel-conversion work in
+            Retention/lifecycle design: the loyalty counterpart to the funnel-conversion work in
             the Booking Funnel Analysis above.
           </p>
         </div>
@@ -2059,10 +2059,10 @@
         <div class="cs-narrative">
           <h4>The System</h4>
           <p>
-            Travel Distribution Systems — Amadeus IT Group, Sabre Corporation. The B2B plumbing
-            that makes every other system on this list possible — the GDS is what an OTA's search
+            Travel Distribution Systems: Amadeus IT Group, Sabre Corporation. The B2B plumbing
+            that makes every other system on this list possible: the GDS is what an OTA's search
             actually queries behind the scenes. What PMs build here is B2B infrastructure for
-            travel agencies and OTAs, not a consumer product — API reliability, partner SLAs, and
+            travel agencies and OTAs, not a consumer product; API reliability, partner SLAs, and
             integration timelines are the actual PM discipline, not UX polish.
           </p>
 
@@ -2117,27 +2117,27 @@
           <p>
             Zepto is an Indian quick-commerce company (founded 2021, Mumbai) promising grocery
             and daily-essentials delivery in roughly 10 minutes, built on a network of
-            hyperlocal "dark stores" — small, delivery-only micro-fulfillment centers rather than
+            hyperlocal "dark stores": small, delivery-only micro-fulfillment centers rather than
             customer-facing retail. Industry: quick commerce / India, one of the most heavily
             VC-funded and fiercely contested categories in Indian consumer tech.
             <span class="todo">fill in — precise TAM/SAM/SOM figures, with a cited source; a
             defensible estimate needs real market-sizing data, not a guess</span>. Business model:
             revenue from delivery fees plus retail margin on grocery/FMCG items, at high order
-            frequency and low basket size per order — the opposite unit-economics shape of a
+            frequency and low basket size per order, the opposite unit-economics shape of a
             traditional e-commerce order. Growth strategy: category expansion beyond core grocery
             into adjacent high-margin categories (electronics, beauty, pharmacy) once the delivery
             network exists.
           </p>
           <p>
             Competitors: Blinkit (Zomato-owned), Swiggy Instamart, BigBasket's quick-commerce arm
-            (Tata-owned), and newer entrants like Flipkart Minutes and Amazon Now — all racing on
+            (Tata-owned), and newer entrants like Flipkart Minutes and Amazon Now, all racing on
             the same dark-store-density playbook, which makes this one of the clearest
             multi-player moat questions in Indian consumer tech right now.
           </p>
 
           <h4>The Moat</h4>
           <p>
-            The competitive advantage is precision over scale — dark store density concentrated
+            The competitive advantage is precision over scale: dark store density concentrated
             in top-10 pin codes rather than broad coverage. The network effect: orders → better
             placement/inventory decisions → faster delivery → more orders (flywheel). The moat
             itself is dark store density in high-density pin codes. The risk is thin margins.
@@ -2154,7 +2154,7 @@
           <h4>Strategic Recommendations</h4>
           <p>
             Don't compete on core delivery-speed parity once it's table stakes across all major
-            players — compete on basket economics. Push private-label penetration in
+            players; compete on basket economics instead. Push private-label penetration in
             high-frequency categories (staples, household) to improve gross margin per order
             without relying on delivery-fee increases that would hurt the retention the density
             moat already bought. Treat premium/high-margin SKU categories (electronics, beauty)
@@ -2213,7 +2213,7 @@
             mechanic, no new inventory required, the easiest one to justify to an engineering
             team on effort alone. <strong>Smart refunds</strong>: the trust problem: refund
             policy already gets fought over in the payments work above (T16); this is the
-            user-facing half of that same fight. <strong>Waitlist for sold-out flights</strong> —
+            user-facing half of that same fight. <strong>Waitlist for sold-out flights</strong>:
             a demand-signal play as much as a feature: it tells the business what routes to add
             capacity on, beyond simply telling engineering what to build. <strong>Multi-city planner</strong>: explicitly
             the complexity the AI Trip Planner (T2) scoped out of its v1; this is where that
@@ -2225,12 +2225,12 @@
             where PRDs most often turn into vague feature wishlists instead of real requirements.
           </p>
           <p>
-            <span class="todo">Progress: 0 of 6 actually written — this page tracks real
+            <span class="todo">Progress: 0 of 6 actually written; this page tracks real
             completion, not intent; a PRD only gets checked off once it exists</span>
           </p>
           <h4>What This Portfolio Proves</h4>
           <p>
-            PRD writing at range and speed — breadth across a feature roadmap rather than depth
+            PRD writing at range and speed: breadth across a feature roadmap rather than depth
             on one project.
           </p>
         </div>
@@ -2262,10 +2262,10 @@
         <div class="cs-narrative">
           <h4>The Template</h4>
           <p>
-            A PRD structured as seven fields — problem statement, user stories, business goals,
-            requirements, acceptance criteria, success metrics, launch plan — the same structure
+            A PRD structured as seven fields (problem statement, user stories, business goals,
+            requirements, acceptance criteria, success metrics, launch plan), the same structure
             reused across the Travel PRD Portfolio (T10) and the AI Trip Planner PRD (T2). Seven
-            fields, not twelve — every extra section is a section a stakeholder skims past, and a
+            fields, not twelve: every extra section is a section a stakeholder skims past, and a
             skimmed section is worse than a missing one because it creates the illusion the
             question got answered.
           </p>
@@ -2273,7 +2273,7 @@
           <h4>Positioning</h4>
           <p>
             "A PRD reads like a spec doc. It works like a decision memo in disguise." The tell is which section
-            gets read first: nobody opens a PRD to find out how a button works — they open it to
+            gets read first: nobody opens a PRD to find out how a button works; they open it to
             find out whether the thing is worth building at all, which is a Goals and Requirements
             question, not an Acceptance Criteria one. Write the doc in that order and most of the
             actual disagreement in a review happens on page one, where it's cheap to argue about,
@@ -2282,7 +2282,7 @@
 
           <h4>Where This Template Breaks</h4>
           <p>
-            It's built for a feature with a defined shape — something that has a clear "done."
+            It's built for a feature with a defined shape: something that has a clear "done."
             It strains on genuinely open-ended, discovery-stage work, where forcing Acceptance
             Criteria this early just produces confident-sounding fiction. Swapping in a different
             template doesn't fix that; the honest fix is admitting the doc is a hypothesis memo at
@@ -2330,17 +2330,17 @@
           <p>
             Visas are the one travel step nobody enjoys and everybody procrastinates on. This
             tracks application status across embassies and visa-processing services, nudges the
-            user before a document actually goes bad — not after — estimates realistic processing
+            user before a document actually goes bad rather than after, estimates realistic processing
             time by visa type and country, and stores the underlying documents somewhere more
             durable than a phone's downloads folder.
           </p>
           <h4>Core Flows</h4>
           <p>
-            Status tracking pulls from whatever an embassy, VFS, or BLS portal actually exposes —
+            Status tracking pulls from whatever an embassy, VFS, or BLS portal actually exposes,
             scraping where there's no real API, because most consulates don't have one, which is
             an honest constraint worth naming up front rather than assuming away. Reminders run
             on two independent clocks at once: one counting down to the application deadline,
-            another counting down to passport or document expiry — the second one being the clock
+            another counting down to passport or document expiry, the second one being the clock
             people actually forget about, since it's not the one they were watching. The document
             vault is the unglamorous but load-bearing piece: encrypted storage for passport scans,
             photos, bank statements, and invitation letters, each with its own expiry flag so a
@@ -2356,7 +2356,7 @@
           <p>
             Regulated, documentation-heavy product design, and notification design that has to
             reason about two independent deadlines instead of one.
-            <span class="todo">Outcome: not built yet — stays labeled that way until it is</span>
+            <span class="todo">Outcome: not built yet; stays labeled that way until it is</span>
           </p>
         </div>
         <div class="jlinks">
@@ -2387,8 +2387,8 @@
         <div class="cs-narrative">
           <h4>The System</h4>
           <p>
-            Travel Payments Systems — Stripe, Adyen. The payment infrastructure underneath every
-            other system here — a single itinerary can touch 4+ currencies and vendors at once.
+            Travel Payments Systems: Stripe, Adyen. The payment infrastructure underneath every
+            other system here: a single itinerary can touch 4+ currencies and vendors at once.
             What PMs build here is multi-currency, multi-method payment handling and
             refund/dispute resolution at travel-specific scale and complexity, not a generic
             checkout flow.
@@ -2397,9 +2397,9 @@
           <h4>Key Concepts</h4>
           <ul>
             <li><strong>Split payments &amp; multi-vendor settlement</strong>: one trip booking might pay an airline, a hotel, and a local tour operator; who gets paid when, and who eats a refund when one leg cancels?</li>
-            <li><strong>Chargeback &amp; dispute handling</strong>: travel has uniquely high dispute rates (cancelled flights, no-show hotels) — a payments PM's core recurring headache.</li>
+            <li><strong>Chargeback &amp; dispute handling</strong>: travel has uniquely high dispute rates (cancelled flights, no-show hotels): a payments PM's core recurring headache.</li>
             <li><strong>Currency conversion &amp; FX risk</strong>: who absorbs the exchange-rate movement between the booking date and the travel date, months later?</li>
-            <li><strong>Refund policy as a product surface</strong>, not a policy doc — partial refunds, cash vs. credit, voucher expiry are UX decisions with real financial modeling behind each one.</li>
+            <li><strong>Refund policy as a product surface</strong>, not a policy doc: partial refunds, cash vs. credit, voucher expiry are UX decisions with real financial modeling behind each one.</li>
           </ul>
 
           <h4>Open Questions</h4>
@@ -2451,7 +2451,7 @@
 
           <h4>My Role</h4>
           <p>
-            I owned the integration requirements end-to-end — scoping what data needed to
+            I owned the integration requirements end-to-end: scoping what data needed to
             flow, in what direction, and on what trigger, working directly with engineering.
             Integration type: <span class="todo">fill in — REST / SOAP / batch file, whatever
             it actually was</span>. I used Postman to test and validate API requests/responses
@@ -2461,14 +2461,14 @@
           <h4>SQL &amp; Data Work</h4>
           <p>
             I drafted and validated KPI queries (SELECT, JOINs, GROUP BY / aggregations)
-            before they went to stakeholders — the same pattern used for Power BI and
+            before they went to stakeholders, the same pattern used for Power BI and
             Salesforce reporting. Sample query: <span class="todo">fill in — a real query
             you've written, e.g. a payout reconciliation check</span>.
           </p>
 
           <h4>Backlog &amp; Sequencing</h4>
           <p>
-            I ran the build in Jira and Azure DevOps — epics broken into stories, prioritized
+            I ran the build in Jira and Azure DevOps: epics broken into stories, prioritized
             by what was actually blocking partner onboarding or a revenue number that sprint,
             ahead of a formal reach/impact score. <span class="todo">fill in — a real example of
             re-sequencing this backlog under stakeholder pressure</span>.
@@ -2483,7 +2483,7 @@
           <h4>What Transfers From This</h4>
           <p>
             Comfort scoping a technical integration directly with engineering, beyond writing a PRD
-            and handing it off — the same rigor applies whether the "backlog" is a PRD's
+            and handing it off. The same rigor applies whether the "backlog" is a PRD's
             stories or a data-migration checklist.
           </p>
         </div>
@@ -2711,7 +2711,7 @@
 
           <h4>Lessons Learned</h4>
           <p>
-            Most PM decisions are "two-way doors" (reversible) — decide fast, ship, learn,
+            Most PM decisions are "two-way doors" (reversible): decide fast, ship, learn,
             iterate. Most PMs mistakenly treat them like "one-way doors," which is why
             products move slowly.
           </p>
