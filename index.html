@@ -786,7 +786,7 @@
             <li style="margin-bottom:7px">One-tap "hold my seat 15 min" for indecisive high-intent users.</li>
             <li style="margin-bottom:7px">Smart filter defaults ranked by price + duration + layover, not price alone.</li>
             <li style="margin-bottom:7px">Payment retry with saved card + biometric re-auth to cut payment-stage drop-off.</li>
-            <li style="margin-bottom:7px">Proactive delay-risk badge on results (feeds the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>).</li>
+            <li style="margin-bottom:7px">Proactive delay-risk badge on results (feeds the <a href="travel-tech-more.html#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>).</li>
             <li style="margin-bottom:7px">Group-booking mode for 4+ pax with a shared itinerary link.</li>
             <li>Post-booking "manage trip" nudges (web check-in, gate-change alerts) via push.</li>
           </ol>
@@ -818,7 +818,7 @@
             <li><strong>All-in fare display</strong>: the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
             <li><strong>Opt-in add-ons</strong>: directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete: it needs a revenue-per-booking floor agreed with Finance before shipping, on top of a UX sign-off.</li>
             <li><strong>Baggage/meal policy inline</strong>: minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
-            <li><strong>Delay-risk badge</strong>: risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T3</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
+            <li><strong>Delay-risk badge</strong>: risks eroding trust in a different direction if the underlying prediction (see the <a href="travel-tech-more.html#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T3</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
           </ul>
           <p>
             <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind the A/B test
@@ -1035,179 +1035,251 @@
       </article>
     </div>
 
-    <!-- T3: Flight Delay Prediction Dashboard -->
+<!-- T5: Travel Support AI Copilot -->
     <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum done">T3</span>
-        <h3 class="jcat-title">Flight Delay Prediction Dashboard</h3>
-        <span class="jcat-category">Metrics &amp; Analytics</span>
+        <span class="jnum done">T5</span>
+        <h3 class="jcat-title">Travel Support AI Copilot</h3>
+        <span class="jcat-category">AI &amp; Agentic Product Design</span>
       </div>
-      <article class="jcard" data-case="flight-delay-prediction-dashboard" data-updated="2026-07-30">
+      <article class="jcard" data-case="travel-support-ai-copilot" data-updated="2026-07-30">
         <button class="jhead" type="button">
           <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#FB923C,#C2410C)">📉</div>
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#2DD4BF,#0D9488)">💬</div>
             <div>
-              <div class="jtitle">Flight Delay Prediction Dashboard</div>
-              <div class="jmeta">⭐⭐⭐⭐ Built · see live dashboard</div>
+              <div class="jtitle">Travel Support AI Copilot</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Built · try the live demo</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <div class="cs-facts">
-          <span class="chip">8,000 flights analyzed</span>
-          <span class="chip">Self-contained HTML/JS dashboard</span>
-          <span class="chip">CVD-validated palette</span>
-          <span class="chip">Full dark-mode support</span>
+          <span class="chip">Live interactive demo</span>
+          <span class="chip">Agentic AI, not just Q&amp;A</span>
+          <span class="chip">3 core conversation flows</span>
+          <span class="chip">Escalation &amp; guardrail architecture</span>
+          <span class="chip">Deflection vs. safety trade-off</span>
         </div>
 
         <div class="cs-narrative">
-          <h4>Why Nobody Acts on This Today</h4>
+          <h4>Where the Volume Comes From</h4>
           <p>
-            An OTA or airline can't act on delay risk it hasn't aggregated. A single flight-status
-            page tells one traveller their flight is late; nothing rolls that up into the pattern a
-            PM actually needs: which routes are structurally unreliable, which airlines run tighter
-            operations, and when in the calendar or the day risk spikes. This project builds that
-            rollup, answering the three questions a travel-tech PM would actually be asked before
-            shipping something like the "delay-risk badge" recommended in the
-            <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a>:
-            which routes delay most, how airlines differ, and how season and time of day shape delay risk.
+            The support queries that pile up fastest at an OTA ("cancel my flight," "how much
+            baggage can I bring," "can I change the travel date") are also the most repetitive
+            and rule-governed. A human agent resolving them one ticket at a time is expensive and
+            slow at OTA volumes; a plain FAQ chatbot that only answers questions can't actually
+            act on a booking. The gap this project scopes is the one in between: an assistant that
+            can both answer <em>and</em> execute (cancel a booking, initiate a refund, apply a
+            fare rule), which is a materially different (and riskier) design problem than a
+            Q&amp;A bot, because it can now make a costly, sometimes irreversible mistake on its
+            own.
           </p>
 
-          <h4>My Approach</h4>
+          <h4>Scope &amp; Non-Goals</h4>
           <p>
-            The honest constraint first: this was built in an environment that can't reach DGCA, US
-            BTS, or Kaggle to pull a real historical dataset. Rather than present scraped-looking
-            numbers that weren't actually real, I built a modeled dataset instead and said so
-            directly on the dashboard: 8,000 flights generated from parameters I chose and
-            documented: fictional airline names (so no delay number is ever attributed to a real,
-            identifiable carrier), real Indian city-pair routes (airport congestion at Delhi/Mumbai/
-            Bengaluru and effects like North Indian winter fog are public aviation-industry knowledge,
-            not a claim about any company), and additive delay effects for route congestion, season,
-            and time-of-day. Delay minutes are drawn from a <strong>gamma distribution</strong>, not a
-            normal one: real delays are right-skewed with a hard floor at zero, and gamma is bounded
-            at zero and long-tailed by construction, which a normal distribution isn't. The first pass
-            came out at a 48.9% on-time rate (implausibly low for any real airline), so I re-tuned the
-            distribution parameters until the fleet-wide numbers matched a plausible real-world range,
-            while keeping the underlying patterns (winter fog, monsoon, evening cascade) intact. Full
-            calculation, every parameter, and the reasoning behind each one are documented in the
-            dashboard's own
-            <a href="projects/flight-delay-dashboard/dashboard.html#methodology" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Methodology section</a>,
-            summarized here in full.
+            <strong>In scope:</strong> cancellations, refund recommendations, baggage-allowance
+            questions, and date/name booking changes: the four query types responsible for most
+            repetitive support volume. <strong>Explicitly routed to a human, never handled
+            autonomously:</strong> visa <em>legal</em> advice (a compliance and liability
+            question, not a support one; the bot can point to the airline/embassy's own
+            documentation but never advise), disputes and fraud claims, and any refund above a
+            fixed autonomous-action ceiling (see Guardrails below).
+          </p>
+
+          <h4>Where Today's Industry Falls Short</h4>
+          <p>
+            Before designing the flows, it's worth naming the pattern this design is deliberately
+            not repeating. Travel and OTA support bots in production today tend to fail in one of
+            four recurring ways. This is a pattern visible across the category, not a claim about
+            any specific company's product:
+          </p>
+          <ul>
+            <li><strong>Answer-only, can't act</strong>: most bots can tell you the cancellation policy but can't actually cancel anything; the moment a user needs an action taken, they're back in a queue for a human, which defeats the point of automating the repetitive cases in the first place.</li>
+            <li><strong>Black-box numbers</strong>: the few bots that do quote a refund or fee rarely show the rule behind it, so a user has no way to check it's right, which is the same trust erosion the fare-shock problem in the <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a> causes at the booking stage.</li>
+            <li><strong>Silent or absent confirmation</strong>: bots that can act either skip a confirmation step entirely (risky) or are so conservative they add friction to low-risk actions too (annoying): few calibrate the gate to the actual risk of the specific action, the way Flow 1 vs. Flow 2 do below.</li>
+            <li><strong>Context loss at handoff</strong>: "please repeat your issue" after being passed to a human is one of the most common support complaints in the category; the bot's understanding of the problem evaporates the moment escalation happens.</li>
+          </ul>
+          <p>
+            The wireframes further down (Screens 1–4) are the direct, one-to-one answer to these
+            four gaps, not generic chat-UI decoration; each screen is annotated with the specific
+            failure mode it closes. But rather than leave it at mockups, the architecture below is
+            also built and actually running:
           </p>
         </div>
+
+        <a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
+          <picture>
+            <source srcset="projects/travel-support-copilot/screenshots/demo-light.webp" type="image/webp">
+            <img src="projects/travel-support-copilot/screenshots/demo-light.png" alt="Interactive demo of the Travel Support AI Copilot: a chat panel where a user asks to cancel a flight, the copilot shows its reasoning, a confirmation gate appears before the irreversible action executes, and the confirmed cancellation and refund are logged in the Agent Action Log panel" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          </picture>
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">
+          Click to open the live, interactive demo (also available in dark mode): a rule-based
+          simulation of the flows and guardrails below, running entirely in your browser. A public
+          static site can't safely hold an API key to call a real LLM, so this demonstrates the
+          <em>architecture</em> working end to end (confirmation gate, escalation handoff, audit
+          trail), not a claim of production-grade language understanding; labeled as exactly that
+          on the demo page itself.
+        </p>
+
+        <div class="cs-narrative">
+          <h4>Flow 1: Cancellation + Refund Recommendation (highest-risk flow)</h4>
+          <p>
+            The flow with the most at stake: it ends in an irreversible action (a cancelled
+            booking) and moves real money. Representative flow, illustrating the decision points,
+            not a transcript from a live system:
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Turn</th><th>Speaker</th><th>Message</th><th>System</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Turn">1</td><td data-label="Speaker">User</td><td data-label="Message">"I need to cancel my Delhi–Mumbai flight tomorrow"</td><td data-label="System">Intent: cancel_booking (0.96) → PNR lookup</td></tr>
+              <tr><td data-label="Turn">2</td><td data-label="Speaker">Agent</td><td data-label="Message">"Found your DEL–BOM booking. Cancelling inside 24hrs of departure means a partial refund under this fare's rules — you'd get back part of what you paid. Want the exact amount?"</td><td data-label="System">Tool call: refund_policy_engine(fare_class, hours_to_departure)</td></tr>
+              <tr><td data-label="Turn">3</td><td data-label="Speaker">User</td><td data-label="Message">"Yes, how much"</td><td data-label="System">—</td></tr>
+              <tr><td data-label="Turn">4</td><td data-label="Speaker">Agent</td><td data-label="Message">"You'd get back ₹3,200 of ₹5,800 paid. Confirm cancellation?"</td><td data-label="System"><strong>Confirmation gate</strong>: irreversible action, requires explicit user confirmation before executing (guardrail, not optional)</td></tr>
+              <tr><td data-label="Turn">5</td><td data-label="Speaker">User</td><td data-label="Message">"Confirmed"</td><td data-label="System">—</td></tr>
+              <tr><td data-label="Turn">6</td><td data-label="Speaker">Agent</td><td data-label="Message">"Done — booking cancelled, ₹3,200 refund initiated, arrives in 5–7 business days. Reference CXL-48213."</td><td data-label="System">Tool calls: cancel_booking() + issue_refund(): both logged to the audit trail below</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
+          <picture>
+            <source srcset="projects/travel-support-copilot/screenshots/wireframes-light.webp" type="image/webp">
+            <img src="projects/travel-support-copilot/screenshots/wireframes-light.png" alt="Four wireframes for the Travel Support AI Copilot: Reasoning You Can See (visible confidence and fare-rule reasoning), Confirm Before It's Irreversible (a confirmation gate before cancel/refund actions), Context Follows You to a Human (a structured handoff summary instead of a repeat-yourself transcript), and Audit Trail for Support Ops (every autonomous action logged with a confidence score and review flag)" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          </picture>
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode): each screen is annotated with the specific industry gap it closes.</p>
 
         <details class="cs-showmore">
-          <summary>Show more: full calculation methodology, parameter tables <span class="sm-count">(every number, and why)</span></summary>
+          <summary>Show more: Flows 2 &amp; 3, agent architecture, guardrails, evaluation, metrics, risks <span class="sm-count">(the safety-critical half)</span></summary>
+
         <div class="cs-narrative">
-          <h4>Methodology: the calculation, step by step</h4>
-          <p>For every one of the 8,000 simulated flights:</p>
-          <ul>
-            <li>Draw a <strong>base delay</strong> from Gamma(shape=1.3, scale=3.2): mean ≈ 4.2 minutes, right-skewed.</li>
-            <li>Multiply by that flight's <strong>airline reliability index</strong> (a single fixed number per airline, see table below), the only airline-level effect in the model, kept deliberately simple so differences between the fictional carriers stay modest rather than dramatic.</li>
-            <li>Multiply by a <strong>time-of-day multiplier</strong> (0.90 Early Morning → 1.55 Night) to model how delays cascade later into an operating day.</li>
-            <li>Add a fixed <strong>route congestion term</strong> (see table below), scaled by 0.35, a stand-in for how much busier Delhi/Mumbai/Bengaluru are than smaller airports.</li>
-            <li>If the route is monsoon-sensitive <em>and</em> the month falls in Jun–Sep, add an extra Gamma(1.6, 5.0) term (mean ≈ 8 min).</li>
-            <li>If the route is fog-sensitive <em>and</em> the month is Dec/Jan, add an extra Gamma(1.8, 6.0) term (mean ≈ 10.8 min), amplified 1.3× for Early Morning departures, since fog is worst at dawn.</li>
-            <li>Cancellation is decided separately, as its own probability: a 0.6% base rate, +1.8pp if monsoon-exposed that month, +2.4pp if fog-exposed that month. If cancelled, delay is zeroed; a cancellation is a different outcome from "a very late flight," not the same thing at the extreme end.</li>
-            <li>A flight counts as <strong>delayed</strong> if its final delay exceeds 15 minutes (the standard on-time threshold) and it wasn't cancelled.</li>
-          </ul>
-          <div class="ptable2-wrap">
-            <table class="ptable2">
-              <thead><tr><th>Airline (fictional)</th><th>Type</th><th>Reliability index</th></tr></thead>
-              <tbody>
-                <tr><td>BlueSky Air</td><td>Full-service</td><td>0.75 (best)</td></tr>
-                <tr><td>IndiFly</td><td>LCC</td><td>1.00</td></tr>
-                <tr><td>Skyline National</td><td>Full-service</td><td>1.15</td></tr>
-                <tr><td>Metro Express</td><td>LCC</td><td>1.25</td></tr>
-                <tr><td>Coastal Wings</td><td>Regional/turboprop</td><td>1.35 (worst)</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="ptable2-wrap">
-            <table class="ptable2">
-              <thead><tr><th>Route</th><th>Congestion term (min)</th><th>Monsoon-sensitive</th><th>Fog-sensitive</th></tr></thead>
-              <tbody>
-                <tr><td>DEL-BOM</td><td>9</td><td>—</td><td>Yes</td></tr>
-                <tr><td>DEL-BLR</td><td>7</td><td>—</td><td>Yes</td></tr>
-                <tr><td>DEL-GOI</td><td>7</td><td>Yes</td><td>Yes</td></tr>
-                <tr><td>DEL-HYD</td><td>7</td><td>—</td><td>Yes</td></tr>
-                <tr><td>DEL-CCU</td><td>6</td><td>—</td><td>Yes</td></tr>
-                <tr><td>DEL-AMD</td><td>6</td><td>—</td><td>Yes</td></tr>
-                <tr><td>DEL-PNQ</td><td>6</td><td>—</td><td>Yes</td></tr>
-                <tr><td>BOM-BLR</td><td>6</td><td>—</td><td>—</td></tr>
-                <tr><td>BOM-COK</td><td>5</td><td>Yes</td><td>—</td></tr>
-                <tr><td>COK-BOM</td><td>5</td><td>Yes</td><td>—</td></tr>
-                <tr><td>BLR-HYD</td><td>4</td><td>—</td><td>—</td></tr>
-                <tr><td>MAA-CCU</td><td>4</td><td>—</td><td>—</td></tr>
-                <tr><td>BLR-COK</td><td>4</td><td>Yes</td><td>—</td></tr>
-                <tr><td>HYD-MAA</td><td>4</td><td>—</td><td>—</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <h4>Flow 2: Baggage Policy Question (lowest-risk flow)</h4>
           <p>
-            Why these specific numbers: not derived from any real source, chosen and then iterated.
-            The first draft produced an implausible 48.9% on-time rate; I scaled the base gamma
-            parameters and congestion multiplier down until the fleet-wide rate landed at 84.4%,
-            inside a plausible real-world range, while preserving the relative shape of every
-            effect (which season is worst, which route is worst, night vs. morning). What this
-            deliberately doesn't model: real distributional parameters fit from a published
-            dataset (none was reachable from this environment), or flight-to-flight correlation
-            (a delayed inbound aircraft delaying its own next outbound leg). A real airline
-            operations model would need that, and it's a materially harder problem than this
-            exercise set out to solve.
+            The contrast case: a pure information lookup with no action taken and nothing to
+            confirm, so it needs none of Flow 1's guardrails.
+          </p>
+          <ul>
+            <li><strong>User:</strong> "How much check-in baggage do I get on my booking?"</li>
+            <li><strong>Agent</strong> (intent: baggage_query, 0.99 confidence) → tool call: fetch fare rules for the booking's specific fare class → <strong>"Your Economy Saver fare includes 15kg check-in. Extra baggage is ₹500/kg if you add it now, or ₹800/kg at the airport — want me to add extra baggage to this booking?"</strong></li>
+          </ul>
+          <p>
+            Fully autonomous end-to-end: answered <em>and</em> resolved the likely follow-up
+            (add baggage) without a human, because nothing here is irreversible or high-value
+            enough to need a confirmation gate.
+          </p>
+
+          <h4>Flow 3: Booking Date Change (medium-risk flow)</h4>
+          <p>
+            Sits between the two above: it's an action, so pure information-lookup rules don't
+            apply, but a correctable one, so it gets a lighter version of Flow 1's gate: confirm the fare difference, but
+            no separate human-escalation trigger unless the fare-difference lookup itself fails.
+            Intent: change_booking_date → tool call: check seat availability + fare difference on
+            new date → agent states the fare difference and change fee → single confirmation →
+            executes change_booking() and emails the updated ticket.
+          </p>
+
+          <h4>Agent Architecture</h4>
+          <p>
+            Four layers, in order: <strong>(1) Intent router</strong>: classifies the incoming
+            message into one of the in-scope intents above, or "unclassified" → human.
+            <strong>(2) Tool-calling layer</strong>: each intent maps to a fixed set of callable
+            tools (PNR lookup, refund_policy_engine, fare-difference calculator, cancel_booking,
+            issue_refund, change_booking): the agent can only call tools on this allow-list, it
+            cannot invent new actions. <strong>(3) Confirmation gate</strong>: any tool call that
+            is irreversible or moves money (cancel_booking, issue_refund) requires an explicit
+            user confirmation turn before executing, never fires on the first pass.
+            <strong>(4) Escalation router</strong>: triggers on low intent-confidence
+            (&lt;0.85), a tool call failing twice, explicit user frustration signals, or any
+            query touching a hard non-goal (visa advice, disputes): handed to a human agent with
+            the full conversation transcript attached, not restarted from zero.
+          </p>
+
+          <h4>Guardrails</h4>
+          <p>
+            This is the part of the design that actually differentiates a support <em>copilot</em>
+            from a support <em>chatbot</em>, and the part a scope doc for an agent that can take
+            real actions can't skip:
+          </p>
+          <ul>
+            <li><strong>Autonomous-action ceiling</strong>: the agent may autonomously execute cancellations/refunds up to a fixed rupee ceiling; above it, the same flow runs but ends in a human-approval step instead of auto-executing.</li>
+            <li><strong>Confirmation before irreversible actions</strong>: never optional, shown in Flow 1 above; a wrong autonomous cancellation is far more costly to trust than a wrong autonomous baggage-fee quote.</li>
+            <li><strong>No autonomous visa/legal advice</strong>: the intent router treats this as a hard non-goal, not a confidence threshold; it escalates every time, regardless of how confident the model is in an answer.</li>
+            <li><strong>Full audit trail</strong>: every tool call the agent executes, conversations included, is logged with the triggering intent, confidence score, and outcome, reviewable by support ops, the same operational-audit discipline as the PCMS payout reconciliation work (see Technical Execution, T27).</li>
+          </ul>
+
+          <h4>Evaluation Approach</h4>
+          <p>
+            Deflection rate alone is a misleading headline metric here: a bot can "deflect" a
+            ticket by giving an answer that satisfies the user in the moment but is wrong, which
+            shows up as a good deflection number and a bad outcome. Evaluation needs three lenses,
+            not one: <strong>resolution accuracy</strong> (a sampled human audit of closed
+            bot-handled tickets weighed against the bot's own confidence score), <strong>wrong-action
+            rate</strong>: the safety metric, tracking autonomous actions a human reviewer would
+            have executed differently, weighted far more heavily than any convenience metric, and
+            <strong>escalation-appropriateness</strong>, checking the router escalates when it
+            should as often as it deflects when it shouldn't.
+          </p>
+        </div>
+
+        <div class="ptable2-wrap">
+          <table class="ptable2">
+            <thead><tr><th>Metric</th><th>What it's really measuring</th><th>Why it's on this list</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Metric">Containment rate</td><td data-label="Measuring">% of in-scope tickets resolved without a human</td><td data-label="Why">The headline efficiency number, but never read alone (see below)</td></tr>
+              <tr><td data-label="Metric">Wrong-action rate</td><td data-label="Measuring">Autonomous actions a human audit would reverse or flag</td><td data-label="Why">The safety guardrail metric: this one has veto power over containment rate</td></tr>
+              <tr><td data-label="Metric">CSAT on bot-resolved tickets</td><td data-label="Measuring">Satisfaction specifically on containment, not overall support CSAT</td><td data-label="Why">A ticket can be "contained" and still leave the user unhappy</td></tr>
+              <tr><td data-label="Metric">Escalation-appropriateness</td><td data-label="Measuring">Did the router escalate the tickets it should have</td><td data-label="Why">Catches an overconfident agent as readily as an under-confident one</td></tr>
+              <tr><td data-label="Metric">Time-to-resolution</td><td data-label="Measuring">End-to-end, bot-handled vs. human-handled tickets</td><td data-label="Why">The business-facing efficiency number, once the safety metrics above clear</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Business Impact (modeled, not measured)</h4>
+          <p>
+            Illustrative, not a real support-cost figure: if cancellation, baggage, and
+            date-change queries together are a modeled ~35% of ticket volume, and the copilot
+            fully contains half of those (the baggage-query type especially, since it needs no
+            guardrail and resolves in one turn), that's roughly a sixth of total support volume
+            handled at near-zero marginal cost instead of a human agent's fully-loaded
+            cost-per-ticket. The number that actually matters for a launch decision, though, is
+            the wrong-action rate at that containment level; a model here would need real
+            historical ticket data to size properly, which is exactly why this stays a scope doc
+            and not a "built" project, unlike the modeled-but-labeled dataset in the
+            <a href="travel-tech-more.html#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>.
+          </p>
+
+          <h4>Risks</h4>
+          <p>
+            The risk that actually matters isn't "the bot gives a bad answer": a Q&amp;A chatbot
+            has that risk too, and it's recoverable. It's <strong>the bot takes a bad
+            action</strong>: an autonomous cancellation or refund that shouldn't have happened costs
+            real money and leaves a damaged booking behind, well past an unhelpful chat log's worth of harm. Every guardrail
+            above exists to keep that specific failure mode's blast radius small and recoverable
+            (confirmation gates, action ceilings, audit trails) rather than trying to prevent it
+            outright, which no confidence threshold can fully guarantee.
+          </p>
+
+          <h4>What Carries Over From T18</h4>
+          <p>
+            The same lesson as the ChatGPT Memory Feature teardown (Feature Reverse Engineering,
+            T18) shows up again here in a higher-stakes form: the hard PM problem in agentic AI
+            isn't language understanding or intent classification (those are largely solved). It's
+            designing the guardrail and escalation layer that keeps the agent's inevitable
+            mistakes cheap and reversible instead of expensive and permanent.
           </p>
         </div>
         </details>
 
-        <div class="cs-narrative">
-          <h4>The Analysis</h4>
-          <p>
-            With the dataset built, I grouped it four ways (by route, by airline, by season, and by
-            time of day), computing average delay, the share of flights delayed over 15 minutes, and
-            cancellation rate for each. A single "worst route" or "worst season" number hides the
-            risk that actually matters operationally, which is where two dimensions compound, so I
-            cross-tabbed the top 8 routes against all 5 seasons into a heatmap instead of stopping at
-            one-dimensional rankings.
-          </p>
-
-          <h4>Key Findings</h4>
-          <ul>
-            <li><strong>84.4% on-time</strong> fleet-wide, 9.2min average delay, 1.1% cancellation rate.</li>
-            <li><strong>DEL-GOI is the single worst route</strong> (12.6min avg, 34% delayed &gt;15min), the only route in the model that's both winter-fog- <em>and</em> monsoon-sensitive, so it takes a hit twice a year instead of once.</li>
-            <li><strong>Winter is the worst season by a wide margin</strong> (11.9min avg vs. 7.5min in Spring/Post-Monsoon): every Delhi-origin route in the heatmap spikes in December–January.</li>
-            <li><strong>Delays compound through the day</strong>: Night departures average 11.0min vs. 8.3min in the Early Morning, consistent with how real airline operations cascade delays leg-to-leg.</li>
-            <li><strong>Airline-level spread is real but secondary</strong>: the gap between the most and least reliable modeled carrier (7.6–10.7min) is smaller than the gap between Winter and Spring (7.5–11.9min). Route and season explain more than carrier choice does.</li>
-          </ul>
-
-          <h4>Recommendations</h4>
-          <p>What a PM would actually do with this, if it were live data instead of modeled data:</p>
-          <ul>
-            <li><strong>Surface delay risk during booking, not after.</strong> Feed a route + season + time-of-day risk score into the delay-risk badge recommended in the Flight Booking Teardown, so a traveller sees it before they book, not after they're already delayed.</li>
-            <li><strong>Pad schedule buffers seasonally, not year-round.</strong> A flat on-time SLA misses that Delhi-origin routes need a materially wider buffer specifically in December–January, not every month.</li>
-            <li><strong>Treat Night departures as an upstream ops problem.</strong> Since delay compounds through the day in this model, padding the last flight of the day treats a symptom; the real fix is earlier-leg reliability.</li>
-            <li><strong>Re-run this against real DGCA/BTS data before shipping anything downstream of it.</strong> This dashboard's job was to prove the analysis and the product judgment, not to replace a real data pipeline.</li>
-          </ul>
-
-          <h4>Where the Real Risk Sits</h4>
-          <p>
-            The chart itself is rarely a delay dashboard's real product risk. The risk is presenting
-            modeled or incomplete data as if it were ground truth. The discipline that matters here is the same
-            one from the AI Trip Planner's guardrails: say what's real, say what's modeled, and never
-            let a polished visualization imply more certainty than the underlying data supports.
-          </p>
-        </div>
-
-        <a href="projects/flight-delay-dashboard/dashboard.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
-          <picture>
-            <source srcset="projects/flight-delay-dashboard/screenshots/dashboard-light.webp" type="image/webp">
-            <img src="projects/flight-delay-dashboard/screenshots/dashboard-light.png" alt="Flight Delay Prediction Dashboard: KPI tiles (8,000 flights, 84.4% on-time, 9.2min avg delay) and a bar chart ranking all 15 routes by average delay, DEL-GOI worst at 12.6 minutes" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          </picture>
-        </a>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click the screenshot to open the live, interactive dashboard (also available in dark mode).</p>
         <div class="jlinks">
-          <span><span class="k">Link</span><a href="projects/flight-delay-dashboard/dashboard.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">live dashboard →</a></span>
-          <span><span class="k">Image</span><a href="projects/flight-delay-dashboard/screenshots/dashboard-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+          <span><span class="k">Live demo</span><a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">try it →</a></span>
+          <span><span class="k">Link</span><a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
+          <span><span class="k">Image</span><a href="projects/travel-support-copilot/screenshots/wireframes-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
         </div>
       </div>
       </article>
@@ -1215,7 +1287,7 @@
 
     <a class="track-showmore" href="travel-tech-more.html">
       <span class="track-showmore-label">Show more case studies</span>
-      <span class="track-showmore-count">T5 (live demo), T8, Weft, Career Copilot, and cross-industry practice work →</span>
+      <span class="track-showmore-count">T3 (delay dashboard), T8, Weft, Career Copilot, and cross-industry practice work →</span>
     </a>
     </div>
 
