@@ -266,6 +266,11 @@
   .about-block{margin-bottom:20px}
   .about-block .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:8px}
   .about-block p{color:#52525B;font-size:15.5px}
+  .about-narrative{max-width:720px}
+  .about-lead{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;line-height:1.35;color:var(--paper);margin:0 0 18px}
+  .about-subhead{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;line-height:1.2;border-left:3px solid var(--pink);padding-left:16px;margin:44px 0 16px}
+  .about-principles{margin:18px 0 20px;display:flex;flex-direction:column;gap:5px}
+  .about-principles span{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:var(--paper)}
 
   /* ---------- Journal timeline track ---------- */
   .jtrack{position:relative;padding-left:64px}
