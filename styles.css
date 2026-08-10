@@ -461,7 +461,10 @@
   .log-when{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
   .log-role{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;line-height:1.2}
   .log-org{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--lime);text-transform:uppercase;margin:6px 0 10px}
+  .log-arc{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;color:var(--pink);margin:-4px 0 12px}
   .log-desc{color:#52525B;font-size:14.5px;max-width:600px}
+  .log-bullets{margin:0 0 14px;padding-left:18px;max-width:600px}
+  .log-bullets li{color:#52525B;font-size:14.5px;line-height:1.55;margin-bottom:5px}
 
   /* ---------- Toolkit ---------- */
   .toolkit-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
