@@ -76,7 +76,7 @@
     <p class="sec-intro">
       T1, T2, and T3 are the fully built flagships; they're also pinned to the top of the
       <a href="index.html#travel-tech" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">main portfolio page</a>.
-      T5 (Travel Support AI Copilot, with a working live demo) and T8 (Booking Funnel Analysis)
+      T5 (Flight Delay Prediction Dashboard) and T8 (Booking Funnel Analysis)
       are written to the same depth. T28 (Weft) and T29 (Career Copilot) are real, shipped products
       pulled in from their own GitHub repos, not travel-tech scope docs. T1–T17 are travel tech;
       T18–T27 are cross-industry practice categories: feature reverse engineering, user psychology,
@@ -217,7 +217,7 @@
             <li style="margin-bottom:7px">One-tap "hold my seat 15 min" for indecisive high-intent users.</li>
             <li style="margin-bottom:7px">Smart filter defaults ranked by price + duration + layover, not price alone.</li>
             <li style="margin-bottom:7px">Payment retry with saved card + biometric re-auth to cut payment-stage drop-off.</li>
-            <li style="margin-bottom:7px">Proactive delay-risk badge on results (feeds the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>).</li>
+            <li style="margin-bottom:7px">Proactive delay-risk badge on results (feeds the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T5)</a>).</li>
             <li style="margin-bottom:7px">Group-booking mode for 4+ pax with a shared itinerary link.</li>
             <li>Post-booking "manage trip" nudges (web check-in, gate-change alerts) via push.</li>
           </ol>
@@ -249,7 +249,7 @@
             <li><strong>All-in fare display</strong>: the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
             <li><strong>Opt-in add-ons</strong>: directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete: it needs a revenue-per-booking floor agreed with Finance before shipping, beyond a simple UX sign-off.</li>
             <li><strong>Baggage/meal policy inline</strong>: minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
-            <li><strong>Delay-risk badge</strong>: risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T3</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
+            <li><strong>Delay-risk badge</strong>: risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T5</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
           </ul>
           <p>
             <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind the A/B test
@@ -751,7 +751,7 @@
     </div>
 <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum done">T5</span>
+        <span class="jnum done">T3</span>
         <h3 class="jcat-title">Customer Support AI Copilot</h3>
       </div>
       <article class="jcard" data-case="travel-support-ai-copilot" data-updated="2026-07-30">
@@ -963,7 +963,7 @@
             the wrong-action rate at that containment level; a model here would need real
             historical ticket data to size properly, which is exactly why this stays a scope doc
             and not a "built" project, unlike the modeled-but-labeled dataset in the
-            <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T3)</a>.
+            <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T5)</a>.
           </p>
 
           <h4>Risks</h4>
@@ -1425,7 +1425,7 @@
       <div class="cat-head"><h2>Metrics &amp; Analytics</h2><span class="cat-tag">// KPI design, dashboards, and the metric tree behind them</span></div>
 <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum done">T3</span>
+        <span class="jnum done">T5</span>
         <h3 class="jcat-title">Flight Delay Prediction Dashboard</h3>
       </div>
       <article class="jcard" data-case="flight-delay-prediction-dashboard" data-updated="2026-07-30">
