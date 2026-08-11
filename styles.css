@@ -570,6 +570,9 @@
   .tool-tag{display:inline-flex;align-items:center;gap:6px;margin:2px 0}
   footer{padding:36px 0;border-top:1px solid var(--line)}
   .colophon{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey)}
+  .colophon a{color:var(--grey);text-decoration:none;border-bottom:1px dashed var(--line)}
+  .colophon a:hover{color:var(--pink);border-bottom-color:var(--pink)}
+  .colophon-contact{display:flex;flex-wrap:wrap;gap:4px 10px}
 
   /* ---------- Responsive ---------- */
   @media (max-width:1100px){
