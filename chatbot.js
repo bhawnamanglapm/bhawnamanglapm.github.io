@@ -1,8 +1,6 @@
 (function(){
   document.addEventListener('DOMContentLoaded', function(){
-    // Set this to the Cloudflare Worker URL from cf-worker/README.md once
-    // it's deployed, e.g. 'https://bhawna-portfolio-chatbot.example.workers.dev'
-    var WORKER_URL = '';
+    var WORKER_URL = 'https://bhawna-portfolio-chatbot.bhawnamangla98.workers.dev';
 
     var OFFLINE_MESSAGE = "I'm not able to chat right now — feel free to email Bhawna directly at bhawna202019@gmail.com or connect on LinkedIn.";
 
