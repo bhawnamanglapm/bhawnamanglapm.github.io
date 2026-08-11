@@ -120,16 +120,28 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text, history: history.slice(0, -1) })
       })
-        .then(function(res){ return res.json(); })
-        .then(function(data){
-          typingBubble.remove();
-          var reply = (data && data.reply) ? data.reply : OFFLINE_MESSAGE;
-          addBubble('assistant', reply);
-          history.push({ role: 'assistant', content: reply });
+        .then(function(res){
+          return res.json().then(function(data){
+            return { ok: res.ok, status: res.status, data: data };
+          });
         })
-        .catch(function(){
+        .then(function(result){
           typingBubble.remove();
-          addBubble('assistant', OFFLINE_MESSAGE);
+          if(result.ok && result.data && result.data.reply){
+            addBubble('assistant', result.data.reply);
+            history.push({ role: 'assistant', content: result.data.reply });
+          } else {
+            // TEMP DEBUG: surfacing the real error instead of the friendly
+            // fallback while we track down the deploy issue. Revert to
+            // OFFLINE_MESSAGE once the chatbot is confirmed working.
+            var detail = result.data && (result.data.error || result.data.detail);
+            addBubble('assistant', 'Debug — HTTP ' + result.status + (detail ? ': ' + detail : ' (no error detail in response body)'));
+          }
+        })
+        .catch(function(err){
+          typingBubble.remove();
+          // TEMP DEBUG: same as above, revert once fixed.
+          addBubble('assistant', 'Debug — request failed before a response came back: ' + (err && err.message ? err.message : String(err)));
         })
         .finally(function(){
           setBusy(false);
