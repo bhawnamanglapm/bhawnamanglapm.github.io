@@ -1,0 +1,6 @@
+hub,hub_name,region,congestion_index
+DEL,Delhi,North,8
+BOM,Mumbai,West,7
+BLR,Bengaluru,South,5
+HYD,Hyderabad,South,4
+CCU,Kolkata,East,6
