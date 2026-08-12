@@ -1598,42 +1598,146 @@
       </div>
       </article>
     </div>
-<div class="jcat-group hide-wip">
+<div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum">T4</span>
+        <span class="jnum done">T4</span>
         <h3 class="jcat-title">Airline Operations Dashboard</h3>
       </div>
-      <article class="jcard" data-case="airline-operations-dashboard">
+      <article class="jcard" data-case="airline-operations-dashboard" data-updated="2026-08-12">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#64748B,#334155)">🛫</div>
             <div>
               <div class="jtitle">Airline Operations Dashboard</div>
-              <div class="jmeta">⭐⭐⭐⭐ Roadmap · scope defined</div>
+              <div class="jmeta">⭐⭐⭐⭐ Built · see live dashboard</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">6,000 flights analyzed</span>
+          <span class="chip">Single fictional airline (Aravali Air)</span>
+          <span class="chip">Self-contained HTML/JS dashboard</span>
+          <span class="chip">Full dark-mode support</span>
+        </div>
+
         <div class="cs-narrative">
-          <h4>Scope</h4>
+          <h4>A Different Question Than the Delay Dashboard</h4>
           <p>
-            Dashboards for on-time performance, load factor, revenue per flight, cancellation
-            rate, customer complaints, and baggage handling performance — relevant to airline and
-            operations-focused PM roles. <span class="todo">fill in: which dashboard tool (Power
-            BI or Tableau) and one KPI per area above</span>
+            The sibling
+            <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Prediction Dashboard</a>
+            answers an OTA's question — which routes and airlines should get flagged as delay-risky
+            — across five carriers. This one answers the question an airline's own ops team asks
+            about itself: is my operation actually healthy, hub by hub and month by month, and what
+            downstream cost does unreliability actually carry? One carrier, tracked in depth on
+            on-time performance, load factor, revenue per flight, cancellation rate, complaints, and
+            baggage handling, is the right shape for that question. This is also the SQL/Power BI
+            discipline I used for PCMS reporting at Bajaj Finance, applied to a domain I hadn't
+            worked in before — deliberately, as ETL/data-product practice.
           </p>
-          <h4>Skills Demonstrated</h4>
+
+          <h4>My Approach</h4>
           <p>
-            Operations analytics, KPI design, cross-functional dashboarding — the same SQL/Power
-            BI discipline used for PCMS reporting at Bajaj Finance.
-            <span class="todo">Outcome/insight: fill in: once built</span>
+            Same honest constraint as the sibling project: no real airline ops data is public or
+            reachable from this environment, so this is a modeled dataset, disclosed as such on the
+            dashboard itself. 6,000 simulated flights for one fictional carrier ("Aravali Air")
+            across 5 real Indian hubs, with on-time performance, cancellation, load factor, revenue,
+            complaints, and baggage mishandling each modeled with a documented, deliberate rule, not
+            arbitrary noise: for example, complaints are weighted to rise sharply when a flight was
+            delayed and further still when it was cancelled — a real, well-documented airline-ops
+            pattern, and the whole reason this dataset exists rather than being five independent
+            random columns. Full calculation, every parameter, and the reasoning behind each one are
+            documented in the dashboard's own
+            <a href="projects/airline-operations-dashboard/dashboard.html#methodology" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Methodology section</a>,
+            summarized here in full.
           </p>
         </div>
+
+        <details class="cs-showmore">
+          <summary>Show more: full calculation methodology, the data-quality fix I made <span class="sm-count">(every number, and why)</span></summary>
+        <div class="cs-narrative">
+          <h4>Methodology: the calculation, step by step</h4>
+          <p>For every one of the 6,000 simulated flights, in order:</p>
+          <ul>
+            <li><strong>On-time performance</strong>: starts from a base probability of 90%, reduced by that hub's congestion index (Delhi and Kolkata run busiest), then reduced further by −22pp if the hub is fog-sensitive and the month is Dec/Jan, or −14pp if monsoon-sensitive and the month is Jun–Sep.</li>
+            <li><strong>Cancellation</strong>: decided separately as its own probability (base 0.6%, +hub congestion, +weather exposure). A cancelled flight is always counted as not on-time, never the reverse.</li>
+            <li><strong>Load factor</strong>: drawn from a normal distribution around a base of 79%, shifted up in the Oct–Nov festive season and down in the Jan–Feb low season and at monsoon-exposed hubs during monsoon months.</li>
+            <li><strong>Revenue</strong>: ticket revenue = passengers × a per-hub base fare × a seasonal fare multiplier; ancillary revenue (bags, seats, meals) added per passenger on top. Both zero for a cancelled flight.</li>
+            <li><strong>Complaints</strong>: drawn from a weighted distribution that shifts hard toward more complaints when the flight was delayed, and harder still when it was cancelled — the one deliberate correlation this generator exists to demonstrate.</li>
+            <li><strong>Baggage mishandling</strong>: one independent per-bag draw, rate rising with hub congestion and on any day operations went irregular (delayed or cancelled).</li>
+          </ul>
+          <p>
+            <strong>A data-quality decision worth naming:</strong> the dataset tracks two different
+            passenger counts — <code>passengers_expected</code> (a demand estimate, computed the
+            same way regardless of outcome) and <code>passengers_boarded</code> (zero for a
+            cancelled flight, by definition). Load factor and revenue are correctly built on
+            <em>boarded</em> passengers, since those only exist for flights that actually flew. My
+            first pass used <em>boarded</em> passengers as the denominator for the complaints-rate
+            metric too, which made cancelled flights show <strong>zero</strong> complaints per 1,000
+            passengers: the exact opposite of reality, purely because a cancelled flight boards
+            nobody. I caught this by sanity-checking the output before building the chart, not after
+            — the reliability-vs-complaints chart on the dashboard would otherwise have shown
+            cancellations as the "safest" outcome for a customer, which is backwards. Complaints are
+            rated against <em>expected</em> passengers instead: the people actually affected by the
+            flight, whether it flew or not. This is the same kind of judgment call as excluding
+            cancelled flights before averaging delay minutes in the sibling dashboard — a metric's
+            denominator has to match what the metric is actually claiming to measure, and getting it
+            wrong doesn't throw an error, it just silently produces a plausible-looking wrong number.
+          </p>
+          <p>
+            Why these specific numbers: not derived from any real source, chosen and then checked
+            against public ballpark ranges for plausibility (domestic OTP typically 70–88%, load
+            factor typically 75–85%, baggage mishandling typically 4–8 per 1,000 bags industry-wide).
+            The fleet-wide numbers landed at 77.9% on-time, 78.9% load factor, and 5.4 bags
+            mishandled per 1,000 — all inside those ranges. What this deliberately doesn't model:
+            real distributional parameters fit from a published dataset (none was reachable from
+            this environment), or knock-on delay (one late inbound aircraft delaying that same tail
+            number's next departure) — a real ops model would need that, and it's a materially
+            harder problem than this exercise scopes to.
+          </p>
+        </div>
+        </details>
+
+        <div class="cs-narrative">
+          <h4>Key Findings</h4>
+          <ul>
+            <li><strong>77.9% on-time fleet-wide</strong>, 78.9% average load factor, 1.2% cancellation rate, ₹6,38,860 average revenue per flight.</li>
+            <li><strong>Bengaluru is the most reliable hub (83.3% on-time)</strong>, Mumbai the least (74.6%): the two hubs with no modeled weather exposure sit at the top, the two with monsoon exposure sit at the bottom.</li>
+            <li><strong>Delhi and Kolkata both collapse in Winter</strong> (63.1% and 66.9% on-time) from their own fog exposure; Mumbai and Kolkata separately collapse in Monsoon (66.0% and 67.3%) — Kolkata is the only hub that takes a hit twice a year instead of once, the same "double exposure" pattern that made DEL-GOI the worst route in the sibling delay dashboard.</li>
+            <li><strong>Complaints track reliability, not price or amenities</strong>: 0.29 complaints per 1,000 passengers when on-time, 2.05 when delayed, 6.10 when cancelled — a cancelled flight generates roughly 21× the complaint volume of an on-time one, per passenger affected.</li>
+            <li><strong>Revenue doesn't track on-time performance</strong>: Delhi has the worst-adjacent on-time rate but the highest revenue per flight (₹6,86,112), because fare levels are set by hub demand, not by operational reliability. Reliability and revenue are two separate levers, not one.</li>
+          </ul>
+
+          <h4>Recommendations</h4>
+          <p>What a PM would actually do with this, if it were live ops data instead of modeled data:</p>
+          <ul>
+            <li><strong>Fund reliability improvements by the complaint cost they prevent, not just the delay minutes they save.</strong> The 21× complaint multiplier on cancellations makes a stronger budget case than "average delay went down 2 minutes" ever will.</li>
+            <li><strong>Give Kolkata a dedicated irregular-ops playbook, not a shared one.</strong> It's the only hub exposed to both major seasonal risks in this model; a generic playbook sized for single-exposure hubs will under-resource it twice a year.</li>
+            <li><strong>Don't let a high-revenue hub's numbers hide its reliability problem.</strong> Delhi's revenue leadership could mask its on-time performance from a purely commercial dashboard — reliability and revenue need to stay on the same page, not two separate reports someone has to cross-reference manually.</li>
+            <li><strong>Re-run this against real ops data before shipping anything downstream of it.</strong> This dashboard's job was to prove the ETL pipeline and the product judgment behind each transform decision, not to replace a real data source.</li>
+          </ul>
+
+          <h4>Where the Real Risk Sits</h4>
+          <p>
+            The same discipline as the sibling dashboard applies here: the risk isn't a wrong chart,
+            it's a metric whose denominator quietly doesn't measure what its label claims — exactly
+            what the passengers_expected/passengers_boarded fix above was catching. Say what's
+            modeled, say what's real, and check a metric's denominator before trusting what it shows,
+            not after.
+          </p>
+        </div>
+
+        <a href="projects/airline-operations-dashboard/dashboard.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
+          <picture>
+            <source srcset="projects/airline-operations-dashboard/screenshots/dashboard-light.webp" type="image/webp">
+            <img src="projects/airline-operations-dashboard/screenshots/dashboard-light.png" alt="Airline Operations Dashboard: KPI tiles (6,000 flights, 77.9% on-time, 78.9% load factor) and a bar chart ranking all 5 hubs by on-time performance, Bengaluru best at 83.3%, Mumbai worst at 74.6%" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          </picture>
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click the screenshot to open the live, interactive dashboard (also available in dark mode).</p>
         <div class="jlinks">
-          <span><span class="k">Link</span><span class="todo">fill in</span></span>
-          <span><span class="k">Image</span><span class="todo">fill in</span></span>
-          <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
+          <span><span class="k">Link</span><a href="projects/airline-operations-dashboard/dashboard.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">live dashboard →</a></span>
+          <span><span class="k">Image</span><a href="projects/airline-operations-dashboard/screenshots/dashboard-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
         </div>
       </div>
       </article>

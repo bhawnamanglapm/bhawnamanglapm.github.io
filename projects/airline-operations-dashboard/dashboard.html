@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airline Operations Dashboard</title>
+<meta name="description" content="An internal airline-operations dashboard supporting Bhawna Mangla's travel-tech PM case study.">
+<link rel="canonical" href="https://bhawnamanglapm.github.io/projects/airline-operations-dashboard/dashboard.html">
+<style>
+  /* Tokens live on :root (not the .viz-root wrapper div) so that `body`,
+     an ANCESTOR of .viz-root, can also resolve them — CSS custom properties
+     only cascade to descendants of where they're defined. Same token set
+     as the sibling Flight Delay Prediction Dashboard, for a consistent
+     look across the Metrics & Analytics practice area. */
+  :root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --page:           #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --grid:           #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --brand-accent:   #4F46E5;
+    --brand-lime:     #0A766D;
+    --series-1: #2a78d6; /* blue */
+    --series-2: #eb6834; /* orange */
+    --series-3: #1baf7a; /* aqua */
+    --series-4: #eda100; /* yellow */
+    --series-5: #e87ba4; /* magenta */
+    --seq-100: #cde2fb; --seq-200: #9ec5f4; --seq-300: #6da7ec;
+    --seq-400: #3987e5; --seq-500: #256abf; --seq-600: #184f95; --seq-700: #0d366b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19; --page: #0d0d0d;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+      --grid: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+      --brand-accent: #8B7FF0; --brand-lime: #2DD4BF;
+      --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+      --series-4: #c98500; --series-5: #d55181;
+      --seq-100: #184f95; --seq-200: #1c5cab; --seq-300: #256abf;
+      --seq-400: #3987e5; --seq-500: #5598e7; --seq-600: #86b6ef; --seq-700: #b7d3f6;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19; --page: #0d0d0d;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --grid: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+    --brand-accent: #8B7FF0; --brand-lime: #2DD4BF;
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+    --series-4: #c98500; --series-5: #d55181;
+    --seq-100: #184f95; --seq-200: #1c5cab; --seq-300: #256abf;
+    --seq-400: #3987e5; --seq-500: #5598e7; --seq-600: #86b6ef; --seq-700: #b7d3f6;
+  }
+
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{margin:0;background:var(--page);color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:36px 24px 80px}
+  header.page-head{margin-bottom:28px}
+  .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-lime);font-weight:600;margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 10px;letter-spacing:-.01em}
+  .subtitle{color:var(--text-secondary);font-size:15px;line-height:1.6;max-width:760px;margin:0}
+  .disclaimer{
+    margin-top:16px;padding:14px 18px;border-radius:10px;background:var(--surface-1);
+    border:1px solid var(--border);border-left:3px solid var(--brand-accent);
+    font-size:13.5px;color:var(--text-secondary);line-height:1.55;
+  }
+  .disclaimer strong{color:var(--text-primary)}
+
+  .methodology p{color:var(--text-secondary);font-size:14px;line-height:1.65;margin:0 0 14px;max-width:720px}
+  .methodology p strong{color:var(--text-primary)}
+  .methodology h3{font-size:14px;margin:20px 0 8px;color:var(--text-primary)}
+  .methodology h3:first-of-type{margin-top:4px}
+  .methodology code{font-size:12.5px;background:var(--page);border:1px solid var(--border);border-radius:4px;padding:1px 6px}
+  .methodology ul{margin:0 0 14px;padding-left:20px}
+  .methodology li{color:var(--text-secondary);font-size:14px;line-height:1.6;margin-bottom:6px}
+
+  .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0}
+  .kpi{background:var(--surface-1);border:1px solid var(--border);border-top:2px solid var(--brand-accent);border-radius:10px 10px 12px 12px;padding:18px 20px}
+  .kpi .label{font-size:12px;color:var(--text-muted);margin-bottom:8px}
+  .kpi .value{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+
+  .card{background:var(--surface-1);border:1px solid var(--border);border-radius:14px;padding:24px 26px;margin-bottom:22px}
+  .card h2{font-size:16px;margin:0 0 4px}
+  .card .card-sub{font-size:13px;color:var(--text-muted);margin:0 0 18px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;font-size:12.5px;color:var(--text-secondary)}
+  .legend-item{display:flex;align-items:center;gap:6px}
+  .legend-swatch{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+  .bar-row{display:flex;align-items:center;gap:10px;padding:5px 0;position:relative}
+  .bar-cat{width:150px;flex-shrink:0;font-size:12.5px;color:var(--text-secondary);text-align:right;padding-right:4px}
+  .bar-track{flex:1;position:relative;height:20px}
+  .bar-fill{position:absolute;left:0;top:2px;height:16px;border-radius:8px 8px 8px 8px;cursor:pointer;transition:filter .12s}
+  .bar-fill:hover,.bar-fill:focus-visible{filter:brightness(1.08)}
+  .bar-val{font-size:12px;color:var(--text-secondary);margin-left:6px;white-space:nowrap;min-width:38px}
+
+  .tooltip{
+    position:fixed;pointer-events:none;background:var(--text-primary);color:var(--page);
+    font-size:12.5px;padding:9px 12px;border-radius:8px;line-height:1.5;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:50;opacity:0;transition:opacity .1s;
+    max-width:240px;
+  }
+  .tooltip.show{opacity:1}
+  .tooltip .tt-strong{font-weight:700;font-size:13.5px}
+  .tooltip .tt-key{display:inline-block;width:9px;height:2px;margin-right:6px;vertical-align:middle}
+
+  table.data-table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+  table.data-table th,table.data-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--grid)}
+  table.data-table th{color:var(--text-muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+  table.data-table tr:last-child td{border-bottom:none}
+  details.table-toggle{margin-top:8px}
+  details.table-toggle summary{cursor:pointer;font-size:13px;color:var(--brand-accent);font-weight:600;list-style:none}
+  details.table-toggle summary::-webkit-details-marker{display:none}
+  details.table-toggle summary::before{content:"▸ ";}
+  details.table-toggle[open] summary::before{content:"▾ ";}
+  .table-wrap{overflow-x:auto}
+  details.table-toggle .table-wrap{margin-top:12px}
+
+  .heat-wrap{overflow-x:auto}
+  table.heatmap{border-collapse:separate;border-spacing:3px;font-size:12.5px}
+  table.heatmap th{color:var(--text-muted);font-weight:600;font-size:11px;text-transform:uppercase;padding:6px 8px;text-align:center}
+  table.heatmap th.rowhead{text-align:right;color:var(--text-secondary);font-weight:500;text-transform:none;font-size:12.5px}
+  table.heatmap td{padding:0;text-align:center}
+  .heat-cell{
+    width:74px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:6px;
+    font-variant-numeric:tabular-nums;font-weight:600;cursor:pointer;
+  }
+
+  .caption{font-size:12.5px;color:var(--text-muted);margin-top:10px}
+
+  @media (max-width:820px){
+    .kpi-row{grid-template-columns:1fr 1fr}
+    .two-col{grid-template-columns:1fr}
+    .bar-cat{width:110px;font-size:11.5px}
+  }
+</style>
+</head>
+<body>
+
+<div class="viz-root">
+<div class="wrap">
+  <header class="page-head">
+    <p class="eyebrow">Travel-Tech Practice · T4</p>
+    <h1>Airline Operations Dashboard</h1>
+    <p class="subtitle">
+      How reliable each hub is, where revenue and load factor actually come from,
+      and how customer complaints track operational performance — built the same
+      way an internal ops team, not an OTA, would track a single carrier's health.
+    </p>
+    <div class="disclaimer">
+      <strong>Synthetic, modeled data — not a real airline's published performance.</strong>
+      "Aravali Air" is a fictional single carrier, so no numbers here are attributed
+      to a real, identifiable airline. Hubs use real Indian city codes, since hub
+      congestion (Delhi/Mumbai) and seasonal effects (North Indian winter fog,
+      western-coast monsoon) are well-documented public aviation-industry patterns,
+      the same convention used in the sibling
+      <a href="../flight-delay-dashboard/dashboard.html" style="color:var(--brand-accent)">Flight Delay Prediction Dashboard</a>.
+      Full generator + methodology in the repo (see footer link).
+    </div>
+  </header>
+
+  <section class="kpi-row" id="kpiRow" aria-label="Headline metrics"></section>
+
+  <section class="card">
+    <h2>How reliable is each hub?</h2>
+    <p class="card-sub">On-time performance by hub, all 5 hubs, ranked highest to lowest.</p>
+    <div id="hubOtpChart" role="img" aria-label="Bar chart of on-time performance by hub"></div>
+    <details class="table-toggle"><summary>View full hub table</summary>
+      <div class="table-wrap" id="hubTable"></div>
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>Revenue per flight, by hub</h2>
+    <p class="card-sub">Average ticket + ancillary revenue per operated flight (₹).</p>
+    <div id="hubRevenueChart" role="img" aria-label="Bar chart of average revenue per flight by hub"></div>
+  </section>
+
+  <section class="two-col">
+    <div class="card">
+      <h2>On-time performance by month</h2>
+      <p class="card-sub">Fleet-wide OTP %, Jan–Dec.</p>
+      <div id="monthOtpChart" role="img" aria-label="Bar chart of on-time performance by month"></div>
+    </div>
+    <div class="card">
+      <h2>Load factor by month</h2>
+      <p class="card-sub">Average seats filled %, Jan–Dec.</p>
+      <div id="monthLoadChart" role="img" aria-label="Bar chart of load factor by month"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Hub × season — where seasonal risk concentrates</h2>
+    <p class="card-sub">On-time performance (%) by hub and season. Darker = worse.</p>
+    <div class="heat-wrap" id="heatmap" role="img" aria-label="Heatmap of on-time performance by hub and season"></div>
+    <p class="caption">Reading it: Delhi and Kolkata (both fog-sensitive) dip hardest in Winter. Mumbai and Kolkata (both monsoon-sensitive) dip separately in Monsoon. Bengaluru and Hyderabad, with neither exposure modeled, stay comparatively flat year-round.</p>
+  </section>
+
+  <section class="card">
+    <h2>The insight: complaints track reliability, not price or amenities</h2>
+    <p class="card-sub">Complaints per 1,000 passengers, by how the flight actually performed.</p>
+    <div id="reliabilityChart" role="img" aria-label="Bar chart of complaints per 1,000 passengers by reliability bucket"></div>
+    <p class="caption" id="reliabilityCaption"></p>
+  </section>
+
+  <section class="card methodology" id="methodology">
+    <h2>Methodology — how these numbers were generated</h2>
+    <p class="card-sub">Every number on this page is synthetic. Here's the calculation, and the reasoning behind each choice, in full.</p>
+
+    <h3>Why a single fictional airline, not a benchmark across many</h3>
+    <p>
+      The sibling <a href="../flight-delay-dashboard/dashboard.html" style="color:var(--brand-accent)">Flight Delay Prediction Dashboard</a>
+      answers an OTA's question — "which routes/airlines should I flag as
+      delay-risky?" — across five carriers. This dashboard answers a
+      different question an airline's own ops team asks about itself: "how
+      is my operation actually performing, by hub and over time?" One
+      carrier, tracked in depth, is the right shape for that question — a
+      multi-airline benchmark would be the wrong tool for it.
+    </p>
+
+    <h3>The calculation, step by step</h3>
+    <p>For every one of the 6,000 simulated flights, in order:</p>
+    <ul>
+      <li><strong>On-time performance</strong>: starts from a base probability of 90%, reduced by that hub's congestion index (Delhi and Kolkata run busiest), then reduced further by −22pp if the hub is fog-sensitive and the month is Dec/Jan, or −14pp if monsoon-sensitive and the month is Jun–Sep.</li>
+      <li><strong>Cancellation</strong>: decided separately as its own probability (base 0.6%, +hub congestion, +weather exposure). A cancelled flight is always counted as not on-time, but never the reverse — cancellation is the more severe outcome.</li>
+      <li><strong>Load factor</strong>: drawn from a normal distribution around a base of 79%, shifted up in the Oct–Nov festive season and down in the Jan–Feb low season and at monsoon-exposed hubs during monsoon months.</li>
+      <li><strong>Revenue</strong>: ticket revenue = passengers × a per-hub base fare × a seasonal fare multiplier (higher in festive season, discounted in low season). Ancillary revenue (bags, seats, meals) is added per passenger on top. Both are zero for a cancelled flight.</li>
+      <li><strong>Complaints</strong>: drawn from a weighted distribution that shifts hard toward more complaints when the flight was delayed, and harder still when it was cancelled — the one deliberate correlation this generator exists to demonstrate, not background noise.</li>
+      <li><strong>Baggage mishandling</strong>: one independent per-bag draw, rate rising with hub congestion and on any day operations went irregular (delayed or cancelled).</li>
+    </ul>
+
+    <h3>A data-quality decision worth naming: two different passenger counts</h3>
+    <p>
+      The dataset tracks <code>passengers_expected</code> (a demand estimate,
+      computed the same way regardless of outcome) separately from
+      <code>passengers_boarded</code> (zero for a cancelled flight, by
+      definition). Load factor and revenue are correctly built on
+      <em>boarded</em> passengers, since those only exist for flights that
+      actually flew. But the first version of this analysis used
+      <em>boarded</em> passengers as the denominator for the complaints-rate
+      metric too — which made cancelled flights show <strong>zero</strong>
+      complaints per 1,000 passengers, the exact opposite of reality, purely
+      because a cancelled flight boards nobody. Complaints are rated against
+      <em>expected</em> passengers instead: the people actually affected by
+      the flight, whether it flew or not. Same kind of judgment call as
+      excluding cancelled flights before averaging delay minutes in the
+      sibling dashboard — a metric's denominator has to match what the
+      metric is actually claiming to measure.
+    </p>
+
+    <h3>Why these specific numbers</h3>
+    <p>
+      Not derived from any real source — chosen, then checked against public
+      ballpark ranges for plausibility (domestic OTP typically 70–88%,
+      load factor typically 75–85%, baggage mishandling typically 4–8 per
+      1,000 bags across the industry). The fleet-wide numbers here — 77.9%
+      on-time, 78.9% load factor, 5.4 bags mishandled per 1,000 — all land
+      inside those ranges. The relative patterns (which hub is worst, which
+      season hurts which hub, that delays and cancellations both drive up
+      complaints) are what the model was actually built to produce, and are
+      the point of the exercise.
+    </p>
+
+    <h3>What this deliberately doesn't model</h3>
+    <p>
+      It doesn't fit real distributional parameters from any published
+      dataset — there wasn't one available in this environment. It doesn't
+      model knock-on delay (one late inbound aircraft delaying that same
+      tail number's next departure) — a real ops model would need that, and
+      it's a materially harder problem than this exercise scopes to. Every
+      flight is generated independently; it's built to produce the
+      aggregate patterns an ops dashboard needs, not to be an operations
+      simulator.
+    </p>
+
+    <p class="caption" style="margin-top:4px">
+      Full source: <code>projects/airline-operations-dashboard/generate_dataset.py</code> and
+      <code>analyze.py</code> in the repo — every number above is reproducible from those two files.
+    </p>
+  </section>
+
+  <footer class="caption" style="margin-top:8px">
+    Dataset, generator script, and full methodology: see <code>projects/airline-operations-dashboard/</code>
+    in the portfolio repo. Built as part of the
+    <a href="https://bhawnamanglapm.github.io/travel-tech-more.html#cat-metrics-and-analytics" style="color:var(--brand-accent)">Travel-Tech Practice</a> section.
+  </footer>
+</div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const DATA = {"kpis": {"total_flights": 6000, "on_time_pct": 77.9, "avg_load_factor_pct": 78.9, "avg_revenue_per_flight": 638860, "cancellation_pct": 1.18, "complaints_per_1000_pax": 0.72, "baggage_mishandled_per_1000": 5.4}, "hubs": [{"hub": "BLR", "hub_name": "Bengaluru", "flights": 1206, "on_time_pct": 83.3, "load_factor_pct": 79.1, "avg_revenue": 612183, "cancellation_pct": 0.66, "complaints_per_1000_pax": 0.63, "mishandled_per_1000": 4.96}, {"hub": "HYD", "hub_name": "Hyderabad", "flights": 954, "on_time_pct": 81.2, "load_factor_pct": 79.2, "avg_revenue": 583212, "cancellation_pct": 0.52, "complaints_per_1000_pax": 0.55, "mishandled_per_1000": 4.65}, {"hub": "DEL", "hub_name": "Delhi", "flights": 1674, "on_time_pct": 76.3, "load_factor_pct": 79.2, "avg_revenue": 686112, "cancellation_pct": 1.61, "complaints_per_1000_pax": 0.8, "mishandled_per_1000": 5.74}, {"hub": "CCU", "hub_name": "Kolkata", "flights": 676, "on_time_pct": 74.9, "load_factor_pct": 78.3, "avg_revenue": 593749, "cancellation_pct": 1.92, "complaints_per_1000_pax": 0.7, "mishandled_per_1000": 5.36}, {"hub": "BOM", "hub_name": "Mumbai", "flights": 1490, "on_time_pct": 74.6, "load_factor_pct": 78.3, "avg_revenue": 663896, "cancellation_pct": 1.21, "complaints_per_1000_pax": 0.83, "mishandled_per_1000": 5.89}], "months": [{"month": 1, "flights": 470, "on_time_pct": 73.4, "load_factor_pct": 73.1, "avg_revenue": 530846, "cancellation_pct": 1.06, "complaints_per_1000_pax": 0.99, "mishandled_per_1000": 6.41, "label": "Jan"}, {"month": 2, "flights": 484, "on_time_pct": 77.9, "load_factor_pct": 73.3, "avg_revenue": 533879, "cancellation_pct": 1.03, "complaints_per_1000_pax": 0.69, "mishandled_per_1000": 5.42, "label": "Feb"}, {"month": 3, "flights": 484, "on_time_pct": 82.6, "load_factor_pct": 78.9, "avg_revenue": 629001, "cancellation_pct": 2.07, "complaints_per_1000_pax": 0.76, "mishandled_per_1000": 5.12, "label": "Mar"}, {"month": 4, "flights": 498, "on_time_pct": 80.5, "load_factor_pct": 78.6, "avg_revenue": 632668, "cancellation_pct": 1.0, "complaints_per_1000_pax": 0.6, "mishandled_per_1000": 5.08, "label": "Apr"}, {"month": 5, "flights": 528, "on_time_pct": 79.9, "load_factor_pct": 78.9, "avg_revenue": 628617, "cancellation_pct": 1.33, "complaints_per_1000_pax": 0.88, "mishandled_per_1000": 5.28, "label": "May"}, {"month": 6, "flights": 518, "on_time_pct": 77.0, "load_factor_pct": 78.8, "avg_revenue": 629952, "cancellation_pct": 1.16, "complaints_per_1000_pax": 0.82, "mishandled_per_1000": 5.03, "label": "Jun"}, {"month": 7, "flights": 510, "on_time_pct": 76.5, "load_factor_pct": 78.2, "avg_revenue": 626887, "cancellation_pct": 1.76, "complaints_per_1000_pax": 0.72, "mishandled_per_1000": 5.28, "label": "Jul"}, {"month": 8, "flights": 491, "on_time_pct": 76.2, "load_factor_pct": 77.5, "avg_revenue": 619376, "cancellation_pct": 1.02, "complaints_per_1000_pax": 0.85, "mishandled_per_1000": 5.56, "label": "Aug"}, {"month": 9, "flights": 504, "on_time_pct": 74.8, "load_factor_pct": 77.9, "avg_revenue": 622747, "cancellation_pct": 1.79, "complaints_per_1000_pax": 0.59, "mishandled_per_1000": 5.36, "label": "Sep"}, {"month": 10, "flights": 488, "on_time_pct": 82.2, "load_factor_pct": 85.9, "avg_revenue": 786593, "cancellation_pct": 0.41, "complaints_per_1000_pax": 0.4, "mishandled_per_1000": 5.49, "label": "Oct"}, {"month": 11, "flights": 524, "on_time_pct": 82.6, "load_factor_pct": 85.8, "avg_revenue": 781904, "cancellation_pct": 0.76, "complaints_per_1000_pax": 0.4, "mishandled_per_1000": 5.24, "label": "Nov"}, {"month": 12, "flights": 501, "on_time_pct": 71.1, "load_factor_pct": 78.9, "avg_revenue": 629598, "cancellation_pct": 0.8, "complaints_per_1000_pax": 1.08, "mishandled_per_1000": 5.71, "label": "Dec"}], "heatmap": [{"hub": "BLR", "Winter": 81.1, "Spring": 86.3, "Summer": 82.7, "Monsoon": 82.8, "Post-Monsoon": 85.1}, {"hub": "HYD", "Winter": 82.2, "Spring": 87.2, "Summer": 80.1, "Monsoon": 78.7, "Post-Monsoon": 78.6}, {"hub": "DEL", "Winter": 63.1, "Spring": 79.2, "Summer": 79.7, "Monsoon": 81.0, "Post-Monsoon": 81.8}, {"hub": "CCU", "Winter": 66.9, "Spring": 81.9, "Summer": 80.2, "Monsoon": 67.3, "Post-Monsoon": 84.0}, {"hub": "BOM", "Winter": 78.3, "Spring": 76.6, "Summer": 72.1, "Monsoon": 66.0, "Post-Monsoon": 82.4}], "season_order": ["Winter", "Spring", "Summer", "Monsoon", "Post-Monsoon"], "reliability_complaints": [{"bucket": "On-time", "complaints_per_1000_pax": 0.29}, {"bucket": "Delayed", "complaints_per_1000_pax": 2.05}, {"bucket": "Cancelled", "complaints_per_1000_pax": 6.1}]};
+
+const cs = getComputedStyle(document.querySelector('.viz-root'));
+function cssVar(name){ return cs.getPropertyValue(name).trim(); }
+
+const tooltip = document.getElementById('tooltip');
+function showTooltip(evt, html){
+  tooltip.innerHTML = html;
+  tooltip.classList.add('show');
+  const x = evt.clientX + 14, y = evt.clientY + 14;
+  tooltip.style.left = Math.min(x, window.innerWidth - 260) + 'px';
+  tooltip.style.top = Math.min(y, window.innerHeight - 100) + 'px';
+}
+function hideTooltip(){ tooltip.classList.remove('show'); }
+
+function fmtPct(v){ return v.toFixed(1) + '%'; }
+function fmtRs(v){ return '₹' + Math.round(v).toLocaleString('en-IN'); }
+function fmtRate(v){ return v.toFixed(2); }
+
+// ---------- KPI tiles ----------
+(function renderKpis(){
+  const k = DATA.kpis;
+  const items = [
+    { label: 'Flights operated', value: k.total_flights.toLocaleString() },
+    { label: 'On-time performance', value: fmtPct(k.on_time_pct) },
+    { label: 'Avg load factor', value: fmtPct(k.avg_load_factor_pct) },
+    { label: 'Avg revenue / flight', value: fmtRs(k.avg_revenue_per_flight) },
+    { label: 'Cancellation rate', value: fmtPct(k.cancellation_pct) },
+    { label: 'Baggage mishandled /1,000', value: fmtRate(k.baggage_mishandled_per_1000) },
+  ];
+  const row = document.getElementById('kpiRow');
+  items.forEach(it => {
+    const div = document.createElement('div');
+    div.className = 'kpi';
+    const l = document.createElement('div'); l.className = 'label'; l.textContent = it.label;
+    const v = document.createElement('div'); v.className = 'value'; v.textContent = it.value;
+    div.appendChild(l); div.appendChild(v);
+    row.appendChild(div);
+  });
+})();
+
+// ---------- Generic single-hue horizontal bar chart ----------
+function renderBarChart(containerId, rows, opts){
+  const container = document.getElementById(containerId);
+  const maxVal = Math.max(...rows.map(r => opts.value(r)));
+  rows.forEach((r, i) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    const cat = document.createElement('div');
+    cat.className = 'bar-cat';
+    cat.textContent = opts.label(r);
+    const track = document.createElement('div');
+    track.className = 'bar-track';
+    const fill = document.createElement('div');
+    fill.className = 'bar-fill';
+    fill.tabIndex = 0;
+    const pct = (opts.value(r) / maxVal) * 100;
+    fill.style.width = pct + '%';
+    fill.style.background = opts.color ? opts.color(r, i) : cssVar('--series-1');
+    const valSpan = document.createElement('span');
+    valSpan.className = 'bar-val';
+    valSpan.textContent = opts.valueLabel ? opts.valueLabel(r) : opts.value(r).toFixed(1);
+    track.appendChild(fill);
+    row.appendChild(cat);
+    row.appendChild(track);
+    row.appendChild(valSpan);
+    container.appendChild(row);
+
+    const showTT = (evt) => showTooltip(evt, opts.tooltip(r));
+    fill.addEventListener('pointermove', showTT);
+    fill.addEventListener('focus', () => showTooltip({clientX: fill.getBoundingClientRect().right, clientY: fill.getBoundingClientRect().top}, opts.tooltip(r)));
+    fill.addEventListener('pointerleave', hideTooltip);
+    fill.addEventListener('blur', hideTooltip);
+  });
+}
+
+// ---------- Hub on-time chart ----------
+const hubColors = ['--series-1','--series-2','--series-3','--series-4','--series-5'];
+renderBarChart('hubOtpChart', DATA.hubs, {
+  label: r => r.hub_name,
+  value: r => r.on_time_pct,
+  valueLabel: r => fmtPct(r.on_time_pct),
+  color: (r, i) => cssVar(hubColors[i % hubColors.length]),
+  tooltip: r => `<div class="tt-strong">${fmtPct(r.on_time_pct)} on-time</div>${r.hub_name} · ${fmtPct(r.cancellation_pct)} cancelled<br>${r.flights.toLocaleString()} flights · ${fmtRate(r.mishandled_per_1000)} bags mishandled/1,000`,
+});
+
+(function(){
+  const legend = document.createElement('div');
+  legend.className = 'legend';
+  DATA.hubs.forEach((r, i) => {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    const sw = document.createElement('span');
+    sw.className = 'legend-swatch';
+    sw.style.background = cssVar(hubColors[i % hubColors.length]);
+    item.appendChild(sw);
+    item.appendChild(document.createTextNode(r.hub_name + ' (' + r.hub + ')'));
+    legend.appendChild(item);
+  });
+  document.getElementById('hubOtpChart').before(legend);
+})();
+
+(function(){
+  const wrap = document.getElementById('hubTable');
+  const table = document.createElement('table');
+  table.className = 'data-table';
+  table.innerHTML = '<thead><tr><th>Hub</th><th>On-time</th><th>Load factor</th><th>Avg revenue</th><th>Cancel rate</th><th>Complaints /1,000</th><th>Mishandled /1,000</th></tr></thead>';
+  const tbody = document.createElement('tbody');
+  DATA.hubs.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.hub_name}</td><td>${fmtPct(r.on_time_pct)}</td><td>${fmtPct(r.load_factor_pct)}</td><td>${fmtRs(r.avg_revenue)}</td><td>${fmtPct(r.cancellation_pct)}</td><td>${fmtRate(r.complaints_per_1000_pax)}</td><td>${fmtRate(r.mishandled_per_1000)}</td>`;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+})();
+
+// ---------- Hub revenue chart ----------
+renderBarChart('hubRevenueChart', DATA.hubs, {
+  label: r => r.hub_name,
+  value: r => r.avg_revenue,
+  valueLabel: r => fmtRs(r.avg_revenue),
+  color: (r, i) => cssVar(hubColors[i % hubColors.length]),
+  tooltip: r => `<div class="tt-strong">${fmtRs(r.avg_revenue)}</div>${r.hub_name} avg revenue/flight<br>${fmtPct(r.load_factor_pct)} avg load factor`,
+});
+
+// ---------- Month trends ----------
+renderBarChart('monthOtpChart', DATA.months, {
+  label: r => r.label,
+  value: r => r.on_time_pct,
+  valueLabel: r => fmtPct(r.on_time_pct),
+  color: () => cssVar('--series-1'),
+  tooltip: r => `<div class="tt-strong">${fmtPct(r.on_time_pct)} on-time</div>${r.label} · ${r.flights.toLocaleString()} flights`,
+});
+renderBarChart('monthLoadChart', DATA.months, {
+  label: r => r.label,
+  value: r => r.load_factor_pct,
+  valueLabel: r => fmtPct(r.load_factor_pct),
+  color: () => cssVar('--series-3'),
+  tooltip: r => `<div class="tt-strong">${fmtPct(r.load_factor_pct)} load factor</div>${r.label} · ${fmtRs(r.avg_revenue)} avg revenue/flight`,
+});
+
+// ---------- Reliability vs. complaints ----------
+const reliabilityColors = {'On-time': '--series-3', 'Delayed': '--series-4', 'Cancelled': '--series-2'};
+renderBarChart('reliabilityChart', DATA.reliability_complaints, {
+  label: r => r.bucket,
+  value: r => r.complaints_per_1000_pax,
+  valueLabel: r => fmtRate(r.complaints_per_1000_pax),
+  color: (r) => cssVar(reliabilityColors[r.bucket] || '--series-1'),
+  tooltip: r => `<div class="tt-strong">${fmtRate(r.complaints_per_1000_pax)} complaints/1,000 pax</div>${r.bucket} flights`,
+});
+(function(){
+  const onTime = DATA.reliability_complaints.find(r => r.bucket === 'On-time').complaints_per_1000_pax;
+  const cancelled = DATA.reliability_complaints.find(r => r.bucket === 'Cancelled').complaints_per_1000_pax;
+  const multiple = (cancelled / onTime).toFixed(1);
+  document.getElementById('reliabilityCaption').textContent =
+    `Reading it: a cancelled flight generates roughly ${multiple}× the complaint volume of an on-time one, per passenger affected — reliability, not price or amenities, is what this dataset was built to show driving complaints.`;
+})();
+
+// ---------- Heatmap ----------
+(function(){
+  const seasons = DATA.season_order;
+  const allVals = DATA.heatmap.flatMap(row => seasons.map(s => row[s]).filter(v => v != null));
+  const min = Math.min(...allVals), max = Math.max(...allVals);
+  // On-time % is "higher is better" — invert the sequential ramp so the
+  // WORST (lowest on-time) cells get the darkest, most-alarming fill,
+  // matching how the sibling dashboard reads "darker = worse" for delay
+  // minutes (where higher is already the bad direction).
+  const seqSteps = ['--seq-100','--seq-200','--seq-300','--seq-400','--seq-500','--seq-600','--seq-700'];
+
+  function colorFor(v){
+    const t = 1 - (v - min) / (max - min || 1);
+    const idx = Math.min(seqSteps.length - 1, Math.floor(t * seqSteps.length));
+    return cssVar(seqSteps[idx]);
+  }
+  function relativeLuminance(hex){
+    const h = hex.replace('#', '');
+    const r = parseInt(h.substring(0,2), 16) / 255;
+    const g = parseInt(h.substring(2,4), 16) / 255;
+    const b = parseInt(h.substring(4,6), 16) / 255;
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+  function textFor(v){
+    return relativeLuminance(colorFor(v)) > 0.55 ? '#0b0b0b' : '#ffffff';
+  }
+
+  const wrap = document.getElementById('heatmap');
+  const table = document.createElement('table');
+  table.className = 'heatmap';
+  const thead = document.createElement('tr');
+  thead.innerHTML = '<th class="rowhead">Hub</th>' + seasons.map(s => `<th>${s}</th>`).join('');
+  table.appendChild(thead);
+
+  const hubNames = Object.fromEntries(DATA.hubs.map(h => [h.hub, h.hub_name]));
+
+  DATA.heatmap.forEach(row => {
+    const tr = document.createElement('tr');
+    const rowhead = document.createElement('th');
+    rowhead.className = 'rowhead';
+    rowhead.textContent = hubNames[row.hub] || row.hub;
+    tr.appendChild(rowhead);
+    seasons.forEach(s => {
+      const td = document.createElement('td');
+      const v = row[s];
+      const cell = document.createElement('div');
+      cell.className = 'heat-cell';
+      cell.tabIndex = 0;
+      if(v == null){
+        cell.style.background = 'var(--grid)';
+        cell.textContent = '–';
+      } else {
+        cell.style.background = colorFor(v);
+        cell.style.color = textFor(v);
+        cell.textContent = v.toFixed(1);
+        const tt = () => `<div class="tt-strong">${fmtPct(v)} on-time</div>${hubNames[row.hub] || row.hub} · ${s}`;
+        cell.addEventListener('pointermove', (e) => showTooltip(e, tt()));
+        cell.addEventListener('focus', () => {
+          const r = cell.getBoundingClientRect();
+          showTooltip({clientX:r.right, clientY:r.top}, tt());
+        });
+        cell.addEventListener('pointerleave', hideTooltip);
+        cell.addEventListener('blur', hideTooltip);
+      }
+      td.appendChild(cell);
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
+  wrap.appendChild(table);
+})();
+</script>
+
+</body>
+</html>
