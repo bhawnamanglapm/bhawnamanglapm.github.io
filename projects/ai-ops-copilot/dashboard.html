@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpsPilot — AI Operations Copilot</title>
+<meta name="description" content="Interactive AI operations copilot demo — inbound email triage, confidence-based routing, and audit guardrails — from Bhawna Mangla's PM portfolio.">
+<link rel="canonical" href="https://bhawnamanglapm.github.io/projects/ai-ops-copilot/dashboard.html">
+<style>
+  :root {
+    color-scheme: light;
+    --page:           #f9f9f7;
+    --surface-1:      #fcfcfb;
+    --surface-2:      #f2f1ed;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --border:         rgba(11,11,11,0.10);
+    --brand-accent:   #4F46E5;
+    --brand-lime:     #0A766D;
+    --brand-warn:     #B45309;
+    --brand-danger:   #B42318;
+    --ok-bg: #E6F4EA; --ok-fg: #146C2E; --ok-border: #B7E1C2;
+    --warn-bg: #FDF1DE; --warn-fg: #B45309; --warn-border: #F3D9AE;
+    --danger-bg: #FBE7E5; --danger-fg: #B42318; --danger-border: #F2C1BC;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface-1: #1a1a19; --surface-2: #232320;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+      --border: rgba(255,255,255,0.10);
+      --brand-accent: #8B7FF0; --brand-lime: #2DD4BF; --brand-warn: #F59E0B; --brand-danger: #F87171;
+      --ok-bg: #123021; --ok-fg: #4ADE80; --ok-border: #1F5138;
+      --warn-bg: #332409; --warn-fg: #F59E0B; --warn-border: #5C4210;
+      --danger-bg: #350f0d; --danger-fg: #F87171; --danger-border: #5C1B17;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19; --surface-2: #232320;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --border: rgba(255,255,255,0.10);
+    --brand-accent: #8B7FF0; --brand-lime: #2DD4BF; --brand-warn: #F59E0B; --brand-danger: #F87171;
+    --ok-bg: #123021; --ok-fg: #4ADE80; --ok-border: #1F5138;
+    --warn-bg: #332409; --warn-fg: #F59E0B; --warn-border: #5C4210;
+    --danger-bg: #350f0d; --danger-fg: #F87171; --danger-border: #5C1B17;
+  }
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{margin:0;background:var(--page);color:var(--text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;}
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 20px 80px}
+  .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-lime);font-weight:600;margin:0 0 8px}
+  h1{font-size:28px;margin:0 0 8px;letter-spacing:-.01em}
+  .sub{color:var(--text-secondary);font-size:14.5px;max-width:760px;line-height:1.6;margin:0 0 6px}
+  .disclosure{font-size:12.5px;color:var(--text-muted);background:var(--surface-2);border:1px solid var(--border);
+    border-radius:10px;padding:10px 14px;margin:16px 0 32px;max-width:760px}
+  code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.92em;background:var(--surface-2);
+    padding:1px 5px;border-radius:4px}
+
+  /* --- Pipeline diagram --- */
+  .pipeline-card{background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:26px 22px;margin-bottom:28px}
+  .pipeline-card h2{font-size:16px;margin:0 0 18px}
+  .pipeline{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;font-size:12.5px}
+  .pipe-node{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;
+    min-width:140px;flex:1 1 140px;display:flex;flex-direction:column;gap:4px;position:relative}
+  .pipe-node .pn-icon{font-size:20px}
+  .pipe-node .pn-title{font-weight:700;font-size:13px}
+  .pipe-node .pn-desc{color:var(--text-muted);font-size:11.5px;line-height:1.4}
+  .pipe-arrow{display:flex;align-items:center;justify-content:center;flex:0 0 28px;color:var(--text-muted);font-size:18px}
+  @media (max-width:900px){
+    .pipeline{flex-direction:column}
+    .pipe-arrow{transform:rotate(90deg);flex:0 0 20px}
+  }
+
+  /* --- KPI strip --- */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+  .kpi{background:var(--surface-1);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+  .kpi .k-num{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+  .kpi .k-lbl{font-size:11.5px;color:var(--text-muted);margin-top:2px}
+  @media (max-width:700px){.kpi-row{grid-template-columns:1fr 1fr}}
+
+  /* --- Threshold control --- */
+  .threshold-card{background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:28px}
+  .threshold-card h2{font-size:16px;margin:0 0 6px}
+  .threshold-card .desc{font-size:13px;color:var(--text-secondary);margin:0 0 16px}
+  .threshold-row{display:flex;align-items:center;gap:16px}
+  .threshold-row input[type=range]{flex:1;accent-color:var(--brand-accent)}
+  .threshold-val{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:700;font-size:15px;min-width:46px;text-align:right}
+
+  /* --- Queue table --- */
+  .queue-card{background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:28px;overflow-x:auto}
+  .queue-card h2{font-size:16px;margin:0 0 16px}
+  table.queue{width:100%;border-collapse:collapse;min-width:760px}
+  table.queue th{text-align:left;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);
+    padding:8px 10px;border-bottom:1px solid var(--border)}
+  table.queue td{padding:11px 10px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
+  table.queue tr.qrow{cursor:pointer;transition:background .15s}
+  table.queue tr.qrow:hover{background:var(--surface-2)}
+  .cat-badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
+  .cat-payout{background:#E3E8FD;color:#3730A3}
+  .cat-kyc{background:#FDE8F3;color:#9D174D}
+  .cat-claim{background:#FEF3C7;color:#92400E}
+  .cat-spam{background:var(--surface-2);color:var(--text-muted)}
+  :root[data-theme="dark"] .cat-payout, @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cat-payout{background:#312E81;color:#C7D2FE}}
+  :root[data-theme="dark"] .cat-kyc{background:#831843;color:#FBCFE8}
+  :root[data-theme="dark"] .cat-claim{background:#78350F;color:#FDE68A}
+  .status-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:700;border:1px solid}
+  .status-ok{background:var(--ok-bg);color:var(--ok-fg);border-color:var(--ok-border)}
+  .status-review{background:var(--warn-bg);color:var(--warn-fg);border-color:var(--warn-border)}
+  .conf-bar-wrap{width:70px;height:6px;background:var(--surface-2);border-radius:4px;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:8px}
+  .conf-bar{height:100%;border-radius:4px}
+  .qsummary{color:var(--text-secondary);font-size:12.5px;max-width:260px}
+  .detail-row td{background:var(--surface-2);padding:0}
+  .detail-inner{padding:16px 20px;font-size:12.5px;color:var(--text-secondary);display:none}
+  .detail-inner.open{display:block}
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:10px}
+  .detail-field .df-k{color:var(--text-muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.04em}
+  .detail-field .df-v{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12.5px;color:var(--text-primary)}
+  .pii{background:var(--surface-1);border:1px dashed var(--border);border-radius:6px;padding:1px 6px}
+
+  /* --- Guardrails --- */
+  .guard-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px}
+  @media (max-width:820px){.guard-grid{grid-template-columns:1fr}}
+  .guard-card{background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:20px}
+  .guard-card h3{font-size:14.5px;margin:0 0 10px}
+  .guard-card p{font-size:12.5px;color:var(--text-secondary);line-height:1.6;margin:0 0 10px}
+  .pii-example{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;margin-bottom:8px}
+  .pii-example .lbl{color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:3px}
+
+  /* --- Audit log --- */
+  .audit-card{background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:10px;overflow-x:auto}
+  .audit-card h2{font-size:16px;margin:0 0 16px}
+  table.audit{width:100%;border-collapse:collapse;min-width:680px}
+  table.audit th{text-align:left;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);padding:8px 10px;border-bottom:1px solid var(--border)}
+  table.audit td{padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-secondary)}
+  table.audit td.ts{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;white-space:nowrap;color:var(--text-muted)}
+
+  a.back{display:inline-flex;align-items:center;gap:6px;color:var(--brand-lime);text-decoration:none;font-size:13px;margin-bottom:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../../travel-tech-more.html#case-ai-ops-copilot">&larr; Back to case study</a>
+  <div class="eyebrow">AI Ops Copilot — Interactive Demo</div>
+  <h1>OpsPilot: Inbound Email Triage &amp; Case Automation</h1>
+  <p class="sub">An AI operations copilot for a fictional NBFC ("Meridian Financial") that classifies, extracts,
+    and routes inbound partner emails — payout disputes, KYC resubmissions, claim escalations — auto-approving
+    high-confidence cases and sending the rest to a human review queue.</p>
+  <div class="disclosure">
+    <strong>What's real here:</strong> the architecture, routing logic, guardrails, and UI are a genuine working
+    prototype (drag the threshold slider below — it live-reclassifies every row). <strong>What's synthetic:</strong>
+    the 14 sample emails and their extracted fields are illustrative data I wrote, not real customer correspondence
+    — no real partner, account number, or claim in this demo is real.
+  </div>
+
+  <div class="pipeline-card">
+    <h2>System Architecture</h2>
+    <div class="pipeline">
+      <div class="pipe-node"><span class="pn-icon">📧</span><span class="pn-title">Email Ingestion</span><span class="pn-desc">Inbound mailbox polled via API; attachments extracted</span></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node"><span class="pn-icon">🧠</span><span class="pn-title">LLM Classifier</span><span class="pn-desc">Categorizes intent: Payout Dispute / KYC / Claim / Irrelevant</span></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node"><span class="pn-icon">🔎</span><span class="pn-title">Parser</span><span class="pn-desc">Extracts structured fields: partner ID, amount, dates, doc type</span></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node"><span class="pn-icon">⚖️</span><span class="pn-title">Business Rules Engine</span><span class="pn-desc">Applies confidence threshold + fraud/value checks</span></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node"><span class="pn-icon">👤</span><span class="pn-title">Human Review Queue</span><span class="pn-desc">Low-confidence or flagged cases held for a human decision</span></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node"><span class="pn-icon">🗂️</span><span class="pn-title">Automated Case Creation</span><span class="pn-desc">Approved cases open a ticket in the ops system automatically</span></div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="k-num" id="kTotal">—</div><div class="k-lbl">Emails processed today</div></div>
+    <div class="kpi"><div class="k-num" id="kAuto">—</div><div class="k-lbl">Auto-approved</div></div>
+    <div class="kpi"><div class="k-num" id="kReview">—</div><div class="k-lbl">Routed to human review</div></div>
+    <div class="kpi"><div class="k-num" id="kConf">—</div><div class="k-lbl">Avg. classifier confidence</div></div>
+  </div>
+
+  <div class="threshold-card">
+    <h2>Auto-approval confidence threshold</h2>
+    <p class="desc">The Business Rules Engine auto-approves a case only if classifier confidence clears this bar
+      <em>and</em> no fraud/value flag is set. Drag it — the queue below re-routes live, same as it would in production
+      if an ops lead tightened or loosened the bar.</p>
+    <div class="threshold-row">
+      <input type="range" id="thresholdSlider" min="50" max="99" value="90">
+      <span class="threshold-val" id="thresholdVal">90%</span>
+    </div>
+  </div>
+
+  <div class="queue-card">
+    <h2>Live Queue</h2>
+    <table class="queue">
+      <thead><tr><th>Case</th><th>Category</th><th>Summary</th><th>Confidence</th><th>Status</th></tr></thead>
+      <tbody id="queueBody"></tbody>
+    </table>
+  </div>
+
+  <div class="guard-grid">
+    <div class="guard-card">
+      <h3>PII Redaction</h3>
+      <p>Extracted fields are masked before anything touches a log, a dashboard, or this demo. Full values are
+        only ever visible inside the secure case record itself.</p>
+      <div class="pii-example"><span class="lbl">Raw extraction</span>Partner A/C: 8827 4410 9931 5502</div>
+      <div class="pii-example"><span class="lbl">Redacted (shown everywhere else)</span>Partner A/C: <span class="pii">•••• •••• •••• 5502</span></div>
+    </div>
+    <div class="guard-card">
+      <h3>Edge Cases &amp; Fraud Flags</h3>
+      <p>Three conditions force human review regardless of confidence score, since a high-confidence classification
+        can still be a high-risk decision:</p>
+      <p style="margin:0"><strong>1.</strong> Payout amount above ₹2,00,000 &nbsp;·&nbsp; <strong>2.</strong> Partner ID
+        flagged in the last 90 days &nbsp;·&nbsp; <strong>3.</strong> Duplicate claim reference number detected.</p>
+    </div>
+  </div>
+
+  <div class="audit-card">
+    <h2>Audit Log</h2>
+    <table class="audit">
+      <thead><tr><th>Timestamp</th><th>Case</th><th>Decision</th><th>Reason</th></tr></thead>
+      <tbody id="auditBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const CASES = [
+  {id:"OPS-10231", cat:"payout", catLabel:"Payout Dispute", summary:"Partner disputes ₹18,400 shortfall vs. expected payout for March cycle.", conf:96, amount:18400, flagged:false},
+  {id:"OPS-10232", cat:"kyc", catLabel:"KYC Resubmission", summary:"Updated PAN card image submitted after initial OCR mismatch.", conf:94, amount:0, flagged:false},
+  {id:"OPS-10233", cat:"claim", catLabel:"Claim Escalation", summary:"Second follow-up on unresolved claim, references ticket from 12 days ago.", conf:71, amount:0, flagged:false},
+  {id:"OPS-10234", cat:"payout", catLabel:"Payout Dispute", summary:"Partner requests payout recalculation citing a rate-card change.", conf:88, amount:42500, flagged:false},
+  {id:"OPS-10235", cat:"spam", catLabel:"Irrelevant", summary:"Auto-reply / out-of-office bounce, no actionable content.", conf:99, amount:0, flagged:false},
+  {id:"OPS-10236", cat:"kyc", catLabel:"KYC Resubmission", summary:"Address proof re-upload, document quality low, OCR uncertain.", conf:62, amount:0, flagged:false},
+  {id:"OPS-10237", cat:"payout", catLabel:"Payout Dispute", summary:"High-value payout dispute referencing a large one-time settlement.", conf:97, amount:215000, flagged:true},
+  {id:"OPS-10238", cat:"claim", catLabel:"Claim Escalation", summary:"Claim reference number matches one already resolved last week.", conf:93, amount:0, flagged:true},
+  {id:"OPS-10239", cat:"payout", catLabel:"Payout Dispute", summary:"Minor rounding discrepancy flagged by partner, well within tolerance.", conf:98, amount:340, flagged:false},
+  {id:"OPS-10240", cat:"kyc", catLabel:"KYC Resubmission", summary:"Fresh Aadhaar upload, clean OCR match against existing profile.", conf:99, amount:0, flagged:false},
+  {id:"OPS-10241", cat:"claim", catLabel:"Claim Escalation", summary:"New claim, incomplete supporting documents attached.", conf:58, amount:0, flagged:false},
+  {id:"OPS-10242", cat:"payout", catLabel:"Payout Dispute", summary:"Partner ID has an active fraud-review flag from a prior case.", conf:91, amount:9800, flagged:true},
+  {id:"OPS-10243", cat:"claim", catLabel:"Claim Escalation", summary:"Straightforward claim status inquiry, well-formed request.", conf:95, amount:0, flagged:false},
+  {id:"OPS-10244", cat:"spam", catLabel:"Irrelevant", summary:"Vendor marketing email, no relation to any open case.", conf:97, amount:0, flagged:false},
+];
+
+const REASON = c => {
+  if (c.flagged) {
+    if (c.amount > 200000) return "High-value payout (>₹2,00,000) — value guardrail forces review regardless of confidence.";
+    if (c.cat === "claim") return "Duplicate claim reference number detected — routed for manual de-duplication.";
+    return "Partner ID carries an active fraud-review flag — routed for manual review.";
+  }
+  return null;
+};
+
+function fmtPct(n){ return n + "%"; }
+
+function render(threshold){
+  const body = document.getElementById("queueBody");
+  const auditBody = document.getElementById("auditBody");
+  body.innerHTML = "";
+  auditBody.innerHTML = "";
+
+  let autoCount = 0, reviewCount = 0, confSum = 0;
+  const baseTime = new Date("2026-08-13T09:14:00");
+
+  CASES.forEach((c, i) => {
+    confSum += c.conf;
+    const passesConfidence = c.conf >= threshold;
+    const approved = passesConfidence && !c.flagged;
+    if (approved) autoCount++; else reviewCount++;
+
+    const barColor = c.conf >= 90 ? "var(--ok-fg)" : c.conf >= 75 ? "var(--brand-warn)" : "var(--brand-danger)";
+
+    const tr = document.createElement("tr");
+    tr.className = "qrow";
+    tr.innerHTML = `
+      <td><strong>${c.id}</strong></td>
+      <td><span class="cat-badge cat-${c.cat}">${c.catLabel}</span></td>
+      <td class="qsummary">${c.summary}</td>
+      <td><span class="conf-bar-wrap"><span class="conf-bar" style="width:${c.conf}%;background:${barColor}"></span></span>${c.conf}%</td>
+      <td>${approved
+        ? `<span class="status-pill status-ok">✓ Auto-approved</span>`
+        : `<span class="status-pill status-review">⏸ Manual review</span>`}</td>
+    `;
+    const detailTr = document.createElement("tr");
+    detailTr.className = "detail-row";
+    const reasonText = REASON(c) || (approved
+      ? `Confidence ${c.conf}% ≥ ${threshold}% threshold, no guardrail flags — auto-approved and case created automatically.`
+      : `Confidence ${c.conf}% below the ${threshold}% threshold — held for human review.`);
+    detailTr.innerHTML = `<td colspan="5"><div class="detail-inner" id="detail-${i}">
+      <div class="detail-grid">
+        <div class="detail-field"><div class="df-k">Case ID</div><div class="df-v">${c.id}</div></div>
+        <div class="detail-field"><div class="df-k">Category</div><div class="df-v">${c.catLabel}</div></div>
+        <div class="detail-field"><div class="df-k">Classifier confidence</div><div class="df-v">${c.conf}%</div></div>
+        <div class="detail-field"><div class="df-k">Guardrail flag</div><div class="df-v">${c.flagged ? "Yes" : "None"}</div></div>
+      </div>
+      <div class="detail-field"><div class="df-k">Routing reason</div><div class="df-v" style="font-family:inherit">${reasonText}</div></div>
+    </div></td>`;
+
+    tr.addEventListener("click", () => {
+      document.getElementById(`detail-${i}`).classList.toggle("open");
+    });
+
+    body.appendChild(tr);
+    body.appendChild(detailTr);
+
+    const ts = new Date(baseTime.getTime() + i * 7 * 60000);
+    const tsStr = ts.toTimeString().slice(0,5);
+    const auditTr = document.createElement("tr");
+    auditTr.innerHTML = `<td class="ts">Aug 13, ${tsStr}</td><td>${c.id}</td><td>${approved ? "Auto-approved" : "Sent to review"}</td><td>${reasonText}</td>`;
+    auditBody.appendChild(auditTr);
+  });
+
+  document.getElementById("kTotal").textContent = CASES.length;
+  document.getElementById("kAuto").textContent = autoCount;
+  document.getElementById("kReview").textContent = reviewCount;
+  document.getElementById("kConf").textContent = Math.round(confSum / CASES.length) + "%";
+}
+
+const slider = document.getElementById("thresholdSlider");
+const valLabel = document.getElementById("thresholdVal");
+slider.addEventListener("input", () => {
+  valLabel.textContent = slider.value + "%";
+  render(parseInt(slider.value, 10));
+});
+render(parseInt(slider.value, 10));
+</script>
+</body>
+</html>

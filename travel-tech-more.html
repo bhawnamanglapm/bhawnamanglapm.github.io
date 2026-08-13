@@ -1429,6 +1429,113 @@
       </div>
       </article>
     </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T34</span>
+        <h3 class="jcat-title">OpsPilot — AI Operations Copilot</h3>
+      </div>
+      <article class="jcard" data-case="ai-ops-copilot" data-updated="2026-08-13">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#6366F1,#3730A3)">📥</div>
+            <div>
+              <div class="jtitle">OpsPilot — AI Operations Copilot</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Built · try the live demo</div>
+              <div class="jtools"><b>Tools:</b> HTML/CSS/JS, interactive prototyping</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">Confidence-based auto-approval, live threshold slider</span>
+          <span class="chip">6-stage pipeline: ingest → classify → parse → rules → review → case</span>
+          <span class="chip">PII redaction + fraud/value guardrails</span>
+          <span class="chip">Full audit log, every decision explained</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> HTML/CSS/JS — self-contained interactive prototype, no framework or backend.</p>
+
+        <div class="cs-narrative">
+          <h4>Why This Exists</h4>
+          <p>
+            Every other AI project on this site is either a data-analysis dashboard (SQL,
+            Amplitude, Power BI) or a customer-facing conversational copilot (the
+            <a href="#case-travel-support-ai-copilot" data-open-case="travel-support-ai-copilot" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Travel Support AI Copilot</a>).
+            Neither one demonstrates the specific shape of AI product I actually shipped-adjacent
+            work in at Bajaj Finance: an internal operations tool that triages a high-volume
+            inbound queue, extracts structured data from unstructured text, and decides — with a
+            human safety net — what can be auto-processed versus what a person has to look at.
+            That's a real, common enterprise-AI pattern, and it wasn't represented here until now.
+          </p>
+
+          <h4>The Scenario</h4>
+          <p>
+            <strong>"Meridian Financial"</strong> is a fictional NBFC (no real company, named or
+            implied). Its partner-operations inbox receives a constant stream of emails: partners
+            disputing a payout amount, resubmitting a rejected KYC document, or escalating an
+            unresolved claim. Today that's a person reading every email, deciding what it is,
+            pulling out the relevant details, and deciding what to do — the exact kind of
+            repetitive, rule-governed decision that AI operations tooling is built for, and the
+            same category of problem PCMS solved for payout <em>calculation</em> at Bajaj Finance,
+            applied here to payout <em>correspondence</em> instead.
+          </p>
+
+          <h4>My Approach</h4>
+          <p>
+            Built the full pipeline as a working prototype rather than a static mockup: an
+            <strong>LLM Classifier</strong> stage that categorizes each email (Payout Dispute / KYC
+            Resubmission / Claim Escalation / Irrelevant), a <strong>Parser</strong> stage that
+            extracts structured fields, and a <strong>Business Rules Engine</strong> that decides
+            auto-approval based on two independent signals: classifier confidence against a
+            configurable threshold, <em>and</em> three hard guardrails that override confidence
+            entirely (a payout above ₹2,00,000, a partner ID with an active fraud flag, or a
+            duplicate claim reference number). The confidence threshold slider on the live demo is
+            fully functional — dragging it re-runs the routing logic against all 14 sample cases in
+            real time, the same lever an ops lead would actually pull in production to trade off
+            automation coverage against review volume.
+          </p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Key Design Decisions</h4>
+          <ul>
+            <li><strong>Confidence alone isn't the approval gate — confidence AND guardrails are.</strong> A classifier can be 97% confident about a case that's still too risky to auto-approve (a large payout, a flagged partner). Modeling these as two separate, independently-overridable checks — not one blended score — is the difference between a demo that looks safe and a system that actually is.</li>
+            <li><strong>PII gets redacted before it reaches any surface a human doesn't strictly need it on</strong> — logs, dashboards, this demo included. The full unmasked value only ever exists inside the secure case record itself, not in anything an ops analyst scans while triaging a queue.</li>
+            <li><strong>Every routing decision is explained, not just logged.</strong> The audit log doesn't just say "approved" or "reviewed" — it states the exact reason (which threshold was cleared, or which specific guardrail fired), because an ops lead auditing a month of automated decisions needs to trust the "why," not just the "what."</li>
+          </ul>
+
+          <h4>Recommendations</h4>
+          <p>What I'd push for next if this were a real system, not a portfolio prototype:</p>
+          <ul>
+            <li><strong>Track guardrail-override rate as its own metric, separate from auto-approval rate.</strong> A rising share of high-confidence cases getting caught by guardrails is an early signal worth watching on its own — it might mean fraud patterns are shifting, not just that guardrails are "working."</li>
+            <li><strong>Route human review decisions back into a feedback loop.</strong> Every case a human overturns or confirms is a labeled example; without feeding that back into the classifier, the system never gets better at exactly the cases it's currently worst at.</li>
+            <li><strong>Set the threshold per category, not globally.</strong> A 90% bar might be too conservative for well-formed KYC resubmissions and too loose for payout disputes — a single global slider is the simplest version of this control, not the final one.</li>
+          </ul>
+
+          <h4>Where the Real Risk Sits</h4>
+          <p>
+            Same discipline as every other AI project here: the risk isn't the classifier being
+            wrong sometimes — it's a wrong decision being <em>irreversible</em> and
+            <em>unexplained</em>. The guardrails exist specifically to catch the cases where being
+            wrong is expensive (a large payout, a flagged partner), and the audit log exists so a
+            wrong auto-approval is never a mystery when someone has to unwind it. A system that's
+            merely accurate isn't good enough here; it has to be accurate <em>and</em> legible.
+          </p>
+        </div>
+
+        <a href="projects/ai-ops-copilot/dashboard.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
+          <picture>
+            <img src="projects/ai-ops-copilot/screenshots/dashboard-light.png" alt="OpsPilot dashboard: a 6-stage architecture pipeline (Email Ingestion through Automated Case Creation), KPI tiles (14 processed, 7 auto-approved, 7 to review, 88% avg confidence), a live confidence-threshold slider, a 14-row case queue with category badges and status pills, PII redaction and fraud-guardrail panels, and a full audit log" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          </picture>
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click the screenshot to open the live, interactive demo — drag the confidence threshold and click any row to expand its routing reason (also available in dark mode).</p>
+        <div class="jlinks">
+          <span><span class="k">Link</span><a href="projects/ai-ops-copilot/dashboard.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">live demo →</a></span>
+          <span><span class="k">Image</span><a href="projects/ai-ops-copilot/screenshots/dashboard-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
     </div>
 
     <div class="cat-section" id="cat-metrics-and-analytics">
