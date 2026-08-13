@@ -2230,6 +2230,31 @@
         </div>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 3 screenshots are real charts from my own live Amplitude project, built through the actual Amplitude UI against the ingested dataset.</p>
 
+        <div class="cs-narrative">
+          <h4>Beyond the Guide: Amplitude's Own Default Dashboard</h4>
+          <p>
+            Past the specific charts in the practice guide, I also opened
+            Amplitude's auto-generated "User Activity" notebook — a template it
+            builds automatically once real data starts flowing in, not something I
+            set up. It confirmed the data pipeline end to end: 243 daily active
+            users, new-signup and returning-user trends, and a visible retention
+            decay curve, all matching the pattern the dataset was built around. It
+            also surfaced something worth understanding rather than dismissing:
+            the device/country/platform breakdown panels all show <strong>"Invalid
+            chart definition."</strong> That's not the pipeline breaking — those
+            panels reference Amplitude's own auto-captured device/geo properties,
+            normally filled in by a real mobile/web SDK. Since this dataset was
+            sent server-side through the HTTP API rather than a live app SDK, those
+            specific built-in properties were never populated — expected, not a
+            bug, and a real distinction between "data sent by a script" and "data
+            sent by an instrumented app" worth knowing.
+          </p>
+        </div>
+        <a href="projects/amplitude-strideway/screenshots/basic-04-user-activity-overview.png" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
+          <img src="projects/amplitude-strideway/screenshots/basic-04-user-activity-overview.png" alt="Amplitude's auto-generated User Activity dashboard: 243 daily active users, new-user and returning-user trend charts, a retention decay curve, and device/country/platform breakdown panels showing 'Invalid chart definition' since this data was sent server-side without SDK-captured device properties" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Amplitude's own auto-generated dashboard, exported as PDF directly from the tool — included as-is, "Invalid chart definition" panels and all, rather than cropped down to only the clean parts.</p>
+
         <div class="jlinks">
           <span><span class="k">Guide</span><a href="projects/amplitude-strideway/AMPLITUDE_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">practice guide →</a></span>
           <span><span class="k">Dataset</span><a href="projects/amplitude-strideway/generate_dataset.py" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">generator script →</a></span>
