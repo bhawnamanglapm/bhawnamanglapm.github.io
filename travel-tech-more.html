@@ -2155,6 +2155,196 @@
       </div>
       </article>
     </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T32</span>
+        <h3 class="jcat-title">Amplitude Analytics — Strideway (Basic)</h3>
+      </div>
+      <article class="jcard" data-case="amplitude-strideway-basic" data-updated="2026-08-13">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#34D399,#047857)">🏃</div>
+            <div>
+              <div class="jtitle">Amplitude Analytics — Strideway (Basic)</div>
+              <div class="jmeta">⭐⭐⭐ Built · event segmentation, real Amplitude account</div>
+              <div class="jtools"><b>Tools:</b> Amplitude (tracking plan, Segmentation), Python (HTTP API ingestion)</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">3,000 users · 52,082 events, real Amplitude account</span>
+          <span class="chip">10-event tracking plan built via the Amplitude API</span>
+          <span class="chip">Fictional habit app (Strideway), documented behavior model</span>
+          <span class="chip">5 segmentation charts, real screenshots</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> Amplitude (tracking plan, Event Segmentation), Python + Amplitude's HTTP API V2 for data ingestion.</p>
+
+        <div class="cs-narrative">
+          <h4>Why This Exists</h4>
+          <p>
+            Amplitude/Mixpanel are listed among the tools worth having, alongside
+            <a href="#case-sql-saas-analytics-basic" data-open-case="sql-saas-analytics-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">SQL</a>
+            — but with no prior hands-on use. This project is the real thing, not a
+            simulation: a genuine Amplitude organization (free Starter plan), a
+            tracking plan built for real through Amplitude's own API, and real usage
+            data sent through Amplitude's actual ingestion pipeline for a fresh
+            scenario — "Strideway," a fictional fitness/habit-tracking app.
+          </p>
+
+          <h4>My Approach</h4>
+          <p>
+            First, a real tracking plan: 10 events (Sign Up, Complete Onboarding,
+            Log Workout, Hit Streak Milestone, View Paywall, Start Free Trial,
+            Upgrade to Premium, Cancel Subscription, Open App, Invite Friend), 7
+            event properties, and 5 user properties, created directly in the live
+            Amplitude project — this is the part of the job that happens before any
+            engineer writes a tracking call. Then a documented synthetic dataset:
+            3,000 users and 52,082 events, with every behavioral difference modeled
+            on a deliberate, real pattern rather than random noise — Referral- and
+            Organic-acquired users complete onboarding and retain far better than
+            Influencer-driven signups (lower-intent curiosity clicks, a real growth
+            pattern), and hitting a 7-day workout streak sharply raises the odds of
+            seeing — and converting on — the premium paywall shortly after (a
+            real behavioral-commitment upsell pattern). That data was sent into the
+            actual Amplitude project through Amplitude's own HTTP API, run from a
+            Python script with my own API key — real ingestion, not fabricated
+            chart data.
+          </p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Key Findings</h4>
+          <ul>
+            <li><strong>Daily signups climbed from single digits in May to 50-65/day by late July</strong> across all 4 channels, with Organic consistently the largest share — the deliberate growth ramp built into the dataset, confirmed in real Amplitude charts, not just the generator script.</li>
+            <li><strong>Onboarding completion clearly splits by channel</strong>: Organic and Referral-driven signups convert to a completed profile far more consistently than Paid Social or Influencer signups — visible directly in the segmentation chart, matching the model's Referral 88%/Organic 81% vs. Influencer 55% completion rates.</li>
+            <li><strong>Cardio and Strength are Strideway's most-logged workout types</strong>, HIIT and Yoga meaningfully behind — a simple distribution chart, still a real product-mix read.</li>
+          </ul>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
+          <img src="projects/amplitude-strideway/screenshots/basic-01-signup-by-channel.png" alt="Amplitude Segmentation chart: Daily Unique Users for Sign Up Event, May 1 to Aug 13, grouped by signup_channel — Organic (blue) consistently highest, all 4 channels trending upward" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/amplitude-strideway/screenshots/basic-02-workout-by-type.png" alt="Amplitude Segmentation chart: Daily Unique Users Logging Workouts by Workout Type — Cardio and Strength leading, HIIT and Yoga lower, all trending upward with overall growth" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/amplitude-strideway/screenshots/basic-03-onboarding-by-channel.png" alt="Amplitude Segmentation chart: Daily Unique Users Completing Onboarding by Signup Channel — Organic (blue) clearly highest, Referral/Paid Social/Influencer lower and closer together" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </div>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 3 screenshots are real charts from my own live Amplitude project, built through the actual Amplitude UI against the ingested dataset.</p>
+
+        <div class="jlinks">
+          <span><span class="k">Guide</span><a href="projects/amplitude-strideway/AMPLITUDE_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">practice guide →</a></span>
+          <span><span class="k">Dataset</span><a href="projects/amplitude-strideway/generate_dataset.py" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">generator script →</a></span>
+          <span><span class="k">Next</span><a href="#case-amplitude-strideway-advanced" data-open-case="amplitude-strideway-advanced" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Advanced: funnels, retention, cohorts (T33) →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T33</span>
+        <h3 class="jcat-title">Amplitude Analytics — Strideway (Advanced)</h3>
+      </div>
+      <article class="jcard" data-case="amplitude-strideway-advanced" data-updated="2026-08-13">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#10B981,#065F46)">🔥</div>
+            <div>
+              <div class="jtitle">Amplitude Analytics — Strideway (Advanced)</div>
+              <div class="jmeta">⭐⭐⭐⭐ Built · funnels, retention, cohorts, a real bug fixed</div>
+              <div class="jtools"><b>Tools:</b> Amplitude (Funnels, Retention, Cohorts, API)</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">Full 6-step monetization funnel</span>
+          <span class="chip">Retention curve segmented by channel</span>
+          <span class="chip">Real conversion-window bug found and fixed</span>
+          <span class="chip">Hit a real Starter-plan limit on cohorts</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> Amplitude (Funnel analysis, Retention analysis, Cohorts), the Amplitude Chart API (used to diagnose the bug below).</p>
+
+        <div class="cs-narrative">
+          <h4>Why Advanced, Not Just Basic</h4>
+          <p>
+            Segmentation charts prove I can read a single metric; this half proves
+            I can trace a user journey end to end — funnel conversion, retention
+            over time, and cohort definition, the exact Amplitude patterns behind
+            most growth/monetization dashboards. Same Strideway dataset as the
+            <a href="#case-amplitude-strideway-basic" data-open-case="amplitude-strideway-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic case study (T32)</a>.
+          </p>
+
+          <h4>A Real Amplitude Bug, Found and Fixed</h4>
+          <p>
+            The first funnel I built — Sign Up → Complete Onboarding → Log Workout
+            → View Paywall → Start Free Trial → Upgrade to Premium — came back
+            showing only <strong>19% conversion</strong> from onboarding to a first
+            logged workout. That looked wrong: nearly every onboarded user in this
+            dataset eventually logs a workout. I checked directly against the raw
+            dataset and confirmed it — <strong>92.5%</strong> of onboarded users
+            eventually log at least one workout, nowhere near 19%.
+          </p>
+          <p>
+            The cause, found by pulling the chart's real definition through
+            Amplitude's own API rather than guessing: Amplitude funnels default to
+            a <strong>1-day conversion window</strong> between each step
+            (<code>conversionSeconds: 86400</code>). Since many users in this
+            dataset don't log their first workout until well after onboarding —
+            they open the app sporadically over weeks, not daily — a 1-day window
+            was silently dropping every conversion that happened even slightly
+            later than that, while still reporting a clean-looking, plausible
+            percentage. Widening the window to 90 days fixed it exactly: Log
+            Workout jumped to <strong>68.97% (2,069 of 2,236)</strong>, matching the
+            raw dataset precisely.
+          </p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Key Findings</h4>
+          <ul>
+            <li><strong>Full funnel, corrected</strong>: Sign Up 3,000 → Complete Onboarding 74.53% → Log Workout 68.97% → View Paywall 11.97% → Start Free Trial 5.9% → Upgrade to Premium 1.63% (49 users) — a realistic, multi-week monetization path, not a same-day one.</li>
+            <li><strong>Retention by channel is the clearest chart in the whole project</strong>: at Day 30, Referral-acquired users retain around 46%, Organic around 36%, Paid Social around 22%, and Influencer around 9% — a roughly 5x spread between the best and worst channel, purely from acquisition source.</li>
+            <li><strong>Cohort creation hit a real plan limit</strong>: dynamic (auto-recalculating) cohorts require a paid Amplitude plan; the Starter tier blocked saving one. The definition itself — "users who performed Upgrade to Premium, count ≥ 1" — was correct; only persisting it as a live cohort was gated. A genuine, worth-knowing constraint of the free tier, not a mistake.</li>
+          </ul>
+
+          <h4>What This Means, Applied</h4>
+          <p>
+            The retention chart changes the decision quite a bit: I wouldn't
+            automatically scale Influencer just because it brings users in. I'd
+            treat Referral as the stronger quality channel if its retained-user
+            curve is consistently better. As PM, I'd shift more acquisition effort
+            toward Referral, while keeping Influencer as a controlled acquisition
+            experiment. For Influencer, I'd dig into which creators, audiences, and
+            landing experiences are producing retained users rather than judging
+            the channel only on acquisition volume. I'd also set up a cohort
+            comparison for Influencer vs. Referral — same signup period, same
+            retention window, ideally normalized by plan — to make sure the
+            difference isn't caused by audience mix. The goal wouldn't be "kill
+            Influencer"; it would be optimize for retained customers, not just
+            acquired customers. If Referral continues to show stronger retention,
+            I'd increase investment there and use Influencer selectively where
+            creators can demonstrate comparable downstream retention.
+          </p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Before / After: the funnel-window fix</h4>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
+          <img src="projects/amplitude-strideway/screenshots/advanced-01-funnel-before-fix.png" alt="Amplitude funnel chart before the fix: Sign Up 100%, Complete Onboarding 74.53%, Log Workout only 19% (570 users), View Paywall 0.3%, Start Free Trial 0.13%, Upgrade to Premium 0% — the 1-day conversion window silently dropping real conversions" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/amplitude-strideway/screenshots/advanced-02-funnel-after-fix.png" alt="Amplitude funnel chart after widening the conversion window to 90 days: Sign Up 100%, Complete Onboarding 74.53%, Log Workout 68.97% (2,069 users), View Paywall 11.97%, Start Free Trial 5.9%, Upgrade to Premium 1.63% — matching the raw dataset exactly" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/amplitude-strideway/screenshots/advanced-03-retention-by-channel.png" alt="Amplitude retention chart: Daily retention from Sign Up to Open App by signup channel over 30 days — Referral (purple) highest around 46% by Day 30, Organic (blue) around 36%, Paid Social (green) around 22%, Influencer (teal) lowest around 9%" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/amplitude-strideway/screenshots/advanced-04-cohort-definition.png" alt="Amplitude New Cohort screen: users who performed Upgrade to Premium, count >= 1 time, during Last 90 days — a correct definition that could not be saved on the free Starter plan (dynamic cohorts are a paid feature)" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </div>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 4 screenshots are real charts from my own live Amplitude project — including the broken funnel, left in on purpose to show the actual bug rather than only the fixed result.</p>
+
+        <div class="jlinks">
+          <span><span class="k">Guide</span><a href="projects/amplitude-strideway/AMPLITUDE_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">practice guide →</a></span>
+          <span><span class="k">Back</span><a href="#case-amplitude-strideway-basic" data-open-case="amplitude-strideway-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic: event segmentation (T32) →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
     </div>
 
     <div class="cat-section" id="cat-feature-reverse-engineering">
