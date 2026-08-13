@@ -179,10 +179,17 @@ WITH monthly_signups AS (
 )
 SELECT month,
        new_customers,
-       SUM(new_customers) OVER (ORDER BY month) AS cumulative_customers
+       SUM(new_customers) OVER (ORDER BY month ROWS UNBOUNDED PRECEDING) AS cumulative_customers
 FROM monthly_signups
 ORDER BY month;
 ```
+
+> **Note:** `ROWS UNBOUNDED PRECEDING` is required here (not just `ORDER BY
+> month` alone). Without it, SQL Server defaults to a RANGE window frame,
+> which errors on `FORMAT()`'s output (`Msg 8729`) because RANGE frames cap
+> the ORDER BY column's underlying type at 900 bytes and `FORMAT()` returns
+> `nvarchar(4000)` regardless of the actual string length. ROWS frames don't
+> have that restriction.
 
 **4. Rank active customers by tenure within each plan** (window function:
 `RANK() ... PARTITION BY`)
