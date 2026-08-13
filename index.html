@@ -865,171 +865,175 @@
       </article>
     </div>
 
-    <!-- T2: AI Trip Planner -->
-    <div class="jcat-group">
+<!-- T2: Airline Operations Dashboard -->
+<div class="jcat-group">
       <div class="jcat-head">
         <span class="jnum done">T2</span>
-        <h3 class="jcat-title">AI Trip Planner — PRD</h3>
-        <span class="jcat-category">AI &amp; Agentic Product Design</span>
+        <h3 class="jcat-title">Airline Operations Dashboard</h3>
+        <span class="jcat-category">Metrics &amp; Analytics</span>
       </div>
-      <article class="jcard" data-case="ai-trip-planner-prd" data-updated="2026-07-30">
+      <article class="jcard" data-case="airline-operations-dashboard" data-updated="2026-08-12">
         <button class="jhead" type="button">
           <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#C084FC,#9333EA)">🧭</div>
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#64748B,#334155)">🛫</div>
             <div>
-              <div class="jtitle">"Wayfare AI" — Trip Planner PRD</div>
-              <div class="jmeta">⭐⭐⭐⭐⭐ Flagship · fully scoped</div>
+              <div class="jtitle">Airline Operations Dashboard</div>
+              <div class="jmeta">⭐⭐⭐⭐ Built · see live dashboard</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <div class="cs-facts">
-          <span class="chip">Goals &amp; Non-Goals</span>
-          <span class="chip">P0/P1/P2 requirements</span>
-          <span class="chip">Phased launch plan</span>
-          <span class="chip">Open questions, not just answers</span>
-        </div>
-
-        <div class="prd-meta">
-          <div><span class="k">Doc type</span><span class="v">PRD</span></div>
-          <div><span class="k">Status</span><span class="v">Draft v1.2</span></div>
-          <div><span class="k">Owner</span><span class="v">Bhawna Mangla (PM)</span></div>
-          <div><span class="k">Last updated</span><span class="v">Jul 2026</span></div>
+          <span class="chip">6,000 flights analyzed</span>
+          <span class="chip">Single fictional airline (Aravali Air)</span>
+          <span class="chip">Self-contained HTML/JS dashboard</span>
+          <span class="chip">Full dark-mode support</span>
+          <span class="chip">Also built in Power BI: star schema + DAX</span>
         </div>
 
         <div class="cs-narrative">
-          <h4>TL;DR</h4>
+          <h4>A Different Question Than the Delay Dashboard</h4>
           <p>
-            <strong>"Wayfare AI"</strong>: a conversational trip-planning assistant that turns
-            "plan me a trip" into a bookable, weather- and budget-aware itinerary in one session.
-            MVP scope: single-destination domestic trips only, 3–7 days. Ships itinerary
-            generation, a budget optimizer, and weather-aware sequencing; explicitly does not
-            attempt multi-city routing, group itineraries, or live disruption reflow in v1; see
-            Goals &amp; Non-Goals below for why.
+            The sibling
+            <a href="travel-tech-more.html#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Prediction Dashboard</a>
+            answers an OTA's question — which routes and airlines should get flagged as delay-risky
+            — across five carriers. This one answers the question an airline's own ops team asks
+            about itself: is my operation actually healthy, hub by hub and month by month, and what
+            downstream cost does unreliability actually carry? One carrier, tracked in depth on
+            on-time performance, load factor, revenue per flight, cancellation rate, complaints, and
+            baggage handling, is the right shape for that question. This is also the SQL/Power BI
+            discipline I used for PCMS reporting at Bajaj Finance, applied to a domain I hadn't
+            worked in before — deliberately, as ETL/data-product practice.
           </p>
 
-          <h4>Problem Statement</h4>
+          <h4>My Approach</h4>
           <p>
-            Planning a multi-day trip today means 8–12 open tabs (flights, hotels, blogs, weather,
-            maps) and hours of manual cross-referencing. Users abandon planning mid-way and either
-            overpay on a generic package or under-plan and lose time on-trip re-deciding.
+            Same honest constraint as the sibling project: no real airline ops data is public or
+            reachable from this environment, so this is a modeled dataset, disclosed as such on the
+            dashboard itself. 6,000 simulated flights for one fictional carrier ("Aravali Air")
+            across 5 real Indian hubs, with on-time performance, cancellation, load factor, revenue,
+            complaints, and baggage mishandling each modeled with a documented, deliberate rule, not
+            arbitrary noise: for example, complaints are weighted to rise sharply when a flight was
+            delayed and further still when it was cancelled — a real, well-documented airline-ops
+            pattern, and the whole reason this dataset exists rather than being five independent
+            random columns. Full calculation, every parameter, and the reasoning behind each one are
+            documented in the dashboard's own
+            <a href="projects/airline-operations-dashboard/dashboard.html#methodology" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Methodology section</a>,
+            summarized here in full.
           </p>
-
-          <h4>Goals &amp; Non-Goals</h4>
-          <p><strong>Goals (v1):</strong></p>
-          <ul>
-            <li><strong>G1:</strong> Cut time-to-first-itinerary to under 90 seconds for a first-time planner.</li>
-            <li><strong>G2:</strong> Convert at least one booked leg per generated itinerary, at a target rate set post-launch (the North Star, below).</li>
-            <li><strong>G3:</strong> Let a budget-conscious traveller swap any single item without manually recalculating the rest of the plan.</li>
-          </ul>
-          <p><strong>Non-Goals (explicitly out of scope for v1):</strong></p>
-          <ul>
-            <li>Multi-city or multi-destination routing.</li>
-            <li>Shared or group itineraries.</li>
-            <li>Live disruption reflow: needs a flight-status API integration not yet built; sequenced for v2 once MVP itinerary quality is validated, not because it's unimportant (it's Reactive Rhea's entire use case, see below).</li>
-            <li>Replacing a travel agent for complex international multi-leg trips: this is a single-destination planning aid, not a full-service booking replacement.</li>
-          </ul>
-
-          <h4>Users &amp; Use Cases</h4>
-          <ul>
-            <li><strong>"First-timer Farah"</strong>: plans 1 international trip/yr, wants 2–3 easy choices, not raw options.</li>
-            <li><strong>"Optimizer Omar"</strong>: books 6+ trips/yr, wants full control and only trusts AI suggestions he can see the reasoning behind.</li>
-            <li><strong>"Reactive Rhea"</strong>: mid-trip, needs the plan to adapt live when a flight delays or weather turns (her use case is explicitly a Non-Goal for v1; see above).</li>
-          </ul>
-          <p><strong>User stories:</strong></p>
-          <ul>
-            <li>As a first-time planner, I want to type "5 days in Vietnam under ₹60k" and get a full day-by-day itinerary, so I don't have to research every leg myself.</li>
-            <li>As a budget-conscious traveller, I want to see how each day's plan affects my total spend, so I can swap a paid activity for a free one without recalculating manually.</li>
-            <li>As a returning user, I want the assistant to remember my dietary and pace preferences, so I don't re-explain them every trip.</li>
-            <li>As a skeptical planner, I want to see <em>why</em> a restaurant or attraction was recommended, so I can trust or override the suggestion.</li>
-          </ul>
-
-          <h4>Requirements</h4>
-          <p>Prioritized P0 (must ship for MVP) through P2 (explicitly post-MVP):</p>
         </div>
-
-        <div class="ptable2-wrap">
-          <table class="ptable2">
-            <thead><tr><th>Requirement</th><th>Priority</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td data-label="Requirement">Destination recommendation from loose intent</td><td data-label="Priority"><span class="prio p0">P0</span></td><td data-label="Notes">Parses budget band, trip length, vibe from a single input</td></tr>
-              <tr><td data-label="Requirement">Day-by-day itinerary generation</td><td data-label="Priority"><span class="prio p0">P0</span></td><td data-label="Notes">The core deliverable; every other requirement supports it</td></tr>
-              <tr><td data-label="Requirement">Budget optimizer</td><td data-label="Priority"><span class="prio p0">P0</span></td><td data-label="Notes">Reallocates spend across flight/hotel/activities to hit a target</td></tr>
-              <tr><td data-label="Requirement">Weather-aware sequencing</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Outdoor-heavy days scheduled against the best forecast window</td></tr>
-              <tr><td data-label="Requirement">Restaurant/attraction recommendation</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Rating + proximity + price band, with visible reasoning</td></tr>
-              <tr><td data-label="Requirement">Preference memory (dietary, pace)</td><td data-label="Priority"><span class="prio p1">P1</span></td><td data-label="Notes">Persists across sessions for returning users</td></tr>
-              <tr><td data-label="Requirement">Disruption re-planning on delay</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1; needs flight-status API integration</td></tr>
-              <tr><td data-label="Requirement">Multi-city routing</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1</td></tr>
-              <tr><td data-label="Requirement">Shared/group itineraries</td><td data-label="Priority"><span class="prio p2">P2</span></td><td data-label="Notes">Non-Goal for v1</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="cs-narrative">
-          <h4>Design: Key Flows</h4>
-          <ul>
-            <li><strong>Intent capture</strong>: single chat-style input + 3 quick-pick chips (budget band, trip length, vibe), not a 12-field form.</li>
-            <li><strong>Itinerary review</strong>: day-by-day vertical timeline, each activity swappable via a "Why this?" expand showing rating/distance/price reasoning.</li>
-            <li><strong>Budget bar</strong>: persistent sticky bar showing spend-to-date vs. target, updating live as items are swapped.</li>
-            <li><strong>Book/hold</strong>: itinerary converts to a bookable checklist (flight, hotel, key activities) with per-leg deep links.</li>
-          </ul>
-        </div>
-
-        <a href="projects/ai-trip-planner/wireframes.html" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
-          <picture>
-            <source srcset="projects/ai-trip-planner/screenshots/wireframes-light.webp" type="image/webp">
-            <img src="projects/ai-trip-planner/screenshots/wireframes-light.png" alt="Four low-fidelity wireframes for Wayfare AI: Intent Capture (chat input plus quick-pick chips), Itinerary Review (day-by-day timeline with a Why this? expand), Budget Bar (sticky spend-vs-target progress bar), and Book/Hold (per-leg booking checklist)" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          </picture>
-        </a>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode).</p>
 
         <details class="cs-showmore">
-          <summary>Show more: Success Metrics, Launch Plan, Risks &amp; Open Questions, Reusable Insight <span class="sm-count">(the rest of the PRD)</span></summary>
+          <summary>Show more: full calculation methodology, the data-quality fix I made <span class="sm-count">(every number, and why)</span></summary>
         <div class="cs-narrative">
-          <h4>Success Metrics</h4>
-          <p>
-            <strong>North Star:</strong> itineraries that convert to at least one booked leg.
-            <strong>Supporting:</strong> time-to-first-itinerary (target &lt;90s, ties to G1),
-            swap rate per itinerary (a trust signal on first-pass suggestion quality: a high swap
-            rate means the first draft is missing the mark), budget-target adherence rate, D7 return
-            rate for pre-trip re-edits.
-          </p>
-
-          <h4>Launch Plan</h4>
+          <h4>Methodology: the calculation, step by step</h4>
+          <p>For every one of the 6,000 simulated flights, in order:</p>
           <ul>
-            <li><strong>Phase 1 (MVP):</strong> single-destination domestic trips, 3–7 days. Itinerary generation + budget optimizer + weather sequencing only: the three P0 requirements.</li>
-            <li><strong>Phase 2:</strong> multi-city routing + persistent preference memory, gated on Phase 1 hitting its swap-rate and time-to-itinerary targets. Routing multiple cities is premature if the single-city itinerary still isn't trusted.</li>
-            <li><strong>Phase 3:</strong> live disruption reflow (Reactive Rhea's use case), gated on a flight-status API integration that doesn't exist yet.</li>
+            <li><strong>On-time performance</strong>: starts from a base probability of 90%, reduced by that hub's congestion index (Delhi and Kolkata run busiest), then reduced further by −22pp if the hub is fog-sensitive and the month is Dec/Jan, or −14pp if monsoon-sensitive and the month is Jun–Sep.</li>
+            <li><strong>Cancellation</strong>: decided separately as its own probability (base 0.6%, +hub congestion, +weather exposure). A cancelled flight is always counted as not on-time, never the reverse.</li>
+            <li><strong>Load factor</strong>: drawn from a normal distribution around a base of 79%, shifted up in the Oct–Nov festive season and down in the Jan–Feb low season and at monsoon-exposed hubs during monsoon months.</li>
+            <li><strong>Revenue</strong>: ticket revenue = passengers × a per-hub base fare × a seasonal fare multiplier; ancillary revenue (bags, seats, meals) added per passenger on top. Both zero for a cancelled flight.</li>
+            <li><strong>Complaints</strong>: drawn from a weighted distribution that shifts hard toward more complaints when the flight was delayed, and harder still when it was cancelled — the one deliberate correlation this generator exists to demonstrate.</li>
+            <li><strong>Baggage mishandling</strong>: one independent per-bag draw, rate rising with hub congestion and on any day operations went irregular (delayed or cancelled).</li>
           </ul>
-
-          <h4>Risks &amp; Open Questions</h4>
           <p>
-            <strong>Risk:</strong> hallucinated venue details (wrong hours, permanently closed)
-            need a live data-freshness check well beyond training-time accuracy. Recommendation
-            logic must stay auditable and explainable so it doesn't over-fit to popular/sponsored
-            listings (same scoring discipline as the
-            Hotel Recommendation Engine project, still on the roadmap).
+            <strong>A data-quality decision worth naming:</strong> the dataset tracks two different
+            passenger counts — <code>passengers_expected</code> (a demand estimate, computed the
+            same way regardless of outcome) and <code>passengers_boarded</code> (zero for a
+            cancelled flight, by definition). Load factor and revenue are correctly built on
+            <em>boarded</em> passengers, since those only exist for flights that actually flew. My
+            first pass used <em>boarded</em> passengers as the denominator for the complaints-rate
+            metric too, which made cancelled flights show <strong>zero</strong> complaints per 1,000
+            passengers: the exact opposite of reality, purely because a cancelled flight boards
+            nobody. I caught this by sanity-checking the output before building the chart, not after
+            — the reliability-vs-complaints chart on the dashboard would otherwise have shown
+            cancellations as the "safest" outcome for a customer, which is backwards. Complaints are
+            rated against <em>expected</em> passengers instead: the people actually affected by the
+            flight, whether it flew or not. This is the same kind of judgment call as excluding
+            cancelled flights before averaging delay minutes in the sibling dashboard — a metric's
+            denominator has to match what the metric is actually claiming to measure, and getting it
+            wrong doesn't throw an error, it just silently produces a plausible-looking wrong number.
           </p>
-          <p><strong>Open questions this doc doesn't resolve:</strong></p>
-          <ul>
-            <li>Should the budget optimizer be allowed to suggest a <em>different destination</em> than requested if it saves &gt;30% of budget, or does that override user intent in a way that breaks trust?</li>
-            <li>What's the fallback UX when no itinerary can be generated within the stated budget: degrade gracefully with a "closest match," or refuse and ask the user to adjust?</li>
-            <li>Does surfacing restaurant/attraction rankings require a sponsored-placement disclosure, and who owns that legal review before launch?</li>
-          </ul>
-
-          <h4>Why Trust Is the Real Problem</h4>
           <p>
-            Generating an itinerary is the easy half. The hard PM problem is designing the trust layer
-            (the "why this?" reasoning, swap-not-regenerate interaction) that lets a user hand
-            over planning without feeling like they lost control of the trip.
+            Why these specific numbers: not derived from any real source, chosen and then checked
+            against public ballpark ranges for plausibility (domestic OTP typically 70–88%, load
+            factor typically 75–85%, baggage mishandling typically 4–8 per 1,000 bags industry-wide).
+            The fleet-wide numbers landed at 77.9% on-time, 78.9% load factor, and 5.4 bags
+            mishandled per 1,000 — all inside those ranges. What this deliberately doesn't model:
+            real distributional parameters fit from a published dataset (none was reachable from
+            this environment), or knock-on delay (one late inbound aircraft delaying that same tail
+            number's next departure) — a real ops model would need that, and it's a materially
+            harder problem than this exercise scopes to.
           </p>
         </div>
         </details>
 
+        <div class="cs-narrative">
+          <h4>Key Findings</h4>
+          <ul>
+            <li><strong>77.9% on-time fleet-wide</strong>, 78.9% average load factor, 1.2% cancellation rate, ₹6,38,860 average revenue per flight.</li>
+            <li><strong>Bengaluru is the most reliable hub (83.3% on-time)</strong>, Mumbai the least (74.6%): the two hubs with no modeled weather exposure sit at the top, the two with monsoon exposure sit at the bottom.</li>
+            <li><strong>Delhi and Kolkata both collapse in Winter</strong> (63.1% and 66.9% on-time) from their own fog exposure; Mumbai and Kolkata separately collapse in Monsoon (66.0% and 67.3%) — Kolkata is the only hub that takes a hit twice a year instead of once, the same "double exposure" pattern that made DEL-GOI the worst route in the sibling delay dashboard.</li>
+            <li><strong>Complaints track reliability, not price or amenities</strong>: 0.29 complaints per 1,000 passengers when on-time, 2.05 when delayed, 6.10 when cancelled — a cancelled flight generates roughly 21× the complaint volume of an on-time one, per passenger affected.</li>
+            <li><strong>Revenue doesn't track on-time performance</strong>: Delhi has the worst-adjacent on-time rate but the highest revenue per flight (₹6,86,112), because fare levels are set by hub demand, not by operational reliability. Reliability and revenue are two separate levers, not one.</li>
+          </ul>
+
+          <h4>Recommendations</h4>
+          <p>What a PM would actually do with this, if it were live ops data instead of modeled data:</p>
+          <ul>
+            <li><strong>Fund reliability improvements by the complaint cost they prevent, not just the delay minutes they save.</strong> The 21× complaint multiplier on cancellations makes a stronger budget case than "average delay went down 2 minutes" ever will.</li>
+            <li><strong>Give Kolkata a dedicated irregular-ops playbook, not a shared one.</strong> It's the only hub exposed to both major seasonal risks in this model; a generic playbook sized for single-exposure hubs will under-resource it twice a year.</li>
+            <li><strong>Don't let a high-revenue hub's numbers hide its reliability problem.</strong> Delhi's revenue leadership could mask its on-time performance from a purely commercial dashboard — reliability and revenue need to stay on the same page, not two separate reports someone has to cross-reference manually.</li>
+            <li><strong>Re-run this against real ops data before shipping anything downstream of it.</strong> This dashboard's job was to prove the ETL pipeline and the product judgment behind each transform decision, not to replace a real data source.</li>
+          </ul>
+
+          <h4>Where the Real Risk Sits</h4>
+          <p>
+            The same discipline as the sibling dashboard applies here: the risk isn't a wrong chart,
+            it's a metric whose denominator quietly doesn't measure what its label claims — exactly
+            what the passengers_expected/passengers_boarded fix above was catching. Say what's
+            modeled, say what's real, and check a metric's denominator before trusting what it shows,
+            not after.
+          </p>
+
+          <h4>Also Built as a Power BI Report</h4>
+          <p>
+            The same analysis, built a third way: a Power BI report using Power Query (M) for the
+            transform step and DAX for every measure, instead of pandas. A star schema with one fact
+            table (Fact_Flights) and two dimension tables (Dim_Hub, and a Dim_Date table built with a
+            DAX <code>CALENDAR()</code> function rather than imported) — the tool-native way an
+            ETL/BI Product Owner's team would actually structure this, distinct from and
+            complementary to the Python version above, not a replacement for it.
+          </p>
+          <p>
+            Built specifically for practice, not because the Python version needed a second build.
+            Worth naming: the DAX measures landed on numbers matching the Python version almost
+            exactly — 83.25% on-time for Bengaluru in Power BI vs. 83.3% in Python, 76.34% vs. 76.3%
+            for Delhi — two completely independent computations agreeing. The
+            <code>Complaints per 1000 Pax</code> DAX measure also carries forward the same
+            <code>passengers_expected</code> denominator fix from the Python build, rather than
+            re-discovering the same bug a second time.
+          </p>
+        </div>
+
+        <div style="display:grid;gap:14px;margin:18px 0">
+          <img src="projects/airline-operations-dashboard/power-bi/screenshots/overview.png" alt="Power BI Overview page: KPI cards for flights operated, on-time %, load factor, and cancellation %, a bar chart of on-time % by hub, a chronological month trend line, and a hub slicer" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/airline-operations-dashboard/power-bi/screenshots/hub-deep-dive.png" alt="Power BI Hub Deep-Dive page: a table of all 5 measures by hub, and a hub-by-season matrix with conditional-formatting heatmap on on-time %, Delhi Winter darkest at 63.09%" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/airline-operations-dashboard/power-bi/screenshots/reliability-complaints.png" alt="Power BI Reliability and Complaints page: a column chart of complaints per 1,000 passengers by reliability bucket, cancelled flights roughly 21x the on-time rate" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </div>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Power BI report screenshots — Overview, Hub Deep-Dive, and Reliability &amp; Complaints pages. <a href="projects/airline-operations-dashboard/power-bi/airline-operations.pbix" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Download the .pbix file →</a> Build guide and source data: <code>projects/airline-operations-dashboard/power-bi/</code> in the repo.</p>
+
+        <a href="projects/airline-operations-dashboard/dashboard.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
+          <picture>
+            <source srcset="projects/airline-operations-dashboard/screenshots/dashboard-light.webp" type="image/webp">
+            <img src="projects/airline-operations-dashboard/screenshots/dashboard-light.png" alt="Airline Operations Dashboard: KPI tiles (6,000 flights, 77.9% on-time, 78.9% load factor) and a bar chart ranking all 5 hubs by on-time performance, Bengaluru best at 83.3%, Mumbai worst at 74.6%" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          </picture>
+        </a>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click the screenshot to open the live, interactive dashboard (also available in dark mode).</p>
         <div class="jlinks">
-          <span><span class="k">Link</span><a href="projects/ai-trip-planner/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
-          <span><span class="k">Image</span><a href="projects/ai-trip-planner/screenshots/wireframes-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+          <span><span class="k">Link</span><a href="projects/airline-operations-dashboard/dashboard.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">live dashboard →</a></span>
+          <span><span class="k">Image</span><a href="projects/airline-operations-dashboard/screenshots/dashboard-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
         </div>
       </div>
       </article>
