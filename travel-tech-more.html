@@ -1950,6 +1950,211 @@
       </div>
       </article>
     </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T30</span>
+        <h3 class="jcat-title">SQL Analytics — SaaS Subscriptions (Basic)</h3>
+      </div>
+      <article class="jcard" data-case="sql-saas-analytics-basic" data-updated="2026-08-13">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#38BDF8,#0369A1)">🗄️</div>
+            <div>
+              <div class="jtitle">SQL Analytics — SaaS Subscriptions (Basic)</div>
+              <div class="jmeta">⭐⭐⭐ Built · SELECT, JOIN, GROUP BY, aggregates</div>
+              <div class="jtools"><b>Tools:</b> SQL Server 2022 (T-SQL), SSMS, VS Code (mssql)</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">900 customers · 3 plans · 24 months</span>
+          <span class="chip">8 queries: SELECT, JOIN, GROUP BY, CASE</span>
+          <span class="chip">Real local SQL Server install, not a browser sandbox</span>
+          <span class="chip">Fictional company (Aptura), documented churn model</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> SQL Server 2022 Express (T-SQL), SSMS (data import), VS Code with the SQL Server (mssql) extension (query writing and execution) — installed and run locally, not a hosted playground.</p>
+
+        <div class="cs-narrative">
+          <h4>Why This Exists</h4>
+          <p>
+            SQL is listed as a skill across this site, but until this project the only place it was
+            actually demonstrated was the
+            <a href="#case-pcms-payout-system-integration" data-open-case="pcms-payout-system-integration" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">PCMS case study</a>
+            — real Bajaj Finance work, which stays exactly as delivered and untouched, permanently a
+            written account rather than something a visitor can independently verify. This project
+            exists to prove the same skill a second way: a fresh, fictional scenario, built and
+            queried end to end on my own machine, not something pre-generated for me to just display.
+          </p>
+
+          <h4>My Approach</h4>
+          <p>
+            Built a synthetic B2B SaaS company ("Aptura") from scratch: a Python generator producing
+            900 customers, 3 pricing plans (Starter $29 / Growth $99 / Scale $299), and 24 months of
+            subscription history, with churn modeled on two well-documented SaaS patterns rather than
+            independent randomness — cheaper plans churn more (weaker product lock-in) and
+            Paid-Search-acquired customers churn more than Referral-acquired ones (referred customers
+            arrive with higher intent). Then installed SQL Server 2022 Express and SSMS on my own
+            Windows machine, connected VS Code's SQL Server (mssql) extension to it, created the
+            database, imported the data, and ran all 8 queries below myself.
+          </p>
+
+          <h4>Real Setup, Real Errors</h4>
+          <p>None of this went in cleanly on the first try, which is the actual point of doing it hands-on rather than reading a guide:</p>
+          <ul>
+            <li><strong>"Cannot open database … login failed"</strong> the first time VS Code connected to a database name that didn't exist yet — fixed by connecting to the default <code>master</code> database first, then running <code>CREATE DATABASE aptura_saas</code> directly from a query window before reconnecting.</li>
+            <li><strong>"There is already an object named 'subscriptions'"</strong> from SQL Server's Import Flat File wizard, which always tries to create a brand-new table — it collided with tables I'd already created manually. Fixed by dropping the empty manually-created tables and letting the wizard build them fresh from the CSVs instead.</li>
+          </ul>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Key Findings</h4>
+          <ul>
+            <li><strong>$63,298 current MRR</strong> across 662 active subscriptions (238 cancelled, 26.4% cumulative churn).</li>
+            <li><strong>Starter churns at 34.0%, more than 3× Scale's 10.1%</strong> (Growth sits in between at 20.8%) — the cheapest plan is also the leakiest.</li>
+            <li><strong>Paid Search churns at 31.6% vs. Referral's 21.5%</strong>, with Organic (26.9%) and Outbound Sales (23.7%) in between — acquisition channel predicts retention almost as strongly as plan tier does.</li>
+            <li>Scale carries the fewest active subscriptions (98) but the highest MRR contribution per plan (₹29,302 modeled) — plan mix matters as much as headcount when reading a subscription business.</li>
+          </ul>
+
+          <h4>What This Means</h4>
+          <p>
+            The churn numbers point to a retention problem that is concentrated in specific parts of
+            Aptura's business rather than being a company-wide issue. Starter customers are churning
+            at 34% versus just 10% on Scale, which suggests Starter customers may not be reaching
+            enough value early enough, or that the plan is attracting customers with weaker product
+            fit. Similarly, Paid Search has 31.6% churn versus 21.5% from Referral, indicating that
+            acquisition source and customer intent may be affecting retention. As PM, I'd first
+            segment these cohorts further by activation, use case, company size, onboarding
+            completion, and time-to-value to identify the real driver rather than immediately changing
+            pricing. I'd then test a stronger Starter onboarding and activation journey, clearer value
+            communication, and targeted in-product nudges, while reviewing Paid Search messaging and
+            landing-page qualification so we attract customers whose expectations match the product.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
+          <img src="projects/sql-saas-analytics/screenshots/basic-01-total-customers.png" alt="T-SQL query: SELECT COUNT(*) AS total_customers FROM customers; result: 900" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/basic-02-active-vs-cancelled.png" alt="T-SQL query grouping subscriptions by status; result: 662 active, 238 cancelled" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/basic-03-current-mrr.png" alt="T-SQL query joining subscriptions to plans for current MRR; result: 63298" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/basic-04-mrr-by-plan.png" alt="T-SQL query for MRR by plan; result: Scale 29302/98 subs, Growth 24948/252 subs, Starter 9048/312 subs" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/basic-05-new-customers-by-month.png" alt="T-SQL query for new customers by signup month using FORMAT(); result showing a growth ramp from 14 in Jan 2024 to 33 by Jul 2024" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/basic-06-customers-by-channel.png" alt="T-SQL query for customers by acquisition channel; result: Paid Search 266, Organic 253, Referral 191, Outbound Sales 190" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/basic-07-churn-by-plan.png" alt="T-SQL query for churn rate by plan using CASE WHEN; result: Starter 34.0%, Growth 20.8%, Scale 10.1%" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/basic-08-churn-by-channel.png" alt="T-SQL query for churn rate by acquisition channel via a 3-table join; result: Paid Search 31.6%, Organic 26.9%, Outbound Sales 23.7%, Referral 21.5%" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </div>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 8 screenshots are my own SQL Server / VS Code session — query and result grid together, unedited.</p>
+
+        <div class="jlinks">
+          <span><span class="k">Guide</span><a href="projects/sql-saas-analytics/TSQL_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">T-SQL practice guide →</a></span>
+          <span><span class="k">Dataset</span><a href="projects/sql-saas-analytics/generate_dataset.py" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">generator script →</a></span>
+          <span><span class="k">Next</span><a href="#case-sql-saas-analytics-advanced" data-open-case="sql-saas-analytics-advanced" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Advanced: CTEs &amp; window functions (T31) →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T31</span>
+        <h3 class="jcat-title">SQL Analytics — SaaS Subscriptions (Advanced)</h3>
+      </div>
+      <article class="jcard" data-case="sql-saas-analytics-advanced" data-updated="2026-08-13">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#0EA5E9,#0C4A6E)">🧮</div>
+            <div>
+              <div class="jtitle">SQL Analytics — SaaS Subscriptions (Advanced)</div>
+              <div class="jmeta">⭐⭐⭐⭐ Built · CTEs, window functions, cohort retention</div>
+              <div class="jtools"><b>Tools:</b> SQL Server 2022 (T-SQL), VS Code (mssql)</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">4 queries: CTEs, LAG, SUM() OVER, RANK() PARTITION BY</span>
+          <span class="chip">Monthly cohort retention analysis</span>
+          <span class="chip">Real T-SQL dialect bug hit and fixed</span>
+          <span class="chip">Same Aptura dataset as the Basic case study</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> SQL Server 2022 Express (T-SQL), VS Code with the SQL Server (mssql) extension.</p>
+
+        <div class="cs-narrative">
+          <h4>Why Advanced, Not Just Basic</h4>
+          <p>
+            Aggregates and joins prove I can retrieve data; this half proves I can shape it the way a
+            PM actually needs to — cohort retention curves, month-over-month growth, and running
+            totals, the exact SQL patterns behind most subscription-business dashboards. Same Aptura
+            dataset as the
+            <a href="#case-sql-saas-analytics-basic" data-open-case="sql-saas-analytics-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic case study (T30)</a>,
+            four new query patterns instead of eight simpler ones.
+          </p>
+
+          <h4>A Real T-SQL Dialect Bug, and the Fix</h4>
+          <p>
+            These 4 queries were first written and verified against SQLite for a browser-based version
+            of this project, then ported to T-SQL for SQL Server (<code>FORMAT()</code> instead of
+            <code>strftime()</code>, <code>DATEDIFF()</code> instead of <code>julianday()</code>).
+            Three of the four ported cleanly on the first run. The running-cumulative-signups query
+            didn't:
+          </p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <tbody>
+                <tr><td style="font-family:'IBM Plex Mono',monospace;font-size:12px">Msg 8729, Level 16: ORDER BY list of RANGE window frame has total size of 8000 bytes. Largest size supported is 900 bytes.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The cause: <code>FORMAT()</code> returns <code>nvarchar(4000)</code> regardless of how
+            short the actual string is, and SQL Server's default window-frame type (RANGE) caps its
+            ORDER BY column at 900 bytes for that reason. The fix was one clause, not a rewrite —
+            swapping the implicit RANGE frame for an explicit <code>ROWS UNBOUNDED PRECEDING</code>
+            frame (the semantically correct frame for a running total anyway):
+          </p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <tbody>
+                <tr><td style="font-family:'IBM Plex Mono',monospace;font-size:12px">SUM(new_customers) OVER (ORDER BY month ROWS UNBOUNDED PRECEDING) AS cumulative_customers</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Key Findings</h4>
+          <ul>
+            <li><strong>3- and 6-month cohort retention bounces between roughly 62% and 96%</strong> month to month, because monthly cohorts are small (14–33 signups each) — reading that as expected noise rather than over-reacting to any single month's number is itself part of the skill.</li>
+            <li><strong>Month-over-month new-MRR growth swings widely for the same reason</strong> (e.g. −40.5% in March, +183.6% in May) — a small-N, growing company's month-over-month metrics are volatile by construction, not necessarily a signal.</li>
+            <li><strong>Cumulative signups climb cleanly</strong> (14 → 37 → 55 → 71 → 94 across the first five months) once the running-total fix above was applied, confirming the window function now computes correctly.</li>
+            <li><strong>Ranking active customers by tenure within each plan</strong> surfaces exactly who's been on a plan longest — useful for e.g. identifying who to interview for retention research, or who to invite to a beta first.</li>
+          </ul>
+
+          <h4>What This Means, Applied</h4>
+          <p>
+            The cohort-retention query above is what turns the Basic case study's churn-by-plan and
+            churn-by-channel diagnosis into something actionable rather than a one-time snapshot: I'd
+            track 30/60/90-day retention, activation rate, and churn by cohort to validate whether
+            interventions — a stronger Starter onboarding journey, tighter Paid Search targeting —
+            actually improve retention and lifetime value, instead of just assuming they worked.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
+          <img src="projects/sql-saas-analytics/screenshots/advanced-01-cohort-retention.png" alt="T-SQL CTE query for monthly cohort retention; result showing 3-month and 6-month retention percentages per signup-month cohort" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/advanced-02-mom-mrr-growth.png" alt="T-SQL query using LAG() OVER for month-over-month new-MRR growth; result showing new MRR per month and percent change vs. the prior month" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/advanced-03-cumulative-signups.png" alt="T-SQL query using SUM() OVER with an explicit ROWS UNBOUNDED PRECEDING frame for running cumulative signups; result climbing 14, 37, 55, 71, 94" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/advanced-04-tenure-rank.png" alt="T-SQL query using RANK() OVER PARTITION BY to rank active customers by tenure within each plan; result showing the longest-tenured Growth-plan customers ranked 1 through 7" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </div>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 4 screenshots are my own SQL Server / VS Code session — query and result grid together, unedited, including the frame-fix retry on the cumulative-signups query.</p>
+
+        <div class="jlinks">
+          <span><span class="k">Guide</span><a href="projects/sql-saas-analytics/TSQL_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">T-SQL practice guide →</a></span>
+          <span><span class="k">Back</span><a href="#case-sql-saas-analytics-basic" data-open-case="sql-saas-analytics-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic: SELECT, JOIN, GROUP BY (T30) →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
     </div>
 
     <div class="cat-section" id="cat-feature-reverse-engineering">
@@ -3007,211 +3212,6 @@
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
           <span><span class="k">Engagement</span><span class="todo">fill in</span></span>
-        </div>
-      </div>
-      </article>
-    </div>
-<div class="jcat-group">
-      <div class="jcat-head">
-        <span class="jnum done">T30</span>
-        <h3 class="jcat-title">SQL Analytics — SaaS Subscriptions (Basic)</h3>
-      </div>
-      <article class="jcard" data-case="sql-saas-analytics-basic" data-updated="2026-08-13">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#38BDF8,#0369A1)">🗄️</div>
-            <div>
-              <div class="jtitle">SQL Analytics — SaaS Subscriptions (Basic)</div>
-              <div class="jmeta">⭐⭐⭐ Built · SELECT, JOIN, GROUP BY, aggregates</div>
-              <div class="jtools"><b>Tools:</b> SQL Server 2022 (T-SQL), SSMS, VS Code (mssql)</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <div class="cs-facts">
-          <span class="chip">900 customers · 3 plans · 24 months</span>
-          <span class="chip">8 queries: SELECT, JOIN, GROUP BY, CASE</span>
-          <span class="chip">Real local SQL Server install, not a browser sandbox</span>
-          <span class="chip">Fictional company (Aptura), documented churn model</span>
-        </div>
-        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> SQL Server 2022 Express (T-SQL), SSMS (data import), VS Code with the SQL Server (mssql) extension (query writing and execution) — installed and run locally, not a hosted playground.</p>
-
-        <div class="cs-narrative">
-          <h4>Why This Exists</h4>
-          <p>
-            SQL is listed as a skill across this site, but until this project the only place it was
-            actually demonstrated was the
-            <a href="#case-pcms-payout-system-integration" data-open-case="pcms-payout-system-integration" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">PCMS case study</a>
-            — real Bajaj Finance work, which stays exactly as delivered and untouched, permanently a
-            written account rather than something a visitor can independently verify. This project
-            exists to prove the same skill a second way: a fresh, fictional scenario, built and
-            queried end to end on my own machine, not something pre-generated for me to just display.
-          </p>
-
-          <h4>My Approach</h4>
-          <p>
-            Built a synthetic B2B SaaS company ("Aptura") from scratch: a Python generator producing
-            900 customers, 3 pricing plans (Starter $29 / Growth $99 / Scale $299), and 24 months of
-            subscription history, with churn modeled on two well-documented SaaS patterns rather than
-            independent randomness — cheaper plans churn more (weaker product lock-in) and
-            Paid-Search-acquired customers churn more than Referral-acquired ones (referred customers
-            arrive with higher intent). Then installed SQL Server 2022 Express and SSMS on my own
-            Windows machine, connected VS Code's SQL Server (mssql) extension to it, created the
-            database, imported the data, and ran all 8 queries below myself.
-          </p>
-
-          <h4>Real Setup, Real Errors</h4>
-          <p>None of this went in cleanly on the first try, which is the actual point of doing it hands-on rather than reading a guide:</p>
-          <ul>
-            <li><strong>"Cannot open database … login failed"</strong> the first time VS Code connected to a database name that didn't exist yet — fixed by connecting to the default <code>master</code> database first, then running <code>CREATE DATABASE aptura_saas</code> directly from a query window before reconnecting.</li>
-            <li><strong>"There is already an object named 'subscriptions'"</strong> from SQL Server's Import Flat File wizard, which always tries to create a brand-new table — it collided with tables I'd already created manually. Fixed by dropping the empty manually-created tables and letting the wizard build them fresh from the CSVs instead.</li>
-          </ul>
-        </div>
-
-        <div class="cs-narrative">
-          <h4>Key Findings</h4>
-          <ul>
-            <li><strong>$63,298 current MRR</strong> across 662 active subscriptions (238 cancelled, 26.4% cumulative churn).</li>
-            <li><strong>Starter churns at 34.0%, more than 3× Scale's 10.1%</strong> (Growth sits in between at 20.8%) — the cheapest plan is also the leakiest.</li>
-            <li><strong>Paid Search churns at 31.6% vs. Referral's 21.5%</strong>, with Organic (26.9%) and Outbound Sales (23.7%) in between — acquisition channel predicts retention almost as strongly as plan tier does.</li>
-            <li>Scale carries the fewest active subscriptions (98) but the highest MRR contribution per plan (₹29,302 modeled) — plan mix matters as much as headcount when reading a subscription business.</li>
-          </ul>
-
-          <h4>What This Means</h4>
-          <p>
-            The churn numbers point to a retention problem that is concentrated in specific parts of
-            Aptura's business rather than being a company-wide issue. Starter customers are churning
-            at 34% versus just 10% on Scale, which suggests Starter customers may not be reaching
-            enough value early enough, or that the plan is attracting customers with weaker product
-            fit. Similarly, Paid Search has 31.6% churn versus 21.5% from Referral, indicating that
-            acquisition source and customer intent may be affecting retention. As PM, I'd first
-            segment these cohorts further by activation, use case, company size, onboarding
-            completion, and time-to-value to identify the real driver rather than immediately changing
-            pricing. I'd then test a stronger Starter onboarding and activation journey, clearer value
-            communication, and targeted in-product nudges, while reviewing Paid Search messaging and
-            landing-page qualification so we attract customers whose expectations match the product.
-          </p>
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
-          <img src="projects/sql-saas-analytics/screenshots/basic-01-total-customers.png" alt="T-SQL query: SELECT COUNT(*) AS total_customers FROM customers; result: 900" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/basic-02-active-vs-cancelled.png" alt="T-SQL query grouping subscriptions by status; result: 662 active, 238 cancelled" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/basic-03-current-mrr.png" alt="T-SQL query joining subscriptions to plans for current MRR; result: 63298" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/basic-04-mrr-by-plan.png" alt="T-SQL query for MRR by plan; result: Scale 29302/98 subs, Growth 24948/252 subs, Starter 9048/312 subs" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/basic-05-new-customers-by-month.png" alt="T-SQL query for new customers by signup month using FORMAT(); result showing a growth ramp from 14 in Jan 2024 to 33 by Jul 2024" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/basic-06-customers-by-channel.png" alt="T-SQL query for customers by acquisition channel; result: Paid Search 266, Organic 253, Referral 191, Outbound Sales 190" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/basic-07-churn-by-plan.png" alt="T-SQL query for churn rate by plan using CASE WHEN; result: Starter 34.0%, Growth 20.8%, Scale 10.1%" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/basic-08-churn-by-channel.png" alt="T-SQL query for churn rate by acquisition channel via a 3-table join; result: Paid Search 31.6%, Organic 26.9%, Outbound Sales 23.7%, Referral 21.5%" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-        </div>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 8 screenshots are my own SQL Server / VS Code session — query and result grid together, unedited.</p>
-
-        <div class="jlinks">
-          <span><span class="k">Guide</span><a href="projects/sql-saas-analytics/TSQL_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">T-SQL practice guide →</a></span>
-          <span><span class="k">Dataset</span><a href="projects/sql-saas-analytics/generate_dataset.py" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">generator script →</a></span>
-          <span><span class="k">Next</span><a href="#case-sql-saas-analytics-advanced" data-open-case="sql-saas-analytics-advanced" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Advanced: CTEs &amp; window functions (T31) →</a></span>
-        </div>
-      </div>
-      </article>
-    </div>
-<div class="jcat-group">
-      <div class="jcat-head">
-        <span class="jnum done">T31</span>
-        <h3 class="jcat-title">SQL Analytics — SaaS Subscriptions (Advanced)</h3>
-      </div>
-      <article class="jcard" data-case="sql-saas-analytics-advanced" data-updated="2026-08-13">
-        <button class="jhead" type="button">
-          <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#0EA5E9,#0C4A6E)">🧮</div>
-            <div>
-              <div class="jtitle">SQL Analytics — SaaS Subscriptions (Advanced)</div>
-              <div class="jmeta">⭐⭐⭐⭐ Built · CTEs, window functions, cohort retention</div>
-              <div class="jtools"><b>Tools:</b> SQL Server 2022 (T-SQL), VS Code (mssql)</div>
-            </div>
-          </div>
-          <span class="jtoggle">view case study →</span>
-        </button>
-      <div class="jbody">
-        <div class="cs-facts">
-          <span class="chip">4 queries: CTEs, LAG, SUM() OVER, RANK() PARTITION BY</span>
-          <span class="chip">Monthly cohort retention analysis</span>
-          <span class="chip">Real T-SQL dialect bug hit and fixed</span>
-          <span class="chip">Same Aptura dataset as the Basic case study</span>
-        </div>
-        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> SQL Server 2022 Express (T-SQL), VS Code with the SQL Server (mssql) extension.</p>
-
-        <div class="cs-narrative">
-          <h4>Why Advanced, Not Just Basic</h4>
-          <p>
-            Aggregates and joins prove I can retrieve data; this half proves I can shape it the way a
-            PM actually needs to — cohort retention curves, month-over-month growth, and running
-            totals, the exact SQL patterns behind most subscription-business dashboards. Same Aptura
-            dataset as the
-            <a href="#case-sql-saas-analytics-basic" data-open-case="sql-saas-analytics-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic case study (T30)</a>,
-            four new query patterns instead of eight simpler ones.
-          </p>
-
-          <h4>A Real T-SQL Dialect Bug, and the Fix</h4>
-          <p>
-            These 4 queries were first written and verified against SQLite for a browser-based version
-            of this project, then ported to T-SQL for SQL Server (<code>FORMAT()</code> instead of
-            <code>strftime()</code>, <code>DATEDIFF()</code> instead of <code>julianday()</code>).
-            Three of the four ported cleanly on the first run. The running-cumulative-signups query
-            didn't:
-          </p>
-          <div class="ptable2-wrap">
-            <table class="ptable2">
-              <tbody>
-                <tr><td style="font-family:'IBM Plex Mono',monospace;font-size:12px">Msg 8729, Level 16: ORDER BY list of RANGE window frame has total size of 8000 bytes. Largest size supported is 900 bytes.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p>
-            The cause: <code>FORMAT()</code> returns <code>nvarchar(4000)</code> regardless of how
-            short the actual string is, and SQL Server's default window-frame type (RANGE) caps its
-            ORDER BY column at 900 bytes for that reason. The fix was one clause, not a rewrite —
-            swapping the implicit RANGE frame for an explicit <code>ROWS UNBOUNDED PRECEDING</code>
-            frame (the semantically correct frame for a running total anyway):
-          </p>
-          <div class="ptable2-wrap">
-            <table class="ptable2">
-              <tbody>
-                <tr><td style="font-family:'IBM Plex Mono',monospace;font-size:12px">SUM(new_customers) OVER (ORDER BY month ROWS UNBOUNDED PRECEDING) AS cumulative_customers</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="cs-narrative">
-          <h4>Key Findings</h4>
-          <ul>
-            <li><strong>3- and 6-month cohort retention bounces between roughly 62% and 96%</strong> month to month, because monthly cohorts are small (14–33 signups each) — reading that as expected noise rather than over-reacting to any single month's number is itself part of the skill.</li>
-            <li><strong>Month-over-month new-MRR growth swings widely for the same reason</strong> (e.g. −40.5% in March, +183.6% in May) — a small-N, growing company's month-over-month metrics are volatile by construction, not necessarily a signal.</li>
-            <li><strong>Cumulative signups climb cleanly</strong> (14 → 37 → 55 → 71 → 94 across the first five months) once the running-total fix above was applied, confirming the window function now computes correctly.</li>
-            <li><strong>Ranking active customers by tenure within each plan</strong> surfaces exactly who's been on a plan longest — useful for e.g. identifying who to interview for retention research, or who to invite to a beta first.</li>
-          </ul>
-
-          <h4>What This Means, Applied</h4>
-          <p>
-            The cohort-retention query above is what turns the Basic case study's churn-by-plan and
-            churn-by-channel diagnosis into something actionable rather than a one-time snapshot: I'd
-            track 30/60/90-day retention, activation rate, and churn by cohort to validate whether
-            interventions — a stronger Starter onboarding journey, tighter Paid Search targeting —
-            actually improve retention and lifetime value, instead of just assuming they worked.
-          </p>
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
-          <img src="projects/sql-saas-analytics/screenshots/advanced-01-cohort-retention.png" alt="T-SQL CTE query for monthly cohort retention; result showing 3-month and 6-month retention percentages per signup-month cohort" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/advanced-02-mom-mrr-growth.png" alt="T-SQL query using LAG() OVER for month-over-month new-MRR growth; result showing new MRR per month and percent change vs. the prior month" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/advanced-03-cumulative-signups.png" alt="T-SQL query using SUM() OVER with an explicit ROWS UNBOUNDED PRECEDING frame for running cumulative signups; result climbing 14, 37, 55, 71, 94" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/sql-saas-analytics/screenshots/advanced-04-tenure-rank.png" alt="T-SQL query using RANK() OVER PARTITION BY to rank active customers by tenure within each plan; result showing the longest-tenured Growth-plan customers ranked 1 through 7" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-        </div>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 4 screenshots are my own SQL Server / VS Code session — query and result grid together, unedited, including the frame-fix retry on the cumulative-signups query.</p>
-
-        <div class="jlinks">
-          <span><span class="k">Guide</span><a href="projects/sql-saas-analytics/TSQL_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">T-SQL practice guide →</a></span>
-          <span><span class="k">Back</span><a href="#case-sql-saas-analytics-basic" data-open-case="sql-saas-analytics-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic: SELECT, JOIN, GROUP BY (T30) →</a></span>
         </div>
       </div>
       </article>
