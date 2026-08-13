@@ -617,7 +617,7 @@
     <div class="sec-head">
       <span class="sec-num">05</span>
       <h2>Case Studies</h2>
-      <span class="sec-tag">// teardowns, PRDs, dashboards, and an AI copilot</span>
+      <span class="sec-tag">// dashboards, SQL, and product analytics — hands-on, not just claimed</span>
     </div>
     <p class="sec-intro">
       A selection of product work that demonstrates how I approach the complete Product
@@ -655,213 +655,106 @@
     </div>
 
     <div class="jtrack">
-    <!-- T1: Flight Booking Product Teardown -->
+    <!-- T31: SQL Analytics — SaaS Subscriptions (Advanced) -->
     <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum done">T1</span>
-        <h3 class="jcat-title">Flight Booking Product Teardown</h3>
-        <span class="jcat-category">Product Teardown</span>
+        <span class="jnum done">T31</span>
+        <h3 class="jcat-title">SQL Analytics — SaaS Subscriptions (Advanced)</h3>
+        <span class="jcat-category">Metrics &amp; Analytics</span>
       </div>
-      <article class="jcard" data-case="makemytrip-flight-booking-teardown" data-updated="2026-07-30">
+      <article class="jcard" data-case="sql-saas-analytics-advanced" data-updated="2026-08-13">
         <button class="jhead" type="button">
           <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#38BDF8,#0284C7)">✈️</div>
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#0EA5E9,#0C4A6E)">🧮</div>
             <div>
-              <div class="jtitle">MakeMyTrip — Flight Booking Teardown</div>
-              <div class="jmeta">⭐⭐⭐⭐⭐ Flagship · fully scoped</div>
-              <div class="jtools"><b>Frameworks:</b> CIRCLES, RICE, MoSCoW, HEART, OKRs</div>
+              <div class="jtitle">SQL Analytics — SaaS Subscriptions (Advanced)</div>
+              <div class="jmeta">⭐⭐⭐⭐ Built · CTEs, window functions, cohort retention</div>
+              <div class="jtools"><b>Tools:</b> SQL Server 2022 (T-SQL), VS Code (mssql)</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <div class="cs-facts">
-          <span class="chip">CIRCLES method</span>
-          <span class="chip">HEART framework (Google)</span>
-          <span class="chip">OKR-aligned recommendation</span>
-          <span class="chip">RICE + MoSCoW</span>
-          <span class="chip">Business model &amp; risk analysis</span>
+          <span class="chip">4 queries: CTEs, LAG, SUM() OVER, RANK() PARTITION BY</span>
+          <span class="chip">Monthly cohort retention analysis</span>
+          <span class="chip">Real T-SQL dialect bug hit and fixed</span>
+          <span class="chip">Same Aptura dataset as the Basic case study</span>
         </div>
-        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Frameworks used:</strong> CIRCLES, RICE, MoSCoW, HEART (Google), OKRs — written analysis, no build.</p>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> SQL Server 2022 Express (T-SQL), VS Code with the SQL Server (mssql) extension.</p>
 
         <div class="cs-narrative">
-          <h4>C — Comprehend the Situation</h4>
+          <h4>Why Advanced, Not Just Basic</h4>
           <p>
-            The clarifying questions I'd ask before touching the product: which platform
-            (web vs. app — <strong>both</strong>), domestic or
-            international (<strong>domestic only</strong>), and an existing product or a new one
-            (<strong>existing, mature product</strong>). Scope: MakeMyTrip's flight search →
-            booking flow specifically, not hotels or holidays, narrower on purpose so the
-            analysis goes deep on one flow instead of shallow across three.
-          </p>
-          <p>
-            <strong>Business model:</strong> the flight vertical monetizes through airline
-            commissions/overrides, a convenience fee layered on the base fare, and ancillary
-            revenue (seat selection, insurance, baggage). That matters here specifically:
-            add-on pre-selection and the late-stage fee reveal found below aren't accidental UX
-            oversights, they're revenue mechanisms. Any recommendation that removes them has a
-            real, quantifiable cost, well past a mere upside; see Risks &amp; Trade-offs below.
-          </p>
-          <p>
-            <strong>North Star Metric (company level):</strong> completed bookings per unique
-            searcher, which normalizes for the high browsing-only traffic that never intends to book.
-            This teardown is scoped to moving that metric one funnel stage at a time, starting
-            with the stage that leaks hardest.
+            Aggregates and joins prove I can retrieve data; this half proves I can shape it the way a
+            PM actually needs to — cohort retention curves, month-over-month growth, and running
+            totals, the exact SQL patterns behind most subscription-business dashboards. Same Aptura
+            dataset as the
+            <a href="travel-tech-more.html#case-sql-saas-analytics-basic" data-open-case="sql-saas-analytics-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic case study (T30)</a>,
+            four new query patterns instead of eight simpler ones.
           </p>
 
-          <h4>I — Identify the Customer</h4>
+          <h4>A Real T-SQL Dialect Bug, and the Fix</h4>
           <p>
-            Three personas span the segmentation axes that actually predict booking behavior:
-            price sensitivity, time pressure, and party complexity, not demographic axes like age
-            or city, which don't:
+            These 4 queries were first written and verified against SQLite for a browser-based version
+            of this project, then ported to T-SQL for SQL Server (<code>FORMAT()</code> instead of
+            <code>strftime()</code>, <code>DATEDIFF()</code> instead of <code>julianday()</code>).
+            Three of the four ported cleanly on the first run. The running-cumulative-signups query
+            didn't:
           </p>
-          <ul>
-            <li><strong>"Value Rakesh"</strong> (28, IT professional, 4–5 domestic trips/yr): price-sensitive, compares 3+ apps before booking.</li>
-            <li><strong>"Business Priya"</strong> (34, consulting manager): books last-minute, values reliability and rebooking flexibility over price.</li>
-            <li><strong>"Family Planner Anita"</strong> (41): books for 4+ pax, needs group-seat clarity and abandons on unclear total-fare breakdowns.</li>
-          </ul>
-
-          <h4>R — Report the Customer's Needs</h4>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <tbody>
+                <tr><td style="font-family:'IBM Plex Mono',monospace;font-size:12px">Msg 8729, Level 16: ORDER BY list of RANGE window frame has total size of 8000 bytes. Largest size supported is 900 bytes.</td></tr>
+              </tbody>
+            </table>
+          </div>
           <p>
-            <strong>Journey:</strong> Home search widget → results list (filters/sort) → fare
-            review (baggage/meal add-ons) → traveller details → payment → confirmation + "My
-            Trips." Logged-out users are funnelled into account creation at payment, not upfront;
-            that reduces search friction but adds a late-stage form-fill tax.
+            The cause: <code>FORMAT()</code> returns <code>nvarchar(4000)</code> regardless of how
+            short the actual string is, and SQL Server's default window-frame type (RANGE) caps its
+            ORDER BY column at 900 bytes for that reason. The fix was one clause, not a rewrite —
+            swapping the implicit RANGE frame for an explicit <code>ROWS UNBOUNDED PRECEDING</code>
+            frame (the semantically correct frame for a running total anyway):
           </p>
-          <p>
-            <strong>Retention loop:</strong> "My Trips" is a lifecycle retention engine wearing a
-            post-booking utility tab as a disguise. It's why a user reopens the app at all
-            after booking (rebooking, cancellation, web check-in). That's why Business Priya's
-            reliance on it post-confirmation (see the funnel map below) is a commercial signal, not
-            a mere UX nicety: it's the retention mechanism the acquisition funnel below feeds into.
-          </p>
-          <p><strong>Needs uncovered, mapped to the journey above:</strong></p>
-          <ul>
-            <li><strong>Trust/transparency need</strong>: fare inflation between search-result price and fare-review price (taxes/fees revealed late) erodes trust; add-on pre-selection (insurance, seat) defaults to "on," reading as a dark pattern at checkout.</li>
-            <li><strong>Time-efficiency need</strong>: filter fatigue (12+ dimensions, no smart default) and no persistent price comparison across dates force users to manually reopen search in a new tab.</li>
-            <li><strong>Clarity/control need</strong>: baggage policy buried a tap deep, a top cause of post-booking support contact.</li>
-          </ul>
-          <p>
-            <strong>Funnel:</strong> Search → Results → Fare Review → Traveller Info → Payment →
-            Confirmation. The biggest modeled drop-off sits between Results and Fare Review
-            (price-shock from add-on fees: modeled at ~38% conversion in the
-            <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>),
-            with a second leak between Traveller Info and Payment (form fatigue + OTP retry friction).
-          </p>
-        </div>
-
-        <a href="projects/flight-booking-teardown/journey-map.html" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
-          <picture>
-            <source srcset="projects/flight-booking-teardown/screenshots/journey-map-light.webp" type="image/webp">
-            <img src="projects/flight-booking-teardown/screenshots/journey-map-light.png" alt="Journey and funnel map from Search to Confirmation, showing the funnel narrowing from 100% to 14%, with the steepest drop (92% to 35%) at Fare Review, annotated with pain points, persona impact, and which recommendation targets each stage" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          </picture>
-        </a>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full interactive Journey &amp; Funnel Map (also available in dark mode).</p>
-
-        <details class="cs-showmore">
-          <summary>Show more: Cut, List Solutions, RICE scoring, Risks, Summarize, HEART metrics, OKRs <span class="sm-count">(the full CIRCLES back half)</span></summary>
-        <div class="cs-narrative">
-          <p>
-            <strong>Competitors:</strong> ixigo surfaces the convenience fee earlier than
-            MakeMyTrip and leads with "flight confirm guarantee" trust messaging; Booking.com's
-            flights product (smaller India share) shows all-in price at search. MakeMyTrip's "My
-            Trips" is the strongest post-booking lifecycle surface of the three.
-          </p>
-
-          <h4>C — Cut Through Prioritization</h4>
-          <p>
-            Of the three personas, I'd prioritize <strong>Value Rakesh's need first.</strong>
-            Price-sensitive comparison shoppers are both the largest segment of OTA search traffic
-            and the segment most exposed to the single biggest funnel leak above: the
-            fare-review price shock hits a price-anchored searcher hardest. Business Priya's
-            reliability need and Family Planner Anita's group-booking complexity are real, but
-            lower-frequency, worth a later cycle rather than this one. Everything below is scoped to
-            fixing Rakesh's need first.
-          </p>
-
-          <h4>L — List Solutions</h4>
-          <ol style="padding-left:18px;margin:0 0 14px;color:#33333D;font-size:14.5px;line-height:1.6">
-            <li style="margin-bottom:7px">All-in fare display at the results level: kill the late-stage price reveal.</li>
-            <li style="margin-bottom:7px">Opt-in (not opt-out) add-ons at fare review.</li>
-            <li style="margin-bottom:7px">Persistent "compare dates" strip on results instead of reopening search.</li>
-            <li style="margin-bottom:7px">Baggage/meal policy inline on the fare card, not a tap away.</li>
-            <li style="margin-bottom:7px">One-tap "hold my seat 15 min" for indecisive high-intent users.</li>
-            <li style="margin-bottom:7px">Smart filter defaults ranked by price + duration + layover, not price alone.</li>
-            <li style="margin-bottom:7px">Payment retry with saved card + biometric re-auth to cut payment-stage drop-off.</li>
-            <li style="margin-bottom:7px">Proactive delay-risk badge on results (feeds the <a href="travel-tech-more.html#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T5)</a>).</li>
-            <li style="margin-bottom:7px">Group-booking mode for 4+ pax with a shared itinerary link.</li>
-            <li>Post-booking "manage trip" nudges (web check-in, gate-change alerts) via push.</li>
-          </ol>
-
-          <h4>E — Evaluate Trade-offs</h4>
-          <p>RICE-scored, ranked by priority:</p>
-        </div>
-
-        <div class="ptable2-wrap">
-          <table class="ptable2">
-            <thead><tr><th>Feature (RICE-scored)</th><th>Reach × Impact × Confidence</th><th>Effort</th><th>RICE / priority</th></tr></thead>
-            <tbody>
-              <tr><td data-label="Feature">Opt-in add-ons at fare review</td><td data-label="R×I×C">8 × 2 × 0.9</td><td data-label="Effort">1</td><td data-label="RICE">14.4 · <strong>P1 / Must</strong></td></tr>
-              <tr><td data-label="Feature">All-in fare display at results</td><td data-label="R×I×C">10 × 3 × 0.9</td><td data-label="Effort">2</td><td data-label="RICE">13.5 · <strong>P1 / Must</strong></td></tr>
-              <tr><td data-label="Feature">Baggage/meal policy inline</td><td data-label="R×I×C">9 × 1.5 × 0.8</td><td data-label="Effort">1</td><td data-label="RICE">10.8 · <strong>P1 / Must</strong></td></tr>
-              <tr><td data-label="Feature">Delay-risk badge on results</td><td data-label="R×I×C">10 × 2 × 0.6</td><td data-label="Effort">3</td><td data-label="RICE">4.0 · <strong>P2 / Should</strong></td></tr>
-              <tr><td data-label="Feature">Payment retry + biometric re-auth</td><td data-label="R×I×C">5 × 3 × 0.7</td><td data-label="Effort">3</td><td data-label="RICE">3.5 · <strong>P2 / Should</strong></td></tr>
-              <tr><td data-label="Feature">Persistent compare-dates strip</td><td data-label="R×I×C">6 × 2 × 0.7</td><td data-label="Effort">3</td><td data-label="RICE">2.8 · <strong>P3 / Could</strong></td></tr>
-            </tbody>
-          </table>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <tbody>
+                <tr><td style="font-family:'IBM Plex Mono',monospace;font-size:12px">SUM(new_customers) OVER (ORDER BY month ROWS UNBOUNDED PRECEDING) AS cumulative_customers</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div class="cs-narrative">
-          <p style="margin-top:12px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle: the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a booking-funnel fix.</p>
-
-          <h4>Risks &amp; Trade-offs</h4>
-          <p>Every recommendation above has a cost as well as an upside, named here rather than after launch:</p>
+          <h4>Key Findings</h4>
           <ul>
-            <li><strong>All-in fare display</strong>: the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
-            <li><strong>Opt-in add-ons</strong>: directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete: it needs a revenue-per-booking floor agreed with Finance before shipping, on top of a UX sign-off.</li>
-            <li><strong>Baggage/meal policy inline</strong>: minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
-            <li><strong>Delay-risk badge</strong>: risks eroding trust in a different direction if the underlying prediction (see the <a href="travel-tech-more.html#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T5</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
+            <li><strong>3- and 6-month cohort retention bounces between roughly 62% and 96%</strong> month to month, because monthly cohorts are small (14–33 signups each) — reading that as expected noise rather than over-reacting to any single month's number is itself part of the skill.</li>
+            <li><strong>Month-over-month new-MRR growth swings widely for the same reason</strong> (e.g. −40.5% in March, +183.6% in May) — a small-N, growing company's month-over-month metrics are volatile by construction, not necessarily a signal.</li>
+            <li><strong>Cumulative signups climb cleanly</strong> (14 → 37 → 55 → 71 → 94 across the first five months) once the running-total fix above was applied, confirming the window function now computes correctly.</li>
+            <li><strong>Ranking active customers by tenure within each plan</strong> surfaces exactly who's been on a plan longest — useful for e.g. identifying who to interview for retention research, or who to invite to a beta first.</li>
           </ul>
+
+          <h4>What This Means, Applied</h4>
           <p>
-            <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind the A/B test
-            already scoped in the <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>,
-            with revenue-per-booking as a guardrail metric alongside conversion, not conversion
-            alone. A win on Fare Review conversion that quietly craters ancillary revenue is a
-            loss dressed up as a win.
+            The cohort-retention query above is what turns the Basic case study's churn-by-plan and
+            churn-by-channel diagnosis into something actionable rather than a one-time snapshot: I'd
+            track 30/60/90-day retention, activation rate, and churn by cohort to validate whether
+            interventions — a stronger Starter onboarding journey, tighter Paid Search targeting —
+            actually improve retention and lifetime value, instead of just assuming they worked.
           </p>
-
-          <h4>S — Summarize Recommendation</h4>
-          <p>
-            Ship <strong>all-in fare display</strong> and <strong>opt-in add-ons</strong> first:
-            RICE 13.5 and 14.4, the two highest-scored and lowest-effort items on the list. Together
-            they remove the exact price-shock that costs the funnel its single biggest leak, for
-            the segment (Rakesh) chosen in the Cut step above. Everything else on this list
-            sequences behind those two.
-          </p>
-
-          <h4>Success Metrics: the HEART Framework</h4>
-          <p>Using Google's own HEART framework (Rodden et al.) instead of a single catch-all "engagement" number:</p>
-          <ul>
-            <li><strong>Happiness</strong>: CSAT specifically on "pricing clarity" (post-booking survey); NPS delta before/after the all-in pricing rollout.</li>
-            <li><strong>Engagement</strong>: searches per session; % of sessions using the new compare-dates strip.</li>
-            <li><strong>Adoption</strong>: % of eligible searchers who see and interact with the all-in fare display / opt-in add-on toggle in month one.</li>
-            <li><strong>Retention</strong>: repeat booking rate within 90 days, segmented by whether a user's first booking hit the old opt-out add-on flow or the new opt-in one.</li>
-            <li><strong>Task success</strong>: Results→Fare Review conversion (the primary funnel-leak metric, North Star for this cycle), search-to-confirmation completion rate, time-to-book.</li>
-          </ul>
-
-          <h4>Tied to an OKR</h4>
-          <p><strong>Objective:</strong> Remove price-shock and trust friction from fare review for price-sensitive searchers.</p>
-          <ul>
-            <li><strong>KR1:</strong> Increase Results→Fare Review conversion from the ~38% modeled baseline (see <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis, T8</a>) to 50%+ within one quarter.</li>
-            <li><strong>KR2:</strong> Reduce "hidden fees" CSAT verbatims by 50%.</li>
-            <li><strong>KR3:</strong> Ship both P1/Must recommendations this quarter, validated against the A/B hypotheses already scoped in T8.</li>
-          </ul>
         </div>
-        </details>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
+          <img src="projects/sql-saas-analytics/screenshots/advanced-01-cohort-retention.png" alt="T-SQL CTE query for monthly cohort retention; result showing 3-month and 6-month retention percentages per signup-month cohort" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/advanced-02-mom-mrr-growth.png" alt="T-SQL query using LAG() OVER for month-over-month new-MRR growth; result showing new MRR per month and percent change vs. the prior month" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/advanced-03-cumulative-signups.png" alt="T-SQL query using SUM() OVER with an explicit ROWS UNBOUNDED PRECEDING frame for running cumulative signups; result climbing 14, 37, 55, 71, 94" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/sql-saas-analytics/screenshots/advanced-04-tenure-rank.png" alt="T-SQL query using RANK() OVER PARTITION BY to rank active customers by tenure within each plan; result showing the longest-tenured Growth-plan customers ranked 1 through 7" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </div>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 4 screenshots are my own SQL Server / VS Code session — query and result grid together, unedited, including the frame-fix retry on the cumulative-signups query.</p>
 
         <div class="jlinks">
-          <span><span class="k">Link</span><a href="projects/flight-booking-teardown/journey-map.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">journey &amp; funnel map →</a></span>
-          <span><span class="k">Image</span><a href="projects/flight-booking-teardown/screenshots/journey-map-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+          <span><span class="k">Guide</span><a href="projects/sql-saas-analytics/TSQL_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">T-SQL practice guide →</a></span>
+          <span><span class="k">Back</span><a href="travel-tech-more.html#case-sql-saas-analytics-basic" data-open-case="sql-saas-analytics-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic: SELECT, JOIN, GROUP BY (T30) →</a></span>
         </div>
       </div>
       </article>
@@ -1043,253 +936,112 @@
       </article>
     </div>
 
-<!-- T3: Travel Support AI Copilot -->
+<!-- T33: Amplitude Analytics — Strideway (Advanced) -->
     <div class="jcat-group">
       <div class="jcat-head">
-        <span class="jnum done">T3</span>
-        <h3 class="jcat-title">Travel Support AI Copilot</h3>
-        <span class="jcat-category">AI &amp; Agentic Product Design</span>
+        <span class="jnum done">T33</span>
+        <h3 class="jcat-title">Amplitude Analytics — Strideway (Advanced)</h3>
+        <span class="jcat-category">Metrics &amp; Analytics</span>
       </div>
-      <article class="jcard" data-case="travel-support-ai-copilot" data-updated="2026-07-30">
+      <article class="jcard" data-case="amplitude-strideway-advanced" data-updated="2026-08-13">
         <button class="jhead" type="button">
           <div class="jhead-left">
-            <div class="jcard-illus" style="background:linear-gradient(135deg,#2DD4BF,#0D9488)">💬</div>
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#10B981,#065F46)">🔥</div>
             <div>
-              <div class="jtitle">Travel Support AI Copilot</div>
-              <div class="jmeta">⭐⭐⭐⭐⭐ Built · try the live demo</div>
-              <div class="jtools"><b>Tools:</b> HTML/CSS/JS</div>
+              <div class="jtitle">Amplitude Analytics — Strideway (Advanced)</div>
+              <div class="jmeta">⭐⭐⭐⭐ Built · funnels, retention, cohorts, a real bug fixed</div>
+              <div class="jtools"><b>Tools:</b> Amplitude (Funnels, Retention, Cohorts, API)</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
         </button>
       <div class="jbody">
         <div class="cs-facts">
-          <span class="chip">Live interactive demo</span>
-          <span class="chip">Agentic AI, not just Q&amp;A</span>
-          <span class="chip">3 core conversation flows</span>
-          <span class="chip">Escalation &amp; guardrail architecture</span>
-          <span class="chip">Deflection vs. safety trade-off</span>
+          <span class="chip">Full 6-step monetization funnel</span>
+          <span class="chip">Retention curve segmented by channel</span>
+          <span class="chip">Real conversion-window bug found and fixed</span>
+          <span class="chip">Hit a real Starter-plan limit on cohorts</span>
         </div>
-        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> HTML/CSS/JS — self-contained interactive demo, no framework or backend.</p>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> Amplitude (Funnel analysis, Retention analysis, Cohorts), the Amplitude Chart API (used to diagnose the bug below).</p>
 
         <div class="cs-narrative">
-          <h4>Where the Volume Comes From</h4>
+          <h4>Why Advanced, Not Just Basic</h4>
           <p>
-            The support queries that pile up fastest at an OTA ("cancel my flight," "how much
-            baggage can I bring," "can I change the travel date") are also the most repetitive
-            and rule-governed. A human agent resolving them one ticket at a time is expensive and
-            slow at OTA volumes; a plain FAQ chatbot that only answers questions can't actually
-            act on a booking. The gap this project scopes is the one in between: an assistant that
-            can both answer <em>and</em> execute (cancel a booking, initiate a refund, apply a
-            fare rule), which is a materially different (and riskier) design problem than a
-            Q&amp;A bot, because it can now make a costly, sometimes irreversible mistake on its
-            own.
+            Segmentation charts prove I can read a single metric; this half proves
+            I can trace a user journey end to end — funnel conversion, retention
+            over time, and cohort definition, the exact Amplitude patterns behind
+            most growth/monetization dashboards. Same Strideway dataset as the
+            <a href="travel-tech-more.html#case-amplitude-strideway-basic" data-open-case="amplitude-strideway-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic case study (T32)</a>.
           </p>
 
-          <h4>Scope &amp; Non-Goals</h4>
+          <h4>A Real Amplitude Bug, Found and Fixed</h4>
           <p>
-            <strong>In scope:</strong> cancellations, refund recommendations, baggage-allowance
-            questions, and date/name booking changes: the four query types responsible for most
-            repetitive support volume. <strong>Explicitly routed to a human, never handled
-            autonomously:</strong> visa <em>legal</em> advice (a compliance and liability
-            question, not a support one; the bot can point to the airline/embassy's own
-            documentation but never advise), disputes and fraud claims, and any refund above a
-            fixed autonomous-action ceiling (see Guardrails below).
+            The first funnel I built — Sign Up → Complete Onboarding → Log Workout
+            → View Paywall → Start Free Trial → Upgrade to Premium — came back
+            showing only <strong>19% conversion</strong> from onboarding to a first
+            logged workout. That looked wrong: nearly every onboarded user in this
+            dataset eventually logs a workout. I checked directly against the raw
+            dataset and confirmed it — <strong>92.5%</strong> of onboarded users
+            eventually log at least one workout, nowhere near 19%.
           </p>
-
-          <h4>Where Today's Industry Falls Short</h4>
           <p>
-            Before designing the flows, it's worth naming the pattern this design is deliberately
-            not repeating. Travel and OTA support bots in production today tend to fail in one of
-            four recurring ways. This is a pattern visible across the category, not a claim about
-            any specific company's product:
-          </p>
-          <ul>
-            <li><strong>Answer-only, can't act</strong>: most bots can tell you the cancellation policy but can't actually cancel anything; the moment a user needs an action taken, they're back in a queue for a human, which defeats the point of automating the repetitive cases in the first place.</li>
-            <li><strong>Black-box numbers</strong>: the few bots that do quote a refund or fee rarely show the rule behind it, so a user has no way to check it's right, which is the same trust erosion the fare-shock problem in the <a href="#case-makemytrip-flight-booking-teardown" data-open-case="makemytrip-flight-booking-teardown" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Booking Teardown (T1)</a> causes at the booking stage.</li>
-            <li><strong>Silent or absent confirmation</strong>: bots that can act either skip a confirmation step entirely (risky) or are so conservative they add friction to low-risk actions too (annoying): few calibrate the gate to the actual risk of the specific action, the way Flow 1 vs. Flow 2 do below.</li>
-            <li><strong>Context loss at handoff</strong>: "please repeat your issue" after being passed to a human is one of the most common support complaints in the category; the bot's understanding of the problem evaporates the moment escalation happens.</li>
-          </ul>
-          <p>
-            The wireframes further down (Screens 1–4) are the direct, one-to-one answer to these
-            four gaps, not generic chat-UI decoration; each screen is annotated with the specific
-            failure mode it closes. But rather than leave it at mockups, the architecture below is
-            also built and actually running:
+            The cause, found by pulling the chart's real definition through
+            Amplitude's own API rather than guessing: Amplitude funnels default to
+            a <strong>1-day conversion window</strong> between each step
+            (<code>conversionSeconds: 86400</code>). Since many users in this
+            dataset don't log their first workout until well after onboarding —
+            they open the app sporadically over weeks, not daily — a 1-day window
+            was silently dropping every conversion that happened even slightly
+            later than that, while still reporting a clean-looking, plausible
+            percentage. Widening the window to 90 days fixed it exactly: Log
+            Workout jumped to <strong>68.97% (2,069 of 2,236)</strong>, matching the
+            raw dataset precisely.
           </p>
         </div>
-
-        <a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
-          <picture>
-            <source srcset="projects/travel-support-copilot/screenshots/demo-light.webp" type="image/webp">
-            <img src="projects/travel-support-copilot/screenshots/demo-light.png" alt="Interactive demo of the Travel Support AI Copilot: a chat panel where a user asks to cancel a flight, the copilot shows its reasoning, a confirmation gate appears before the irreversible action executes, and the confirmed cancellation and refund are logged in the Agent Action Log panel" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          </picture>
-        </a>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">
-          Click to open the live, interactive demo (also available in dark mode): a rule-based
-          simulation of the flows and guardrails below, running entirely in your browser. A public
-          static site can't safely hold an API key to call a real LLM, so this demonstrates the
-          <em>architecture</em> working end to end (confirmation gate, escalation handoff, audit
-          trail), not a claim of production-grade language understanding; labeled as exactly that
-          on the demo page itself.
-        </p>
 
         <div class="cs-narrative">
-          <h4>Flow 1: Cancellation + Refund Recommendation (highest-risk flow)</h4>
-          <p>
-            The flow with the most at stake: it ends in an irreversible action (a cancelled
-            booking) and moves real money. Representative flow, illustrating the decision points,
-            not a transcript from a live system:
-          </p>
-        </div>
-
-        <div class="ptable2-wrap">
-          <table class="ptable2">
-            <thead><tr><th>Turn</th><th>Speaker</th><th>Message</th><th>System</th></tr></thead>
-            <tbody>
-              <tr><td data-label="Turn">1</td><td data-label="Speaker">User</td><td data-label="Message">"I need to cancel my Delhi–Mumbai flight tomorrow"</td><td data-label="System">Intent: cancel_booking (0.96) → PNR lookup</td></tr>
-              <tr><td data-label="Turn">2</td><td data-label="Speaker">Agent</td><td data-label="Message">"Found your DEL–BOM booking. Cancelling inside 24hrs of departure means a partial refund under this fare's rules — you'd get back part of what you paid. Want the exact amount?"</td><td data-label="System">Tool call: refund_policy_engine(fare_class, hours_to_departure)</td></tr>
-              <tr><td data-label="Turn">3</td><td data-label="Speaker">User</td><td data-label="Message">"Yes, how much"</td><td data-label="System">—</td></tr>
-              <tr><td data-label="Turn">4</td><td data-label="Speaker">Agent</td><td data-label="Message">"You'd get back ₹3,200 of ₹5,800 paid. Confirm cancellation?"</td><td data-label="System"><strong>Confirmation gate</strong>: irreversible action, requires explicit user confirmation before executing (guardrail, not optional)</td></tr>
-              <tr><td data-label="Turn">5</td><td data-label="Speaker">User</td><td data-label="Message">"Confirmed"</td><td data-label="System">—</td></tr>
-              <tr><td data-label="Turn">6</td><td data-label="Speaker">Agent</td><td data-label="Message">"Done — booking cancelled, ₹3,200 refund initiated, arrives in 5–7 business days. Reference CXL-48213."</td><td data-label="System">Tool calls: cancel_booking() + issue_refund(): both logged to the audit trail below</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="display:block;margin:20px 0 4px">
-          <picture>
-            <source srcset="projects/travel-support-copilot/screenshots/wireframes-light.webp" type="image/webp">
-            <img src="projects/travel-support-copilot/screenshots/wireframes-light.png" alt="Four wireframes for the Travel Support AI Copilot: Reasoning You Can See (visible confidence and fare-rule reasoning), Confirm Before It's Irreversible (a confirmation gate before cancel/refund actions), Context Follows You to a Human (a structured handoff summary instead of a repeat-yourself transcript), and Audit Trail for Support Ops (every autonomous action logged with a confidence score and review flag)" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          </picture>
-        </a>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full wireframe set (also available in dark mode): each screen is annotated with the specific industry gap it closes.</p>
-
-        <details class="cs-showmore">
-          <summary>Show more: Flows 2 &amp; 3, agent architecture, guardrails, evaluation, metrics, risks <span class="sm-count">(the safety-critical half)</span></summary>
-
-        <div class="cs-narrative">
-          <h4>Flow 2: Baggage Policy Question (lowest-risk flow)</h4>
-          <p>
-            The contrast case: a pure information lookup with no action taken and nothing to
-            confirm, so it needs none of Flow 1's guardrails.
-          </p>
+          <h4>Key Findings</h4>
           <ul>
-            <li><strong>User:</strong> "How much check-in baggage do I get on my booking?"</li>
-            <li><strong>Agent</strong> (intent: baggage_query, 0.99 confidence) → tool call: fetch fare rules for the booking's specific fare class → <strong>"Your Economy Saver fare includes 15kg check-in. Extra baggage is ₹500/kg if you add it now, or ₹800/kg at the airport — want me to add extra baggage to this booking?"</strong></li>
-          </ul>
-          <p>
-            Fully autonomous end-to-end: answered <em>and</em> resolved the likely follow-up
-            (add baggage) without a human, because nothing here is irreversible or high-value
-            enough to need a confirmation gate.
-          </p>
-
-          <h4>Flow 3: Booking Date Change (medium-risk flow)</h4>
-          <p>
-            Sits between the two above: it's an action, so pure information-lookup rules don't
-            apply, but a correctable one, so it gets a lighter version of Flow 1's gate: confirm the fare difference, but
-            no separate human-escalation trigger unless the fare-difference lookup itself fails.
-            Intent: change_booking_date → tool call: check seat availability + fare difference on
-            new date → agent states the fare difference and change fee → single confirmation →
-            executes change_booking() and emails the updated ticket.
-          </p>
-
-          <h4>Agent Architecture</h4>
-          <p>
-            Four layers, in order: <strong>(1) Intent router</strong>: classifies the incoming
-            message into one of the in-scope intents above, or "unclassified" → human.
-            <strong>(2) Tool-calling layer</strong>: each intent maps to a fixed set of callable
-            tools (PNR lookup, refund_policy_engine, fare-difference calculator, cancel_booking,
-            issue_refund, change_booking): the agent can only call tools on this allow-list, it
-            cannot invent new actions. <strong>(3) Confirmation gate</strong>: any tool call that
-            is irreversible or moves money (cancel_booking, issue_refund) requires an explicit
-            user confirmation turn before executing, never fires on the first pass.
-            <strong>(4) Escalation router</strong>: triggers on low intent-confidence
-            (&lt;0.85), a tool call failing twice, explicit user frustration signals, or any
-            query touching a hard non-goal (visa advice, disputes): handed to a human agent with
-            the full conversation transcript attached, not restarted from zero.
-          </p>
-
-          <h4>Guardrails</h4>
-          <p>
-            This is the part of the design that actually differentiates a support <em>copilot</em>
-            from a support <em>chatbot</em>, and the part a scope doc for an agent that can take
-            real actions can't skip:
-          </p>
-          <ul>
-            <li><strong>Autonomous-action ceiling</strong>: the agent may autonomously execute cancellations/refunds up to a fixed rupee ceiling; above it, the same flow runs but ends in a human-approval step instead of auto-executing.</li>
-            <li><strong>Confirmation before irreversible actions</strong>: never optional, shown in Flow 1 above; a wrong autonomous cancellation is far more costly to trust than a wrong autonomous baggage-fee quote.</li>
-            <li><strong>No autonomous visa/legal advice</strong>: the intent router treats this as a hard non-goal, not a confidence threshold; it escalates every time, regardless of how confident the model is in an answer.</li>
-            <li><strong>Full audit trail</strong>: every tool call the agent executes, conversations included, is logged with the triggering intent, confidence score, and outcome, reviewable by support ops, the same operational-audit discipline as the PCMS payout reconciliation work (see Technical Execution, T27).</li>
+            <li><strong>Full funnel, corrected</strong>: Sign Up 3,000 → Complete Onboarding 74.53% → Log Workout 68.97% → View Paywall 11.97% → Start Free Trial 5.9% → Upgrade to Premium 1.63% (49 users) — a realistic, multi-week monetization path, not a same-day one.</li>
+            <li><strong>Retention by channel is the clearest chart in the whole project</strong>: at Day 30, Referral-acquired users retain around 46%, Organic around 36%, Paid Social around 22%, and Influencer around 9% — a roughly 5x spread between the best and worst channel, purely from acquisition source.</li>
+            <li><strong>Cohort creation hit a real plan limit</strong>: dynamic (auto-recalculating) cohorts require a paid Amplitude plan; the Starter tier blocked saving one. The definition itself — "users who performed Upgrade to Premium, count ≥ 1" — was correct; only persisting it as a live cohort was gated. A genuine, worth-knowing constraint of the free tier, not a mistake.</li>
           </ul>
 
-          <h4>Evaluation Approach</h4>
+          <h4>What This Means, Applied</h4>
           <p>
-            Deflection rate alone is a misleading headline metric here: a bot can "deflect" a
-            ticket by giving an answer that satisfies the user in the moment but is wrong, which
-            shows up as a good deflection number and a bad outcome. Evaluation needs three lenses,
-            not one: <strong>resolution accuracy</strong> (a sampled human audit of closed
-            bot-handled tickets weighed against the bot's own confidence score), <strong>wrong-action
-            rate</strong>: the safety metric, tracking autonomous actions a human reviewer would
-            have executed differently, weighted far more heavily than any convenience metric, and
-            <strong>escalation-appropriateness</strong>, checking the router escalates when it
-            should as often as it deflects when it shouldn't.
+            The retention chart changes the decision quite a bit: I wouldn't
+            automatically scale Influencer just because it brings users in. I'd
+            treat Referral as the stronger quality channel if its retained-user
+            curve is consistently better. As PM, I'd shift more acquisition effort
+            toward Referral, while keeping Influencer as a controlled acquisition
+            experiment. For Influencer, I'd dig into which creators, audiences, and
+            landing experiences are producing retained users rather than judging
+            the channel only on acquisition volume. I'd also set up a cohort
+            comparison for Influencer vs. Referral — same signup period, same
+            retention window, ideally normalized by plan — to make sure the
+            difference isn't caused by audience mix. The goal wouldn't be "kill
+            Influencer"; it would be optimize for retained customers, not just
+            acquired customers. If Referral continues to show stronger retention,
+            I'd increase investment there and use Influencer selectively where
+            creators can demonstrate comparable downstream retention.
           </p>
-        </div>
-
-        <div class="ptable2-wrap">
-          <table class="ptable2">
-            <thead><tr><th>Metric</th><th>What it's really measuring</th><th>Why it's on this list</th></tr></thead>
-            <tbody>
-              <tr><td data-label="Metric">Containment rate</td><td data-label="Measuring">% of in-scope tickets resolved without a human</td><td data-label="Why">The headline efficiency number, but never read alone (see below)</td></tr>
-              <tr><td data-label="Metric">Wrong-action rate</td><td data-label="Measuring">Autonomous actions a human audit would reverse or flag</td><td data-label="Why">The safety guardrail metric: this one has veto power over containment rate</td></tr>
-              <tr><td data-label="Metric">CSAT on bot-resolved tickets</td><td data-label="Measuring">Satisfaction specifically on containment, not overall support CSAT</td><td data-label="Why">A ticket can be "contained" and still leave the user unhappy</td></tr>
-              <tr><td data-label="Metric">Escalation-appropriateness</td><td data-label="Measuring">Did the router escalate the tickets it should have</td><td data-label="Why">Catches an overconfident agent as readily as an under-confident one</td></tr>
-              <tr><td data-label="Metric">Time-to-resolution</td><td data-label="Measuring">End-to-end, bot-handled vs. human-handled tickets</td><td data-label="Why">The business-facing efficiency number, once the safety metrics above clear</td></tr>
-            </tbody>
-          </table>
         </div>
 
         <div class="cs-narrative">
-          <h4>Business Impact (modeled, not measured)</h4>
-          <p>
-            Illustrative, not a real support-cost figure: if cancellation, baggage, and
-            date-change queries together are a modeled ~35% of ticket volume, and the copilot
-            fully contains half of those (the baggage-query type especially, since it needs no
-            guardrail and resolves in one turn), that's roughly a sixth of total support volume
-            handled at near-zero marginal cost instead of a human agent's fully-loaded
-            cost-per-ticket. The number that actually matters for a launch decision, though, is
-            the wrong-action rate at that containment level; a model here would need real
-            historical ticket data to size properly, which is exactly why this stays a scope doc
-            and not a "built" project, unlike the modeled-but-labeled dataset in the
-            <a href="travel-tech-more.html#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T5)</a>.
-          </p>
-
-          <h4>Risks</h4>
-          <p>
-            The risk that actually matters isn't "the bot gives a bad answer": a Q&amp;A chatbot
-            has that risk too, and it's recoverable. It's <strong>the bot takes a bad
-            action</strong>: an autonomous cancellation or refund that shouldn't have happened costs
-            real money and leaves a damaged booking behind, well past an unhelpful chat log's worth of harm. Every guardrail
-            above exists to keep that specific failure mode's blast radius small and recoverable
-            (confirmation gates, action ceilings, audit trails) rather than trying to prevent it
-            outright, which no confidence threshold can fully guarantee.
-          </p>
-
-          <h4>What Carries Over From T18</h4>
-          <p>
-            The same lesson as the ChatGPT Memory Feature teardown (Feature Reverse Engineering,
-            T18) shows up again here in a higher-stakes form: the hard PM problem in agentic AI
-            isn't language understanding or intent classification (those are largely solved). It's
-            designing the guardrail and escalation layer that keeps the agent's inevitable
-            mistakes cheap and reversible instead of expensive and permanent.
-          </p>
+          <h4>Before / After: the funnel-window fix</h4>
         </div>
-        </details>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
+          <img src="projects/amplitude-strideway/screenshots/advanced-01-funnel-before-fix.png" alt="Amplitude funnel chart before the fix: Sign Up 100%, Complete Onboarding 74.53%, Log Workout only 19% (570 users), View Paywall 0.3%, Start Free Trial 0.13%, Upgrade to Premium 0% — the 1-day conversion window silently dropping real conversions" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/amplitude-strideway/screenshots/advanced-02-funnel-after-fix.png" alt="Amplitude funnel chart after widening the conversion window to 90 days: Sign Up 100%, Complete Onboarding 74.53%, Log Workout 68.97% (2,069 users), View Paywall 11.97%, Start Free Trial 5.9%, Upgrade to Premium 1.63% — matching the raw dataset exactly" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/amplitude-strideway/screenshots/advanced-03-retention-by-channel.png" alt="Amplitude retention chart: Daily retention from Sign Up to Open App by signup channel over 30 days — Referral (purple) highest around 46% by Day 30, Organic (blue) around 36%, Paid Social (green) around 22%, Influencer (teal) lowest around 9%" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/amplitude-strideway/screenshots/advanced-05-retention-builder-panel.png" alt="Amplitude retention chart builder, full browser view: Starting event Sign Up, return event Open App, Measured as 'Return On or After' — the actual configuration panel behind the retention-by-channel chart, not just its output" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/amplitude-strideway/screenshots/advanced-04-cohort-definition.png" alt="Amplitude New Cohort screen: users who performed Upgrade to Premium, count >= 1 time, during Last 90 days — a correct definition that could not be saved on the free Starter plan (dynamic cohorts are a paid feature)" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </div>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 5 screenshots are real captures from my own live Amplitude project — including the broken funnel and the retention chart's builder panel, left in on purpose to show the actual process rather than only clean, cropped results.</p>
 
         <div class="jlinks">
-          <span><span class="k">Live demo</span><a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">try it →</a></span>
-          <span><span class="k">Link</span><a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
-          <span><span class="k">Image</span><a href="projects/travel-support-copilot/screenshots/wireframes-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
+          <span><span class="k">Guide</span><a href="projects/amplitude-strideway/AMPLITUDE_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">practice guide →</a></span>
+          <span><span class="k">Back</span><a href="travel-tech-more.html#case-amplitude-strideway-basic" data-open-case="amplitude-strideway-basic" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Basic: event segmentation (T32) →</a></span>
         </div>
       </div>
       </article>
@@ -1297,7 +1049,7 @@
 
     <a class="track-showmore" href="travel-tech-more.html">
       <span class="track-showmore-label">Show more case studies</span>
-      <span class="track-showmore-count">T5 (delay dashboard), T8, Weft, Career Copilot, and cross-industry practice work →</span>
+      <span class="track-showmore-count">Flight Booking Teardown, Travel Support AI Copilot, T5 (delay dashboard), T8, SQL/Amplitude Basics, Weft, Career Copilot, and cross-industry practice work →</span>
     </a>
     </div>
 
