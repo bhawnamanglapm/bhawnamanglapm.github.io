@@ -1586,116 +1586,193 @@
         </div>
 
         <div class="cs-narrative">
-          <h4>Research log — 14 Aug 2026: the trigger and the pattern</h4>
-          <p><strong>The case that started it — Deloitte, twice, six weeks apart.</strong>
-          Australia's Department of Employment and Workplace Relations commissioned Deloitte in Dec
-          2024 for a welfare-compliance review; the delivered report (Jul 2025) turned out to
-          contain fabricated citations and an invented court quote, confirmed as drafted with
-          Microsoft Azure OpenAI GPT-4o. Deloitte corrected the report, disclosed the AI use, and
-          refunded the final AU$97,000 installment of a AU$439,000 contract (Oct 2025). Six weeks
-          later a near-identical failure surfaced in Canada — a $1.6M CAD healthcare-staffing
-          report for Newfoundland &amp; Labrador with fabricated academic citations and real
-          researchers credited with papers they never wrote. Deloitte defended that report's
-          recommendations rather than retracting it; a provincial accounting watchdog opened its own
-          investigation. <strong>The second incident, this close behind the first, is the real
-          finding</strong> — whatever Deloitte fixed after Australia wasn't fixed everywhere, fast
-          enough.</p>
-          <p><strong>Not a one-firm problem.</strong> EY Canada pulled a cybersecurity report after
-          16 of 27 sources were found fabricated or broken; KPMG's flagship agentic-AI report had 40
-          of 45 citations wrong or invented. In US courts alone, <strong>1,313 documented cases</strong>
-          now involve AI-fabricated content, 496 involving licensed attorneys, with sanctions up
-          roughly 11× in 18 months.</p>
-          <p><strong>India is about to have its own version of this.</strong> The Supreme Court
-          (Essel Infraprojects/NCLT matter, 2 Jul 2026) declared zero tolerance for AI-hallucinated
-          case law — 3 of 6 judgments an NCLT bench relied on didn't exist. The Bombay High Court
-          separately quashed a ₹27.91 crore tax order after an assessing officer cited 3 non-existent
-          precedents; a Bengaluru tribunal recalled a ~₹669 crore order for the same reason. Unlike
-          the Deloitte pattern, India's documented cases so far sit inside courts and tax
-          administration, not a named Indian consulting firm — worth revisiting as more surfaces.</p>
+          <h4>Full log — every question asked, every answer given</h4>
+          <p>Kept verbatim, unedited, for authenticity — this is the actual research conversation,
+          not a cleaned-up summary of it. Sources are the same links cited live during the research;
+          a few of the longer tables below are reformatted from chat markdown into this site's
+          table style, but the words and numbers are unchanged.</p>
         </div>
 
         <div class="cs-narrative">
-          <h4>Research log — 14 Aug 2026: who actually owns this problem</h4>
-          <p>Sorted the underlying problem statements by who would really own the fix, not who
-          talks about it in a trend report:</p>
+          <h4>Q1 — "i want to make fresh project for deloitte company- analyze the whole company website and various other live websites and let me know on which problem statements they are working on?"</h4>
+          <p><em>(<code>deloitte.com</code> and <code>deloittedigital.com</code> turned out to be blocked for direct fetching in my research environment, so this was built from indexed content, press coverage, and third-party analysis — not a raw site crawl.)</em></p>
           <ul>
-            <li><strong>Product-manager-owned:</strong> AI output verification/guardrails, agentic-AI
-            governance maturity, scaling agent platforms from pilot to production, process
-            redesign (not just tooling a broken workflow), service-orchestration prioritization,
-            safe agent deployment in regulated industries.</li>
-            <li><strong>Data-management-owned:</strong> content/data pipeline integrity, customer
-            data platform unification, data-privacy classification and access controls, the data
-            feeds wired into any agent — and, interestingly, citation/provenance verification sits
-            in <em>both</em> categories at once: a PM designs the review-gate product, data
-            management builds the traceability layer under it.</li>
-            <li><strong>Not really either:</strong> infra/compute scaling, cybersecurity engineering,
-            change management, talent/comp planning, macro policy advisory — these get bundled into
-            "AI trend" writeups but belong to different functions entirely.</li>
+            <li><strong>Scaling agentic AI — and the governance gap behind it.</strong> Deloitte launched Zora AI (with Nvidia) — deployable agents for finance, HR, supply chain, procurement, customer service — already running internally on expense management (claimed 25% cost cut, 40% productivity gain). Their own Tech Trends 2026 report admits only 1 in 5 companies have a mature governance model for autonomous AI agents.</li>
+            <li><strong>AI output verification — and it's not theoretical for them.</strong> In 2025, Deloitte Australia delivered a 237-page government report with fabricated citations, a made-up court quote, and nonexistent academic references — and refunded ~$290,000 USD to the Australian government.</li>
+            <li><strong>Service orchestration at scale.</strong> TrueServe (Deloitte Digital) — an agentic service-acceleration platform already running 100+ projects across 60+ clients.</li>
+            <li><strong>Financial services clients</strong> are telling Deloitte their top pressures are regulatory/compliance complexity, AI adoption vs. stablecoin/digital-asset disruption, and workforce resistance to new tools.</li>
+            <li><strong>India-specific:</strong> Project Bharat (expansion into tier-2/3 cities), Union Budget policy advisory, and real open Product Manager roles in Bengaluru/Hyderabad/Pune.</li>
           </ul>
         </div>
 
         <div class="cs-narrative">
-          <h4>Research log — 14 Aug 2026: this isn't a Deloitte problem, or a Gemini problem</h4>
-          <p>Traced the same failure mode across sectors and platforms to check whether it's
-          specific to one company or one AI vendor. It's neither:</p>
+          <h4>Q2 — "product managers are working on which projects out of these"</h4>
+          <p>Filtered the list down to what an actual Product Manager — not a strategy consultant, compliance advisor, or HR/infra team — would own:</p>
           <ul>
-            <li><strong>Fabrication-type failures:</strong> Deloitte, EY, KPMG (consulting) · Sports
-            Illustrated, CNET, Gannett (media) — AI invents authoritative-looking content, nobody
-            checks it before publishing.</li>
-            <li><strong>Loss-of-control failures:</strong> Air Canada (<em>Moffatt v. Air Canada</em>,
-            2024 BCCRT 149 — held legally liable for a chatbot's invented refund policy) · DPD
-            (chatbot coaxed into swearing at a customer and calling DPD "the worst delivery firm in
-            the world") · a Chevrolet dealership (chatbot manipulated into "selling" a $76,000 Tahoe
-            for $1) — AI wasn't lying so much as ungoverned in a live conversation the company had
-            already told people was binding.</li>
-            <li><strong>On platforms specifically:</strong> every disclosed incident so far traces to
-            <strong>Microsoft Azure OpenAI (GPT-4 family)</strong> — not Google Gemini. That's most
-            likely a deployment-volume effect (Azure OpenAI was the default enterprise on-ramp for
-            Microsoft-stack companies through 2023–2025) rather than proof one model hallucinates
-            more than another — worth re-checking against an actual leaderboard (Vectara HHEM)
-            rather than incident anecdotes if this becomes a real comparison point later.</li>
+            <li><strong>Clearly PM-owned:</strong> AI output verification/hallucination risk in client deliverables; governance maturity gap for autonomous AI agents; scaling agentic AI from pilot to production (Zora AI); AI-first process redesign vs. automating human-shaped workflows; tooling broken/suboptimized processes instead of redesigning them; service orchestration/personalization at scale (TrueServe); content supply chain fragmentation (Content Intelligence Hub); safely deploying GenAI in regulated industries (Agentforce accelerators).</li>
+            <li><strong>Borderline:</strong> translating AI ROI into enterprise financial impact (analytics/strategy usually owns the answer); AI ambition vs. stablecoin disruption in banking (becomes PM work only once it's a specific product).</li>
+            <li><strong>Not PM work</strong> (excluded): infra/security engineering, HR/L&amp;D, org design, macro policy, compliance advisory.</li>
           </ul>
+          <p>Of the 8 clearly-PM ones, #1 (AI output verification) is the strongest fit — it's the one with a real, sourced, named incident behind it rather than a generic trend.</p>
         </div>
 
         <div class="cs-narrative">
-          <h4>Research log — 14 Aug 2026: what governments actually require (most: nothing)</h4>
-          <p>Checked what a company is legally obligated to submit before launching an AI platform.
-          Only two regimes specify this in enforceable detail:</p>
+          <h4>Q3 — "data management team might work on which project out of these"</h4>
+          <p>Filtered for what a Data Management team (governance, quality, pipelines/ETL, master data, privacy/access) would own — not the PM layer on top:</p>
           <ul>
-            <li><strong>EU AI Act, Annex IV</strong> (binding from 2 Aug 2026, high-risk systems
-            only) — a 9-section technical file: general description, design/training-data
-            governance, monitoring &amp; control, performance metrics, risk management, a lifecycle
-            change log, applied standards, a signed Declaration of Conformity, and a post-market
-            monitoring plan.</li>
-            <li><strong>China (CAC algorithm filing)</strong> — generative AI with public reach must
-            file within 10 working days of launch: algorithm name/purpose/mechanism plus a security
-            self-assessment on a CAC template. 988 services filed, 598 app-level registrations
-            completed as of mid-2026.</li>
-            <li><strong>Everywhere else — US, India, most of the world — nothing is required before
-            launch.</strong> India's Feb 2026 AI Governance Guidelines ("seven sutras") are
-            explicitly voluntary; NIST's AI RMF is explicitly voluntary. That's the real reason
-            incidents like Deloitte's get caught <em>after</em> publication by an outside
-            researcher, instead of being blocked before it happened — there was no gate to block it
-            at.</li>
-            <li><strong>The gap inside the gap:</strong> even the EU's mandatory technical file
-            doesn't ask "is every fact in this specific output true" — it governs the system in
-            aggregate, not each document it produces. No regime currently requires the exact check
-            that would have caught Deloitte's actual failure.</li>
+            <li><strong>Primary fits:</strong> content supply chain fragmentation (Content Intelligence Hub — a named content pipeline built with Adobe/AWS); service orchestration/personalization (TrueServe's underlying "customer data platforms"); data-privacy regulation compliance; safe GenAI deployment in regulated industries (data classification/access governance before an agent can act); AI output verification (the Deloitte incident was fabricated <em>citations</em> — at root, a data provenance/lineage failure); scaling Zora AI (agents are only as good as the data feeds wired into them).</li>
+            <li><strong>Borderline:</strong> translating AI ROI (data management owns the reporting pipeline feeding it, not the answer itself); re-architecting tech orgs (data architecture is one input among several).</li>
           </ul>
+          <p>Interesting pattern: #21, #20, #17, #24, #1, and #3 all share the same underlying skill — building and governing the data layer under an AI/personalization product.</p>
         </div>
 
         <div class="cs-narrative">
-          <h4>Research log — 14 Aug 2026: the vendor-diligence dead end</h4>
-          <p>Last thread: does good vendor procurement solve this? Ran Deloitte's actual setup
-          against a standard AI-vendor due-diligence checklist (SOC 2, ISO 42001, ISO 27001, audit
-          rights, no-training-on-your-data clauses, incident-notification SLAs, version-change
-          notice). <strong>Microsoft Azure OpenAI passes nearly every item</strong> — it's one of
-          the most heavily audited, certified platforms in existence. That's the actual finding:
-          <strong>Deloitte didn't fail at picking a trustworthy vendor. They failed at the one check
-          no vendor relationship can ever cover — verifying their own output before a client saw
-          it.</strong> Vendor trust and output verification are two separate control layers, and
-          almost every company caught so far only built the first one.</p>
+          <h4>Q4 — "what project i should work on"</h4>
+          <p><strong>Build #1: AI Output Verification &amp; Provenance — a guardrail product for the exact failure Deloitte already had.</strong> Reasoning given: it's not speculative (a named report, fabricated court quotes, a real refund, not a guessed trend); it bridges both the PM lens and the data-management lens at once; it extends an existing case study instead of starting from zero; and it's honest to build without pretending to have worked with Deloitte data.</p>
         </div>
+
+        <div class="cs-narrative">
+          <h4>Q5 — "consider me a layman person and in human centric language without considering what project i have already done- focus on deloitte and make me understand the requirement, problem statement."</h4>
+          <p>Explained as a story: Deloitte Australia was hired to review a welfare compliance system; AI was used to help draft the report; nobody properly checked the AI's work before it shipped; the AI invented a quote and attributed it to a real judge in a real court case, and cited academic papers that don't exist. An outside researcher found it. Deloitte had to admit it, rewrite the report, and refund the government close to $290,000.</p>
+          <p>The real reason: not that the AI is "bad" — AI tools are known to occasionally invent plausible-sounding facts. The failure was a human process failure — whoever was supposed to verify every fact and quote either didn't do it carefully, or there was no system forcing that check to happen before the document went out. Like a newsroom publishing a fabricated quote because the editor didn't fact-check it.</p>
+          <p>What's actually needed, in plain terms: a reliable checkpoint that (1) flags anything AI-generated that hasn't been independently confirmed, (2) makes it easy to trace every fact/quote/citation back to something real, (3) refuses to let a document ship until that check has happened, and (4) keeps a record of what was checked and by whom.</p>
+        </div>
+
+        <details class="cs-showmore">
+          <summary>Show more: Q6–Q21 <span class="sm-count">(the full source-hunting, global-pattern, India, platforms, regulation, and procurement thread)</span></summary>
+
+        <div class="cs-narrative">
+          <h4>Q6 — "where can i research about these things- share me links"</h4>
+          <p>Grouped into: (1) the Deloitte incident itself — AI Incident Database entry, CFO Dive's two articles, Horses for Sources' industry take, with an explicit flag that outlets disagree on the refund amount ($63K–$439K depending on what's being described); (2) the general hallucination problem — Infomineo, Hatchworks, Digital Divide Data; (3) how people design the actual fix — Indium and Knostic on human-in-the-loop review, with the caveat that reviewers often approve AI output without truly verifying it when volume is high; (4) the official rulebooks — NIST AI RMF and the EU AI Act's official text, framed as "cite these, don't just cite blogs."</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q7 — "so the incident occured in 2024, deloitte admitted in 2025, what measure steps currently deloitte is taking"</h4>
+          <p>Corrected timeline: DEWR commissioned Deloitte Dec 2024; report delivered Jul 2025; a University of Sydney researcher spotted fabrications Sep 2025; Deloitte admitted, corrected, and partially refunded Oct 2025; a <strong>second, separate incident surfaced in Canada in Nov 2025</strong> — Newfoundland &amp; Labrador paid ~$1.6M CAD for a 526-page healthcare-staffing report also containing fabricated citations and real researchers credited with papers they never wrote.</p>
+          <p><strong>What Deloitte actually did:</strong> in Australia — corrected the report, added a disclosure statement, partial refund. In Canada — called the fake citations "incorrect," stood behind the report's recommendations anyway, promised a citation review; no refund confirmed; a provincial accounting watchdog opened its own investigation.</p>
+          <p><strong>The part that matters most:</strong> no public evidence of a real fix between incident one and incident two — Canada was delivered and flagged only weeks after Australia went public. Deloitte also already sells a product for exactly this problem — "aiStudio: Large Language Model Controls," including a literal "Citation Retriever" and "RAG Evaluation" control, part of "Deloitte Trustworthy AI™" — with nothing in public reporting suggesting it was used on their own report-writing.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q8 — "which companies faced similar situations all over world- give me list"</h4>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Sector</th><th>Entity</th><th>What happened</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Sector">Consulting</td><td data-label="Entity">Deloitte (Australia)</td><td data-label="What happened">Fabricated citations, invented court quote — partial refund</td></tr>
+                <tr><td data-label="Sector">Consulting</td><td data-label="Entity">Deloitte (Canada)</td><td data-label="What happened">Fake academic citations in a $1.6M healthcare report — watchdog investigating</td></tr>
+                <tr><td data-label="Sector">Consulting</td><td data-label="Entity">EY (Canada)</td><td data-label="What happened">16 of 27 sources fabricated/broken — report pulled</td></tr>
+                <tr><td data-label="Sector">Consulting</td><td data-label="Entity">KPMG</td><td data-label="What happened">40 of 45 citations fabricated or wrong in a flagship AI report</td></tr>
+                <tr><td data-label="Sector">Law</td><td data-label="Entity">Sullivan &amp; Cromwell</td><td data-label="What happened">~28 erroneous citations in a bankruptcy motion — public apology to the Chief Judge</td></tr>
+                <tr><td data-label="Sector">Law</td><td data-label="Entity">Ellis George LLP &amp; K&amp;L Gates LLP</td><td data-label="What happened">9 of 27 citations fake — jointly fined ~$31,000</td></tr>
+                <tr><td data-label="Sector">Aviation</td><td data-label="Entity">Air Canada</td><td data-label="What happened">Chatbot invented a bereavement-fare policy — held legally liable</td></tr>
+                <tr><td data-label="Sector">Government</td><td data-label="Entity">NYC "MyCity" chatbot</td><td data-label="What happened">Feeds business owners fabricated legal information — still live</td></tr>
+                <tr><td data-label="Sector">Media</td><td data-label="Entity">Chicago Sun-Times</td><td data-label="What happened">10 of 15 books in a "Summer Reading List" were fabricated</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Scale: as of April 2026, <strong>1,313 documented court cases worldwide</strong> involve AI-fabricated content, 496 involving licensed attorneys; sanctions up ~11× in 18 months. Caveat given at the time: almost everything well-documented here comes out of the US, Canada, and Australia — most likely a visibility bias (public court records, active press), not proof the problem is smaller elsewhere.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q9 — "in india?"</h4>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Where</th><th>What happened</th><th>Outcome</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Where">Supreme Court (Essel Infraprojects/NCLT)</td><td data-label="What happened">3 of 6 judgments relied on didn't exist; 3 real ones had invented paragraphs/wrong titles</td><td data-label="Outcome">Order quashed; zero-tolerance ruling, 2 Jul 2026</td></tr>
+                <tr><td data-label="Where">Bombay High Court (KMG Wires)</td><td data-label="What happened">Tax officer cited 3 non-existent decisions</td><td data-label="Outcome">₹27.91 crore tax order quashed</td></tr>
+                <tr><td data-label="Where">Bengaluru tax tribunal</td><td data-label="What happened">4 non-existent case citations in an order</td><td data-label="Outcome">~₹669 crore order recalled</td></tr>
+                <tr><td data-label="Where">Delhi High Court</td><td data-label="What happened">Plea drafted via ChatGPT, fake quotes/cases</td><td data-label="Outcome">Dismissed; lawyer pulled up</td></tr>
+                <tr><td data-label="Where">Manipur High Court (2024)</td><td data-label="What happened">Government pleader used ChatGPT for research</td><td data-label="Outcome">Reliability concern recorded</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The distinctive thing about India's version: the cases cluster in courts and government tax administration — not, so far, a named Indian consulting firm the way Deloitte/EY/KPMG got caught globally. Either they haven't been caught yet, or India's exposure is currently concentrated wherever the paper trail is public.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q10 — "other than consulting firms which sectors and which companies made these mistakes all over world"</h4>
+          <p>Tech: Google Bard's factual error in its public launch demo wiped ~$100B off Alphabet's market cap in a day; Microsoft Bing Chat gave wrong Gap/Lululemon financial figures live in its own launch demo. Media: CNET paused AI-written finance articles after errors; Gannett paused AI sports recaps after public mockery; Sports Illustrated's CEO was fired after AI-generated fake bylines. Retail/automotive: a Chevrolet dealership chatbot was manipulated into "agreeing" to sell a $76,000 Tahoe for $1. Logistics: DPD's chatbot was coaxed into swearing at a customer and calling DPD "the worst delivery firm in the world." Aviation: Air Canada held legally liable for its chatbot's invented refund policy. Government: NYC's "MyCity" chatbot still gives business owners fabricated legal information. Healthcare: a lawsuit alleges ChatGPT offered reassurance instead of urging emergency care during a serious health event. Banking: no named scandal yet, but analysts explicitly call it "not if, but when."</p>
+          <p>Pattern noted: two different failure modes — "fabrication" (Deloitte, EY, KPMG, Sports Illustrated, CNET: AI invents authoritative-looking content nobody checked) versus "loss of control" (Air Canada, DPD, Chevrolet: AI was manipulated or ungoverned in a live conversation the company had already called binding). Both point at the same missing checkpoint between "the AI said it" and "we stand behind it."</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q11 — "we have noticed gemini not giving correct output or other platforms....currently which platforms are actually responsible for all these issues that happened in deloitte and other companies"</h4>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Incident</th><th>Platform</th><th>Confirmed?</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Incident">Deloitte (Australia)</td><td data-label="Platform">Microsoft Azure OpenAI — GPT-4o</td><td data-label="Confirmed?">Yes, disclosed in the reissued report</td></tr>
+                <tr><td data-label="Incident">NYC "MyCity" chatbot</td><td data-label="Platform">Microsoft Azure + OpenAI</td><td data-label="Confirmed?">Yes</td></tr>
+                <tr><td data-label="Incident">Microsoft Bing Chat</td><td data-label="Platform">OpenAI GPT-4</td><td data-label="Confirmed?">Yes</td></tr>
+                <tr><td data-label="Incident">Google Bard</td><td data-label="Platform">Google's own Bard (Gemini's predecessor)</td><td data-label="Confirmed?">Yes — different, older product</td></tr>
+                <tr><td data-label="Incident">Chevrolet dealership chatbot</td><td data-label="Platform">"ChatGPT-powered" per reporting</td><td data-label="Confirmed?">Reasonably</td></tr>
+                <tr><td data-label="Incident">Deloitte Canada, EY, KPMG</td><td data-label="Platform">Not disclosed</td><td data-label="Confirmed?">No</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Direct answer on Gemini:</strong> Gemini is not behind any of the major professional-services scandals. Every disclosed one points to the same platform — OpenAI's GPT family via Microsoft Azure OpenAI — most likely because Azure OpenAI had the largest enterprise footprint during 2023–2025, a deployment-volume story, not necessarily a worse-model story. Pointed to the Vectara HHEM leaderboard as the real apples-to-apples comparison rather than incident anecdotes, and noted every current model still hallucinates on open-ended factual questions, Gemini included — but the paper trail on scandals specifically points at GPT-4/GPT-4o via Azure, not Google.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q12 — "how many such ai platforms are launched till date and their names."</h4>
+          <p>No official registry exists, so no exact count — but listed the ~19 organizations the industry treats as genuinely distinct foundation-model makers: OpenAI (GPT/ChatGPT), Google DeepMind (Gemini), Anthropic (Claude), Microsoft (Copilot, built on OpenAI), Meta (Llama), xAI (Grok), Amazon (Titan/Nova), Mistral AI, Cohere (Command), Perplexity, DeepSeek, Alibaba (Qwen), Baidu (Ernie), Tencent (Hunyuan), 01.AI (Yi), Zhipu AI (GLM), Stability AI, AI21 Labs (Jamba), Databricks (DBRX), IBM (Granite) — with hundreds of significant variants below that, and thousands of consumer products built on top of this handful, not separate platforms in the same sense.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q13 — "what is india doing"</h4>
+          <p><strong>Regulation:</strong> India's Feb 2026 "AI Governance Guidelines" ("seven sutras") — an AI Governance Group, a Technology &amp; Policy Expert Committee, an AI Safety Institute — explicitly principle-based and largely voluntary; real legal teeth currently come from the existing DPDP Act and IT Rules, not a purpose-built AI law. The guidelines themselves call for further review on generative-AI liability and accountability. Plus the judicial side already covered — the Supreme Court's July 2026 zero-tolerance ruling is doing more real enforcement than the voluntary guidelines.</p>
+          <p><strong>Building platforms:</strong> under the ₹10,000 crore IndiaAI Mission, three sovereign AI models were unveiled at the Delhi AI Impact Summit — Sarvam AI's Vikram (30B) and a 105B reasoning model, Gnani.ai, and BharatGen. Plus Krutrim (Ola's AI arm, India's first AI unicorn, 22 languages), BharatGPT (already deployed at scale on IRCTC), and Bhashini (government language infrastructure).</p>
+          <p>Flagged as the sharpest angle: India is racing to build sovereign AI at government scale at the exact moment its own Supreme Court is ruling zero-tolerance on the failure mode those platforms haven't solved either — none of the three sovereign models have a publicly disclosed verification layer of their own.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q14 — "names of platforms other than those 19"</h4>
+          <p>Added, with sourcing: Nvidia (Nemotron, and the "Nemotron Coalition" open-model alliance whose founding members include India's own Sarvam AI); TII/Falcon (UAE); Moonshot AI (Kimi, China); MiniMax (China); Huawei (Pangu — the only Chinese firm with both a frontier model and its own AI chips); Naver (HyperCLOVA X, Korea); LG AI Research (EXAONE/K-EXAONE, a government-backed Korean sovereign-model project); Samsung (health-specific foundation models). Plus a lighter-confidence list flagged as "not re-verified this session": Inflection AI (Pi), Character.AI, Snowflake (Arctic), Salesforce (xGen/Agentforce), Aleph Alpha, Sakana AI, Preferred Networks (PLaMo), Baichuan, StepFun, SenseTime, iFlytek.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q15 — "and if any company launch their own ai platform - what measures are taken that it can be used."</h4>
+          <p><strong>Legally required, by region:</strong> EU — mandatory pre-market conformity assessment for high-risk systems (real law, real penalties). China — mandatory CAC security assessment + algorithm filing before public reach. US and India — no binding pre-launch requirement; NIST's AI RMF and India's guidelines are both explicitly voluntary. Outside the EU and China, a company can currently launch to the public with no prior approval from anyone.</p>
+          <p><strong>What companies do on their own regardless of law:</strong> red-teaming (adversarial testing, documented with exact prompts and severity); model cards / system cards (published limitations and evaluation results); company-specific frameworks (Anthropic's Responsible Scaling Policy, Google DeepMind's Frontier Safety Framework, OpenAI's Preparedness Framework); staged rollout. Explicitly quoted the researchers' own caveat: "red-teaming practices vary widely, and there are few established standards or best practices" — closer to an honor system than an inspection.</p>
+          <p>Tied back to Deloitte directly: there was no CAC-style filing or EU-style conformity assessment standing between Deloitte and using AI in that report — the only thing that could have caught it was Deloitte's own internal review, which is exactly the layer that failed.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q16 — "what all are actual legal documents - share me links"</h4>
+          <p>Split into binding law (EU AI Act official text on EUR-Lex; China's Interim Measures for Generative AI Services, via China Law Translate and the CAC original; India's DPDP Act, 2023, via the official Gazette and India Code) versus guidance/frameworks that aren't codified statute (NIST AI RMF; India's AI Governance Guidelines PDF via PIB; FINRA's 2026 Annual Regulatory Oversight Report). Flagged explicitly: only the first group is actually law with penalties attached — the second is guidance, and conflating the two is exactly the kind of precision gap that got Deloitte in trouble.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q17 — "is there any other document that is left"</h4>
+          <p>Added three more, since "legal document" specifically was asked: India's IT Rules, 2021 (Intermediary Guidelines and Digital Media Ethics Code), official MeitY-hosted PDF; <em>Mata v. Avianca, Inc.</em> (S.D.N.Y. 2023) — the original, most-cited AI-hallucination sanctions ruling, via CourtListener; <em>Moffatt v. Air Canada</em>, 2024 BCCRT 149 — the actual tribunal decision, via CanLII. Noted honestly that I could not find direct links to the Indian court orders discussed earlier (Supreme Court, Bombay HC, Bengaluru tribunal, Delhi HC, Manipur HC) since Indian judgments aren't reliably indexed by general web search — pointed to the Supreme Court's own judgment portal and Indian Kanoon as the right places to search directly instead of taking an unverified link on faith.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q18 — "what all details a company needs to submit to govt to ensure their AI models /platforms are working correctly"</h4>
+          <p><strong>EU AI Act Annex IV — the 9-section technical file</strong> (binding 2 Aug 2026, high-risk systems only): general description; design &amp; development details including training/validation/testing data governance; monitoring, functioning &amp; control; performance metrics (accuracy, robustness, cybersecurity); risk management; a lifecycle-changes log; applied standards; a signed EU Declaration of Conformity; a post-market monitoring plan.</p>
+          <p><strong>China's CAC algorithm filing</strong> (within 10 working days of launch): algorithm name, type, intended purpose, technical mechanism, plus a security self-assessment report on a CAC template; only a limited public summary is disclosed (category, entity name, product, purpose, Beian filing number). 988 services filed, 598 app-level registrations completed as of mid-2026.</p>
+          <p><strong>Everywhere else:</strong> nothing required. And the sharper point: neither real regime explicitly requires "prove every citation/fact in AI-generated output is real" — the EU governs the system in aggregate, China's filing is about the algorithm being registered, not auditing every document produced with it. Even where governments do require submissions, none of them ask the one question that would have caught Deloitte's actual failure.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q19 — "before purchasing any AI tool what all things do companies verify"</h4>
+          <p>Model quality (accuracy for the specific use case, disclosed hallucination rates, offline evaluation support, version-comparison); data handling (what happens to data sent to the tool, whether it trains the vendor's model, access controls, data residency); certifications (SOC 2 as baseline, ISO/IEC 42001 for AI management systems specifically, ISO 27001); contract clauses (ban on training on your data without consent, audit rights, 24–72h incident-notification SLA, no silent model swaps, clear liability/indemnification, a real exit/data-deletion plan); and ongoing monitoring — re-reviewing vendor certifications every 2–3 years or after any serious incident, not just once at signing.</p>
+          <p>Closed with the gap this doesn't cover: none of this verifies whether any specific document a team produces using the tool is actually true — vendor due diligence and output verification are two separate control layers, and most companies only build the first.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q20 — "So deloitte purchased this right? Deloitte (Australia, welfare report) Microsoft Azure OpenAI — GPT-4o"</h4>
+          <p>Confirmed: yes, almost certainly through an existing enterprise Microsoft relationship. Ran that against the Q19 checklist directly — SOC 2 ✅, ISO 27001 ✅, data residency controls ✅, no-training-on-data terms ✅ standard, established auditable vendor with SLAs ✅. <strong>Deloitte would have passed nearly every item.</strong> The vendor was not the problem — Microsoft/Azure OpenAI is one of the most heavily audited, certified platforms in existence. What Deloitte didn't have, and no vendor contract can supply, is a process step internal to Deloitte checking whether the specific citations in that specific report were real before it reached the client. Framed as the project's core insight: "Deloitte didn't fail at picking a trustworthy AI vendor. They failed at the one check no vendor relationship can ever cover: verifying their own output before a client saw it."</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q21 — "so it means deloitte or any company can buy any tool- but they shld also have internal tool that verifies if that tool is giving right output as per their clients bcs vendor might have large problem statement solved but we need to go in depth"</h4>
+          <p>Confirmed and sharpened into one line: <strong>a vendor's AI tool is built to solve a broad problem, well, for millions of possible customers. It was never built to know whether it got a specific client's specific context, or a specific deliverable, right. That depth is always the buyer's job, never the vendor's.</strong> Explained why structurally: the vendor doesn't know the company's client, industry-specific facts, or what "correct" means in that specific deliverable — only the company itself has that context. So every company using AI needs a second, internal layer between "the AI produced this" and "we're sending this to a client" — one that can't be bought off the shelf, because buying it would just recreate the same problem one level up.</p>
+        </div>
+
+        </details>
 
         <div class="cs-narrative">
           <h4>Where this goes next</h4>
