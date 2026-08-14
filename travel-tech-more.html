@@ -1536,6 +1536,195 @@
       </div>
       </article>
     </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T35</span>
+        <h3 class="jcat-title">The Verification Gap — Research in Progress</h3>
+      </div>
+      <article class="jcard" data-case="ai-verification-research" data-updated="2026-08-14">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#F59E0B,#B45309)">🔍</div>
+            <div>
+              <div class="jtitle">The Verification Gap — Research in Progress</div>
+              <div class="jmeta">🔬 Ongoing research · started 14 Aug 2026, updated as it develops</div>
+              <div class="jtools"><b>Method:</b> primary-source verification — court filings, official regulator PDFs, company disclosures, cross-checked against news coverage</div>
+            </div>
+          </div>
+          <span class="jtoggle">view research log →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">24 problem statements mapped and sorted by who actually owns each one</span>
+          <span class="chip">12+ organizations traced worldwide, across 6 sectors</span>
+          <span class="chip">India-specific: Supreme Court zero-tolerance ruling, July 2026</span>
+          <span class="chip">Primary sources only — no blog paraphrase without a receipt</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Status:</strong> this is a live research trail, not a finished case study — it's the groundwork behind a future build (see <a href="#case-ai-ops-copilot" data-open-case="ai-ops-copilot" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">OpsPilot</a>'s confidence-gate pattern, applied one level up — to the deliverable itself, not just a case queue). I'm adding to it as the research goes deeper, so treat the dated entries below as a running log, not a finished table of contents.</p>
+
+        <div class="cs-narrative">
+          <h4>Why This Exists</h4>
+          <p>
+            This started as market research for a Deloitte-facing project — "what problem is a
+            company like this actually working on, that a PM could credibly help with?" It turned
+            into something more useful than a single pitch: a documented pattern, verified across
+            dozens of primary sources, about what actually breaks when companies plug generative AI
+            into real client-facing work — and, just as importantly, what <em>doesn't</em> fix it.
+            I'm keeping this section live and adding to it as the research goes deeper, rather than
+            freezing it as a one-time writeup.
+          </p>
+
+          <h4>Current thesis (updated as this develops)</h4>
+          <p>
+            <strong>A vendor's AI platform is built to solve a broad problem well, for millions of
+            possible customers. It was never built to know whether it got a specific client's
+            specific facts right in a specific deliverable.</strong> That depth is structurally the
+            buyer's job, not the vendor's — no procurement checklist, certification, or contract
+            clause changes that. The gap isn't a bad vendor choice; it's a missing internal layer
+            that has to exist regardless of which vendor a company picks.
+          </p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Research log — 14 Aug 2026: the trigger and the pattern</h4>
+          <p><strong>The case that started it — Deloitte, twice, six weeks apart.</strong>
+          Australia's Department of Employment and Workplace Relations commissioned Deloitte in Dec
+          2024 for a welfare-compliance review; the delivered report (Jul 2025) turned out to
+          contain fabricated citations and an invented court quote, confirmed as drafted with
+          Microsoft Azure OpenAI GPT-4o. Deloitte corrected the report, disclosed the AI use, and
+          refunded the final AU$97,000 installment of a AU$439,000 contract (Oct 2025). Six weeks
+          later a near-identical failure surfaced in Canada — a $1.6M CAD healthcare-staffing
+          report for Newfoundland &amp; Labrador with fabricated academic citations and real
+          researchers credited with papers they never wrote. Deloitte defended that report's
+          recommendations rather than retracting it; a provincial accounting watchdog opened its own
+          investigation. <strong>The second incident, this close behind the first, is the real
+          finding</strong> — whatever Deloitte fixed after Australia wasn't fixed everywhere, fast
+          enough.</p>
+          <p><strong>Not a one-firm problem.</strong> EY Canada pulled a cybersecurity report after
+          16 of 27 sources were found fabricated or broken; KPMG's flagship agentic-AI report had 40
+          of 45 citations wrong or invented. In US courts alone, <strong>1,313 documented cases</strong>
+          now involve AI-fabricated content, 496 involving licensed attorneys, with sanctions up
+          roughly 11× in 18 months.</p>
+          <p><strong>India is about to have its own version of this.</strong> The Supreme Court
+          (Essel Infraprojects/NCLT matter, 2 Jul 2026) declared zero tolerance for AI-hallucinated
+          case law — 3 of 6 judgments an NCLT bench relied on didn't exist. The Bombay High Court
+          separately quashed a ₹27.91 crore tax order after an assessing officer cited 3 non-existent
+          precedents; a Bengaluru tribunal recalled a ~₹669 crore order for the same reason. Unlike
+          the Deloitte pattern, India's documented cases so far sit inside courts and tax
+          administration, not a named Indian consulting firm — worth revisiting as more surfaces.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Research log — 14 Aug 2026: who actually owns this problem</h4>
+          <p>Sorted the underlying problem statements by who would really own the fix, not who
+          talks about it in a trend report:</p>
+          <ul>
+            <li><strong>Product-manager-owned:</strong> AI output verification/guardrails, agentic-AI
+            governance maturity, scaling agent platforms from pilot to production, process
+            redesign (not just tooling a broken workflow), service-orchestration prioritization,
+            safe agent deployment in regulated industries.</li>
+            <li><strong>Data-management-owned:</strong> content/data pipeline integrity, customer
+            data platform unification, data-privacy classification and access controls, the data
+            feeds wired into any agent — and, interestingly, citation/provenance verification sits
+            in <em>both</em> categories at once: a PM designs the review-gate product, data
+            management builds the traceability layer under it.</li>
+            <li><strong>Not really either:</strong> infra/compute scaling, cybersecurity engineering,
+            change management, talent/comp planning, macro policy advisory — these get bundled into
+            "AI trend" writeups but belong to different functions entirely.</li>
+          </ul>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Research log — 14 Aug 2026: this isn't a Deloitte problem, or a Gemini problem</h4>
+          <p>Traced the same failure mode across sectors and platforms to check whether it's
+          specific to one company or one AI vendor. It's neither:</p>
+          <ul>
+            <li><strong>Fabrication-type failures:</strong> Deloitte, EY, KPMG (consulting) · Sports
+            Illustrated, CNET, Gannett (media) — AI invents authoritative-looking content, nobody
+            checks it before publishing.</li>
+            <li><strong>Loss-of-control failures:</strong> Air Canada (<em>Moffatt v. Air Canada</em>,
+            2024 BCCRT 149 — held legally liable for a chatbot's invented refund policy) · DPD
+            (chatbot coaxed into swearing at a customer and calling DPD "the worst delivery firm in
+            the world") · a Chevrolet dealership (chatbot manipulated into "selling" a $76,000 Tahoe
+            for $1) — AI wasn't lying so much as ungoverned in a live conversation the company had
+            already told people was binding.</li>
+            <li><strong>On platforms specifically:</strong> every disclosed incident so far traces to
+            <strong>Microsoft Azure OpenAI (GPT-4 family)</strong> — not Google Gemini. That's most
+            likely a deployment-volume effect (Azure OpenAI was the default enterprise on-ramp for
+            Microsoft-stack companies through 2023–2025) rather than proof one model hallucinates
+            more than another — worth re-checking against an actual leaderboard (Vectara HHEM)
+            rather than incident anecdotes if this becomes a real comparison point later.</li>
+          </ul>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Research log — 14 Aug 2026: what governments actually require (most: nothing)</h4>
+          <p>Checked what a company is legally obligated to submit before launching an AI platform.
+          Only two regimes specify this in enforceable detail:</p>
+          <ul>
+            <li><strong>EU AI Act, Annex IV</strong> (binding from 2 Aug 2026, high-risk systems
+            only) — a 9-section technical file: general description, design/training-data
+            governance, monitoring &amp; control, performance metrics, risk management, a lifecycle
+            change log, applied standards, a signed Declaration of Conformity, and a post-market
+            monitoring plan.</li>
+            <li><strong>China (CAC algorithm filing)</strong> — generative AI with public reach must
+            file within 10 working days of launch: algorithm name/purpose/mechanism plus a security
+            self-assessment on a CAC template. 988 services filed, 598 app-level registrations
+            completed as of mid-2026.</li>
+            <li><strong>Everywhere else — US, India, most of the world — nothing is required before
+            launch.</strong> India's Feb 2026 AI Governance Guidelines ("seven sutras") are
+            explicitly voluntary; NIST's AI RMF is explicitly voluntary. That's the real reason
+            incidents like Deloitte's get caught <em>after</em> publication by an outside
+            researcher, instead of being blocked before it happened — there was no gate to block it
+            at.</li>
+            <li><strong>The gap inside the gap:</strong> even the EU's mandatory technical file
+            doesn't ask "is every fact in this specific output true" — it governs the system in
+            aggregate, not each document it produces. No regime currently requires the exact check
+            that would have caught Deloitte's actual failure.</li>
+          </ul>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Research log — 14 Aug 2026: the vendor-diligence dead end</h4>
+          <p>Last thread: does good vendor procurement solve this? Ran Deloitte's actual setup
+          against a standard AI-vendor due-diligence checklist (SOC 2, ISO 42001, ISO 27001, audit
+          rights, no-training-on-your-data clauses, incident-notification SLAs, version-change
+          notice). <strong>Microsoft Azure OpenAI passes nearly every item</strong> — it's one of
+          the most heavily audited, certified platforms in existence. That's the actual finding:
+          <strong>Deloitte didn't fail at picking a trustworthy vendor. They failed at the one check
+          no vendor relationship can ever cover — verifying their own output before a client saw
+          it.</strong> Vendor trust and output verification are two separate control layers, and
+          almost every company caught so far only built the first one.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Where this goes next</h4>
+          <p>Open threads, in the order I'll likely pull on them:</p>
+          <ul>
+            <li>Design the actual internal verification layer this points toward — likely the next
+            interactive build on this site, in the same family as OpsPilot but applied to
+            document/citation verification instead of a case queue.</li>
+            <li>Find out whether any Indian consulting firm has had a Deloitte-style incident yet, or
+            whether India's exposure really is concentrated in courts/tax administration so far —
+            current answer is "not publicly caught yet," which isn't the same as "not happening."</li>
+            <li>Get a real, apples-to-apples hallucination-rate comparison across GPT/Gemini/Claude
+            (Vectara HHEM leaderboard) instead of relying on which platform happens to have been
+            caught in a public incident.</li>
+            <li>Track what, if anything, Deloitte actually changes internally over the next few
+            months — so far there's no public evidence of a fix between the Australia and Canada
+            incidents, which is itself worth revisiting later.</li>
+          </ul>
+        </div>
+
+        <div class="jlinks">
+          <span><span class="k">EU AI Act</span><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full text →</a></span>
+          <span><span class="k">NIST AI RMF</span><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">framework →</a></span>
+          <span><span class="k">Mata v. Avianca</span><a href="https://www.courtlistener.com/docket/63107798/mata-v-avianca-inc/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">court record →</a></span>
+          <span><span class="k">Deloitte incident</span><a href="https://incidentdatabase.ai/cite/1193/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">AI Incident DB →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
     </div>
 
     <div class="cat-section" id="cat-metrics-and-analytics">
