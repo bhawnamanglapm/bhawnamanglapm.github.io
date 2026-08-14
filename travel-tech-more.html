@@ -1784,24 +1784,48 @@
           <p>Confirmed and sharpened into one line: <strong>a vendor's AI tool is built to solve a broad problem, well, for millions of possible customers. It was never built to know whether it got a specific client's specific context, or a specific deliverable, right. That depth is always the buyer's job, never the vendor's.</strong> Explained why structurally: the vendor doesn't know the company's client, industry-specific facts, or what "correct" means in that specific deliverable — only the company itself has that context. So every company using AI needs a second, internal layer between "the AI produced this" and "we're sending this to a client" — one that can't be bought off the shelf, because buying it would just recreate the same problem one level up.</p>
         </div>
 
+        <div class="cs-narrative">
+          <h4>Q22 — "give me answer to all these questions and then i will decide on what i need to go in detail" <span style="font-weight:400;color:var(--grey)">(India-specific consulting firms, a real hallucination-rate comparison, and what Deloitte has actually changed internally)</span></h4>
+          <p><strong>1) Any Indian consulting firm caught yet?</strong> Not found — but the global pattern got bigger while looking. It's now <strong>all four of the Big Four</strong>, not three: KPMG's withdrawn Oct 2025 report fabricated specific claims about real, named clients (UBS, NHS Greater Manchester, Swiss Federal Railways, and a false claim that Emirates launched a chatbot called "Sara"); EY pulled a May 2026 loyalty-fraud report citing a McKinsey report that doesn't exist; and <strong>PwC</strong> was confirmed too — four separate PwC Middle East "thought leadership" reports (2024–2026) with fabricated citations, one assessed as 100% AI-generated once references are excluded, including an entirely invented governance framework called "Citizen Pulse." On India specifically: nothing found linking an Indian firm or engagement — only a mildly ironic Deloitte India press release on the same timeline titled "Indian enterprises lead global peers in at-scale AI adoption."</p>
+          <p><strong>2) Real hallucination-rate comparison (Vectara HHEM leaderboard):</strong> two pictures exist. On the older, easier benchmark, Gemini models lead (Gemini-2.0-Flash at 0.7%). On the harder, Feb 2026 dataset (32K-token documents across legal/medical/financial domains), rankings shuffle and everything gets worse — GPT-5.4-nano 3.1%, Gemini 2.5 Flash-Lite 3.3%, Grok 3 5.8%, Claude Haiku 4.5 9.8%, Claude Opus 4.6 12.2%, Gemini 3 Pro 13.6%. The finding that matters: on the harder test, every current state-of-the-art reasoning model exceeds 10% hallucination regardless of vendor — Vectara's own hypothesis is that reasoning models' extra "thinking" steps introduce drift from the source, so more capable models get <em>worse</em>, not better, on this specific failure mode.</p>
+          <p><strong>3) What Deloitte's actually changed internally:</strong> Deloitte's own position hasn't moved — still "stands by the recommendations" on Canada, still frames it as a citation-verification lapse. The real change came from the <em>client</em>, not Deloitte: Newfoundland &amp; Labrador rewrote its own procurement process within days — mandatory human verification, audit rights over vendor AI use. That's a client protecting itself from Deloitte, not Deloitte fixing itself.</p>
+          <p class="src-line">Sources: <a href="https://theprint.in/feature/pwc-big-four-ai-hallucination-kpmg-ey-deloitte/3002405/" target="_blank" rel="noopener" class="src-a">ThePrint (all four Big Four)</a> · <a href="https://oecd.ai/en/incidents/2026-06-12-b883" target="_blank" rel="noopener" class="src-a">OECD.AI (KPMG)</a> · <a href="https://gptzero.me/news/investigations-pwc/" target="_blank" rel="noopener" class="src-a">GPTZero (PwC investigation)</a> · <a href="https://www.vectara.com/blog/introducing-the-next-generation-of-vectaras-hallucination-leaderboard" target="_blank" rel="noopener" class="src-a">Vectara (leaderboard)</a> · <a href="https://www.canadian-accountant.com/content/profession/cpanl-deloitte-ai-scandal" target="_blank" rel="noopener" class="src-a">Canadian Accountant (NL procurement update)</a></p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q23 — "Lets get on 3rd problem" <span style="font-weight:400;color:var(--grey)">(deeper dive on Deloitte's internal response)</span></h4>
+          <p>Found a brand-new, dated announcement — <strong>ControlCatalyst.AI</strong>, launched 12 Aug 2026 (days before this conversation), a suite for internal audit/SOX/risk-controls work, built on the same "Deloitte Trustworthy AI™" branding as the pre-Australia "aiStudio" product. Chased down what it actually does: automates control testing and evidence documentation for <em>client</em> engagements — the same pattern as aiStudio, a product sold to clients, not a fix aimed at Deloitte's own report-writing process. <strong>Verdict:</strong> this is the third AI-governance product shipped since Australia, and the third one aimed at what Deloitte sells rather than the specific internal failure that happened twice. The launch timing — 3 months after Canada, weeks after PwC's scandal broke — reads more like catching up on positioning industry-wide than a purpose-built response to this exact failure.</p>
+          <p class="src-line">Sources: <a href="https://www.deloitte.com/us/en/about/press-room/deloitte-announces-launch-of-controlcatalyst-ai.html" target="_blank" rel="noopener" class="src-a">Deloitte press release</a> · <a href="https://www.cpapracticeadvisor.com/2026/08/05/deloitte-introduces-controlcatalyst-ai/188027/" target="_blank" rel="noopener" class="src-a">CPA Practice Advisor</a> · <a href="https://techedgeai.com/deloitte-launches-controlcatalyst-ai-to-bring-agentic-ai-to-enterprise-risk-and-compliance/" target="_blank" rel="noopener" class="src-a">TechEdgeAI</a></p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q24 — "what all tools/websites/apps like ControlCatalyst.AI are present in market"</h4>
+          <p>Three distinct market layers, not one:</p>
+          <ul>
+            <li><strong>Layer A — direct SOX/GRC competitors:</strong> Optro (formerly AuditBoard), Workiva (4,000+ customers, 75% of Fortune 500), Diligent One Platform, and KPMG's own "TACO" agentic-governance framework.</li>
+            <li><strong>Layer B — the tools that actually caught the Big Four:</strong> GPTZero (the tool literally used in the KPMG/EY/PwC investigations — acquired by Superhuman/Grammarly, June 2026, $88M valuation) and Originality.AI. Neither was built for this purpose; both were repurposed academic-integrity/content-detection tools.</li>
+            <li><strong>Layer C — enterprise LLM output-verification infrastructure</strong> (the category closest to a real project): Patronus AI (open-source "Lynx" detector), Galileo (sub-200ms runtime guardrails), Arize (LLM evaluation/RAG scoring), Guardrails AI (RAIL validation framework).</li>
+          </ul>
+          <p><strong>The honest read:</strong> Layer C is not empty — it's real, funded infrastructure. What doesn't exist anywhere publicly is the specific product decision to wire that infrastructure into one firm's actual report-delivery workflow. That's a PM gap sitting on solved technology, not a technology gap.</p>
+          <p class="src-line">Sources: <a href="https://www.riskwatch.com/audit-management-software/" target="_blank" rel="noopener" class="src-a">RiskWatch</a> · <a href="https://originality.ai/blog/gptzero-ai-content-detection-review" target="_blank" rel="noopener" class="src-a">Originality.AI (GPTZero review)</a> · <a href="https://www.braintrust.dev/articles/best-hallucination-detection-tools-2026" target="_blank" rel="noopener" class="src-a">Braintrust (hallucination detection tools)</a> · <a href="https://galileo.ai/blog/galileo-vs-patronus" target="_blank" rel="noopener" class="src-a">Galileo vs. Patronus</a></p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q25 — "what pm gap missing didnt understand, tell me in detail"</h4>
+          <p>Explained with the actual proof it's real: Deloitte already owned a citation-checker (aiStudio's "Citation Retriever") before Australia, and it still shipped fabricated citations anyway. The technology wasn't the problem. The smoke-detector analogy: owning a detector doesn't stop a fire unless someone's also decided which rooms need one, who checks the battery, what happens when it beeps, and who's accountable if it was dead for months. Six concrete decisions nobody's making at Deloitte: (1) does the check run on every report or only some; (2) where in the workflow does it run; (3) what confidence score is "good enough" to ship without a human; (4) whose job is it to actually check a flagged item; (5) what happens when someone overrides it under deadline pressure; (6) who's accountable if the whole thing gets silently bypassed. None of these are technology questions — they're business-process decisions, which is the actual, portable definition of what a PM does here that a detection vendor never will.</p>
+        </div>
+
         </details>
 
         <div class="cs-narrative">
           <h4>Where this goes next</h4>
-          <p>Open threads, in the order I'll likely pull on them:</p>
+          <p>Open threads, updated as they resolve:</p>
           <ul>
-            <li>Design the actual internal verification layer this points toward — likely the next
-            interactive build on this site, in the same family as OpsPilot but applied to
-            document/citation verification instead of a case queue.</li>
-            <li>Find out whether any Indian consulting firm has had a Deloitte-style incident yet, or
-            whether India's exposure really is concentrated in courts/tax administration so far —
-            current answer is "not publicly caught yet," which isn't the same as "not happening."</li>
-            <li>Get a real, apples-to-apples hallucination-rate comparison across GPT/Gemini/Claude
-            (Vectara HHEM leaderboard) instead of relying on which platform happens to have been
-            caught in a public incident.</li>
-            <li>Track what, if anything, Deloitte actually changes internally over the next few
-            months — so far there's no public evidence of a fix between the Australia and Canada
-            incidents, which is itself worth revisiting later.</li>
+            <li><s>Find out whether any Indian consulting firm has had a Deloitte-style incident yet</s> — checked (Q22): not found; the pattern instead expanded to all four of the Big Four globally.</li>
+            <li><s>Get a real hallucination-rate comparison across GPT/Gemini/Claude</s> — checked (Q22): Vectara HHEM leaderboard reviewed; on the harder 2026 benchmark, every current frontier model exceeds 10%, regardless of vendor.</li>
+            <li><s>Track what Deloitte's actually changed internally</s> — checked (Q23): ControlCatalyst.AI (12 Aug 2026) is a third client-facing product, not an internal-deliverable fix — still no public evidence of the specific gap being closed.</li>
+            <li>Design the actual internal verification layer this points toward — see <a href="#case-deloitte-pm-roleplay" data-open-case="deloitte-pm-roleplay" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">the execution-roadmap exercise</a>, a role-play working through exactly this as a hypothetical Deloitte PM.</li>
+            <li>Run a real citation-fabrication check on an actual public Deloitte report myself, using the same method that caught KPMG/EY/PwC — the one open item that's not hypothetical, still not started.</li>
           </ul>
         </div>
 
@@ -1809,7 +1833,187 @@
           <span><span class="k">EU AI Act</span><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full text →</a></span>
           <span><span class="k">NIST AI RMF</span><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">framework →</a></span>
           <span><span class="k">Mata v. Avianca</span><a href="https://www.courtlistener.com/docket/63107798/mata-v-avianca-inc/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">court record →</a></span>
-          <span><span class="k">Deloitte incident</span><a href="https://incidentdatabase.ai/cite/1193/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">AI Incident DB →</a></span>
+          <span><span class="k">PwC investigation</span><a href="https://gptzero.me/news/investigations-pwc/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GPTZero →</a></span>
+          <span><span class="k">Vectara leaderboard</span><a href="https://www.vectara.com/blog/introducing-the-next-generation-of-vectaras-hallucination-leaderboard" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">next-gen benchmark →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T36</span>
+        <h3 class="jcat-title">Deloitte PM Role-Play — A 5-Year Execution Plan</h3>
+      </div>
+      <article class="jcard" data-case="deloitte-pm-roleplay" data-updated="2026-08-14">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#8B5CF6,#5B21B6)">🧭</div>
+            <div>
+              <div class="jtitle">Deloitte PM Role-Play — A 5-Year Execution Plan</div>
+              <div class="jmeta">🎭 Practice exercise · not a real engagement · started 14 Aug 2026</div>
+              <div class="jtools"><b>Method:</b> "if I were the PM who owned this problem at Deloitte" — a structured planning exercise built directly on the findings in <a href="#case-ai-verification-research" data-open-case="ai-verification-research" style="color:inherit;text-decoration:underline">The Verification Gap</a></div>
+            </div>
+          </div>
+          <span class="jtoggle">view the plan →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">5 phases, ~2.5–4 years, mapped team-by-team and decision-by-decision</span>
+          <span class="chip">Split into what's doable as an outsider vs. only possible once hired</span>
+          <span class="chip">4 concrete plans: this week, everything outsider-doable, the full insider plan, and the gap between them</span>
+          <span class="chip">Explicitly a rehearsal exercise — useful whether or not this becomes a real application</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">What this is:</strong> after building the research in <em>The Verification Gap</em>, I used it as a prompt to practice strategic PM thinking — "if I actually owned this problem at Deloitte, what's the real plan." This is <strong>explicitly a role-play/rehearsal exercise</strong>, not a claim of real Deloitte involvement or insider access. Kept verbatim for the same reason as the research log: it's more honest, and more useful as prep, than a cleaned-up summary.</p>
+
+        <div class="cs-narrative">
+          <h4>Q1 — "so what should i do exactly right now? Second scenario - think I am working as PM in Deloitte working on this problem- what all steps should i plan for next two to five years in detail. Which teams shld be involved. What knowledge gap to be fulfilled? what reports to be taken out from past data and how to utilize them for current job"</h4>
+          <p>Laid out five phases: <strong>Phase 0 — Diagnostic</strong> (usage audit, tool inventory, post-mortem interviews, an internal exposure scan); <strong>Phase 1 — Pilot</strong> (policy, threshold, wiring a detection tool into one practice's real workflow); <strong>Phase 2 — Scale</strong> (expand practices, certification training, a leadership dashboard, folding it into performance metrics); <strong>Phase 3 — Embed &amp; Enforce</strong> (firm-wide mandatory gate, contract language, partner workflow); <strong>Phase 4 — Industry leadership</strong> (feedback loop, a public transparency report, evaluating productization).</p>
+          <p><strong>Knowledge gaps flagged:</strong> Deloitte's real delivery workflow end to end, RAG/LLM evaluation literacy, regulatory literacy (EU AI Act, India's guidelines), change management, and metrics design that survives external audit.</p>
+          <p><strong>Past-data reports to pull:</strong> prior peer-review/QA error rates as a baseline, the Australia/Canada incident timelines root-caused precisely, aiStudio's actual usage logs (was Citation Retriever ever invoked, by whom), report volume/value by practice to prioritize the pilot, client complaint/escalation history, and external benchmark data (KPMG/EY/PwC findings) as internal-urgency ammunition.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q2 — "role-play exercise (practice thinking like a Deloitte PM, useful prep either way. Here's the 2–5 year plan I'd run if I were the PM who owned this at Deloitte,"</h4>
+          <p>Confirmed as the framing going forward, and offered four ways to keep going: deepen one phase, rehearse explaining it aloud, stress-test it against a skeptical stakeholder, or leave it as reference.</p>
+        </div>
+
+        <details class="cs-showmore">
+          <summary>Show more: Q3–Q13 <span class="sm-count">(what's possible as an outsider, teams, decision rights, the full sequential plan, and the four final plans with timelines)</span></summary>
+
+        <div class="cs-narrative">
+          <h4>Q3 — "check what all things are currently possible since i am not part of deloitte and what all will be possible post joining only in all phases"</h4>
+          <p>Marked every activity across all 5 phases ✅ (buildable now, no employment needed) or 🔒 (requires real access/authority). The standout ✅: running a real citation-fabrication check on an actual public Deloitte report — the same technique that caught KPMG/EY/PwC works on any public report, not just from inside. Everything in Phase 0–1 skews heavily ✅; Phases 2–4 skew increasingly 🔒 as it requires real organizational authority — flagged as a healthy signal, not a gap in effort.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q4 — "which all teams shld actually be involved in these phases be it designers, developers, complaince, data etc"</h4>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Phase</th><th>Teams involved</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Phase">0 — Diagnostic</td><td data-label="Teams">QRM, AI Center of Excellence, Data/Analytics, Data Science/ML engineers, Information Security, delivery leads, Legal</td></tr>
+                <tr><td data-label="Phase">1 — Pilot</td><td data-label="Teams">Product/UX Designer, Backend/Platform Engineers, Data Engineers, AI/ML engineers, QRM, Legal, pilot Practice Lead, delivery teams, Procurement</td></tr>
+                <tr><td data-label="Phase">2 — Scale</td><td data-label="Teams">L&amp;D, Data/Analytics + Designer, HR, additional Practice Leads, Internal Comms</td></tr>
+                <tr><td data-label="Phase">3 — Embed &amp; Enforce</td><td data-label="Teams">Legal/Contracts, Backend Engineers, Partners, Sales/BD, Compliance/Internal Audit</td></tr>
+                <tr><td data-label="Phase">4 — Industry leadership</td><td data-label="Teams">Data Science, Corporate Comms/PR, Legal, Strategy, Regulatory Affairs, Finance</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Noted pattern: Phase 0–1 skews technical/data/design; Phase 2–3 shifts to organizational roles (HR, Legal, partners) as it moves from pilot to mandate; Phase 4 shifts again toward strategic/external roles as it goes from internal fix to market position.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q5 — "how PM work in each phase along with them"</h4>
+          <p>Core pattern that repeats every phase: the PM sits between two people who each see half the problem and makes the call neither owns alone — e.g. in Phase 1, an ML engineer knows the threshold's tradeoff curve but not its business consequence, so the PM works through that tradeoff with them and then <strong>owns the number</strong>, not just relays it. Same shape recurs: translating Legal's liability concerns into a policy engineers can build, translating a partner's delivery-time worries into language an Executive Committee will actually approve, translating override data into a model-improvement brief Data Science can act on.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q6 — "who is decision maker in each phase"</h4>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Phase</th><th>Real decision-maker</th><th>PM's actual authority</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Phase">0</td><td data-label="Decision-maker">Head of QRM (whether to investigate); GC (how findings are documented)</td><td data-label="PM authority">None over go/no-go — leverage is the memo's quality</td></tr>
+                <tr><td data-label="Phase">1</td><td data-label="Decision-maker">Chief Risk Officer (threshold); Practice Managing Partner (opt-in); QRM+Legal (policy)</td><td data-label="PM authority">Owns the pilot's design, not the permission to run it</td></tr>
+                <tr><td data-label="Phase">2</td><td data-label="Decision-maker">Each Practice's own Managing Partner; Chief People Officer (HR metrics)</td><td data-label="PM authority">Repeats the sell per practice; supplies data to HR, doesn't own the lever</td></tr>
+                <tr><td data-label="Phase">3</td><td data-label="Decision-maker">Executive Committee / CEO (firm-wide mandate — above QRM's own authority)</td><td data-label="PM authority">Builds the case; decision genuinely leaves your usual sponsor's authority</td></tr>
+                <tr><td data-label="Phase">4</td><td data-label="Decision-maker">CEO + GC + Comms (public report); Chief Strategy Officer (productization)</td><td data-label="PM authority">Supplies the honest data; doesn't decide what becomes public</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The pattern: your decision authority stays roughly constant in scope while the stakes around you keep rising, so your relative power shrinks every phase even as the work gets no less rigorous — the real skill on display is building recommendations good enough that people with more authority keep saying yes to them.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q7 — "once everything is approved in these reasearches - what should be next steps"</h4>
+          <p>Five real next steps, in order: decide what this research is actually for (portfolio, interview prep, or both); do the one non-hypothetical thing first — run a real citation check on a public Deloitte report; turn the Phase 0 thinking into an actual one-page diagnostic memo; scope the buildable Phase-1 prototype; decide whether this also feeds a real application, since actual Deloitte India PM openings exist (Bengaluru/Hyderabad/Pune).</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q8 — "i will decide this later- first tell me thinking i am PM of Deloitte and working on these phases"</h4>
+          <p>Walked through it as a lived narrative rather than a table — the uncomfortable off-record conversations with people who lived through the Australia/Canada post-mortems; the sentence that actually gets Phase 1 funded ("this gate would have caught both incidents that already happened"); arguing an ML engineer down from an 85% threshold to tiered thresholds by report type and owning that call; discovering one practice's reviewers rubber-stamp every flag because nobody gave them time for the work, and escalating it as a staffing gap instead of a compliance failure; the short, airtight Executive Committee meeting where someone asks what this costs in delivery time and the honest number is ready because it was tracked honestly the whole way through; and catching your own draft of the Phase 4 transparency report overclaiming ("we've eliminated this risk") and pulling it back to something true.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q9 — "dont tell year wise- i just need answer like if this problem statement in phase 0 is solved and approved then next step will be coversing with operations team, designer, developer etc according to the issue we solving" <span style="font-weight:400;color:var(--grey)">(refined over two follow-ups — "table," then "phase wise and each problem wise" — into this final form)</span></h4>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Phase</th><th>Problem just solved</th><th>Next: talk to</th><th>About what</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Phase">0</td><td data-label="Problem">Diagnostic confirmed by QRM</td><td data-label="Next">Delivery/Practice teams + AI COE</td><td data-label="About">Agree scope — which reports, which practice, for the pilot</td></tr>
+                <tr><td data-label="Phase">1</td><td data-label="Problem">Scope agreed</td><td data-label="Next">Data Science + Designer</td><td data-label="About">Detection approach; what a flagged citation looks like to a reviewer</td></tr>
+                <tr><td data-label="Phase">1</td><td data-label="Problem">Detection + design exist</td><td data-label="Next">Backend Engineers</td><td data-label="About">Feasibility — where this sits in the real pipeline</td></tr>
+                <tr><td data-label="Phase">1</td><td data-label="Problem">Buildable, confirmed</td><td data-label="Next">QRM + Legal</td><td data-label="About">Write the real policy — mandatory scope, threshold, override rule</td></tr>
+                <tr><td data-label="Phase">1</td><td data-label="Problem">Policy drafted</td><td data-label="Next">Practice's Managing Partner + Procurement</td><td data-label="About">Sign-off to run it; contract the tool</td></tr>
+                <tr><td data-label="Phase">2</td><td data-label="Problem">Pilot proven with real data</td><td data-label="Next">Additional Practice Leads</td><td data-label="About">Expand, using real pilot numbers as proof</td></tr>
+                <tr><td data-label="Phase">2</td><td data-label="Problem">Expansion agreed</td><td data-label="Next">L&amp;D</td><td data-label="About">Build the certification training</td></tr>
+                <tr><td data-label="Phase">2</td><td data-label="Problem">Training live</td><td data-label="Next">Data/Analytics + Designer</td><td data-label="About">Build the leadership dashboard</td></tr>
+                <tr><td data-label="Phase">2</td><td data-label="Problem">Dashboard reveals ignored flags</td><td data-label="Next">HR</td><td data-label="About">Fold compliance into performance metrics</td></tr>
+                <tr><td data-label="Phase">3</td><td data-label="Problem">Enough evidence exists</td><td data-label="Next">Executive Committee sponsor</td><td data-label="About">Push for a firm-wide mandatory gate</td></tr>
+                <tr><td data-label="Phase">3</td><td data-label="Problem">Mandate approved</td><td data-label="Next">Legal/Contracts</td><td data-label="About">Write it into client agreements</td></tr>
+                <tr><td data-label="Phase">3</td><td data-label="Problem">Contracts updated</td><td data-label="Next">Backend Engineers + Partners</td><td data-label="About">Build the literal hard stop; change sign-off workflow</td></tr>
+                <tr><td data-label="Phase">4</td><td data-label="Problem">Hard gate live and stable</td><td data-label="Next">Data Science</td><td data-label="About">Feed override data back to improve accuracy</td></tr>
+                <tr><td data-label="Phase">4</td><td data-label="Problem">Feedback loop shows improvement</td><td data-label="Next">Comms + Legal + Strategy/Finance</td><td data-label="About">Public transparency report; productization decision</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q10 — "now make four plans- one that in this week as a PM outside deloitte - I should do, second include all things in the phases as discussed can be done even if not part of deloitte. Third plan as a PM of Deloitte to complete all phases. FOurth- tell me what all things already covered by non PM of Deloitte and left for the time I become PM of deloitte."</h4>
+          <p><strong>Plan 1 (this week):</strong> run the citation check on 2–3 real reports; write the Phase 0 diagnostic memo; draft the Phase 1 policy; sketch the reviewer-screen concept; shortlist real open Deloitte India PM roles; consolidate into a portfolio-ready outline.</p>
+          <p><strong>Plan 2 (everything outsider-doable):</strong> tool inventory and regulatory tracking (both already ongoing), the real citation scan, the diagnostic memo, the written policy, a working prototype of the reviewer screen + audit trail, a metrics framework, a training curriculum outline, a dashboard mockup, sample contract language, a mock transparency report.</p>
+          <p><strong>Plan 3 (the full insider plan):</strong> the same 5 phases, but with real internal data, real threshold sign-off from an actual Chief Risk Officer, a real pipeline integration, real Executive Committee approval, real published transparency report and productization decision.</p>
+          <p><strong>Plan 4 (the gap):</strong> Plan 2 covers the thinking/design layer of every phase; the residual — real usage data, real post-mortems, real organizational authority, real HR/contract/committee involvement — only exists once actually employed.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q11 — "now tell me genuine tentative timeline for plan 2 shld be kept"</h4>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Item</th><th>Tentative duration</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Item">Tool inventory / regulatory tracking</td><td data-label="Duration">Done / continuous</td></tr>
+                <tr><td data-label="Item">Real citation-fabrication scan (2–3 reports, done properly)</td><td data-label="Duration">~3 weeks</td></tr>
+                <tr><td data-label="Item">Diagnostic memo</td><td data-label="Duration">~1.5 weeks</td></tr>
+                <tr><td data-label="Item">Written policy + metrics framework</td><td data-label="Duration">~2 weeks</td></tr>
+                <tr><td data-label="Item">Working prototype (reviewer screen + audit trail)</td><td data-label="Duration">~4–5 weeks</td></tr>
+                <tr><td data-label="Item">Training curriculum outline + dashboard mockup (parallel)</td><td data-label="Duration">~2 weeks each</td></tr>
+                <tr><td data-label="Item">Sample contract language + mock transparency report</td><td data-label="Duration">&lt;1 week / ~1 week</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Sequential: ~16–17 weeks (~4 months). With realistic parallelization: <strong>~10–12 weeks (~2.5–3 months)</strong>. Flagged two items not worth compressing further regardless of time pressure: the citation scan and the prototype — both lose their entire value if rushed.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q12 — "plan 3" <span style="font-weight:400;color:var(--grey)">(same treatment, for the full insider plan)</span></h4>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Phase</th><th>Realistic duration</th><th>Real bottleneck</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Phase">0 — Diagnostic</td><td data-label="Duration">3–4 months</td><td data-label="Bottleneck">Securing sponsorship; scheduling sensitive post-mortem interviews</td></tr>
+                <tr><td data-label="Phase">1 — Pilot</td><td data-label="Duration">6–9 months</td><td data-label="Bottleneck">Legal review cycles; real production-pipeline integration; running long enough for real data</td></tr>
+                <tr><td data-label="Phase">2 — Scale</td><td data-label="Duration">8–12 months</td><td data-label="Bottleneck">HR's annual review cycle — stuck on a calendar date regardless of effort</td></tr>
+                <tr><td data-label="Phase">3 — Embed &amp; Enforce</td><td data-label="Duration">9–14 months</td><td data-label="Bottleneck">Executive Committee's own meeting cadence; contract renewal cycles; partner behavior takes months to actually stick</td></tr>
+                <tr><td data-label="Phase">4 — Industry leadership</td><td data-label="Duration">12–18 months</td><td data-label="Bottleneck">Needs a real year of accumulated data before the feedback loop is trustworthy</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Sequential total: ~3–4.5 years. With realistic overlap: <strong>~2.5–3.5 years</strong>. Plan 2 (you, alone): ~3 months, gated by your hours. Plan 3 (as an employee): ~2.5–4 years, gated by other people's calendars and committees — roughly a 10x gap, and it's not about effort, it's the real difference between building something and getting a large organization to adopt it.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q13 — "make roadmap for each team including all phases" / "now plan 4" <span style="font-weight:400;color:var(--grey)">(the team-axis view, and the final integrated timeline)</span></h4>
+          <p>Flipped the axis to one row per team across all 5 phases. What it made obvious that the phase-view didn't: <strong>Regulatory Affairs is the only team active in every phase with zero gaps</strong> — which is literally the function I've been personally performing this whole research thread. <strong>QRM and Legal are the backbone</strong>, touching four of five phases each. <strong>Data Science has the strangest arc</strong> — heavy in Phase 0, silent through Phases 1–3, then back for all of Phase 4, a real staffing risk if that team scatters to other projects in between. Six teams (AI COE, InfoSec, Data Engineers, Procurement, Sales, Finance) appear in exactly one phase each — the easiest stakeholders to manage precisely because their ask is bounded.</p>
+          <p>Finally, integrated Plan 2 and Plan 3 into one real timeline: <strong>Stage 1</strong> — now, as an outsider, ~3 months (Plan 2, already in motion). <strong>Stage 2</strong> — the honest, uncontrollable gap: applying, interviewing, onboarding, no real number possible. <strong>Stage 3</strong> — once actually hired, Plan 4's leftover items land at Months 1–4 (Phase 0, real data), 4–13 (Phase 1, real pilot), 13–25 (Phase 2, gated by HR's cycle), 25–39 (Phase 3, the slowest, gated by committee cadence), 39–57 (Phase 4). The one number worth keeping: the outsider work doesn't get thrown away at hire — it compresses Stage 3's start, since you're revising real work instead of beginning from a blank page.</p>
+        </div>
+
+        </details>
+
+        <div class="jlinks">
+          <span><span class="k">Companion research</span><a href="#case-ai-verification-research" data-open-case="ai-verification-research" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">The Verification Gap →</a></span>
+          <span><span class="k">Pattern this extends</span><a href="#case-ai-ops-copilot" data-open-case="ai-ops-copilot" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">OpsPilot →</a></span>
         </div>
       </div>
       </article>
