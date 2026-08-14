@@ -1801,11 +1801,40 @@
         <div class="cs-narrative">
           <h4>Q24 — "what all tools/websites/apps like ControlCatalyst.AI are present in market"</h4>
           <p>Three distinct market layers, not one:</p>
-          <ul>
-            <li><strong>Layer A — direct SOX/GRC competitors:</strong> Optro (formerly AuditBoard), Workiva (4,000+ customers, 75% of Fortune 500), Diligent One Platform, and KPMG's own "TACO" agentic-governance framework.</li>
-            <li><strong>Layer B — the tools that actually caught the Big Four:</strong> GPTZero (the tool literally used in the KPMG/EY/PwC investigations — acquired by Superhuman/Grammarly, June 2026, $88M valuation) and Originality.AI. Neither was built for this purpose; both were repurposed academic-integrity/content-detection tools.</li>
-            <li><strong>Layer C — enterprise LLM output-verification infrastructure</strong> (the category closest to a real project): Patronus AI (open-source "Lynx" detector), Galileo (sub-200ms runtime guardrails), Arize (LLM evaluation/RAG scoring), Guardrails AI (RAIL validation framework).</li>
-          </ul>
+          <p><strong>Layer A — direct SOX/GRC competitors:</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Tool</th><th>What it is</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Tool">Optro (formerly AuditBoard)</td><td data-label="What">Category leader — SOXHUB heritage, 1,585+ G2 reviews at 4.6/5, Fortune 500 + Big Four advisory partnerships</td></tr>
+                <tr><td data-label="Tool">Workiva</td><td data-label="What">4,000+ customers, 75% of Fortune 500 — links SOX controls evidence directly to source financial data and SEC filings</td></tr>
+                <tr><td data-label="Tool">Diligent One Platform</td><td data-label="What">Audit management + continuous monitoring, AI analyzing 100% of transactional data, not sampling</td></tr>
+                <tr><td data-label="Tool">KPMG's own "TACO" framework</td><td data-label="What">An agentic-AI governance framework reusing SOX's ICFR structure — notable since KPMG is also the firm that got caught fabricating an agentic-AI report</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Layer B — the tools that actually caught the Big Four:</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Tool</th><th>What it is</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Tool">GPTZero</td><td data-label="What">The tool literally used in the KPMG, EY, and PwC investigations. Originally an academic-integrity plagiarism detector, now doing citation-fabrication forensics on Big Four reports. Acquired by Superhuman (Grammarly), June 2026 — $88M valuation, 19M+ users, $30M ARR</td></tr>
+                <tr><td data-label="Tool">Originality.AI</td><td data-label="What">Competing AI-content detector; its integrated fact-checker flags fabricated statistics, wrong dates, and unverified attributions. Enterprise API available ($136–179/mo)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Layer C — enterprise LLM output-verification infrastructure</strong> (the category closest to a real project):</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Tool</th><th>Positioning</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Tool">Patronus AI</td><td data-label="Positioning">Open-source "Lynx" hallucination detector, plus domain-specific evaluators (finance, legal, healthcare, copyright)</td></tr>
+                <tr><td data-label="Tool">Galileo</td><td data-label="Positioning">Real-time runtime guardrails — sub-200ms inline blocking of unsafe/hallucinated responses before they reach a user</td></tr>
+                <tr><td data-label="Tool">Arize</td><td data-label="Positioning">LLM evaluation platform, hallucination/relevance scoring, LLM-as-judge, strong RAG support</td></tr>
+                <tr><td data-label="Tool">Guardrails AI</td><td data-label="Positioning">Open framework (RAIL) for enforcing structure and validation rules on LLM output</td></tr>
+              </tbody>
+            </table>
+          </div>
           <p><strong>The honest read:</strong> Layer C is not empty — it's real, funded infrastructure. What doesn't exist anywhere publicly is the specific product decision to wire that infrastructure into one firm's actual report-delivery workflow. That's a PM gap sitting on solved technology, not a technology gap.</p>
           <p class="src-line">Sources: <a href="https://www.riskwatch.com/audit-management-software/" target="_blank" rel="noopener" class="src-a">RiskWatch</a> · <a href="https://originality.ai/blog/gptzero-ai-content-detection-review" target="_blank" rel="noopener" class="src-a">Originality.AI (GPTZero review)</a> · <a href="https://www.braintrust.dev/articles/best-hallucination-detection-tools-2026" target="_blank" rel="noopener" class="src-a">Braintrust (hallucination detection tools)</a> · <a href="https://galileo.ai/blog/galileo-vs-patronus" target="_blank" rel="noopener" class="src-a">Galileo vs. Patronus</a></p>
         </div>
@@ -1878,24 +1907,145 @@
         </div>
 
         <details class="cs-showmore">
-          <summary>Show more: Q3–Q13 <span class="sm-count">(what's possible as an outsider, teams, decision rights, the full sequential plan, and the four final plans with timelines)</span></summary>
+          <summary>Show more: Q3–Q14 <span class="sm-count">(what's possible as an outsider, teams, decision rights, the full sequential plan, the four final plans with timelines, and the team-by-team roadmap)</span></summary>
 
         <div class="cs-narrative">
           <h4>Q3 — "check what all things are currently possible since i am not part of deloitte and what all will be possible post joining only in all phases"</h4>
-          <p>Marked every activity across all 5 phases ✅ (buildable now, no employment needed) or 🔒 (requires real access/authority). The standout ✅: running a real citation-fabrication check on an actual public Deloitte report — the same technique that caught KPMG/EY/PwC works on any public report, not just from inside. Everything in Phase 0–1 skews heavily ✅; Phases 2–4 skew increasingly 🔒 as it requires real organizational authority — flagged as a healthy signal, not a gap in effort.</p>
+          <p><strong>Phase 0 — Diagnostic</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Activity</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Activity">Internal GenAI usage audit</td><td data-label="Status">🔒 Employees-only — needs internal survey/access data</td></tr>
+                <tr><td data-label="Activity">Tool inventory (aiStudio, ControlCatalyst.AI)</td><td data-label="Status">✅ Already done — found through public press releases/PDFs</td></tr>
+                <tr><td data-label="Activity">Post-mortem interviews with Australia/Canada teams</td><td data-label="Status">🔒 Impossible from outside — only public reporting exists</td></tr>
+                <tr><td data-label="Activity">Internal exposure scan (run a citation check on sample reports)</td><td data-label="Status">✅ Fully possible right now, on real public reports — the same technique that caught KPMG/EY/PwC</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Phase 1 — Pilot</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Activity</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Activity">Write the actual policy (disclosure, threshold, escalation)</td><td data-label="Status">✅ Fully writable now — a PM design artifact, not something requiring employment</td></tr>
+                <tr><td data-label="Activity">Wire a real detection tool into Deloitte's actual pipeline</td><td data-label="Status">🔒 Requires internal system access and engineering resources</td></tr>
+                <tr><td data-label="Activity">Prototype what that integration would look like (UI, workflow, audit trail)</td><td data-label="Status">✅ Fully buildable — the OpsPilot pattern, re-aimed at document verification</td></tr>
+                <tr><td data-label="Activity">Define success metrics (adoption %, flag rate, override rate)</td><td data-label="Status">✅ Fully definable as a planning exercise</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Phase 2 — Scale</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Activity</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Activity">Expand to more practice areas</td><td data-label="Status">🔒 Requires organizational authority</td></tr>
+                <tr><td data-label="Activity">Design the certification/training curriculum</td><td data-label="Status">✅ The content design doesn't require employment, only the rollout does</td></tr>
+                <tr><td data-label="Activity">Build a leadership dashboard mockup</td><td data-label="Status">✅ Fully buildable as a prototype</td></tr>
+                <tr><td data-label="Activity">Fold metrics into performance reviews</td><td data-label="Status">🔒 Requires HR system access and organizational authority</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Phase 3 — Embed &amp; Enforce</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Activity</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Activity">Firm-wide mandatory gate</td><td data-label="Status">🔒 Requires real authority over delivery workflow</td></tr>
+                <tr><td data-label="Activity">Legal/contract language for clients</td><td data-label="Status">🔒 Real version needs actual Legal and real contracts — but ✅ sample clause language is draftable as a demonstration</td></tr>
+                <tr><td data-label="Activity">Partner sign-off workflow integration</td><td data-label="Status">🔒 Requires access to real internal systems</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Phase 4 — Industry leadership</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Activity</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Activity">Feed real override data back into the model</td><td data-label="Status">🔒 Requires real production data that doesn't exist outside the company</td></tr>
+                <tr><td data-label="Activity">Publish an actual company transparency report</td><td data-label="Status">🔒 Requires authority to speak for Deloitte</td></tr>
+                <tr><td data-label="Activity">Draft what that transparency report would say</td><td data-label="Status">✅ A mock version is writable as a portfolio artifact</td></tr>
+                <tr><td data-label="Activity">Track regulatory shifts (EU AI Act, India's guidelines)</td><td data-label="Status">✅ Already doing this — this whole research thread is exactly that work</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The standout ✅ across all five phases: running a real citation-fabrication check on an actual public Deloitte report. Almost everything in Phase 0–1 skews ✅; Phase 2–4 skew increasingly 🔒 as it requires real organizational authority — a healthy signal about where "PM work" ends and "PM job" begins, not a gap in effort.</p>
         </div>
 
         <div class="cs-narrative">
           <h4>Q4 — "which all teams shld actually be involved in these phases be it designers, developers, complaince, data etc"</h4>
+          <p><strong>Phase 0 — Diagnostic</strong></p>
           <div class="ptable2-wrap">
             <table class="ptable2">
-              <thead><tr><th>Phase</th><th>Teams involved</th></tr></thead>
+              <thead><tr><th>Team</th><th>Role in this phase</th></tr></thead>
               <tbody>
-                <tr><td data-label="Phase">0 — Diagnostic</td><td data-label="Teams">QRM, AI Center of Excellence, Data/Analytics, Data Science/ML engineers, Information Security, delivery leads, Legal</td></tr>
-                <tr><td data-label="Phase">1 — Pilot</td><td data-label="Teams">Product/UX Designer, Backend/Platform Engineers, Data Engineers, AI/ML engineers, QRM, Legal, pilot Practice Lead, delivery teams, Procurement</td></tr>
-                <tr><td data-label="Phase">2 — Scale</td><td data-label="Teams">L&amp;D, Data/Analytics + Designer, HR, additional Practice Leads, Internal Comms</td></tr>
-                <tr><td data-label="Phase">3 — Embed &amp; Enforce</td><td data-label="Teams">Legal/Contracts, Backend Engineers, Partners, Sales/BD, Compliance/Internal Audit</td></tr>
-                <tr><td data-label="Phase">4 — Industry leadership</td><td data-label="Teams">Data Science, Corporate Comms/PR, Legal, Strategy, Regulatory Affairs, Finance</td></tr>
+                <tr><td data-label="Team">Quality &amp; Risk Management (QRM)</td><td data-label="Role">Sponsors the diagnostic — owns the mandate to ask "how bad is this really"</td></tr>
+                <tr><td data-label="Team">AI Center of Excellence</td><td data-label="Role">Provides the internal usage data — who's using Azure OpenAI/Copilot, how</td></tr>
+                <tr><td data-label="Team">Data/Analytics</td><td data-label="Role">Builds the actual usage-audit query across internal systems</td></tr>
+                <tr><td data-label="Team">Data Science/ML engineers</td><td data-label="Role">Run the citation-fabrication scan on sample reports</td></tr>
+                <tr><td data-label="Team">Information Security</td><td data-label="Role">Clears any tool used to scan client documents — a real data-handling decision</td></tr>
+                <tr><td data-label="Team">Delivery leads (Australia/Canada engagements)</td><td data-label="Role">The actual post-mortem interviews — without them, the diagnosis is blind</td></tr>
+                <tr><td data-label="Team">Legal / General Counsel</td><td data-label="Role">Needs visibility from day one — the diagnostic could surface existing liability exposure</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Phase 1 — Pilot</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Team</th><th>Role in this phase</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Team">Product/UX Designer</td><td data-label="Role">Designs the review interface — what a flagged citation looks like, how someone approves/overrides</td></tr>
+                <tr><td data-label="Team">Backend/Platform Engineers</td><td data-label="Role">Wire the detection tool into the real document pipeline</td></tr>
+                <tr><td data-label="Team">Data Engineers</td><td data-label="Role">Build the audit-trail data model — who checked what, when, what the outcome was</td></tr>
+                <tr><td data-label="Team">AI/ML Engineers</td><td data-label="Role">Tune or select the detection model, calibrate the confidence threshold</td></tr>
+                <tr><td data-label="Team">QRM</td><td data-label="Role">Owns the policy document — what "mandatory" means, what happens on override</td></tr>
+                <tr><td data-label="Team">Legal</td><td data-label="Role">Reviews the escalation policy for liability implications</td></tr>
+                <tr><td data-label="Team">Practice lead (pilot practice)</td><td data-label="Role">Sponsors the pilot inside their team, absorbs the "this slows us down" pushback</td></tr>
+                <tr><td data-label="Team">Delivery teams in the pilot</td><td data-label="Role">The actual users — their friction reports are the real signal</td></tr>
+                <tr><td data-label="Team">Procurement</td><td data-label="Role">Negotiates and contracts an external tool, if licensing one</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Phase 2 — Scale</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Team</th><th>Role in this phase</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Team">Learning &amp; Development (L&amp;D)</td><td data-label="Role">Builds and delivers the certification training — real instructional design</td></tr>
+                <tr><td data-label="Team">Data/Analytics</td><td data-label="Role">Builds the leadership dashboard — flag rate, override rate, trends by practice</td></tr>
+                <tr><td data-label="Team">Product/UX Designer</td><td data-label="Role">Designs that dashboard so leadership can actually act on it</td></tr>
+                <tr><td data-label="Team">HR</td><td data-label="Role">Folds override-rate/compliance metrics into performance review criteria</td></tr>
+                <tr><td data-label="Team">Practice leads (expanded set)</td><td data-label="Role">Each new practice needs its own sponsor doing the same internal selling job</td></tr>
+                <tr><td data-label="Team">Internal Communications</td><td data-label="Role">Rolling out a mandatory process to a much larger population needs real change-comms</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Phase 3 — Embed &amp; Enforce</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Team</th><th>Role in this phase</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Team">Legal / Contracts</td><td data-label="Role">Writes the actual client-facing contract language disclosing the process</td></tr>
+                <tr><td data-label="Team">Backend Engineers</td><td data-label="Role">Build the hard technical gate — a report can't be marked "ready to send" without the check</td></tr>
+                <tr><td data-label="Team">Partners (client-facing leadership)</td><td data-label="Role">Formal sign-off authority — this phase doesn't happen without partner-level buy-in</td></tr>
+                <tr><td data-label="Team">QRM</td><td data-label="Role">Enforces the mandate — "recommended" becomes "required"</td></tr>
+                <tr><td data-label="Team">Sales / Business Development</td><td data-label="Role">Starts using the process as a competitive point against EY/KPMG/PwC</td></tr>
+                <tr><td data-label="Team">Compliance / Internal Audit</td><td data-label="Role">Independently checks enforcement is actually happening, not just declared</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Phase 4 — Industry leadership</strong></p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Team</th><th>Role in this phase</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Team">Data Science</td><td data-label="Role">Builds the feedback loop — using override data to improve detection accuracy</td></tr>
+                <tr><td data-label="Team">Corporate Communications / PR</td><td data-label="Role">Drafts and manages the public transparency report</td></tr>
+                <tr><td data-label="Team">Legal</td><td data-label="Role">Reviews everything before it's public — real legal risk in a report about a past failure</td></tr>
+                <tr><td data-label="Team">Product/Strategy team</td><td data-label="Role">Evaluates whether to productize the internal tool and sell it externally</td></tr>
+                <tr><td data-label="Team">Regulatory Affairs / Policy team</td><td data-label="Role">Tracks EU AI Act enforcement, India's guidelines, FINRA-style guidance</td></tr>
+                <tr><td data-label="Team">Finance</td><td data-label="Role">Owns the budget case if this becomes an external product</td></tr>
               </tbody>
             </table>
           </div>
@@ -1904,7 +2054,12 @@
 
         <div class="cs-narrative">
           <h4>Q5 — "how PM work in each phase along with them"</h4>
-          <p>Core pattern that repeats every phase: the PM sits between two people who each see half the problem and makes the call neither owns alone — e.g. in Phase 1, an ML engineer knows the threshold's tradeoff curve but not its business consequence, so the PM works through that tradeoff with them and then <strong>owns the number</strong>, not just relays it. Same shape recurs: translating Legal's liability concerns into a policy engineers can build, translating a partner's delivery-time worries into language an Executive Committee will actually approve, translating override data into a model-improvement brief Data Science can act on.</p>
+          <p><strong>Phase 0 — Diagnostic:</strong> the PM isn't building yet, just turning scattered signals into one decision-ready picture. With Data/Analytics: define the actual question (not "how many people use AI" but which practices, weighted by risk), then get it pulled. With Data Science/ML engineers: scope what "done" looks like for the exposure scan, then translate their technical output into a risk narrative leadership can act on. With delivery leads: run the post-mortem interviews personally — structured discovery, not delegated. With Legal/InfoSec: loop in early to flag landmines before they become blockers.</p>
+          <p><strong>Phase 1 — Pilot:</strong> with the Designer, write the requirements, critique the design against a reviewer's real workflow under deadline pressure. With Backend Engineers, write the integration spec and negotiate feasibility, cutting scope yourself when needed. With Data Engineers, define exactly what the audit trail needs to capture so it's usable evidence later. With AI/ML engineers — the big one — don't set the confidence threshold alone or hand it fully to engineering either; understand the tradeoff curve together and <strong>own the number and its consequence</strong>. With QRM/Legal, write the first policy draft yourself rather than waiting for Legal to author it. With the practice lead and delivery teams, run the pilot rollout personally, collecting friction weekly. With Procurement, do the actual vendor bake-off yourself.</p>
+          <p><strong>Phase 2 — Scale:</strong> with L&amp;D, define the learning objectives, not the training content itself. With Data/Design on the dashboard, define what decision a QRM leader makes differently because of it, before anyone builds anything. With HR, make the case with data — you influence this lever, you don't own it. With each new practice lead, adapt the pitch to their specific risk profile rather than reusing one deck. With Internal Comms, write the core narrative; they own the channels and cadence.</p>
+          <p><strong>Phase 3 — Embed &amp; Enforce:</strong> with Legal/Contracts, supply the plain-language description of what the process does; they turn it into binding language. With Backend Engineers, define the hard-gate requirement and work through real edge cases (emergency overrides) together. With Partners — the hardest conversation in the whole plan — translate this into their language: risk avoided, not process added, usually one-on-one, not a group memo. With Sales/BD, supply the real flag-rate and override-rate trend data as ammunition. With Compliance/Internal Audit, welcome being audited without getting defensive.</p>
+          <p><strong>Phase 4 — Industry leadership:</strong> with Data Science, define what "improving the model" should optimize for, based on real complaints collected over the previous phases. With Corporate Comms/PR, supply the honest data and actively guard against over-claiming — you know the real limitations better than anyone. With Strategy leadership, make the actual build-vs-sell recommendation, backed by years of real data, not a guess.</p>
+          <p>The pattern that repeats every phase: the PM sits between two people who each see half the problem, and makes the call neither owns alone — that's the actual, portable answer to "what does a PM even do here that the specialists don't already do."</p>
         </div>
 
         <div class="cs-narrative">
@@ -1926,12 +2081,22 @@
 
         <div class="cs-narrative">
           <h4>Q7 — "once everything is approved in these reasearches - what should be next steps"</h4>
-          <p>Five real next steps, in order: decide what this research is actually for (portfolio, interview prep, or both); do the one non-hypothetical thing first — run a real citation check on a public Deloitte report; turn the Phase 0 thinking into an actual one-page diagnostic memo; scope the buildable Phase-1 prototype; decide whether this also feeds a real application, since actual Deloitte India PM openings exist (Bengaluru/Hyderabad/Pune).</p>
+          <p><strong>Step 1 — decide what this research is actually for.</strong> If it's becoming a portfolio project, the buildable slice is Phase 0–1, not the full 5-year roadmap. If it's interview/application prep, the deliverable is a tight, spoken 90-second version, not the full document. If both (the likely right call), the portfolio project becomes the interview prep — walking in having built the thing, not just described it.</p>
+          <p><strong>Step 2 — do the one real, non-hypothetical thing first.</strong> Run the citation-fabrication check on an actual public Deloitte report. Everything else in this research is analysis of other people's findings; this would be a finding of your own — the highest-leverage action still sitting unstarted.</p>
+          <p><strong>Step 3 — turn the diagnostic memo into something real.</strong> The Phase 0 content already exists (thesis, sourced pattern, the aiStudio irony, the KPMG/EY/PwC pattern) — package it as the actual one-page artifact a real PM would produce, written as if going to a QRM sponsor tomorrow.</p>
+          <p><strong>Step 4 — scope the buildable prototype.</strong> Once the memo exists, decide exactly what Phase 1 looks like as a working demo — the reviewer screen, the confidence threshold, the audit trail — same pattern as OpsPilot, aimed at document/citation verification instead of a case queue.</p>
+          <p><strong>Step 5 — decide on the real-world application angle.</strong> Real, live Deloitte India Product Manager roles exist (Bengaluru/Hyderabad/Pune) — worth deciding whether this body of work is also meant to feed an actual application, since that changes some of the framing.</p>
+          <p><strong>Recommended sequencing:</strong> Step 2 first (fast, genuinely novel, de-risks everything after it), then Step 3 (mostly writing, not new research), then pause and decide Steps 4–5 together once the memo and the audit findings can be seen side by side.</p>
         </div>
 
         <div class="cs-narrative">
           <h4>Q8 — "i will decide this later- first tell me thinking i am PM of Deloitte and working on these phases"</h4>
-          <p>Walked through it as a lived narrative rather than a table — the uncomfortable off-record conversations with people who lived through the Australia/Canada post-mortems; the sentence that actually gets Phase 1 funded ("this gate would have caught both incidents that already happened"); arguing an ML engineer down from an 85% threshold to tiered thresholds by report type and owning that call; discovering one practice's reviewers rubber-stamp every flag because nobody gave them time for the work, and escalating it as a staffing gap instead of a compliance failure; the short, airtight Executive Committee meeting where someone asks what this costs in delivery time and the honest number is ready because it was tracked honestly the whole way through; and catching your own draft of the Phase 4 transparency report overclaiming ("we've eliminated this risk") and pulling it back to something true.</p>
+          <p>Walked through it as a lived narrative rather than another table:</p>
+          <p><strong>Phase 0 — Diagnostic.</strong> You've just been handed this mandate after the Canada incident made leadership nervous. Your first move isn't a meeting — it's a message to the AI Center of Excellence asking for raw usage numbers, and a separate, quieter message to two people who were on the Australia and Canada engagements, asking if they'd talk to you off the record first, before anything official. Those conversations are uncomfortable. Nobody wants to relive it. You're not there to assign blame — you keep saying that, and you mean it — but you still walk out with a clear picture: the citation-check tool existed, someone knew about it, and it just wasn't part of the actual checklist anyone followed under deadline pressure. That single sentence becomes the spine of your diagnostic memo. Meanwhile Data Science runs the citation-fabrication scan on a sample of 60 recent reports. The number comes back worse than expected. You land on: "14 of 60 sampled reports contain at least one citation we could not independently verify. At current volume, that's a material, recurring exposure, not an isolated incident." That one paragraph is what gets you Phase 1.</p>
+          <p><strong>Phase 1 — Pilot.</strong> You pick government/public-sector engagements — same domain as both scandals, easiest case to make. The practice's Managing Partner is skeptical; his exact words are something like "we already have QA, why do we need another gate." You don't argue. You show him the memo, the 14-of-60 number, and one sentence: "This gate would have caught both of the incidents that already happened." He signs off, but tells you plainly he'll pull out if it slows delivery by more than a day. Now you're in the room with an ML engineer arguing about a threshold. She wants 85% — fewer false flags, less reviewer fatigue. You push for 95%, because you've just spent three months reading two post-mortems and you know exactly what a missed citation costs. You settle on tiered thresholds by report type, which is more work to build but is the right call, and you're the one who has to justify it later if it's wrong either way. By the end of the pilot, adoption is real but not universal — about 70% of eligible reports go through the gate. You report that number honestly instead of rounding up.</p>
+          <p><strong>Phase 2 — Scale.</strong> This phase is less building, more repeating yourself to different audiences. You give the same pitch to four more practice leads, and each time you adjust it — Tax cares about a different kind of citation risk than Consulting does, so you actually go learn enough about each practice's report types to make the pitch land, rather than reusing one slide deck everywhere. The dashboard ships. Within a month you notice one practice has a flag-override rate three times everyone else's. You don't go in accusatory — you go find out why, and it turns out their reviewers genuinely don't have time allocated for this work, so the check exists but gets rubber-stamped. That's a staffing problem disguised as a compliance problem, and it's not something you can fix with a threshold. You escalate it as a resourcing gap, not a rule-breaking problem.</p>
+          <p><strong>Phase 3 — Embed &amp; Enforce.</strong> This is the phase you spend more time with partners than with any technical team. Making the gate mandatory firm-wide means asking the Executive Committee to change how every partner signs off on every deliverable — and you don't get that meeting easily. It takes a champion, someone senior enough to get you the room, and weeks of making sure the business case is airtight beforehand: adoption trend, override trend going down, zero incidents since rollout, and — quietly — the fact that two more competitors have now had the identical failure publicly. The meeting itself is short. Someone asks "what does this cost us in delivery time." You have the real number ready, because you tracked it honestly the whole time instead of hoping nobody would ask. It's small enough that the room moves on. Legal takes the plain-language description you wrote and turns it into three paragraphs of contract language you barely recognize, but it says what it needs to say.</p>
+          <p><strong>Phase 4 — Industry leadership.</strong> By now this isn't your pet project anymore — it's just how the firm works. You spend more time on the feedback loop, tightening the model against years of real override data, than on convincing anyone of anything. Comms wants to publish a transparency report and asks you to write the technical section. You catch yourself pulling one sentence back — a draft that says "we've eliminated this risk" — because you know that's not true, and you'd rather it say "we've built a system that catches this before it reaches a client, and we keep improving it," which is honest and still strong. Someone in Strategy asks if this should become a product. You say yes, but only after showing them what it actually costs to run well — because you've watched enough well-intentioned tools get sold before anyone checked whether they were profitable to support.</p>
         </div>
 
         <div class="cs-narrative">
@@ -2058,9 +2223,59 @@
         </div>
 
         <div class="cs-narrative">
-          <h4>Q13 — "make roadmap for each team including all phases" / "now plan 4" <span style="font-weight:400;color:var(--grey)">(the team-axis view, and the final integrated timeline)</span></h4>
-          <p>Flipped the axis to one row per team across all 5 phases. What it made obvious that the phase-view didn't: <strong>Regulatory Affairs is the only team active in every phase with zero gaps</strong> — which is literally the function I've been personally performing this whole research thread. <strong>QRM and Legal are the backbone</strong>, touching four of five phases each. <strong>Data Science has the strangest arc</strong> — heavy in Phase 0, silent through Phases 1–3, then back for all of Phase 4, a real staffing risk if that team scatters to other projects in between. Six teams (AI COE, InfoSec, Data Engineers, Procurement, Sales, Finance) appear in exactly one phase each — the easiest stakeholders to manage precisely because their ask is bounded.</p>
-          <p>Finally, integrated Plan 2 and Plan 3 into one real timeline: <strong>Stage 1</strong> — now, as an outsider, ~3 months (Plan 2, already in motion). <strong>Stage 2</strong> — the honest, uncontrollable gap: applying, interviewing, onboarding, no real number possible. <strong>Stage 3</strong> — once actually hired, Plan 4's leftover items land at Months 1–4 (Phase 0, real data), 4–13 (Phase 1, real pilot), 13–25 (Phase 2, gated by HR's cycle), 25–39 (Phase 3, the slowest, gated by committee cadence), 39–57 (Phase 4). The one number worth keeping: the outsider work doesn't get thrown away at hire — it compresses Stage 3's start, since you're revising real work instead of beginning from a blank page.</p>
+          <h4>Q13 — "make roadmap for each team including all phases"</h4>
+          <p>Flipped the axis — one row per team, showing its complete arc across all five phases:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Team</th><th>Phase 0</th><th>Phase 1</th><th>Phase 2</th><th>Phase 3</th><th>Phase 4</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Team">QRM</td><td data-label="P0">Secures sponsorship, oversees diagnostic</td><td data-label="P1">Owns policy draft, ongoing oversight</td><td data-label="P2">Continues oversight as scope expands</td><td data-label="P3">Builds the Executive Committee business case</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Legal / General Counsel</td><td data-label="P0">Reviews diagnostic memo</td><td data-label="P1">Reviews the policy, multiple rounds</td><td data-label="P2">—</td><td data-label="P3">Rolls verification into client contracts</td><td data-label="P4">Reviews the transparency report</td></tr>
+                <tr><td data-label="Team">AI Center of Excellence</td><td data-label="P0">Provides usage data and tool context</td><td data-label="P1">—</td><td data-label="P2">—</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Information Security</td><td data-label="P0">Clears the scanning tool</td><td data-label="P1">—</td><td data-label="P2">—</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Data / Analytics</td><td data-label="P0">Builds the usage-audit query</td><td data-label="P1">—</td><td data-label="P2">Builds the leadership dashboard with Design</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Data Science / ML Engineers</td><td data-label="P0">Runs the citation-fabrication scan</td><td data-label="P1">Calibrates the confidence threshold</td><td data-label="P2">—</td><td data-label="P3">—</td><td data-label="P4">Owns the feedback loop — 12+ months of real data</td></tr>
+                <tr><td data-label="Team">Delivery Teams / Engagement Leads</td><td data-label="P0">Sit for post-mortem interviews</td><td data-label="P1">Actually run the pilot</td><td data-label="P2">—</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Product / UX Designer</td><td data-label="P0">—</td><td data-label="P1">Designs the reviewer screen</td><td data-label="P2">Designs the dashboard with Data</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Backend / Platform Engineering</td><td data-label="P0">—</td><td data-label="P1">Real pipeline integration — longest item in Phase 1</td><td data-label="P2">—</td><td data-label="P3">Builds the hard enforcement gate</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Data Engineers</td><td data-label="P0">—</td><td data-label="P1">Builds the audit-trail data model</td><td data-label="P2">—</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Procurement</td><td data-label="P0">—</td><td data-label="P1">Negotiates vendor contract if licensing</td><td data-label="P2">—</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Practice Leads / Managing Partners</td><td data-label="P0">—</td><td data-label="P1">Pilot practice sign-off</td><td data-label="P2">Sell to each additional practice, staggered</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">L&amp;D</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">Designs and delivers certification training</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Internal Communications</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">Manages rollout comms per wave</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">HR</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">Changes performance-review criteria — the real bottleneck</td><td data-label="P3">—</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Executive Committee</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">—</td><td data-label="P3">Agenda slot + decision</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Partners (broader, client-facing)</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">—</td><td data-label="P3">Actual behavior change — 24+ weeks of reinforcement</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Sales / Business Development</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">—</td><td data-label="P3">Folds proof points into pitches</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Compliance / Internal Audit</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">—</td><td data-label="P3">First independent audit</td><td data-label="P4">—</td></tr>
+                <tr><td data-label="Team">Corporate Comms / PR</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">—</td><td data-label="P3">—</td><td data-label="P4">Drafts the public transparency report</td></tr>
+                <tr><td data-label="Team">Strategy / Product Leadership</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">—</td><td data-label="P3">—</td><td data-label="P4">Evaluates productization</td></tr>
+                <tr><td data-label="Team">Finance</td><td data-label="P0">—</td><td data-label="P1">—</td><td data-label="P2">—</td><td data-label="P3">—</td><td data-label="P4">Builds the ROI case</td></tr>
+                <tr><td data-label="Team">Regulatory Affairs</td><td data-label="P0">Starts tracking from day one</td><td data-label="P1">Continuous</td><td data-label="P2">Continuous</td><td data-label="P3">Continuous</td><td data-label="P4">Feeds into the productization call</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>What this view makes obvious that the phase-view didn't: <strong>Regulatory Affairs is the only team with zero gaps</strong>, active from Phase 0 straight through Phase 4 — literally the function I've been personally performing this whole research thread. <strong>QRM and Legal are the backbone</strong>, touching four of five phases each. <strong>Data Science has the strangest arc</strong> — heavy in Phase 0, silent through Phases 1–3, then back for all of Phase 4, a real staffing risk if that team scatters to other projects in between. Six teams (AI COE, InfoSec, Data Engineers, Procurement, Sales, Finance) appear in exactly one phase each — the easiest stakeholders to manage precisely because their ask is bounded.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q14 — "now plan 4" <span style="font-weight:400;color:var(--grey)">(the same genuine-timeline treatment, applied to Plan 4 — the integrated real-world timeline)</span></h4>
+          <p><strong>Stage 1 — now, as an outsider (already covered by Plan 2): ~3 months, starting today.</strong> Tool inventory, regulatory tracking, the citation-audit, the diagnostic memo, the written policy, the working prototype, the training outline, the dashboard mockup, sample contract language, the mock transparency report — all done or in motion regardless of employment status.</p>
+          <p><strong>Stage 2 — the honest gap in between: unknown duration.</strong> Applying, interviewing, getting an offer, onboarding. Genuinely not mine or yours to control, so no fake number gets attached to it.</p>
+          <p><strong>Stage 3 — once actually hired: the leftover (Plan 4) items, with real timing.</strong> Everything below only starts counting from Day 1 as an employed PM:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Phase</th><th>Left for after joining</th><th>When it happens post-hire</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Phase">0</td><td data-label="Left">Real internal usage-audit numbers · real post-mortem interviews · actual QRM sponsorship secured</td><td data-label="When">Months 1–4</td></tr>
+                <tr><td data-label="Phase">1</td><td data-label="Left">Real threshold sign-off from the actual CRO · real pipeline integration · a real pilot with real deadlines and real people</td><td data-label="When">Months 4–13</td></tr>
+                <tr><td data-label="Phase">2</td><td data-label="Left">Real training delivery to real staff · real HR system changes · real multi-practice adoption data</td><td data-label="When">Months 13–25</td></tr>
+                <tr><td data-label="Phase">3</td><td data-label="Left">Real Executive Committee approval · real binding contracts · a real enforced hard gate · real partner behavior change</td><td data-label="When">Months 25–39</td></tr>
+                <tr><td data-label="Phase">4</td><td data-label="Left">A real published transparency report · a real productization decision with real financials</td><td data-label="When">Months 39–57</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The one number worth keeping: the outsider work doesn't get thrown away once hired — it compresses Stage 3's start. Walking in with an already-written policy draft, an already-built prototype, and an already-run citation audit means Phase 0–1 likely move faster than the table above suggests, because it's revising real work instead of starting from a blank page.</p>
         </div>
 
         </details>
