@@ -1541,13 +1541,13 @@
         <span class="jnum">T35</span>
         <h3 class="jcat-title">The Verification Gap — Research in Progress</h3>
       </div>
-      <article class="jcard" data-case="ai-verification-research" data-updated="2026-08-14">
+      <article class="jcard" data-case="ai-verification-research" data-updated="2026-08-15">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#F59E0B,#B45309)">🔍</div>
             <div>
               <div class="jtitle">The Verification Gap — Research in Progress</div>
-              <div class="jmeta">🔬 Ongoing research · started 14 Aug 2026, updated as it develops</div>
+              <div class="jmeta">🔬 Ongoing research · started 14 Aug 2026, updated 15 Aug 2026</div>
               <div class="jtools"><b>Method:</b> primary-source verification — court filings, official regulator PDFs, company disclosures, cross-checked against news coverage</div>
             </div>
           </div>
@@ -1559,6 +1559,8 @@
           <span class="chip">12+ organizations traced worldwide, across 6 sectors</span>
           <span class="chip">India-specific: Supreme Court zero-tolerance ruling, July 2026</span>
           <span class="chip">Primary sources only — no blog paraphrase without a receipt</span>
+          <span class="chip">Ran the check myself: a real, unflagged Deloitte report — 100 citations, 49 sourced, 51 not</span>
+          <span class="chip">16-step verification framework → a 12-stage, 3-track platform architecture</span>
         </div>
         <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Status:</strong> this is a live research trail, not a finished case study — it's the groundwork behind a future build (see <a href="#case-ai-ops-copilot" data-open-case="ai-ops-copilot" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">OpsPilot</a>'s confidence-gate pattern, applied one level up — to the deliverable itself, not just a case queue). I'm adding to it as the research goes deeper, so treat the dated entries below as a running log, not a finished table of contents.</p>
 
@@ -1844,6 +1846,249 @@
           <p>Explained with the actual proof it's real: Deloitte already owned a citation-checker (aiStudio's "Citation Retriever") before Australia, and it still shipped fabricated citations anyway. The technology wasn't the problem. The smoke-detector analogy: owning a detector doesn't stop a fire unless someone's also decided which rooms need one, who checks the battery, what happens when it beeps, and who's accountable if it was dead for months. Six concrete decisions nobody's making at Deloitte: (1) does the check run on every report or only some; (2) where in the workflow does it run; (3) what confidence score is "good enough" to ship without a human; (4) whose job is it to actually check a flagged item; (5) what happens when someone overrides it under deadline pressure; (6) who's accountable if the whole thing gets silently bypassed. None of these are technology questions — they're business-process decisions, which is the actual, portable definition of what a PM does here that a detection vendor never will.</p>
         </div>
 
+        <div class="cs-narrative">
+          <h4>Q26 — "ok lets start here" <span style="font-weight:400;color:var(--grey)">(sourced a real, unflagged Deloitte report and ran the actual check)</span></h4>
+          <p>Moved from research to hands-on audit. Sourced Deloitte's <strong>"Regulatory Outlook for Financial Markets 2024"</strong> — a real, public, 56-page Deloitte Centre for Regulatory Strategy report, not one of the already-flagged scandal reports. First check: structural completeness — do the in-text citation numbers and the bibliography actually match. Counted every citation marker across all 56 pages by hand and cross-validated the total by summing page-by-page (32 through page 10, +23 = 55 through page 24, +20 = 75 through page 39, +25 = 100 through page 50 — the sum lands exactly on the highest in-text number, confirming the manual count was accurate). Then opened the Endnotes section: it lists entries <strong>1 through 49 only</strong>. <strong>Citations 50 through 100 — 51 of the report's 100 in-text citations, just over half — have no bibliography entry anywhere in the document.</strong></p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q27 — "what is citation first explain in simple terms" / "how many citations each page have"</h4>
+          <p>A citation is just a receipt — a small number in the text that points to exactly where a claim came from, so a reader can go check it themselves instead of taking the author's word for it. Delivered the full per-page count across all 56 pages as the evidence base for the structural check above.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q28 — "what all steps should i plan by which i shld verify each thing in the document"</h4>
+          <p>Formalized an 8-step verification methodology, each step mapped to what would need to be built to automate it:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>#</th><th>Step</th><th>What it checks</th></tr></thead>
+              <tbody>
+                <tr><td data-label="#">1</td><td data-label="Step">Structural completeness</td><td data-label="Checks">In-text citation count vs. bibliography entry count — cheap, automatable, and the one that caught the real finding</td></tr>
+                <tr><td data-label="#">2</td><td data-label="Step">Existence check</td><td data-label="Checks">Does each citation's URL resolve and match a real, findable source</td></tr>
+                <tr><td data-label="#">3</td><td data-label="Step">Content-accuracy check</td><td data-label="Checks">Does the source actually say the claim — the hard, AI-model-dependent step</td></tr>
+                <tr><td data-label="#">4</td><td data-label="Step">Named-author verification</td><td data-label="Checks">Cross-check quoted speakers/authors against a real publication database</td></tr>
+                <tr><td data-label="#">5</td><td data-label="Step">Statistical/data-point verification</td><td data-label="Checks">Does the quoted number match the source's number</td></tr>
+                <tr><td data-label="#">6</td><td data-label="Step">Self-citation consistency</td><td data-label="Checks">Flag when the publisher cites itself</td></tr>
+                <tr><td data-label="#">7</td><td data-label="Step">Recency/currency check</td><td data-label="Checks">Has a cited fact since gone stale or been contradicted</td></tr>
+                <tr><td data-label="#">8</td><td data-label="Step">Sampling/coverage threshold</td><td data-label="Checks">Not automatable — the PM-owned policy call on how much unverifiable content is acceptable to publish</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q29 — "now check each citation by going the link provided and see if statement is there"</h4>
+          <p>Hit a real environment wall first: WebFetch came back <code>EGRESS_BLOCKED</code> on every domain tested — including a completely neutral sanity-check domain with zero sensitivity, confirming it wasn't a Deloitte-specific block but a full outage. Pivoted transparently to WebSearch as the verification method instead — same rigor, different tool. Result: <strong>all 49 present endnotes independently checked out as real</strong> — correct organization, correct date, correct author, topically accurate — across sources including DNB, IMF, World Bank, BIS, ESRB, IOSCO, BCBS, EIOPA, FSB, ECB, Bank of England, the European Commission, the Federal Reserve, UK Finance, Reuters, and Deloitte's own site. Two details worth flagging: endnotes #40 and #46 cite the identical "Future of Payments Review" report for two different points (redundant, not wrong), and #49 is a <strong>self-citation</strong> — Deloitte citing its own report on digital-asset regulation.</p>
+          <p>Then mapped every one of the 51 uncited citations (50–100) to its exact page and claim — the evidence that turns "roughly half is unsourced" into something concrete and checkable:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>#</th><th>Pg</th><th>The specific claim it's attached to</th></tr></thead>
+              <tbody>
+                <tr><td data-label="#">50</td><td data-label="Pg">23</td><td data-label="Claim">Spain has postponed its MiCAR compliance deadline to December 2025</td></tr>
+                <tr><td data-label="#">51</td><td data-label="Pg">23</td><td data-label="Claim">Licence timings "vary between two weeks and two years across the EU27"</td></tr>
+                <tr><td data-label="#">52</td><td data-label="Pg">23</td><td data-label="Claim">Bitcoin/Ether daily trading-volume chart (source: CoinMarketCap)</td></tr>
+                <tr><td data-label="#">53</td><td data-label="Pg">23</td><td data-label="Claim">Firms should prepare for "heightened scrutiny" on digital-asset licensing</td></tr>
+                <tr><td data-label="#">54</td><td data-label="Pg">24</td><td data-label="Claim">Major jurisdictions pushing ahead with their own national AI approaches</td></tr>
+                <tr><td data-label="#">55</td><td data-label="Pg">24</td><td data-label="Claim">AI use-case chart (source: Warwick Business School)</td></tr>
+                <tr><td data-label="#">56</td><td data-label="Pg">28</td><td data-label="Claim">ECB imposing "periodic penalty payments" on SSM banks</td></tr>
+                <tr><td data-label="#">57</td><td data-label="Pg">28</td><td data-label="Claim">UK regulatory-fines chart (source: PRA, FCA)</td></tr>
+                <tr><td data-label="#">58</td><td data-label="Pg">29</td><td data-label="Claim">EBA issued revised guidelines on resolvability</td></tr>
+                <tr><td data-label="#">59</td><td data-label="Pg">29</td><td data-label="Claim">PRA will review branch-vs-subsidiary thresholds</td></tr>
+                <tr><td data-label="#">60</td><td data-label="Pg">29</td><td data-label="Claim">Near-final EU CRD6/CRR3 text published</td></tr>
+                <tr><td data-label="#">61</td><td data-label="Pg">29</td><td data-label="Claim">Near-final UK capital policy published</td></tr>
+                <tr><td data-label="#">62</td><td data-label="Pg">29</td><td data-label="Claim">Large banks capitalised to absorb "a very significant credit shock"</td></tr>
+                <tr><td data-label="#">63</td><td data-label="Pg">29</td><td data-label="Claim">"Evidence" cited from 2023 bank failures</td></tr>
+                <tr><td data-label="#">64</td><td data-label="Pg">29</td><td data-label="Claim">Reverse stress tests (RST) recommendation</td></tr>
+                <tr><td data-label="#">65</td><td data-label="Pg">32</td><td data-label="Claim"><strong>"£740 billion (around 55%) of all lending to UK businesses" comes via NBFIs</strong></td></tr>
+                <tr><td data-label="#">66</td><td data-label="Pg">32</td><td data-label="Claim">"Senior supervisors" question effectiveness of indirect NBFI regulation</td></tr>
+                <tr><td data-label="#">67</td><td data-label="Pg">33</td><td data-label="Claim">ECB published Oct 2023 review of CCR governance practices</td></tr>
+                <tr><td data-label="#">68</td><td data-label="Pg">33</td><td data-label="Claim">PRA identified CCR management shortcomings</td></tr>
+                <tr><td data-label="#">69</td><td data-label="Pg">33</td><td data-label="Claim">FCA found poor client-relationship management</td></tr>
+                <tr><td data-label="#">70</td><td data-label="Pg">35</td><td data-label="Claim">Reference to "SUK reforms"</td></tr>
+                <tr><td data-label="#">71</td><td data-label="Pg">36</td><td data-label="Claim">FSCS branch liability cap of £500m</td></tr>
+                <tr><td data-label="#">72</td><td data-label="Pg">37</td><td data-label="Claim">"New rules on MOBI" came into effect end of 2023</td></tr>
+                <tr><td data-label="#">73</td><td data-label="Pg">37</td><td data-label="Claim">FCA says wholesale market has "a long way to go" on inclusive culture</td></tr>
+                <tr><td data-label="#">74</td><td data-label="Pg">38</td><td data-label="Claim">Supervisors advocate "impact underwriting"</td></tr>
+                <tr><td data-label="#">75</td><td data-label="Pg">39</td><td data-label="Claim">Insurers must attest annually to Fundamental Spread/MA sufficiency</td></tr>
+                <tr><td data-label="#">76</td><td data-label="Pg">41</td><td data-label="Claim">FCA plans to review the advice/guidance boundary in 2024</td></tr>
+                <tr><td data-label="#">77</td><td data-label="Pg">43</td><td data-label="Claim">Info-sharing needed for product governance/value assessments</td></tr>
+                <tr><td data-label="#">78</td><td data-label="Pg">43</td><td data-label="Claim">FCA's 2024 review of Duty embeddedness</td></tr>
+                <tr><td data-label="#">79–80</td><td data-label="Pg">43</td><td data-label="Claim">FCA highlighted firms not passing on a fair share of revenues</td></tr>
+                <tr><td data-label="#">81</td><td data-label="Pg">44</td><td data-label="Claim"><strong>"49% of portfolio managers and 69% of stockbrokers had identified no vulnerable consumers"</strong></td></tr>
+                <tr><td data-label="#">82</td><td data-label="Pg">45</td><td data-label="Claim">"Significant shortcomings" in the FCA's fund-liquidity review</td></tr>
+                <tr><td data-label="#">83</td><td data-label="Pg">45</td><td data-label="Claim">PRA's model risk management principles</td></tr>
+                <tr><td data-label="#">84</td><td data-label="Pg">46</td><td data-label="Claim">IOSCO guidance on swing-pricing market-impact modelling</td></tr>
+                <tr><td data-label="#">85</td><td data-label="Pg">46</td><td data-label="Claim">FSB recommendation against daily dealing for illiquid-asset funds</td></tr>
+                <tr><td data-label="#">86–87</td><td data-label="Pg">47</td><td data-label="Claim">DC/DB pension investment-opportunity measures</td></tr>
+                <tr><td data-label="#">88</td><td data-label="Pg">47</td><td data-label="Claim">The Mansion House Compact</td></tr>
+                <tr><td data-label="#">89</td><td data-label="Pg">47</td><td data-label="Claim">The LTAF (UK)</td></tr>
+                <tr><td data-label="#">90</td><td data-label="Pg">47</td><td data-label="Claim">ELTIF II (EU)</td></tr>
+                <tr><td data-label="#">91</td><td data-label="Pg">47</td><td data-label="Claim">New EU loan-origination-fund regime</td></tr>
+                <tr><td data-label="#">92</td><td data-label="Pg">47</td><td data-label="Claim">IOSCO warning on rate-driven default/valuation risk</td></tr>
+                <tr><td data-label="#">93</td><td data-label="Pg">47</td><td data-label="Claim">Regulators calling for more private-market transparency</td></tr>
+                <tr><td data-label="#">94</td><td data-label="Pg">47</td><td data-label="Claim">ESMA's CSA on valuation risks</td></tr>
+                <tr><td data-label="#">95</td><td data-label="Pg">48</td><td data-label="Claim">PRA model risk management principles (repeat citation)</td></tr>
+                <tr><td data-label="#">96</td><td data-label="Pg">49</td><td data-label="Claim"><strong>Private credit grew "from less than USD 60 billion in 2002 to over USD 1.3 trillion in H1 2022"</strong></td></tr>
+                <tr><td data-label="#">97</td><td data-label="Pg">49</td><td data-label="Claim">FCA raised concerns re: high-risk/complex investments sold to wealth clients</td></tr>
+                <tr><td data-label="#">98</td><td data-label="Pg">50</td><td data-label="Claim">Deloitte's "own analysis" on fee-discount value</td></tr>
+                <tr><td data-label="#">99</td><td data-label="Pg">50</td><td data-label="Claim"><strong>Global private-equity dry powder hit "USD 2.69 trillion in December 2023"</strong></td></tr>
+                <tr><td data-label="#">100</td><td data-label="Pg">50</td><td data-label="Claim"><strong>Deloitte's own "ESG in Private Capital Survey 2023"</strong> — 69 respondents, 61 firms, "91% already having ESG policies" — a second, uncredited self-citation</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The bolded rows are the real risk: specific, quotable statistics presented with the exact same confident formatting as the 49 verified ones — with no way for a reader to tell, just by looking at the page, which citations are checkable and which aren't.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q30 — "so what all checks we did and what we did miss? what shld be the roadmap"</h4>
+          <p>Self-audit against the 8-step framework: fully done — structural completeness, existence checks on all 49. Partial — content-accuracy (topic-level match confirmed, not full sentence-level verification) and self-citation (2 found, not run as a systematic sweep). Not done — named-author verification beyond 2 spot checks, statistical re-verification of every number, and recency (now actually possible in hindsight, since 2024 forward-looking predictions can be checked against what really happened by 2026). Turned that gap analysis into a 7-phase build roadmap — structural scan first (cheapest, catches the most), then existence + topical match, then the hard content-accuracy layer, then statistics, author-verification, self-citation/circularity, recency monitoring, and a governance policy layer last.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q31 — "what else is missing in 8 step framework"</h4>
+          <p>Pushed past execution gaps into methodology gaps — failure modes the 8 steps don't even have a step for. Found 7 more, restructured into 5 tiers by what kind of work each actually needs:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Tier</th><th>Adds</th><th>Catches</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Tier">1 — Structural</td><td data-label="Adds">Citation-placement accuracy</td><td data-label="Catches">A marker attached to the wrong claim in the same paragraph — a real bug found on page 29, where a duplicated paragraph reused an old citation number</td></tr>
+                <tr><td data-label="Tier">2 — Semantic</td><td data-label="Adds">Framing fidelity</td><td data-label="Catches">A true fact used out of context — a caveat dropped when quoting a source</td></tr>
+                <tr><td data-label="Tier">2 — Semantic</td><td data-label="Adds">Derived-statistic methodology</td><td data-label="Catches">A number the report calculated itself from raw source data, not quoted verbatim — is the math shown and correct</td></tr>
+                <tr><td data-label="Tier">3 — Provenance</td><td data-label="Adds">Chain-of-custody</td><td data-label="Catches">A "source" that's just relaying someone else's number a hop removed — citation laundering</td></tr>
+                <tr><td data-label="Tier">4 — Temporal</td><td data-label="Adds">Internal consistency</td><td data-label="Catches">The report contradicting itself across pages</td></tr>
+                <tr><td data-label="Tier">4 — Temporal</td><td data-label="Adds">Library-level pattern check</td><td data-label="Catches">Whether a firm's self-citation rate, or a repeated-but-superseded claim, is trending across its whole publication history — invisible if every audit is per-document</td></tr>
+                <tr><td data-label="Tier">5 — Governance</td><td data-label="Adds">Materiality/risk-weighting</td><td data-label="Catches">Nothing on its own — it's the triage layer deciding which citations get the deepest scrutiny (headline stat vs. background aside) instead of spending a fixed budget evenly</td></tr>
+                <tr><td data-label="Tier">5 — Governance</td><td data-label="Adds">Remediation workflow</td><td data-label="Catches">What happens after something's found wrong — retraction, versioning, notifying anyone who already relied on it. Detection without this is a dead end</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q32 — "what all websites exist working on these frameworks"</h4>
+          <p>Fresh market scan against the 5-tier structure — the finding is the shape of the gap, not any single tool:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Layer</th><th>Players</th><th>What they actually cover</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Layer">Structural</td><td data-label="Players">SwanRef, CiteCheck, RefCheck-AI</td><td data-label="Covers">Academic-paper citations only — 150M+ papers via Crossref/Google Scholar, binary real-or-fake</td></tr>
+                <tr><td data-label="Layer">Semantic</td><td data-label="Players">Patronus AI (Lynx), Galileo (Luna), Vectara (HHEM-2.3)</td><td data-label="Covers">Live RAG-answer faithfulness, in the moment a chatbot responds — not auditing a finished, already-published PDF</td></tr>
+                <tr><td data-label="Layer">Provenance</td><td data-label="Players">GPTZero, Originality.AI</td><td data-label="Covers">Academic/AI-content plagiarism forensics — the tool literally used to catch KPMG, EY and PwC, but built for papers, not corporate reports</td></tr>
+                <tr><td data-label="Layer">Legal-specific</td><td data-label="Players">Lexis+ / Protégé, NexLaw</td><td data-label="Covers">Case-law and statute citations only</td></tr>
+                <tr><td data-label="Layer">Governance</td><td data-label="Players">Workiva, Diligent, AuditBoard, Deloitte's own ControlCatalyst.AI</td><td data-label="Covers">Internal SOX/financial controls — not the credibility of a firm's own published thought-leadership</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Every specialist tool is built for a different document type, a different moment (live generation vs. after publish), or a different purpose (internal controls vs. public credibility). Nobody stitches structural + semantic + provenance + governance together, aimed at a firm's own published research output — the whitespace this whole thread has been pointing at.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q33 — "explain me the gap in layman language"</h4>
+          <p>Every existing tool is a specialist checkpoint doing one narrow job — a bouncer checking student IDs (SwanRef), a spell-checker built into a live chatbot (Patronus/Vectara), a plagiarism detector at a university (GPTZero), a lawyer's citation checker (Shepard's/NexLaw), or the internal-audit team checking a company's own books (Workiva/Diligent). Nobody's built the full check-up doctor — the one who takes a firm's own published report and runs it through every layer at once, and specifically tells you where the sourcing simply stops and nobody flagged it. That's exactly what the manual walkthrough of the Deloitte report proved by hand this week.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q34 — "what all things need to be checked in full report"</h4>
+          <p>Consolidated into a 10-item, end-to-end audit checklist: (1) document-wide structural count-match, (2) per-citation existence/attribution/topic/claim/context/placement, (3) every number and statistic, (4) every chart's data source, (5) every quote and named person, (6) self-referencing, (7) internal consistency across the document, (8) currency — did a forecast actually hold up, (9) the materiality-and-coverage decision of which claims matter most, (10) what happens after something's found wrong. This list is what the platform's architecture is a direct build-spec for.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q35 — "does it cover — nobody has built the 'full check-up' doctor"</h4>
+          <p>Mapped the 10-item checklist against the market scan, item by item, to confirm the gap is real and not just a hunch: existence/attribution (academic tools only), content-match (live-chat tools only), context/caveat-dropping (nobody, anywhere), citation-placement (nobody), derived-statistics (nobody), chart sourcing (nobody), self-citation as a standing feature (nobody), internal consistency (nobody), currency re-checking after publish (nobody), and materiality/remediation workflow (GRC tools have it, but for internal controls, not public reports). Confirmed: every specialist tool is either the wrong document type, the wrong moment in time, or the wrong purpose — the "full check-up" really doesn't exist yet.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q36 — "what if each speciality is built so that the system is not heavy and correct output is given"</h4>
+          <p>The instinct is exactly how these systems actually get built in the industry, not a simplification — confirmed against the market research itself (Braintrust, on the current RAG-eval landscape: "there is no single tool that does everything — a production stack layers an eval framework, a faithfulness checker, an observability platform, and an inline guardrail"). Laid out the shape: a cheap parsing layer runs on 100% of citations first; a router decides which specialists a given citation actually needs (a $-figure gets the statistics specialist, a quote gets author-verification, most citations trigger 2–4 of the roster, never all of them); each specialist stays small and narrow — several can be bought/integrated (Patronus, Vectara) instead of built; a lightweight aggregator combines verdicts into one score; governance sits on top as pure rules, no model at all. The real product becomes the router and the governance layer, glued around a handful of licensed specialists plus the handful nobody else has built.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q37 — "what all specialisations are there"</h4>
+          <p>Full roster, organized by what signal in a citation triggers each one:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Trigger</th><th>Specialist</th><th>What it checks</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Trigger">Always runs</td><td data-label="Specialist">Existence</td><td data-label="Checks">Does the source resolve, is it real</td></tr>
+                <tr><td data-label="Trigger">Always runs</td><td data-label="Specialist">Attribution</td><td data-label="Checks">Right org, date, author</td></tr>
+                <tr><td data-label="Trigger">Always runs</td><td data-label="Specialist">Content-match</td><td data-label="Checks">Does the source support this specific sentence</td></tr>
+                <tr><td data-label="Trigger">Always runs</td><td data-label="Specialist">Placement</td><td data-label="Checks">Is the marker attached to the right claim, not an adjacent one</td></tr>
+                <tr><td data-label="Trigger">Always runs</td><td data-label="Specialist">Self-citation</td><td data-label="Checks">Does the source domain match the publisher's own domain (near-free, pure logic)</td></tr>
+                <tr><td data-label="Trigger">$ or % figure</td><td data-label="Specialist">Statistics-match</td><td data-label="Checks">Does the number match the source</td></tr>
+                <tr><td data-label="Trigger">Report's own calculation</td><td data-label="Specialist">Derived-calculation</td><td data-label="Checks">Is the math shown and correct</td></tr>
+                <tr><td data-label="Trigger">Chart/graph caption</td><td data-label="Specialist">Chart-data</td><td data-label="Checks">Does the visualized data match the source</td></tr>
+                <tr><td data-label="Trigger">Named person + quote</td><td data-label="Specialist">Author-verification</td><td data-label="Checks">Is the quote real, right date/venue</td></tr>
+                <tr><td data-label="Trigger">Secondary/news source</td><td data-label="Specialist">Chain-of-custody</td><td data-label="Checks">Primary source, or laundered through one</td></tr>
+                <tr><td data-label="Trigger">Law/regulation reference</td><td data-label="Specialist">Legal-citation</td><td data-label="Checks">Different registry entirely (Shepard's-style)</td></tr>
+                <tr><td data-label="Trigger">Forecast/deadline language</td><td data-label="Specialist">Currency/recency</td><td data-label="Checks">Has this since been superseded or contradicted by events</td></tr>
+                <tr><td data-label="Trigger">Caveat in the source</td><td data-label="Specialist">Framing-fidelity</td><td data-label="Checks">Was the caveat dropped when the report used the fact</td></tr>
+                <tr><td data-label="Trigger">Repeated fact in-doc</td><td data-label="Specialist">Internal-consistency</td><td data-label="Checks">Do the two instances agree</td></tr>
+                <tr><td data-label="Trigger">Matches a past report</td><td data-label="Specialist">Cross-report/library</td><td data-label="Checks">Contradiction or repetition across the firm's own history</td></tr>
+                <tr><td data-label="Trigger">Not a checker</td><td data-label="Specialist">Materiality/risk-weighting</td><td data-label="Checks">Decides how deep the other specialists should go, based on where the citation sits (headline vs. footnote)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q38 — "what should be steps to check and conclude which route to go and which specialisation to be selected"</h4>
+          <p>The router's actual decision sequence, run for every citation: (1) isolate the exact sentence and source attached to the marker; (2) the existence gate — no bibliography entry at all means stop immediately, flag unverifiable, nothing else runs (this single gate alone caught citations 50–100 in the real audit); (3) run the baseline 5 unconditionally; (4) classify the claim by scanning for $/% figures, quotes, forecast language, chart attachment, legal references, secondary sourcing, and attach only the relevant specialists; (5) score materiality separately, in parallel, deciding depth rather than which specialist runs; (6) aggregate every specialist's verdict into one tier — green/amber/red — with a full evidence record; (7) escalate anything uncertain or high-materiality to a human instead of auto-closing; (8) feed the human's decision back to sharpen future classification.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q39 — "create a complete architecture from document extraction to final output"</h4>
+          <p>Full 12-stage pipeline, grounded in the real Deloitte audit at every stage:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>#</th><th>Stage</th><th>Does</th></tr></thead>
+              <tbody>
+                <tr><td data-label="#">1</td><td data-label="Stage">Extraction</td><td data-label="Does">Parses text, footnote markers, chart captions, quotes, and the bibliography as separate structured fields</td></tr>
+                <tr><td data-label="#">2</td><td data-label="Stage">Citation Graph Builder</td><td data-label="Does">Links every marker to its exact claim and its bibliography entry, or null — the stage that alone surfaces the structural gap</td></tr>
+                <tr><td data-label="#">3</td><td data-label="Stage">Classification &amp; Routing</td><td data-label="Does">Tags each citation with which specialists it actually needs</td></tr>
+                <tr><td data-label="#">4</td><td data-label="Stage">Specialist Verification</td><td data-label="Does">Runs only the triggered specialists in parallel, each a small, swappable service</td></tr>
+                <tr><td data-label="#">5</td><td data-label="Stage">Materiality Scoring</td><td data-label="Does">Scores prominence — pull-quote/headline vs. supporting detail</td></tr>
+                <tr><td data-label="#">6</td><td data-label="Stage">Unified Scorecard</td><td data-label="Does">Combines everything into one master table — never blends the buckets</td></tr>
+                <tr><td data-label="#">7</td><td data-label="Stage">Escalation / Review Queue</td><td data-label="Does">Routes anything uncertain to a human, with evidence pre-assembled</td></tr>
+                <tr><td data-label="#">8</td><td data-label="Stage">Governance Policy Engine</td><td data-label="Does">Pure rules — a firm's configured coverage threshold decides publish/hold/review</td></tr>
+                <tr><td data-label="#">9</td><td data-label="Stage">Output / Export</td><td data-label="Does">Generates the shareable audit report</td></tr>
+                <tr><td data-label="#">10</td><td data-label="Stage">Post-Publication Monitoring</td><td data-label="Does">Re-checks existence and currency on a schedule after the report ships</td></tr>
+                <tr><td data-label="#">11</td><td data-label="Stage">Cross-Report Library</td><td data-label="Does">Indexes every audited report — surfaces pattern-level trends a single document can't</td></tr>
+                <tr><td data-label="#">12</td><td data-label="Stage">Data stores</td><td data-label="Does">Five persistent stores backing the pipeline: Citation Graph DB, Source Cache, Review/Audit Log, Policy Config Store, Report History Index</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q40 — "remember our main target is to find AI Hallucination"</h4>
+          <p>An important correction, caught before it became an overclaim: what the manual audit found on the Deloitte report is <strong>unverifiable</strong>, not <strong>hallucinated</strong> — those are different claims. Hallucinated means the AI invented something that never existed. Unverifiable means there's nothing to check against; the claim could be entirely true. Re-sorted all 16 specialists against the real target: only 5 — Existence, Content-match, Author-verification, Statistics-match, Chain-of-custody — actually prove fabrication. Everything else (structural completeness, placement, self-citation, framing-fidelity, internal-consistency, currency, materiality/governance) is real report-hygiene value, but it isn't hallucination detection, and the pitch has to stay precise about which is which.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q41 — "create an architecture for a platform — if required divide it into two things hallucination and unverifiable"</h4>
+          <p>Split the pipeline into two tracks right after the Citation Graph stage, forking on one question — does this citation have a source at all: <strong>Track A</strong> (has a source) runs the 6 fabrication-proving specialists and can only output Real, Fabricated, or Suspicious. <strong>Track B</strong> (no source) runs a light 3-step check and can only ever output Unverifiable — it never touches the specialists that would let it claim fabrication, because there's nothing to check against. The two converge into a scorecard with 3 separate, non-blendable counts. Scored against the real report: <strong>49 Verified · 0 Hallucinated · 51 Unverifiable</strong> — the honest number, not the inflated "51 hallucinations" headline it would've been easy to overstate.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q42 — "what shld i make to have complete steps — architecture/wireframe/roadmap"</h4>
+          <p>Recommended three linked deliverables: the <strong>architecture</strong> (the fork, the 12 stages, the specialist tiers, build-vs-buy calls); <strong>wireframes</strong> for the 7 screens a real user would need — upload, the scorecard dashboard, a per-citation detail view, the review queue, governance settings, the export report, and a cross-report trend view; and a <strong>roadmap</strong> sequencing the build so the sharpest claim ships first — Track A only (Existence, Content-match, Author-verify) as the MVP, then Track B and governance, then the remaining specialists, then monitoring, then the cross-report library.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q43 — "now make a user diagram for complete architecture including internal architectures" <span style="font-weight:400;color:var(--grey)">(three review-and-fix passes, run against my own critique each time)</span></h4>
+          <p>Built the diagram, then deliberately audited it against everything discussed above rather than treating a first draft as done. Round 1 found real gaps: Self-citation was missing from the specialist grid entirely, despite being the check that caught Deloitte citing itself twice in the real audit. Framing-fidelity and Internal-consistency — the two most differentiated, least-built checks in the whole market scan — were also missing. The Verdict Resolver could output "Suspicious," but the Scorecard only had 3 buckets, so a Suspicious verdict had nowhere to go. Materiality was described in a text label but never actually drawn as a real signal reaching the router. And the 5 data stores from the written spec were invisible on the diagram entirely.</p>
+          <p>Fixed all of it in two more passes: added a 4th, dashed-border <strong>Pending</strong> bucket so Suspicious verdicts can't silently disappear; drew a real materiality-signal line from Stage 1 into both tracks instead of just labeling it; drew all 5 data stores as their own elements with real connectors, including the one — Source Cache — that's genuinely read twice, once at first-check and again by Monitoring, months later. Then one more correction: re-checked whether "AI hallucination" — the stated goal — actually covered fabricated numbers, fabricated authors, <em>and</em> self-made claims with no citation at all. It didn't. Everything in the pipeline was triggered by a citation marker existing in the first place — a bare, uncited assertion stated as flat fact was invisible to the whole system. Added a third track, <strong>Track C</strong>, branching directly off Stage 1 before the citation graph is even built, scanning all uncited text for real factual claims and labeling them a 5th bucket: <strong>Unsupported Assertion</strong> — deliberately never confused with Unverifiable, because "cited but the trail ran out" and "never even tried to cite anything" are different failures with different fixes.</p>
+          <div style="margin:14px 0">
+            <img src="projects/verification-gap-engine/screenshots/architecture-diagram.png" alt="Verification Gap Engine architecture diagram: a document flows through extraction and citation-graph building, then forks into three tracks. Track B (amber, no source) runs a 3-step check ending in Unverifiable. Track A (rust, has a source) runs a materiality-aware classifier dispatching 12 parallel specialists into a verdict resolver producing Real, Fabricated, or Suspicious. Track C (violet, branching off extraction directly) scans uncited body text for unsupported factual claims. All three converge into a 5-bucket scorecard — Verified, Hallucinated, Unverifiable, Pending, Unsupported — feeding materiality scoring, a dashed-border human-run escalation stage, governance policy, and output, before splitting into monitoring and a cross-report library, with five labeled data stores and a trend-data feedback loop back to the top." loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+            <p style="font-size:12.5px;color:var(--grey);margin:8px 0 0">The current architecture: three tracks (Hallucination-checked / Unverifiable / Never-cited), 12 pipeline stages, 12 specialists, and all 5 data stores — nothing left as a label-only fix.</p>
+          </div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q44 — "at what step ai hallucination is checked" / "are fabrication of numbers, authors, and self-made claims all covered"</h4>
+          <p>Precise answer, not a hand-wave: eligibility is decided at the fork (only Track A citations can ever be tested for fabrication); the actual checking happens across the 12-specialist grid; but the verdict itself — the single point allowed to output "Fabricated" — is the Verdict Resolver, one step after the grid. Nowhere else in the pipeline may produce that label. On coverage: fabricated numbers (Statistics-match, Derived-calc), fabricated authors/quotes (Author-verify), and fabricated sources (Existence) were all genuinely covered — but self-made claims with no citation at all were not, until Track C closed that specific hole.</p>
+        </div>
+
         </details>
 
         <div class="cs-narrative">
@@ -1854,7 +2099,10 @@
             <li><s>Get a real hallucination-rate comparison across GPT/Gemini/Claude</s> — checked (Q22): Vectara HHEM leaderboard reviewed; on the harder 2026 benchmark, every current frontier model exceeds 10%, regardless of vendor.</li>
             <li><s>Track what Deloitte's actually changed internally</s> — checked (Q23): ControlCatalyst.AI (12 Aug 2026) is a third client-facing product, not an internal-deliverable fix — still no public evidence of the specific gap being closed.</li>
             <li>Design the actual internal verification layer this points toward — see <a href="#case-deloitte-pm-roleplay" data-open-case="deloitte-pm-roleplay" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">the execution-roadmap exercise</a>, a role-play working through exactly this as a hypothetical Deloitte PM.</li>
-            <li>Run a real citation-fabrication check on an actual public Deloitte report myself, using the same method that caught KPMG/EY/PwC — the one open item that's not hypothetical, still not started.</li>
+            <li><s>Run a real citation-fabrication check on an actual public Deloitte report myself, using the same method that caught KPMG/EY/PwC</s> — done (Q26–Q29): 100 in-text citations, 49 bibliography entries, all 49 confirmed real, 51 unverifiable — with the exact claim behind every one of the 51 mapped out.</li>
+            <li><s>Turn the 8-step framework and the checklist into an actual product architecture</s> — done (Q36–Q43): a 12-stage, 3-track platform architecture (Hallucination-checked / Unverifiable / Never-cited), full specialist roster, and a complete system diagram.</li>
+            <li>Build Track C's actual scanner and run it against the same Deloitte report — the one bucket on the scorecard that's still a "—", not a number.</li>
+            <li>Wireframe the 7 screens this architecture implies, and prototype the MVP slice (Existence + Content-match + Author-verify only) against a second, different unchecked report.</li>
           </ul>
         </div>
 
@@ -1864,6 +2112,8 @@
           <span><span class="k">Mata v. Avianca</span><a href="https://www.courtlistener.com/docket/63107798/mata-v-avianca-inc/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">court record →</a></span>
           <span><span class="k">PwC investigation</span><a href="https://gptzero.me/news/investigations-pwc/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GPTZero →</a></span>
           <span><span class="k">Vectara leaderboard</span><a href="https://www.vectara.com/blog/introducing-the-next-generation-of-vectaras-hallucination-leaderboard" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">next-gen benchmark →</a></span>
+          <span><span class="k">SwanRef</span><a href="https://www.swanref.org/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">citation checker →</a></span>
+          <span><span class="k">GPTZero</span><a href="https://gptzero.me/news/iclr-2026/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">ICLR 2026 findings →</a></span>
         </div>
       </div>
       </article>
