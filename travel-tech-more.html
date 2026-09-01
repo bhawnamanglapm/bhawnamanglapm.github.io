@@ -1881,7 +1881,7 @@
             <div class="jcard-illus" style="background:linear-gradient(135deg,#F59E0B,#B45309)">🔍</div>
             <div>
               <div class="jtitle">The Verification Gap — From Audit to Prototype</div>
-              <div class="jmeta">🔬 Ongoing research · part 2 of 2 · started 15 Aug 2026</div>
+              <div class="jmeta">🔬 Ongoing research · part 2 of 3 · started 15 Aug 2026</div>
               <div class="jtools"><b>Continues from:</b> <a href="#case-ai-verification-research" data-open-case="ai-verification-research" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Part 1 — the research log (Q1–Q25)</a></div>
             </div>
           </div>
@@ -2203,6 +2203,7 @@
             <li><s>Wireframe the screens this architecture implies</s> — done (Q45–Q48): 8 screens, all four verdict states, the full 12-specialist roster, benchmarked against real tools (Q49) — a sample size of one report and zero working code, so not launch-ready, and said so plainly.</li>
             <li>Build Track C's actual scanner and run it against the same Deloitte report — the one bucket on the scorecard that's still a "—", not a number.</li>
             <li>Prototype the MVP slice (Existence + Content-match + Author-verify only) against a second, different unchecked report — still on a sample size of one until that happens.</li>
+            <li>Both of the above are still open — this environment's network access to the source PDF is currently blocked, so neither could be run for real yet. Meanwhile the build side kept moving — the data-handling question, the actual design and prototype, a landing page, and a full screen-by-screen completeness pass: see <a href="#case-verification-gap-product-pass" data-open-case="verification-gap-product-pass" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Part 3: Data, Design &amp; the Full Screen Set</a>.</li>
           </ul>
         </div>
 
@@ -2210,6 +2211,125 @@
           <span><span class="k">Audited report</span><a href="https://nor.deloitte.com/rs/712-CNF-326/images/Regulatory-Outlook-Financial-Markets-2024.pdf" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Deloitte Reg. Outlook 2024 →</a></span>
           <span><span class="k">SwanRef</span><a href="https://www.swanref.org/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">citation checker →</a></span>
           <span><span class="k">GPTZero</span><a href="https://gptzero.me/news/iclr-2026/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">ICLR 2026 findings →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T35c</span>
+        <h3 class="jcat-title">The Verification Gap — Data, Design &amp; the Full Screen Set</h3>
+      </div>
+      <article class="jcard" data-case="verification-gap-product-pass" data-updated="2026-08-16">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#F59E0B,#B45309)">🔍</div>
+            <div>
+              <div class="jtitle">The Verification Gap — Data, Design &amp; the Full Screen Set</div>
+              <div class="jmeta">🔬 Ongoing research · part 3 of 3 · started 16 Aug 2026</div>
+              <div class="jtools"><b>Continues from:</b> <a href="#case-verification-gap-platform" data-open-case="verification-gap-platform" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Part 2 — audit to architecture (Q26–Q49)</a></div>
+            </div>
+          </div>
+          <span class="jtoggle">view build log →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">Closed the confidentiality gap first — Patronus Lynx and Vectara both confirmed self-hostable, so a draft report never has to leave the firm's network</span>
+          <span class="chip">A full plain-language data map: what's uploaded, what stays in-house, what actually calls out</span>
+          <span class="chip">Built in the right order: wireframe → static design → interactive prototype → landing page</span>
+          <span class="chip">A completeness pass across every screen — navigation, buttons, sections, and the gaps still open</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Status:</strong> where the architecture and wireframes from <a href="#case-verification-gap-platform" data-open-case="verification-gap-platform" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Part 2</a> got the two things they didn't have yet — a real answer to "what happens to the data," and screens built past gray boxes. Picks up at Q50.</p>
+
+        <div class="cs-narrative">
+          <h4>Q50 — "No data-handling story. This tool would ingest confidential draft reports and call out to third-party APIs (Patronus, Vectara) — a real firm will ask about that before anything else, and there's no answer yet"</h4>
+          <p>A real, self-flagged gap, not a prompted one — every screen up to this point assumed data access without ever saying where the data goes. Checked whether the two AI specialists the architecture already leans on can actually run privately: <strong>Patronus Lynx is fully open-source</strong> (weights on HuggingFace, runnable via vLLM or Ollama inside a firm's own infrastructure), and <strong>Vectara offers on-prem/VPC/air-gapped private deployment</strong>. Both confirmed by search, not assumed. That single fact is what unlocks a real answer: the specialists that need to <em>read</em> the confidential draft text can be run inside the firm's own network instead of a public multi-tenant API.</p>
+        </div>
+
+        <details class="cs-showmore">
+          <summary>Show more: Q51–Q56 <span class="sm-count">(the full data-flow map and 3rd-party touchpoints, the MVP path — design, prototype, landing page — and the full screen-by-screen completeness audit)</span></summary>
+
+        <div class="cs-narrative">
+          <h4>Q51 — "i want to know in detail about data... where we need to input, where we will get output, from where we will fetch, where third party api involved, where api to be created etc as a layman person" / "where do we need 3rd party apis"</h4>
+          <p>Walked the whole pipeline stage by stage, in plain language, and landed on <strong>only four points where anything ever needs to leave the firm's own systems</strong> — everything else (upload, extraction, the citation graph, the scorecard, the export) stays entirely in-house:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Touchpoint</th><th>What goes out</th><th>Why it has to</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Touchpoint">Existence check</td><td data-label="What goes out">Only the citation's public URL/metadata</td><td data-label="Why">Has to ask the open web whether that source actually resolves — nothing confidential in the request</td></tr>
+                <tr><td data-label="Touchpoint">Content-match &amp; Framing-fidelity</td><td data-label="What goes out">The draft's own sentence, to be compared against the source's sentence</td><td data-label="Why">The one place actual draft text leaves the parsing layer — routed to a <strong>self-hosted</strong> Patronus Lynx or Vectara instance, never a public shared endpoint</td></tr>
+                <tr><td data-label="Touchpoint">Author-verification</td><td data-label="What goes out">Only the quoted name, date, and venue</td><td data-label="Why">Cross-checked against a public speech/quote or news record — not the surrounding confidential paragraph</td></tr>
+                <tr><td data-label="Touchpoint">Legal-citation</td><td data-label="What goes out">Only the law/regulation citation string</td><td data-label="Why">A completely separate registry (Shepard's-style) — a different specialty API from the other three</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The layman version of the answer: everything about the report you're auditing stays on your own servers by default. The only time anything goes outside is to ask a public question ("does this URL exist," "did this person really say this," "is this citation format real") — and the one touchpoint that does need to see your actual sentences runs on a copy of the model you control, not someone else's server.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q52 — "what should i do to make mvp design prototype using the wireframe" / "make complete prompt from wireframe in detail" / "make prototype" → corrected: "first make design using wireframe than prototypr"</h4>
+          <p>Answered the roadmap question the same way this whole thread had already earned the right to answer it — from the earlier wireframe pass, not from scratch: Wireframe (gray, structural — already done) → <strong>Design</strong> (static, real visual identity) → <strong>Prototype</strong> (interactive) → ship. Wrote a full build prompt translating the wireframes' 8 screens, their layout decisions, and the real Deloitte numbers into a build spec — then jumped straight to building the interactive prototype, skipping the middle stage. Caught directly: <em>"first make design using wireframe than prototypr"</em> — a fair, plain correction. Went back and built the missing Design stage before continuing, in the right order this time.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q53 — the Design stage: static, full color, five screens</h4>
+          <p>Built on the wireframes' exact structure, but with a real visual identity for the first time — a deep-teal accent (<code>#146370</code>), true green/rust status colors instead of gray labels, and every number still pulled from the real audit. Five screens: Upload, Processing, Scorecard, Citation Detail — Verified, and Citation Detail — Fabricated (illustrative only, since the real audit found zero fabrications — labeled as such on the screen itself, the same discipline kept since the wireframes).</p>
+          <div style="margin:14px 0">
+            <img src="projects/verification-gap-engine/screenshots/design-scorecard.png" alt="High-fidelity design of the Scorecard screen in full color: a browser-style window shows the audited report's title, page and citation counts, and a Needs Review badge, above three stat tiles reading 49 Verified, 1 Fabricated, and 51 Unverifiable, a green-to-rust proportional bar, and a two-row citation table with status pills." loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+            <p style="font-size:12.5px;color:var(--grey);margin:8px 0 0">The Scorecard in real color for the first time. The "1 Fabricated" tile is the illustrative example — the real audit's actual count is 0.</p>
+          </div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q54 — the Prototype: the same four core screens, actually clickable</h4>
+          <p>Same visual system as the Design stage, this time wired up with real state — <code>Start audit</code> on Upload triggers a live Processing animation that steps through the specialists actually running, which lands on the Scorecard, which links into Citation Detail's <code>Confirm fabricated</code> / <code>Overturn — mark verified</code> / <code>Add note</code> buttons. A visible trace of the earlier data-handling answer made it into the build itself: the Upload screen carries a real <strong>"Data sensitivity"</strong> field alongside report type, not just a file picker — a direct, checkable link between Q50's finding and what actually got built.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q55 — "Create homepage style or first sign up page"</h4>
+          <p>A screen that hadn't existed anywhere before this — every earlier build started at Upload, with nothing in front of it. Built as a genuine front door: a hero making the actual finding the whole pitch ("100 citations. We could only check 49."), a footnoted stat citing the audit itself, three proof-point numbers (4 of 4 Big Four firms with a fabricated-citation incident since 2024, 0 existing tools that audit a firm's own published reports end-to-end, 2 failure modes that look identical to a reader but need different fixes), a "how it works" walkthrough, and a working client-side sign-up form — work email, firm name, and report type, gated behind the same "Data sensitivity" thinking from Q50.</p>
+          <div style="margin:14px 0">
+            <img src="projects/verification-gap-engine/screenshots/landing-page.png" alt="Landing page for the Verification Gap Engine: a hero reading '100 citations. We could only check 49.' with Request early access and See how the audit worked buttons, a scorecard preview beneath it, three proof-point stats (4 of 4, 0, 2), and a How It Works section with four steps — Upload, Check, Score, Review." loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+            <p style="font-size:12.5px;color:var(--grey);margin:8px 0 0">The front door the product never had until this pass — every number on it traces back to the real audit, not placeholder copy.</p>
+          </div>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Q56 — the completeness pass: "what need to be on the first screen" / "how many screens" / "what each page should have like navigation bar" / "buttons" / "sections on each page" / "add up gap pages also when if something goes wrong"</h4>
+          <p>A rapid, screen-by-screen audit across everything built so far, checked against the actual files rather than answered from memory:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>Question</th><th>What the audit found</th></tr></thead>
+              <tbody>
+                <tr><td data-label="Question">Screen count</td><td data-label="Found">Landing (new) + the 4-screen MVP slice (Upload, Processing, Scorecard, Citation Detail) built to design/prototype fidelity — of the 7 screens Q42 originally planned, Review Queue, Governance, Export, and Cross-report trend are still wireframe-only, not yet designed or prototyped</td></tr>
+                <tr><td data-label="Question">Navigation bar</td><td data-label="Found">A real gap, not a style choice — neither the Design stage nor the Prototype has a persistent sidebar or top nav; each screen exists as a standalone view. Flagged as unbuilt product chrome, not a deliberate minimalist decision</td></tr>
+                <tr><td data-label="Question">Buttons per page</td><td data-label="Found">Upload: <code>Start audit</code>. Citation Detail: <code>Confirm fabricated</code>, <code>Overturn — mark verified</code>, <code>Add note</code>. Landing: <code>Request early access</code> (hero + form) and <code>See how the audit worked</code> — every button traced to an actual element in the built files, not a hypothetical list</td></tr>
+                <tr><td data-label="Question">Sections per page</td><td data-label="Found">Landing breaks into 4 real sections: hero, proof-points, "how it works," and the sign-up form — each with its own job, none of them decorative</td></tr>
+                <tr><td data-label="Question">Gap/error states</td><td data-label="Found">Identified, not yet built: what a screen looks like when a document fails to parse, when zero citations are found, when every specialist times out, and when a sign-up submits with no available seats. None of these exist as screens yet — a named, open gap rather than a silent one</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        </details>
+
+        <div class="cs-narrative">
+          <h4>Where this goes next</h4>
+          <p>Open threads, updated as they resolve:</p>
+          <ul>
+            <li><s>Answer the data-handling question a real firm asks first</s> — done (Q50–Q51): a 4-touchpoint map, with the only content-reading specialist confirmed to be self-hostable.</li>
+            <li><s>Build the Design and Prototype stages, in the right order</s> — done (Q52–Q54): 5 static screens, then the same 4 wired up interactively, corrected mid-build to insert the design stage that was skipped the first time.</li>
+            <li><s>Build the front door — a landing/sign-up page</s> — done (Q55): a real hero, proof points, and a working sign-up form, all numbers traced to the real audit.</li>
+            <li>Build the 3 still-wireframe-only screens (Review Queue, Governance, Export, Cross-report trend) to the same design/prototype fidelity as the MVP slice.</li>
+            <li>Build the missing gap/error states named in Q56 — none of the four identified failure screens exist yet.</li>
+            <li>Track C's scanner and the second-report MVP test (still open from Part 2) remain blocked on this environment's network access to a source document.</li>
+          </ul>
+        </div>
+
+        <div class="jlinks">
+          <span><span class="k">Audited report</span><a href="https://nor.deloitte.com/rs/712-CNF-326/images/Regulatory-Outlook-Financial-Markets-2024.pdf" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Deloitte Reg. Outlook 2024 →</a></span>
+          <span><span class="k">Patronus AI</span><a href="https://www.patronus.ai/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Lynx model →</a></span>
+          <span><span class="k">Vectara</span><a href="https://www.vectara.com/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">HHEM &amp; private deployment →</a></span>
         </div>
       </div>
       </article>
