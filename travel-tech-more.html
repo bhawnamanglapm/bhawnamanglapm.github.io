@@ -1595,6 +1595,9 @@
           table style, but the words and numbers are unchanged.</p>
         </div>
 
+        <details class="cs-showmore">
+          <summary>Show more: Q1–Q25 <span class="sm-count">(the original Deloitte site scan, the PM/data-management filtering, the build decision, the plain-language explainer, then the full source-hunting, global-pattern, India, platforms, regulation, and procurement thread)</span></summary>
+
         <div class="cs-narrative">
           <h4>Q1 — "i want to make fresh project for deloitte company- analyze the whole company website and various other live websites and let me know on which problem statements they are working on?"</h4>
           <p><em>(<code>deloitte.com</code> and <code>deloittedigital.com</code> turned out to be blocked for direct fetching in my research environment, so this was built from indexed content, press coverage, and third-party analysis — not a raw site crawl.)</em></p>
@@ -1640,9 +1643,6 @@
           <p>The real reason: not that the AI is "bad" — AI tools are known to occasionally invent plausible-sounding facts. The failure was a human process failure — whoever was supposed to verify every fact and quote either didn't do it carefully, or there was no system forcing that check to happen before the document went out. Like a newsroom publishing a fabricated quote because the editor didn't fact-check it.</p>
           <p>What's actually needed, in plain terms: a reliable checkpoint that (1) flags anything AI-generated that hasn't been independently confirmed, (2) makes it easy to trace every fact/quote/citation back to something real, (3) refuses to let a document ship until that check has happened, and (4) keeps a record of what was checked and by whom.</p>
         </div>
-
-        <details class="cs-showmore">
-          <summary>Show more: Q6–Q49 <span class="sm-count">(source-hunting, global pattern, India, platforms, regulation, procurement — then the actual audit, the verification framework, the full platform architecture, the wireframes, and an honest launch-readiness check)</span></summary>
 
         <div class="cs-narrative">
           <h4>Q6 — "where can i research about these things- share me links"</h4>
@@ -1846,6 +1846,56 @@
           <p>Explained with the actual proof it's real: Deloitte already owned a citation-checker (aiStudio's "Citation Retriever") before Australia, and it still shipped fabricated citations anyway. The technology wasn't the problem. The smoke-detector analogy: owning a detector doesn't stop a fire unless someone's also decided which rooms need one, who checks the battery, what happens when it beeps, and who's accountable if it was dead for months. Six concrete decisions nobody's making at Deloitte: (1) does the check run on every report or only some; (2) where in the workflow does it run; (3) what confidence score is "good enough" to ship without a human; (4) whose job is it to actually check a flagged item; (5) what happens when someone overrides it under deadline pressure; (6) who's accountable if the whole thing gets silently bypassed. None of these are technology questions — they're business-process decisions, which is the actual, portable definition of what a PM does here that a detection vendor never will.</p>
         </div>
 
+        </details>
+
+        <div class="cs-narrative">
+          <h4>Where this goes next</h4>
+          <p>Open threads, updated as they resolve:</p>
+          <ul>
+            <li><s>Find out whether any Indian consulting firm has had a Deloitte-style incident yet</s> — checked (Q22): not found; the pattern instead expanded to all four of the Big Four globally.</li>
+            <li><s>Get a real hallucination-rate comparison across GPT/Gemini/Claude</s> — checked (Q22): Vectara HHEM leaderboard reviewed; on the harder 2026 benchmark, every current frontier model exceeds 10%, regardless of vendor.</li>
+            <li><s>Track what Deloitte's actually changed internally</s> — checked (Q23): ControlCatalyst.AI (12 Aug 2026) is a third client-facing product, not an internal-deliverable fix — still no public evidence of the specific gap being closed.</li>
+            <li>Design the actual internal verification layer this points toward — see <a href="#case-deloitte-pm-roleplay" data-open-case="deloitte-pm-roleplay" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">the execution-roadmap exercise</a>, a role-play working through exactly this as a hypothetical Deloitte PM.</li>
+            <li>The research continues directly into the actual hands-on audit and the platform it led to — see <a href="#case-verification-gap-platform" data-open-case="verification-gap-platform" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Part 2: From Audit to Prototype</a>.</li>
+          </ul>
+        </div>
+
+        <div class="jlinks">
+          <span><span class="k">EU AI Act</span><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full text →</a></span>
+          <span><span class="k">NIST AI RMF</span><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">framework →</a></span>
+          <span><span class="k">Mata v. Avianca</span><a href="https://www.courtlistener.com/docket/63107798/mata-v-avianca-inc/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">court record →</a></span>
+          <span><span class="k">PwC investigation</span><a href="https://gptzero.me/news/investigations-pwc/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GPTZero →</a></span>
+          <span><span class="k">Vectara leaderboard</span><a href="https://www.vectara.com/blog/introducing-the-next-generation-of-vectaras-hallucination-leaderboard" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">next-gen benchmark →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+<div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum">T35b</span>
+        <h3 class="jcat-title">The Verification Gap — From Audit to Prototype</h3>
+      </div>
+      <article class="jcard" data-case="verification-gap-platform" data-updated="2026-08-15">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#F59E0B,#B45309)">🔍</div>
+            <div>
+              <div class="jtitle">The Verification Gap — From Audit to Prototype</div>
+              <div class="jmeta">🔬 Ongoing research · part 2 of 2 · started 15 Aug 2026</div>
+              <div class="jtools"><b>Continues from:</b> <a href="#case-ai-verification-research" data-open-case="ai-verification-research" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Part 1 — the research log (Q1–Q25)</a></div>
+            </div>
+          </div>
+          <span class="jtoggle">view build log →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">Ran the check myself: a real, unflagged Deloitte report — 100 citations, 49 sourced, 51 not</span>
+          <span class="chip">16-step verification framework → a 12-stage, 3-track platform architecture</span>
+          <span class="chip">8 screens wireframed, designed, and built into a clickable prototype</span>
+          <span class="chip">A real landing page, sign-up flow, and honest launch-readiness check</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Status:</strong> where the research turned into hands-on work — the actual citation audit, the verification framework it produced, and the platform architecture, wireframes, design, and prototype built from it. Picks up exactly where <a href="#case-ai-verification-research" data-open-case="ai-verification-research" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Part 1</a> left off, at Q26.</p>
+
         <div class="cs-narrative">
           <h4>Q26 — "ok lets start here" <span style="font-weight:400;color:var(--grey)">(sourced a real, unflagged Deloitte report and ran the actual check)</span></h4>
           <p>Moved from research to hands-on audit. Sourced Deloitte's <strong>"Regulatory Outlook for Financial Markets 2024"</strong> — a real, public, 56-page Deloitte Centre for Regulatory Strategy report, not one of the already-flagged scandal reports. First check: structural completeness — do the in-text citation numbers and the bibliography actually match. Counted every citation marker across all 56 pages by hand and cross-validated the total by summing page-by-page (32 through page 10, +23 = 55 through page 24, +20 = 75 through page 39, +25 = 100 through page 50 — the sum lands exactly on the highest in-text number, confirming the manual count was accurate). Then opened the Endnotes section: it lists entries <strong>1 through 49 only</strong>. <strong>Citations 50 through 100 — 51 of the report's 100 in-text citations, just over half — have no bibliography entry anywhere in the document.</strong></p>
@@ -1856,6 +1906,9 @@
           <h4>Q27 — "what is citation first explain in simple terms" / "how many citations each page have"</h4>
           <p>A citation is just a receipt — a small number in the text that points to exactly where a claim came from, so a reader can go check it themselves instead of taking the author's word for it. Delivered the full per-page count across all 56 pages as the evidence base for the structural check above.</p>
         </div>
+
+        <details class="cs-showmore">
+          <summary>Show more: Q28–Q49 <span class="sm-count">(the verification methodology, the full 51-row unverifiable-citation map, the 16-step framework, the market scan, and the entire platform architecture, wireframes, and prototype)</span></summary>
 
         <div class="cs-narrative">
           <h4>Q28 — "what all steps should i plan by which i shld verify each thing in the document"</h4>
@@ -1880,7 +1933,22 @@
         <div class="cs-narrative">
           <h4>Q29 — "now check each citation by going the link provided and see if statement is there"</h4>
           <p>Hit a real environment wall first: WebFetch came back <code>EGRESS_BLOCKED</code> on every domain tested — including a completely neutral sanity-check domain with zero sensitivity, confirming it wasn't a Deloitte-specific block but a full outage. Pivoted transparently to WebSearch as the verification method instead — same rigor, different tool. Result: <strong>all 49 present endnotes independently checked out as real</strong> — correct organization, correct date, correct author, topically accurate — across sources including DNB, IMF, World Bank, BIS, ESRB, IOSCO, BCBS, EIOPA, FSB, ECB, Bank of England, the European Commission, the Federal Reserve, UK Finance, Reuters, and Deloitte's own site. Two details worth flagging: endnotes #40 and #46 cite the identical "Future of Payments Review" report for two different points (redundant, not wrong), and #49 is a <strong>self-citation</strong> — Deloitte citing its own report on digital-asset regulation.</p>
-          <p>Then mapped every one of the 51 uncited citations (50–100) to its exact page and claim — the evidence that turns "roughly half is unsourced" into something concrete and checkable:</p>
+          <p>Then mapped every one of the 51 uncited citations (50–100) to its exact page and claim — the evidence that turns "roughly half is unsourced" into something concrete and checkable. The five below are the ones that matter most — specific, quotable statistics presented with the exact same confident formatting as the 49 verified ones, with no way for a reader to tell, just by looking at the page, which citations are checkable and which aren't:</p>
+          <div class="ptable2-wrap">
+            <table class="ptable2">
+              <thead><tr><th>#</th><th>Pg</th><th>The specific claim it's attached to</th></tr></thead>
+              <tbody>
+                <tr><td data-label="#">65</td><td data-label="Pg">32</td><td data-label="Claim"><strong>"£740 billion (around 55%) of all lending to UK businesses" comes via NBFIs</strong></td></tr>
+                <tr><td data-label="#">81</td><td data-label="Pg">44</td><td data-label="Claim"><strong>"49% of portfolio managers and 69% of stockbrokers had identified no vulnerable consumers"</strong></td></tr>
+                <tr><td data-label="#">96</td><td data-label="Pg">49</td><td data-label="Claim"><strong>Private credit grew "from less than USD 60 billion in 2002 to over USD 1.3 trillion in H1 2022"</strong></td></tr>
+                <tr><td data-label="#">99</td><td data-label="Pg">50</td><td data-label="Claim"><strong>Global private-equity dry powder hit "USD 2.69 trillion in December 2023"</strong></td></tr>
+                <tr><td data-label="#">100</td><td data-label="Pg">50</td><td data-label="Claim"><strong>Deloitte's own "ESG in Private Capital Survey 2023"</strong> — 69 respondents, 61 firms, "91% already having ESG policies" — a second, uncredited self-citation</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <details class="cs-showmore" style="margin:14px 0">
+            <summary>Show all 51 — every citation, every claim, not just the five above <span class="sm-count">(the full page-by-page map)</span></summary>
           <div class="ptable2-wrap">
             <table class="ptable2">
               <thead><tr><th>#</th><th>Pg</th><th>The specific claim it's attached to</th></tr></thead>
@@ -1937,7 +2005,7 @@
               </tbody>
             </table>
           </div>
-          <p>The bolded rows are the real risk: specific, quotable statistics presented with the exact same confident formatting as the 49 verified ones — with no way for a reader to tell, just by looking at the page, which citations are checkable and which aren't.</p>
+          </details>
         </div>
 
         <div class="cs-narrative">
@@ -2130,24 +2198,15 @@
           <h4>Where this goes next</h4>
           <p>Open threads, updated as they resolve:</p>
           <ul>
-            <li><s>Find out whether any Indian consulting firm has had a Deloitte-style incident yet</s> — checked (Q22): not found; the pattern instead expanded to all four of the Big Four globally.</li>
-            <li><s>Get a real hallucination-rate comparison across GPT/Gemini/Claude</s> — checked (Q22): Vectara HHEM leaderboard reviewed; on the harder 2026 benchmark, every current frontier model exceeds 10%, regardless of vendor.</li>
-            <li><s>Track what Deloitte's actually changed internally</s> — checked (Q23): ControlCatalyst.AI (12 Aug 2026) is a third client-facing product, not an internal-deliverable fix — still no public evidence of the specific gap being closed.</li>
-            <li>Design the actual internal verification layer this points toward — see <a href="#case-deloitte-pm-roleplay" data-open-case="deloitte-pm-roleplay" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">the execution-roadmap exercise</a>, a role-play working through exactly this as a hypothetical Deloitte PM.</li>
             <li><s>Run a real citation-fabrication check on an actual public Deloitte report myself, using the same method that caught KPMG/EY/PwC</s> — done (Q26–Q29): 100 in-text citations, 49 bibliography entries, all 49 confirmed real, 51 unverifiable — with the exact claim behind every one of the 51 mapped out.</li>
             <li><s>Turn the 8-step framework and the checklist into an actual product architecture</s> — done (Q36–Q43): a 12-stage, 3-track platform architecture (Hallucination-checked / Unverifiable / Never-cited), full specialist roster, and a complete system diagram.</li>
-            <li>Build Track C's actual scanner and run it against the same Deloitte report — the one bucket on the scorecard that's still a "—", not a number.</li>
             <li><s>Wireframe the screens this architecture implies</s> — done (Q45–Q48): 8 screens, all four verdict states, the full 12-specialist roster, benchmarked against real tools (Q49) — a sample size of one report and zero working code, so not launch-ready, and said so plainly.</li>
-            <li>Prototype the MVP slice (Existence + Content-match + Author-verify only) against a second, different unchecked report — the actual next step toward something more than a wireframe.</li>
+            <li>Build Track C's actual scanner and run it against the same Deloitte report — the one bucket on the scorecard that's still a "—", not a number.</li>
+            <li>Prototype the MVP slice (Existence + Content-match + Author-verify only) against a second, different unchecked report — still on a sample size of one until that happens.</li>
           </ul>
         </div>
 
         <div class="jlinks">
-          <span><span class="k">EU AI Act</span><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full text →</a></span>
-          <span><span class="k">NIST AI RMF</span><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">framework →</a></span>
-          <span><span class="k">Mata v. Avianca</span><a href="https://www.courtlistener.com/docket/63107798/mata-v-avianca-inc/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">court record →</a></span>
-          <span><span class="k">PwC investigation</span><a href="https://gptzero.me/news/investigations-pwc/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GPTZero →</a></span>
-          <span><span class="k">Vectara leaderboard</span><a href="https://www.vectara.com/blog/introducing-the-next-generation-of-vectaras-hallucination-leaderboard" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">next-gen benchmark →</a></span>
           <span><span class="k">Audited report</span><a href="https://nor.deloitte.com/rs/712-CNF-326/images/Regulatory-Outlook-Financial-Markets-2024.pdf" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Deloitte Reg. Outlook 2024 →</a></span>
           <span><span class="k">SwanRef</span><a href="https://www.swanref.org/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">citation checker →</a></span>
           <span><span class="k">GPTZero</span><a href="https://gptzero.me/news/iclr-2026/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">ICLR 2026 findings →</a></span>
