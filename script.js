@@ -297,6 +297,7 @@
           if(data.success){
             if(status){ status.textContent = "Sent — I'll get back to you soon."; }
             form.reset();
+            if(typeof gtag === 'function'){ gtag('event', 'generate_lead', { form_id: 'contactForm' }); }
           } else {
             if(status){ status.classList.add('error'); status.textContent = "Something went wrong — email me directly instead."; }
           }
@@ -309,4 +310,43 @@
         });
     });
   }
+
+  // ---- Analytics: custom event tracking for key CTAs ----
+  // Enhanced Measurement (on by default in GA4) already covers outbound
+  // clicks, scroll depth, and page views. These fill the gap: internal
+  // buttons and same-page anchors that Enhanced Measurement can't see,
+  // since they never leave the page or trigger a new page_view.
+  function trackEvent(name, params){
+    if(typeof gtag === 'function'){ gtag('event', name, params || {}); }
+  }
+
+  // Nav CTAs (Resume, Let's Talk, Back to portfolio)
+  document.querySelectorAll('.nav-btn').forEach(function(el){
+    el.addEventListener('click', function(){
+      trackEvent('nav_cta_click', {
+        link_text: el.textContent.trim(),
+        link_url: el.getAttribute('href') || ''
+      });
+    });
+  });
+
+  // Hero CTAs (See case studies, Get in touch) -- homepage only
+  document.querySelectorAll('.hero-cta .btn').forEach(function(el){
+    el.addEventListener('click', function(){
+      trackEvent('hero_cta_click', {
+        link_text: el.textContent.trim(),
+        link_url: el.getAttribute('href') || ''
+      });
+    });
+  });
+
+  // Case-study card opens, labeled by the card's own data-case slug
+  document.querySelectorAll('.jhead').forEach(function(el){
+    el.addEventListener('click', function(){
+      var card = el.closest('[data-case]');
+      trackEvent('case_study_open', {
+        case_id: card ? card.getAttribute('data-case') : 'unknown'
+      });
+    });
+  });
 })();
