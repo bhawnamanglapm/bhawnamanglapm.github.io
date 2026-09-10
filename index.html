@@ -1330,29 +1330,73 @@ Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div
           <p style="margin:18px 0 6px"><strong>Step 5 — Run it again with different data, to prove it's not hardcoded</strong></p>
           <p style="margin:0 0 14px">
             If the mock just matched Step 2's exact inputs, that would prove nothing — it could be
-            a lookup table. So Step 5 deliberately sends <strong>different</strong> values: a
-            different customer ID, a different (but still valid) PAN, a different DOB, a
-            different wrong token — and checks whether the logic still reaches the correct
-            branch. The 3 business-rule cases (not found / duplicate / server error) keep the
-            same trigger ID, because those are literal constants the mock's code checks for by
-            design — the same convention real sandbox environments use (e.g. a payment gateway's
-            test card numbers that deliberately trigger a decline). Everything else genuinely
-            varies:
+            a lookup table. So this run deliberately sends <strong>different</strong> values —
+            different customer ID, a different (but still valid) PAN, a different DOB, a different
+            wrong token — same 9 scenario types, none of the literal data reused. The 3
+            business-rule cases (not found / duplicate / server error) keep the same trigger ID,
+            because those are literal constants the mock's code checks for by design — the same
+            convention real sandbox environments use (e.g. a payment gateway's test card numbers
+            that deliberately trigger a decline). Everything else genuinely varies.
           </p>
-          <div class="ptable2-wrap"><table class="ptable2">
-            <thead><tr><th>Scenario</th><th>New input</th><th>Expected</th><th>Actual</th><th>Result</th></tr></thead>
-            <tbody>
-              <tr><td>Valid request</td><td>TEST002 / XYZAB5678C / 1998-11-23</td><td>200 · VERIFIED</td><td>200 · VERIFIED</td><td>✅</td></tr>
-              <tr><td>Missing PAN</td><td>TEST002, dob only</td><td>400 · MISSING_FIELD</td><td>400 · MISSING_FIELD</td><td>✅</td></tr>
-              <tr><td>Invalid PAN format</td><td>pan: "999999"</td><td>400 · INVALID_FORMAT</td><td>400 · INVALID_FORMAT</td><td>✅</td></tr>
-              <tr><td>Invalid token</td><td>token: FAKE_TOKEN_999</td><td>401 · INVALID_TOKEN</td><td>401 · INVALID_TOKEN</td><td>✅</td></tr>
-              <tr><td>Missing auth</td><td>TEST002, no token</td><td>401 · MISSING_AUTH</td><td>401 · MISSING_AUTH</td><td>✅</td></tr>
-              <tr><td>Customer not found</td><td>NOTFOUND001 / XYZAB5678C / 1998-11-23</td><td>404 · CUSTOMER_NOT_FOUND</td><td>404 · CUSTOMER_NOT_FOUND</td><td>✅</td></tr>
-              <tr><td>Invalid DOB format</td><td>dob: "23-11-1998"</td><td>400 · INVALID_DATE_FORMAT</td><td>400 · INVALID_DATE_FORMAT</td><td>✅</td></tr>
-              <tr><td>Duplicate request</td><td>DUPLICATE001 / XYZAB5678C / 1998-11-23</td><td>409 · DUPLICATE_REQUEST</td><td>409 · DUPLICATE_REQUEST</td><td>✅</td></tr>
-              <tr><td>Server error</td><td>ERROR001 / XYZAB5678C / 1998-11-23</td><td>500 · INTERNAL_ERROR</td><td>500 · INTERNAL_ERROR</td><td>✅</td></tr>
-            </tbody>
-          </table></div>
+          <p style="margin:0 0 14px">
+            <strong>Where this gets typed:</strong> the same <code>KYC Verify</code> request's
+            Authorization and Body tabs in Postman — not a new request — sent against the
+            code-based mock server running locally at <code>http://localhost:4501</code>.
+          </p>
+
+          <p style="margin:0 0 4px"><strong>1. Valid request</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "TEST002", "pan": "XYZAB5678C", "dob": "1998-11-23" }</div>
+          <div class="code-snip">Actual — 200 OK ✅ (matches expected)
+{ "status": "SUCCESS", "customerId": "TEST002", "kycStatus": "VERIFIED", "verificationDate": "2026-09-10", "requestId": "REQ-10001" }</div>
+
+          <p style="margin:0 0 4px"><strong>2. Missing PAN</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "TEST002", "dob": "1998-11-23" }</div>
+          <div class="code-snip">Actual — 400 Bad Request ✅ (matches expected)
+{ "status": "FAILED", "errorCode": "MISSING_FIELD", "message": "PAN is required" }</div>
+
+          <p style="margin:0 0 4px"><strong>3. Invalid PAN format</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "TEST002", "pan": "999999", "dob": "1998-11-23" }</div>
+          <div class="code-snip">Actual — 400 Bad Request ✅ (matches expected)
+{ "status": "FAILED", "errorCode": "INVALID_FORMAT", "message": "PAN format is invalid (expected AAAAA9999A)" }</div>
+
+          <p style="margin:0 0 4px"><strong>4. Invalid token</strong></p>
+          <div class="code-snip">Token: FAKE_TOKEN_999
+Body: { "customerId": "TEST002", "pan": "XYZAB5678C", "dob": "1998-11-23" }</div>
+          <div class="code-snip">Actual — 401 Unauthorized ✅ (matches expected)
+{ "status": "FAILED", "errorCode": "INVALID_TOKEN", "message": "Invalid or expired token" }</div>
+
+          <p style="margin:0 0 4px"><strong>5. Missing auth</strong></p>
+          <div class="code-snip">Token: (none — Auth Type set to "No Auth")
+Body: { "customerId": "TEST002", "pan": "XYZAB5678C", "dob": "1998-11-23" }</div>
+          <div class="code-snip">Actual — 401 Unauthorized ✅ (matches expected)
+{ "status": "FAILED", "errorCode": "MISSING_AUTH", "message": "Authorization header is required" }</div>
+
+          <p style="margin:0 0 4px"><strong>6. Customer not found</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "NOTFOUND001", "pan": "XYZAB5678C", "dob": "1998-11-23" }</div>
+          <div class="code-snip">Actual — 404 Not Found ✅ (matches expected)
+{ "status": "FAILED", "errorCode": "CUSTOMER_NOT_FOUND", "message": "No customer found with this ID" }</div>
+
+          <p style="margin:0 0 4px"><strong>7. Invalid DOB format</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "TEST002", "pan": "XYZAB5678C", "dob": "23-11-1998" }</div>
+          <div class="code-snip">Actual — 400 Bad Request ✅ (matches expected)
+{ "status": "FAILED", "errorCode": "INVALID_DATE_FORMAT", "message": "dob must be in YYYY-MM-DD format" }</div>
+
+          <p style="margin:0 0 4px"><strong>8. Duplicate request</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "DUPLICATE001", "pan": "XYZAB5678C", "dob": "1998-11-23" }</div>
+          <div class="code-snip">Actual — 409 Conflict ✅ (matches expected)
+{ "status": "FAILED", "errorCode": "DUPLICATE_REQUEST", "message": "A KYC request for this customer is already in progress" }</div>
+
+          <p style="margin:0 0 4px"><strong>9. Server error</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "ERROR001", "pan": "XYZAB5678C", "dob": "1998-11-23" }</div>
+          <div class="code-snip">Actual — 500 Internal Server Error ✅ (matches expected)
+{ "status": "FAILED", "errorCode": "INTERNAL_ERROR", "message": "Something went wrong on our end" }</div>
 
           <p style="margin:0 0 18px"><strong>Result</strong> — 9 for 9, with entirely different data than Step 2 used. Same category of input still lands on the same correct branch every time — real validation logic, not a lookup table keyed to one specific example.</p>
 
