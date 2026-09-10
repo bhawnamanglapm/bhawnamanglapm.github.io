@@ -1099,16 +1099,81 @@
           </p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
-          <img src="projects/partner-ops-practice/screenshots/sql-duplicate-payouts.png" alt="T-SQL GROUP BY / HAVING query finding 3 duplicate payout pairs, same partner, amount, and date" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/partner-ops-practice/screenshots/sql-payouts-after-expiry.png" alt="T-SQL 3-table join finding 4 payouts made after the governing e-agreement had expired, across 2 partners" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/partner-ops-practice/screenshots/api-list-partners.png" alt="Postman GET request listing all partners, 200 OK, real data from the same database used in the SQL queries" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/partner-ops-practice/screenshots/api-partner-summary.png" alt="Postman GET request for one partner's aggregate summary — total payouts, amount paid, agreement status, flagged duplicates" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/partner-ops-practice/screenshots/api-create-discrepancy.png" alt="Postman POST request creating a new discrepancy, 201 Created, with a test script saving the new ID into a collection variable" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/partner-ops-practice/screenshots/api-resolve-discrepancy-chained.png" alt="Postman PATCH request resolving that discrepancy using the ID saved by the previous request — a chained workflow, not three disconnected calls" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
-          <img src="projects/partner-ops-practice/screenshots/api-discrepancy-feed.png" alt="Postman GET request for the consolidated discrepancy feed, 200 OK, with two passing test assertions" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        <div class="cs-narrative">
+          <h4>Walkthrough — Input → Output → Understanding</h4>
+          <p style="margin:0 0 16px">
+            Six of the real query/request pairs from this project, each with what was sent, what
+            actually came back, and what it means — the same way I'd walk an interviewer through
+            it verbally rather than just showing a result.
+          </p>
+
+          <p style="margin:0 0 6px"><strong>1. Duplicate payouts — Input</strong></p>
+          <div class="code-snip">SELECT partner_id, amount, payout_date, COUNT(*) AS cnt FROM payouts GROUP BY partner_id, amount, payout_date HAVING COUNT(*) &gt; 1;</div>
+          <p style="margin:0 0 6px"><strong>Output</strong></p>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>partner_id</th><th>amount</th><th>payout_date</th><th>cnt</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>50935.88</td><td>2026-03-26</td><td>2</td></tr>
+              <tr><td>1</td><td>62587.81</td><td>2025-03-26</td><td>2</td></tr>
+              <tr><td>1</td><td>13526.91</td><td>2026-06-23</td><td>2</td></tr>
+            </tbody>
+          </table></div>
+          <p style="margin:0 0 18px"><strong>Understanding</strong> — 3 pairs, same partner/amount/date, each appearing exactly twice. That's the signature of a retry that wasn't idempotent or a batch job that re-ran — not a typo. A running total or reconciliation report built on this data without deduping first would silently overstate what that partner was actually owed.</p>
+
+          <p style="margin:0 0 6px"><strong>2. Payouts after agreement expiry — Input</strong></p>
+          <div class="code-snip">SELECT p.payout_id, pt.partner_name, p.payout_date, e.expiry_date FROM payouts p JOIN partners pt ON pt.partner_id = p.partner_id JOIN e_agreements e ON e.partner_id = p.partner_id WHERE e.status = 'expired' AND p.payout_date &gt; e.expiry_date AND p.status = 'completed';</div>
+          <p style="margin:0 0 6px"><strong>Output</strong></p>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>payout_id</th><th>partner_name</th><th>payout_date</th><th>expiry_date</th></tr></thead>
+            <tbody>
+              <tr><td>177</td><td>Bluepeak Finserv</td><td>2026-04-19</td><td>2026-02-15</td></tr>
+              <tr><td>178</td><td>Bluepeak Finserv</td><td>2026-04-14</td><td>2026-02-15</td></tr>
+              <tr><td>179</td><td>Ganges Retail Finance</td><td>2026-03-19</td><td>2026-02-15</td></tr>
+              <tr><td>180</td><td>Ganges Retail Finance</td><td>2026-04-04</td><td>2026-02-15</td></tr>
+            </tbody>
+          </table></div>
+          <p style="margin:0 0 18px"><strong>Understanding</strong> — 4 payouts, 2 partners, all moved 1–2 months after the governing agreement had already lapsed. This is the sharpest finding in the dataset: money moved on a contract that wasn't valid anymore. The 3-table JOIN is what makes it visible — payouts alone has no idea an agreement even exists.</p>
+
+          <p style="margin:0 0 6px"><strong>3. Activity after suspension — Input</strong></p>
+          <div class="code-snip">SELECT pt.partner_name, a.activity_ts FROM activity_logs a JOIN partners pt ON pt.partner_id = a.partner_id WHERE a.activity_type = 'payout_request' AND pt.status = 'suspended';</div>
+          <p style="margin:0 0 6px"><strong>Output</strong></p>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>partner_name</th><th>activity_ts</th></tr></thead>
+            <tbody>
+              <tr><td>Lakeside Capital</td><td>2026-08-15 10:22:00</td></tr>
+              <tr><td>Everest Capital Partners</td><td>2026-08-15 10:22:00</td></tr>
+            </tbody>
+          </table></div>
+          <p style="margin:0 0 18px"><strong>Understanding</strong> — 2 partners requested a payout after their account had already been suspended. This is the same instinct as finding #2, applied to behavior instead of money: cross-reference what someone did against what their account status should have allowed.</p>
+
+          <p style="margin:0 0 6px"><strong>4. Fetch a partner's aggregate summary via API — Input</strong></p>
+          <div class="code-snip">GET {{baseUrl}}/partners/1/summary</div>
+          <p style="margin:0 0 6px"><strong>Output</strong> — 200 OK</p>
+          <div class="code-snip">{
+  "partner_id": 1, "partner_name": "Aravali Traders", "status": "active",
+  "total_payouts": 6, "total_amount_paid": 254101.2,
+  "agreement_status": "signed", "flagged_duplicate_payouts": 6
+}</div>
+          <p style="margin:0 0 18px"><strong>Understanding</strong> — one API call returning the same numbers that took several SQL queries to assemble (6 payouts, ₹254,101.20 total, 6 duplicate-flagged rows — matching finding #1 exactly, since all 3 duplicate pairs happen to belong to partner 1). This is the API equivalent of a JOIN + aggregate: the server does the assembling so the client doesn't have to make 4 separate calls.</p>
+
+          <p style="margin:0 0 6px"><strong>5. Create a discrepancy record — Input</strong></p>
+          <div class="code-snip">POST {{baseUrl}}/discrepancies
+Body: { "partnerId": 1, "issueType": "manual_review", "note": "Flagged during interview practice run" }</div>
+          <p style="margin:0 0 6px"><strong>Output</strong> — 201 Created</p>
+          <div class="code-snip">{
+  "discrepancy_id": 999, "partnerId": 1, "issueType": "manual_review",
+  "note": "Flagged during interview practice run",
+  "detected_date": "2026-09-09", "resolved": false
+}</div>
+          <p style="margin:0 0 18px"><strong>Understanding</strong> — 201, not 200: this request <em>created</em> something new, and the ID it returned (999) gets saved automatically into a collection variable by a test script, ready for the next request to reuse — no copy-pasting an ID by hand.</p>
+
+          <p style="margin:0 0 6px"><strong>6. Resolve it — the chained request — Input</strong></p>
+          <div class="code-snip">PATCH {{baseUrl}}/discrepancies/{{createdDiscrepancyId}}
+Body: { "resolved": true }</div>
+          <p style="margin:0 0 6px"><strong>Output</strong> — 200 OK</p>
+          <div class="code-snip">{ "discrepancy_id": 999, "resolved": true }</div>
+          <p style="margin:0 0 4px"><strong>Understanding</strong> — <code>{{createdDiscrepancyId}}</code> in the URL was never typed by hand — it's the exact ID request #5 saved a moment earlier. That's a real multi-step workflow (create → confirm → resolve), the same shape as create-an-order → pay-for-it → ship-it in any real transactional API, not three disconnected calls that happen to run one after another.</p>
         </div>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 7 panels reconstruct the real, verified query/response pairs from this project as clean image assets — same real data and numbers throughout, re-rendered since the originals were captured live in VS Code and Postman rather than saved as standalone files. The last three show the chained workflow in action: POST creates a discrepancy and saves its ID, PATCH resolves it using that saved ID, and the consolidated feed reflects the result — with Postman's own test assertions passing alongside it.</p>
 
         <div class="jlinks">
           <span><span class="k">Guide</span><a href="projects/partner-ops-practice/SQL_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">SQL practice guide →</a></span>

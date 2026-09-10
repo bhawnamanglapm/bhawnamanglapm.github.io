@@ -452,6 +452,8 @@
   table.ptable2 td{color:#33333D}
   table.ptable2 tr:last-child td{border-bottom:none}
 
+  .code-snip{border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 16px;margin:0 0 18px;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.6;white-space:pre-wrap;word-break:break-word;color:#33333D;background:#fff}
+
   .caveat{background:var(--ink-3);border:1px solid var(--line);border-left:3px solid var(--lime);border-radius:12px;padding:18px 22px;font-size:14.5px;color:#3F3F55}
 
   /* ---------- Experience timeline ---------- */
