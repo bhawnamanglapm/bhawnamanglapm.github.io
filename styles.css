@@ -306,10 +306,17 @@
   }
   .jnum.done{background:var(--lime);border-color:var(--lime);color:#fff;box-shadow:0 0 0 4px rgba(181,112,85,.22)}
   /* Homepage case studies auto-sort by recency (see script.js), so the Tn
-     badge's number never lines up with display order — hide it here only.
-     travel-tech-more.html keeps it, since its cat-sections stay in a fixed
-     curated order where the numbers still read sensibly. */
-  #travel-tech .jnum{display:none}
+     project-ID badge never lines up with display order. Rather than hide
+     the badge (leaves the timeline rail with no marker, looking broken),
+     replace its content with a plain sequential count via a CSS counter —
+     counted in final DOM order, so it's always correct after JS re-sorts,
+     across both the pinned track and the recency-sorted one below it.
+     travel-tech-more.html keeps the real Tn text; its cat-sections stay in
+     a fixed curated order where the project numbers still read sensibly. */
+  #travel-tech{counter-reset:cs-count}
+  #travel-tech .jcat-group{counter-increment:cs-count}
+  #travel-tech .jnum{font-size:0}
+  #travel-tech .jnum::before{content:counter(cs-count);font-size:12.5px}
 
   /* ---------- Journal cards ---------- */
   .jcard{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:16px;padding:0;box-shadow:var(--shadow)}
