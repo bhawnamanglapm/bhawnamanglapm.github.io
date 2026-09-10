@@ -1183,6 +1183,113 @@ Body: { "resolved": true }</div>
       </article>
     </div>
 
+    <!-- T35: NSDL KYC Verification — API Validation & Testing Practice -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T35</span>
+        <h3 class="jcat-title">NSDL KYC Verification — API Testing Practice</h3>
+        <span class="jcat-category">Metrics &amp; Analytics</span>
+      </div>
+      <article class="jcard" data-case="nsdl-kyc-practice" data-updated="2026-09-10">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#7C3AED,#4C1D95)">🔐</div>
+            <div>
+              <div class="jtitle">NSDL KYC Verification — API Testing Practice</div>
+              <div class="jmeta">⭐⭐⭐ Built · self-directed practice, not client work · connectivity → auth → validation → business logic</div>
+              <div class="jtools"><b>Tools:</b> Postman (collection + code-based mock server), Node.js</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">Real Node.js mock server with actual validation logic, not canned responses</span>
+          <span class="chip">9 real test scenarios: connectivity → auth → request validation → business logic → server error</span>
+          <span class="chip">2 real mistakes made and caught mid-build, documented rather than edited out</span>
+          <span class="chip">Also used to drill raw HTTP method fundamentals (GET/POST/PUT/PATCH/DELETE) against a live public API</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> Postman (collection, Authorization tab, Tests scripts, a code-based local mock server), Node.js.</p>
+
+        <div class="cs-narrative">
+          <h4>Why This Project</h4>
+          <p>
+            A follow-on to the Partner Ops project, built to answer a more specific question: how
+            would I actually verify a third-party KYC check — the exact kind of NSDL/Aadhaar
+            verification a lending onboarding flow depends on — beyond "I sent a request and got
+            a response back." Self-directed practice, not a real NSDL integration or client work.
+          </p>
+
+          <h4>Step by Step — From Collection to Result</h4>
+
+          <p style="margin:0 0 6px"><strong>Step 1 — Build the request</strong></p>
+          <p>A new Postman collection, one request: <code>POST /v1/kyc/verify</code>, with an <code>Authorization: Bearer</code> header and a JSON body — <code>customerId</code>, <code>pan</code>, <code>dob</code>.</p>
+
+          <p style="margin:0 0 6px"><strong>Step 2 — Stand up a mock server with real logic, not a canned answer</strong></p>
+          <p>
+            Rather than a static example response, the mock server runs actual validation code:
+            checks the auth header, checks each required field is present, validates PAN against
+            the real NSDL format pattern (<code>AAAAA9999A</code>) and the date against
+            <code>YYYY-MM-DD</code>, then branches into business-rule outcomes (not found,
+            duplicate in progress, server error, a deliberately slow response for a timeout test)
+            keyed off specific test customer IDs. It genuinely evaluates whatever gets sent to
+            it, the same as a real backend would.
+          </p>
+
+          <p style="margin:0 0 6px"><strong>Step 3 — Two real mistakes, caught by checking the actual response, not just the status</strong></p>
+          <p>
+            First: a JSON body got pasted into the URL field by accident — Postman returned
+            <em>"Invalid character in header content"</em>, which is a real, specific error a
+            mixed-up field produces. Second, and more instructive: a request came back
+            <strong>401 Unauthorized</strong> when it should have been 200 — not because the mock
+            was broken, but because the Authorization tab's Token field was empty (a token typed
+            into the wrong field earlier). The fix in both cases was reading what the response
+            actually said instead of assuming the request was fine.
+          </p>
+          <div class="code-snip">POST {{baseUrl}}/v1/kyc/verify
+Authorization: Bearer VALID_TEST_TOKEN
+Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
+          <p style="margin:8px 0 6px"><strong>Output</strong> — 200 OK</p>
+          <div class="code-snip">{ "status": "SUCCESS", "customerId": "TEST001", "kycStatus": "VERIFIED", "verificationDate": "2026-09-10", "requestId": "REQ-10001" }</div>
+
+          <p style="margin:18px 0 6px"><strong>Step 4 — Run the full scenario matrix, one at a time</strong></p>
+          <p>Same request, deliberately varied — wrong token, missing field, bad format, unknown customer, duplicate, server error — confirming the exact expected status and error code for each:</p>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Scenario</th><th>Expected</th><th>Actual</th><th>Result</th></tr></thead>
+            <tbody>
+              <tr><td>Valid request</td><td>200 · VERIFIED</td><td>200 · VERIFIED</td><td>✅</td></tr>
+              <tr><td>Missing PAN</td><td>400 · MISSING_FIELD</td><td>400 · MISSING_FIELD</td><td>✅</td></tr>
+              <tr><td>Invalid PAN format</td><td>400 · INVALID_FORMAT</td><td>400 · INVALID_FORMAT</td><td>✅</td></tr>
+              <tr><td>Invalid token</td><td>401 · INVALID_TOKEN</td><td>401 · INVALID_TOKEN</td><td>✅</td></tr>
+              <tr><td>Missing auth</td><td>401 · MISSING_AUTH</td><td>401 · MISSING_AUTH</td><td>✅</td></tr>
+              <tr><td>Customer not found</td><td>404 · CUSTOMER_NOT_FOUND</td><td>404 · CUSTOMER_NOT_FOUND</td><td>✅</td></tr>
+              <tr><td>Invalid DOB format</td><td>400 · INVALID_DATE_FORMAT</td><td>400 · INVALID_DATE_FORMAT</td><td>✅</td></tr>
+              <tr><td>Duplicate request</td><td>409 · DUPLICATE_REQUEST</td><td>409 · DUPLICATE_REQUEST</td><td>✅</td></tr>
+              <tr><td>Server error</td><td>500 · INTERNAL_ERROR</td><td>500 · INTERNAL_ERROR</td><td>✅</td></tr>
+            </tbody>
+          </table></div>
+
+          <p style="margin:0 0 18px"><strong>Result</strong> — 9 for 9, every status code and error code matching, all genuinely produced by the mock's own validation logic reacting to real input, not read off a pre-written example.</p>
+
+          <h4>A Self-Caught Mistake Worth Keeping In</h4>
+          <p>
+            Alongside this, the same session included a plain HTTP-methods drill against a public
+            test API (GET/POST/PUT/PATCH/DELETE, no mock involved) — and one request meant to be a
+            PATCH was accidentally sent as a leftover GET. It still came back <strong>200
+            OK</strong>. The status code alone said nothing was wrong; only checking the response
+            body — the "update" had silently not happened — caught it. That's the actual habit
+            this whole project was practicing: a green status code is not proof the intended
+            thing occurred, the response content is.
+          </p>
+        </div>
+
+        <div class="jlinks">
+          <span><span class="k">Code</span><a href="projects/nsdl-kyc-practice/kyc-mock-server.js" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Mock server validation logic →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
     <a class="track-showmore" href="travel-tech-more.html">
       <span class="track-showmore-label">Show more case studies</span>
       <span class="track-showmore-count">Flight Booking Teardown, Travel Support AI Copilot, T5 (delay dashboard), T8, SQL/Amplitude Basics, Weft, Career Copilot, and cross-industry practice work →</span>
