@@ -1242,13 +1242,21 @@ Response — Status 200 (bottom half — what the mock replies with):
 { "status": "SUCCESS", "customerId": "TEST001", "kycStatus": "VERIFIED",
   "verificationDate": "2026-09-10", "requestId": "REQ-10001" }</div>
           <p>
-            Nine examples like this covered the full scenario set this way — genuinely useful,
-            and worth knowing since it's the more commonly used Postman mocking approach on most
-            teams. But it turned out Postman actually offers <em>two</em> distinct mock types:
-            this classic example-matching one, and a newer code-based "Mock (BETA)" that runs
-            real server logic instead of static examples. Since the goal was testing actual
-            validation behavior rather than pre-written answers, the code-based version below is
-            what the full 9-scenario run in Step 5 actually ran against.
+            Nine examples like this got built first, one per scenario — request body in, expected
+            response + status out — effectively writing down the expected contract before testing
+            anything. The actual verification step came after: going back to the real
+            <strong>KYC Verify</strong> request itself, typing the same scenario's details into
+            its Body, hitting Send, and checking whether the real response that came back matched
+            what that scenario's example said it should be. That's the core loop of API
+            testing — define what "correct" looks like first, then run the real thing and compare.
+          </p>
+          <p>
+            Genuinely useful, and worth knowing since it's the more commonly used Postman mocking
+            approach on most teams. But it turned out Postman actually offers <em>two</em>
+            distinct mock types: this classic example-matching one, and a newer code-based "Mock
+            (BETA)" that runs real server logic instead of static examples. Since the goal was
+            testing actual validation behavior rather than pre-written answers, the code-based
+            version below is what the full 9-scenario run in Step 5 actually ran against.
           </p>
 
           <p style="margin:0 0 6px"><strong>Step 3 — Stand up a mock server with real logic, not a canned answer</strong></p>
