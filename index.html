@@ -1223,7 +1223,12 @@ Body: { "resolved": true }</div>
           <h4>Step by Step — From Collection to Result</h4>
 
           <p style="margin:0 0 6px"><strong>Step 1 — Build the request</strong></p>
-          <p>A new Postman collection, one request: <code>POST /v1/kyc/verify</code>, with an <code>Authorization: Bearer</code> header and a JSON body — <code>customerId</code>, <code>pan</code>, <code>dob</code>.</p>
+          <p style="margin:0 0 6px">A new Postman collection, one request: <code>POST {{baseUrl}}/v1/kyc/verify</code>, with an <code>Authorization: Bearer</code> header and a JSON body.</p>
+          <div class="code-snip">{
+  "customerId": "TEST001",
+  "pan": "ABCDE1234F",
+  "dob": "1995-06-15"
+}</div>
 
           <p style="margin:0 0 6px"><strong>Step 2 — Define the 9 examples first (the expected contract)</strong></p>
           <p style="margin:0 0 14px">
