@@ -1,0 +1,695 @@
+{
+  "info": {
+    "name": "Partner Ops API \u2014 Practice",
+    "description": "Practice API for a fintech partner-payout system (partners, e-agreements, payouts, activity logs, discrepancies). Import, then right-click the collection -> Mock Collection to get a real HTTPS URL with zero backend setup.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Basics",
+      "item": [
+        {
+          "name": "List all partners",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/partners",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners"
+              ],
+              "query": []
+            },
+            "description": "List all partners."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/partners",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partners"
+                  ],
+                  "query": []
+                },
+                "description": "List all partners."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"partner_id\": 1,\n    \"partner_name\": \"Aravali Traders\",\n    \"region\": \"East\",\n    \"onboarding_date\": \"2024-10-16\",\n    \"status\": \"active\"\n  },\n  {\n    \"partner_id\": 2,\n    \"partner_name\": \"Bluepeak Finserv\",\n    \"region\": \"North\",\n    \"onboarding_date\": \"2023-09-08\",\n    \"status\": \"active\"\n  },\n  {\n    \"partner_id\": 3,\n    \"partner_name\": \"Coastal Credit Co\",\n    \"region\": \"North\",\n    \"onboarding_date\": \"2024-11-23\",\n    \"status\": \"active\"\n  },\n  {\n    \"partner_id\": 4,\n    \"partner_name\": \"Delta Fincorp\",\n    \"region\": \"North\",\n    \"onboarding_date\": \"2024-08-27\",\n    \"status\": \"active\"\n  },\n  {\n    \"partner_id\": 5,\n    \"partner_name\": \"Everest Capital Partners\",\n    \"region\": \"South\",\n    \"onboarding_date\": \"2023-04-06\",\n    \"status\": \"suspended\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get partner by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/partners/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "1"
+              ],
+              "query": []
+            },
+            "description": "Get one partner by ID."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/partners/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partners",
+                    "1"
+                  ],
+                  "query": []
+                },
+                "description": "Get one partner by ID."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"partner_id\": 1,\n  \"partner_name\": \"Aravali Traders\",\n  \"region\": \"East\",\n  \"onboarding_date\": \"2024-10-16\",\n  \"status\": \"active\"\n}"
+            },
+            {
+              "name": "404 Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/partners/999",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partners",
+                    "999"
+                  ],
+                  "query": []
+                },
+                "description": ""
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Partner 999 not found\"\n}"
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status is 200', function () { pm.response.to.have.status(200); });",
+                  "const data = pm.response.json();",
+                  "pm.collectionVariables.set('lastPartnerId', data.partner_id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get activity logs for a partner",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/partners/1/activity-logs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "1",
+                "activity-logs"
+              ],
+              "query": []
+            },
+            "description": "Fetch activity logs for one partner."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/partners/1/activity-logs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partners",
+                    "1",
+                    "activity-logs"
+                  ],
+                  "query": []
+                },
+                "description": "Fetch activity logs for one partner."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"log_id\": 4,\n    \"partner_id\": 1,\n    \"activity_type\": \"dispute_raised\",\n    \"activity_ts\": \"2026-02-10 16:42:00\",\n    \"details\": \"dispute_raised event for partner 1\"\n  },\n  {\n    \"log_id\": 1,\n    \"partner_id\": 1,\n    \"activity_type\": \"dispute_raised\",\n    \"activity_ts\": \"2026-05-10 11:27:00\",\n    \"details\": \"dispute_raised event for partner 1\"\n  },\n  {\n    \"log_id\": 2,\n    \"partner_id\": 1,\n    \"activity_type\": \"agreement_view\",\n    \"activity_ts\": \"2026-06-15 15:28:00\",\n    \"details\": \"agreement_view event for partner 1\"\n  },\n  {\n    \"log_id\": 3,\n    \"partner_id\": 1,\n    \"activity_type\": \"agreement_view\",\n    \"activity_ts\": \"2026-09-16 20:57:00\",\n    \"details\": \"agreement_view event for partner 1\"\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Filtering & Pagination",
+      "item": [
+        {
+          "name": "Payouts filtered by status=disputed",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/payouts?status=disputed",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payouts"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "disputed"
+                }
+              ]
+            },
+            "description": "Filter payouts by status."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/payouts?status=disputed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payouts"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "disputed"
+                    }
+                  ]
+                },
+                "description": "Filter payouts by status."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"payout_id\": 34,\n    \"partner_id\": 8,\n    \"amount\": 40970.66,\n    \"payout_date\": \"2024-08-06\",\n    \"status\": \"disputed\",\n    \"payment_method\": \"RTGS\",\n    \"finacle_reference_id\": \"FIN-008-00034\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Agreements filtered by status=expired",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/agreements?status=expired",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agreements"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "expired"
+                }
+              ]
+            },
+            "description": "Filter e-agreements by status."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/agreements?status=expired",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agreements"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "expired"
+                    }
+                  ]
+                },
+                "description": "Filter e-agreements by status."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"agreement_id\": 2,\n    \"partner_id\": 2,\n    \"agreement_type\": \"Premium\",\n    \"status\": \"expired\",\n    \"sent_date\": \"2023-09-15\",\n    \"signed_date\": \"2023-09-24\",\n    \"expiry_date\": \"2026-02-15\"\n  },\n  {\n    \"agreement_id\": 7,\n    \"partner_id\": 7,\n    \"agreement_type\": \"Custom\",\n    \"status\": \"expired\",\n    \"sent_date\": \"2024-08-05\",\n    \"signed_date\": \"2024-08-11\",\n    \"expiry_date\": \"2026-02-15\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Payouts, paginated",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/payouts?page=1&pageSize=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payouts"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "5"
+                }
+              ]
+            },
+            "description": "Paginated payout list."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/payouts?page=1&pageSize=5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payouts"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "5"
+                    }
+                  ]
+                },
+                "description": "Paginated payout list."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"page\": 1,\n  \"pageSize\": 5,\n  \"total\": 90,\n  \"results\": [\n    {\n      \"payout_id\": 1,\n      \"partner_id\": 1,\n      \"amount\": 50935.88,\n      \"payout_date\": \"2026-03-26\",\n      \"status\": \"completed\",\n      \"payment_method\": \"NEFT\",\n      \"finacle_reference_id\": \"FIN-001-00001\"\n    },\n    {\n      \"payout_id\": 2,\n      \"partner_id\": 1,\n      \"amount\": 62587.81,\n      \"payout_date\": \"2025-03-26\",\n      \"status\": \"completed\",\n      \"payment_method\": \"RTGS\",\n      \"finacle_reference_id\": \"FIN-001-00002\"\n    },\n    {\n      \"payout_id\": 3,\n      \"partner_id\": 1,\n      \"amount\": 13526.91,\n      \"payout_date\": \"2026-06-23\",\n      \"status\": \"completed\",\n      \"payment_method\": \"RTGS\",\n      \"finacle_reference_id\": \"FIN-001-00003\"\n    },\n    {\n      \"payout_id\": 4,\n      \"partner_id\": 2,\n      \"amount\": 92483.82,\n      \"payout_date\": \"2024-06-07\",\n      \"status\": \"completed\",\n      \"payment_method\": \"NEFT\",\n      \"finacle_reference_id\": \"FIN-002-00004\"\n    },\n    {\n      \"payout_id\": 5,\n      \"partner_id\": 2,\n      \"amount\": 70702.8,\n      \"payout_date\": \"2025-08-20\",\n      \"status\": \"completed\",\n      \"payment_method\": \"IMPS\",\n      \"finacle_reference_id\": \"FIN-002-00005\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Advanced (POST/PATCH, tests, chaining)",
+      "item": [
+        {
+          "name": "Get unresolved discrepancies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/discrepancies?resolved=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "discrepancies"
+              ],
+              "query": [
+                {
+                  "key": "resolved",
+                  "value": "false"
+                }
+              ]
+            },
+            "description": "The consolidated discrepancy feed."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/discrepancies?resolved=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "discrepancies"
+                  ],
+                  "query": [
+                    {
+                      "key": "resolved",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "The consolidated discrepancy feed."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"duplicate_payouts_flagged\": 6,\n  \"expired_agreement_payouts\": [\n    {\n      \"payout_id\": 87,\n      \"partner_id\": 2,\n      \"payout_date\": \"2026-04-19\",\n      \"expiry_date\": \"2026-02-15\"\n    },\n    {\n      \"payout_id\": 88,\n      \"partner_id\": 2,\n      \"payout_date\": \"2026-04-14\",\n      \"expiry_date\": \"2026-02-15\"\n    },\n    {\n      \"payout_id\": 89,\n      \"partner_id\": 7,\n      \"payout_date\": \"2026-03-19\",\n      \"expiry_date\": \"2026-02-15\"\n    },\n    {\n      \"payout_id\": 90,\n      \"partner_id\": 7,\n      \"payout_date\": \"2026-04-04\",\n      \"expiry_date\": \"2026-02-15\"\n    }\n  ],\n  \"stuck_agreements\": [\n    {\n      \"agreement_id\": 3,\n      \"partner_id\": 3,\n      \"agreement_type\": \"Standard\",\n      \"status\": \"sent\",\n      \"sent_date\": \"2026-03-12\",\n      \"signed_date\": null,\n      \"expiry_date\": null\n    },\n    {\n      \"agreement_id\": 9,\n      \"partner_id\": 9,\n      \"agreement_type\": \"Standard\",\n      \"status\": \"sent\",\n      \"sent_date\": \"2026-03-08\",\n      \"signed_date\": null,\n      \"expiry_date\": null\n    },\n    {\n      \"agreement_id\": 15,\n      \"partner_id\": 15,\n      \"agreement_type\": \"Standard\",\n      \"status\": \"sent\",\n      \"sent_date\": \"2026-03-18\",\n      \"signed_date\": null,\n      \"expiry_date\": null\n    }\n  ]\n}"
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('response has stuck_agreements array', function () {",
+                  "  const data = pm.response.json();",
+                  "  pm.expect(data.stuck_agreements).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create a new discrepancy",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/discrepancies",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "discrepancies"
+              ],
+              "query": []
+            },
+            "description": "Log a new discrepancy for review.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partnerId\": 1,\n  \"issueType\": \"manual_review\",\n  \"note\": \"Flagged during interview practice run\"\n}"
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/discrepancies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "discrepancies"
+                  ],
+                  "query": []
+                },
+                "description": "Log a new discrepancy for review.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"partnerId\": 1,\n  \"issueType\": \"manual_review\",\n  \"note\": \"Flagged during interview practice run\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"discrepancy_id\": 999,\n  \"partnerId\": 1,\n  \"issueType\": \"manual_review\",\n  \"note\": \"Flagged during interview practice run\",\n  \"detected_date\": \"2026-09-09\",\n  \"resolved\": false\n}"
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status is 201', function () { pm.response.to.have.status(201); });",
+                  "const data = pm.response.json();",
+                  "pm.collectionVariables.set('createdDiscrepancyId', data.discrepancy_id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Resolve a discrepancy (chained request)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/discrepancies/{{createdDiscrepancyId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "discrepancies",
+                "{{createdDiscrepancyId}}"
+              ],
+              "query": []
+            },
+            "description": "Resolve a discrepancy (uses the ID saved by the previous request).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resolved\": true\n}"
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/discrepancies/{{createdDiscrepancyId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "discrepancies",
+                    "{{createdDiscrepancyId}}"
+                  ],
+                  "query": []
+                },
+                "description": "Resolve a discrepancy (uses the ID saved by the previous request).",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resolved\": true\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"discrepancy_id\": 999,\n  \"resolved\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get partner summary (aggregate)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/partners/1/summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "1",
+                "summary"
+              ],
+              "query": []
+            },
+            "description": "Aggregate view: one partner's full payout + agreement + flag status."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/partners/1/summary",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partners",
+                    "1",
+                    "summary"
+                  ],
+                  "query": []
+                },
+                "description": "Aggregate view: one partner's full payout + agreement + flag status."
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"partner_id\": 1,\n  \"partner_name\": \"Aravali Traders\",\n  \"status\": \"active\",\n  \"total_payouts\": 6,\n  \"total_amount_paid\": 254101.2,\n  \"agreement_status\": \"signed\",\n  \"flagged_duplicate_payouts\": 6\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://REPLACE-WITH-YOUR-MOCK-SERVER-URL.mock.pstmn.io"
+    },
+    {
+      "key": "lastPartnerId",
+      "value": ""
+    },
+    {
+      "key": "createdDiscrepancyId",
+      "value": ""
+    }
+  ]
+}

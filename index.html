@@ -1022,6 +1022,99 @@
       </article>
     </div>
 
+    <!-- T34: Partner Ops — SQL & API Testing Practice -->
+    <div class="jcat-group">
+      <div class="jcat-head">
+        <span class="jnum done">T34</span>
+        <h3 class="jcat-title">Partner Ops — SQL &amp; API Testing Practice</h3>
+        <span class="jcat-category">Metrics &amp; Analytics</span>
+      </div>
+      <article class="jcard" data-case="partner-ops-practice" data-updated="2026-09-10">
+        <button class="jhead" type="button">
+          <div class="jhead-left">
+            <div class="jcard-illus" style="background:linear-gradient(135deg,#0EA5E9,#0369A1)">🧪</div>
+            <div>
+              <div class="jtitle">Partner Ops — SQL &amp; API Testing Practice</div>
+              <div class="jmeta">⭐⭐⭐⭐ Built · self-directed practice, not client work · relational schema, multi-table SQL, REST API test suite</div>
+              <div class="jtools"><b>Tools:</b> SQL Server 2022 (T-SQL), VS Code (mssql), Postman (collection + mock server)</div>
+            </div>
+          </div>
+          <span class="jtoggle">view case study →</span>
+        </button>
+      <div class="jbody">
+        <div class="cs-facts">
+          <span class="chip">18 partners, 90 payouts, 160 activity logs — 5 issues seeded on purpose, found by query</span>
+          <span class="chip">13 SQL queries, basic → advanced, verified live on SQL Server</span>
+          <span class="chip">10-request Postman collection + mock server, incl. a chained POST→PATCH workflow</span>
+          <span class="chip">Found and fixed 2 real bugs along the way, not just a clean first pass</span>
+        </div>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> SQL Server 2022 Express (T-SQL), VS Code with the SQL Server (mssql) extension, Postman (collection + a self-hosted mock server).</p>
+
+        <div class="cs-narrative">
+          <h4>Why This Project</h4>
+          <p>
+            A self-directed practice project, not client work — built to turn "I know SQL and
+            APIs conceptually" into something demonstrable, in the same operational world I
+            already know from owning PCMS at Bajaj Finserv: partners, e-agreements, payouts, and
+            activity logs. Five real data issues (duplicate payouts, payments made after an
+            agreement had expired, agreements stuck unsigned for 90+ days, activity logged after
+            an account was suspended) were seeded into the raw data on purpose, not pre-labeled —
+            the exercise was writing the SQL and API checks that actually find them.
+          </p>
+
+          <h4>Two Real Bugs, Found and Fixed</h4>
+          <p>
+            Nothing here was a clean first pass, which is arguably the more useful part to show.
+            A regional-average SQL query came back with the right leading region but the wrong
+            number — tracing it back showed the payouts data was correct and the problem was
+            10 of 18 partners carrying the wrong region tag in a dimension table, found with a
+            JOIN against a known-correct reference set and fixed with one set-based
+            <code>UPDATE ... FROM ... JOIN</code>. Separately, a Postman mock server was silently
+            returning the wrong saved example for two requests that shared a path
+            (<code>/payouts</code>) but differed only by query string — two conditions in the
+            generated server code both matched on path alone, so the first one always fired and
+            the second was dead code. The fix was adding a check on the actual query parameter
+            the two examples were supposed to be distinguished by.
+          </p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Key Findings</h4>
+          <ul>
+            <li><strong>3 duplicate payout pairs</strong> surfaced with a single <code>GROUP BY ... HAVING COUNT(*) &gt; 1</code> — the classic signature of a non-idempotent retry or a batch job re-run, not a data-entry typo.</li>
+            <li><strong>4 payouts moved after their governing agreement had already expired</strong>, across 2 partners — the sharpest finding in the dataset, surfaced by a 3-table JOIN comparing payout date against agreement expiry.</li>
+            <li><strong>2 payout requests logged after the partner's account was suspended</strong>, found by joining the activity log to account status — the same "cross-reference what someone did against what their account should allow" pattern, just on behavioral data instead of transactional data.</li>
+            <li><strong>The Postman side mirrors the SQL side exactly</strong> — every example response in the API collection was pulled directly from the same database, so testing "fetch a partner's activity logs" via API returns the identical numbers already verified in SQL.</li>
+          </ul>
+
+          <h4>What This Means, Applied</h4>
+          <p>
+            The methodology matters more than any single query: start with a structural check
+            (does every payout have a valid, currently-active agreement behind it), then a
+            duplication check, then an activity-consistency check, then consolidate everything
+            into one queryable report instead of three separate spreadsheets. That's a real
+            discipline, not a one-off script — the same instinct behind
+            <a href="#research" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">the research above</a>,
+            applied to payments and partner operations instead.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:18px 0">
+          <img src="projects/partner-ops-practice/screenshots/sql-duplicate-payouts.png" alt="T-SQL GROUP BY / HAVING query finding 3 duplicate payout pairs, same partner, amount, and date" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/partner-ops-practice/screenshots/sql-payouts-after-expiry.png" alt="T-SQL 3-table join finding 4 payouts made after the governing e-agreement had expired, across 2 partners" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/partner-ops-practice/screenshots/api-list-partners.png" alt="Postman GET request listing all partners, 200 OK, real data from the same database used in the SQL queries" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+          <img src="projects/partner-ops-practice/screenshots/api-partner-summary.png" alt="Postman GET request for one partner's aggregate summary — total payouts, amount paid, agreement status, flagged duplicates" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
+        </div>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 4 panels reconstruct the real, verified query/response pairs from this project as clean image assets — same real data and numbers throughout, re-rendered since the originals were captured live in VS Code and Postman rather than saved as standalone files.</p>
+
+        <div class="jlinks">
+          <span><span class="k">Guide</span><a href="projects/partner-ops-practice/SQL_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">SQL practice guide →</a></span>
+          <span><span class="k">Collection</span><a href="projects/partner-ops-practice/Partner-Ops-API.postman_collection.json" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Postman collection →</a></span>
+        </div>
+      </div>
+      </article>
+    </div>
+
     <a class="track-showmore" href="travel-tech-more.html">
       <span class="track-showmore-label">Show more case studies</span>
       <span class="track-showmore-count">Flight Booking Teardown, Travel Support AI Copilot, T5 (delay dashboard), T8, SQL/Amplitude Basics, Weft, Career Copilot, and cross-industry practice work →</span>
