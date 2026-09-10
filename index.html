@@ -1206,7 +1206,7 @@ Body: { "resolved": true }</div>
         <div class="cs-facts">
           <span class="chip">Real Node.js mock server with actual validation logic, not canned responses</span>
           <span class="chip">9 real test scenarios: connectivity → auth → request validation → business logic → server error</span>
-          <span class="chip">2 real mistakes made and caught mid-build, documented rather than edited out</span>
+          <span class="chip">3 real mistakes made and caught mid-build, documented rather than edited out</span>
           <span class="chip">Also used to drill raw HTTP method fundamentals (GET/POST/PUT/PATCH/DELETE) against a live public API</span>
         </div>
         <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> Postman (collection, Authorization tab, Tests scripts, a code-based local mock server), Node.js.</p>
@@ -1225,7 +1225,33 @@ Body: { "resolved": true }</div>
           <p style="margin:0 0 6px"><strong>Step 1 — Build the request</strong></p>
           <p>A new Postman collection, one request: <code>POST /v1/kyc/verify</code>, with an <code>Authorization: Bearer</code> header and a JSON body — <code>customerId</code>, <code>pan</code>, <code>dob</code>.</p>
 
-          <p style="margin:0 0 6px"><strong>Step 2 — Stand up a mock server with real logic, not a canned answer</strong></p>
+          <p style="margin:0 0 6px"><strong>Step 2 — Try Postman's example-based mocking first, and catch a real mix-up</strong></p>
+          <p>
+            Before writing any server code, the first attempt used Postman's classic
+            example-based mock — no logic at all, just saved request/response pairs Postman
+            replays. Adding one taught a distinction worth having ready: an example has two
+            separate halves — a <strong>request</strong> (what gets sent) and a
+            <strong>response</strong> (what the mock replies with) — and it's easy to put the
+            wrong content in the wrong half. That's exactly what happened first: the intended
+            response JSON got typed into the request-body slot, leaving the actual response empty.
+          </p>
+          <div class="code-snip">Request body (top half — what triggers this example):
+{ "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }
+
+Response — Status 200 (bottom half — what the mock replies with):
+{ "status": "SUCCESS", "customerId": "TEST001", "kycStatus": "VERIFIED",
+  "verificationDate": "2026-09-10", "requestId": "REQ-10001" }</div>
+          <p>
+            Nine examples like this covered the full scenario set this way — genuinely useful,
+            and worth knowing since it's the more commonly used Postman mocking approach on most
+            teams. But it turned out Postman actually offers <em>two</em> distinct mock types:
+            this classic example-matching one, and a newer code-based "Mock (BETA)" that runs
+            real server logic instead of static examples. Since the goal was testing actual
+            validation behavior rather than pre-written answers, the code-based version below is
+            what the full 9-scenario run in Step 5 actually ran against.
+          </p>
+
+          <p style="margin:0 0 6px"><strong>Step 3 — Stand up a mock server with real logic, not a canned answer</strong></p>
           <p>
             Rather than a static example response, the mock server runs actual validation code:
             checks the auth header, checks each required field is present, validates PAN against
@@ -1236,7 +1262,7 @@ Body: { "resolved": true }</div>
             it, the same as a real backend would.
           </p>
 
-          <p style="margin:0 0 6px"><strong>Step 3 — Two real mistakes, caught by checking the actual response, not just the status</strong></p>
+          <p style="margin:0 0 6px"><strong>Step 4 — Two more real mistakes in the code-based mock, caught by checking the actual response, not just the status</strong></p>
           <p>
             First: a JSON body got pasted into the URL field by accident — Postman returned
             <em>"Invalid character in header content"</em>, which is a real, specific error a
@@ -1252,7 +1278,7 @@ Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div
           <p style="margin:8px 0 6px"><strong>Output</strong> — 200 OK</p>
           <div class="code-snip">{ "status": "SUCCESS", "customerId": "TEST001", "kycStatus": "VERIFIED", "verificationDate": "2026-09-10", "requestId": "REQ-10001" }</div>
 
-          <p style="margin:18px 0 6px"><strong>Step 4 — Run the full scenario matrix, one at a time</strong></p>
+          <p style="margin:18px 0 6px"><strong>Step 5 — Run the full scenario matrix, one at a time</strong></p>
           <p>Same request, deliberately varied — wrong token, missing field, bad format, unknown customer, duplicate, server error — confirming the exact expected status and error code for each:</p>
           <div class="ptable2-wrap"><table class="ptable2">
             <thead><tr><th>Scenario</th><th>Expected</th><th>Actual</th><th>Result</th></tr></thead>
