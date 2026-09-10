@@ -1232,20 +1232,59 @@ Body: { "resolved": true }</div>
             there's nothing to check a real response against.
           </p>
 
-          <div class="ptable2-wrap"><table class="ptable2">
-            <thead><tr><th>Scenario</th><th>Input body</th><th>Expected output</th></tr></thead>
-            <tbody>
-              <tr><td>Valid</td><td>{customerId, pan, dob all valid}</td><td>200 · SUCCESS / VERIFIED</td></tr>
-              <tr><td>Missing PAN</td><td>pan omitted</td><td>400 · MISSING_FIELD</td></tr>
-              <tr><td>Invalid PAN format</td><td>pan: "12345"</td><td>400 · INVALID_FORMAT</td></tr>
-              <tr><td>Invalid token</td><td>wrong Bearer token</td><td>401 · INVALID_TOKEN</td></tr>
-              <tr><td>Missing auth</td><td>no Authorization header</td><td>401 · MISSING_AUTH</td></tr>
-              <tr><td>Customer not found</td><td>customerId: "NOTFOUND001"</td><td>404 · CUSTOMER_NOT_FOUND</td></tr>
-              <tr><td>Invalid DOB format</td><td>dob: "15-06-1995"</td><td>400 · INVALID_DATE_FORMAT</td></tr>
-              <tr><td>Duplicate request</td><td>customerId: "DUPLICATE001"</td><td>409 · DUPLICATE_REQUEST</td></tr>
-              <tr><td>Server error</td><td>customerId: "ERROR001"</td><td>500 · INTERNAL_ERROR</td></tr>
-            </tbody>
-          </table></div>
+          <p style="margin:0 0 4px"><strong>1. Valid</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
+          <div class="code-snip">Expected — 200 OK
+{ "status": "SUCCESS", "customerId": "TEST001", "kycStatus": "VERIFIED", "verificationDate": "2026-09-10", "requestId": "REQ-10001" }</div>
+
+          <p style="margin:0 0 4px"><strong>2. Missing PAN</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "TEST001", "dob": "1995-06-15" }</div>
+          <div class="code-snip">Expected — 400 Bad Request
+{ "status": "FAILED", "errorCode": "MISSING_FIELD", "message": "PAN is required" }</div>
+
+          <p style="margin:0 0 4px"><strong>3. Invalid PAN format</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "TEST001", "pan": "12345", "dob": "1995-06-15" }</div>
+          <div class="code-snip">Expected — 400 Bad Request
+{ "status": "FAILED", "errorCode": "INVALID_FORMAT", "message": "PAN format is invalid (expected AAAAA9999A)" }</div>
+
+          <p style="margin:0 0 4px"><strong>4. Invalid token</strong></p>
+          <div class="code-snip">Token: WRONG_TOKEN
+Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
+          <div class="code-snip">Expected — 401 Unauthorized
+{ "status": "FAILED", "errorCode": "INVALID_TOKEN", "message": "Invalid or expired token" }</div>
+
+          <p style="margin:0 0 4px"><strong>5. Missing auth</strong></p>
+          <div class="code-snip">Token: (none — Auth Type set to "No Auth")
+Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
+          <div class="code-snip">Expected — 401 Unauthorized
+{ "status": "FAILED", "errorCode": "MISSING_AUTH", "message": "Authorization header is required" }</div>
+
+          <p style="margin:0 0 4px"><strong>6. Customer not found</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "NOTFOUND001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
+          <div class="code-snip">Expected — 404 Not Found
+{ "status": "FAILED", "errorCode": "CUSTOMER_NOT_FOUND", "message": "No customer found with this ID" }</div>
+
+          <p style="margin:0 0 4px"><strong>7. Invalid DOB format</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "15-06-1995" }</div>
+          <div class="code-snip">Expected — 400 Bad Request
+{ "status": "FAILED", "errorCode": "INVALID_DATE_FORMAT", "message": "dob must be in YYYY-MM-DD format" }</div>
+
+          <p style="margin:0 0 4px"><strong>8. Duplicate request</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "DUPLICATE001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
+          <div class="code-snip">Expected — 409 Conflict
+{ "status": "FAILED", "errorCode": "DUPLICATE_REQUEST", "message": "A KYC request for this customer is already in progress" }</div>
+
+          <p style="margin:0 0 4px"><strong>9. Server error</strong></p>
+          <div class="code-snip">Token: VALID_TEST_TOKEN
+Body: { "customerId": "ERROR001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
+          <div class="code-snip">Expected — 500 Internal Server Error
+{ "status": "FAILED", "errorCode": "INTERNAL_ERROR", "message": "Something went wrong on our end" }</div>
 
           <p style="margin:0 0 14px">
             One real mix-up along the way, worth keeping: an example has two separate halves —
@@ -1288,64 +1327,27 @@ Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div
           <p style="margin:8px 0 6px"><strong>Output</strong> — 200 OK</p>
           <div class="code-snip">{ "status": "SUCCESS", "customerId": "TEST001", "kycStatus": "VERIFIED", "verificationDate": "2026-09-10", "requestId": "REQ-10001" }</div>
 
-          <p style="margin:18px 0 6px"><strong>Step 5 — Run the full scenario matrix, one at a time</strong></p>
-          <p>Same request, deliberately varied — wrong token, missing field, bad format, unknown customer, duplicate, server error — the actual input sent and actual output received for all 9:</p>
+          <p style="margin:18px 0 6px"><strong>Step 5 — Run each one for real, checking actual against expected</strong></p>
+          <p style="margin:0 0 14px">
+            Same 9 inputs from Step 2, now sent for real against the code-based mock's actual
+            validation logic — not read off an example, genuinely evaluated:
+          </p>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Scenario</th><th>Expected</th><th>Actual</th><th>Result</th></tr></thead>
+            <tbody>
+              <tr><td>Valid request</td><td>200 · VERIFIED</td><td>200 · VERIFIED</td><td>✅</td></tr>
+              <tr><td>Missing PAN</td><td>400 · MISSING_FIELD</td><td>400 · MISSING_FIELD</td><td>✅</td></tr>
+              <tr><td>Invalid PAN format</td><td>400 · INVALID_FORMAT</td><td>400 · INVALID_FORMAT</td><td>✅</td></tr>
+              <tr><td>Invalid token</td><td>401 · INVALID_TOKEN</td><td>401 · INVALID_TOKEN</td><td>✅</td></tr>
+              <tr><td>Missing auth</td><td>401 · MISSING_AUTH</td><td>401 · MISSING_AUTH</td><td>✅</td></tr>
+              <tr><td>Customer not found</td><td>404 · CUSTOMER_NOT_FOUND</td><td>404 · CUSTOMER_NOT_FOUND</td><td>✅</td></tr>
+              <tr><td>Invalid DOB format</td><td>400 · INVALID_DATE_FORMAT</td><td>400 · INVALID_DATE_FORMAT</td><td>✅</td></tr>
+              <tr><td>Duplicate request</td><td>409 · DUPLICATE_REQUEST</td><td>409 · DUPLICATE_REQUEST</td><td>✅</td></tr>
+              <tr><td>Server error</td><td>500 · INTERNAL_ERROR</td><td>500 · INTERNAL_ERROR</td><td>✅</td></tr>
+            </tbody>
+          </table></div>
 
-          <p style="margin:0 0 4px"><strong>1. Valid request</strong></p>
-          <div class="code-snip">Token: VALID_TEST_TOKEN
-Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
-          <div class="code-snip">200 OK
-{ "status": "SUCCESS", "customerId": "TEST001", "kycStatus": "VERIFIED", "verificationDate": "2026-09-10", "requestId": "REQ-10001" }</div>
-
-          <p style="margin:0 0 4px"><strong>2. Missing PAN</strong></p>
-          <div class="code-snip">Token: VALID_TEST_TOKEN
-Body: { "customerId": "TEST001", "dob": "1995-06-15" }</div>
-          <div class="code-snip">400 Bad Request
-{ "status": "FAILED", "errorCode": "MISSING_FIELD", "message": "PAN is required" }</div>
-
-          <p style="margin:0 0 4px"><strong>3. Invalid PAN format</strong></p>
-          <div class="code-snip">Token: VALID_TEST_TOKEN
-Body: { "customerId": "TEST001", "pan": "12345", "dob": "1995-06-15" }</div>
-          <div class="code-snip">400 Bad Request
-{ "status": "FAILED", "errorCode": "INVALID_FORMAT", "message": "PAN format is invalid (expected AAAAA9999A)" }</div>
-
-          <p style="margin:0 0 4px"><strong>4. Invalid token</strong></p>
-          <div class="code-snip">Token: WRONG_TOKEN
-Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
-          <div class="code-snip">401 Unauthorized
-{ "status": "FAILED", "errorCode": "INVALID_TOKEN", "message": "Invalid or expired token" }</div>
-
-          <p style="margin:0 0 4px"><strong>5. Missing auth</strong></p>
-          <div class="code-snip">Token: (none — Auth Type set to "No Auth")
-Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
-          <div class="code-snip">401 Unauthorized
-{ "status": "FAILED", "errorCode": "MISSING_AUTH", "message": "Authorization header is required" }</div>
-
-          <p style="margin:0 0 4px"><strong>6. Customer not found</strong></p>
-          <div class="code-snip">Token: VALID_TEST_TOKEN
-Body: { "customerId": "NOTFOUND001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
-          <div class="code-snip">404 Not Found
-{ "status": "FAILED", "errorCode": "CUSTOMER_NOT_FOUND", "message": "No customer found with this ID" }</div>
-
-          <p style="margin:0 0 4px"><strong>7. Invalid DOB format</strong></p>
-          <div class="code-snip">Token: VALID_TEST_TOKEN
-Body: { "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "15-06-1995" }</div>
-          <div class="code-snip">400 Bad Request
-{ "status": "FAILED", "errorCode": "INVALID_DATE_FORMAT", "message": "dob must be in YYYY-MM-DD format" }</div>
-
-          <p style="margin:0 0 4px"><strong>8. Duplicate request</strong></p>
-          <div class="code-snip">Token: VALID_TEST_TOKEN
-Body: { "customerId": "DUPLICATE001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
-          <div class="code-snip">409 Conflict
-{ "status": "FAILED", "errorCode": "DUPLICATE_REQUEST", "message": "A KYC request for this customer is already in progress" }</div>
-
-          <p style="margin:0 0 4px"><strong>9. Server error</strong></p>
-          <div class="code-snip">Token: VALID_TEST_TOKEN
-Body: { "customerId": "ERROR001", "pan": "ABCDE1234F", "dob": "1995-06-15" }</div>
-          <div class="code-snip">500 Internal Server Error
-{ "status": "FAILED", "errorCode": "INTERNAL_ERROR", "message": "Something went wrong on our end" }</div>
-
-          <p style="margin:0 0 18px"><strong>Result</strong> — 9 for 9, every status code and error code matching, all genuinely produced by the mock's own validation logic reacting to real input, not read off a pre-written example.</p>
+          <p style="margin:0 0 18px"><strong>Result</strong> — 9 for 9, every status code and error code matching what Step 2 defined as correct, all genuinely produced by the mock's own validation logic reacting to real input.</p>
 
           <h4>A Self-Caught Mistake Worth Keeping In</h4>
           <p>
