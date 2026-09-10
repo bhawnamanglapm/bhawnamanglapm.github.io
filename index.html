@@ -1225,38 +1225,40 @@ Body: { "resolved": true }</div>
           <p style="margin:0 0 6px"><strong>Step 1 — Build the request</strong></p>
           <p>A new Postman collection, one request: <code>POST /v1/kyc/verify</code>, with an <code>Authorization: Bearer</code> header and a JSON body — <code>customerId</code>, <code>pan</code>, <code>dob</code>.</p>
 
-          <p style="margin:0 0 6px"><strong>Step 2 — Try Postman's example-based mocking first, and catch a real mix-up</strong></p>
-          <p>
-            Before writing any server code, the first attempt used Postman's classic
-            example-based mock — no logic at all, just saved request/response pairs Postman
-            replays. Adding one taught a distinction worth having ready: an example has two
-            separate halves — a <strong>request</strong> (what gets sent) and a
-            <strong>response</strong> (what the mock replies with) — and it's easy to put the
-            wrong content in the wrong half. That's exactly what happened first: the intended
-            response JSON got typed into the request-body slot, leaving the actual response empty.
+          <p style="margin:0 0 6px"><strong>Step 2 — Define the 9 examples first (the expected contract)</strong></p>
+          <p style="margin:0 0 14px">
+            Before testing anything, 9 examples got built — one per scenario, each a
+            request/response pair stating what should happen. This is the answer key: without it,
+            there's nothing to check a real response against.
           </p>
-          <div class="code-snip">Request body (top half — what triggers this example):
-{ "customerId": "TEST001", "pan": "ABCDE1234F", "dob": "1995-06-15" }
 
-Response — Status 200 (bottom half — what the mock replies with):
-{ "status": "SUCCESS", "customerId": "TEST001", "kycStatus": "VERIFIED",
-  "verificationDate": "2026-09-10", "requestId": "REQ-10001" }</div>
-          <p>
-            Nine examples like this got built first, one per scenario — request body in, expected
-            response + status out — effectively writing down the expected contract before testing
-            anything. The actual verification step came after: going back to the real
-            <strong>KYC Verify</strong> request itself, typing the same scenario's details into
-            its Body, hitting Send, and checking whether the real response that came back matched
-            what that scenario's example said it should be. That's the core loop of API
-            testing — define what "correct" looks like first, then run the real thing and compare.
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Scenario</th><th>Input body</th><th>Expected output</th></tr></thead>
+            <tbody>
+              <tr><td>Valid</td><td>{customerId, pan, dob all valid}</td><td>200 · SUCCESS / VERIFIED</td></tr>
+              <tr><td>Missing PAN</td><td>pan omitted</td><td>400 · MISSING_FIELD</td></tr>
+              <tr><td>Invalid PAN format</td><td>pan: "12345"</td><td>400 · INVALID_FORMAT</td></tr>
+              <tr><td>Invalid token</td><td>wrong Bearer token</td><td>401 · INVALID_TOKEN</td></tr>
+              <tr><td>Missing auth</td><td>no Authorization header</td><td>401 · MISSING_AUTH</td></tr>
+              <tr><td>Customer not found</td><td>customerId: "NOTFOUND001"</td><td>404 · CUSTOMER_NOT_FOUND</td></tr>
+              <tr><td>Invalid DOB format</td><td>dob: "15-06-1995"</td><td>400 · INVALID_DATE_FORMAT</td></tr>
+              <tr><td>Duplicate request</td><td>customerId: "DUPLICATE001"</td><td>409 · DUPLICATE_REQUEST</td></tr>
+              <tr><td>Server error</td><td>customerId: "ERROR001"</td><td>500 · INTERNAL_ERROR</td></tr>
+            </tbody>
+          </table></div>
+
+          <p style="margin:0 0 14px">
+            One real mix-up along the way, worth keeping: an example has two separate halves —
+            request (what gets sent) and response (what comes back) — and the first attempt typed
+            the expected response into the request half by mistake, leaving the actual response
+            empty. Easy error, and it's exactly why having the expected answer written down
+            <em>first</em> matters: it made the mistake obvious immediately, instead of only
+            surfacing later when a real test didn't behave as expected.
           </p>
-          <p>
-            Genuinely useful, and worth knowing since it's the more commonly used Postman mocking
-            approach on most teams. But it turned out Postman actually offers <em>two</em>
-            distinct mock types: this classic example-matching one, and a newer code-based "Mock
-            (BETA)" that runs real server logic instead of static examples. Since the goal was
-            testing actual validation behavior rather than pre-written answers, the code-based
-            version below is what the full 9-scenario run in Step 5 actually ran against.
+          <p style="margin:0 0 18px">
+            Postman turned out to offer two separate mock types — this example-matching one, and a
+            newer code-based "Mock (BETA)" that runs real logic. The code-based one is what Step 5's
+            actual test run used, but these 9 examples are what "correct" was defined against.
           </p>
 
           <p style="margin:0 0 6px"><strong>Step 3 — Stand up a mock server with real logic, not a canned answer</strong></p>
