@@ -31,3 +31,23 @@ Claude has no direct access to the Google account behind this GA4 property (no O
 4. Get a week-over-week read: what changed, what it means, and anything worth acting on (e.g., a case study nobody's opening, a channel that's actually working).
 
 Last set up: 2026-09-08.
+
+## Google Search Console
+
+Set up 2026-09-18, prompted by the first analytics check-in showing zero
+Organic Search sessions — `site:bhawnamanglapm.github.io` returned no live
+pages, meaning Google had never crawled the site.
+
+- Property: `https://bhawnamanglapm.github.io/` (URL-prefix property — a
+  Domain property won't work here since DNS for `github.io` isn't ours to
+  verify against).
+- Verified automatically via the existing GA4 (gtag.js) connection. A
+  `google-site-verification` meta tag is also in `index.html` as a backup
+  verification method — don't remove either the tag or the gtag.js script,
+  or verification can be lost.
+- `sitemap.xml` submitted.
+- Indexing requested for the homepage (added to Google's priority crawl
+  queue — not instant; check back at a future session for actual results).
+
+Next check: re-run `site:bhawnamanglapm.github.io` at a future check-in to
+confirm the site has actually been indexed.
