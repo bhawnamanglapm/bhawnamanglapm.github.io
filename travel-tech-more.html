@@ -1552,13 +1552,13 @@
         <span class="jnum">T35</span>
         <h3 class="jcat-title">The Verification Gap — Research in Progress</h3>
       </div>
-      <article class="jcard" data-case="ai-verification-research" data-updated="2026-08-15">
+      <article class="jcard" data-case="ai-verification-research" data-updated="2026-09-18">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#F59E0B,#B45309)">🔍</div>
             <div>
               <div class="jtitle">The Verification Gap — Research in Progress</div>
-              <div class="jmeta">🔬 Ongoing research · started 14 Aug 2026, updated 15 Aug 2026</div>
+              <div class="jmeta">🔬 Ongoing research · started 14 Aug 2026, updated 18 Sep 2026</div>
               <div class="jtools"><b>Method:</b> primary-source verification — court filings, official regulator PDFs, company disclosures, cross-checked against news coverage</div>
             </div>
           </div>
@@ -1607,7 +1607,7 @@
         </div>
 
         <details class="cs-showmore">
-          <summary>Show more: Q1–Q25 <span class="sm-count">(the original Deloitte site scan, the PM/data-management filtering, the build decision, the plain-language explainer, then the full source-hunting, global-pattern, India, platforms, regulation, and procurement thread)</span></summary>
+          <summary>Show more: Q1–Q26 <span class="sm-count">(the original Deloitte site scan, the PM/data-management filtering, the build decision, the plain-language explainer, then the full source-hunting, global-pattern, India, platforms, regulation, and procurement thread, plus a completeness re-check and the Canada watchdog's non-investigation)</span></summary>
 
         <div class="cs-narrative">
           <h4>Q1 — "i want to make fresh project for deloitte company- analyze the whole company website and various other live websites and let me know on which problem statements they are working on?"</h4>
@@ -1857,6 +1857,15 @@
           <p>Explained with the actual proof it's real: Deloitte already owned a citation-checker (aiStudio's "Citation Retriever") before Australia, and it still shipped fabricated citations anyway. The technology wasn't the problem. The smoke-detector analogy: owning a detector doesn't stop a fire unless someone's also decided which rooms need one, who checks the battery, what happens when it beeps, and who's accountable if it was dead for months. Six concrete decisions nobody's making at Deloitte: (1) does the check run on every report or only some; (2) where in the workflow does it run; (3) what confidence score is "good enough" to ship without a human; (4) whose job is it to actually check a flagged item; (5) what happens when someone overrides it under deadline pressure; (6) who's accountable if the whole thing gets silently bypassed. None of these are technology questions — they're business-process decisions, which is the actual, portable definition of what a PM does here that a detection vendor never will.</p>
         </div>
 
+        <div class="cs-narrative">
+          <h4>Q26 — "check whether our research work was complete or something left. And then check how government and deloitte are working together" <span style="font-weight:400;color:var(--grey)">(18 Sep 2026)</span></h4>
+          <p><strong>Completeness check on this log:</strong> Q1–Q25 hold up — every question has a primary source, and the "Where this goes next" list below was already fully resolved or pointing forward into Part 2/3. The real gaps are in the build, not the research: Part 2 is explicitly one audited report with Track C never run, and Part 3 has 4 of 7 planned screens still wireframe-only — both honestly labeled already, both blocked on this environment's network access to a source PDF, not on missing research.</p>
+          <p><strong>New finding — Canada's accountability gap just got worse, not better.</strong> CPA NL (the professional accounting watchdog covering Newfoundland &amp; Labrador) opened an investigation into Deloitte's fabricated citations in the $1.6M healthcare report — and in May 2026 closed it <strong>without investigating anything</strong>, on a legal-entity technicality: the report was delivered under a contract with "Deloitte Inc.," which isn't a CPA NL-registered firm, while "Deloitte LLP" (the firm that <em>is</em> registered) "was not a party to the contract and had no involvement in the report." Nobody has been held accountable for that report by anyone. This directly extends the project's own thesis from Q7/Q22 — not just that no internal fix is visible, but that the external oversight mechanism that might have forced one has now formally declined to look.</p>
+          <p><strong>A correction, not an addition — checked and ruled out.</strong> A South Africa story surfaced in the same search results (a government AI policy pulled in April 2026 after 6 of 67 citations turned out to be fabricated) and it would have been easy to log as a fifth Big Four incident. Checked directly: it isn't one. The policy was drafted internally by South Africa's own Department of Communications and Digital Technologies under Minister Malatsi — no consulting firm named in any source as author or vendor. Noting this explicitly rather than silently skipping it, since conflating two similar-sounding stories is exactly the kind of unverified-citation error this whole research thread is about.</p>
+          <p><strong>No evidence found</strong> that any government has cut ties with, blacklisted, or restricted new contracts to Deloitte specifically because of these incidents. Newfoundland &amp; Labrador's procurement-process tightening (already logged at Q7) remains the only concrete governmental response on record — and now the one oversight body that could have added a second is off the table.</p>
+          <p class="src-line">Sources: <a href="https://theindependent.ca/news/lji/accounting-watchdog-to-investigate-deloitte-over-fake-citations-in-1-6-million-healthcare-report/" target="_blank" rel="noopener" class="src-a">The Independent (investigation opened)</a> · <a href="https://ricochet.media/politics/provinces/atlantic/deloitte-used-ai-in-1-6m-government-report-but-watchdog-says-it-cant-investigate/" target="_blank" rel="noopener" class="src-a">Ricochet Media (investigation closed)</a> · <a href="https://canadian-accountant.com/content/profession/cpa-nl-deloitte-ai" target="_blank" rel="noopener" class="src-a">Canadian Accountant</a> · <a href="https://ancparliament.org.za/statement-on-minister-malatsis-use-of-artificial-intelligence-in-drafting-south-africas-national-ai-policy/" target="_blank" rel="noopener" class="src-a">ANC Parliamentary Caucus (South Africa statement)</a> · <a href="https://www.cnbcafrica.com/2026/south-africa-pulls-ai-policy-after-hallucinated-citations-expose-drafting-scandal" target="_blank" rel="noopener" class="src-a">CNBC Africa (South Africa policy pulled)</a></p>
+        </div>
+
         </details>
 
         <div class="cs-narrative">
@@ -1866,6 +1875,7 @@
             <li><s>Find out whether any Indian consulting firm has had a Deloitte-style incident yet</s> — checked (Q22): not found; the pattern instead expanded to all four of the Big Four globally.</li>
             <li><s>Get a real hallucination-rate comparison across GPT/Gemini/Claude</s> — checked (Q22): Vectara HHEM leaderboard reviewed; on the harder 2026 benchmark, every current frontier model exceeds 10%, regardless of vendor.</li>
             <li><s>Track what Deloitte's actually changed internally</s> — checked (Q23): ControlCatalyst.AI (12 Aug 2026) is a third client-facing product, not an internal-deliverable fix — still no public evidence of the specific gap being closed.</li>
+            <li><s>Re-check whether any oversight body has actually held Deloitte accountable</s> — checked (Q26): CPA NL closed its Newfoundland &amp; Labrador investigation in May 2026 without investigating, on a legal-entity technicality. No government has restricted new contracts to Deloitte over any of this.</li>
             <li>Design the actual internal verification layer this points toward — see <a href="#case-deloitte-pm-roleplay" data-open-case="deloitte-pm-roleplay" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">the execution-roadmap exercise</a>, a role-play working through exactly this as a hypothetical Deloitte PM.</li>
             <li>The research continues directly into the actual hands-on audit and the platform it led to — see <a href="#case-verification-gap-platform" data-open-case="verification-gap-platform" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Part 2: From Audit to Prototype</a>.</li>
           </ul>
