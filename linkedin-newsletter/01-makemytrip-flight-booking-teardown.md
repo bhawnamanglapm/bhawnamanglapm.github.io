@@ -8,48 +8,52 @@
 
 ## Suggested headline
 
-**I tore down MakeMyTrip's flight booking flow and set a SMART goal to fix it. Here's the one number that changed my whole recommendation.**
+**I tore down MakeMyTrip's flight booking flow. Here's the story, told the way I'd tell it in an interview — Situation, Task, Action, Result.**
 
 ---
 
 ## Post body
 
-I want to show you how a Product Manager actually thinks — not with fancy words, but with a real example. So I picked one thing: the flow on MakeMyTrip where you search for a flight and end up booking it. And I studied it closely, the way I would if this were my actual job at the company.
+I want to show you how a Product Manager actually thinks — not with fancy words, but with a real example. I'll walk through it the same way I would if someone asked me about it in an interview: what the situation was, what I set out to do, what I actually did, and what the result was.
 
-**First, where do people actually give up and leave?**
+**Situation — what was actually going on**
 
-You'd think most people quit right at the payment step — typing in card details, waiting for OTP, that kind of friction. That's not where the biggest drop happens.
+MakeMyTrip's flight booking flow (search for a flight, review the fare, pay, done) has a real problem, and it's not where most people would guess. You'd think most people quit right at payment — card details, OTP, that kind of friction. They don't. The biggest drop happens one step earlier — right after picking a flight, on the page that shows the final price. At that point, roughly **62 out of every 100 people who reach that page leave without booking.**
 
-The biggest drop happens one step earlier — right after you pick a flight from the results list, and it takes you to the page where you review the final fare. At that point, roughly **62 out of every 100 people who reach that page leave without booking.** Why? Because the price they see on the results page is not the final price. Taxes, fees, and a few extra charges (that were already ticked "yes" for you, without asking) show up only now. People feel tricked, even if nobody meant to trick them, and they leave.
+Why? The price shown on the results list isn't the final price. Taxes, fees, and a few extra charges — already ticked "yes" for you, without asking — only show up now. People feel tricked, even if nobody meant to trick them, and they leave.
 
-I imagined a specific person to make this real: a 28-year-old IT professional who compares 3-4 apps before booking anything, because he's careful with money. For someone like him, that price jump isn't a small annoyance — it's the exact reason he closes the app.
+To make this real, I imagined a specific person: a 28-year-old IT professional who compares 3-4 apps before booking, because he's careful with money. For someone like him, that price jump at the last step isn't a small annoyance — it's the exact reason he closes the app.
 
-**Here's the part that made me stop and think twice.**
+**Task — what I set out to do**
 
-My first instinct was: "easy fix, just show the full price upfront, and don't tick those extra charges automatically." But then I asked myself — *why were they doing it this way in the first place?*
+Figure out exactly where and why people were leaving, and come back with a real recommendation — not just "fix the pricing," but something specific enough that an actual team could build it, and honest enough about what it would cost the business.
 
-Turns out, those extra charges (insurance, seat selection, baggage) are a real source of income for MakeMyTrip, on top of what they earn from the airline itself. So if I just remove that late price-reveal and those pre-ticked extras, the company loses real money. Telling them "just fix it" without saying that out loud isn't good advice — it's wishful thinking.
+**Action — what I actually did**
 
-So my actual recommendation had two parts, not one:
+My first instinct was: "easy fix, show the full price upfront, stop auto-ticking those extra charges." But I stopped and asked — *why were they doing it this way in the first place?*
 
-1. **Show the full, final price right from the results page** — no surprises later — and **stop automatically ticking "yes" on extra charges; let the customer choose to add them instead.** These were the two changes that would help the most, for the least effort, out of ten ideas I considered and scored.
-2. **Say clearly, in writing, before anyone builds anything:** these two changes will likely reduce the extra income MakeMyTrip makes from add-ons per booking. That's not a small footnote — it means Finance needs to agree on how much of a dip is acceptable, not just the design team saying "looks good."
+Turns out those extra charges (insurance, seat selection, baggage) are real income for MakeMyTrip, on top of what they earn from the airline. Removing them without saying so out loud isn't good advice — it's wishful thinking.
 
-That second part is the actual difference between advice that *sounds* smart and advice a real company could actually use. Every idea that would cost the company something got written down as a real risk, before anyone built anything — not discovered afterward, when it's too late to plan for it.
+So I came back with two things, not one:
 
-**How would I know if it actually worked?**
+1. **Show the full, final price right from the results page** — and **stop automatically ticking "yes" on extra charges; let the customer choose to add them.** Out of ten ideas I considered and scored, these two would help the most for the least engineering effort.
+2. **Said clearly, in writing, before anyone builds anything:** these two changes will likely reduce the extra income MakeMyTrip makes from add-ons per booking. Not a footnote — Finance needs to agree on how much of a dip is acceptable, not just the design team saying "looks good."
 
-Not with one single number like "engagement went up." I'd track five different things together: are people happier about pricing being clear (asked directly, after booking); are they using the product more; are they actually noticing and using the new "full price upfront" feature; do they come back and book again within 90 days; and — the main one — did more people actually make it from the results page to a completed booking.
+That second part is the real difference between advice that *sounds* smart and advice a company could actually use. Every idea with a real cost got written down as a risk before anyone built anything — not discovered afterward, when it's too late to plan for it.
 
-And instead of a vague goal like "make pricing less confusing," I'd write it out the SMART way — a simple habit of checking a goal against five questions before calling it a real goal at all:
+**Result — what success actually looks like, and how I'd prove it**
 
-- **Specific — what exactly changes?** More people who reach the final price page actually go on to complete their booking, instead of leaving.
-- **Measurable — by how much, in numbers?** From roughly 38 out of every 100 people completing a booking today, up to 50 or more out of 100.
-- **Achievable — is this realistic?** Yes — because the two fixes I'm shipping (full price upfront, optional add-ons instead of pre-ticked) are the two changes my scoring showed would help the most for the least engineering effort. This isn't a guess; it's the highest-leverage move available.
-- **Relevant — does this actually matter to the business?** Yes, directly — but only if I also watch the extra-charge income at the same time, so a "win" on bookings doesn't quietly become a loss in revenue.
-- **Time-bound — by when?** Within the next 3 months, so there's a real deadline to check the result against, not an open-ended hope.
+I wouldn't just say "it worked" — I'd track five things together: are people happier about pricing being clear (asked directly, after booking); are they using the product more; are they actually noticing and using the new "full price upfront" feature; do they come back and book again within 90 days; and — the main one — did more people actually make it from that price page to a completed booking.
 
-That last part — Relevant — is the one people skip, and it's the one that matters most here. If more people book, but the company makes far less money per booking, that's not really a win — it's a loss wearing a win's costume.
+And instead of a vague goal like "make pricing less confusing," I'd write the actual target the SMART way — five plain checks:
+
+- **Specific — what exactly changes?** More people who reach the final price page actually complete their booking, instead of leaving.
+- **Measurable — by how much?** From ~38 out of every 100 people completing a booking today, up to 50 or more out of 100.
+- **Achievable — is this realistic?** Yes — these are the two changes my scoring showed would help most for the least effort. Not a guess.
+- **Relevant — does this matter to the business?** Yes — but only if I also watch the extra-charge income at the same time, so a booking win doesn't quietly become a revenue loss.
+- **Time-bound — by when?** Within the next 3 months, so there's a real deadline to check against.
+
+Relevant is the one people skip, and it's the one that matters most here. If more people book but the company makes far less per booking, that's not really a win — it's a loss wearing a win's costume.
 
 ---
 
@@ -63,8 +67,8 @@ The full write-up — including all three customer personas, exactly how I score
 
 - **Voice:** first person, direct, no fluff intro — open with a hook line, not a greeting
 - **Language: plain, layman terms — explain every framework/jargon word in plain English the moment it would otherwise appear, or don't name it at all.** No CIRCLES/RICE/MoSCoW/HEART/OKR/"ancillary revenue"/"conversion rate" as bare terms — say what they mean in one clause instead (e.g. "62 out of 100 people leave" instead of "62% drop-off")
-- **Structure:** hook → the finding, explained plainly → the twist/nuance → the recommendation with its named cost, explained plainly → a SMART goal (Specific, Measurable, Achievable, Relevant, Time-bound), each letter spelled out in plain words → CTA back to portfolio
-- **Goal format: SMART, not OKRs** — write the goal as five explicit, plainly-worded checks (Specific/Measurable/Achievable/Relevant/Time-bound) rather than an Objective + Key Results list. SMART is the more widely recognized format for a general LinkedIn audience
+- **Overall structure: STAR** — label and write four clear sections: **Situation** (what was actually going on), **Task** (what I set out to do), **Action** (what I actually did, including the twist/nuance and the named cost), **Result** (what success looks like and how I'd prove it). This is the same structure to use verbally in an interview, so writing it this way doubles as interview prep.
+- **Goal format inside Result: SMART, not OKRs** — write the target as five explicit, plainly-worded checks (Specific/Measurable/Achievable/Relevant/Time-bound) rather than an Objective + Key Results list. SMART is the more widely recognized format for a general LinkedIn audience
 - **Length:** ~650-800 words in the body — plain language runs a bit longer than jargon, that's fine
 - **Always name a trade-off, not just a win** — this is the throughline of your whole portfolio's voice, keep it in every post
 - **Close every post with a one-line teaser for the next one** — builds newsletter momentum across the series
