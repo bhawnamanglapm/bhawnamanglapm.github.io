@@ -8,7 +8,7 @@
 
 ## Suggested headline
 
-**I tore down MakeMyTrip's flight booking flow using 5 PM frameworks. Here's the one number that changed my whole recommendation.**
+**I tore down MakeMyTrip's flight booking flow and set a SMART goal to fix it. Here's the one number that changed my whole recommendation.**
 
 ---
 
@@ -41,9 +41,15 @@ That second part is the actual difference between advice that *sounds* smart and
 
 Not with one single number like "engagement went up." I'd track five different things together: are people happier about pricing being clear (asked directly, after booking); are they using the product more; are they actually noticing and using the new "full price upfront" feature; do they come back and book again within 90 days; and — the main one — did more people actually make it from the results page to a completed booking.
 
-And I'd set one clear goal for the next few months: take that "62 out of 100 people leave" number and get it down so that **half or more actually go through with booking** — without quietly losing so much extra-charge income that it undoes the win.
+And instead of a vague goal like "make pricing less confusing," I'd write it out the SMART way — a simple habit of checking a goal against five questions before calling it a real goal at all:
 
-That last part matters more than it sounds. If more people book, but the company makes far less money per booking, that's not really a win — it's a loss wearing a win's costume.
+- **Specific — what exactly changes?** More people who reach the final price page actually go on to complete their booking, instead of leaving.
+- **Measurable — by how much, in numbers?** From roughly 38 out of every 100 people completing a booking today, up to 50 or more out of 100.
+- **Achievable — is this realistic?** Yes — because the two fixes I'm shipping (full price upfront, optional add-ons instead of pre-ticked) are the two changes my scoring showed would help the most for the least engineering effort. This isn't a guess; it's the highest-leverage move available.
+- **Relevant — does this actually matter to the business?** Yes, directly — but only if I also watch the extra-charge income at the same time, so a "win" on bookings doesn't quietly become a loss in revenue.
+- **Time-bound — by when?** Within the next 3 months, so there's a real deadline to check the result against, not an open-ended hope.
+
+That last part — Relevant — is the one people skip, and it's the one that matters most here. If more people book, but the company makes far less money per booking, that's not really a win — it's a loss wearing a win's costume.
 
 ---
 
@@ -57,7 +63,8 @@ The full write-up — including all three customer personas, exactly how I score
 
 - **Voice:** first person, direct, no fluff intro — open with a hook line, not a greeting
 - **Language: plain, layman terms — explain every framework/jargon word in plain English the moment it would otherwise appear, or don't name it at all.** No CIRCLES/RICE/MoSCoW/HEART/OKR/"ancillary revenue"/"conversion rate" as bare terms — say what they mean in one clause instead (e.g. "62 out of 100 people leave" instead of "62% drop-off")
-- **Structure:** hook → the finding, explained plainly → the twist/nuance → the recommendation with its named cost, explained plainly → how success gets measured, explained plainly → CTA back to portfolio
+- **Structure:** hook → the finding, explained plainly → the twist/nuance → the recommendation with its named cost, explained plainly → a SMART goal (Specific, Measurable, Achievable, Relevant, Time-bound), each letter spelled out in plain words → CTA back to portfolio
+- **Goal format: SMART, not OKRs** — write the goal as five explicit, plainly-worded checks (Specific/Measurable/Achievable/Relevant/Time-bound) rather than an Objective + Key Results list. SMART is the more widely recognized format for a general LinkedIn audience
 - **Length:** ~650-800 words in the body — plain language runs a bit longer than jargon, that's fine
 - **Always name a trade-off, not just a win** — this is the throughline of your whole portfolio's voice, keep it in every post
 - **Close every post with a one-line teaser for the next one** — builds newsletter momentum across the series
