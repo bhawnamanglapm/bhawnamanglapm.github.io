@@ -103,13 +103,13 @@
         <span class="jnum done">T1</span>
         <h3 class="jcat-title">Flight Booking Product Teardown</h3>
       </div>
-      <article class="jcard" data-case="makemytrip-flight-booking-teardown" data-updated="2026-07-30">
+      <article class="jcard" data-case="makemytrip-flight-booking-teardown" data-updated="2026-09-20">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#38BDF8,#0284C7)">✈️</div>
             <div>
-              <div class="jtitle">MakeMyTrip — Flight Booking Teardown</div>
-              <div class="jmeta">⭐⭐⭐⭐⭐ Flagship · fully scoped</div>
+              <div class="jtitle">MakeMyTrip — Pricing Transparency &amp; Dark Patterns Teardown</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Flagship · fully scoped · evidence-grounded</div>
               <div class="jtools"><b>Frameworks:</b> CIRCLES, RICE, MoSCoW, HEART, OKRs</div>
             </div>
           </div>
@@ -121,9 +121,10 @@
           <span class="chip">HEART framework (Google)</span>
           <span class="chip">OKR-aligned recommendation</span>
           <span class="chip">RICE + MoSCoW</span>
-          <span class="chip">Business model &amp; risk analysis</span>
+          <span class="chip">Regulatory &amp; financial-filing research</span>
         </div>
         <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Frameworks used:</strong> CIRCLES, RICE, MoSCoW, HEART (Google), OKRs — written analysis, no build.</p>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">A note on evidence:</strong> as an outside analyst I don't have MakeMyTrip's internal funnel or A/B data, so this teardown doesn't invent conversion percentages to sound precise. Every claim about the booking flow below is sourced to a public regulator (CCPA, CCI), an enforcement action against a named company, or MakeMyTrip's own financial filings — linked at the bottom of each section. Where something is an allegation rather than a proven fact, it's labelled as one.</p>
 
         <div class="cs-narrative">
           <h4>C — Comprehend the Situation</h4>
@@ -132,34 +133,48 @@
             (web vs. app: <strong>both</strong>), domestic or
             international (<strong>domestic only</strong>), and an existing product or a new one
             (<strong>existing, mature product</strong>). Scope: MakeMyTrip's flight search →
-            booking flow specifically, not hotels or holidays, narrower on purpose so the
-            analysis goes deep on one flow instead of shallow across three.
+            booking flow specifically, narrowed further to the fee/pricing-transparency question,
+            because that's the one part of the flow with real, public evidence behind it — a
+            regulator, an enforcement precedent, and the company's own disclosed accounting, not a
+            guess at a funnel I can't see.
           </p>
           <p>
-            <strong>Business model:</strong> the flight vertical monetizes through airline
-            commissions/overrides, a convenience fee layered on the base fare, and ancillary
-            revenue (seat selection, insurance, baggage). That matters here specifically. Add-on
-            pre-selection and the late-stage fee reveal found below aren't accidental UX
-            oversights; they're revenue mechanisms, and removing them has a real, quantifiable
-            cost. See Risks &amp; Trade-offs below.
+            <strong>Business model, from MakeMyTrip's own FY25 filing:</strong> the flight vertical
+            monetizes through airline commissions/overrides, a convenience fee layered on the base
+            fare (₹249–499 on MakeMyTrip vs. ₹0–399 among lower-cost competitors), and ancillary
+            add-ons (seat selection, insurance, baggage). MakeMyTrip discloses <strong>$301.6
+            million</strong> in "customer inducement costs" for FY25 — discounts, cashbacks, and
+            loyalty spend — booked as a <em>reduction of revenue</em>, not a separate expense line.
+            That accounting choice matters for this teardown specifically: it means the fee/add-on
+            mechanics below aren't incidental UX decisions, they're revenue mechanisms with a
+            disclosed, nine-figure scale. Removing them has a real, quantifiable cost — see Risks
+            &amp; Trade-offs below.
           </p>
           <p>
-            <strong>North Star Metric (company level):</strong> completed bookings per unique
-            searcher, which normalizes for the high browsing-only traffic that never intends to book.
-            This teardown is scoped to moving that metric one funnel stage at a time, starting
-            with the stage that leaks hardest.
+            <strong>The regulatory backdrop, which is what actually makes this teardown
+            tractable:</strong> India's Central Consumer Protection Authority (CCPA) published
+            <em>Guidelines for Prevention and Regulation of Dark Patterns, 2023</em>, naming 13
+            specific patterns — including "drip pricing" (revealing charges late in the flow) and
+            forced/pre-selected add-ons — as unfair trade practices. In 2026, <strong>SpiceJet was
+            fined under this exact framework</strong> for practices in the same category this
+            teardown examines: a real, recent enforcement precedent in Indian travel booking, not
+            a hypothetical risk. Separately, India's Competition Commission (CCI) fined MakeMyTrip
+            and Goibibo <strong>₹223.48 crore in 2022</strong> for hotel price-parity abuse — a
+            different specific practice, but the same underlying pattern: pricing mechanics that
+            regulators have already acted on, in this company's own history.
           </p>
+          <p class="src-line">Sources: <a href="https://investors.mmtcdn.com/MMYT_20_F_2025_filed_15d9fdfb54.pdf" target="_blank" rel="noopener" class="src-a">MakeMyTrip FY25 20-F (SEC)</a> · <a href="https://consumeraffairs.nic.in/sites/default/files/file-uploads/latestnews/Draft%20Guidelines%20for%20Prevention%20and%20Regulation%20of%20Dark%20Patterns%202023.pdf" target="_blank" rel="noopener" class="src-a">CCPA Dark Patterns Guidelines, 2023</a> · <a href="https://www.business-standard.com/article/companies/cci-imposes-penalties-makemytrip-oyo-for-anti-competitive-conduct-122101901184_1.html" target="_blank" rel="noopener" class="src-a">CCI price-parity order, 2022 (₹223.48 Cr)</a></p>
 
           <h4>I — Identify the Customer</h4>
           <p>
-            Three personas span the segmentation axes that actually predict booking behavior:
-            price sensitivity, time pressure, and party complexity, not demographic axes like age
-            or city, which don't:
+            Three illustrative personas, built to span the segmentation axes that predict booking
+            behavior — price sensitivity, time pressure, and party complexity — not measured
+            MakeMyTrip user data:
           </p>
           <ul>
-            <li><strong>"Value Rakesh"</strong> (28, IT professional, 4–5 domestic trips/yr): price-sensitive, compares 3+ apps before booking.</li>
+            <li><strong>"Value Rakesh"</strong> (28, IT professional, 4–5 domestic trips/yr): price-sensitive, compares multiple apps before booking on the final price paid, not the headline price.</li>
             <li><strong>"Business Priya"</strong> (34, consulting manager): books last-minute, values reliability and rebooking flexibility over price.</li>
-            <li><strong>"Family Planner Anita"</strong> (41): books for 4+ pax, needs group-seat clarity and abandons on unclear total-fare breakdowns.</li>
+            <li><strong>"Family Planner Anita"</strong> (41): books for 4+ pax, needs group-seat clarity and is most exposed to an unclear total-fare breakdown across multiple travellers.</li>
           </ul>
 
           <h4>R — Report the Customer's Needs</h4>
@@ -170,78 +185,83 @@
             that reduces search friction but adds a late-stage form-fill tax.
           </p>
           <p>
-            <strong>Retention loop:</strong> "My Trips" is a lifecycle retention engine wearing a
-            post-booking utility tab as a disguise. It's why a user reopens the app at all after
-            booking (rebooking, cancellation, web check-in), and why Business Priya's reliance on
-            it post-confirmation (see the funnel map below) reads as a commercial signal rather
-            than a UX nicety: it's the retention mechanism the acquisition funnel below actually
-            feeds into.
+            <strong>Retention loop:</strong> "My Trips" functions as a lifecycle retention engine
+            inside a post-booking utility tab — it's why a user reopens the app after booking at
+            all (rebooking, cancellation, web check-in), feeding the same repeat-usage loop the
+            company's own loyalty program (MMTBLACK, restructured in 2024) is built to reinforce.
           </p>
-          <p><strong>Needs uncovered, mapped to the journey above:</strong></p>
+          <p><strong>Needs uncovered, mapped to the journey above and grounded in the regulatory evidence, not a modeled funnel:</strong></p>
           <ul>
-            <li><strong>Trust/transparency need</strong>: fare inflation between search-result price and fare-review price (taxes/fees revealed late) erodes trust; add-on pre-selection (insurance, seat) defaults to "on," reading as a dark pattern at checkout.</li>
-            <li><strong>Time-efficiency need</strong>: filter fatigue (12+ dimensions, no smart default) and no persistent price comparison across dates force users to manually reopen search in a new tab.</li>
-            <li><strong>Clarity/control need</strong>: baggage policy buried a tap deep, a top cause of post-booking support contact.</li>
+            <li><strong>Trust/transparency need</strong>: "drip pricing" — the base fare shown at search differing from the total revealed at fare review — is one of the 13 patterns CCPA explicitly names as unfair, and is the same category of practice SpiceJet was fined for. Pre-selected, opt-out add-ons (insurance, seat) sit in the same named category.</li>
+            <li><strong>Time-efficiency need</strong>: filter fatigue (many dimensions, no smart default) with no persistent price comparison across dates forces users to manually reopen search in a new tab — a UX observation, not a regulatory one.</li>
+            <li><strong>Clarity/control need</strong>: baggage policy buried a tap deep is a plausible driver of post-booking support contact, consistent with (though not proof of) the "black-box numbers" pattern flagged in the <a href="#case-ai-verification-research" data-open-case="ai-verification-research" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Verification Gap research (T1)</a> elsewhere on this site.</li>
           </ul>
           <p>
             <strong>Funnel:</strong> Search → Results → Fare Review → Traveller Info → Payment →
-            Confirmation. The biggest modeled drop-off sits between Results and Fare Review
-            (price-shock from add-on fees: modeled at ~38% conversion in the
-            <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>),
-            with a second leak between Traveller Info and Payment (form fatigue + OTP retry friction).
+            Confirmation. I can't see MakeMyTrip's actual conversion numbers at each stage — no
+            outside analyst can — so this teardown doesn't invent one. What's verifiable instead:
+            the specific mechanic named by CCPA (late fee reveal between Results and Fare Review)
+            is the exact shape of pattern the regulator and the SpiceJet enforcement precedent
+            describe, which is reason enough to treat that transition as the highest-risk point in
+            the flow without needing a fabricated percentage to justify it.
           </p>
         </div>
 
         <a href="projects/flight-booking-teardown/journey-map.html" target="_blank" rel="noopener" style="display:block;margin:4px 0 4px">
           <picture>
             <source srcset="projects/flight-booking-teardown/screenshots/journey-map-light.webp" type="image/webp">
-            <img src="projects/flight-booking-teardown/screenshots/journey-map-light.png" alt="Journey and funnel map from Search to Confirmation, showing the funnel narrowing from 100% to 14%, with the steepest drop (92% to 35%) at Fare Review, annotated with pain points, persona impact, and which recommendation targets each stage" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
+            <img src="projects/flight-booking-teardown/screenshots/journey-map-light.png" alt="Journey map from Search to Confirmation, annotated with pain points, persona impact, and which recommendation targets each stage" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
           </picture>
         </a>
-        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full interactive Journey &amp; Funnel Map (also available in dark mode).</p>
+        <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click to open the full interactive Journey Map (also available in dark mode). Note: the funnel percentages in the linked map are an illustrative RICE-scoring exercise, not measured MakeMyTrip data — see the methodology note above.</p>
 
         <details class="cs-showmore">
           <summary>Show more: Cut, List Solutions, RICE scoring, Risks, Summarize, HEART metrics, OKRs <span class="sm-count">(the full CIRCLES back half)</span></summary>
         <div class="cs-narrative">
           <p>
-            <strong>Competitors:</strong> ixigo surfaces the convenience fee earlier than
-            MakeMyTrip and leads with "flight confirm guarantee" trust messaging; Booking.com's
-            flights product (smaller India share) shows all-in price at search. MakeMyTrip's "My
-            Trips" is the strongest post-booking lifecycle surface of the three.
+            <strong>Competitive and regulatory context:</strong> the 2022 CCI order named
+            MakeMyTrip and Goibibo together, and a separate CCI probe (2019) examined MakeMyTrip
+            and OYO on related unfair-practice complaints — meaning this isn't a single-company
+            problem, it's a pattern regulators are watching across the category. A March 2026
+            short-seller report (Morpheus Research) made further allegations — including that
+            MakeMyTrip continued price-parity practices after the 2022 order, and used "mandatory"
+            insurance opt-outs and late-revealed convenience fees. <strong>These are allegations
+            from a party with a financial interest in the stock falling, not independently
+            verified facts</strong>, and I'm treating them accordingly — worth naming because
+            they're part of the public record, not because they're proven.
           </p>
 
           <h4>C — Cut Through Prioritization</h4>
           <p>
             Of the three personas, I'd prioritize <strong>Value Rakesh's need first.</strong>
-            Price-sensitive comparison shoppers are both the largest segment of OTA search traffic
-            and the segment most exposed to the single biggest funnel leak above: the
-            fare-review price shock hits a price-anchored searcher hardest. Business Priya's
-            reliability need and Family Planner Anita's group-booking complexity are real, but
-            lower-frequency, worth a later cycle rather than this one. Everything below is scoped to
-            fixing Rakesh's need first.
+            Price-sensitive comparison shoppers are both a large segment of OTA search traffic and
+            the segment most exposed to a late fee reveal, since they've already anchored on the
+            headline price shown at search. Business Priya's reliability need and Family Planner
+            Anita's group-booking complexity are real, but lower-frequency, worth a later cycle
+            rather than this one. Everything below is scoped to fixing Rakesh's need first.
           </p>
 
           <h4>L — List Solutions</h4>
           <ol style="padding-left:18px;margin:0 0 14px;color:#33333D;font-size:14.5px;line-height:1.6">
-            <li style="margin-bottom:7px">All-in fare display at the results level: kill the late-stage price reveal.</li>
-            <li style="margin-bottom:7px">Opt-in (not opt-out) add-ons at fare review.</li>
+            <li style="margin-bottom:7px">All-in fare display at the results level: address the "drip pricing" pattern CCPA specifically names, before a regulator or a repeat of the SpiceJet outcome forces it.</li>
+            <li style="margin-bottom:7px">Opt-in (not opt-out) add-ons at fare review — directly responsive to CCPA's forced-add-on pattern.</li>
             <li style="margin-bottom:7px">Persistent "compare dates" strip on results instead of reopening search.</li>
             <li style="margin-bottom:7px">Baggage/meal policy inline on the fare card, not a tap away.</li>
             <li style="margin-bottom:7px">One-tap "hold my seat 15 min" for indecisive high-intent users.</li>
             <li style="margin-bottom:7px">Smart filter defaults ranked by price + duration + layover, not price alone.</li>
-            <li style="margin-bottom:7px">Payment retry with saved card + biometric re-auth to cut payment-stage drop-off.</li>
+            <li style="margin-bottom:7px">Payment retry with saved card + biometric re-auth to reduce late-stage abandonment.</li>
             <li style="margin-bottom:7px">Proactive delay-risk badge on results (feeds the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard (T5)</a>).</li>
             <li style="margin-bottom:7px">Group-booking mode for 4+ pax with a shared itinerary link.</li>
             <li>Post-booking "manage trip" nudges (web check-in, gate-change alerts) via push.</li>
           </ol>
 
           <h4>E — Evaluate Trade-offs</h4>
-          <p>RICE-scored, ranked by priority:</p>
+          <p>RICE-scored, ranked by priority. <strong>Reach, Impact, and Confidence here are my own analyst judgment for illustrating prioritization method, not measured MakeMyTrip metrics</strong> — the two regulatory-motivated items are ranked P1 regardless of the exact score, because they're the two the CCPA framework and the SpiceJet precedent most directly bear on:</p>
         </div>
 
         <div class="ptable2-wrap">
           <table class="ptable2">
-            <thead><tr><th>Feature (RICE-scored)</th><th>Reach × Impact × Confidence</th><th>Effort</th><th>RICE / priority</th></tr></thead>
+            <thead><tr><th>Feature (RICE-scored, illustrative)</th><th>Reach × Impact × Confidence</th><th>Effort</th><th>RICE / priority</th></tr></thead>
             <tbody>
               <tr><td data-label="Feature">Opt-in add-ons at fare review</td><td data-label="R×I×C">8 × 2 × 0.9</td><td data-label="Effort">1</td><td data-label="RICE">14.4 · <strong>P1 / Must</strong></td></tr>
               <tr><td data-label="Feature">All-in fare display at results</td><td data-label="R×I×C">10 × 3 × 0.9</td><td data-label="Effort">2</td><td data-label="RICE">13.5 · <strong>P1 / Must</strong></td></tr>
@@ -254,31 +274,30 @@
         </div>
 
         <div class="cs-narrative">
-          <p style="margin-top:12px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle: the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a booking-funnel fix.</p>
+          <p style="margin-top:12px"><strong style="color:var(--paper)">MoSCoW:</strong> Won't-have this cycle: the full loyalty-program overhaul (separate project, see Travel Loyalty Program Redesign below); it's a retention lever, not a fee-transparency fix.</p>
 
           <h4>Risks &amp; Trade-offs</h4>
-          <p>Every recommendation above has a real cost. Naming it here, before launch, not after:</p>
+          <p>Every recommendation above has a real cost. Naming it here, before launch, not after — and grounding the scale in MakeMyTrip's own disclosed numbers, not a guess:</p>
           <ul>
             <li><strong>All-in fare display</strong>: the honest total can look higher than a competitor's headline price at the results stage, hurting click-through from price-comparison meta-search and paid search ads. The fix that builds trust downstream may cost impressions upstream.</li>
-            <li><strong>Opt-in add-ons</strong>: directly reduces ancillary revenue per booking (insurance/seat attach rate). This is the business-model trade-off named in Comprehend, made concrete: it needs a revenue-per-booking floor agreed with Finance before shipping, beyond a simple UX sign-off.</li>
+            <li><strong>Opt-in add-ons</strong>: directly reduces ancillary revenue per booking. MakeMyTrip's own FY25 filing shows $301.6M in customer-inducement-related revenue reduction already — a real, disclosed number that shows this isn't a marginal trade-off; it needs a revenue-per-booking floor agreed with Finance before shipping, not just a UX sign-off.</li>
             <li><strong>Baggage/meal policy inline</strong>: minor engineering cost, no material revenue risk. The lowest-risk item on the list, consistent with its RICE ranking.</li>
             <li><strong>Delay-risk badge</strong>: risks eroding trust in a different direction if the underlying prediction (see the <a href="#case-flight-delay-prediction-dashboard" data-open-case="flight-delay-prediction-dashboard" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Flight Delay Dashboard, T5</a>) isn't well-calibrated. A wrong badge is worse than no badge.</li>
           </ul>
           <p>
-            <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind the A/B test
-            already scoped in the <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis (T8)</a>,
+            <strong>Mitigation:</strong> ship all-in pricing and opt-in add-ons behind an A/B test,
             with revenue-per-booking as a guardrail metric alongside conversion, not conversion
             alone. A win on Fare Review conversion that quietly craters ancillary revenue is a
-            loss dressed up as a win.
+            loss dressed up as a win — and given the CCPA/SpiceJet precedent, shipping this
+            proactively is materially cheaper than being the next enforcement case.
           </p>
 
           <h4>S — Summarize Recommendation</h4>
           <p>
             Ship <strong>all-in fare display</strong> and <strong>opt-in add-ons</strong> first:
-            RICE 13.5 and 14.4, the two highest-scored and lowest-effort items on the list. Together
-            they remove the exact price-shock that costs the funnel its single biggest leak, for
-            the segment (Rakesh) chosen in the Cut step above. Everything else on this list
-            sequences behind those two.
+            RICE 13.5 and 14.4, the two highest-scored and lowest-effort items on the list, and the
+            two most directly responsive to the CCPA dark-patterns framework. Everything else on
+            this list sequences behind those two.
           </p>
 
           <h4>Success Metrics: the HEART Framework</h4>
@@ -288,16 +307,17 @@
             <li><strong>Engagement</strong>: searches per session; % of sessions using the new compare-dates strip.</li>
             <li><strong>Adoption</strong>: % of eligible searchers who see and interact with the all-in fare display / opt-in add-on toggle in month one.</li>
             <li><strong>Retention</strong>: repeat booking rate within 90 days, segmented by whether a user's first booking hit the old opt-out add-on flow or the new opt-in one.</li>
-            <li><strong>Task success</strong>: Results→Fare Review conversion (the primary funnel-leak metric, North Star for this cycle), search-to-confirmation completion rate, time-to-book.</li>
+            <li><strong>Task success</strong>: Results→Fare Review conversion (the primary metric this cycle targets — MakeMyTrip would measure this against its own internal baseline, which isn't externally visible), search-to-confirmation completion rate, time-to-book.</li>
           </ul>
 
           <h4>Tied to an OKR</h4>
-          <p><strong>Objective:</strong> Remove price-shock and trust friction from fare review for price-sensitive searchers.</p>
+          <p><strong>Objective:</strong> Bring fare-review pricing in line with the CCPA dark-patterns framework, ahead of enforcement rather than in response to it.</p>
           <ul>
-            <li><strong>KR1:</strong> Increase Results→Fare Review conversion from the ~38% modeled baseline (see <a href="travel-tech-more.html#case-ota-booking-funnel-analysis" data-open-case="ota-booking-funnel-analysis" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Booking Funnel Analysis, T8</a>) to 50%+ within one quarter.</li>
+            <li><strong>KR1:</strong> Establish an internal Results→Fare Review conversion baseline (not something an outside analyst can know) and target measurable lift after removing the late fee reveal.</li>
             <li><strong>KR2:</strong> Reduce "hidden fees" CSAT verbatims by 50%.</li>
-            <li><strong>KR3:</strong> Ship both P1/Must recommendations this quarter, validated against the A/B hypotheses already scoped in T8.</li>
+            <li><strong>KR3:</strong> Ship both P1/Must recommendations this quarter, validated against an A/B test rather than shipped on judgment alone.</li>
           </ul>
+          <p class="src-line">Sources: <a href="https://www.morpheus-research.com/makemytrip/" target="_blank" rel="noopener" class="src-a">Morpheus Research report (allegations, not verified fact)</a> · <a href="https://www.businesstoday.in/latest/corporate/story/makemytrip-padded-profits-misled-customers-allowed-bad-actor-hotels-in-its-platform-report-523291-2026-03-31" target="_blank" rel="noopener" class="src-a">BusinessToday coverage</a> · <a href="https://www.business-standard.com/article/pti-stories/competition-comm-orders-probe-against-make-my-trip-goibibo-oyo-119102900856_1.html" target="_blank" rel="noopener" class="src-a">CCI probe, MakeMyTrip &amp; OYO, 2019</a></p>
         </div>
         </details>
 
