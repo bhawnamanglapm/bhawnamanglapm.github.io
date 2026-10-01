@@ -3547,6 +3547,20 @@
           </picture>
         </a>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click the screenshot to open the live, interactive dashboard (also available in dark mode).</p>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">A single flight-status page tells one traveller their flight is late, but nothing rolls that up into the pattern a PM actually needs — which routes are structurally unreliable, which airlines run tighter operations, and when risk spikes — the exact rollup needed before shipping a delay-risk badge like the one recommended in the MakeMyTrip teardown.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Built 8,000 flights from documented parameters since no real DGCA/BTS/Kaggle dataset was reachable → chose a gamma distribution over a normal one because real delays are right-skewed with a floor at zero → the first pass came out an implausible 48.9% on-time, so re-tuned parameters until the fleet-wide numbers matched a plausible real-world range while keeping the underlying patterns intact → grouped the data 4 ways (route, airline, season, time of day) and cross-tabbed routes against seasons into a heatmap instead of stopping at one-dimensional rankings.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A self-contained, CVD-validated HTML/JS dashboard surfacing on-time rate, average delay, and cancellation rate by route/airline/season/time-of-day, with every modeling choice documented in its own Methodology section rather than presented as scraped real data.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">DEL-GOI is the worst route specifically because it's the only one exposed to both winter fog and monsoon risk — a pattern invisible in a one-dimensional ranking. The real product risk was never the chart; it's presenting modeled data as if it were ground truth, which is why every claim on the dashboard is labeled as modeled, not measured.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><a href="projects/flight-delay-dashboard/dashboard.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">live dashboard →</a></span>
           <span><span class="k">Image</span><a href="projects/flight-delay-dashboard/screenshots/dashboard-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
@@ -3720,6 +3734,20 @@
           </picture>
         </a>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click the screenshot to open the live, interactive dashboard (also available in dark mode).</p>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">An airline's own ops team needs to know if its operation is actually healthy — hub by hub, season by season — and what unreliability costs downstream in complaints, not just in delay minutes. No real airline ops data was reachable from this environment, so the gap had to be closed with a disclosed, rule-based model instead of pretending to real data.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Modeled 6,000 flights for one carrier across 5 real hubs, each metric built on a documented rule (congestion, fog/monsoon exposure, seasonal fare multipliers) → sanity-checked the output before charting it, which is what caught the passengers_expected/passengers_boarded bug → checked the fleet-wide numbers against public plausibility ranges → rebuilt the same analysis a second, independent way in Power BI to cross-check the first.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A self-contained HTML/JS dashboard (dark-mode supported) plus a Power BI star-schema report, both surfacing on-time %, load factor, revenue, cancellations, complaints and baggage handling together on one page instead of across separate commercial/ops reports.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The two independent builds landed on matching numbers (83.25% vs. 83.3% Bengaluru on-time), which is the real proof point — not the specific numbers themselves, since the data is modeled. The job this dashboard actually proves is the ETL pipeline and the judgment behind each transform decision; it explicitly should not be trusted as real ops data, and says so on the dashboard itself.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><a href="projects/airline-operations-dashboard/dashboard.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">live dashboard →</a></span>
           <span><span class="k">Image</span><a href="projects/airline-operations-dashboard/screenshots/dashboard-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
@@ -3823,6 +3851,19 @@
           </p>
         </div>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">A funnel chart only shows where users leave — the actual PM work is pairing each drop-off with a testable behavioral reason instead of a generic "reduce friction" recommendation everywhere.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Modeled the 5-stage OTA flight-booking funnel end to end → identified Results→Details as the biggest leak by far (~38% conversion) → diagnosed 3 specific behavioral mechanisms behind it (anchoring bias, add-on defaults, no fare-lock) rather than stopping at "price shock."</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">5 targeted fixes (all-in pricing, opt-in add-ons, a fare-lock CTA, autofill for repeat travellers, payment auto-retry) paired with 3 specific A/B test hypotheses, each naming what metric to watch and what trade-off to expect.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The generalizable lesson, not just the specific fix: a funnel's real diagnostic value comes from naming the behavioral mechanism behind each drop-off, since that's what separates a testable hypothesis from a guess.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks hide-wip">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in: funnel chart screenshot</span></span>
@@ -3886,6 +3927,20 @@
             infrastructure in underperforming zones.
           </p>
         </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Orders placed is an inflatable, discount-driven number that doesn't actually measure what users value — a North Star metric and a growth model need to separate real reliability from promotion-driven volume.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Proposed "on-time deliveries per active user" as the North Star → ran the full funnel through AARRR, flagging activation (first on-time delivery) as the single highest-leverage churn moment → built a metric tree separating the inflatable top-line number from the normalized, actually-meaningful one → designed a matched-pair pin-code test to isolate reliability's effect on retention from a discount's effect on raw volume.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A North Star metric tree (orders placed → on-time delivery → normalized per active user) with named leading (delivery-partner availability), lagging (NPS, repeat order rate), and guardrail (restaurant cancellation rate) indicators.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The hypothesis worth testing: on-time delivery predicts repeat orders more strongly than price does — meaning a rupee spent on delivery-partner availability in an underperforming zone should outperform the same rupee spent on a blanket discount, measured by 30-day repeat rate, not volume alone.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -3989,6 +4044,19 @@
         </div>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 8 screenshots are my own SQL Server / VS Code session — query and result grid together, unedited.</p>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">SQL is listed as a skill across the site, but the only place it was actually demonstrated was the PCMS case study — real Bajaj Finance work that stays untouched as a written account, with nothing a visitor can independently verify.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Built a synthetic B2B SaaS dataset (900 customers, 3 plans, 24 months) with churn modeled on two documented SaaS patterns, not random noise → installed SQL Server 2022 and SSMS on an actual local machine, not a browser sandbox → hit and fixed 2 real setup errors (a login failure from connecting before the database existed, an Import Flat File naming collision) → ran all 8 queries personally and verified the result grids.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">8 T-SQL queries (SELECT, JOIN, GROUP BY, CASE, aggregates) surfacing current MRR, churn by plan, and churn by acquisition channel — each with its own unedited query-and-result screenshot.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">Starter plan churns at over 3× Scale's rate, and acquisition channel predicts retention almost as strongly as plan tier does — the real PM move is segmenting further by activation and time-to-value before touching pricing, not reacting to the headline churn number alone.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Guide</span><a href="projects/sql-saas-analytics/TSQL_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">T-SQL practice guide →</a></span>
           <span><span class="k">Dataset</span><a href="projects/sql-saas-analytics/generate_dataset.py" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">generator script →</a></span>
@@ -4091,6 +4159,19 @@
           <img src="projects/sql-saas-analytics/screenshots/advanced-04-tenure-rank.png" alt="T-SQL query using RANK() OVER PARTITION BY to rank active customers by tenure within each plan; result showing the longest-tenured Growth-plan customers ranked 1 through 7" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
         </div>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 4 screenshots are my own SQL Server / VS Code session — query and result grid together, unedited, including the frame-fix retry on the cumulative-signups query.</p>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">The Basic case study proves I can retrieve data (SELECT, JOIN, GROUP BY) but not shape it the way a PM actually needs to — cohort retention curves, month-over-month growth, running totals — the SQL patterns behind most real subscription-business dashboards.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Ported 4 queries from SQLite (a browser-based prototype) to T-SQL for SQL Server → 3 of 4 ported cleanly, but the running-cumulative-signups query hit a real dialect error (RANGE window frame's 900-byte ORDER BY cap, triggered by FORMAT()'s nvarchar(4000) return type) → diagnosed the root cause rather than guessing, and fixed it with one clause: an explicit ROWS UNBOUNDED PRECEDING frame, which is also the semantically correct frame for a running total anyway.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">4 T-SQL queries using CTEs, LAG(), SUM() OVER, and RANK() PARTITION BY — monthly cohort retention, month-over-month MRR growth, cumulative signups, and tenure ranking within each plan — on the same Aptura dataset as the Basic study.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">Small-N monthly cohorts (14–33 signups each) produce genuinely volatile retention and growth numbers month to month — reading that as expected noise rather than over-reacting to any single month is itself part of the skill. This is what turns the Basic study's churn diagnosis into something trackable over time, instead of a one-time snapshot.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
 
         <div class="jlinks">
           <span><span class="k">Guide</span><a href="projects/sql-saas-analytics/TSQL_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">T-SQL practice guide →</a></span>
@@ -4201,6 +4282,19 @@
         </a>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Amplitude's own auto-generated dashboard, exported as PDF directly from the tool — included as-is, "Invalid chart definition" panels and all, rather than cropped down to only the clean parts.</p>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Amplitude is listed as a skill worth having, but with no prior hands-on use demonstrated anywhere on the site — the gap this project closes with a real account and real data, not a simulation.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Built a real 10-event tracking plan (7 event properties, 5 user properties) directly in a live Amplitude project, the part of the job that happens before an engineer writes a tracking call → generated a documented synthetic dataset (3,000 users, 52,082 events) with every behavioral difference modeled on a real growth pattern → sent it through Amplitude's own HTTP API with a personal key, real ingestion rather than fabricated chart data → opened Amplitude's own auto-generated dashboard as a second, independent check and investigated rather than dismissed the "Invalid chart definition" panels it surfaced.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">5 real segmentation charts (signup by channel, workout type distribution, onboarding completion by channel, platform split) plus Amplitude's own auto-generated User Activity dashboard, all built against live ingested data.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The "Invalid chart definition" panels weren't a bug — they're the expected result of sending data server-side via API instead of through a live app SDK, which never populates Amplitude's auto-captured device/geo properties. Understanding that distinction, not just getting clean charts, is the real finding.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Guide</span><a href="projects/amplitude-strideway/AMPLITUDE_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">practice guide →</a></span>
           <span><span class="k">Dataset</span><a href="projects/amplitude-strideway/generate_dataset.py" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">generator script →</a></span>
@@ -4309,6 +4403,19 @@
           <img src="projects/amplitude-strideway/screenshots/advanced-04-cohort-definition.png" alt="Amplitude New Cohort screen: users who performed Upgrade to Premium, count >= 1 time, during Last 90 days — a correct definition that could not be saved on the free Starter plan (dynamic cohorts are a paid feature)" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
         </div>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 5 screenshots are real captures from my own live Amplitude project — including the broken funnel and the retention chart's builder panel, left in on purpose to show the actual process rather than only clean, cropped results.</p>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">The Basic case study proves I can read a single metric; it doesn't prove I can trace a full user journey — funnel conversion, retention over time, cohort definition — the Amplitude patterns behind most real growth/monetization dashboards.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Built the 6-step funnel → the first result (19% onboarding→workout conversion) looked implausible against the raw dataset (92.5% actually convert) → pulled the chart's real definition through Amplitude's own Chart API instead of guessing → found the default 1-day conversion window was silently dropping late conversions → widened it to 90 days and confirmed the fix matched the raw data exactly (68.97%) → built the retention-by-channel chart and attempted to save a cohort, which hit a real Starter-plan limit.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">The corrected funnel, a retention-by-channel chart, and a verified cohort definition — plus the "What This Means, Applied" recommendation above: shift acquisition investment toward Referral, use Influencer as a controlled experiment, and normalize any channel comparison by plan before trusting it.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The real finding isn't the funnel percentages themselves — it's that a tool's default setting (a 1-day conversion window) can silently produce a clean, plausible, and completely wrong number, and the only way to catch that is checking a surprising result against the raw data instead of trusting the chart.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
 
         <div class="jlinks">
           <span><span class="k">Guide</span><a href="projects/amplitude-strideway/AMPLITUDE_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">practice guide →</a></span>
@@ -4469,6 +4576,19 @@ Body: { "resolved": true }</div>
           <p style="margin:0 0 6px"><strong>Output</strong> — 200 OK</p>
           <div class="code-snip">{ "discrepancy_id": 999, "resolved": true }</div>
           <p style="margin:0 0 4px"><strong>Understanding</strong> — <code>{{createdDiscrepancyId}}</code> in the URL was never typed by hand — it's the exact ID request #5 saved a moment earlier. That's a real multi-step workflow (create → confirm → resolve), the same shape as create-an-order → pay-for-it → ship-it in any real transactional API, not three disconnected calls that happen to run one after another.</p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Turn "I know SQL and APIs conceptually" into something demonstrable, in the same operational world already known from owning PCMS at Bajaj Finserv — partners, e-agreements, payouts, activity logs.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Seeded 5 real data issues into raw data on purpose, unlabeled (duplicate payouts, post-expiry payments, stuck-unsigned agreements, activity after suspension) → wrote 13 SQL queries from basic to advanced to find them, not pre-knowing which query would surface which issue → built a 10-request Postman collection mirroring the same database, including a chained POST→PATCH workflow → found and fixed 2 real bugs along the way: a wrong region tag in a dimension table (traced via JOIN against a known-correct reference), and a Postman mock server silently returning the wrong example for two requests sharing a path.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">13 verified SQL queries plus a 10-request Postman collection against a self-hosted mock server, with every API example response traceable back to the same database the SQL queries already verified.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The methodology matters more than any single query: structural check → duplication check → activity-consistency check → consolidate into one queryable report instead of three separate spreadsheets. The sharpest single finding: 4 payouts moved after their governing agreement had already expired — invisible without a 3-table JOIN.</td></tr>
+            </tbody>
+          </table></div>
         </div>
 
         <div class="jlinks">
