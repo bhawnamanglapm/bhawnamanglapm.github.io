@@ -725,6 +725,32 @@
             <li>Concept screens S09–S13 are directional; each needs discovery, compliance review and a business case before it's real.</li>
             <li>Next artifacts: API specification with a Postman collection, analytics tracking plan, and a BI dashboard mockup.</li>
           </ul>
+
+          <h4>Conclusion</h4>
+          <p>
+            The simulation proves the full lifecycle end to end on one problem — discovery through
+            SQL-level measurement — not just the parts that are easy to show. The honest caveat sits
+            alongside the business case itself: the base-case NPV is positive ($149k), but the
+            conservative case is negative (($839k)), and that range is driven by two named,
+            unresolved assumptions (merchant adoption, whether released ops capacity is actually
+            cashable) rather than hidden in a single rounded number. What's real: a traced
+            requirement-to-KPI-to-incident chain and a reproducible SQL layer. What's still open:
+            the three items above, each named rather than smoothed over.
+          </p>
+
+          <h4>Where each artifact is used</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Artifact</th><th>Used at</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Artifact"><strong>Competitor benchmark</strong></td><td data-label="Used at">Discover — sets the baseline the PRD's requirements argue against</td></tr>
+              <tr><td data-label="Artifact"><strong>PRD + 47-item backlog + RTM</strong></td><td data-label="Used at">Define — turns the baseline into 24 traceable requirements and a sequenced MVP</td></tr>
+              <tr><td data-label="Artifact"><strong>13 wireframes</strong></td><td data-label="Used at">Design — makes the MVP vs. Phase-2 split (CR-01) concrete on screen</td></tr>
+              <tr><td data-label="Artifact"><strong>Roadmap + RAID log + change control</strong></td><td data-label="Used at">Plan &amp; govern — carries the stale-deadline risk (R-03) through to the failing KPI (KPI-12)</td></tr>
+              <tr><td data-label="Artifact"><strong>3-scenario business case + launch/hypercare plan</strong></td><td data-label="Used at">Justify &amp; launch — the base/conservative/optimistic range decision-makers actually need</td></tr>
+              <tr><td data-label="Artifact"><strong>17-slide executive review</strong></td><td data-label="Used at">Communicate — forces the five decisions the earlier stages set up</td></tr>
+              <tr><td data-label="Artifact"><strong>SQL lab</strong></td><td data-label="Used at">Measure — the KPI definitions (win rate, CR-05) become queryable, including deliberately planted data problems</td></tr>
+            </tbody>
+          </table></div>
         </div>
 
         <div class="jlinks">
@@ -902,6 +928,28 @@
           </p>
         </div>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">An airline's own ops team needs to know if its operation is actually healthy — hub by hub, season by season — and what unreliability costs downstream in complaints, not just in delay minutes. No real airline ops data was reachable from this environment, so the gap had to be closed with a disclosed, rule-based model instead of pretending to real data.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Modeled 6,000 flights for one carrier across 5 real hubs, each metric built on a documented rule (congestion, fog/monsoon exposure, seasonal fare multipliers) → sanity-checked the output before charting it, which is what caught the passengers_expected/passengers_boarded bug → checked the fleet-wide numbers against public plausibility ranges → rebuilt the same analysis a second, independent way in Power BI to cross-check the first.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A self-contained HTML/JS dashboard (dark-mode supported) plus a Power BI star-schema report, both surfacing on-time %, load factor, revenue, cancellations, complaints and baggage handling together on one page instead of across separate commercial/ops reports.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The two independent builds landed on matching numbers (83.25% vs. 83.3% Bengaluru on-time), which is the real proof point — not the specific numbers themselves, since the data is modeled. The job this dashboard actually proves is the ETL pipeline and the judgment behind each transform decision; it explicitly should not be trusted as real ops data, and says so on the dashboard itself.</td></tr>
+            </tbody>
+          </table></div>
+          <h4 style="margin-top:14px">Where each build is used</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Build</th><th>Used for</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Build"><strong>Python/pandas pipeline</strong></td><td data-label="Used for">Generates and transforms the 6,000-flight dataset, catches the denominator bug before any chart is built on top of it</td></tr>
+              <tr><td data-label="Build"><strong>HTML/JS dashboard</strong></td><td data-label="Used for">The shareable, interactive artifact — KPI tiles, hub ranking, the methodology write-up, light/dark mode</td></tr>
+              <tr><td data-label="Build"><strong>Power BI (Power Query + DAX)</strong></td><td data-label="Used for">A second, tool-native rebuild for cross-validation and to demonstrate the star-schema/DAX skill set separately from the Python one</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div style="display:grid;gap:14px;margin:18px 0">
           <img src="projects/airline-operations-dashboard/power-bi/screenshots/overview.png" alt="Power BI Overview page: KPI cards for flights operated, on-time %, load factor, and cancellation %, a bar chart of on-time % by hub, a chronological month trend line, and a hub slicer" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
           <img src="projects/airline-operations-dashboard/power-bi/screenshots/hub-deep-dive.png" alt="Power BI Hub Deep-Dive page: a table of all 5 measures by hub, and a hub-by-season matrix with conditional-formatting heatmap on on-time %, Delhi Winter darkest at 63.09%" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow)">
@@ -1026,6 +1074,19 @@
           <img src="projects/amplitude-strideway/screenshots/advanced-04-cohort-definition.png" alt="Amplitude New Cohort screen: users who performed Upgrade to Premium, count >= 1 time, during Last 90 days — a correct definition that could not be saved on the free Starter plan (dynamic cohorts are a paid feature)" loading="lazy" style="width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)">
         </div>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">All 5 screenshots are real captures from my own live Amplitude project — including the broken funnel and the retention chart's builder panel, left in on purpose to show the actual process rather than only clean, cropped results.</p>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">The Basic case study proves I can read a single metric; it doesn't prove I can trace a full user journey — funnel conversion, retention over time, cohort definition — the Amplitude patterns behind most real growth/monetization dashboards.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Built the 6-step funnel → the first result (19% onboarding→workout conversion) looked implausible against the raw dataset (92.5% actually convert) → pulled the chart's real definition through Amplitude's own Chart API instead of guessing → found the default 1-day conversion window was silently dropping late conversions → widened it to 90 days and confirmed the fix matched the raw data exactly (68.97%) → built the retention-by-channel chart and attempted to save a cohort, which hit a real Starter-plan limit.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">The corrected funnel, a retention-by-channel chart, and a verified cohort definition — plus the "What This Means, Applied" recommendation above: shift acquisition investment toward Referral, use Influencer as a controlled experiment, and normalize any channel comparison by plan before trusting it.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The real finding isn't the funnel percentages themselves — it's that a tool's default setting (a 1-day conversion window) can silently produce a clean, plausible, and completely wrong number, and the only way to catch that is checking a surprising result against the raw data instead of trusting the chart.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
 
         <div class="jlinks">
           <span><span class="k">Guide</span><a href="projects/amplitude-strideway/AMPLITUDE_GUIDE.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">practice guide →</a></span>
@@ -1268,6 +1329,19 @@ Body: { "customerId": "ERROR001", "pan": "XYZAB5678C", "dob": "1998-11-23" }</di
             this whole project was practicing: a green status code is not proof the intended
             thing occurred, the response content is.
           </p>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">A follow-on to the Partner Ops project: how would I actually verify a third-party KYC check — the exact kind of NSDL/Aadhaar verification a lending onboarding flow depends on — beyond "I sent a request and got a response back."</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Built the request contract → defined all 9 expected scenarios first as the answer key, before testing anything → stood up a code-based mock server that runs real validation logic instead of canned answers → caught 2 real mistakes by reading the actual response body, not just the status code → re-ran all 9 scenarios with entirely different data to prove the logic wasn't a lookup table → separately caught a silent no-op bug (a PATCH sent as a leftover GET, still returning 200 OK) in a plain HTTP-methods drill.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A real Node.js mock server covering 9 scenarios — valid, 5 validation/auth failure modes, not-found, duplicate, and server error — plus a documented example-contract defining what "correct" means before any test is run against it.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">9 for 9 on a second run with completely different data — real validation logic, not a hardcoded match. The actual habit this project was practicing: a green status code is never proof the intended thing happened; only the response content is.</td></tr>
+            </tbody>
+          </table></div>
         </div>
 
         <div class="jlinks">
