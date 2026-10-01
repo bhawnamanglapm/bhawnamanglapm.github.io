@@ -1310,6 +1310,31 @@
         </div>
         </details>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Repetitive, rule-governed support queries (cancel, change date, baggage allowance) are expensive to handle one ticket at a time, but a plain Q&amp;A bot can't actually act on a booking — and an agent that can act introduces a new, riskier failure mode: a costly, sometimes irreversible mistake made autonomously.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Named 4 recurring ways support bots fail across the category (answer-only, black-box numbers, silent confirmation, context loss at handoff) → scoped in/out which query types get autonomy vs. mandatory human routing → designed 3 flows at 3 different risk levels (cancellation+refund, baggage lookup, date change) to show the guardrails actually flex with risk, not apply uniformly → built a working rule-based demo proving the architecture (confirmation gate, escalation handoff, audit trail) runs end to end → defined a 3-lens evaluation approach specifically because the obvious headline metric (deflection rate) can look good while hiding a bad outcome.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A 4-layer agent architecture — intent router → tool-calling layer (allow-list only, can't invent actions) → confirmation gate on anything irreversible or money-moving → escalation router with full context handoff — plus an interactive browser demo and 4 annotated wireframes, each mapped to a specific industry failure mode it closes.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The risk that matters isn't a bad answer (recoverable) — it's a bad action (not). Every guardrail exists to keep that specific failure's blast radius small, not to pretend it can be prevented outright. The business-impact number is explicitly modeled, not measured, and said so rather than presented as a real support-cost saving.</td></tr>
+            </tbody>
+          </table></div>
+          <h4 style="margin-top:14px">Which feature is used at which step</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Feature</th><th>Used at</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Feature"><strong>Intent router</strong></td><td data-label="Used at">First touch on every message — classifies into an in-scope intent or routes straight to "unclassified → human"</td></tr>
+              <tr><td data-label="Feature"><strong>Tool-calling allow-list</strong></td><td data-label="Used at">Once an intent is classified — the agent can only call the fixed tools mapped to that intent, never an invented action</td></tr>
+              <tr><td data-label="Feature"><strong>Confirmation gate</strong></td><td data-label="Used at">Immediately before any irreversible or money-moving tool call (cancel_booking, issue_refund) — never fires on the first pass, shown explicitly in Flow 1</td></tr>
+              <tr><td data-label="Feature"><strong>Autonomous-action ceiling</strong></td><td data-label="Used at">Inside the confirmation gate — above a fixed rupee threshold, the same flow ends in human approval instead of auto-executing</td></tr>
+              <tr><td data-label="Feature"><strong>Escalation router</strong></td><td data-label="Used at">Triggered by low confidence, repeated tool failure, frustration signals, or a hard non-goal (visa/legal, disputes) — hands off with full transcript, not a restart</td></tr>
+              <tr><td data-label="Feature"><strong>Audit trail</strong></td><td data-label="Used at">Logged on every executed tool call, used after the fact by support ops and by the wrong-action-rate evaluation metric</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Live demo</span><a href="projects/travel-support-copilot/demo.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">try it →</a></span>
           <span><span class="k">Link</span><a href="projects/travel-support-copilot/wireframes.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">key flow wireframes →</a></span>
@@ -1507,6 +1532,31 @@
         </div>
         </details>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Three stacked gaps nobody closes together: nobody actually knows how work gets done (documented SOPs are fiction), the insight dies in a slide before anyone builds the fix, and nobody proves the fix worked after shipping. Incumbents like Celonis/UiPath fix only the first gap, and only with heavy, six-figure, IT-led deployments.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Designed capture as structure-only (never page content/credentials) after identifying what makes recording workers both legally risky and personally invasive → built reconstruction and merge as rules-based and client-side, deliberately choosing explainable-but-sometimes-wrong over an opaque ML model with no training data to justify it → ran an internal security review that found and fixed a real capture-time privacy leak before shipping → sorted 6 review-raised feedback items by altitude (MVP-blocking vs. deferrable vs. a decision, not a build) instead of reacting to all of them equally → sequenced a 5-test validation plan by which assumption would kill the product first, with kill criteria set in advance.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">Weft — a fully local Chrome MV3 extension that captures a workflow's structure, merges multiple sessions into one map with variant branches, classifies each step against an intervention taxonomy, exports a groomable automation brief/ticket, and tracks realized savings against the original estimate — closing the loop incumbents stop short of.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">All 8 MVP milestones are built and gate-verified, not just scoped. The real moat isn't the task-mining itself (already a commodity) — it's the compounding outcome-data asset: knowing which step patterns actually led to interventions that saved money, which a tool that stops at discovery can never learn.</td></tr>
+            </tbody>
+          </table></div>
+          <h4 style="margin-top:14px">Which feature is used at which step</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Feature</th><th>Used at</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Feature"><strong>Content script + PII redaction</strong></td><td data-label="Used at">Capture (Step 1) — records structure only, redacts anything textual retained before it's ever stored</td></tr>
+              <tr><td data-label="Feature"><strong>Privacy preview</strong></td><td data-label="Used at">Before any session saves — shows the user exactly what will be stored, the fix for the ARIA-role leak the security review caught</td></tr>
+              <tr><td data-label="Feature"><strong>Merge-by-step-identity</strong></td><td data-label="Used at">Merge (Step 2) — aligns multiple sessions into one map even when one session has an inserted or skipped step</td></tr>
+              <tr><td data-label="Feature"><strong>Step-signature taxonomy</strong></td><td data-label="Used at">Analyze (Step 3) — classifies each step and attaches a likely intervention with an estimated saving</td></tr>
+              <tr><td data-label="Feature"><strong>Automation brief + ticket export</strong></td><td data-label="Used at">Spec → Hand off (Steps 4–5) — turns a kept opportunity into a groomable Jira/Linear-ready ticket instead of a dead PDF</td></tr>
+              <tr><td data-label="Feature"><strong>ROI tracker</strong></td><td data-label="Used at">Measure (Step 6) — once shipped, tracks estimate vs. actual saving, the step most tools skip entirely</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><a href="https://github.com/bhawnamanglapm/Weft" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GitHub repo →</a></span>
           <span><span class="k">Docs</span><a href="https://github.com/bhawnamanglapm/Weft/blob/main/weft-prd.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full PRD →</a></span>
@@ -1691,6 +1741,31 @@
         </div>
         </details>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">A serious job application takes 6–8 hours of fragmented, error-prone work, and generic AI chat makes it faster but not safer — it produces confident, plausible-sounding output that's often wrong in ways a candidate can't detect, and in an interview a fabricated claim fails in front of the person deciding whether to hire you.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Committed to one core design bet — evidence-traceability over fluency — and traced it into every architectural decision → split 18 agents into 4 categories wired by real dependency order → split research into a two-phase search-then-structure call specifically so a wrong fact and a malformed JSON field are never the same failure to debug → moved non-fabrication from a prompt instruction (found insufficient) to a structural schema constraint (explicit null-ability) → independently recomputed every numeric claim in all 18 agents' sample outputs against the underlying JSON → read a near-perfect first Critic pass as a red flag, not a pass, and gave Critic one mechanical, unfakeable task instead.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">An 18-agent pipeline (Extraction → Research → Synthesis → Orchestration) with a Planner/Critic/Supervisor layer grounded in one shared, machine-readable agent registry, plus a production dashboard with a free Demo mode and a cost-capped Live mode that stops mid-run the instant a spend ceiling is hit.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">Getting one agent to produce good output was the easy part — the hard part was designing the layer that keeps 18 agents honest about what they don't know, and makes that layer's own claims checkable. The recomputation check caught one real bug (a mismatched total), proving the verification approach actually works rather than just sounding thorough.</td></tr>
+            </tbody>
+          </table></div>
+          <h4 style="margin-top:14px">Which feature is used at which step</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Feature</th><th>Used at</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Feature"><strong>Structural null-ability / bracketed placeholders</strong></td><td data-label="Used at">Inside every agent's output schema — gives "I don't have this" a designated place instead of competing with "make something up"</td></tr>
+              <tr><td data-label="Feature"><strong>Two-phase research call</strong></td><td data-label="Used at">The Research category (Company Intelligence, Learning &amp; Certification, Career Strategy) — search and structuring run as separate calls so a wrong fact is never confused with a malformed field</td></tr>
+              <tr><td data-label="Feature"><strong>AGENT_REGISTRY</strong></td><td data-label="Used at">Checked by Planner before any plan is accepted — makes inventing a nonexistent agent or dependency structurally impossible, not just less likely</td></tr>
+              <tr><td data-label="Feature"><strong>Critic's recomputation task</strong></td><td data-label="Used at">After each agent runs — recomputes every stated total against its own underlying numbers; the step that caught the one real bug in the project</td></tr>
+              <tr><td data-label="Feature"><strong>Supervisor go/no-go verdict</strong></td><td data-label="Used at">Pipeline exit — cross-checks the executed plan against the intended one and every Critic-flagged issue against a named fix, carrying forward every limitation instead of implying more confidence than earned</td></tr>
+              <tr><td data-label="Feature"><strong>Live-mode spend ceiling</strong></td><td data-label="Used at">Checked after every single agent call in Live mode — stops the run immediately when hit, with partial results still saved</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><a href="https://github.com/bhawnamanglapm/Claude" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GitHub repo →</a></span>
           <span><span class="k">Try it live</span><a href="https://careercopilot19.streamlit.app/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">open the app →</a></span>
@@ -1845,6 +1920,32 @@
           </picture>
         </a>
         <p style="font-size:12.5px;color:var(--grey);margin:8px 0 16px">Click the screenshot to open the live, interactive demo — drag the confidence threshold and click any row to expand its routing reason (also available in dark mode).</p>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">A partner-operations inbox gets a constant stream of emails (payout disputes, KYC resubmissions, claim escalations) that a person reads, categorizes, and extracts data from one at a time — the same repetitive, rule-governed decision pattern AI operations tooling exists for, and a real shape of AI product not yet represented elsewhere on this site.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Built the full 6-stage pipeline (ingest → classify → parse → rules → review → case) as a working prototype rather than a static mockup → deliberately modeled approval as two independent, non-blendable checks (confidence threshold AND hard guardrails) instead of one combined score → redacted PII before it reaches any surface a human doesn't strictly need it on → made every routing decision state its specific reason, not just its outcome, since an ops lead auditing a month of decisions needs the "why."</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">OpsPilot — a confidence-gated triage pipeline with a live, functional threshold slider, 3 hard guardrails that override confidence entirely (large payout, flagged partner, duplicate claim), and a full audit log explaining every auto-approval or review routing.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The real risk was never the classifier being wrong sometimes — it's a wrong decision being irreversible and unexplained. A system here has to be accurate and legible; accuracy alone isn't enough when someone eventually has to unwind a bad auto-approval.</td></tr>
+            </tbody>
+          </table></div>
+          <h4 style="margin-top:14px">Which feature is used at which step</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Feature</th><th>Used at</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Feature"><strong>LLM Classifier</strong></td><td data-label="Used at">Stage 2 — categorizes each inbound email (Payout Dispute / KYC Resubmission / Claim Escalation / Irrelevant)</td></tr>
+              <tr><td data-label="Feature"><strong>Parser</strong></td><td data-label="Used at">Stage 3 — extracts structured fields from the classified email</td></tr>
+              <tr><td data-label="Feature"><strong>Confidence threshold slider</strong></td><td data-label="Used at">Stage 4 (Business Rules Engine) — the lever an ops lead would actually pull to trade off automation coverage against review volume</td></tr>
+              <tr><td data-label="Feature"><strong>3 hard guardrails</strong></td><td data-label="Used at">Stage 4, alongside confidence — override auto-approval regardless of confidence score on a large payout, a flagged partner, or a duplicate claim reference</td></tr>
+              <tr><td data-label="Feature"><strong>PII redaction</strong></td><td data-label="Used at">Before anything reaches a dashboard, log, or this demo — the unmasked value only exists in the secure case record</td></tr>
+              <tr><td data-label="Feature"><strong>Audit log</strong></td><td data-label="Used at">Stage 6 (case creation) — states the exact reason behind every routing decision for later review</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><a href="projects/ai-ops-copilot/dashboard.html" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">live demo →</a></span>
           <span><span class="k">Image</span><a href="projects/ai-ops-copilot/screenshots/dashboard-dark.png" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">dark-mode screenshot →</a></span>
