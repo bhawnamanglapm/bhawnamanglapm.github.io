@@ -5269,6 +5269,20 @@ Body: { "resolved": true }</div>
             samples, once written</span>
           </p>
         </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">A PRD reads like a spec doc but has to work like a decision memo in disguise — most templates bury the "is this worth building" question under implementation detail, so disagreement surfaces three weeks into build instead of on page one where it's cheap to argue about.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Cut the structure to 7 fields deliberately, not 12, on the logic that every extra section is one a stakeholder skims past, and a skimmed section is worse than a missing one → ordered the fields so Goals and Requirements come before Acceptance Criteria, matching the order a reader actually needs answers in → stress-tested the template against open-ended, discovery-stage work and found where it genuinely breaks rather than claiming universal fit.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">The 7-field structure (problem statement, user stories, business goals, requirements, acceptance criteria, success metrics, launch plan), reused as-is across the Travel PRD Portfolio and the AI Trip Planner PRD.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The template strains on genuinely open-ended work, where forcing Acceptance Criteria too early just produces confident-sounding fiction. The honest fix isn't swapping templates — it's labeling the doc a hypothesis memo at that stage instead of dressing it up as more certain than it is.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -5334,6 +5348,20 @@ Body: { "resolved": true }</div>
             <span class="todo">Outcome: not built yet; stays labeled that way until it is</span>
           </p>
         </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Visas are the one travel step nobody enjoys and everybody procrastinates on — status is scattered across embassy/VFS/BLS portals, documents go stale in a phone's downloads folder, and the deadline people actually forget about (document expiry) isn't the one they're watching (the application deadline).</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Named the honest constraint up front — most consulates have no real API, so status tracking has to scrape whatever a portal actually exposes, not assume a clean integration away → designed reminders around two independent clocks instead of one, specifically because the less-watched clock (document expiry) is the one that actually causes problems → traced the compliance angle back to the same eKYC/RBI digital-lending discipline already used in the fintech toolkit, since document sensitivity is the hard part here, ahead of the UX.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A tracker spanning status pulls, dual-clock reminders (deadline + document expiry), and an encrypted document vault where every stored document carries its own expiry flag.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">Not built yet, and labeled that way deliberately rather than implied otherwise — the real design insight (two independent deadlines, not one) is the part worth carrying into a build, whenever it happens.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
