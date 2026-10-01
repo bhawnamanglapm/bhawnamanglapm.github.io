@@ -4688,6 +4688,19 @@ Body: { "resolved": true }</div>
           </p>
         </div>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Partner Ops and NSDL KYC tested 2 of 9 real fintech API categories hands-on; a compliance-flavored PM role needs fluency across the other 7 too — identity, payments, credit/risk, fraud/AML, core banking, regulatory reporting, account aggregator.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Mapped all 9 categories against 24 real-world API examples a BFSI company like Bajaj Finserv actually integrates → worked 2 examples in full detail (UPI payment, PEP screening) to show the request-validity-vs-outcome distinction and the 3-way fraud-match result → reduced all 24 examples to the same 7 underlying test questions, isolating the one (domain-specific compliance rules) that actually differentiates a compliance PM from a generic API tester.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A 24-example reference guide (Markdown + .docx), organized by category, each with a realistic endpoint, sample request/response, and the specific test scenarios that matter — honestly labeled as a reference document, not a built or tested system.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">Anyone can check "does it return 200" — the real skill is knowing which extra domain rule (a consent requirement, a masking rule, a regulatory deadline) applies to which specific API, which is what this document was built to test fluency on.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Guide</span><a href="projects/fintech-api-landscape/Fintech-API-Case-Studies.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Full 24-example reference (Markdown) →</a></span>
           <span><span class="k">Word</span><a href="projects/fintech-api-landscape/Fintech-API-Case-Studies.docx" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Download as .docx →</a></span>
@@ -4785,6 +4798,20 @@ Body: { "resolved": true }</div>
             without an internally-verified number to cite here.
           </p>
         </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Learners forget, feel guilty, then quit — D30 retention collapses without an intervention loop, and Streak exists because loss aversion outperforms achievement motivation as a retention lever.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Traced the user flow down to the one nontrivial implementation detail (streak evaluated against local midnight, not server time) → surfaced the real edge cases it creates (timezone travel, offline sync races) → named the central abuse case (users protect the streak with the easiest lesson, gaming the metric against the product's actual learning goal) → identified that Streak Freeze solves the anxiety problem but introduces its own crutch-abuse case.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A redesign idea: surface a visible "grace period" upfront to reduce streak anxiety while preserving the retention hook, rather than only offering Streak Freeze as a paid/equipped recovery mechanic after the fact.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The feature creates user anxiety alongside motivation — it's not a free win. The interesting design tension is that Streak Freeze normalizes breaks while still keeping users inside the ecosystem, which is a retention win dressed as a convenience feature.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -4845,6 +4872,20 @@ Body: { "resolved": true }</div>
             designing the correction and visibility mechanism, not the memory mechanism itself.
           </p>
         </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">People repeat context in every new conversation; a session-to-session experience that feels disposable without persistence is a real retention and differentiation gap against competitors that have it.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Separated what gets remembered (explicit statements vs. inferred preferences) from the guardrails needed around it (user-visible management, opt-out, no silent retention of sensitive data) → identified that there's no ground-truth "correct" memory, so success has to be measured by correction rate and re-engagement, not accuracy → named stale memory (over-indexing on outdated info) as the sharpest failure mode, requiring a decay/update strategy on top of plain accumulation.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">Confidence-weighted memory with visible "last updated" timestamps, so users can trust and correct what's remembered in-line instead of memory being an opaque black box.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The general pattern for any AI feature with implicit state: the PM's real job is designing the correction and visibility mechanism, not the memory mechanism itself — the same lesson that recurs across the AI copilot case studies elsewhere on this site.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -4927,6 +4968,20 @@ Body: { "resolved": true }</div>
             the Booking Funnel Analysis above.
           </p>
         </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Every points program eventually hits the same lifecycle problem: it drives initial sign-up, then stops driving behavior once a user stalls mid-tier — driven by redemption friction, tier stagnation, and opaque earning rules.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Named 3 specific pain points rather than a vague "engagement is low" diagnosis → redesigned earning to shift part of accrual toward behavior-based points the business actually wants (reviews, shoulder-season bookings) → guaranteed a minimum real-value redemption path to close the "earn but can't use" trust gap → borrowed the loss-aversion mechanic from the Duolingo Streak teardown, applied to a much lower-frequency travel-booking cadence.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">Redesigned earning (behavior-based accrual), redemption (guaranteed minimum spendable value), and gamification (visible progress-to-next-tier, a consecutive-quarter streak, occasional surprise-and-delight unlocks).</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">4 KPIs, each tied to a specific redesign bet — repeat booking rate (retention), tier upgrade rate (does visibility actually move people), redemption rate (did the trust gap close), and cost-per-loyalty-booking as the guardrail, since a redesign that buys repeat bookings purely by giving away margin is a loss dressed up as a win.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
@@ -5067,6 +5122,20 @@ Body: { "resolved": true }</div>
             delivery margin.
           </p>
         </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Quick commerce is one of the most heavily VC-funded, fiercely contested categories in Indian consumer tech, with at least 4 well-funded players running the identical dark-store-density playbook — what, if anything, actually differentiates Zepto's position.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Named the real competitive advantage as precision over scale — dark-store density concentrated in top-10 pin codes rather than broad coverage → traced the flywheel (orders → better placement/inventory decisions → faster delivery → more orders) → ran a full SWOT naming the structural weakness (thin per-order margins at low basket size) alongside the real strength (habit-forming delivery times raising switching cost).</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">Don't compete on delivery-speed parity once it's table stakes — compete on basket economics instead: push private-label penetration in high-frequency categories, and treat premium/high-margin SKUs (electronics, beauty) as the actual profitability lever, not core grocery.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">5-year outlook: the profitability path runs through premium SKUs, not core delivery margin — the dark-store density moat buys retention, but margin has to be earned somewhere the delivery-speed race doesn't touch.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Link</span><span class="todo">fill in</span></span>
           <span><span class="k">Image</span><span class="todo">fill in</span></span>
