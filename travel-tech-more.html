@@ -2147,6 +2147,19 @@
           </ul>
         </div>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Started as an open question — "what problem is a company like Deloitte actually working on, that a PM could credibly help with?" — and surfaced a real, documented pattern: AI platforms are built to answer broadly, not to verify a specific client's specific facts, and two AI-fabricated Deloitte reports, an EY report pulled for 16 fabricated sources, and a KPMG report with 40 of 45 citations wrong all trace back to the same missing layer.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Mapped 24 problem statements by who actually owns each one (Q1–Q10) → traced the pattern across 12+ organizations and 6 sectors worldwide, sourced only to primary documents (Q11–Q21) → ruled out a look-alike (South Africa's policy pull — checked and correctly excluded, Q26) → diagnosed the actual gap as 6 unmade business-process decisions, not a technology gap (Q25) → re-checked accountability as late as Sep 2026 and found Canada's oversight body closed its investigation without investigating (Q26).</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">Not proposed yet at this stage — this part is diagnosis, not a build. The actual verification-platform architecture comes out of the hands-on audit in <a href="#case-verification-gap-platform" data-open-case="verification-gap-platform" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Part 2</a>, and the org-adoption plan for it is the <a href="#case-deloitte-pm-roleplay" data-open-case="deloitte-pm-roleplay" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">role-play execution roadmap</a>.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The gap is real and sourced, not assumed — confirmed across 12+ organizations, not one incident. The honest, portable finding: owning detection technology (Deloitte already had a citation-checker before Australia) doesn't fix anything until someone makes the business-process decisions around it — which is the actual, non-technical job a PM does here.</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">EU AI Act</span><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full text →</a></span>
           <span><span class="k">NIST AI RMF</span><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">framework →</a></span>
@@ -2494,6 +2507,32 @@
           </ul>
         </div>
 
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Part 1 diagnosed the gap; this part asks whether it's really there — sourced a real, unflagged, public Deloitte report and ran the citation check by hand instead of trusting the pattern found in others' incidents.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Audited the report structurally — 100 in-text citations vs. 49 bibliography entries (Q26) → built an 8-step verification method, then expanded it to 16 failure modes across 5 tiers (Q28, Q31) → scanned the market and found no tool stitches structural+semantic+provenance+governance together (Q32–Q35) → corrected scope from "hallucination" to a precise 3-way split after catching the risk of overclaiming (Q40–Q41) → designed and audited a 12-stage, 3-track architecture through 3 self-review passes (Q39, Q43) → wireframed 8 screens and benchmarked them against real products (Q45–Q49).</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">The Verification Gap Engine's 12-stage, 3-track pipeline (Hallucination-checked / Unverifiable / Never-cited), a 12-specialist roster triggered selectively per citation, and 8 wireframed screens — all grounded in the real audit's actual numbers, not placeholder data.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">49 Verified · 0 Hallucinated · 51 Unverifiable — the honest result, not the inflated "51 hallucinations" headline it would've been easy to claim. The architecture is real and benchmarked against actual competing tools, but it's a sample size of one report with zero working code — the strongest answer in an interview room, not yet something to pitch to a real client.</td></tr>
+            </tbody>
+          </table></div>
+          <h4 style="margin-top:14px">Which feature is used at which step</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Feature</th><th>Used at</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Feature"><strong>Citation Graph Builder</strong> (Stage 2)</td><td data-label="Used at">Right after extraction — links every marker to its claim and bibliography entry, or null; the single stage that alone surfaced the real 49/51 split</td></tr>
+              <tr><td data-label="Feature"><strong>Track A / B fork</strong></td><td data-label="Used at">Right after the citation graph — separates "has a source, testable for fabrication" from "no source, stays Unverifiable," so the system can never overclaim hallucination where the honest label is unverifiable</td></tr>
+              <tr><td data-label="Feature"><strong>12-specialist roster + router</strong></td><td data-label="Used at">Classification &amp; Routing (Stage 3) through Specialist Verification (Stage 4) — only the specialists a given citation type actually needs ever fire</td></tr>
+              <tr><td data-label="Feature"><strong>Materiality scoring</strong></td><td data-label="Used at">Stage 5 — decides how deep the specialists go (headline stat vs. background aside), not which ones run</td></tr>
+              <tr><td data-label="Feature"><strong>Escalation / Review Queue</strong></td><td data-label="Used at">Stage 7 — routes anything uncertain to a human, with evidence pre-assembled, instead of auto-closing it</td></tr>
+              <tr><td data-label="Feature"><strong>Governance Policy Engine</strong></td><td data-label="Used at">Stage 8, before Output — pure rules deciding publish/hold/review against a firm's configured coverage threshold</td></tr>
+              <tr><td data-label="Feature"><strong>Post-Publication Monitoring + Cross-Report Library</strong></td><td data-label="Used at">Stages 10–11 — re-checks currency/existence on a schedule after a report ships, and surfaces patterns across a firm's whole publication history</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="jlinks">
           <span><span class="k">Audited report</span><a href="https://nor.deloitte.com/rs/712-CNF-326/images/Regulatory-Outlook-Financial-Markets-2024.pdf" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Deloitte Reg. Outlook 2024 →</a></span>
           <span><span class="k">SwanRef</span><a href="https://www.swanref.org/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">citation checker →</a></span>
@@ -2611,6 +2650,19 @@
             <li>Build the missing gap/error states named in Q56 — none of the four identified failure screens exist yet.</li>
             <li>Track C's scanner and the second-report MVP test (still open from Part 2) remain blocked on this environment's network access to a source document.</li>
           </ul>
+        </div>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Part 2's architecture and wireframes still had two unanswered questions a real firm asks first: what happens to the confidential draft data, and does anything exist past gray-box wireframes.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Checked whether the two AI specialists the architecture already needed could run privately — confirmed Patronus Lynx is open-source and Vectara offers on-prem/VPC deployment (Q50) → walked the entire pipeline stage by stage and found only 4 points where anything ever needs to leave the firm's network (Q51) → built Design (5 static, full-color screens) after self-correcting a skipped step (Q52–Q53) → built an interactive Prototype wired with real state (Q54) → built a landing/sign-up page that hadn't existed before (Q55) → ran a completeness audit against the architecture and named every gap found (Q56).</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A 4-touchpoint data-handling map (everything else stays in-house), 5 static design screens, a clickable prototype of the 4-screen MVP slice, and a real landing page with a working sign-up form — every number on it traced to the actual Deloitte audit, not placeholder copy.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The confidentiality question — the one most likely to kill the pitch on contact — now has a real, checked answer. But the self-audit (Q56) is just as important as the build: 3 of 7 planned screens are still wireframe-only, there's no persistent navigation, and 4 named failure/error states don't exist yet — named directly rather than smoothed over.</td></tr>
+            </tbody>
+          </table></div>
         </div>
 
         <div class="jlinks">
@@ -3032,6 +3084,31 @@
         </div>
 
         </details>
+
+        <div class="cs-narrative">
+          <h4>Quick recall</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">The Verification Gap research diagnoses a real gap but doesn't say how it would actually get adopted inside a company. This rehearsal exercise answers: "if I actually owned this problem at Deloitte, what's the real 2–5 year plan" — explicitly a role-play, not a claim of real Deloitte involvement.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Laid out 5 phases (Diagnostic → Pilot → Scale → Embed &amp; Enforce → Industry leadership) with teams and knowledge gaps (Q1) → split every activity into outsider-doable vs. employee-only, phase by phase (Q3–Q4) → mapped who actually makes each decision vs. what a PM only influences (Q6) → walked it as a lived narrative, not just tables (Q8) → built 4 concrete plans (this week / everything outsider-doable / the full insider plan / the gap between them) with realistic timelines (Q10–Q12) → flipped the view to one row per team across all 5 phases (Q13) → merged outsider and insider work into one integrated timeline (Q14).</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">4 concrete, sequenced plans — a 1-week starter plan, everything buildable without being a Deloitte employee (~3 months), the full insider execution plan (~2.5–4 years), and an honest map of exactly where outsider work stops and real organizational authority has to take over.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">Plan 2 (alone, ~3 months) and Plan 3 (as an employee, ~2.5–4 years) differ by roughly 10x — not from less effort, but because Plan 3 is gated by other people's calendars, committees, and budget cycles. The one number worth keeping: outsider work isn't wasted — it compresses the insider timeline's start, since Phase 0–1 become revision work instead of a blank page.</td></tr>
+            </tbody>
+          </table></div>
+          <h4 style="margin-top:14px">Which plan item is used at which step</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Deliverable</th><th>Used at</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Deliverable"><strong>Diagnostic memo</strong></td><td data-label="Used at">Phase 0 — the one document that has to exist before anyone will sponsor a pilot; built outsider-doable (Plan 2), then validated against real numbers once hired (Plan 3)</td></tr>
+              <tr><td data-label="Deliverable"><strong>Written policy + metrics framework</strong></td><td data-label="Used at">Phase 1 — defines what "mandatory" means and what the confidence threshold is, before any engineering work starts</td></tr>
+              <tr><td data-label="Deliverable"><strong>Working prototype (reviewer screen + audit trail)</strong></td><td data-label="Used at">Phase 1 — the artifact a Practice Managing Partner actually signs off on, not a slide deck</td></tr>
+              <tr><td data-label="Deliverable"><strong>Training curriculum + dashboard mockup</strong></td><td data-label="Used at">Phase 2 — rolled out once the pilot has real adoption/flag-rate data to justify expansion</td></tr>
+              <tr><td data-label="Deliverable"><strong>Sample contract language</strong></td><td data-label="Used at">Phase 3 — the illustrative version Legal turns into real binding text once the firm-wide gate is approved</td></tr>
+              <tr><td data-label="Deliverable"><strong>Mock transparency report</strong></td><td data-label="Used at">Phase 4 — the draft Comms would adapt once there's a year of real override data to report honestly</td></tr>
+            </tbody>
+          </table></div>
+        </div>
 
         <div class="jlinks">
           <span><span class="k">Companion research</span><a href="#case-ai-verification-research" data-open-case="ai-verification-research" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">The Verification Gap →</a></span>
