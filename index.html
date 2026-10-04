@@ -638,14 +638,14 @@
         <span class="jnum done">T42</span>
         <h3 class="jcat-title">LedgerLens — Bank Statement Analyzer (Credit Risk Lens)</h3>
       </div>
-      <article class="jcard" data-case="ledgerlens-bank-statement-analyzer" data-updated="2026-10-03">
+      <article class="jcard" data-case="ledgerlens-bank-statement-analyzer" data-updated="2026-10-04">
         <button class="jhead" type="button">
           <div class="jhead-left">
             <div class="jcard-illus" style="background:linear-gradient(135deg,#059669,#064E3B)">🧾</div>
             <div>
               <div class="jtitle">LedgerLens — Bank Statement Analyzer (Credit Risk Lens)</div>
-              <div class="jmeta">⭐⭐⭐⭐⭐ Built · try the live demo · 91 automated tests</div>
-              <div class="jtools"><b>Tools:</b> Node.js 18, pdf.js, Tesseract.js (OCR), xlsx, Claude API (forced tool use)</div>
+              <div class="jmeta">⭐⭐⭐⭐⭐ Built · try the live demo · 109 automated tests</div>
+              <div class="jtools"><b>Tools:</b> Node.js 18, pdf.js, Tesseract.js (OCR), xlsx, SQLite, Claude API (forced tool use)</div>
             </div>
           </div>
           <span class="jtoggle">view case study →</span>
@@ -653,12 +653,13 @@
       <div class="jbody">
         <div class="cs-facts">
           <span class="chip">3 interfaces, 1 shared engine — hosted page, local app, and CLI all produce identical output</span>
+          <span class="chip">Now a real backend API: SQLite job storage, a fair multi-user queue, millisecond re-scoring on review</span>
           <span class="chip">22 data-validation checks, built into the JSON output, not just a UI badge</span>
-          <span class="chip">91 automated tests, offline, run on every GitHub push — 0 API key needed</span>
+          <span class="chip">109 automated tests, offline, run on every GitHub push — 0 API key needed</span>
           <span class="chip">A broken balance check forces REFER regardless of score — never a silent APPROVE</span>
-          <span class="chip">13 example statements on the live demo, each with its own expected result</span>
+          <span class="chip">A full product blueprint &amp; MVP PRD — market research, personas, roadmap, 5 differentiating bets</span>
         </div>
-        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> Node.js 18, pdf.js (digital-PDF text layer), Tesseract.js (OCR for scans/images), xlsx (Excel ingestion), the Claude API via forced tool use for extraction and classification. Three shells — a hosted claude.ai Artifact (rules-only, since a static page can't hold an API key), a local Node backend (LLM-enabled), and a CLI — all call the same <code>engine.js</code>, so the JSON a CLI run produces matches what the UI shows.</p>
+        <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> Node.js 18, pdf.js (digital-PDF text layer), Tesseract.js (OCR for scans/images), xlsx (Excel ingestion), SQLite (job/result storage), the Claude API via forced tool use for extraction and classification. Three shells — a hosted claude.ai Artifact (rules-only, since a static page can't hold an API key), a local Node backend (LLM-enabled, now with a REST API), and a CLI — all run the same pipeline, so the JSON a CLI run produces matches what the UI and the API show.</p>
 
         <div class="cs-narrative">
           <h4>Why This Exists</h4>
@@ -686,6 +687,34 @@
             </tbody>
           </table></div>
 
+          <h4>New: A Real Backend, Not Just a Richer UI</h4>
+          <p>
+            The local server now offers a REST API so a lender's systems can store statements,
+            process them in the background, and record every review decision for many users at
+            once — the step from "a tool one analyst runs" to "something a team can actually run
+            on." Jobs are rows in SQLite, not in-memory state, so nothing is lost on a restart;
+            each job runs in its own worker process so one stuck OCR page or a 100-page statement
+            can't block anyone else; scheduling is fair, meaning the next job always comes from
+            the user with the fewest jobs already running, not whoever queued first. The part
+            that actually matters for a credit workflow: when a reviewer corrects a category or a
+            counterparty, the engine re-scores from a saved snapshot in milliseconds — no
+            re-reading the file, no OCR, no model call — and keeps every earlier result version
+            plus a full audit trail of who changed what and when.
+          </p>
+
+          <h4>Knowledge Sharing — and an Honest Comparison to a CIBIL Score</h4>
+          <p>
+            A new in-app tab answers the questions a non-specialist actually asks: why an LLM is
+            used at all, how the 0–1000 score is calculated (walked through with a real sample's
+            own numbers), and a 21-item FAQ. The sharpest addition is a direct, one-line framing
+            against the credit bureau score every Indian lender already knows: <strong>a CIBIL
+            score shows whether someone has repaid credit before; this analyzer shows whether they
+            can afford a new loan today.</strong> CIBIL can't see that a salary stopped last
+            month; a statement can't see a loan already repaid at another bank — which is exactly
+            why lenders use both, and why the app says so plainly instead of positioning itself as
+            a bureau-score replacement.
+          </p>
+
           <h4>Key Design Decisions</h4>
           <ul>
             <li><strong>Rules first, model second, human last.</strong> Indian bank narrations are semi-structured enough that deterministic rules are fast, free, and auditable; the model only handles what rules can't, and a human only sees what can actually change the decision.</li>
@@ -693,6 +722,7 @@
             <li><strong>The model proposes, code verifies.</strong> Every row the LLM returns has to pass the same balance-arithmetic check as the statement itself; a failing batch is retried once, then falls back to the rule parser, so a model error can't change a decision silently.</li>
             <li><strong>Not every credit is income.</strong> Only SALARY, BUSINESS_INCOME, INTEREST, and RENTAL_INCOME count — P2P receipts, refunds, reversals, loan disbursals, and own-account transfers are explicitly excluded, even though they all show up as a credit.</li>
             <li><strong>Decision = band + hard overrides.</strong> The score sets a base band, but policy rules override it outright — no verifiable income forces DECLINE, FOIR above 65% forces DECLINE, and tampering/structuring/circular flows force REFER — with every override's reason listed, not just applied silently.</li>
+            <li><strong>Correcting a decision shouldn't mean re-running the pipeline.</strong> A reviewer's fix re-scores from a stored snapshot, not from the raw file — fast enough to feel like a live edit, and every prior version stays readable instead of being overwritten.</li>
           </ul>
 
           <h4>A Real Limitation, Caught by Its Own Safety Net</h4>
@@ -709,12 +739,17 @@
 
           <h4>Testing Discipline</h4>
           <p>
-            91 automated checks run offline on every push (no API key needed), including a
+            109 automated checks run offline on every push (no API key needed), including a
             deliberately-wrong mock LLM (every balance off by exactly ₹1,000) to confirm the
-            fallback-to-rules path actually engages and the score doesn't change — and a separate
+            fallback-to-rules path actually engages and the score doesn't change, and a separate
             mock that answers in the model's exact tool format to test the plumbing and guardrails
             without needing a live API call for every CI run. 13 real example statements are
-            checked against their own documented expected result, not just "did it run."
+            checked against their own documented expected result, not just "did it run." The newer
+            18 tests exercise the backend for real — a temporary SQLite database and 2 live
+            worker processes, checking that 2 users' jobs never exceed 2 running at once, that
+            fair scheduling actually alternates between them, that users can't see each other's
+            jobs, and that a review decision on a 6-item queue takes it to 5, then 4, with every
+            earlier result version still retrievable.
           </p>
         </div>
 
@@ -724,9 +759,9 @@
             <thead><tr><th>Section</th><th>Summary</th></tr></thead>
             <tbody>
               <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">A credit officer reviewing statements by hand has to read inconsistent bank layouts correctly, judge what each transaction really is, and catch tampering/structuring — all without a system that's actually auditable for a lending decision.</td></tr>
-              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Chose rules-first classification specifically because Indian bank narrations are semi-structured enough to make it viable → designed the LLM's extraction output to be forced through the same balance check as the statement itself, so a model error can never silently pass → built 13 example statements and 91 offline tests, including a deliberately-wrong mock model, to prove the guardrails actually engage rather than just existing on paper → caught a real OCR digit misread during testing and confirmed the safety net correctly forced REFER instead of a wrong APPROVE.</td></tr>
-              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A 6-stage pipeline (convert → validate order → extract → enrich → classify → score) sharing one engine across a hosted demo, a local LLM-enabled app, and a CLI — producing a 0–1000 credit-risk score, rating band, and decision with reasons, backed by 22 always-on validation checks.</td></tr>
-              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The architecture and guardrails are real and tested end to end — but honestly, LLM accuracy hasn't yet been measured on real (non-synthetic) statements, and the scoring weights are illustrative, not calibrated against historical loan outcomes. A solid proof of concept, not yet a production credit model.</td></tr>
+              <tr><td data-label="Section"><strong>Research steps</strong></td><td data-label="Summary">Chose rules-first classification specifically because Indian bank narrations are semi-structured enough to make it viable → designed the LLM's extraction output to be forced through the same balance check as the statement itself, so a model error can never silently pass → built 13 example statements and 109 offline tests, including a deliberately-wrong mock model and a real backend run against a temporary database, to prove the guardrails actually engage rather than just existing on paper → caught a real OCR digit misread during testing and confirmed the safety net correctly forced REFER instead of a wrong APPROVE → wrote a full product blueprint and MVP PRD (market research, personas, roadmap, 5 differentiating bets) once the engine itself was proven.</td></tr>
+              <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A 6-stage pipeline (convert → validate order → extract → enrich → classify → score) now backed by a real multi-user API — SQLite job storage, a fair queue, millisecond re-scoring on review, and a full audit trail — sharing one engine across a hosted demo, a local LLM-enabled app, and a CLI.</td></tr>
+              <tr><td data-label="Section"><strong>Conclusion</strong></td><td data-label="Summary">The architecture, guardrails, and now the multi-user backend are real and tested end to end — but honestly, LLM accuracy still hasn't been measured on real (non-synthetic) statements, and the scoring weights remain illustrative, not calibrated against historical loan outcomes. A proof of concept that's grown real infrastructure, not yet a production credit model.</td></tr>
             </tbody>
           </table></div>
           <h4 style="margin-top:14px">Which feature is used at which step</h4>
@@ -739,6 +774,8 @@
               <tr><td data-label="Feature"><strong>Confidence + method per row</strong></td><td data-label="Used at">Classification — every row stores whether RULE, LLM, or MANUAL produced its category, and at what confidence, so a reviewer can see how a label was produced, not just what it is</td></tr>
               <tr><td data-label="Feature"><strong>Smart review triage</strong></td><td data-label="Used at">Before scoring — only high-impact flagged rows (large amounts, recurring payments, loan-related, possible bounces, no counterparty) reach a human; low-impact ones auto-accept</td></tr>
               <tr><td data-label="Feature"><strong>Hard policy overrides</strong></td><td data-label="Used at">Last, after the composite score — tampering, structuring, no verifiable income, or FOIR above 65% can force REFER/DECLINE regardless of how high the score is</td></tr>
+              <tr><td data-label="Feature"><strong>Review-decision re-scoring</strong></td><td data-label="Used at">After a reviewer acts in the queue — re-scores from a saved snapshot in milliseconds, saves a new result version, and logs the change to the audit trail, all without touching the original file again</td></tr>
+              <tr><td data-label="Feature"><strong>Fair job scheduling</strong></td><td data-label="Used at">In the backend queue, when multiple users submit jobs at once — the next job always comes from whoever has the fewest jobs already running, so one heavy user can't starve everyone else</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -746,6 +783,7 @@
         <div class="jlinks">
           <span><span class="k">Live demo</span><a href="https://claude.ai/artifact/JkAAGFzSJga3bhCpKa9Vk4" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">try it (rules-only) →</a></span>
           <span><span class="k">Code</span><a href="https://github.com/bhawnamanglapm/LedgerLens1" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GitHub repo →</a></span>
+          <span><span class="k">Blueprint</span><a href="https://github.com/bhawnamanglapm/LedgerLens1/blob/main/docs/LedgerLens_Product_Blueprint.pdf" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Product blueprint &amp; MVP PRD (PDF) →</a></span>
         </div>
       </div>
       </article>
