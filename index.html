@@ -661,19 +661,22 @@
         </div>
         <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> Node.js 18, pdf.js (digital-PDF text layer), Tesseract.js (OCR for scans/images), xlsx (Excel ingestion), SQLite (job/result storage), the Claude API via forced tool use for extraction and classification. Three shells — a hosted claude.ai Artifact (rules-only, since a static page can't hold an API key), a local Node backend (LLM-enabled, now with a REST API), and a CLI — all run the same pipeline, so the JSON a CLI run produces matches what the UI and the API show.</p>
 
-        <div class="cs-narrative">
-          <h4>Why This Exists</h4>
-          <p>
-            A credit officer reviewing a loan applicant's bank statements by hand is doing three
-            jobs at once: reading a messy, bank-specific layout correctly, deciding what each
-            transaction actually is (is a credit really income, or a refund, a loan disbursal, a
-            P2P transfer?), and catching the kind of tampering or structuring that a glance at a
-            balance column won't surface. LedgerLens is a proof of concept for automating all
-            three without quietly trading away the auditability a credit decision needs —
-            ingesting a raw statement (digital PDF, scanned PDF, image, Excel, CSV, or text) and
-            producing a structured, explainable 0–1000 credit-risk score.
+        <div class="practice-note" style="margin:0 0 18px">
+          <p style="margin:0 0 10px"><strong>Executive summary</strong></p>
+          <p style="margin:0">
+            LedgerLens reads a raw bank statement and returns a 0–1000 credit-risk score, a
+            decision, and the reasons behind it — automating the three things a credit officer
+            does by hand (read the layout, judge what each transaction really is, catch
+            tampering) without losing auditability. Rules classify first; an LLM only fills what
+            rules can't; every model output is forced through the same balance check as the
+            statement itself. A real multi-user backend (SQLite, job queue, instant re-scoring on
+            review) and 109 automated tests are already built. <strong>Status:</strong> a tested
+            proof of concept — the scoring model is not yet calibrated against real loan
+            outcomes.
           </p>
+        </div>
 
+        <div class="cs-narrative">
           <h4>The Pipeline</h4>
           <div class="ptable2-wrap"><table class="ptable2">
             <thead><tr><th>Stage</th><th>What it does</th></tr></thead>
@@ -687,70 +690,47 @@
             </tbody>
           </table></div>
 
-          <h4>New: A Real Backend, Not Just a Richer UI</h4>
-          <p>
-            The local server now offers a REST API so a lender's systems can store statements,
-            process them in the background, and record every review decision for many users at
-            once — the step from "a tool one analyst runs" to "something a team can actually run
-            on." Jobs are rows in SQLite, not in-memory state, so nothing is lost on a restart;
-            each job runs in its own worker process so one stuck OCR page or a 100-page statement
-            can't block anyone else; scheduling is fair, meaning the next job always comes from
-            the user with the fewest jobs already running, not whoever queued first. The part
-            that actually matters for a credit workflow: when a reviewer corrects a category or a
-            counterparty, the engine re-scores from a saved snapshot in milliseconds — no
-            re-reading the file, no OCR, no model call — and keeps every earlier result version
-            plus a full audit trail of who changed what and when.
-          </p>
+          <h4>Backend API — Built for a Team, Not One Analyst</h4>
+          <ul>
+            <li><strong>Persistent.</strong> Jobs are rows in SQLite, not in-memory state — a server restart loses nothing.</li>
+            <li><strong>Isolated.</strong> Each job runs in its own worker process, so one stuck OCR page can't block anyone else.</li>
+            <li><strong>Fair.</strong> The next job always comes from the user with the fewest jobs already running, not whoever queued first.</li>
+            <li><strong>Instant correction.</strong> A reviewer's fix re-scores from a saved snapshot in milliseconds — no re-read, no OCR, no model call — with every prior version and a full audit trail retained.</li>
+          </ul>
 
-          <h4>Knowledge Sharing — and an Honest Comparison to a CIBIL Score</h4>
-          <p>
-            A new in-app tab answers the questions a non-specialist actually asks: why an LLM is
-            used at all, how the 0–1000 score is calculated (walked through with a real sample's
-            own numbers), and a 21-item FAQ. The sharpest addition is a direct, one-line framing
-            against the credit bureau score every Indian lender already knows: <strong>a CIBIL
-            score shows whether someone has repaid credit before; this analyzer shows whether they
-            can afford a new loan today.</strong> CIBIL can't see that a salary stopped last
-            month; a statement can't see a loan already repaid at another bank — which is exactly
-            why lenders use both, and why the app says so plainly instead of positioning itself as
-            a bureau-score replacement.
-          </p>
+          <h4>Positioning Against a CIBIL Score</h4>
+          <ul>
+            <li>A CIBIL score shows whether someone has repaid credit before. LedgerLens shows whether they can afford a new loan today.</li>
+            <li>CIBIL can't see a salary that stopped last month; a statement can't see a loan already repaid elsewhere — lenders need both, and the app says so rather than positioning itself as a bureau-score replacement.</li>
+            <li>An in-app Knowledge Sharing tab explains the LLM's role, the scoring math (worked through on a real sample), and a 21-item FAQ for non-specialists.</li>
+          </ul>
 
           <h4>Key Design Decisions</h4>
           <ul>
-            <li><strong>Rules first, model second, human last.</strong> Indian bank narrations are semi-structured enough that deterministic rules are fast, free, and auditable; the model only handles what rules can't, and a human only sees what can actually change the decision.</li>
-            <li><strong>Integrity over coverage.</strong> Balance arithmetic is checked on every single row. A broken balance forces REFER regardless of the composite score — an OCR misread or an edited PDF must never silently produce an APPROVE.</li>
-            <li><strong>The model proposes, code verifies.</strong> Every row the LLM returns has to pass the same balance-arithmetic check as the statement itself; a failing batch is retried once, then falls back to the rule parser, so a model error can't change a decision silently.</li>
-            <li><strong>Not every credit is income.</strong> Only SALARY, BUSINESS_INCOME, INTEREST, and RENTAL_INCOME count — P2P receipts, refunds, reversals, loan disbursals, and own-account transfers are explicitly excluded, even though they all show up as a credit.</li>
-            <li><strong>Decision = band + hard overrides.</strong> The score sets a base band, but policy rules override it outright — no verifiable income forces DECLINE, FOIR above 65% forces DECLINE, and tampering/structuring/circular flows force REFER — with every override's reason listed, not just applied silently.</li>
-            <li><strong>Correcting a decision shouldn't mean re-running the pipeline.</strong> A reviewer's fix re-scores from a stored snapshot, not from the raw file — fast enough to feel like a live edit, and every prior version stays readable instead of being overwritten.</li>
+            <li><strong>Rules first, model second, human last.</strong> Deterministic rules handle what's structured and auditable; the model only fills what rules can't; a human only sees what can change the decision.</li>
+            <li><strong>Integrity over coverage.</strong> Balance arithmetic is checked on every row. A broken balance forces REFER regardless of score — never a silent APPROVE.</li>
+            <li><strong>The model proposes, code verifies.</strong> Every LLM row must pass the same balance check as the statement; a failing batch retries once, then falls back to rules.</li>
+            <li><strong>Not every credit is income.</strong> Only SALARY, BUSINESS_INCOME, INTEREST, and RENTAL_INCOME count — P2P, refunds, loan disbursals, and own-account transfers are excluded.</li>
+            <li><strong>Decision = band + hard overrides.</strong> No verifiable income or FOIR above 65% forces DECLINE; tampering, structuring, or circular flows force REFER — every override's reason is listed.</li>
+            <li><strong>Correction ≠ re-run.</strong> A reviewer's fix re-scores from a stored snapshot, not the raw file — fast, and every prior version stays readable.</li>
           </ul>
 
-          <h4>A Real Limitation, Caught by Its Own Safety Net</h4>
-          <p>
-            Running a scanned test statement through the CLI's 200dpi render, OCR misread
-            <code>1,532.40</code> as <code>1,632.40</code> on one row. That's exactly the kind of
-            digit error OCR produces — and exactly what the balance-arithmetic check exists to
-            catch: the broken running balance forced the decision to <strong>REFER</strong> at a
-            score of 906, instead of silently shipping an APPROVE. The browser's own render of
-            the identical file read every row correctly and scored 966. The finding isn't "OCR is
-            perfect" — it's that the safety net the architecture is built around actually fires
-            when it's supposed to, rather than only working on paper.
-          </p>
+          <h4>Proof the Safety Net Works</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <tbody>
+              <tr><td data-label=""><strong>Finding</strong></td><td data-label="">OCR misread ₹1,532.40 as ₹1,632.40 on a scanned test statement.</td></tr>
+              <tr><td data-label=""><strong>Result</strong></td><td data-label="">The balance check caught it. Decision forced to <strong>REFER</strong> (906) instead of a wrong APPROVE.</td></tr>
+              <tr><td data-label=""><strong>Why it matters</strong></td><td data-label="">The architecture's core guarantee held under a real failure, not just in a spec.</td></tr>
+            </tbody>
+          </table></div>
 
           <h4>Testing Discipline</h4>
-          <p>
-            109 automated checks run offline on every push (no API key needed), including a
-            deliberately-wrong mock LLM (every balance off by exactly ₹1,000) to confirm the
-            fallback-to-rules path actually engages and the score doesn't change, and a separate
-            mock that answers in the model's exact tool format to test the plumbing and guardrails
-            without needing a live API call for every CI run. 13 real example statements are
-            checked against their own documented expected result, not just "did it run." The newer
-            18 tests exercise the backend for real — a temporary SQLite database and 2 live
-            worker processes, checking that 2 users' jobs never exceed 2 running at once, that
-            fair scheduling actually alternates between them, that users can't see each other's
-            jobs, and that a review decision on a 6-item queue takes it to 5, then 4, with every
-            earlier result version still retrievable.
-          </p>
+          <ul>
+            <li>109 automated tests, 0 API key required, run on every push.</li>
+            <li>A deliberately-wrong mock model (every balance off by ₹1,000) proves the fallback-to-rules path actually engages.</li>
+            <li>18 tests exercise a live backend: a real SQLite database, 2 live worker processes, multi-user isolation, and fair scheduling.</li>
+            <li>13 example statements, each checked against its own documented expected result.</li>
+          </ul>
         </div>
 
         <div class="cs-narrative">
