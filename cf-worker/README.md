@@ -52,7 +52,7 @@ step after that.
 
 ## Notes
 
-- The Worker only accepts requests from `https://bhawnamanglapm.github.io`
+- The Worker only accepts requests from `https://bhawnamanglapm.github.io` (the opaque `null` origin is refused; browser CORS plus a server-side origin check, not real authentication)
   (CORS-restricted), so it can't be casually reused by other sites even
   though the URL is public.
 - Nothing here costs money unless you deliberately upgrade the Cloudflare
