@@ -54,7 +54,7 @@ Case studies that have files behind them (documents, datasets, prototypes) each 
 | [partner-ops-sql-api-practice](https://github.com/bhawnamanglapm/partner-ops-sql-api-practice) | Partner Ops SQL and API practice |
 | [fintech-api-landscape](https://github.com/bhawnamanglapm/fintech-api-landscape) | Fintech API landscape reference |
 
-Weft and Career Copilot already had their own repos ([Weft](https://github.com/bhawnamanglapm/Weft), [Claude](https://github.com/bhawnamanglapm/Claude)).
+Weft and Career Copilot already had their own repos ([Weft](https://github.com/bhawnamanglapm/Weft), [Career_Copilot](https://github.com/bhawnamanglapm/Career_Copilot)).
 
 ## Connect
 [LinkedIn](https://www.linkedin.com/in/bhawnamangla/) · [Email](mailto:bhawna202019@gmail.com)
