@@ -3,10 +3,15 @@
 // key to manage, no bill. Deploy this once; the frontend widget (chatbot.js)
 // calls it over HTTPS. See README.md in this folder for deploy steps.
 
+// Only the live site is allowed. The opaque 'null' origin (pages opened from disk, sandboxed
+// iframes, some redirects) is deliberately NOT allowed. To test locally, run `wrangler dev`
+// and add the local origin to this list temporarily; do not deploy that change.
 const ALLOWED_ORIGINS = [
   'https://bhawnamanglapm.github.io',
-  'null', // lets you test by opening index.html straight from disk
 ];
+
+// Request bodies are tiny (a 600-character message plus 8 short turns). Refuse anything larger.
+const MAX_BODY_BYTES = 8 * 1024;
 
 const SYSTEM_PROMPT = `You are the AI assistant on Bhawna Mangla's product management portfolio site (bhawnamanglapm.github.io). You answer visitors' questions ABOUT Bhawna, in the third person ("she"/"her") — you are not pretending to be her. Keep answers short (2-4 sentences), friendly, and professional, like a knowledgeable colleague introducing her work.
 
@@ -56,6 +61,16 @@ export default {
       return new Response(null, { headers });
     }
 
+    // CORS only stops other websites' scripts from reading replies. It is not authentication:
+    // a script outside a browser can send any Origin. This check just refuses requests that do
+    // not claim to come from the live site, and it is not a substitute for rate limiting.
+    if (!ALLOWED_ORIGINS.includes(origin)) {
+      return new Response(JSON.stringify({ error: 'Origin not allowed' }), {
+        status: 403,
+        headers: { ...headers, 'Content-Type': 'application/json' },
+      });
+    }
+
     if (request.method !== 'POST') {
       return new Response(JSON.stringify({ error: 'Method not allowed' }), {
         status: 405,
@@ -63,9 +78,19 @@ export default {
       });
     }
 
+    const declared = Number(request.headers.get('Content-Length') || 0);
+    if (declared > MAX_BODY_BYTES) {
+      return new Response(JSON.stringify({ error: 'Request too large' }), {
+        status: 413,
+        headers: { ...headers, 'Content-Type': 'application/json' },
+      });
+    }
+
     let body;
     try {
-      body = await request.json();
+      const raw = await request.text();
+      if (raw.length > MAX_BODY_BYTES) throw new RangeError('too large');
+      body = JSON.parse(raw);
     } catch (e) {
       return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
         status: 400,
@@ -105,7 +130,8 @@ export default {
         headers: { ...headers, 'Content-Type': 'application/json' },
       });
     } catch (err) {
-      return new Response(JSON.stringify({ error: 'AI request failed', detail: String(err && err.message || err) }), {
+      // Do not echo internal error text to visitors.
+      return new Response(JSON.stringify({ error: 'AI request failed' }), {
         status: 502,
         headers: { ...headers, 'Content-Type': 'application/json' },
       });
