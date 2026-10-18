@@ -67,5 +67,21 @@ const secretish = pages.concat(["chatbot.js", "script.js", "cf-worker/worker.js"
   .filter((f) => /(sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{30,}|xox[baprs]-[A-Za-z0-9-]{10,}|-----BEGIN [A-Z ]*PRIVATE KEY-----)/.test(readFileSync(f, "utf8")));
 check(secretish.length === 0, "no API keys or private keys found in pages, scripts or Worker files", secretish.join(", "));
 
+// 5. Case studies that have their own GitHub repo must link to it. Cards not listed here are
+// write-ups with no files behind them, so they have no repo; the count is printed, not failed.
+const HAS_REPO = [
+  "makemytrip-flight-booking-teardown", "ai-trip-planner-prd", "travel-support-ai-copilot", "weft-workflow-copilot",
+  "career-copilot-ai-agents", "ai-ops-copilot", "ai-verification-research", "verification-gap-platform",
+  "verification-gap-product-pass", "merchant-dispute-hub", "flight-delay-prediction-dashboard", "airline-operations-dashboard",
+  "sql-saas-analytics-basic", "sql-saas-analytics-advanced", "amplitude-strideway-basic", "amplitude-strideway-advanced",
+  "partner-ops-practice", "fintech-api-landscape",
+];
+const more = stripComments(readFileSync("travel-tech-more.html", "utf8"));
+const cards = new Map([...more.matchAll(/<article\b[^>]*data-case="([^"]+)"[\s\S]*?<\/article>/g)].map((m) => [m[1], m[0]]));
+const repoRe = /href="https:\/\/github\.com\/bhawnamanglapm\/[A-Za-z0-9_.-]+"/;
+const missingRepo = HAS_REPO.filter((slug) => !cards.has(slug) || !repoRe.test(cards.get(slug)));
+check(missingRepo.length === 0, `all ${HAS_REPO.length} case studies with their own repo link to it (${missingRepo.length} missing)`, missingRepo.join(", "));
+console.log(`INFO ${cards.size - [...cards.values()].filter((c) => repoRe.test(c)).length} of ${cards.size} case-study cards have no dedicated repo (written analyses with no files)`);
+
 console.log(failures.length ? `\n${failures.length} failure(s)` : "\nAll checks passed.");
 process.exit(failures.length ? 1 : 0);
