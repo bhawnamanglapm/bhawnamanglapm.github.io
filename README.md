@@ -53,6 +53,7 @@ Case studies that have files behind them (documents, datasets, prototypes) each 
 | [amplitude-strideway](https://github.com/bhawnamanglapm/amplitude-strideway) | Amplitude Analytics, Basic and Advanced (2 cards) |
 | [partner-ops-sql-api-practice](https://github.com/bhawnamanglapm/partner-ops-sql-api-practice) | Partner Ops SQL and API practice |
 | [fintech-api-landscape](https://github.com/bhawnamanglapm/fintech-api-landscape) | Fintech API landscape reference |
+| [travel-problem-radar-case-study](https://github.com/bhawnamanglapm/travel-problem-radar-case-study) | Travel Problem Radar (prototype; live page refreshed every 5 hours, AI findings not yet scored) |
 
 Weft and Career Copilot already had their own repos ([Weft](https://github.com/bhawnamanglapm/Weft), [Career_Copilot](https://github.com/bhawnamanglapm/Career_Copilot)).
 
