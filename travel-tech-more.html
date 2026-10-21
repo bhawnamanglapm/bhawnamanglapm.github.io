@@ -3264,6 +3264,84 @@
       </div>
       </article>
     </div>
+<!-- T43: Travel Problem Radar -->
+<div class="jcat-group">
+  <div class="jcat-head">
+    <span class="jnum done">T43</span>
+    <h3 class="jcat-title">Travel Problem Radar — Travel Problems Turned Into Product Ideas</h3>
+  </div>
+  <article class="jcard" data-case="travel-problem-radar" data-updated="2026-10-21">
+    <button class="jhead" type="button">
+      <div class="jhead-left">
+        <div class="jcard-illus" style="background:linear-gradient(135deg,#0EA5E9,#0C4A6E)">📡</div>
+        <div>
+          <div class="jtitle">Travel Problem Radar — Travel Problems Turned Into Product Ideas</div>
+          <div class="jmeta">Prototype · built with AI (Claude) · public demo + live page refreshed every 5 hours · AI findings not yet scored</div>
+          <div class="jtools"><b>Tools:</b> React, Claude API with web search, Vercel (Functions, Cron, Blob), GitHub Actions, GitHub Pages</div>
+        </div>
+      </div>
+      <span class="jtoggle">view case study →</span>
+    </button>
+  <div class="jbody">
+    <div class="cs-facts">
+      <span class="chip">Searches the web for travel problems, sorts them into 4 categories, flags what is new, and attaches a product opportunity to each</span>
+      <span class="chip">Public demo replays a saved 8-item sample: no AI calls, no key, no cost</span>
+      <span class="chip">Live page is read-only: a server job sweeps every 5 hours, and visitors never trigger an AI call</span>
+      <span class="chip">68 server tests and 19 repo checks, all offline, run on every push</span>
+      <span class="chip">Not yet measured: whether what the AI finds is accurate. No real sweep has been scored</span>
+    </div>
+    <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> React (one component, three ways to run), Claude with its web-search tool, Vercel Functions, Cron and Blob storage, GitHub Actions (the 5-hour schedule), GitHub Pages, esbuild. Optional Slack and email (Resend) delivery of each digest. Product owner; built with AI (Claude).</p>
+
+    <div class="cs-narrative">
+      <h4>Why This Project</h4>
+      <p>
+        The best product ideas in travel start as someone's bad day: a refund that never came, a visa fee that
+        quietly quadrupled, a booking that vanished after payment. Those signals are scattered across news,
+        government notices, outage trackers and review sites, and no PM has time to read all of it every day.
+        The radar is a standing feed that finds the problems, sorts them and suggests the "so what" before the
+        morning starts.
+      </p>
+
+      <h4>Key Decisions and Tradeoffs</h4>
+      <ul>
+        <li><strong>Four category calls instead of one big prompt.</strong> Gave up a single ranked list. Got parallel calls, and one failed category no longer sinks the other three.</li>
+        <li><strong>Visitors never trigger an AI call.</strong> The live page reads a sweep saved by a server job, so cost does not grow with traffic and the API key stays on the server.</li>
+        <li><strong>The public demo replays a saved sample.</strong> Anyone can open it with no key and nothing that can break; the trade-off is that the sample is from July 2026.</li>
+        <li><strong>"New" means the headline has not been seen before.</strong> A simple rule that can be tested; the same event under a new headline will show as New again.</li>
+      </ul>
+
+      <h4>What Went Wrong, and What Is Still Unproven</h4>
+      <p>
+        The first production sweep saved items from only 1 of 4 categories. The cause was an output token limit
+        (the model's thinking counts toward it). It is fixed, and a local run returned all four categories. I
+        have not yet confirmed it with a scheduled production run. The bigger open risk is that no real sweep
+        has been scored for accuracy, so the page tells readers to check each source link. A draft scoring
+        rubric is in the repo; it has not been run.
+      </p>
+    </div>
+
+    <div class="cs-narrative">
+      <h4>Quick recall</h4>
+      <div class="ptable2-wrap"><table class="ptable2">
+        <thead><tr><th>Section</th><th>Summary</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Travel problems are scattered across news, government notices, outage trackers and review sites, so a PM finds the ones worth solving late or not at all</td></tr>
+          <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A sweep of four categories with web search, a product opportunity on every item, a demo that replays a sample, and a live page refreshed by a server job</td></tr>
+          <tr><td data-label="Section"><strong>Result</strong></td><td data-label="Summary">Working demo and live page; 68 server tests and 19 repo checks pass offline; a token-limit failure found in the first production sweep and fixed</td></tr>
+          <tr><td data-label="Section"><strong>Not yet measured</strong></td><td data-label="Summary">Accuracy of the AI's findings, and whether anyone besides me finds the opportunities useful</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="jlinks">
+      <span><span class="k">Case study</span><a href="https://bhawnamanglapm.github.io/travel-problem-radar-case-study/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full write-up →</a></span>
+      <span><span class="k">Demo</span><a href="https://bhawnamanglapm.github.io/travel-problem-radar-case-study/demo/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">replays a saved sample →</a></span>
+      <span><span class="k">Live page</span><a href="https://travel-problem-radar.vercel.app/live/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">refreshed every 5 hours →</a></span>
+      <span><span class="k">Code</span><a href="https://github.com/bhawnamanglapm/travel-problem-radar-case-study" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GitHub repo →</a></span>
+    </div>
+  </div>
+  </article>
+</div>
     </div>
 
     <div class="cat-section" id="cat-metrics-and-analytics">
