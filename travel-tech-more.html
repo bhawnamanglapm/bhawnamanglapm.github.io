@@ -3270,27 +3270,28 @@
     <span class="jnum done">T43</span>
     <h3 class="jcat-title">Travel Problem Radar — Travel Problems Turned Into Product Ideas</h3>
   </div>
-  <article class="jcard" data-case="travel-problem-radar" data-updated="2026-10-21">
+  <article class="jcard" data-case="travel-problem-radar" data-updated="2026-10-31">
     <button class="jhead" type="button">
       <div class="jhead-left">
         <div class="jcard-illus" style="background:linear-gradient(135deg,#0EA5E9,#0C4A6E)">📡</div>
         <div>
           <div class="jtitle">Travel Problem Radar — Travel Problems Turned Into Product Ideas</div>
-          <div class="jmeta">Prototype · built with AI (Claude) · public demo + live page refreshed every 5 hours · AI findings not yet scored</div>
-          <div class="jtools"><b>Tools:</b> React, Claude API with web search, Vercel (Functions, Cron, Blob), GitHub Actions, GitHub Pages</div>
+          <div class="jmeta">⭐⭐⭐⭐⭐ Live · Pro paid via Razorpay since 28 Oct 2026 · 1,709 automated tests</div>
+          <div class="jtools"><b>Tools:</b> React, Claude API with web search, Vercel (Functions, Cron, Blob), GitHub Actions, GitHub Pages, Razorpay, Resend, Google sign-in</div>
         </div>
       </div>
       <span class="jtoggle">view case study →</span>
     </button>
   <div class="jbody">
     <div class="cs-facts">
-      <span class="chip">Searches the web for travel problems, sorts them into 4 categories, flags what is new, and attaches a product opportunity to each</span>
-      <span class="chip">Public demo replays a saved 8-item sample: no AI calls, no key, no cost</span>
-      <span class="chip">Live page is read-only: a server job sweeps every 5 hours, and visitors never trigger an AI call</span>
-      <span class="chip">68 server tests and 19 repo checks, all offline, run on every push</span>
-      <span class="chip">Not yet measured: whether what the AI finds is accurate. No real sweep has been scored</span>
+      <span class="chip">Searches the web for travel problems, sorts them into 4 categories plus an India focus, flags what's new, and attaches a product opportunity to each</span>
+      <span class="chip">Live and monetized: Pro via Razorpay since 28 Oct 2026 (₹1/month or ₹1/year, one price on purpose); Free gets a daily summary</span>
+      <span class="chip">The live board is Pro-only since 23 Oct; the public demo still replays a saved sample — no AI calls, no key, no cost</span>
+      <span class="chip">1,709 automated tests + 254 repo checks, all offline, run on every push</span>
+      <span class="chip">The token-limit bug that broke the first production sweep is confirmed fixed — a 25 Oct sweep saved all four categories</span>
+      <span class="chip">Still not measured by a person: whether the AI's sources actually support its summaries — the main open risk</span>
     </div>
-    <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> React (one component, three ways to run), Claude with its web-search tool, Vercel Functions, Cron and Blob storage, GitHub Actions (the 5-hour schedule), GitHub Pages, esbuild. Optional Slack and email (Resend) delivery of each digest. Product owner; built with AI (Claude).</p>
+    <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> React (one component, three ways to run), Claude with its web-search tool, Vercel Functions, Cron and Blob storage, GitHub Actions (the scheduled sweeps), GitHub Pages, esbuild, Razorpay (payments), Resend (email), Google sign-in. Product owner; built with AI (Claude).</p>
 
     <div class="cs-narrative">
       <h4>Why This Project</h4>
@@ -3308,15 +3309,36 @@
         <li><strong>Visitors never trigger an AI call.</strong> The live page reads a sweep saved by a server job, so cost does not grow with traffic and the API key stays on the server.</li>
         <li><strong>The public demo replays a saved sample.</strong> Anyone can open it with no key and nothing that can break; the trade-off is that the sample is from July 2026.</li>
         <li><strong>"New" means the headline has not been seen before.</strong> A simple rule that can be tested; the same event under a new headline will show as New again.</li>
+        <li><strong>One component, three ways to run.</strong> The same React file runs inside Claude's app, on GitHub Pages (the demo), and on Vercel (the live page). Gave up a separate server-side copy of the prompt; got one dashboard to maintain, and a test that fails the moment the two prompts drift apart.</li>
       </ul>
 
-      <h4>What Went Wrong, and What Is Still Unproven</h4>
+      <h4>What's Shipped Since Launch</h4>
+      <ul>
+        <li><strong>Accounts and email.</strong> Sign-up, sign-in (password or Google), a Free daily summary, Pro gets 1–5 emails a day by category and area, a manage page, double opt-in, one-click unsubscribe.</li>
+        <li><strong>Monetization.</strong> Pro at ₹1/month or ₹1/year via Razorpay since 28 Oct 2026 — one price regardless of plan chosen, deliberately, to learn who'll actually pay before pricing on value.</li>
+        <li><strong>Ask the board.</strong> Pro members can ask a question, answered by AI only from items already saved, every claim citing one of them. Off by default until a flag is flipped.</li>
+        <li><strong>India focus.</strong> Each sweep also looks specifically for India-relevant items, with its own target (20% of items, floor 10%) tracked against reality, not assumed.</li>
+        <li><strong>Trends.</strong> A free, public, read-only page tracking new problems per week and per month, by area and category — shipped 31 Oct 2026.</li>
+      </ul>
+
+      <h4>What's Confirmed vs. Still Unproven</h4>
       <p>
-        The first production sweep saved items from only 1 of 4 categories. The cause was an output token limit
-        (the model's thinking counts toward it). It is fixed, and a local run returned all four categories. I
-        have not yet confirmed it with a scheduled production run. The bigger open risk is that no real sweep
-        has been scored for accuracy, so the page tells readers to check each source link. A draft scoring
-        rubric is in the repo; it has not been run.
+        The first production sweep saved items from only 1 of 4 categories — an output token limit (the
+        model's thinking counts toward it). <strong>Confirmed fixed:</strong> a 25 Oct 2026 sweep saved all
+        four categories (18 items), and the 10 sweeps logged since average 19 items at $0.11 each. The bigger,
+        still-open risk: nothing checks that a source actually <em>supports</em> the AI's summary — only
+        whether a link came back at all (1 of 190 items since didn't). A model-comparison test (Haiku vs.
+        Sonnet) exists, but was graded by ChatGPT, not a person. A 20-item human scoring rubric is built and
+        has not been run yet.
+      </p>
+
+      <h4>Keeping the Case Study Itself Honest</h4>
+      <p>
+        On 18 Oct 2026 this case study was checked against the repo, and corrected: two buttons that linked
+        nowhere were replaced with a working demo; a claim that four parallel calls "raised result quality"
+        was removed, since it was never measured; "Product &amp; build (solo)" became "built with AI"; Slack
+        and email delivery claims were narrowed to what was actually true at the time. The discipline: audit
+        your own claims before a reader has to.
       </p>
     </div>
 
@@ -3326,9 +3348,9 @@
         <thead><tr><th>Section</th><th>Summary</th></tr></thead>
         <tbody>
           <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Travel problems are scattered across news, government notices, outage trackers and review sites, so a PM finds the ones worth solving late or not at all</td></tr>
-          <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A sweep of four categories with web search, a product opportunity on every item, a demo that replays a sample, and a live page refreshed by a server job</td></tr>
-          <tr><td data-label="Section"><strong>Result</strong></td><td data-label="Summary">Working demo and live page; 68 server tests and 19 repo checks pass offline; a token-limit failure found in the first production sweep and fixed</td></tr>
-          <tr><td data-label="Section"><strong>Not yet measured</strong></td><td data-label="Summary">Accuracy of the AI's findings, and whether anyone besides me finds the opportunities useful</td></tr>
+          <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A sweep of 4 categories plus India, web search, a product opportunity on every item, Pro email delivery, an Ask-the-board Q&amp;A feature, and a free Trends page — monetized via Razorpay since 28 Oct 2026</td></tr>
+          <tr><td data-label="Section"><strong>Result</strong></td><td data-label="Summary">Live with real Pro subscribers possible since 28 Oct; 1,709 tests and 254 checks pass offline; the token-limit bug that broke the first sweep is confirmed fixed by a real production run</td></tr>
+          <tr><td data-label="Section"><strong>Not yet measured</strong></td><td data-label="Summary">Whether the AI's sources actually support its summaries (the main open risk), and whether a real PM other than the owner finds the opportunities useful</td></tr>
         </tbody>
       </table></div>
     </div>
@@ -3336,7 +3358,8 @@
     <div class="jlinks">
       <span><span class="k">Case study</span><a href="https://bhawnamanglapm.github.io/travel-problem-radar-case-study/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full write-up →</a></span>
       <span><span class="k">Demo</span><a href="https://bhawnamanglapm.github.io/travel-problem-radar-case-study/demo/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">replays a saved sample →</a></span>
-      <span><span class="k">Live page</span><a href="https://travel-problem-radar.vercel.app/live/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">refreshed every 5 hours →</a></span>
+      <span><span class="k">Live page</span><a href="https://radar.pehchanthetraveller.com/live/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Pro members only →</a></span>
+      <span><span class="k">Trends</span><a href="https://radar.pehchanthetraveller.com/trends/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">free, public →</a></span>
       <span><span class="k">Code</span><a href="https://github.com/bhawnamanglapm/travel-problem-radar-case-study" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">GitHub repo →</a></span>
     </div>
   </div>
