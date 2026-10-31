@@ -1511,10 +1511,10 @@ Body: { "customerId": "ERROR001", "pan": "XYZAB5678C", "dob": "1998-11-23" }</di
       <div class="jbody">
         <div class="cs-facts">
           <span class="chip">Searches the web for travel problems, sorts them into 4 categories plus an India focus, flags what's new, and attaches a product opportunity to each</span>
-          <span class="chip">Live and monetized: Pro via Razorpay since 28 Oct 2026 (₹1/month or ₹1/year, one price on purpose); Free gets a daily summary</span>
+          <span class="chip">Live and monetized: Pro via Razorpay since 28 Oct 2026 (₹1/month or ₹1/year) — a price the owner's own cost-floor math says no subscriber count covers</span>
           <span class="chip">The live board is Pro-only since 23 Oct; the public demo still replays a saved sample — no AI calls, no key, no cost</span>
-          <span class="chip">1,709 automated tests + 254 repo checks, all offline, run on every push</span>
-          <span class="chip">The token-limit bug that broke the first production sweep is confirmed fixed — a 25 Oct sweep saved all four categories</span>
+          <span class="chip">1,709 automated tests + 254 repo checks, all offline, run on every push — 514 commits, 140 merged PRs</span>
+          <span class="chip">The first formal test run (30 Oct) ended not ready to sign off — one open Sev-1 bug, logged plainly, not smoothed over</span>
           <span class="chip">Still not measured by a person: whether the AI's sources actually support its summaries — the main open risk</span>
         </div>
         <p class="cs-tools" style="font-size:12.5px;color:var(--grey);margin:0 0 14px"><strong style="color:var(--paper)">Tools used:</strong> React (one component, three ways to run), Claude with its web-search tool, Vercel Functions, Cron and Blob storage, GitHub Actions (the scheduled sweeps), GitHub Pages, esbuild, Razorpay (payments), Resend (email), Google sign-in. Product owner; built with AI (Claude).</p>
@@ -1529,6 +1529,27 @@ Body: { "customerId": "ERROR001", "pan": "XYZAB5678C", "dob": "1998-11-23" }</di
             morning starts.
           </p>
 
+          <h4>How I Approached It — 8 Stages</h4>
+          <p style="margin:0 0 10px">
+            The same full product-owner lifecycle treatment as the
+            <a href="#case-merchant-dispute-hub" data-open-case="merchant-dispute-hub" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Merchant Dispute Hub simulation</a>
+            — except this one is a live product, not a simulation: 38 documents across 8 stages, plus 21 test-result
+            files from the first real test run.
+          </p>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Stage</th><th>What I did</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Stage"><strong>1. Discover</strong></td><td data-label="Did">Framed the problem, logged 8 assumptions against their evidence, compared 7 alternatives from published descriptions, wrote an interview plan — marked as not run</td></tr>
+              <tr><td data-label="Stage"><strong>2. Define</strong></td><td data-label="Did">PRD v2 with 49 requirements in 12 epics (tasks T00–T44), traced requirements to tests with the gaps listed, 21 KPIs with most targets left open</td></tr>
+              <tr><td data-label="Stage"><strong>3. Design</strong></td><td data-label="Did">Documented the live screens, the journey end to end, display rules, and the design trade-offs</td></tr>
+              <tr><td data-label="Stage"><strong>4. Plan &amp; govern</strong></td><td data-label="Did">41-item roadmap, RAID log, 25 revised decisions recorded as change requests, stakeholders and a RACI for a one-person product</td></tr>
+              <tr><td data-label="Stage"><strong>5. Justify &amp; launch</strong></td><td data-label="Did">Cost-floor business case with break-even and stress tests, go-to-market with gates, 22 launch-readiness checks, a post-launch plan with hypercare exit criteria</td></tr>
+              <tr><td data-label="Stage"><strong>6. Communicate</strong></td><td data-label="Did">A one-page executive review ending in 7 decisions for the owner, with those since taken marked</td></tr>
+              <tr><td data-label="Stage"><strong>7. Measure</strong></td><td data-label="Did">The stored data, how each KPI is actually computed from it, and what still isn't measured</td></tr>
+              <tr><td data-label="Stage"><strong>8. Test</strong></td><td data-label="Did">A test plan and 20 testing tasks, requirements validation through production validation. 11 bugs logged, 10 closed, 1 (Sev-1) still open</td></tr>
+            </tbody>
+          </table></div>
+
           <h4>Key Decisions and Tradeoffs</h4>
           <ul>
             <li><strong>Four category calls instead of one big prompt.</strong> Gave up a single ranked list. Got parallel calls, and one failed category no longer sinks the other three.</li>
@@ -1538,24 +1559,45 @@ Body: { "customerId": "ERROR001", "pan": "XYZAB5678C", "dob": "1998-11-23" }</di
             <li><strong>One component, three ways to run.</strong> The same React file runs inside Claude's app, on GitHub Pages (the demo), and on Vercel (the live page). Gave up a separate server-side copy of the prompt; got one dashboard to maintain, and a test that fails the moment the two prompts drift apart.</li>
           </ul>
 
+          <h4>Decisions Worth Discussing</h4>
+          <ul>
+            <li><strong>Priced from the cost floor, then shipped a price that doesn't cover it — and said so.</strong> ₹299/month would cover the ~₹6,797/month running cost at 24–28 members; the owner set ₹1/month or ₹1/year instead, to learn real demand before anything else. That's a price no subscriber count covers, kept in the business case rather than smoothed over.</li>
+            <li><strong>Planned a demand gate, then skipped it — and recorded that it happened.</strong> The launch plan's own rule was: don't charge before sign-ups show real demand. Payment work started before that gate was met, and the executive review says so plainly instead of rewriting the rule after the fact.</li>
+            <li><strong>Traced one failure end to end.</strong> Sweeps failing with HTTP 400 (23–25 Oct) → traced to one AI vendor → an error message that was dropping the real reason → launch blocked → the complete-sweeps KPI → a playbook to prevent a repeat.</li>
+            <li><strong>Reversed the monetization model mid-build.</strong> The board was originally meant to stay public, with Pro selling only extra email. Selling access to the board itself came later, which meant retrofitting accounts and a locked data feed rather than having designed for them from the start.</li>
+          </ul>
+
           <h4>What's Shipped Since Launch</h4>
           <ul>
             <li><strong>Accounts and email.</strong> Sign-up, sign-in (password or Google), a Free daily summary, Pro gets 1–5 emails a day by category and area, a manage page, double opt-in, one-click unsubscribe.</li>
-            <li><strong>Monetization.</strong> Pro at ₹1/month or ₹1/year via Razorpay since 28 Oct 2026 — one price regardless of plan chosen, deliberately, to learn who'll actually pay before pricing on value.</li>
             <li><strong>Ask the board.</strong> Pro members can ask a question, answered by AI only from items already saved, every claim citing one of them. Off by default until a flag is flipped.</li>
             <li><strong>India focus.</strong> Each sweep also looks specifically for India-relevant items, with its own target (20% of items, floor 10%) tracked against reality, not assumed.</li>
             <li><strong>Trends.</strong> A free, public, read-only page tracking new problems per week and per month, by area and category — shipped 31 Oct 2026.</li>
           </ul>
 
+          <h4>Business Case — a Cost Floor, Not a Forecast</h4>
+          <div class="ptable2-wrap"><table class="ptable2">
+            <thead><tr><th>Measure</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Measure">Cost per sweep</td><td data-label="Value">$0.1121 on Haiku (the default since 25 Oct) · $0.21 on Sonnet, measured over real production runs</td></tr>
+              <tr><td data-label="Measure">Monthly running cost with payments live</td><td data-label="Value">~₹6,797 (Anthropic + Vercel Pro + Resend Pro)</td></tr>
+              <tr><td data-label="Measure">Members needed to cover that at ₹299/month</td><td data-label="Value">24–28</td></tr>
+              <tr><td data-label="Measure">At the real price, ₹1/month or ₹1/year (since 28–29 Oct)</td><td data-label="Value">No number of members covers it — the target price is still an open owner decision</td></tr>
+              <tr><td data-label="Measure">Real revenue so far</td><td data-label="Value">3 live ₹1 payments captured by 29 Oct 2026 — the repo doesn't record who paid</td></tr>
+            </tbody>
+          </table></div>
+
           <h4>What's Confirmed vs. Still Unproven</h4>
           <p>
             The first production sweep saved items from only 1 of 4 categories — an output token limit (the
             model's thinking counts toward it). <strong>Confirmed fixed:</strong> a 25 Oct 2026 sweep saved all
-            four categories (18 items), and the 10 sweeps logged since average 19 items at $0.11 each. The bigger,
-            still-open risk: nothing checks that a source actually <em>supports</em> the AI's summary — only
-            whether a link came back at all (1 of 190 items since didn't). A model-comparison test (Haiku vs.
-            Sonnet) exists, but was graded by ChatGPT, not a person. A 20-item human scoring rubric is built and
-            has not been run yet.
+            four categories (18 items), and the 10 sweeps logged since average 19 items at $0.11 each. The first
+            formal test run (30 Oct 2026) ended <strong>not ready to sign off</strong>: one open Severity-1 bug
+            (an account that can't see the live board), integration tests blocked on a staging environment 121
+            commits behind main, and no UAT sign-off yet. The bigger, still-open risk: nothing checks that a
+            source actually <em>supports</em> the AI's summary — only whether a link came back at all (1 of 190
+            items since didn't). A model-comparison test (Haiku vs. Sonnet) exists, but was graded by ChatGPT,
+            not a person. A 20-item human scoring rubric is built and has not been run yet.
           </p>
 
           <h4>Keeping the Case Study Itself Honest</h4>
@@ -1575,7 +1617,7 @@ Body: { "customerId": "ERROR001", "pan": "XYZAB5678C", "dob": "1998-11-23" }</di
             <tbody>
               <tr><td data-label="Section"><strong>Problem</strong></td><td data-label="Summary">Travel problems are scattered across news, government notices, outage trackers and review sites, so a PM finds the ones worth solving late or not at all</td></tr>
               <tr><td data-label="Section"><strong>Solution</strong></td><td data-label="Summary">A sweep of 4 categories plus India, web search, a product opportunity on every item, Pro email delivery, an Ask-the-board Q&amp;A feature, and a free Trends page — monetized via Razorpay since 28 Oct 2026</td></tr>
-              <tr><td data-label="Section"><strong>Result</strong></td><td data-label="Summary">Live with real Pro subscribers possible since 28 Oct; 1,709 tests and 254 checks pass offline; the token-limit bug that broke the first sweep is confirmed fixed by a real production run</td></tr>
+              <tr><td data-label="Section"><strong>Result</strong></td><td data-label="Summary">Live with 3 real ₹1 payments by 29 Oct; 1,709 tests and 254 checks pass offline; the first formal test run ended not ready to sign off, with one open Sev-1 bug named rather than hidden</td></tr>
               <tr><td data-label="Section"><strong>Not yet measured</strong></td><td data-label="Summary">Whether the AI's sources actually support its summaries (the main open risk), and whether a real PM other than the owner finds the opportunities useful</td></tr>
             </tbody>
           </table></div>
@@ -1583,6 +1625,7 @@ Body: { "customerId": "ERROR001", "pan": "XYZAB5678C", "dob": "1998-11-23" }</di
 
         <div class="jlinks">
           <span><span class="k">Case study</span><a href="https://bhawnamanglapm.github.io/travel-problem-radar-case-study/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">full write-up →</a></span>
+          <span><span class="k">PM case study</span><a href="https://github.com/bhawnamanglapm/travel-problem-radar-case-study/blob/main/pm/CASE_STUDY.md" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">8-stage lifecycle doc →</a></span>
           <span><span class="k">Demo</span><a href="https://bhawnamanglapm.github.io/travel-problem-radar-case-study/demo/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">replays a saved sample →</a></span>
           <span><span class="k">Live page</span><a href="https://radar.pehchanthetraveller.com/live/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">Pro members only →</a></span>
           <span><span class="k">Trends</span><a href="https://radar.pehchanthetraveller.com/trends/" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:none;border-bottom:1px solid var(--lime)">free, public →</a></span>
